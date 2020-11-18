@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 #if V4
 using Microsoft.Practices.Unity;
 #else
@@ -63,6 +62,7 @@ namespace Regression
 
         protected static void ClassInitialize(string name)
         {
+            #region Test Types
             PocoType = Type.GetType($"{name}.Implicit_Dependency_Generic`1");
             Required = Type.GetType($"{name}.Required_Dependency_Generic`1");
             Optional = Type.GetType($"{name}.Optional_Dependency_Generic`1");
@@ -77,7 +77,10 @@ namespace Regression
             PocoType_Default_Class  = Type.GetType($"{name}.Implicit_WithDefault_Class");
             Required_Default_String = Type.GetType($"{name}.Required_WithDefault_Class");
             Optional_Default_Class  = Type.GetType($"{name}.Optional_WithDefault_Class");
+            #endregion
 
+
+            #region Test Type Names
             Type_Implicit_Dependency_Ref = Type.GetType($"{name}.Implicit_Dependency_Ref")?.FullName;
             Type_Implicit_Dependency_Out = Type.GetType($"{name}.Implicit_Dependency_Out")?.FullName;
             Type_Implicit_Generic_Ref    = Type.GetType($"{name}.Implicit_Generic_Ref`1") ?.FullName;
@@ -90,6 +93,31 @@ namespace Regression
             Type_Optional_Dependency_Out = Type.GetType($"{name}.Optional_Dependency_Out")?.FullName;
             Type_Optional_Generic_Ref    = Type.GetType($"{name}.Optional_Generic_Ref`1") ?.FullName;
             Type_Optional_Generic_Out    = Type.GetType($"{name}.Optional_Generic_Out`1" )?.FullName;
+            #endregion
+
+
+            #region Injection Support
+            var support = Type.GetType($"{name}.Support");
+            GetByNameMember     = (Func<Type, string, InjectionMember>)support.GetMethod("GetByNameMember")
+                                                                              .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
+            GetByNameOptional   = (Func<Type, string, InjectionMember>)support.GetMethod("GetByNameOptional")
+                                                                              .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
+            GetResolvedMember   = (Func<Type, string, InjectionMember>)support.GetMethod("GetResolvedMember")
+                                                                              .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
+            GetOptionalMember   = (Func<Type, string, InjectionMember>)support.GetMethod("GetOptionalMember")
+                                                                              .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
+            GetOptionalOptional = (Func<Type, string, InjectionMember>)support.GetMethod("GetOptionalOptional")
+                                                                              .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
+            GetGenericMember    = (Func<Type, string, InjectionMember>)support.GetMethod("GetGenericMember")
+                                                                              .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
+            GetGenericOptional  = (Func<Type, string, InjectionMember>)support.GetMethod("GetGenericOptional")
+                                                                              .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
+
+            GetInjectionValue    = (Func<object, InjectionMember>)support.GetMethod("GetInjectionValue")
+                                                                         .CreateDelegate(typeof(Func<object, InjectionMember>));
+            GetInjectionOptional = (Func<object, InjectionMember>)support.GetMethod("GetInjectionOptional")
+                                                                         .CreateDelegate(typeof(Func<object, InjectionMember>));
+            #endregion
         }
 
         public virtual void TestInitialize() => Container = new UnityContainer();
@@ -118,23 +146,15 @@ namespace Regression
 
         #region Injection
 
-        protected abstract InjectionMember GetByNameMember(Type type, string name);
-
-        protected abstract InjectionMember GetByNameOptional(Type type, string name);
-
-        protected abstract InjectionMember GetResolvedMember(Type type, string name);
-
-        protected abstract InjectionMember GetOptionalMember(Type type, string name);
-
-        protected abstract InjectionMember GetOptionalOptional(Type type, string name);
-
-        protected abstract InjectionMember GetGenericMember(Type type, string name);
-
-        protected abstract InjectionMember GetGenericOptional(Type type, string name);
-
-        protected abstract InjectionMember GetInjectionValue(object argument);
-
-        protected abstract InjectionMember GetInjectionOptional(object argument);
+        protected static Func<Type, string, InjectionMember> GetByNameMember;
+        protected static Func<Type, string, InjectionMember> GetByNameOptional;
+        protected static Func<Type, string, InjectionMember> GetResolvedMember;
+        protected static Func<Type, string, InjectionMember> GetOptionalMember;
+        protected static Func<Type, string, InjectionMember> GetOptionalOptional;
+        protected static Func<Type, string, InjectionMember> GetGenericMember;
+        protected static Func<Type, string, InjectionMember> GetGenericOptional;
+        protected static Func<object, InjectionMember>       GetInjectionValue;
+        protected static Func<object, InjectionMember>       GetInjectionOptional;
 
         #endregion
     }
