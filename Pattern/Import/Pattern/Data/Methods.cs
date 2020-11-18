@@ -38,13 +38,13 @@ namespace Methods
     public class Implicit_WithDefault_Value : PatternBaseType
     {
         [InjectionMethod]
-        public void Method(int value = DefaultInt) => Value = value;
+        public void Method(int value = PatternBase.DefaultInt) => Value = value;
     }
 
     public class Implicit_WithDefault_Class : PatternBaseType
     {
         [InjectionMethod]
-        public void Method(string value = DefaultString) => Value = value;
+        public void Method(string value = PatternBase.DefaultString) => Value = value;
     }
 
     #endregion
@@ -79,19 +79,19 @@ namespace Methods
     public class Required_Dependency_Named<T> : PatternBaseType
     {
         [InjectionMethod]
-        public void Method([Dependency(Name)] T value) => Value = value;
+        public void Method([Dependency(PatternBase.Name)] T value) => Value = value;
     }
 
     public class Required_WithDefault_Value : PatternBaseType
     {
         [InjectionMethod]
-        public void Method([Dependency] int value = DefaultInt) => Value = value;
+        public void Method([Dependency] int value = PatternBase.DefaultInt) => Value = value;
     }
 
     public class Required_WithDefault_Class : PatternBaseType
     {
         [InjectionMethod]
-        public void Method([Dependency] string value = DefaultString) => Value = value;
+        public void Method([Dependency] string value = PatternBase.DefaultString) => Value = value;
     }
 
     #endregion
@@ -126,31 +126,31 @@ namespace Methods
     public class Optional_Dependency_Named<T> : PatternBaseType
     {
         [InjectionMethod]
-        public void Method([OptionalDependency(Name)] T value) => Value = value;
+        public void Method([OptionalDependency(PatternBase.Name)] T value) => Value = value;
     }
 
     public class Optional_WithDefault_Value : PatternBaseType
     {
         [InjectionMethod]
-        public void Method([OptionalDependency] int value = DefaultInt) => Value = value;
+        public void Method([OptionalDependency] int value = PatternBase.DefaultInt) => Value = value;
     }
 
     public class Optional_WithDefault_Class : PatternBaseType
     {
         [InjectionMethod]
-        public void Method([OptionalDependency] string value = DefaultString) => Value = value;
+        public void Method([OptionalDependency] string value = PatternBase.DefaultString) => Value = value;
     }
 
     public class Optional_Dependency_Value_Named : PatternBaseType
     {
         [InjectionMethod]
-        public void Method([OptionalDependency(Name)] int value) => Value = value;
+        public void Method([OptionalDependency(PatternBase.Name)] int value) => Value = value;
     }
 
     public class Optional_Dependency_Class_Named : PatternBaseType
     {
         [InjectionMethod]
-        public void Method([OptionalDependency(Name)] Unresolvable value) => Value = value;
+        public void Method([OptionalDependency(PatternBase.Name)] Unresolvable value) => Value = value;
     }
 
     #endregion

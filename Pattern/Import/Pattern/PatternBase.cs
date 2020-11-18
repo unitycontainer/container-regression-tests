@@ -13,18 +13,17 @@ namespace Regression
     {
         #region Fields
 
-        // TODO: Consolidate
         // Test Constants
-        protected const int NamedInt = 123;
-        protected const int DefaultInt = 345;
-        protected const int InjectedInt = 678;
-        protected const int RegisteredInt = 890;
-        protected const string Name = "name";
-        protected const string Null = "null";
-        protected const string NamedString = "named";
-        protected const string DefaultString = "default";
-        protected const string InjectedString = "injected";
-        protected const string RegisteredString = "registered";
+        public const int NamedInt = 123;
+        public const int DefaultInt = 345;
+        public const int InjectedInt = 678;
+        public const int RegisteredInt = 890;
+        public const string Name = "name";
+        public const string Null = "null";
+        public const string NamedString = "named";
+        public const string DefaultString = "default";
+        public const string InjectedString = "injected";
+        public const string RegisteredString = "registered";
         public readonly static Unresolvable RegisteredUnresolvable = Unresolvable.Create("singleton");
         public readonly static Unresolvable NamedSingleton = Unresolvable.Create("named");
         public readonly static Unresolvable InjectedSingleton = SubUnresolvable.Create("injected");

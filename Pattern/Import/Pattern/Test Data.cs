@@ -2,6 +2,12 @@
 
 namespace Regression
 {
+    public abstract class PatternBaseType
+    {
+        public virtual object Value { get; protected set; }
+    }
+
+
     public struct TestStruct
     {
         public int Integer;
@@ -19,9 +25,6 @@ namespace Regression
         public int Integer;
         public object Object;
     }
-
-
-    #region Unresolvable
 
     public class Unresolvable
     {
@@ -49,8 +52,6 @@ namespace Regression
         }
         public new static SubUnresolvable Create(string name) => new SubUnresolvable(name);
     }
-
-    #endregion
 }
 
 

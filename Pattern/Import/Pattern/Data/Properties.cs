@@ -42,14 +42,14 @@ namespace Properties
 
     public class Implicit_WithDefault_Value : PatternBaseType
     {
-        public int Property { get; set; } = DefaultInt;
+        public int Property { get; set; } = PatternBase.DefaultInt;
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
 
     public class Implicit_WithDefault_Class : PatternBaseType
     {
-        public string Property { get; set; } = DefaultString;
+        public string Property { get; set; } = PatternBase.DefaultString;
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
@@ -89,7 +89,7 @@ namespace Properties
 
     public class Required_Dependency_Named<T> : PatternBaseType
     {
-        [Dependency(Name)] public T Property { get; set; }
+        [Dependency(PatternBase.Name)] public T Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
@@ -97,7 +97,7 @@ namespace Properties
     public class Required_WithDefault_Value : PatternBaseType
     {
         [Dependency]
-        [DefaultValue(DefaultInt)]
+        [DefaultValue(PatternBase.DefaultInt)]
         public int Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
@@ -106,7 +106,7 @@ namespace Properties
     public class Required_WithDefault_Class : PatternBaseType
     {
         [Dependency]
-        [DefaultValue(DefaultString)]
+        [DefaultValue(PatternBase.DefaultString)]
         public string Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
@@ -147,21 +147,21 @@ namespace Properties
 
     public class Optional_Dependency_Named<T> : PatternBaseType
     {
-        [OptionalDependency(Name)] public T Property { get; set; }
+        [OptionalDependency(PatternBase.Name)] public T Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
 
     public class Optional_WithDefault_Value : PatternBaseType
     {
-        [OptionalDependency] public int Property { get; set; } = DefaultInt;
+        [OptionalDependency] public int Property { get; set; } = PatternBase.DefaultInt;
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
 
     public class Optional_WithDefault_Class : PatternBaseType
     {
-        [OptionalDependency] public string Property { get; set; } = DefaultString;
+        [OptionalDependency] public string Property { get; set; } = PatternBase.DefaultString;
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }

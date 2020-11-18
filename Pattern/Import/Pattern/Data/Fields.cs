@@ -42,16 +42,16 @@ namespace Fields
 
     public class Implicit_WithDefault_Value : PatternBaseType
     {
-        [DefaultValue(DefaultInt)]
-        public int Field = DefaultInt;
+        [DefaultValue(PatternBase.DefaultInt)]
+        public int Field = PatternBase.DefaultInt;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }
 
     public class Implicit_WithDefault_Class : PatternBaseType
     {
-        [DefaultValue(DefaultString)]
-        public string Field = DefaultString;
+        [DefaultValue(PatternBase.DefaultString)]
+        public string Field = PatternBase.DefaultString;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }
@@ -91,7 +91,7 @@ namespace Fields
 
     public class Required_Dependency_Named<T> : PatternBaseType
     {
-        [Dependency(Name)] public T Field;
+        [Dependency(PatternBase.Name)] public T Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }
@@ -99,7 +99,7 @@ namespace Fields
     public class Required_WithDefault_Value : PatternBaseType
     {
         [Dependency]
-        [DefaultValue(DefaultInt)]
+        [DefaultValue(PatternBase.DefaultInt)]
         public int Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
@@ -108,8 +108,8 @@ namespace Fields
     public class Required_WithDefault_Class : PatternBaseType
     {
         [Dependency]
-        [DefaultValue(DefaultString)]
-        public string Field = DefaultString;
+        [DefaultValue(PatternBase.DefaultString)]
+        public string Field = PatternBase.DefaultString;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }
@@ -150,21 +150,21 @@ namespace Fields
 
     public class Optional_Dependency_Named<T> : PatternBaseType
     {
-        [OptionalDependency(Name)] public T Field;
+        [OptionalDependency(PatternBase.Name)] public T Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }
 
     public class Optional_WithDefault_Value : PatternBaseType
     {
-        [OptionalDependency] public int Field = DefaultInt;
+        [OptionalDependency] public int Field = PatternBase.DefaultInt;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }
 
     public class Optional_WithDefault_Class : PatternBaseType
     {
-        [OptionalDependency] public string Field = DefaultString;
+        [OptionalDependency] public string Field = PatternBase.DefaultString;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }

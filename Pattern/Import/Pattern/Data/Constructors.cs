@@ -33,12 +33,12 @@ namespace Constructors
 
     public class Implicit_WithDefault_Value : PatternBaseType
     {
-        public Implicit_WithDefault_Value(int value = DefaultInt) => Value = value;
+        public Implicit_WithDefault_Value(int value = PatternBase.DefaultInt) => Value = value;
     }
 
     public class Implicit_WithDefault_Class : PatternBaseType
     {
-        public Implicit_WithDefault_Class(string value = DefaultString) => Value = value;
+        public Implicit_WithDefault_Class(string value = PatternBase.DefaultString) => Value = value;
     }
 
     #endregion
@@ -68,17 +68,17 @@ namespace Constructors
 
     public class Required_Dependency_Named<T> : PatternBaseType
     {
-        public Required_Dependency_Named([Dependency(Name)] T value) => Value = value;
+        public Required_Dependency_Named([Dependency(PatternBase.Name)] T value) => Value = value;
     }
 
     public class Required_WithDefault_Value : PatternBaseType
     {
-        public Required_WithDefault_Value([Dependency] int value = DefaultInt) => Value = value;
+        public Required_WithDefault_Value([Dependency] int value = PatternBase.DefaultInt) => Value = value;
     }
 
     public class Required_WithDefault_Class : PatternBaseType
     {
-        public Required_WithDefault_Class([Dependency] string value = DefaultString) => Value = value;
+        public Required_WithDefault_Class([Dependency] string value = PatternBase.DefaultString) => Value = value;
     }
 
     #endregion
@@ -108,17 +108,17 @@ namespace Constructors
 
     public class Optional_Dependency_Named<T> : PatternBaseType
     {
-        public Optional_Dependency_Named([OptionalDependency(Name)] T value) => Value = value;
+        public Optional_Dependency_Named([OptionalDependency(PatternBase.Name)] T value) => Value = value;
     }
 
     public class Optional_WithDefault_Value : PatternBaseType
     {
-        public Optional_WithDefault_Value([OptionalDependency] int value = DefaultInt) => Value = value;
+        public Optional_WithDefault_Value([OptionalDependency] int value = PatternBase.DefaultInt) => Value = value;
     }
 
     public class Optional_WithDefault_Class : PatternBaseType
     {
-        public Optional_WithDefault_Class([OptionalDependency] string value = DefaultString) => Value = value;
+        public Optional_WithDefault_Class([OptionalDependency] string value = PatternBase.DefaultString) => Value = value;
     }
 
     #endregion
