@@ -31,9 +31,10 @@ namespace Regression
         {
             get
             {
-                var Poco_Value      = PocoType.MakeGenericType(typeof(int));
-                var Poco_Ref        = PocoType.MakeGenericType(typeof(Unresolvable));
-                var Poco_Struct     = PocoType.MakeGenericType(typeof(TestStruct));
+                var @generic    = GetType("Implicit_Dependency_Generic`1");
+                var Poco_Value  = @generic.MakeGenericType(typeof(int));
+                var Poco_Ref    = @generic.MakeGenericType(typeof(Unresolvable));
+                var Poco_Struct = @generic.MakeGenericType(typeof(TestStruct));
 
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //                          Test Name                   Type                    Name    Dependency              Expected

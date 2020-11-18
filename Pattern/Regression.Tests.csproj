@@ -61,7 +61,7 @@
 	<!-- Exclusions -->
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net45'">
-	  <Compile Remove="Import\Pattern\Test Data\Fields.cs" />
+	  <Compile Remove="Import\Support\Fields.cs" />
 		<Compile Remove="Import\Tests\Fields\**" />
 		<EmbeddedResource Remove="Import\Tests\Fields\**" />
 		<None Remove="Import\Tests\Fields\**" />

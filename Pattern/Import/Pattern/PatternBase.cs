@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 #if V4
 using Microsoft.Practices.Unity;
 #else
@@ -15,12 +18,14 @@ namespace Regression
         // Test Constants
         public const int NamedInt = 123;
         public const int DefaultInt = 345;
+        public const int DefaultValueInt = 3456;
         public const int InjectedInt = 678;
         public const int RegisteredInt = 890;
         public const string Name = "name";
         public const string Null = "null";
         public const string NamedString = "named";
         public const string DefaultString = "default";
+        public const string DefaultValueString = "default_attr";
         public const string InjectedString = "injected";
         public const string RegisteredString = "registered";
         public readonly static Unresolvable RegisteredUnresolvable = Unresolvable.Create("singleton");
@@ -28,20 +33,7 @@ namespace Regression
         public readonly static Unresolvable InjectedSingleton = SubUnresolvable.Create("injected");
         public readonly static object RegisteredStruct = new TestStruct(55, "struct");
 
-
-        // Generic type names
-        protected static string Type_Implicit_Dependency_Ref;
-        protected static string Type_Implicit_Dependency_Out;
-        protected static string Type_Implicit_Generic_Ref;
-        protected static string Type_Implicit_Generic_Out;
-        protected static string Type_Required_Dependency_Ref;
-        protected static string Type_Required_Dependency_Out;
-        protected static string Type_Required_Generic_Ref;
-        protected static string Type_Required_Generic_Out;
-        protected static string Type_Optional_Dependency_Ref;
-        protected static string Type_Optional_Dependency_Out;
-        protected static string Type_Optional_Generic_Ref;
-        protected static string Type_Optional_Generic_Out;
+        private static IDictionary<string, TypeInfo> _types;
 
         // Test types
         protected static Type PocoType;
@@ -62,6 +54,11 @@ namespace Regression
 
         protected static void ClassInitialize(string name)
         {
+            _types = Assembly.GetExecutingAssembly()
+                             .DefinedTypes
+                             .Where(t => t.Namespace == name)
+                             .ToDictionary(t => t.Name);
+
             #region Test Types
             PocoType = Type.GetType($"{name}.Implicit_Dependency_Generic`1");
             Required = Type.GetType($"{name}.Required_Dependency_Generic`1");
@@ -77,22 +74,6 @@ namespace Regression
             PocoType_Default_Class  = Type.GetType($"{name}.Implicit_WithDefault_Class");
             Required_Default_String = Type.GetType($"{name}.Required_WithDefault_Class");
             Optional_Default_Class  = Type.GetType($"{name}.Optional_WithDefault_Class");
-            #endregion
-
-
-            #region Test Type Names
-            Type_Implicit_Dependency_Ref = Type.GetType($"{name}.Implicit_Dependency_Ref")?.FullName;
-            Type_Implicit_Dependency_Out = Type.GetType($"{name}.Implicit_Dependency_Out")?.FullName;
-            Type_Implicit_Generic_Ref    = Type.GetType($"{name}.Implicit_Generic_Ref`1") ?.FullName;
-            Type_Implicit_Generic_Out    = Type.GetType($"{name}.Implicit_Generic_Out`1") ?.FullName;
-            Type_Required_Dependency_Ref = Type.GetType($"{name}.Required_Dependency_Ref")?.FullName;
-            Type_Required_Dependency_Out = Type.GetType($"{name}.Required_Dependency_Out")?.FullName;
-            Type_Required_Generic_Ref    = Type.GetType($"{name}.Required_Generic_Ref`1") ?.FullName;
-            Type_Required_Generic_Out    = Type.GetType($"{name}.Required_Generic_Out`1") ?.FullName;
-            Type_Optional_Dependency_Ref = Type.GetType($"{name}.Optional_Dependency_Ref")?.FullName;
-            Type_Optional_Dependency_Out = Type.GetType($"{name}.Optional_Dependency_Out")?.FullName;
-            Type_Optional_Generic_Ref    = Type.GetType($"{name}.Optional_Generic_Ref`1") ?.FullName;
-            Type_Optional_Generic_Out    = Type.GetType($"{name}.Optional_Generic_Out`1" )?.FullName;
             #endregion
 
 
@@ -112,7 +93,6 @@ namespace Regression
                                                                               .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
             GetGenericOptional  = (Func<Type, string, InjectionMember>)support.GetMethod("GetGenericOptional")
                                                                               .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
-
             GetInjectionValue    = (Func<object, InjectionMember>)support.GetMethod("GetInjectionValue")
                                                                          .CreateDelegate(typeof(Func<object, InjectionMember>));
             GetInjectionOptional = (Func<object, InjectionMember>)support.GetMethod("GetInjectionOptional")
@@ -122,10 +102,10 @@ namespace Regression
 
         public virtual void TestInitialize() => Container = new UnityContainer();
 
-        
+
         #region Implementation
 
-        protected Type TargetType(string name) => Type.GetType($"{GetType().FullName}+{name}");
+        protected static TypeInfo GetType(string name) => _types[name];
 
         protected virtual void RegisterTypes()
         {

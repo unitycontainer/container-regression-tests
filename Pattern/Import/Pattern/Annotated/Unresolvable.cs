@@ -24,7 +24,7 @@ namespace Regression
         /// }
         /// 
         /// </example>
-        /// <param name="target">Contract name</param>
+        /// <param name="name">Contract name</param>
         [DataTestMethod]
         [DataRow("Required_Dependency_Ref")]
         [DataRow("Required_Dependency_Out")]
@@ -33,9 +33,9 @@ namespace Regression
         [DataRow("Optional_Dependency_Out")]
 #endif
         [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void Annotated_Parameters(string target)
+        public virtual void Annotated_Parameters(string name)
         {
-            var type = TargetType(target);
+            var type = GetType(name);
 
             // Make dependencies available
             RegisterTypes();

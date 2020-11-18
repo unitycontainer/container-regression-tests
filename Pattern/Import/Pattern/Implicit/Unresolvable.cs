@@ -49,9 +49,10 @@ namespace Regression
         {
             get
             {
-                var Poco_Value      = PocoType.MakeGenericType(typeof(int));
-                var Poco_Ref        = PocoType.MakeGenericType(typeof(Unresolvable));
-                var Poco_Struct     = PocoType.MakeGenericType(typeof(TestStruct));
+                var poco_type = GetType("Implicit_Dependency_Generic`1");
+                var Poco_Value      = poco_type.MakeGenericType(typeof(int));
+                var Poco_Ref        = poco_type.MakeGenericType(typeof(Unresolvable));
+                var Poco_Struct     = poco_type.MakeGenericType(typeof(TestStruct));
 
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //                          Test Name       Type            Name    Dependency              Expected         
@@ -82,14 +83,14 @@ namespace Regression
         /// }
         /// 
         /// </example>
-        /// <param name="target">Contract name</param>
+        /// <param name="name">Type name</param>
         [DataTestMethod]
         [DataRow("Implicit_Dependency_Ref")]
         [DataRow("Implicit_Dependency_Out")]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void Implicit_Parameters(string target)
+        public virtual void Implicit_Parameters(string name)
         {
-            var type = TargetType(target);
+            var type = GetType(name);
 
             // Make dependencies available
             RegisterTypes();

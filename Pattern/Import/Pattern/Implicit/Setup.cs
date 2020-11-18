@@ -1,6 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 #if V4
 using Microsoft.Practices.Unity;
 #else
@@ -14,6 +12,10 @@ namespace Regression
         [TestMethod]
         public void Baseline()
         {
+            var instance = Container.Resolve(typeof(BaselineType), null) as PatternBaseType;
+
+            Assert.IsNotNull(instance);
+            Assert.IsNull(instance.Value);
         }
     }
 }

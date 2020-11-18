@@ -13,7 +13,7 @@ using Unity.Injection;
 namespace Regression
 {
     /// <summary>
-    /// Testing unsupported (out and ref) parapeter types
+    /// Testing unsupported (out and ref) parameter types
     /// </summary>
     /// <example>
     /// 
@@ -32,15 +32,13 @@ namespace Regression
         /// <summary>
         /// Tests injecting of REF and OUT parameters with various ways
         /// </summary>
-        /// <param name="target">Name of test type</param>
+        /// <param name="type">Name of test type</param>
         /// <param name="method"></param>
         [DataTestMethod]
         [DynamicData(nameof(Parameter_Validation_Data))]
         [ExpectedException(typeof(InvalidOperationException))]
-        public virtual void Injected_Parameters(string target, string method)
+        public virtual void Injected_Parameters(Type type, string method)
         {
-            var type = Type.GetType(target ?? throw new InvalidOperationException());
-
             Type constructed = type.IsGenericTypeDefinition
                              ? type.MakeGenericType(typeof(Unresolvable))
                              : type;
@@ -97,18 +95,18 @@ namespace Regression
                                                                 .Where(method => method.Name.StartsWith("Get") && method.Name.EndsWith("Member"))
                                                                 .Select(method => method.Name))
                 {
-                    yield return new object[] { Type_Implicit_Dependency_Ref, info };
-                    yield return new object[] { Type_Implicit_Dependency_Out, info };
-                    yield return new object[] { Type_Implicit_Generic_Ref,    info };
-                    yield return new object[] { Type_Implicit_Generic_Out,    info };
-                    yield return new object[] { Type_Required_Dependency_Ref, info };
-                    yield return new object[] { Type_Required_Dependency_Out, info };
-                    yield return new object[] { Type_Required_Generic_Ref,    info };
-                    yield return new object[] { Type_Required_Generic_Out,    info };
-                    yield return new object[] { Type_Optional_Dependency_Ref, info };
-                    yield return new object[] { Type_Optional_Dependency_Out, info };
-                    yield return new object[] { Type_Optional_Generic_Ref,    info };
-                    yield return new object[] { Type_Optional_Generic_Out,    info };
+                    yield return new object[] { GetType("Implicit_Dependency_Ref"), info };
+                    yield return new object[] { GetType("Implicit_Dependency_Out"), info };
+                    yield return new object[] { GetType("Implicit_Generic_Ref`1") , info };
+                    yield return new object[] { GetType("Implicit_Generic_Out`1") , info };
+                    yield return new object[] { GetType("Required_Dependency_Ref"), info };
+                    yield return new object[] { GetType("Required_Dependency_Out"), info };
+                    yield return new object[] { GetType("Required_Generic_Ref`1") , info };
+                    yield return new object[] { GetType("Required_Generic_Out`1") , info };
+                    yield return new object[] { GetType("Optional_Dependency_Ref"), info };
+                    yield return new object[] { GetType("Optional_Dependency_Out"), info };
+                    yield return new object[] { GetType("Optional_Generic_Ref`1") , info };
+                    yield return new object[] { GetType("Optional_Generic_Out`1" ), info };
                 }
             }
         }
