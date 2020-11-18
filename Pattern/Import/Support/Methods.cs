@@ -46,6 +46,17 @@ namespace Methods
     #endregion
 
 
+    #region Baseline
+
+    public class BaselineTestType : PatternBaseType
+    {
+        [InjectionMethod]
+        public void Method() { }
+    }
+
+    #endregion
+
+
     #region No Default
 
     public class Implicit_Dependency_Value : PatternBaseType

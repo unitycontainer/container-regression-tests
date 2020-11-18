@@ -64,6 +64,17 @@ namespace Properties
 
     #endregion
 
+
+    #region Baseline
+
+    public class BaselineTestType : PatternBaseType
+    {
+        public int Property { get; set; }
+    }
+
+    #endregion
+
+
     #region No Default
 
     public class Implicit_Dependency_Value : PatternBaseType

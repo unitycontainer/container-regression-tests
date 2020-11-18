@@ -59,6 +59,17 @@ namespace Fields
     #endregion
 
 
+    #region Baseline
+
+    public class BaselineTestType : PatternBaseType
+    {
+        public int Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+    }
+
+    #endregion
+
 
     #region Implicit
 

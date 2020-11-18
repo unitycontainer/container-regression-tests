@@ -7,10 +7,6 @@ namespace Regression
         public virtual object Value { get; protected set; }
     }
 
-    public class BaselineType : PatternBaseType
-    {
-    }
-
     public struct TestStruct
     {
         public int Integer;

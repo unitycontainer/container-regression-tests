@@ -1,5 +1,6 @@
 ﻿using Regression;
 using System;
+using System.ComponentModel;
 #if V4
 using Microsoft.Practices.Unity;
 #else
@@ -39,6 +40,19 @@ namespace Constructors
         public static InjectionMember GetInjectionOptional(object argument)
             => new InjectionConstructor(argument);
     }
+
+    #endregion
+
+
+    #region Baseline
+
+    public class BaselineTestType : PatternBaseType
+    {
+        public BaselineTestType()
+        {
+        }
+    }
+
 
     #endregion
 

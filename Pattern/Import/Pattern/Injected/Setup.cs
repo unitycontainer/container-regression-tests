@@ -12,7 +12,8 @@ namespace Regression
         [TestMethod]
         public void Baseline()
         {
-            var instance = Container.Resolve(typeof(BaselineType), null) as PatternBaseType;
+            var type = GetType("BaselineTestType");
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             Assert.IsNotNull(instance);
             Assert.IsNull(instance.Value);
