@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Configurations>Debug;Release;v4;v5</Configurations>
+	</PropertyGroup>
+
+	<!-- Configuration Settings -->
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'v4' ">
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'v5' ">
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+	</PropertyGroup>
+
+
+	<PropertyGroup>
+		<UnityContainer>..\..\Container\src\Unity.Container.csproj</UnityContainer>
+		<UnityLegacy>..\..\unity\source\Unity\Src\Unity.csproj</UnityLegacy>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="Exists('$(UnityLegacy)')">
+		<TargetFramework>net45</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\Container\package.sln')">
+		<TargetFramework>net46</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="Exists('$(UnityContainer)') AND !Exists('..\Container\package.sln')">
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="!Exists('$(UnityContainer)') AND !Exists('$(UnityLegacy)') ">
+		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
+	</PropertyGroup>
+
+
+	<!-- Definitions -->
+
+	<PropertyGroup>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net5')) ">V6</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">V6</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">V5</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">V4</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Condition="'$(TargetFramework)' == 'net5.0' " Include="$(UnityContainer)" />
+		<PackageReference Condition="'$(TargetFramework)' == 'net48'" Include="Unity.Container" Version="6.0.*-*" />
+		<PackageReference Condition="'$(TargetFramework)' == 'net46' " Include="Unity.Container" Version="5.11.*" />
+		<PackageReference Condition="'$(TargetFramework)' == 'net45' AND !Exists('$(UnityLegacy)')" Include="Unity" Version="4.0.1" />
+		<ProjectReference Condition="'$(TargetFramework)' == 'net45' AND Exists('$(UnityLegacy)')" Include="$(UnityLegacy)" />
+	</ItemGroup>
+
+	<!-- Exclusions -->
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+	  <Compile Remove="Dependency\Data\Fields.cs" />
+		<Compile Remove="Dependency\Tests\Fields\**" />
+		<EmbeddedResource Remove="Dependency\Tests\Fields\**" />
+		<None Remove="Dependency\Tests\Fields\**" />
+	</ItemGroup>
+
+
+	<PropertyGroup>
+		<Description>Unity Container Regression Tests</Description>
+		<Copyright>Copyright © .NET Foundation and Contributors. All Rights Reserved</Copyright>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
+		<PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
+	</ItemGroup>
+
+
+</Project>
