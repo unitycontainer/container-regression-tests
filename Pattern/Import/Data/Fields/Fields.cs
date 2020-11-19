@@ -1,7 +1,7 @@
 ﻿using Regression;
 using System;
 using System.ComponentModel;
-#if V4
+#if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;

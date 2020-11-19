@@ -4,21 +4,6 @@
 		<Configurations>Debug;Release;v4;v5</Configurations>
 	</PropertyGroup>
 
-	<!-- Configuration Settings -->
-
-	<PropertyGroup Condition=" '$(Configuration)' == 'v4' ">
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)' == 'v5' ">
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-	</PropertyGroup>
-
-
 	<PropertyGroup>
 		<UnityContainer>..\..\Container\src\Unity.Container.csproj</UnityContainer>
 		<UnityLegacy>..\..\unity\source\Unity\Src\Unity.csproj</UnityLegacy>
@@ -43,13 +28,6 @@
 
 	<!-- Definitions -->
 
-	<PropertyGroup>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net5')) ">V6</DefineConstants>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">V6</DefineConstants>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">V5</DefineConstants>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">V4</DefineConstants>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<ProjectReference Condition="'$(TargetFramework)' == 'net5.0' " Include="$(UnityContainer)" />
 		<PackageReference Condition="'$(TargetFramework)' == 'net48'" Include="Unity.Container" Version="6.0.*-*" />
@@ -58,18 +36,37 @@
 		<ProjectReference Condition="'$(TargetFramework)' == 'net45' AND Exists('$(UnityLegacy)')" Include="$(UnityLegacy)" />
 	</ItemGroup>
 
+	<PropertyGroup>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net5')) ">V6;UNITY_V6</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">V6;UNITY_V6</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">V5;UNITY_V5</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">V4;UNITY_V4</DefineConstants>
+	</PropertyGroup>
+
+	<!-- Configuration Settings -->
+	<PropertyGroup>
+		<DefineConstants Condition="'$(Configuration)'=='v4'">$(DefineConstants);BEHAVIOR_V4</DefineConstants>
+		<DefineConstants Condition="'$(Configuration)'=='v5'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+	</PropertyGroup>
+
 	<!-- v4 Exclusions -->
 
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net45'))">
 	  <Compile Remove="Import\Data\Fields\**" />
 	  <Compile Remove="Import\Tests\Fields\**" />
-	  <Compile Remove="Import\Pattern\Implicit\WithDefaults.cs" />
+	  <!--<Compile Remove="Import\Pattern\Implicit\WithDefaults.cs" />-->
 	</ItemGroup>
 
 	<!-- v5 Exclusions -->
 
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net46'))">
-		<Compile Remove="Import\Pattern\Implicit\WithDefaults.cs" />
+		<!--<Compile Remove="Import\Pattern\Implicit\WithDefaults.cs" />-->
 	</ItemGroup>
 
 	
@@ -79,11 +76,18 @@
 		<Copyright>Copyright © .NET Foundation and Contributors. All Rights Reserved</Copyright>
 	</PropertyGroup>
 
+	
+	
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
 		<PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
 	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="set" />
+	</Target>
 
 
 </Project>

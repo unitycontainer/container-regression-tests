@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-#if V4
+#if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
@@ -72,7 +72,7 @@ namespace Regression
         public virtual void Injected_ByGeneric_Required(string test, Type type, string name, Type dependency, object expected)
         {
             if (!type.IsGenericType)
-#if V4
+#if UNITY_V4
                 throw new ResolutionFailedException(type, name, null, null);
 #else
                 throw new ResolutionFailedException(type, name, "Not Generic");
@@ -112,7 +112,7 @@ namespace Regression
         [DynamicData(nameof(Optional_Data))]
         public virtual void Injected_ByGeneric_Optional(string test, Type type, string name, Type dependency, object expected)
         {
-#if V4
+#if UNITY_V4
             if (!type.IsGenericType)
                 throw new ResolutionFailedException(type, name, null, null);
 #else

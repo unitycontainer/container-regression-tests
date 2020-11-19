@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-#if V4
+#if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
@@ -11,12 +11,33 @@ namespace Regression
 {
     public abstract partial class ImplicitPattern
     {
-        [DynamicData(nameof(ParameterWithDefaults_Data))]
+#if BEHAVIOR_V4
+        [ExpectedException(typeof(ResolutionFailedException))]
+#endif
+        [DynamicData(nameof(WithDefaultValue_Data))]
         [DataTestMethod]
         /// <summary>
         /// Tests providing default values
         /// </summary>
-        public virtual void ParameterWithDefaults(string test, Type type, string name)
+        public virtual void WithDefaultValue(string test, Type type, string name)
+        {
+            // Act
+            var instance = Container.Resolve(type, name) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(instance.Expected, instance.Value);
+        }
+
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [ExpectedException(typeof(ResolutionFailedException))]
+#endif
+        [DynamicData(nameof(WithDefaultAttribute_Data))]
+        [DataTestMethod]
+        /// <summary>
+        /// Tests providing default values
+        /// </summary>
+        public virtual void WithDefaultAttribute(string test, Type type, string name)
         {
             // Act
             var instance = Container.Resolve(type, name) as PatternBaseType;
@@ -27,12 +48,31 @@ namespace Regression
         }
 
 
-        // Iterates through types with name starting with Implicit_WithDefault_*
-        public static IEnumerable<object[]> ParameterWithDefaults_Data
+#if BEHAVIOR_V4
+        [ExpectedException(typeof(ResolutionFailedException))]
+#endif
+        [DynamicData(nameof(WithDefaultAndAttribute_Data))]
+        [DataTestMethod]
+        /// <summary>
+        /// Tests providing default values
+        /// </summary>
+        public virtual void WithDefaultAndAttribute(string test, Type type, string name)
+        {
+            // Act
+            var instance = Container.Resolve(type, name) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(instance.Expected, instance.Value);
+        }
+
+        #region Test Data
+
+        public static IEnumerable<object[]> WithDefaultValue_Data
         {
             get
             {
-                foreach (var type in FromNamespace("ImplicitWithDefaults"))
+                foreach (var type in FromNamespace("ImplicitWithDefaults", "_WithDefault$"))
                 { 
                     yield return new object[] 
                     { 
@@ -43,5 +83,39 @@ namespace Regression
                 }
             }
         }
+
+        public static IEnumerable<object[]> WithDefaultAttribute_Data
+        {
+            get
+            {
+                foreach (var type in FromNamespace("ImplicitWithDefaults", "_WithDefaultAttribute$"))
+                {
+                    yield return new object[]
+                    {
+                        type.Name,
+                        type,
+                        null
+                    };
+                }
+            }
+        }
+
+        public static IEnumerable<object[]> WithDefaultAndAttribute_Data
+        {
+            get
+            {
+                foreach (var type in FromNamespace("ImplicitWithDefaults", "_WithDefaultAndAttribute$"))
+                {
+                    yield return new object[]
+                    {
+                        type.Name,
+                        type,
+                        null
+                    };
+                }
+            }
+        }
+
+        #endregion
     }
 }

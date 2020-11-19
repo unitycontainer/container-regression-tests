@@ -1,5 +1,5 @@
 ﻿using System;
-#if V4
+#if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity.Injection;
@@ -15,9 +15,9 @@ namespace Properties
             => new InjectionProperty(PropertyName);
 
         public static InjectionMember GetByNameOptional(Type type, string name)
-#if V4
+#if UNITY_V4
             => new InjectionProperty(PropertyName, new OptionalParameter(type, name));
-#elif V5
+#elif UNITY_V5
             => new InjectionProperty(PropertyName, true);
 #else
             => new OptionalProperty(PropertyName);
@@ -30,9 +30,9 @@ namespace Properties
             => new InjectionProperty(PropertyName, new OptionalParameter(type, name));
 
         public static InjectionMember GetOptionalOptional(Type type, string name)
-#if V4
+#if UNITY_V4
             => new InjectionProperty(PropertyName, new OptionalParameter(type, name));
-#elif V5
+#elif UNITY_V5
             => new InjectionProperty(PropertyName, new OptionalParameter(type, name));
 #else
             => new OptionalProperty(PropertyName, new OptionalParameter(type, name));
@@ -48,9 +48,9 @@ namespace Properties
             => new InjectionProperty(PropertyName, argument);
 
         public static InjectionMember GetInjectionOptional(object argument)
-#if V4
+#if UNITY_V4
             => new InjectionProperty(PropertyName, argument);
-#elif V5
+#elif UNITY_V5
             => new InjectionProperty(PropertyName, argument);
 #else
             => new OptionalProperty(PropertyName, argument);

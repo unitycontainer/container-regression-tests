@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-#if V4
+#if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
@@ -103,11 +103,11 @@ namespace Regression
 
         #region Implementation
 
-        protected static IEnumerable<Type> FromNamespace(string postfix, string regex = ".*")
+        protected static IEnumerable<Type> FromNamespace(string postfix, string expr = ".*")
         {
             var @namespace = $"{Namespace}.{postfix}";
             return _types.Values
-                         .Where(t => t.Namespace?.StartsWith(@namespace) ?? false && Regex.IsMatch(t.Name, regex));
+                .Where(t => (t.Namespace?.StartsWith(@namespace) ?? false) && Regex.IsMatch(t.Name, expr));
         }
 
         protected static TypeInfo GetType(string name) => _types[name];
