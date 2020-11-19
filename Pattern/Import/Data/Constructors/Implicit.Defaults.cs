@@ -68,6 +68,45 @@ namespace Constructors.ImplicitWithDefaults
     }
 
     #endregion
+
+
+    #region Derived
+
+    public class Implicit_Derived_WithDefault : Implicit_Int_WithDefault
+    {
+        private const int _default = 1111;
+
+        public Implicit_Derived_WithDefault(int value = _default)
+            : base(value) { }
+
+        public override object Expected => _default;
+    }
+
+    public class Implicit_Derived_WithDefaultAttribute : Implicit_Int_WithDefaultAttribute
+    {
+        private const int _default = 1111;
+
+        public Implicit_Derived_WithDefaultAttribute([DefaultValue(_default)] int value)
+            : base(value) { }
+
+        public override object Expected => _default;
+    }
+
+    public class Implicit_Derived_WithDefaultAndAttribute : Implicit_Int_WithDefaultAndAttribute
+    {
+        private const int _default = 1111;
+        
+        public Implicit_Derived_WithDefaultAndAttribute([DefaultValue(_default)] int value = PatternBase.DefaultValueInt)
+            : base(value) { }
+
+#if BEHAVIOR_V5
+        public override object Expected => PatternBase.DefaultValueInt;
+#else
+        public override object Expected => _default;
+#endif
+    }
+
+    #endregion
 }
 
 

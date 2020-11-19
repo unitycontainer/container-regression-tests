@@ -90,8 +90,13 @@ namespace Methods.ImplicitWithDefaults
 
         [InjectionMethod]
         public override void Method(int value = _default) => base.Method(value);
-        
+
+#if BEHAVIOR_V5
+        // BUG: See https://github.com/unitycontainer/container/issues/291
+        public override object Expected => PatternBase.DefaultInt;
+#else
         public override object Expected => _default;
+#endif
     }
 
     public class Implicit_Derived_WithDefaultAttribute : Implicit_Int_WithDefaultAttribute
@@ -102,8 +107,8 @@ namespace Methods.ImplicitWithDefaults
         public override void Method([DefaultValue(_default)] int value = PatternBase.DefaultValueInt) => base.Method(value);
 
 #if BEHAVIOR_V5
-        // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => PatternBase.DefaultValueInt;
+        // BUG: See https://github.com/unitycontainer/container/issues/291
+        public override object Expected => PatternBase.DefaultInt;
 #else
         public override object Expected => _default;
 #endif
@@ -112,15 +117,16 @@ namespace Methods.ImplicitWithDefaults
     public class Implicit_Derived_WithDefaultAndAttribute : Implicit_Int_WithDefaultAndAttribute
     {
         private const int _default = 1111;
+        
+        [InjectionMethod]
         public override void Method([DefaultValue(_default)]int value = PatternBase.DefaultValueInt) => base.Method(value);
 #if BEHAVIOR_V5
-        // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => PatternBase.DefaultValueInt;
+        // BUG: See https://github.com/unitycontainer/container/issues/291
+        public override object Expected => PatternBase.DefaultInt;
 #else
         public override object Expected => _default;
 #endif
     }
-
 
     #endregion
 }
