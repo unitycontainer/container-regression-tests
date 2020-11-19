@@ -1,49 +1,12 @@
 ﻿using Regression;
-using System;
-using System.ComponentModel;
 #if V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
-using Unity.Injection;
 #endif
 
 namespace Constructors
 {
-    #region Support
-    public static class Support
-    {
-        public static InjectionMember GetByNameMember(Type type, string name)
-            => throw new NotSupportedException();
-
-        public static InjectionMember GetByNameOptional(Type type, string name)
-            => throw new NotSupportedException();
-
-        public static InjectionMember GetResolvedMember(Type type, string name)
-            => new InjectionConstructor(new ResolvedParameter(type, name));
-
-        public static InjectionMember GetOptionalMember(Type type, string name)
-            => new InjectionConstructor(new OptionalParameter(type, name));
-
-        public static InjectionMember GetOptionalOptional(Type type, string name)
-            => new InjectionConstructor(new OptionalParameter(type, name));
-
-        public static InjectionMember GetGenericMember(Type _, string name)
-            => new InjectionConstructor(new GenericParameter("T", name));
-
-        public static InjectionMember GetGenericOptional(Type type, string name)
-            => new InjectionConstructor(new OptionalGenericParameter("T", name));
-
-        public static InjectionMember GetInjectionValue(object argument)
-            => new InjectionConstructor(argument);
-
-        public static InjectionMember GetInjectionOptional(object argument)
-            => new InjectionConstructor(argument);
-    }
-
-    #endregion
-
-
     #region Baseline
 
     public class BaselineTestType : PatternBaseType
@@ -53,41 +16,11 @@ namespace Constructors
         }
     }
 
-
-    #endregion
-
-
-    #region Implicit
-
-    public class Implicit_Dependency_Value : PatternBaseType
+    public class Implicit<TDependency> : PatternBaseType
     {
-        public Implicit_Dependency_Value(int value) => Value = value;
+        public Implicit(TDependency value) => Value = value;
     }
 
-    public class Implicit_Dependency_Class : PatternBaseType
-    {
-        public Implicit_Dependency_Class(Unresolvable value) => Value = value;
-    }
-
-    public class Implicit_Dependency_Dynamic : PatternBaseType
-    {
-        public Implicit_Dependency_Dynamic(dynamic value) => Value = value;
-    }
-
-    public class Implicit_Dependency_Generic<T> : PatternBaseType
-    {
-        public Implicit_Dependency_Generic(T value) => Value = value;
-    }
-
-    public class Implicit_WithDefault_Value : PatternBaseType
-    {
-        public Implicit_WithDefault_Value(int value = PatternBase.DefaultInt) => Value = value;
-    }
-
-    public class Implicit_WithDefault_Class : PatternBaseType
-    {
-        public Implicit_WithDefault_Class(string value = PatternBase.DefaultString) => Value = value;
-    }
 
     #endregion
 

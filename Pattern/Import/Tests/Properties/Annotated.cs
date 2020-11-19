@@ -12,9 +12,7 @@ namespace Properties
         public override void TestInitialize() => base.TestInitialize();
 
         [ClassInitialize]
-        public static void ClassInit(TestContext context) 
-            => ClassInitialize(context.FullyQualifiedTestClassName
-                 .Substring(0, context.FullyQualifiedTestClassName.LastIndexOf(".")));
+        public static void ClassInit(TestContext context) => ClassInitialize(context);
 
         #endregion
 

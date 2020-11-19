@@ -5,6 +5,8 @@ namespace Regression
     public abstract class PatternBaseType
     {
         public virtual object Value { get; protected set; }
+
+        public virtual object Expected { get; }
     }
 
     public struct TestStruct
@@ -17,12 +19,6 @@ namespace Regression
             Integer = value;
             Instance = instance;
         }
-    }
-
-    public ref struct TestRefStruct
-    {
-        public int Integer;
-        public object Object;
     }
 
     public class Unresolvable

@@ -1,5 +1,4 @@
 ﻿using Regression;
-using System;
 #if V4
 using Microsoft.Practices.Unity;
 #else
@@ -9,43 +8,6 @@ using Unity.Injection;
 
 namespace Methods
 {
-    #region Support
-
-    public static class Support
-    {
-        private const string MethodName = "Method";
-
-        public static InjectionMember GetByNameMember(Type type, string name)
-            => new InjectionMethod(MethodName);
-
-        public static InjectionMember GetByNameOptional(Type type, string name)
-            => new InjectionMethod(MethodName);
-
-        public static InjectionMember GetResolvedMember(Type type, string name)
-            => new InjectionMethod(MethodName, new ResolvedParameter(type, name));
-
-        public static InjectionMember GetOptionalMember(Type type, string name)
-            => new InjectionMethod(MethodName, new ResolvedParameter(type, name));
-
-        public static InjectionMember GetOptionalOptional(Type type, string name)
-            => new InjectionMethod(MethodName, new OptionalParameter(type, name));
-
-        public static InjectionMember GetGenericMember(Type _, string name)
-            => new InjectionMethod(MethodName, new GenericParameter("T", name));
-
-        public static InjectionMember GetGenericOptional(Type type, string name)
-            => new InjectionMethod(MethodName, new OptionalGenericParameter("T", name));
-
-        public static InjectionMember GetInjectionValue(object argument)
-            => new InjectionMethod(MethodName, argument);
-
-        public static InjectionMember GetInjectionOptional(object argument)
-            => new InjectionMethod(MethodName, argument);
-    }
-
-    #endregion
-
-
     #region Baseline
 
     public class BaselineTestType : PatternBaseType
@@ -54,45 +16,10 @@ namespace Methods
         public void Method() { }
     }
 
-    #endregion
-
-
-    #region No Default
-
-    public class Implicit_Dependency_Value : PatternBaseType
+    public class Implicit<TDependency> : PatternBaseType
     {
         [InjectionMethod]
-        public void Method(int value) => Value = value;
-    }
-
-    public class Implicit_Dependency_Class : PatternBaseType
-    {
-        [InjectionMethod]
-        public void Method(Unresolvable value) => Value = value;
-    }
-
-    public class Implicit_Dependency_Dynamic : PatternBaseType
-    {
-        [InjectionMethod]
-        public void Method(dynamic value) => Value = value;
-    }
-
-    public class Implicit_Dependency_Generic<T> : PatternBaseType
-    {
-        [InjectionMethod]
-        public void Method(T value) => Value = value;
-    }
-
-    public class Implicit_WithDefault_Value : PatternBaseType
-    {
-        [InjectionMethod]
-        public void Method(int value = PatternBase.DefaultInt) => Value = value;
-    }
-
-    public class Implicit_WithDefault_Class : PatternBaseType
-    {
-        [InjectionMethod]
-        public void Method(string value = PatternBase.DefaultString) => Value = value;
+        public void Method(TDependency value) => Value = value;
     }
 
     #endregion

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 #if V4
 using Microsoft.Practices.Unity;
 #else
@@ -11,9 +13,12 @@ using Unity.Injection;
 
 namespace Regression
 {
-    public abstract class PatternBase
+    public abstract partial class PatternBase
     {
         #region Fields
+
+        protected IUnityContainer Container;
+        protected static string Namespace { get; private set; }
 
         // Test Constants
         public const int NamedInt = 123;
@@ -48,37 +53,72 @@ namespace Regression
         protected static Type Required_Default_String;
         protected static Type Optional_Default_Class;
 
-        protected IUnityContainer Container;
+        #endregion
+
+        protected static void ClassInitialize(TestContext context)
+        {
+            Namespace = context.FullyQualifiedTestClassName.Substring(0, context.FullyQualifiedTestClassName.LastIndexOf("."));
+
+            _types = Assembly.GetExecutingAssembly()
+                             .DefinedTypes
+                             .Where(t => t.Namespace?.StartsWith(Namespace) ?? false)
+                             .ToDictionary(t => t.Name);
+
+            LoadInjectionFuncs(Type.GetType($"{Namespace}.Support"));
+
+            #region Test Types
+            PocoType = Type.GetType($"{Namespace}.Implicit_Dependency_Generic`1");
+            Required = Type.GetType($"{Namespace}.Required_Dependency_Generic`1");
+            Optional = Type.GetType($"{Namespace}.Optional_Dependency_Generic`1");
+
+            Required_Named = Type.GetType($"{Namespace}.Required_Dependency_Named`1");
+            Optional_Named = Type.GetType($"{Namespace}.Optional_Dependency_Named`1");
+
+            PocoType_Default_Value = Type.GetType($"{Namespace}.Implicit_WithDefault_Value");
+            Required_Default_Value = Type.GetType($"{Namespace}.Required_WithDefault_Value");
+            Optional_Default_Value = Type.GetType($"{Namespace}.Optional_WithDefault_Value");
+
+            PocoType_Default_Class  = Type.GetType($"{Namespace}.Implicit_WithDefault_Class");
+            Required_Default_String = Type.GetType($"{Namespace}.Required_WithDefault_Class");
+            Optional_Default_Class  = Type.GetType($"{Namespace}.Optional_WithDefault_Class");
+            #endregion
+        }
+
+        public virtual void TestInitialize() => Container = new UnityContainer();
+
+        protected virtual void RegisterTypes()
+        {
+            Container.RegisterInstance(RegisteredInt)
+                     .RegisterInstance(RegisteredString)
+                     .RegisterInstance(RegisteredUnresolvable)
+                     .RegisterInstance(typeof(TestStruct), RegisteredStruct)
+#if !V4 // Only Unity v5 and up allow `null` as a value
+                     .RegisterInstance(typeof(string), Null, (object)null)
+                     .RegisterInstance(typeof(Unresolvable), Null, (object)null)
+#endif
+                     .RegisterInstance(Name, NamedInt)
+                     .RegisterInstance(Name, NamedSingleton);
+        }
+
+
+        #region Implementation
+
+        protected static IEnumerable<Type> FromNamespace(string postfix, string regex = ".*")
+        {
+            var @namespace = $"{Namespace}.{postfix}";
+            return _types.Values
+                         .Where(t => t.Namespace?.StartsWith(@namespace) ?? false && Regex.IsMatch(t.Name, regex));
+        }
+
+        protected static TypeInfo GetType(string name) => _types[name];
 
         #endregion
 
-        protected static void ClassInitialize(string name)
-        {
-            _types = Assembly.GetExecutingAssembly()
-                             .DefinedTypes
-                             .Where(t => t.Namespace == name)
-                             .ToDictionary(t => t.Name);
 
-            #region Test Types
-            PocoType = Type.GetType($"{name}.Implicit_Dependency_Generic`1");
-            Required = Type.GetType($"{name}.Required_Dependency_Generic`1");
-            Optional = Type.GetType($"{name}.Optional_Dependency_Generic`1");
+        #region Injection
 
-            Required_Named = Type.GetType($"{name}.Required_Dependency_Named`1");
-            Optional_Named = Type.GetType($"{name}.Optional_Dependency_Named`1");
-
-            PocoType_Default_Value = Type.GetType($"{name}.Implicit_WithDefault_Value");
-            Required_Default_Value = Type.GetType($"{name}.Required_WithDefault_Value");
-            Optional_Default_Value = Type.GetType($"{name}.Optional_WithDefault_Value");
-
-            PocoType_Default_Class  = Type.GetType($"{name}.Implicit_WithDefault_Class");
-            Required_Default_String = Type.GetType($"{name}.Required_WithDefault_Class");
-            Optional_Default_Class  = Type.GetType($"{name}.Optional_WithDefault_Class");
-            #endregion
-
-
-            #region Injection Support
-            var support = Type.GetType($"{name}.Support");
+        private static void LoadInjectionFuncs(Type support)
+        { 
             GetByNameMember     = (Func<Type, string, InjectionMember>)support.GetMethod("GetByNameMember")
                                                                               .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
             GetByNameOptional   = (Func<Type, string, InjectionMember>)support.GetMethod("GetByNameOptional")
@@ -97,34 +137,7 @@ namespace Regression
                                                                          .CreateDelegate(typeof(Func<object, InjectionMember>));
             GetInjectionOptional = (Func<object, InjectionMember>)support.GetMethod("GetInjectionOptional")
                                                                          .CreateDelegate(typeof(Func<object, InjectionMember>));
-            #endregion
         }
-
-        public virtual void TestInitialize() => Container = new UnityContainer();
-
-
-        #region Implementation
-
-        protected static TypeInfo GetType(string name) => _types[name];
-
-        protected virtual void RegisterTypes()
-        {
-            Container.RegisterInstance(RegisteredInt)
-                     .RegisterInstance(RegisteredString)
-                     .RegisterInstance(RegisteredUnresolvable)
-                     .RegisterInstance(typeof(TestStruct), RegisteredStruct)
-#if !V4 // Only Unity v5 and up allow `null` as a value
-                     .RegisterInstance(typeof(string), Null, (object)null)
-                     .RegisterInstance(typeof(Unresolvable), Null, (object)null)
-#endif
-                     .RegisterInstance(Name, NamedInt)
-                     .RegisterInstance(Name, NamedSingleton);
-        }
-
-        #endregion
-
-
-        #region Injection
 
         protected static Func<Type, string, InjectionMember> GetByNameMember;
         protected static Func<Type, string, InjectionMember> GetByNameOptional;

@@ -5,65 +5,15 @@ using System.ComponentModel;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
-using Unity.Injection;
 #endif
 
 namespace Fields
 {
-    #region Support
-
-    public static class Support
-    {
-        private const string FieldName = "Field";
-
-        public static InjectionMember GetByNameMember(Type type, string name)
-            => new InjectionField(FieldName);
-
-        public static InjectionMember GetByNameOptional(Type type, string name)
-#if V5
-            => new InjectionField(FieldName, true);
-#else
-            => new OptionalField(FieldName);
-#endif
-
-        public static InjectionMember GetResolvedMember(Type type, string name)
-            => new InjectionField(FieldName, new ResolvedParameter(type, name));
-
-        public static InjectionMember GetOptionalMember(Type type, string name)
-            => new InjectionField(FieldName, new OptionalParameter(type, name));
-
-        public static InjectionMember GetOptionalOptional(Type type, string name)
-#if V5
-            => new InjectionField(FieldName, new OptionalParameter(type, name));
-#else
-            => new OptionalField(FieldName, new OptionalParameter(type, name));
-#endif
-
-        public static InjectionMember GetGenericMember(Type _, string name)
-            => new InjectionField(FieldName, new GenericParameter("T", name));
-
-        public static InjectionMember GetGenericOptional(Type type, string name)
-            => new InjectionField(FieldName, new OptionalGenericParameter("T", name));
-
-        public static InjectionMember GetInjectionValue(object argument)
-            => new InjectionField(FieldName, argument);
-
-        public static InjectionMember GetInjectionOptional(object argument)
-#if V5
-            => new InjectionField(FieldName, argument);
-#else
-            => new OptionalField(FieldName, argument);
-#endif
-    }
-
-    #endregion
-
-
     #region Baseline
 
     public class BaselineTestType : PatternBaseType
     {
-        public int Field;
+        public object Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }
@@ -72,6 +22,13 @@ namespace Fields
 
 
     #region Implicit
+
+    public class Implicit<TDependency> : PatternBaseType
+    {
+        public TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+    }
 
     public class Implicit_Dependency_Value : PatternBaseType
     {
@@ -103,7 +60,6 @@ namespace Fields
 
     public class Implicit_WithDefault_Value : PatternBaseType
     {
-        [DefaultValue(PatternBase.DefaultInt)]
         public int Field = PatternBase.DefaultInt;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
@@ -111,7 +67,6 @@ namespace Fields
 
     public class Implicit_WithDefault_Class : PatternBaseType
     {
-        [DefaultValue(PatternBase.DefaultString)]
         public string Field = PatternBase.DefaultString;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
