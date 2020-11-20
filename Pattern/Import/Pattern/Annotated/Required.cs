@@ -7,7 +7,7 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Regression
+namespace Regression.Annotated
 {
     /// <summary>
     /// Testing resolution of required dependencies.
@@ -30,7 +30,7 @@ namespace Regression
     /// }
     ///      
     /// </example>
-    public abstract partial class AnnotatedPattern
+    public abstract partial class Pattern
     {
         /// <summary>
         /// Tests dependency resolution from empty container.

@@ -18,7 +18,8 @@ namespace Regression
         #region Fields
 
         protected IUnityContainer Container;
-        protected static string Namespace { get; private set; }
+        protected static string RootNamespace { get; private set; }
+        protected static string DataNamespace { get; private set; }
 
         // Test Constants
         public const int NamedInt = 123;
@@ -41,6 +42,10 @@ namespace Regression
         private static IDictionary<string, TypeInfo> _types;
 
         // Test types
+        protected static Type ImplicitDefinition;
+        protected static Type AnnotatedRequired;
+        protected static Type AnnotatedOptional;
+
         protected static Type PocoType;
         protected static Type Required;
         protected static Type Optional;
@@ -57,30 +62,38 @@ namespace Regression
 
         protected static void ClassInitialize(TestContext context)
         {
-            Namespace = context.FullyQualifiedTestClassName.Substring(0, context.FullyQualifiedTestClassName.LastIndexOf("."));
+            var type = Type.GetType(context.FullyQualifiedTestClassName);
+            RootNamespace = type.Namespace;
+            DataNamespace = $"{type.BaseType.Namespace}.{RootNamespace}";
+
+            ImplicitDefinition = Type.GetType($"{RootNamespace}.ImplicitTestType`1");
+            AnnotatedRequired  = Type.GetType($"{RootNamespace}.RequiredTestType`1");
+            AnnotatedOptional  = Type.GetType($"{RootNamespace}.OptionalTestType`1");
 
             _types = Assembly.GetExecutingAssembly()
                              .DefinedTypes
-                             .Where(t => t.Namespace?.StartsWith(Namespace) ?? false)
+                             .Where(t => t.Namespace?.StartsWith(DataNamespace) ?? false)
                              .ToDictionary(t => t.Name);
 
-            LoadInjectionFuncs(Type.GetType($"{Namespace}.Support"));
+            LoadInjectionFuncs(Type.GetType($"{RootNamespace}.Support"));
+
+            ////////////////////////////
 
             #region Test Types
-            PocoType = Type.GetType($"{Namespace}.Implicit_Dependency_Generic`1");
-            Required = Type.GetType($"{Namespace}.Required_Dependency_Generic`1");
-            Optional = Type.GetType($"{Namespace}.Optional_Dependency_Generic`1");
+            PocoType = Type.GetType($"{RootNamespace}.Implicit_Dependency_Generic`1");
+            Required = Type.GetType($"{RootNamespace}.Required_Dependency_Generic`1");
+            Optional = Type.GetType($"{RootNamespace}.Optional_Dependency_Generic`1");
 
-            Required_Named = Type.GetType($"{Namespace}.Required_Dependency_Named`1");
-            Optional_Named = Type.GetType($"{Namespace}.Optional_Dependency_Named`1");
+            Required_Named = Type.GetType($"{RootNamespace}.Required_Dependency_Named`1");
+            Optional_Named = Type.GetType($"{RootNamespace}.Optional_Dependency_Named`1");
 
-            PocoType_Default_Value = Type.GetType($"{Namespace}.Implicit_WithDefault_Value");
-            Required_Default_Value = Type.GetType($"{Namespace}.Required_WithDefault_Value");
-            Optional_Default_Value = Type.GetType($"{Namespace}.Optional_WithDefault_Value");
+            PocoType_Default_Value = Type.GetType($"{RootNamespace}.Implicit_WithDefault_Value");
+            Required_Default_Value = Type.GetType($"{RootNamespace}.Required_WithDefault_Value");
+            Optional_Default_Value = Type.GetType($"{RootNamespace}.Optional_WithDefault_Value");
 
-            PocoType_Default_Class  = Type.GetType($"{Namespace}.Implicit_WithDefault_Class");
-            Required_Default_String = Type.GetType($"{Namespace}.Required_WithDefault_Class");
-            Optional_Default_Class  = Type.GetType($"{Namespace}.Optional_WithDefault_Class");
+            PocoType_Default_Class  = Type.GetType($"{RootNamespace}.Implicit_WithDefault_Class");
+            Required_Default_String = Type.GetType($"{RootNamespace}.Required_WithDefault_Class");
+            Optional_Default_Class  = Type.GetType($"{RootNamespace}.Optional_WithDefault_Class");
             #endregion
         }
 
@@ -103,9 +116,15 @@ namespace Regression
 
         #region Implementation
 
-        protected static IEnumerable<Type> FromNamespace(string postfix, string expr = ".*")
+        protected static IEnumerable<Type> FromNamespace(string postfix)
         {
-            var @namespace = $"{Namespace}.{postfix}";
+            var @namespace = $"{DataNamespace}.{postfix}";
+            return _types.Values.Where(t => (t.Namespace?.StartsWith(@namespace) ?? false));
+        }
+
+        protected static IEnumerable<Type> FromNamespace(string postfix, string expr)
+        {
+            var @namespace = $"{DataNamespace}.{postfix}";
             return _types.Values
                 .Where(t => (t.Namespace?.StartsWith(@namespace) ?? false) && Regex.IsMatch(t.Name, expr));
         }

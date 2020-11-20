@@ -9,16 +9,29 @@ using Unity;
 
 namespace Fields
 {
-    #region Baseline
-
-    public class BaselineTestType : PatternBaseType
+    public class ImplicitTestType<TDependency>
+        : PatternBaseType
     {
-        public object Field;
-
+        public TDependency Field;
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }
 
-    #endregion
+    public class RequiredTestType<TDependency>
+        : PatternBaseType
+    {
+        [Dependency] public TDependency Field;
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+
+    }
+
+    public class OptionalTestType<TDependency>
+        : PatternBaseType
+    {
+        [OptionalDependency] public TDependency Field;
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+    }
+
+
 
 
     #region Implicit
@@ -71,65 +84,6 @@ namespace Fields
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }
-
-    #endregion
-
-
-    #region Required
-
-    public class Required_Dependency_Value : PatternBaseType
-    {
-        [Dependency] public int Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-    }
-
-    public class Required_Dependency_Class : PatternBaseType
-    {
-        [Dependency] public Unresolvable Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-    }
-
-    public class Required_Dependency_Dynamic : PatternBaseType
-    {
-        [Dependency] public dynamic Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-    }
-
-    public class Required_Dependency_Generic<T> : PatternBaseType
-    {
-        [Dependency] public T Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-    }
-
-    public class Required_Dependency_Named<T> : PatternBaseType
-    {
-        [Dependency(PatternBase.Name)] public T Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-    }
-
-    public class Required_WithDefault_Value : PatternBaseType
-    {
-        [Dependency]
-        [DefaultValue(PatternBase.DefaultInt)]
-        public int Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-    }
-
-    public class Required_WithDefault_Class : PatternBaseType
-    {
-        [Dependency]
-        [DefaultValue(PatternBase.DefaultString)]
-        public string Field = PatternBase.DefaultString;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-    }
-
 
     #endregion
 

@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-#if UNITY_V4
-using Microsoft.Practices.Unity;
-#else
-using Unity;
-#endif
-
-namespace Regression
+﻿namespace Regression.Implicit
 {
-    public abstract partial class ImplicitPattern : PatternBase
+    public abstract partial class Pattern : PatternBase
     {
 
     }

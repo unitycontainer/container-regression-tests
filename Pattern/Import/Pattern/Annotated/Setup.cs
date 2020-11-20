@@ -5,9 +5,9 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Regression
+namespace Regression.Annotated
 {
-    public abstract partial class AnnotatedPattern : PatternBase
+    public abstract partial class Pattern : PatternBase
     {
         [TestMethod]
         public void Baseline()

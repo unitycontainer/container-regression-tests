@@ -7,9 +7,9 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Regression
+namespace Regression.Implicit
 {
-    public abstract partial class ImplicitPattern
+    public abstract partial class Pattern
     {
 #if BEHAVIOR_V4
         [ExpectedException(typeof(ResolutionFailedException))]
@@ -72,7 +72,7 @@ namespace Regression
         {
             get
             {
-                foreach (var type in FromNamespace("ImplicitWithDefaults", "_WithDefault$"))
+                foreach (var type in FromNamespace("WithDefault"))
                 { 
                     yield return new object[] 
                     { 
@@ -88,7 +88,7 @@ namespace Regression
         {
             get
             {
-                foreach (var type in FromNamespace("ImplicitWithDefaults", "_WithDefaultAttribute$"))
+                foreach (var type in FromNamespace("WithDefaultAttribute"))
                 {
                     yield return new object[]
                     {
@@ -104,7 +104,7 @@ namespace Regression
         {
             get
             {
-                foreach (var type in FromNamespace("ImplicitWithDefaults", "_WithDefaultAndAttribute$"))
+                foreach (var type in FromNamespace("WithDefaultAndAttribute"))
                 {
                     yield return new object[]
                     {

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
-using Unity.Injection;
 #endif
 
 namespace Regression
@@ -16,19 +15,17 @@ namespace Regression
         {
             get
             {
-                var poco_type = PatternBase.GetType("Implicit`1");
-
-                yield return new object[] { $"Unresolvable: {typeof(Unresolvable).Name}", poco_type.MakeGenericType(typeof(Unresolvable)) };
-                yield return new object[] { $"Unresolvable: {typeof(string).Name}",       poco_type.MakeGenericType(typeof(string))};
-                yield return new object[] { $"Unresolvable: {typeof(int).Name}",          poco_type.MakeGenericType(typeof(int))};
-                yield return new object[] { $"Unresolvable: {typeof(bool).Name}",         poco_type.MakeGenericType(typeof(bool))};
-                yield return new object[] { $"Unresolvable: {typeof(long).Name}",         poco_type.MakeGenericType(typeof(long))};
-                yield return new object[] { $"Unresolvable: {typeof(short).Name}",        poco_type.MakeGenericType(typeof(short))};
-                yield return new object[] { $"Unresolvable: {typeof(float).Name}",        poco_type.MakeGenericType(typeof(float))};
-                yield return new object[] { $"Unresolvable: {typeof(double).Name}",       poco_type.MakeGenericType(typeof(double))};
-                yield return new object[] { $"Unresolvable: {typeof(Type).Name}",         poco_type.MakeGenericType(typeof(Type))};
-                yield return new object[] { $"Unresolvable: {typeof(ICloneable).Name}",   poco_type.MakeGenericType(typeof(ICloneable))};
-                yield return new object[] { $"Unresolvable: {typeof(Delegate).Name}",     poco_type.MakeGenericType(typeof(Delegate))};
+                yield return new object[] { "typeof(Unresolvable)", typeof(Unresolvable) };
+                yield return new object[] { "typeof(string)",       typeof(string)};
+                yield return new object[] { "typeof(int)",          typeof(int)};
+                yield return new object[] { "typeof(bool)",         typeof(bool)};
+                yield return new object[] { "typeof(long)",         typeof(long)};
+                yield return new object[] { "typeof(short)",        typeof(short)};
+                yield return new object[] { "typeof(float)",        typeof(float)};
+                yield return new object[] { "typeof(double)",       typeof(double)};
+                yield return new object[] { "typeof(Type)",         typeof(Type)};
+                yield return new object[] { "typeof(ICloneable)",   typeof(ICloneable)};
+                yield return new object[] { "typeof(Delegate)",     typeof(Delegate)};
             }
         }
 
@@ -45,13 +42,13 @@ namespace Regression
                 yield return new object[] { "Func<IUnityContainer>",        typeof(Func<IUnityContainer>),          null,   typeof(Func<IUnityContainer>)        };
                 yield return new object[] { "object[]",                     typeof(object[]),                       null,   typeof(object[])                     };
 #if !V4
-                yield return new object[] { "List<int>",                    typeof(List<int>),                      null,   typeof(List<int>) };
-                yield return new object[] { "List<string>",                 typeof(List<string>),                   null,   typeof(List<string>) };
+                yield return new object[] { "List<int>",                    typeof(List<int>),                      null,   typeof(List<int>)                    };
+                yield return new object[] { "List<string>",                 typeof(List<string>),                   null,   typeof(List<string>)                 };
                 yield return new object[] { "IEnumerable<IUnityContainer>", typeof(IEnumerable<IUnityContainer>),   null,   typeof(IEnumerable<IUnityContainer>) };
 #endif
 #if !V4 && !V5
-                yield return new object[] { "IUnityContainerAsync",         typeof(IUnityContainerAsync),           null,   typeof(IUnityContainerAsync) };
-                yield return new object[] { "IServiceProvider",             typeof(IServiceProvider),               null,   typeof(IServiceProvider) };
+                yield return new object[] { "IUnityContainerAsync",         typeof(IUnityContainerAsync),           null,   typeof(IUnityContainerAsync)         };
+                yield return new object[] { "IServiceProvider",             typeof(IServiceProvider),               null,   typeof(IServiceProvider)             };
 #endif
             }
         }

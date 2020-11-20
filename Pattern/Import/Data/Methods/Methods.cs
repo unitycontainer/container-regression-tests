@@ -1,4 +1,5 @@
 ﻿using Regression;
+using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -8,65 +9,44 @@ using Unity.Injection;
 
 namespace Methods
 {
-    #region Baseline
-
-    public class BaselineTestType : PatternBaseType
+    public class BaselineTestType<TDependency>
+        : PatternBaseType
     {
         [InjectionMethod]
-        public void Method() { }
+        public virtual void Method(TDependency value) => Value = value;
     }
 
-    public class Implicit<TDependency> : PatternBaseType
+    public class RequiredTestType<TDependency>
+        : PatternBaseType
     {
         [InjectionMethod]
-        public void Method(TDependency value) => Value = value;
+        public virtual void Method([Dependency] TDependency value) => Value = value;
     }
 
-    #endregion
-
-
-    #region Required
-
-    public class Required_Dependency_Value : PatternBaseType
+    public class OptionalTestType<TDependency>
+        : PatternBaseType
     {
         [InjectionMethod]
-        public void Method([Dependency] int value) => Value = value;
+        public virtual void Method([OptionalDependency] TDependency value) => Value = value;
     }
 
-    public class Required_Dependency_Class : PatternBaseType
+
+    #region Invalid
+
+    public class BaselineTestType_Ref<TDependency>
+        : PatternBaseType where TDependency : class
     {
         [InjectionMethod]
-        public void Method([Dependency] Unresolvable value) => Value = value;
+        public virtual void Method(ref TDependency value)
+            => throw new InvalidOperationException("should never execute");
     }
 
-    public class Required_Dependency_Dynamic : PatternBaseType
+    public class BaselineTestType_Out<TDependency>
+        : PatternBaseType where TDependency : class
     {
         [InjectionMethod]
-        public void Method([Dependency] dynamic value) => Value = value;
-    }
-
-    public class Required_Dependency_Generic<T> : PatternBaseType
-    {
-        [InjectionMethod]
-        public void Method([Dependency] T value) => Value = value;
-    }
-
-    public class Required_Dependency_Named<T> : PatternBaseType
-    {
-        [InjectionMethod]
-        public void Method([Dependency(PatternBase.Name)] T value) => Value = value;
-    }
-
-    public class Required_WithDefault_Value : PatternBaseType
-    {
-        [InjectionMethod]
-        public void Method([Dependency] int value = PatternBase.DefaultInt) => Value = value;
-    }
-
-    public class Required_WithDefault_Class : PatternBaseType
-    {
-        [InjectionMethod]
-        public void Method([Dependency] string value = PatternBase.DefaultString) => Value = value;
+        public virtual void Method(out TDependency value)
+            => throw new InvalidOperationException("should never execute");
     }
 
     #endregion

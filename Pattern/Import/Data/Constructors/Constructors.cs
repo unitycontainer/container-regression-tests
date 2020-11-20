@@ -1,4 +1,5 @@
 ﻿using Regression;
+using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -7,62 +8,43 @@ using Unity;
 
 namespace Constructors
 {
-    #region Baseline
-
-    public class BaselineTestType : PatternBaseType
+    public class ImplicitTestType<TDependency>
+        : PatternBaseType
     {
-        public BaselineTestType()
-        {
-        }
+        public ImplicitTestType(TDependency value) => Value = value;
     }
 
-    public class Implicit<TDependency> : PatternBaseType
+    public class RequiredTestType<TDependency>
+        : PatternBaseType
     {
-        public Implicit(TDependency value) => Value = value;
+        public RequiredTestType([Dependency] TDependency value) => Value = value;
+    }
+
+    public class OptionalTestType<TDependency>
+        : PatternBaseType
+    {
+        public OptionalTestType([OptionalDependency] TDependency value) => Value = value;
     }
 
 
-    #endregion
+    #region Invalid
 
-
-    #region Required
-
-    public class Required_Dependency_Value : PatternBaseType
+    public class BaselineTestType_Ref<TDependency>
+        : PatternBaseType where TDependency : class
     {
-        public Required_Dependency_Value([Dependency] int value) => Value = value;
+        public BaselineTestType_Ref(ref TDependency value)
+            => throw new InvalidOperationException("should never execute");
     }
 
-    public class Required_Dependency_Class : PatternBaseType
+    public class BaselineTestType_Out<TDependency>
+        : PatternBaseType where TDependency : class
     {
-        public Required_Dependency_Class([Dependency] Unresolvable value) => Value = value;
-    }
-
-    public class Required_Dependency_Dynamic : PatternBaseType
-    {
-        public Required_Dependency_Dynamic([Dependency] dynamic value) => Value = value;
-    }
-
-    public class Required_Dependency_Generic<T> : PatternBaseType
-    {
-        public Required_Dependency_Generic([Dependency] T value) => Value = value;
-    }
-
-    public class Required_Dependency_Named<T> : PatternBaseType
-    {
-        public Required_Dependency_Named([Dependency(PatternBase.Name)] T value) => Value = value;
-    }
-
-    public class Required_WithDefault_Value : PatternBaseType
-    {
-        public Required_WithDefault_Value([Dependency] int value = PatternBase.DefaultInt) => Value = value;
-    }
-
-    public class Required_WithDefault_Class : PatternBaseType
-    {
-        public Required_WithDefault_Class([Dependency] string value = PatternBase.DefaultString) => Value = value;
+        public BaselineTestType_Out(out TDependency value)
+            => throw new InvalidOperationException("should never execute");
     }
 
     #endregion
+
 
 
     #region Optional

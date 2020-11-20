@@ -1,10 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Regression;
 
 namespace Methods
 {
     [TestClass]
-    public partial class Implicit : ImplicitPattern
+    public partial class Implicit : Regression.Implicit.Pattern
     {
         #region Scaffolding
 

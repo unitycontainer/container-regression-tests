@@ -1,20 +1,22 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 #endif
 
-namespace Regression
+namespace Regression.Implicit
 {
-    public abstract partial class ImplicitPattern
+    public abstract partial class Pattern
     {
         [DataTestMethod]
         [DynamicData(nameof(ResolvableFromEmpty_Data), typeof(PatternBase))]
         public virtual void ResolvableFromEmpty(string test, Type type, string name, Type expected)
         {
+            // Arrange
+            var target = ImplicitDefinition.MakeGenericType(type);
+
             // Act
             var instance = Container.Resolve(type, name);
 
@@ -31,6 +33,9 @@ namespace Regression
         [ExpectedException(typeof(ResolutionFailedException))]
         public virtual void UnResolvableFromEmpty(string test, Type type)
         {
+            // Arrange
+            var target = ImplicitDefinition.MakeGenericType(type);
+
             // Act
             _ = Container.Resolve(type, null) as PatternBaseType;
         }

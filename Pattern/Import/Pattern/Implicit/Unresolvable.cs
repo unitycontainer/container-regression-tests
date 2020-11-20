@@ -6,27 +6,44 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Regression
+namespace Regression.Implicit
 {
-    public abstract partial class ImplicitPattern
+    /// <summary>
+    /// Tests invalid parameter types
+    /// </summary>
+    public abstract partial class Pattern
     {
-        /// <summary>
-        /// Tests invalid parameter types
-        /// </summary>
         [DataTestMethod]
-        [DataRow("Implicit_Dependency_Ref")]
-        [DataRow("Implicit_Dependency_Out")]
+        [DynamicData(nameof(ResolvableFromEmpty_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void ThrowsOnInvalidParameter(string name)
+        public virtual void ThrowsOnRefParameter(string test, Type type, string name, Type expected)
         {
-            var type = GetType(name);
-
-            // Make dependencies available
-            RegisterTypes();
+            // Arrange
+            var target = GetType("BaselineTestType_Ref`1").MakeGenericType(type);
 
             // Act
-            _ = Container.Resolve(type);
+            var instance = Container.Resolve(target, name);
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, expected);
         }
 
+
+        [DataTestMethod]
+        [DynamicData(nameof(ResolvableFromEmpty_Data), typeof(PatternBase))]
+        [ExpectedException(typeof(ResolutionFailedException))]
+        public virtual void ThrowsOnOutParameter(string test, Type type, string name, Type expected)
+        {
+            // Arrange
+            var target = GetType("BaselineTestType_Out`1").MakeGenericType(type);
+
+            // Act
+            var instance = Container.Resolve(target, name);
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, expected);
+        }
     }
 }

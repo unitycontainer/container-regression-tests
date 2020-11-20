@@ -1,6 +1,5 @@
 ﻿using Regression;
 using System;
-using System.ComponentModel;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -10,14 +9,27 @@ using Unity.Injection;
 
 namespace Properties
 {
-    #region Baseline
-
-    public class BaselineTestType : PatternBaseType
+    public class ImplicitTestType<TDependency>
+        : PatternBaseType
     {
-        public object Property { get; set; }
+        public TDependency Property { get; set; }
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
 
-    #endregion
+    public class RequiredTestType<TDependency>
+        : PatternBaseType
+    {
+        [Dependency] public TDependency Property { get; set; }
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+
+    }
+
+    public class OptionalTestType<TDependency>
+        : PatternBaseType
+    {
+        [OptionalDependency] public TDependency Property { get; set; }
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+    }
 
 
     #region Implicit
@@ -67,64 +79,6 @@ namespace Properties
     public class Implicit_WithDefault_Class : PatternBaseType
     {
         public string Property { get; set; } = PatternBase.DefaultString;
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-    }
-
-    #endregion
-
-
-    #region Required
-
-    public class Required_Dependency_Value : PatternBaseType
-    {
-        [Dependency] public int Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-    }
-
-    public class Required_Dependency_Class : PatternBaseType
-    {
-        [Dependency] public Unresolvable Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-    }
-
-    public class Required_Dependency_Dynamic : PatternBaseType
-    {
-        [Dependency] public dynamic Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-    }
-
-    public class Required_Dependency_Generic<T> : PatternBaseType
-    {
-        [Dependency] public T Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-    }
-
-    public class Required_Dependency_Named<T> : PatternBaseType
-    {
-        [Dependency(PatternBase.Name)] public T Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-    }
-
-    public class Required_WithDefault_Value : PatternBaseType
-    {
-        [Dependency]
-        [DefaultValue(PatternBase.DefaultInt)]
-        public int Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-    }
-
-    public class Required_WithDefault_Class : PatternBaseType
-    {
-        [Dependency]
-        [DefaultValue(PatternBase.DefaultString)]
-        public string Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
