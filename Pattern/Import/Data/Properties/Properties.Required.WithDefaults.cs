@@ -7,36 +7,23 @@ using Unity;
 #endif
 
 
-
 namespace Regression.Annotated.Properties.Required.WithDefaults
 {
-#if !BEHAVIOR_V5 // Unity v5 did not support Default Values on properties
 
     #region WithDefault
 
-    public class Required_Property_Int_WithDefault : PatternBaseType
-    {
-        [Dependency] public int Property { get; set; } = PatternBase.DefaultInt;
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-
-        public override object Expected => PatternBase.DefaultInt;
-    }
-
-    public class Required_Property_String_WithDefault : PatternBaseType
-    {
-        [Dependency] public string Property { get; set; } = PatternBase.DefaultString;
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-
-        public override object Expected => PatternBase.DefaultString;
-    }
-
-    public class Required_Property_DerivedFromInt_WithDefault : Required_Property_Int_WithDefault
-    {
-    }
+    // Unity does not support implicit default values on properties
+    // When resolved it will throw if not registered
+    //
+    //public class Required_WithDefault : PatternBaseType
+    //{
+    //    [Dependency] public int Property { get; set; } = PatternBase.DefaultInt;
+    //}
 
     #endregion
+
+
+#if !BEHAVIOR_V5 // Unity v5 did not support DefaultValueAttribute on properties
 
 
     #region WithDefaultAttribute

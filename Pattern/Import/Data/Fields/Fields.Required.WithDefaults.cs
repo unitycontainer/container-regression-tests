@@ -6,36 +6,22 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
+
 namespace Regression.Annotated.Fields.Required.WithDefaults
 {
-#if !BEHAVIOR_V5 // Unity v5 did not support Default Values on fields
-
     #region WithDefault
 
-    public class Required_Field_Int_WithDefault : PatternBaseType
-    {
-        [Dependency] public int Field = PatternBase.DefaultInt;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-
-        public override object Expected => PatternBase.DefaultInt;
-    }
-
-    public class Required_Field_String_WithDefault : PatternBaseType
-    {
-        [Dependency] public string Field = PatternBase.DefaultString;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-
-        public override object Expected => PatternBase.DefaultString;
-    }
-
-    public class Required_DerivedFromInt_WithDefault : Required_Field_Int_WithDefault
-    {
-    }
+    // Unity does not support implicit default values on fields
+    // When resolved it will throw if not registered
+    //
+    //public class Required_WithDefault : PatternBaseType
+    //{
+    //    [Dependency] public int Field = PatternBase.DefaultInt;
+    //}
 
     #endregion
 
+#if !BEHAVIOR_V5 // Unity v5 did not support DefaultValueAttribute on fields
 
     #region WithDefaultAttribute
 
@@ -77,7 +63,7 @@ namespace Regression.Annotated.Fields.Required.WithDefaults
     #endregion
 
 
-    #region 
+    #region WithDefaultAndAttribute
 
     public class Required_Field_Int_WithDefaultAndAttribute : PatternBaseType
     {
