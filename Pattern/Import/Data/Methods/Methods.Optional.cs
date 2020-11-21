@@ -5,20 +5,20 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Regression.Annotated.Methods.Required
+namespace Regression.Annotated.Methods.Optional
 {
     public class BaselineTestType<TDependency>
         : PatternBaseType
     {
         [InjectionMethod]
-        public virtual void Method([Dependency] TDependency value) => Value = value;
+        public virtual void Method([OptionalDependency] TDependency value) => Value = value;
     }
 
     public class BaselineTestType_Ref<TDependency>
         : PatternBaseType where TDependency : class
     {
         [InjectionMethod]
-        public virtual void Method([Dependency] ref TDependency _)
+        public virtual void Method([OptionalDependency] ref TDependency _)
             => throw new InvalidOperationException("should never execute");
     }
 
@@ -26,7 +26,7 @@ namespace Regression.Annotated.Methods.Required
         : PatternBaseType where TDependency : class
     {
         [InjectionMethod]
-        public virtual void Method([Dependency] out TDependency _)
+        public virtual void Method([OptionalDependency] out TDependency _)
             => throw new InvalidOperationException("should never execute");
     }
 }

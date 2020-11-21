@@ -39,13 +39,7 @@ namespace Regression
         public readonly static Unresolvable InjectedSingleton = SubUnresolvable.Create("injected");
         public readonly static object RegisteredStruct = new TestStruct(55, "struct");
 
-        private static IDictionary<string, TypeInfo> _types;
-
         // Test types
-        protected static Type ImplicitDefinition;
-        protected static Type AnnotatedRequired;
-        protected static Type AnnotatedOptional;
-
         protected static Type PocoType;
         protected static Type Required;
         protected static Type Optional;
@@ -66,34 +60,25 @@ namespace Regression
             RootNamespace = type.Namespace;
             DataNamespace = $"{type.BaseType.Namespace}.{RootNamespace}";
 
-            ImplicitDefinition = Type.GetType($"{RootNamespace}.ImplicitTestType`1");
-            AnnotatedRequired  = Type.GetType($"{RootNamespace}.RequiredTestType`1");
-            AnnotatedOptional  = Type.GetType($"{RootNamespace}.OptionalTestType`1");
-
-            _types = Assembly.GetExecutingAssembly()
-                             .DefinedTypes
-                             .Where(t => t.Namespace?.StartsWith(DataNamespace) ?? false)
-                             .ToDictionary(t => t.Name);
-
             LoadInjectionFuncs(Type.GetType($"{RootNamespace}.Support"));
 
             ////////////////////////////
 
             #region Test Types
-            PocoType = Type.GetType($"{RootNamespace}.Implicit_Dependency_Generic`1");
-            Required = Type.GetType($"{RootNamespace}.Required_Dependency_Generic`1");
-            Optional = Type.GetType($"{RootNamespace}.Optional_Dependency_Generic`1");
+            PocoType = GetRootType("Implicit_Dependency_Generic`1");
+            Required = GetRootType("Required_Dependency_Generic`1");
+            Optional = GetRootType("Optional_Dependency_Generic`1");
 
-            Required_Named = Type.GetType($"{RootNamespace}.Required_Dependency_Named`1");
-            Optional_Named = Type.GetType($"{RootNamespace}.Optional_Dependency_Named`1");
+            Required_Named = GetRootType("Required_Dependency_Named`1");
+            Optional_Named = GetRootType("Optional_Dependency_Named`1");
 
-            PocoType_Default_Value = Type.GetType($"{RootNamespace}.Implicit_WithDefault_Value");
-            Required_Default_Value = Type.GetType($"{RootNamespace}.Required_WithDefault_Value");
-            Optional_Default_Value = Type.GetType($"{RootNamespace}.Optional_WithDefault_Value");
+            PocoType_Default_Value = GetRootType("Implicit_WithDefault_Value");
+            Required_Default_Value = GetRootType("Required_WithDefault_Value");
+            Optional_Default_Value = GetRootType("Optional_WithDefault_Value");
 
-            PocoType_Default_Class  = Type.GetType($"{RootNamespace}.Implicit_WithDefault_Class");
-            Required_Default_String = Type.GetType($"{RootNamespace}.Required_WithDefault_Class");
-            Optional_Default_Class  = Type.GetType($"{RootNamespace}.Optional_WithDefault_Class");
+            PocoType_Default_Class  = GetRootType("Implicit_WithDefault_Class");
+            Required_Default_String = GetRootType("Required_WithDefault_Class");
+            Optional_Default_Class  = GetRootType("Optional_WithDefault_Class");
             #endregion
         }
 
@@ -119,17 +104,36 @@ namespace Regression
         protected static IEnumerable<Type> FromNamespace(string postfix)
         {
             var @namespace = $"{DataNamespace}.{postfix}";
-            return _types.Values.Where(t => (t.Namespace?.StartsWith(@namespace) ?? false));
+            return Assembly.GetExecutingAssembly()
+                           .DefinedTypes
+                           .Where(t => (t.Namespace?.StartsWith(@namespace) ?? false));
         }
 
         protected static IEnumerable<Type> FromNamespace(string postfix, string expr)
         {
             var @namespace = $"{DataNamespace}.{postfix}";
-            return _types.Values
-                .Where(t => (t.Namespace?.StartsWith(@namespace) ?? false) && Regex.IsMatch(t.Name, expr));
+            return Assembly.GetExecutingAssembly()
+                           .DefinedTypes
+                           .Where(t => (t.Namespace?.StartsWith(@namespace) ?? false) && Regex.IsMatch(t.Name, expr));
         }
 
-        protected static TypeInfo GetType(string name) => _types[name];
+        protected static Type GetType(string name)
+        {
+            return Type.GetType($"{DataNamespace}.{name}") ??
+                   Type.GetType($"{RootNamespace}.{name}");
+        }
+
+        protected static Type GetType(string @namespace, string name)
+        {
+            return Type.GetType($"{DataNamespace}.{@namespace}.{name}") ??
+                   Type.GetType($"{RootNamespace}.{@namespace}.{name}");
+        }
+
+        protected static Type GetRootType(string name)
+        {
+            var fullName = $"{RootNamespace}.{name}";
+            return Type.GetType(fullName);
+        }
 
         #endregion
 

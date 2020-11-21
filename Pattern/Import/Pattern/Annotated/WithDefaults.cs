@@ -1,13 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-#if UNITY_V4
-using Microsoft.Practices.Unity;
-#else
-using Unity;
-#endif
 
-namespace Regression.Implicit
+namespace Regression.Annotated
 {
     public abstract partial class Pattern
     {
@@ -29,7 +23,6 @@ namespace Regression.Implicit
             Assert.IsInstanceOfType(instance, type);
             Assert.AreEqual(instance.Expected, instance.Value);
         }
-
 
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         [ExpectedException(typeof(ResolutionFailedException))]
@@ -71,3 +64,4 @@ namespace Regression.Implicit
         }
     }
 }
+

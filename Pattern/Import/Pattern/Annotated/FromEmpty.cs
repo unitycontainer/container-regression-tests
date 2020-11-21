@@ -10,27 +10,15 @@ namespace Regression.Annotated
 {
     public abstract partial class Pattern
     {
-        [DataTestMethod]
-        [DynamicData(nameof(ResolvableFromEmpty_Data), typeof(PatternBase))]
-        public virtual void ResolvableFromEmptyRequired(string test, Type type, string name, Type expected)
-        {
-            // Arrange
-            var target = AnnotatedRequired.MakeGenericType(type);
-
-            // Act
-            var instance = Container.Resolve(target, name);
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, target);
-        }
+        private Type _typeDefinition;
 
         [DataTestMethod]
-        [DynamicData(nameof(ResolvableFromEmpty_Data), typeof(PatternBase))]
-        public virtual void ResolvableFromEmptyOptional(string test, Type type, string name, Type expected)
+        [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
+        public virtual void TypeFromEmpty_Required(string test, Type type)
         {
             // Arrange
-            var target = AnnotatedOptional.MakeGenericType(type);
+            var target = (_typeDefinition ??= GetType("Required", "BaselineTestType`1"))
+                .MakeGenericType(type);
 
             // Act
             var instance = Container.Resolve(target, null);
@@ -40,25 +28,43 @@ namespace Regression.Annotated
             Assert.IsInstanceOfType(instance, target);
         }
 
-
         [DataTestMethod]
-        [DynamicData(nameof(UnResolvableFromEmpty_Data), typeof(PatternBase))]
+        [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void UnResolvableFromEmptyRequired(string test, Type type)
+        public virtual void InvalidTypeFromEmpty_Required(string test, Type type)
         {
             // Arrange
-            var target = AnnotatedRequired.MakeGenericType(type);
+            var target = (_typeDefinition ??= GetType("Required", "BaselineTestType`1"))
+                .MakeGenericType(type);
 
             // Act
             _ = Container.Resolve(target, null);
         }
 
+
         [DataTestMethod]
-        [DynamicData(nameof(UnResolvableFromEmpty_Data), typeof(PatternBase))]
-        public virtual void UnResolvableFromEmptyOptional(string test, Type type)
+        [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
+        public virtual void TypeFromEmpty_Optional(string test, Type type)
         {
             // Arrange
-            var target = AnnotatedOptional.MakeGenericType(type);
+            var target = (_typeDefinition ??= GetType("Optional", "BaselineTestType`1"))
+                .MakeGenericType(type);
+
+            // Act
+            var instance = Container.Resolve(target, null);
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, target);
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
+        public virtual void InvalidTypeFromEmpty_Optional(string test, Type type)
+        {
+            // Arrange
+            var target = (_typeDefinition ??= GetType("Optional", "BaselineTestType`1"))
+                .MakeGenericType(type);
 
             // Act
             var instance = Container.Resolve(target, null) as PatternBaseType;

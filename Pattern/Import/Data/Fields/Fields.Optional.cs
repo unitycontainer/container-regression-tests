@@ -5,12 +5,12 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Regression.Annotated.Fields.Required
+namespace Regression.Annotated.Fields.Optional
 {
     public class BaselineTestType<TDependency>
         : PatternBaseType
     {
-        [Dependency] public TDependency Field;
+        [OptionalDependency] public TDependency Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }

@@ -6,13 +6,14 @@ using Unity;
 #endif
 
 
-namespace Regression.Annotated.Properties.Required
+namespace Regression.Annotated.Properties.Optional
 {
     public class BaselineTestType<TDependency>
         : PatternBaseType
     {
-        [Dependency] public TDependency Property { get; set; }
+        [OptionalDependency] public TDependency Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
 }
+

@@ -14,36 +14,28 @@ namespace Regression.Implicit
     public abstract partial class Pattern
     {
         [DataTestMethod]
-        [DynamicData(nameof(ResolvableFromEmpty_Data), typeof(PatternBase))]
+        [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void ThrowsOnRefParameter(string test, Type type, string name, Type expected)
+        public virtual void ThrowsOnRefParameter(string test, Type type)
         {
             // Arrange
             var target = GetType("BaselineTestType_Ref`1").MakeGenericType(type);
 
             // Act
-            var instance = Container.Resolve(target, name);
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, expected);
+            _ = Container.Resolve(target, null);
         }
 
 
         [DataTestMethod]
-        [DynamicData(nameof(ResolvableFromEmpty_Data), typeof(PatternBase))]
+        [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void ThrowsOnOutParameter(string test, Type type, string name, Type expected)
+        public virtual void ThrowsOnOutParameter(string test, Type type)
         {
             // Arrange
             var target = GetType("BaselineTestType_Out`1").MakeGenericType(type);
 
             // Act
-            var instance = Container.Resolve(target, name);
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, expected);
+            _ = Container.Resolve(target, null);
         }
     }
 }
