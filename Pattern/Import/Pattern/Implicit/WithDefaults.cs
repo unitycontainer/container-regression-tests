@@ -14,7 +14,7 @@ namespace Regression.Implicit
 #if BEHAVIOR_V4
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [DynamicData(nameof(WithDefaultValue_Data), typeof(PatternBase))]
+        [DynamicData(nameof(WithDefaultValue_Data))]
         [DataTestMethod]
         /// <summary>
         /// Tests providing default values
@@ -34,7 +34,7 @@ namespace Regression.Implicit
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [DynamicData(nameof(WithDefaultAttribute_Data), typeof(PatternBase))]
+        [DynamicData(nameof(WithDefaultAttribute_Data))]
         [DataTestMethod]
         /// <summary>
         /// Tests providing default values
@@ -54,7 +54,7 @@ namespace Regression.Implicit
 #if BEHAVIOR_V4
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [DynamicData(nameof(WithDefaultAndAttribute_Data), typeof(PatternBase))]
+        [DynamicData(nameof(WithDefaultAndAttribute_Data))]
         [DataTestMethod]
         /// <summary>
         /// Tests providing default values

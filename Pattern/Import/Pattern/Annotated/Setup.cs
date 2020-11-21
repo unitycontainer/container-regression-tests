@@ -1,8 +1,38 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
 
 namespace Regression.Annotated
 {
     public abstract partial class Pattern : PatternBase
     {
+
+        public static IEnumerable<object[]> Required_WithDefaults_Data
+        {
+            get
+            {
+                foreach (var type in FromNamespace("Required.WithDefaults"))
+                {
+                    yield return new object[]
+                    {
+                        type.Name,
+                        type
+                    };
+                }
+            }
+        }
+
+        public static IEnumerable<object[]> Optional_WithDefaults_Data
+        {
+            get
+            {
+                foreach (var type in FromNamespace("Optional.WithDefaults"))
+                {
+                    yield return new object[]
+                    {
+                        type.Name,
+                        type
+                    };
+                }
+            }
+        }
     }
 }

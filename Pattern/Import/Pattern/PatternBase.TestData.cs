@@ -17,12 +17,14 @@ namespace Regression
             {
                 yield return typeof(Unresolvable);
                 yield return typeof(string);
+#if !BEHAVIOR_V4 // Unity v4 did not support optional value types
                 yield return typeof(int);
                 yield return typeof(bool);
                 yield return typeof(long);
                 yield return typeof(short);
                 yield return typeof(float);
                 yield return typeof(double);
+#endif
                 yield return typeof(Type);
                 yield return typeof(ICloneable);
                 yield return typeof(Delegate);
@@ -38,19 +40,19 @@ namespace Regression
                 yield return typeof(Lazy<IUnityContainer>);
                 yield return typeof(Func<IUnityContainer>);
                 yield return typeof(object[]);
-#if !V4
+#if !BEHAVIOR_V4
                 yield return typeof(List<int>);
                 yield return typeof(List<string>);
                 yield return typeof(IEnumerable<IUnityContainer>);
 #endif
-#if !V4 && !V5
+#if !BEHAVIOR_V4 && !BEHAVIOR_V5
                 yield return typeof(IUnityContainerAsync);
                 yield return typeof(IServiceProvider);
 #endif
             }
         }
 
-        #region Test Data Sources
+#region Test Data Sources
 
         public static IEnumerable<object[]> UnResolvableTypes_Data
         {
@@ -74,52 +76,7 @@ namespace Regression
             }
         }
 
-        public static IEnumerable<object[]> WithDefaultValue_Data
-        {
-            get
-            {
-                foreach (var type in FromNamespace("WithDefault"))
-                {
-                    yield return new object[]
-                    {
-                        type.Name,
-                        type
-                    };
-                }
-            }
-        }
-
-        public static IEnumerable<object[]> WithDefaultAttribute_Data
-        {
-            get
-            {
-                foreach (var type in FromNamespace("WithDefaultAttribute"))
-                {
-                    yield return new object[]
-                    {
-                        type.Name,
-                        type
-                    };
-                }
-            }
-        }
-
-        public static IEnumerable<object[]> WithDefaultAndAttribute_Data
-        {
-            get
-            {
-                foreach (var type in FromNamespace("WithDefaultAndAttribute"))
-                {
-                    yield return new object[]
-                    {
-                        type.Name,
-                        type
-                    };
-                }
-            }
-        }
-
-        #endregion
+#endregion
     }
 }
 

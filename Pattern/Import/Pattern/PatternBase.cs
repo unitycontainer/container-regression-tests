@@ -106,15 +106,7 @@ namespace Regression
             var @namespace = $"{DataNamespace}.{postfix}";
             return Assembly.GetExecutingAssembly()
                            .DefinedTypes
-                           .Where(t => (t.Namespace?.StartsWith(@namespace) ?? false));
-        }
-
-        protected static IEnumerable<Type> FromNamespace(string postfix, string expr)
-        {
-            var @namespace = $"{DataNamespace}.{postfix}";
-            return Assembly.GetExecutingAssembly()
-                           .DefinedTypes
-                           .Where(t => (t.Namespace?.StartsWith(@namespace) ?? false) && Regex.IsMatch(t.Name, expr));
+                           .Where(t => (t.Namespace?.Equals(@namespace) ?? false));
         }
 
         protected static Type GetType(string name)

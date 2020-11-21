@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<Configurations>Debug;Release;v4;v5</Configurations>
+		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>
