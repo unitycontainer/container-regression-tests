@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -17,73 +16,46 @@ namespace Regression
     {
         #region Fields
 
+        private static string _root { get; set; }
+        private static string _data { get; set; }
+
+
         protected IUnityContainer Container;
-        protected static string RootNamespace { get; private set; }
-        protected static string DataNamespace { get; private set; }
 
-        // Test Constants
-        public const int NamedInt = 123;
-        public const int DefaultInt = 345;
-        public const int DefaultValueInt = 3456;
-        public const int InjectedInt = 678;
-        public const int RegisteredInt = 890;
         public const string Name = "name";
-        public const string Null = "null";
-        public const string NamedString = "named";
-        public const string DefaultString = "default";
-        public const string DefaultValueString = "default_attr";
-        public const string InjectedString = "injected";
-        public const string RegisteredString = "registered";
-        public readonly static Unresolvable RegisteredUnresolvable = Unresolvable.Create("singleton");
-        public readonly static Unresolvable NamedSingleton = Unresolvable.Create("named");
-        public readonly static Unresolvable InjectedSingleton = SubUnresolvable.Create("injected");
-        public readonly static object RegisteredStruct = new TestStruct(55, "struct");
 
-        // Test types
-        protected static Type PocoType;
-        protected static Type Required;
-        protected static Type Optional;
-        protected static Type Required_Named;
-        protected static Type Optional_Named;
-        protected static Type PocoType_Default_Value;
-        protected static Type Required_Default_Value;
-        protected static Type Optional_Default_Value;
-        protected static Type PocoType_Default_Class;
-        protected static Type Required_Default_String;
-        protected static Type Optional_Default_Class;
-
+        #region Integer
+        public const int NamedInt        = 1234;
+        public const int DefaultInt      = 3456;
+        public const int DefaultValueInt = 4567;
+        public const int InjectedInt     = 6789;
+        public const int RegisteredInt   = 8901;
+        public const int OverriddenInt   = 9012;
+        #endregion
+        
+        #region String
+        public const string Null                = "null";
+        public const string NamedString         = "named_string";
+        public const string DefaultString       = "default_string";
+        public const string DefaultValueString  = "default_value_string";
+        public const string RegisteredString    = "registered_string";
+        public const string InjectedString      = "injected_string";
+        public const string OverriddenString    = "overridden_string";
         #endregion
 
-        protected static void ClassInitialize(TestContext context)
-        {
-            var type = Type.GetType(context.FullyQualifiedTestClassName);
-            RootNamespace = type.Namespace;
-            DataNamespace = $"{type.BaseType.Namespace}.{RootNamespace}";
+        #region Unresolvable
+        public readonly static Unresolvable RegisteredUnresolvable = Unresolvable.Create("registered");
+        public readonly static Unresolvable NamedUnresolvable      = Unresolvable.Create("named");
+        public readonly static Unresolvable InjectedUnresolvable   = SubUnresolvable.Create("injected");
+        public readonly static Unresolvable OverriddenUnresolvable = SubUnresolvable.Create("overridden");
+        #endregion
 
-            LoadInjectionFuncs(Type.GetType($"{RootNamespace}.Support"));
+        #region Struct
+        public readonly static object RegisteredStruct = new TestStruct(55, "struct");
+        public readonly static object NamedStruct = new TestStruct(44, "named struct");
+        #endregion
 
-            ////////////////////////////
-
-            #region Test Types
-            PocoType = GetRootType("Implicit_Dependency_Generic`1");
-            Required = GetRootType("Required_Dependency_Generic`1");
-            Optional = GetRootType("Optional_Dependency_Generic`1");
-
-            Required_Named = GetRootType("Required_Dependency_Named`1");
-            Optional_Named = GetRootType("Optional_Dependency_Named`1");
-
-            PocoType_Default_Value = GetRootType("Implicit_WithDefault_Value");
-            Required_Default_Value = GetRootType("Required_WithDefault_Value");
-            Optional_Default_Value = GetRootType("Optional_WithDefault_Value");
-
-            PocoType_Default_Class  = GetRootType("Implicit_WithDefault_Class");
-            Required_Default_String = GetRootType("Required_WithDefault_Class");
-            Optional_Default_Class  = GetRootType("Optional_WithDefault_Class");
-            #endregion
-        }
-
-        public virtual void TestInitialize() => Container = new UnityContainer();
-
+        #region Unresolvable Type Instances
         public const bool        RegisteredBool       = true;
         public const long        RegisteredLong       = 12;
         public const short       RegisteredShort      = 23;
@@ -92,6 +64,36 @@ namespace Regression
         public static Type       RegisteredType       = typeof(PatternBase);
         public static ICloneable RegisteredICloneable = new object[0];
         public static Delegate   RegisteredDelegate   = (Func<int>)(() => 0);
+        #endregion
+
+        #endregion
+
+        protected static void ClassInitialize(TestContext context)
+        {
+            var type = Type.GetType(context.FullyQualifiedTestClassName);
+            _root = type.Namespace;
+            _data = $"{type.BaseType.Namespace}.{_root}";
+
+            LoadInjectionFuncs(Type.GetType($"{_root}.Support"));
+        }
+
+        public virtual void TestInitialize() => Container = new UnityContainer();
+
+        protected virtual void RegisterTypes()
+        {
+            Container.RegisterInstance(RegisteredInt)
+                     .RegisterInstance(Name, NamedInt)
+                     .RegisterInstance(RegisteredString)
+                     .RegisterInstance(Name, NamedString)
+                     .RegisterInstance(RegisteredUnresolvable)
+                     .RegisterInstance(Name, NamedUnresolvable)
+#if !V4 // Only Unity v5 and up allow `null` as a value
+                     .RegisterInstance(typeof(string),       Null, (object)null)
+                     .RegisterInstance(typeof(Unresolvable), Null, (object)null)
+#endif
+                     .RegisterInstance(typeof(TestStruct), RegisteredStruct)
+                     .RegisterInstance(typeof(TestStruct), Name, NamedStruct);
+        }
 
 
         protected virtual void RegisterUnResolvableTypes()
@@ -112,26 +114,12 @@ namespace Regression
 
 
 
-        protected virtual void RegisterTypes()
-        {
-            Container.RegisterInstance(RegisteredInt)
-                     .RegisterInstance(RegisteredString)
-                     .RegisterInstance(RegisteredUnresolvable)
-                     .RegisterInstance(typeof(TestStruct), RegisteredStruct)
-#if !V4 // Only Unity v5 and up allow `null` as a value
-                     .RegisterInstance(typeof(string), Null, (object)null)
-                     .RegisterInstance(typeof(Unresolvable), Null, (object)null)
-#endif
-                     .RegisterInstance(Name, NamedInt)
-                     .RegisterInstance(Name, NamedSingleton);
-        }
-
 
         #region Implementation
 
         protected static IEnumerable<Type> FromNamespace(string postfix)
         {
-            var @namespace = $"{DataNamespace}.{postfix}";
+            var @namespace = $"{_data}.{postfix}";
             return Assembly.GetExecutingAssembly()
                            .DefinedTypes
                            .Where(t => (t.Namespace?.Equals(@namespace) ?? false));
@@ -139,19 +127,19 @@ namespace Regression
 
         protected static Type GetType(string name)
         {
-            return Type.GetType($"{DataNamespace}.{name}") ??
-                   Type.GetType($"{RootNamespace}.{name}");
+            return Type.GetType($"{_data}.{name}") ??
+                   Type.GetType($"{_root}.{name}");
         }
 
         protected static Type GetType(string @namespace, string name)
         {
-            return Type.GetType($"{DataNamespace}.{@namespace}.{name}") ??
-                   Type.GetType($"{RootNamespace}.{@namespace}.{name}");
+            return Type.GetType($"{_data}.{@namespace}.{name}") ??
+                   Type.GetType($"{_root}.{@namespace}.{name}");
         }
 
         protected static Type GetRootType(string name)
         {
-            var fullName = $"{RootNamespace}.{name}";
+            var fullName = $"{_root}.{name}";
             return Type.GetType(fullName);
         }
 
