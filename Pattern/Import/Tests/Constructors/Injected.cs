@@ -18,13 +18,12 @@ namespace Constructors
         #endregion
 
 
-        //#region Unsupported
+        #region Incompatible Tests
 
-        //public override void Injected_ByName(string test, Type type, string name, Type dependency, object expected) { }
-        //public override void Injected_ByName_Default(string test, Type type, string name, Type dependency, object expected) { }
-        //public override void Injected_ByName_Required(string test, Type type, string name, Type dependency, object expected) { }
-        //public override void Injected_ByName_Optional(string test, Type type, string name, Type dependency, object expected) { }
+        public override void Injected_ByName_Implicit(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble) { }
+        public override void Injected_ByName_Required(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble) { }
+        public override void Injected_ByName_Optional(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble) { }
 
-        //#endregion
+        #endregion
     }
 }

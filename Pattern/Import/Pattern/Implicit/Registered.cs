@@ -10,7 +10,6 @@ namespace Regression.Implicit
 {
     public abstract partial class Pattern
     {
-
         [DataTestMethod]
         [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
         public virtual void Registered_Resolvable_Type(string test, Type type)

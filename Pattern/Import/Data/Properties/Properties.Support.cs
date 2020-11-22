@@ -11,38 +11,38 @@ namespace Properties
     {
         private const string PropertyName = "Property";
 
-        public static InjectionMember GetByNameMember(Type type, string name)
+        public static InjectionMember GetByNameMember(Type _)
             => new InjectionProperty(PropertyName);
 
-        public static InjectionMember GetByNameOptional(Type type, string name)
+        public static InjectionMember GetByNameOptional(Type importType)
 #if UNITY_V4
-            => new InjectionProperty(PropertyName, new OptionalParameter(type, name));
+            => new InjectionProperty(PropertyName, new OptionalParameter(importType, contractName));
 #elif UNITY_V5
             => new InjectionProperty(PropertyName, true);
 #else
             => new OptionalProperty(PropertyName);
 #endif
 
-        public static InjectionMember GetResolvedMember(Type type, string name)
-            => new InjectionProperty(PropertyName, new ResolvedParameter(type, name));
+        public static InjectionMember GetResolvedMember(Type importType, string contractName)
+            => new InjectionProperty(PropertyName, new ResolvedParameter(importType, contractName));
 
-        public static InjectionMember GetOptionalMember(Type type, string name)
-            => new InjectionProperty(PropertyName, new OptionalParameter(type, name));
+        public static InjectionMember GetOptionalMember(Type importType, string contractName)
+            => new InjectionProperty(PropertyName, new OptionalParameter(importType, contractName));
 
-        public static InjectionMember GetOptionalOptional(Type type, string name)
+        public static InjectionMember GetOptionalOptional(Type importType, string contractName)
 #if UNITY_V4
-            => new InjectionProperty(PropertyName, new OptionalParameter(type, name));
+            => new InjectionProperty(PropertyName, new OptionalParameter(importType, contractName));
 #elif UNITY_V5
-            => new InjectionProperty(PropertyName, new OptionalParameter(type, name));
+            => new InjectionProperty(PropertyName, new OptionalParameter(importType, contractName));
 #else
-            => new OptionalProperty(PropertyName, new OptionalParameter(type, name));
+            => new OptionalProperty(PropertyName, new OptionalParameter(importType, contractName));
 #endif
 
-        public static InjectionMember GetGenericMember(Type _, string name)
-            => new InjectionProperty(PropertyName, new GenericParameter("T", name));
+        public static InjectionMember GetGenericMember(Type _, string contractName)
+            => new InjectionProperty(PropertyName, new GenericParameter("T", contractName));
 
-        public static InjectionMember GetGenericOptional(Type type, string name)
-            => new InjectionProperty(PropertyName, new OptionalGenericParameter("T", name));
+        public static InjectionMember GetGenericOptional(Type importType, string contractName)
+            => new InjectionProperty(PropertyName, new OptionalGenericParameter("T", contractName));
 
         public static InjectionMember GetInjectionValue(object argument)
             => new InjectionProperty(PropertyName, argument);

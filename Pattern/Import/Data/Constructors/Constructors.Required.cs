@@ -11,12 +11,14 @@ namespace Regression.Annotated.Constructors.Required
         : PatternBaseType
     {
         public BaselineTestType([Dependency] TDependency value) => Value = value;
+        public override object Expected => default(TDependency);
     }
 
     public class BaselineTestTypeNamed<TDependency>
         : PatternBaseType
     {
         public BaselineTestTypeNamed([Dependency(PatternBase.Name)] TDependency value) => Value = value;
+        public override object Expected => default(TDependency);
     }
 
 

@@ -13,6 +13,7 @@ namespace Regression.Implicit.Methods
     {
         [InjectionMethod]
         public virtual void Method(TDependency value) => Value = value;
+        public override object Expected => default(TDependency);
     }
 
     public class BaselineTestType_Ref<TDependency>

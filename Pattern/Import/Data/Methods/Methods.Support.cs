@@ -11,26 +11,26 @@ namespace Methods
     {
         private const string MethodName = "Method";
 
-        public static InjectionMember GetByNameMember(Type type, string name)
+        public static InjectionMember GetByNameMember(Type _)
             => new InjectionMethod(MethodName);
 
-        public static InjectionMember GetByNameOptional(Type type, string name)
+        public static InjectionMember GetByNameOptional(Type _)
             => new InjectionMethod(MethodName);
 
-        public static InjectionMember GetResolvedMember(Type type, string name)
-            => new InjectionMethod(MethodName, new ResolvedParameter(type, name));
+        public static InjectionMember GetResolvedMember(Type importType, string contractName)
+            => new InjectionMethod(MethodName, new ResolvedParameter(importType, contractName));
 
-        public static InjectionMember GetOptionalMember(Type type, string name)
-            => new InjectionMethod(MethodName, new ResolvedParameter(type, name));
+        public static InjectionMember GetOptionalMember(Type importType, string contractName)
+            => new InjectionMethod(MethodName, new ResolvedParameter(importType, contractName));
 
-        public static InjectionMember GetOptionalOptional(Type type, string name)
-            => new InjectionMethod(MethodName, new OptionalParameter(type, name));
+        public static InjectionMember GetOptionalOptional(Type importType, string contractName)
+            => new InjectionMethod(MethodName, new OptionalParameter(importType, contractName));
 
-        public static InjectionMember GetGenericMember(Type _, string name)
-            => new InjectionMethod(MethodName, new GenericParameter("T", name));
+        public static InjectionMember GetGenericMember(Type _, string contractName)
+            => new InjectionMethod(MethodName, new GenericParameter("T", contractName));
 
-        public static InjectionMember GetGenericOptional(Type type, string name)
-            => new InjectionMethod(MethodName, new OptionalGenericParameter("T", name));
+        public static InjectionMember GetGenericOptional(Type importType, string contractName)
+            => new InjectionMethod(MethodName, new OptionalGenericParameter("T", contractName));
 
         public static InjectionMember GetInjectionValue(object argument)
             => new InjectionMethod(MethodName, argument);

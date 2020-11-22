@@ -7,6 +7,7 @@ namespace Regression.Implicit.Constructors
         : PatternBaseType
     {
         public BaselineTestType(TDependency value) => Value = value;
+        public override object Expected => default(TDependency);
     }
 
     public class BaselineTestType_Ref<TDependency>

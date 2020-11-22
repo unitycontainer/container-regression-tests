@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -12,12 +11,14 @@ namespace Regression.Annotated.Constructors.Optional
         : PatternBaseType
     {
         public BaselineTestType([OptionalDependency] TDependency value) => Value = value;
+        public override object Expected => default(TDependency);
     }
 
     public class BaselineTestTypeNamed<TDependency>
         : PatternBaseType
     {
         public BaselineTestTypeNamed([OptionalDependency(PatternBase.Name)] TDependency value) => Value = value;
+        public override object Expected => default(TDependency);
     }
 
 

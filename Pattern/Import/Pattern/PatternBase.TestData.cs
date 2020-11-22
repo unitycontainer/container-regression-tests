@@ -51,6 +51,57 @@ namespace Regression
 
         #region Test Data Sources
 
+        public static IEnumerable<object[]> Test_Data
+        {
+            get
+            {
+                #region Integer
+                yield return new object[] 
+                {
+                    typeof(int).Name,        // Name
+                    typeof(int),             // Type
+                    DefaultInt,              // Default
+                    DefaultValueInt,         // DefaultValue
+                    RegisteredInt,           // Registered
+                    NamedInt,                // Named
+                    InjectedInt,             // Injected
+                    OverriddenInt,           // Overridden
+                    false                    // Is resolvable from empty
+                };
+                #endregion
+
+                #region String
+                yield return new object[]
+                {
+                    typeof(string).Name,     // Name
+                    typeof(string),          // Type
+                    DefaultString,           // Default
+                    DefaultValueString,      // DefaultValue
+                    RegisteredString,        // Registered
+                    NamedString,             // Named
+                    InjectedString,          // Injected
+                    OverriddenString,        // Overridden
+                    false                    // Is resolvable from empty
+                };
+                #endregion
+
+                #region Unresolvable
+                yield return new object[]
+                {
+                    typeof(Unresolvable).Name,// Name
+                    typeof(Unresolvable),     // Type
+                    null,                     // Default
+                    null,                     // DefaultValue
+                    RegisteredUnresolvable,   // Registered
+                    NamedUnresolvable,        // Named
+                    InjectedUnresolvable,     // Injected
+                    OverriddenUnresolvable,   // Overridden
+                    false                     // Is resolvable from empty
+                };
+                #endregion
+            }
+        }
+
         public static IEnumerable<object[]> BuiltInTypes_Data
         {
             get

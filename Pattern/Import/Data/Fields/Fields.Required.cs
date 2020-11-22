@@ -13,6 +13,7 @@ namespace Regression.Annotated.Fields.Required
         [Dependency] public TDependency Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Expected => default(TDependency);
     }
 
     public class BaselineTestTypeNamed<TDependency>
@@ -21,5 +22,6 @@ namespace Regression.Annotated.Fields.Required
         [Dependency(PatternBase.Name)] public TDependency Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Expected => default(TDependency);
     }
 }

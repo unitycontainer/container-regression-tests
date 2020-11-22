@@ -23,30 +23,22 @@ namespace Regression
         }
     }
 
-    public class Unresolvable
+    public class Unresolvable : PatternBaseType
     {
-        public readonly string ID;
-
-        protected Unresolvable(string id) { ID = id; }
+        protected Unresolvable(string id) { Value = id; }
 
         public static Unresolvable Create(string name) => new Unresolvable(name);
 
-        public override string ToString()
-        {
-            return $"Unresolvable.{ID}";
-        }
+        public override string ToString() => $"Unresolvable.{Value}";
     }
 
     public class SubUnresolvable : Unresolvable
     {
         private SubUnresolvable(string id)
-            : base(id)
-        {
-        }
-        public override string ToString()
-        {
-            return $"SubUnresolvable.{ID}";
-        }
+            : base(id) { }
+
+        public override string ToString() => $"SubUnresolvable.{Value}";
+
         public new static SubUnresolvable Create(string name) => new SubUnresolvable(name);
     }
 }

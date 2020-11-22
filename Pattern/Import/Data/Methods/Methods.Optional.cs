@@ -12,6 +12,7 @@ namespace Regression.Annotated.Methods.Optional
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency] TDependency value) => Value = value;
+        public override object Expected => default(TDependency);
     }
 
     public class BaselineTestTypeNamed<TDependency>
@@ -19,6 +20,7 @@ namespace Regression.Annotated.Methods.Optional
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency(PatternBase.Name)] TDependency value) => Value = value;
+        public override object Expected => default(TDependency);
     }
 
 
