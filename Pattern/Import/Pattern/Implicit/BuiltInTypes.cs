@@ -12,7 +12,7 @@ namespace Regression.Implicit
     {
         [DataTestMethod]
         [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
-        public virtual void BuiltIn_Type(string test, Type type)
+        public virtual void BuiltIn_Interface(string test, Type type)
         {
             // Arrange
             // Act
@@ -26,7 +26,7 @@ namespace Regression.Implicit
         [DataTestMethod]
         [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void BuiltIn_Named(string test, Type type)
+        public virtual void BuiltIn_Interface_Named(string test, Type type)
         {
             // Arrange
             // Act

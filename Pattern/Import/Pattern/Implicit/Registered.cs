@@ -13,7 +13,7 @@ namespace Regression.Implicit
 
         [DataTestMethod]
         [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void Registered_Type_Resolvable(string test, Type type)
+        public virtual void Registered_Resolvable_Type(string test, Type type)
         {
             // Arrange
             RegisterTypes();
@@ -29,7 +29,7 @@ namespace Regression.Implicit
 
         [DataTestMethod]
         [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void Registered_Import_Resolvable(string test, Type type)
+        public virtual void Registered_Resolvable_Import(string test, Type type)
         {
             // Arrange
             RegisterTypes();
@@ -50,7 +50,7 @@ namespace Regression.Implicit
         /// </summary>
         [DataTestMethod]
         [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void Registered_Type_UnResolvable(string test, Type type)
+        public virtual void Registered_UnResolvable_Type(string test, Type type)
         {
             // Arrange
             RegisterUnResolvableTypes();
@@ -70,7 +70,7 @@ namespace Regression.Implicit
         /// </summary>
         [DataTestMethod]
         [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void Registered_Import_UnResolvable(string test, Type type)
+        public virtual void Registered_UnResolvable_Import(string test, Type type)
         {
             // Arrange
             RegisterUnResolvableTypes();

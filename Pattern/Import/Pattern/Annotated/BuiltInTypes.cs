@@ -12,7 +12,7 @@ namespace Regression.Annotated
     {
         [DataTestMethod]
         [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
-        public virtual void Required_BuiltIn_Import(string test, Type type)
+        public virtual void Required_BuiltIn_Interface(string test, Type type)
         {
             // Arrange
             var target = (_typeDefinition ??= GetType("Required", "BaselineTestType`1"))
@@ -42,7 +42,7 @@ namespace Regression.Annotated
 
         [DataTestMethod]
         [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
-        public virtual void Optional_BuiltIn_Import(string test, Type type)
+        public virtual void Optional_BuiltIn_Interface(string test, Type type)
         {
             // Arrange
             var target = (_typeDefinition ??= GetType("Optional", "BaselineTestType`1"))

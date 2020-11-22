@@ -55,7 +55,7 @@ namespace Regression
         {
             get
             {
-                yield return new object[] { typeof(IUnityContainer).Name, typeof(IUnityContainer) };
+                yield return new object[] { typeof(IUnityContainer).Name,       typeof(IUnityContainer) };
 #if !BEHAVIOR_V4 && !BEHAVIOR_V5
                 yield return new object[] { typeof(IUnityContainerAsync).Name,  typeof(IUnityContainerAsync) };
                 yield return new object[] { typeof(IServiceProvider).Name,      typeof(IServiceProvider) };

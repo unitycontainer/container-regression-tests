@@ -12,7 +12,7 @@ namespace Regression.Implicit
     {
         [DataTestMethod]
         [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void FromEmpty_Type_Resolvable(string test, Type type)
+        public virtual void FromEmpty_Resolvable_Type(string test, Type type)
         {
             // Arrange
             // Act
@@ -23,10 +23,22 @@ namespace Regression.Implicit
             Assert.IsInstanceOfType(instance, type);
         }
 
+        [DataTestMethod]
+        [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
+        public virtual void FromEmpty_Resolvable_Named(string test, Type type)
+        {
+            // Arrange
+            // Act
+            var instance = Container.Resolve(type, Name);
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+        }
 
         [DataTestMethod]
         [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void FromEmpty_Import_Resolvable(string test, Type type)
+        public virtual void FromEmpty_Resolvable_Import(string test, Type type)
         {
             // Arrange
             var target = (_typeDefinition ??= GetType("BaselineTestType`1"))
@@ -46,7 +58,7 @@ namespace Regression.Implicit
         [DataTestMethod]
         [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void FromEmpty_Type_UnResolvable(string test, Type type)
+        public virtual void FromEmpty_UnResolvable_Type(string test, Type type)
         {
             // Act
             _ = Container.Resolve(type, null);
@@ -59,7 +71,7 @@ namespace Regression.Implicit
         [DataTestMethod]
         [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void FromEmpty_Import_UnResolvable(string test, Type type)
+        public virtual void FromEmpty_UnResolvable_Import(string test, Type type)
         {
             // Arrange
             var target = (_typeDefinition ??= GetType("BaselineTestType`1"))
