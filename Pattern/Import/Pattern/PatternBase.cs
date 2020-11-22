@@ -68,6 +68,9 @@ namespace Regression
 
         #endregion
 
+
+        #region Scaffolding
+
         protected static void ClassInitialize(TestContext context)
         {
             var type = Type.GetType(context.FullyQualifiedTestClassName);
@@ -78,6 +81,11 @@ namespace Regression
         }
 
         public virtual void TestInitialize() => Container = new UnityContainer();
+
+        #endregion
+
+
+        #region Registrations
 
         protected virtual void RegisterTypes()
         {
@@ -95,7 +103,6 @@ namespace Regression
                      .RegisterInstance(typeof(TestStruct), Name, NamedStruct);
         }
 
-
         protected virtual void RegisterUnResolvableTypes()
         {
             Container.RegisterInstance(RegisteredInt)
@@ -112,7 +119,7 @@ namespace Regression
                      .RegisterInstance(RegisteredDelegate);
         }
 
-
+        #endregion
 
 
         #region Implementation
@@ -137,16 +144,10 @@ namespace Regression
                    Type.GetType($"{_root}.{@namespace}.{name}");
         }
 
-        protected static Type GetRootType(string name)
-        {
-            var fullName = $"{_root}.{name}";
-            return Type.GetType(fullName);
-        }
-
         #endregion
 
 
-        #region Injection
+        #region Injection Support
 
         private static void LoadInjectionFuncs(Type support)
         { 
