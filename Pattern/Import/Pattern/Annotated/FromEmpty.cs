@@ -10,11 +10,11 @@ namespace Regression.Annotated
 {
     public abstract partial class Pattern
     {
-        private Type _typeDefinition;
+        #region Required
 
         [DataTestMethod]
         [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void TypeFromEmpty_Required(string test, Type type)
+        public virtual void Required_FromEmpty_Valid(string test, Type type)
         {
             // Arrange
             var target = (_typeDefinition ??= GetType("Required", "BaselineTestType`1"))
@@ -28,10 +28,28 @@ namespace Regression.Annotated
             Assert.IsInstanceOfType(instance, target);
         }
 
+
+        [DataTestMethod]
+        [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
+        public virtual void Required_FromEmpty_Valid_Named(string test, Type type)
+        {
+            // Arrange
+            var target = (_typeDefinition ??= GetType("Required", "BaselineTestTypeNamed`1"))
+                .MakeGenericType(type);
+
+            // Act
+            var instance = Container.Resolve(target, null);
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, target);
+        }
+
+
         [DataTestMethod]
         [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void InvalidTypeFromEmpty_Required(string test, Type type)
+        public virtual void Required_FromEmpty_Invalid(string test, Type type)
         {
             // Arrange
             var target = (_typeDefinition ??= GetType("Required", "BaselineTestType`1"))
@@ -41,10 +59,14 @@ namespace Regression.Annotated
             _ = Container.Resolve(target, null);
         }
 
+        #endregion
+
+
+        #region Optional
 
         [DataTestMethod]
         [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void TypeFromEmpty_Optional(string test, Type type)
+        public virtual void Optional_FromEmpty_Valid(string test, Type type)
         {
             // Arrange
             var target = (_typeDefinition ??= GetType("Optional", "BaselineTestType`1"))
@@ -58,9 +80,10 @@ namespace Regression.Annotated
             Assert.IsInstanceOfType(instance, target);
         }
 
+
         [DataTestMethod]
         [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void InvalidTypeFromEmpty_Optional(string test, Type type)
+        public virtual void Optional_FromEmpty_Invalid(string test, Type type)
         {
             // Arrange
             var target = (_typeDefinition ??= GetType("Optional", "BaselineTestType`1"))
@@ -73,5 +96,7 @@ namespace Regression.Annotated
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, target);
         }
+
+        #endregion
     }
 }

@@ -16,7 +16,7 @@ namespace Regression.Annotated
 #endif
         [DataTestMethod]
         [DynamicData(nameof(Required_WithDefaults_Data))]
-        public virtual void Required_WithDefaults(string test, Type type)
+        public virtual void Required_FromEmpty_WithDefaults(string test, Type type)
         {
             // Act
             var instance = Container.Resolve(type, null) as PatternBaseType;
@@ -30,7 +30,7 @@ namespace Regression.Annotated
 
         [DataTestMethod]
         [DynamicData(nameof(Optional_WithDefaults_Data))]
-        public virtual void Optional_WithDefaults(string test, Type type)
+        public virtual void Optional_FromEmpty_WithDefaults(string test, Type type)
         {
             // Act
             var instance = Container.Resolve(type, null) as PatternBaseType;
@@ -39,6 +39,41 @@ namespace Regression.Annotated
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
             Assert.AreEqual(instance.Expected, instance.Value);
+        }
+
+
+
+        [DataTestMethod]
+        [DynamicData(nameof(Required_WithDefaults_Data))]
+        public virtual void Required_Registered_WithDefaults(string test, Type type)
+        {
+            // Arrange
+            RegisterTypes();
+
+            // Act
+            var instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+            Assert.AreEqual(Container.Resolve(instance.Dependency, null), instance.Value);
+        }
+
+
+        [DataTestMethod]
+        [DynamicData(nameof(Optional_WithDefaults_Data))]
+        public virtual void Optional_Registered_WithDefaults(string test, Type type)
+        {
+            // Arrange
+            RegisterTypes();
+
+            // Act
+            var instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+            Assert.AreEqual(Container.Resolve(instance.Dependency, null), instance.Value);
         }
     }
 }

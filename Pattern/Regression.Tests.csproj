@@ -26,6 +26,12 @@
 		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <Compile Remove="Import\Pattern\Injected\Review\**" />
+	  <EmbeddedResource Remove="Import\Pattern\Injected\Review\**" />
+	  <None Remove="Import\Pattern\Injected\Review\**" />
+	</ItemGroup>
+
 
 	<!-- Definitions -->
 

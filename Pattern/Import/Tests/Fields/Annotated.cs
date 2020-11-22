@@ -14,12 +14,5 @@ namespace Fields
         public static void ClassInit(TestContext context) => ClassInitialize(context);
 
         #endregion
-
-
-        #region Unsupported
-
-        public override void Annotated_Parameters(string name) { }
-
-        #endregion
     }
 }

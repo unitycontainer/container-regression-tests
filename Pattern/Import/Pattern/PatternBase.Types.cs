@@ -7,6 +7,8 @@ namespace Regression
         public virtual object Value { get; protected set; }
 
         public virtual object Expected { get; }
+
+        public virtual Type Dependency => typeof(object);
     }
 
     public struct TestStruct

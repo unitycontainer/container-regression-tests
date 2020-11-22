@@ -14,6 +14,15 @@ namespace Regression.Annotated.Methods.Optional
         public virtual void Method([OptionalDependency] TDependency value) => Value = value;
     }
 
+    public class BaselineTestTypeNamed<TDependency>
+        : PatternBaseType
+    {
+        [InjectionMethod]
+        public virtual void Method([OptionalDependency(PatternBase.Name)] TDependency value) => Value = value;
+    }
+
+
+
     public class BaselineTestType_Ref<TDependency>
         : PatternBaseType where TDependency : class
     {

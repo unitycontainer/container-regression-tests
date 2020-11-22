@@ -84,6 +84,34 @@ namespace Regression
 
         public virtual void TestInitialize() => Container = new UnityContainer();
 
+        public const bool        RegisteredBool       = true;
+        public const long        RegisteredLong       = 12;
+        public const short       RegisteredShort      = 23;
+        public const float       RegisteredFloat      = 34;
+        public const double      RegisteredDouble     = 45;
+        public static Type       RegisteredType       = typeof(PatternBase);
+        public static ICloneable RegisteredICloneable = new object[0];
+        public static Delegate   RegisteredDelegate   = (Func<int>)(() => 0);
+
+
+        protected virtual void RegisterUnResolvableTypes()
+        {
+            Container.RegisterInstance(RegisteredInt)
+                     .RegisterInstance(RegisteredString)
+                     .RegisterInstance(RegisteredUnresolvable)
+                     .RegisterInstance(typeof(TestStruct), RegisteredStruct)
+                     .RegisterInstance(RegisteredBool)
+                     .RegisterInstance(RegisteredLong)
+                     .RegisterInstance(RegisteredShort)
+                     .RegisterInstance(RegisteredFloat)
+                     .RegisterInstance(RegisteredDouble)
+                     .RegisterInstance(RegisteredType)
+                     .RegisterInstance(RegisteredICloneable)
+                     .RegisterInstance(RegisteredDelegate);
+        }
+
+
+
         protected virtual void RegisterTypes()
         {
             Container.RegisterInstance(RegisteredInt)

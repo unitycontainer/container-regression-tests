@@ -10,11 +10,14 @@ namespace Regression.Implicit
 {
     public abstract partial class Pattern
     {
+
         [DataTestMethod]
         [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void FromEmpty_Type_Resolvable(string test, Type type)
+        public virtual void Registered_Type_Resolvable(string test, Type type)
         {
             // Arrange
+            RegisterTypes();
+
             // Act
             var instance = Container.Resolve(type, null);
 
@@ -26,14 +29,16 @@ namespace Regression.Implicit
 
         [DataTestMethod]
         [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void FromEmpty_Import_Resolvable(string test, Type type)
+        public virtual void Registered_Import_Resolvable(string test, Type type)
         {
             // Arrange
+            RegisterTypes();
+
             var target = (_typeDefinition ??= GetType("BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act
-            var instance = Container.Resolve(target, null);
+            var instance = Container.Resolve(target, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -45,11 +50,18 @@ namespace Regression.Implicit
         /// </summary>
         [DataTestMethod]
         [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
-        [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void FromEmpty_Type_UnResolvable(string test, Type type)
+        public virtual void Registered_Type_UnResolvable(string test, Type type)
         {
+            // Arrange
+            RegisterUnResolvableTypes();
+
             // Act
-            _ = Container.Resolve(type, null);
+            var instance = Container.Resolve(type, null);
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+            Assert.AreEqual(Container.Resolve(type, null), instance);
         }
 
 
@@ -58,15 +70,21 @@ namespace Regression.Implicit
         /// </summary>
         [DataTestMethod]
         [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
-        [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void FromEmpty_Import_UnResolvable(string test, Type type)
+        public virtual void Registered_Import_UnResolvable(string test, Type type)
         {
             // Arrange
+            RegisterUnResolvableTypes();
+
             var target = (_typeDefinition ??= GetType("BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act
-            _ = Container.Resolve(target, null) as PatternBaseType;
+            var instance = Container.Resolve(target, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, target);
+            Assert.AreEqual(Container.Resolve(type, null), instance.Value);
         }
     }
 }

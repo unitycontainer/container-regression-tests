@@ -17,6 +17,7 @@ namespace Regression
             {
                 yield return typeof(Unresolvable);
                 yield return typeof(string);
+
 #if !BEHAVIOR_V4 // Unity v4 did not support optional value types
                 yield return typeof(int);
                 yield return typeof(bool);
@@ -24,12 +25,26 @@ namespace Regression
                 yield return typeof(short);
                 yield return typeof(float);
                 yield return typeof(double);
-#endif
+                // TODO: typeof(TestStruct)
+#endif                                            
                 yield return typeof(Type);
                 yield return typeof(ICloneable);
                 yield return typeof(Delegate);
             }
         }
+
+        public static IEnumerable<Type> ContainerTypes
+        {
+            get
+            {
+                yield return typeof(IUnityContainer);
+#if !BEHAVIOR_V4 && !BEHAVIOR_V5
+                yield return typeof(IUnityContainerAsync);
+                yield return typeof(IServiceProvider);
+#endif
+            }
+        }
+
 
         public static IEnumerable<Type> ResolvableTypes
         {
@@ -52,7 +67,7 @@ namespace Regression
             }
         }
 
-#region Test Data Sources
+        #region Test Data Sources
 
         public static IEnumerable<object[]> UnResolvableTypes_Data
         {
@@ -76,7 +91,7 @@ namespace Regression
             }
         }
 
-#endregion
+        #endregion
     }
 }
 

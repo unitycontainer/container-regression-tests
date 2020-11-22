@@ -14,6 +14,13 @@ namespace Regression.Annotated.Constructors.Optional
         public BaselineTestType([OptionalDependency] TDependency value) => Value = value;
     }
 
+    public class BaselineTestTypeNamed<TDependency>
+        : PatternBaseType
+    {
+        public BaselineTestTypeNamed([OptionalDependency(PatternBase.Name)] TDependency value) => Value = value;
+    }
+
+
     public class BaselineTestType_Ref<TDependency>
         : PatternBaseType where TDependency : class
     {

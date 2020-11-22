@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -13,6 +14,7 @@ namespace Regression.Implicit.Constructors.WithDefault
         public Implicit_Parameter_Int_WithDefault(int value = PatternBase.DefaultInt) => Value = value;
 
         public override object Expected => PatternBase.DefaultInt;
+        public override Type Dependency => typeof(int);
     }
 
     public class Implicit_Parameter_String_WithDefault : PatternBaseType
@@ -20,6 +22,7 @@ namespace Regression.Implicit.Constructors.WithDefault
         public Implicit_Parameter_String_WithDefault(string value = PatternBase.DefaultString) => Value = value;
 
         public override object Expected => PatternBase.DefaultString;
+        public override Type Dependency => typeof(string);
     }
 
     public class Implicit_Derived_WithDefault : Implicit_Parameter_Int_WithDefault
@@ -41,6 +44,7 @@ namespace Regression.Implicit.Constructors.WithDefaultAttribute
         public Implicit_Int_WithDefaultAttribute([DefaultValue(PatternBase.DefaultValueInt)] int value) => Value = value;
 
         public override object Expected => PatternBase.DefaultValueInt;
+        public override Type Dependency => typeof(int);
     }
 
     public class Implicit_String_WithDefaultAttribute : PatternBaseType
@@ -48,6 +52,7 @@ namespace Regression.Implicit.Constructors.WithDefaultAttribute
         public Implicit_String_WithDefaultAttribute([DefaultValue(PatternBase.DefaultValueString)] string value) => Value = value;
 
         public override object Expected => PatternBase.DefaultValueString;
+        public override Type Dependency => typeof(string);
     }
 
     public class Implicit_Derived_WithDefaultAttribute : Implicit_Int_WithDefaultAttribute
@@ -58,6 +63,7 @@ namespace Regression.Implicit.Constructors.WithDefaultAttribute
             : base(value) { }
 
         public override object Expected => _default;
+        public override Type Dependency => typeof(int);
     }
 }
 
@@ -74,6 +80,7 @@ namespace Regression.Implicit.Constructors.WithDefaultAndAttribute
 #else
         public override object Expected => PatternBase.DefaultValueInt;
 #endif
+        public override Type Dependency => typeof(int);
     }
 
     public class Implicit_String_WithDefaultAndAttribute : PatternBaseType
@@ -86,6 +93,7 @@ namespace Regression.Implicit.Constructors.WithDefaultAndAttribute
 #else
         public override object Expected => PatternBase.DefaultValueString;
 #endif
+        public override Type Dependency => typeof(string);
     }
 
     public class Implicit_Derived_WithDefaultAndAttribute : Implicit_Int_WithDefaultAndAttribute
@@ -100,5 +108,6 @@ namespace Regression.Implicit.Constructors.WithDefaultAndAttribute
 #else
         public override object Expected => _default;
 #endif
+        public override Type Dependency => typeof(int);
     }
 }

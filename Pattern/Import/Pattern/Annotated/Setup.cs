@@ -1,9 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Regression.Annotated
 {
     public abstract partial class Pattern : PatternBase
     {
+        #region Fields
+
+        private Type _typeDefinition;
+
+        #endregion
+
+
+        #region Test Data
 
         public static IEnumerable<object[]> Required_WithDefaults_Data
         {
@@ -34,5 +43,7 @@ namespace Regression.Annotated
                 }
             }
         }
+        
+        #endregion
     }
 }

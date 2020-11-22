@@ -34,6 +34,7 @@ namespace Regression.Annotated.Properties.Required.WithDefaults
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Expected => PatternBase.DefaultValueInt;
+        public override Type Dependency => typeof(int);
     }
 
     public class Required_Property_WithDefaultAttribute_Int : PatternBaseType
@@ -42,6 +43,7 @@ namespace Regression.Annotated.Properties.Required.WithDefaults
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Expected => PatternBase.DefaultValueInt;
+        public override Type Dependency => typeof(int);
     }
 
     public class Required_Property_String_WithDefaultAttribute : PatternBaseType
@@ -49,6 +51,7 @@ namespace Regression.Annotated.Properties.Required.WithDefaults
         [Dependency] [DefaultValue(PatternBase.DefaultValueString)] public string Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Expected => PatternBase.DefaultValueString;
+        public override Type Dependency => typeof(string);
     }
 
     public class Required_Property_WithDefaultAttribute_String : PatternBaseType
@@ -57,6 +60,7 @@ namespace Regression.Annotated.Properties.Required.WithDefaults
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Expected => PatternBase.DefaultValueString;
+        public override Type Dependency => typeof(string);
     }
 
     public class Required_Property_Derived_WithDefaultAttribute
@@ -75,6 +79,7 @@ namespace Regression.Annotated.Properties.Required.WithDefaults
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Expected => PatternBase.DefaultValueInt;
+        public override Type Dependency => typeof(int);
     }
 
     public class Required_Property_WithDefaultAndAttribute_Int : PatternBaseType
@@ -83,6 +88,7 @@ namespace Regression.Annotated.Properties.Required.WithDefaults
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Expected => PatternBase.DefaultValueInt;
+        public override Type Dependency => typeof(int);
     }
 
     public class Required_Property_String_WithDefaultAndAttribute : PatternBaseType
@@ -91,6 +97,7 @@ namespace Regression.Annotated.Properties.Required.WithDefaults
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Expected => PatternBase.DefaultValueString;
+        public override Type Dependency => typeof(string);
     }
 
     public class Required_Property_WithDefaultAndAttribute_String : PatternBaseType
@@ -99,6 +106,7 @@ namespace Regression.Annotated.Properties.Required.WithDefaults
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Expected => PatternBase.DefaultValueString;
+        public override Type Dependency => typeof(string);
     }
 
     public class Required_Property_Derived_WithDefaultAndAttribute : Required_Property_Int_WithDefaultAndAttribute

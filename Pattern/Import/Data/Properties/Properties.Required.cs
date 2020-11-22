@@ -15,4 +15,12 @@ namespace Regression.Annotated.Properties.Required
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
+
+    public class BaselineTestTypeNamed<TDependency>
+        : PatternBaseType
+    {
+        [Dependency(PatternBase.Name)] public TDependency Property { get; set; }
+
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+    }
 }

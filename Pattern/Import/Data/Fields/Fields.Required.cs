@@ -14,4 +14,12 @@ namespace Regression.Annotated.Fields.Required
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }
+
+    public class BaselineTestTypeNamed<TDependency>
+        : PatternBaseType
+    {
+        [Dependency(PatternBase.Name)] public TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -11,11 +12,14 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
     #region WithDefault
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
+
     public class Optional_Parameter_Int_WithDefault : PatternBaseType
     {
         public Optional_Parameter_Int_WithDefault([OptionalDependency] int value = PatternBase.DefaultInt) => Value = value;
         public override object Expected => PatternBase.DefaultInt;
+        public override Type Dependency => typeof(int);
     }
+
 
     public class Optional_DerivedFromInt_WithDefault : Optional_Parameter_Int_WithDefault
     {
@@ -23,8 +27,11 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
 
         public Optional_DerivedFromInt_WithDefault([OptionalDependency] int value = _default) : base(value) { }
         public override object Expected => _default;
+        public override Type Dependency => typeof(int);
     }
+
 #endif
+
 
     public class Optional_Parameter_String_WithDefault : PatternBaseType
     {
@@ -35,12 +42,14 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
 #else
         public override object Expected => PatternBase.DefaultString;
 #endif
+        public override Type Dependency => typeof(string);
     }
 
     #endregion
 
 
     #region WithDefaultAttribute
+
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
@@ -54,7 +63,9 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
 #else
         public override object Expected => PatternBase.DefaultValueInt;
 #endif
+        public override Type Dependency => typeof(int);
     }
+
 
     public class Optional_WithDefaultAttribute_Int : PatternBaseType
     {
@@ -65,7 +76,9 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
 #else
         public override object Expected => PatternBase.DefaultValueInt;
 #endif
+        public override Type Dependency => typeof(int);
     }
+
 
     public class Optional_Derived_WithDefaultAttribute : Optional_Int_WithDefaultAttribute
     {
@@ -78,9 +91,12 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
 #else
         public override object Expected => _default;
 #endif
+        public override Type Dependency => typeof(int);
     }
 
+
 #endif
+
 
     public class Optional_String_WithDefaultAttribute : PatternBaseType
     {
@@ -91,7 +107,9 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
 #else
         public override object Expected => PatternBase.DefaultValueString;
 #endif
+        public override Type Dependency => typeof(string);
     }
+
 
     public class Optional_WithDefaultAttribute_String : PatternBaseType
     {
@@ -102,12 +120,14 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
 #else
         public override object Expected => PatternBase.DefaultValueString;
 #endif
+        public override Type Dependency => typeof(string);
     }
 
     #endregion
 
 
     #region WithDefaultAndAttribute
+
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
@@ -121,7 +141,9 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
 #else
         public override object Expected => PatternBase.DefaultValueInt;
 #endif
+        public override Type Dependency => typeof(int);
     }
+
 
     public class Optional_WithDefaultAndAttribute_Int : PatternBaseType
     {
@@ -133,7 +155,9 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
 #else
         public override object Expected => PatternBase.DefaultValueInt;
 #endif
+        public override Type Dependency => typeof(int);
     }
+
 
     public class Optional_Derived_WithDefaultAndAttribute : Optional_Int_WithDefaultAndAttribute
     {
@@ -147,9 +171,12 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
 #else
         public override object Expected => _default;
 #endif
+        public override Type Dependency => typeof(int);
     }
 
+
 #endif
+
 
     public class Optional_String_WithDefaultAndAttribute : PatternBaseType
     {
@@ -162,7 +189,9 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
 #else
         public override object Expected => PatternBase.DefaultValueString;
 #endif
+        public override Type Dependency => typeof(string);
     }
+
 
     public class Optional_WithDefaultAndAttribute_String : PatternBaseType
     {
@@ -175,6 +204,7 @@ namespace Regression.Annotated.Constructors.Optional.WithDefaults
 #else
         public override object Expected => PatternBase.DefaultValueString;
 #endif
+        public override Type Dependency => typeof(string);
     }
 
     #endregion
