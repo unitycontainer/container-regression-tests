@@ -92,9 +92,4 @@
 		<PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
 	</ItemGroup>
 
-	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-	  <Exec Command="set" />
-	</Target>
-
-
 </Project>

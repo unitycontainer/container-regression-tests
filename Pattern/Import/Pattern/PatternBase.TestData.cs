@@ -33,24 +33,10 @@ namespace Regression
             }
         }
 
-        public static IEnumerable<Type> ContainerTypes
-        {
-            get
-            {
-                yield return typeof(IUnityContainer);
-#if !BEHAVIOR_V4 && !BEHAVIOR_V5
-                yield return typeof(IUnityContainerAsync);
-                yield return typeof(IServiceProvider);
-#endif
-            }
-        }
-
-
         public static IEnumerable<Type> ResolvableTypes
         {
             get
             {
-                yield return typeof(IUnityContainer);
                 yield return typeof(object);
                 yield return typeof(Lazy<IUnityContainer>);
                 yield return typeof(Func<IUnityContainer>);
@@ -60,14 +46,22 @@ namespace Regression
                 yield return typeof(List<string>);
                 yield return typeof(IEnumerable<IUnityContainer>);
 #endif
-#if !BEHAVIOR_V4 && !BEHAVIOR_V5
-                yield return typeof(IUnityContainerAsync);
-                yield return typeof(IServiceProvider);
-#endif
             }
         }
 
         #region Test Data Sources
+
+        public static IEnumerable<object[]> BuiltInTypes_Data
+        {
+            get
+            {
+                yield return new object[] { typeof(IUnityContainer).Name, typeof(IUnityContainer) };
+#if !BEHAVIOR_V4 && !BEHAVIOR_V5
+                yield return new object[] { typeof(IUnityContainerAsync).Name,  typeof(IUnityContainerAsync) };
+                yield return new object[] { typeof(IServiceProvider).Name,      typeof(IServiceProvider) };
+#endif
+            }
+        }
 
         public static IEnumerable<object[]> UnResolvableTypes_Data
         {
