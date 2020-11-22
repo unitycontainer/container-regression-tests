@@ -18,47 +18,21 @@ namespace Regression
     /// </example>
     public abstract partial class InjectedPattern
     {
-        [DataTestMethod]
-        [DynamicData(nameof(Test_Data), typeof(PatternBase))]
-        public virtual void Injected_ByName_Implicit(string test,       Type type, 
-                                                     object @default,   object defaultAttr, 
-                                                     object registered, object named, 
-                                                     object injected,   object overridden, 
-                                                     bool isResolveble)
-        {
-            // Arrange
-            var target = (_typeDefinition ??= GetType("Implicit", "BaselineTestType`1"))
-                .MakeGenericType(type);
-
-            Container.RegisterType(target, Get_ByNameRequired_Member(type));
-
-            // Validate
-            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
-
-            // Register missing types
-            RegisterTypes();
-
-            // Act
-            var instance = Container.Resolve(target, null) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(registered, instance.Value);
-        }
+        #region Implicit
 
         [DataTestMethod]
-        [DynamicData(nameof(Test_Data), typeof(PatternBase))]
-        public virtual void Injected_ByName_Required(string test, Type type,
-                                                     object @default,   object defaultAttr,
-                                                     object registered, object named,
-                                                     object injected,   object overridden,
-                                                     bool isResolveble)
+        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        public virtual void Implicit_WithRequired_ByName(string test,       Type type, 
+                                                         object @default,   object defaultAttr, 
+                                                         object registered, object named, 
+                                                         object injected,   object overridden, 
+                                                         bool isResolveble)
         {
             // Arrange
-            var target = (_typeDefinition ??= GetType("Annotated", "Required.BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("Implicit", "BaselineTestType`1"))
                 .MakeGenericType(type);
 
-            Container.RegisterType(target, Get_ByNameRequired_Member(type));
+            Container.RegisterType(target, InjectionMember_Required_ByName(type));
 
             // Validate
             Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
@@ -76,21 +50,24 @@ namespace Regression
 
 
         [DataTestMethod]
-        [DynamicData(nameof(Test_Data), typeof(PatternBase))]
-        public virtual void Injected_ByName_Optional(string test, Type type,
-                                                     object defaultValue, object defaultAttr,
-                                                     object registered, object named,
-                                                     object injected, object overridden,
-                                                     bool isResolveble)
+        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        public virtual void Implicit_WithOptional_ByName(string test, Type type,
+                                                         object @default, object defaultAttr,
+                                                         object registered, object named,
+                                                         object injected, object overridden,
+                                                         bool isResolveble)
         {
+            PatternBaseType instance = null;
             // Arrange
-            var target = (_typeDefinition ??= GetType("Annotated", "Optional.BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("Implicit", "BaselineTestType`1"))
                 .MakeGenericType(type);
 
-            Container.RegisterType(target, Get_ByNameRequired_Member(type));
+            Container.RegisterType(target, InjectionMember_Optional_ByName(type));
 
             // Validate
-            var instance = Container.Resolve(target, null) as PatternBaseType;
+            instance = Container.Resolve(target, null) as PatternBaseType;
+
+            // Validate
             Assert.IsNotNull(instance);
             Assert.AreEqual(instance.Expected, instance.Value);
 
@@ -104,5 +81,142 @@ namespace Regression
             Assert.IsNotNull(instance);
             Assert.AreEqual(registered, instance.Value);
         }
+
+        #endregion
+
+        
+        #region Required
+
+        [DataTestMethod]
+        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        public virtual void Required_WithRequired_ByName(string test, Type type,
+                                                         object @default,   object defaultAttr,
+                                                         object registered, object named,
+                                                         object injected,   object overridden,
+                                                         bool isResolveble)
+        {
+            // Arrange
+            var target = (TypeDefinition ??= GetType("Annotated", "Required.BaselineTestType`1"))
+                .MakeGenericType(type);
+
+            Container.RegisterType(target, InjectionMember_Required_ByName(type));
+
+            // Validate
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            var instance = Container.Resolve(target, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(registered, instance.Value);
+        }
+
+
+        [DataTestMethod]
+        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        public virtual void Required_WithOptional_ByName(string test, Type type,
+                                                         object @default, object defaultAttr,
+                                                         object registered, object named,
+                                                         object injected, object overridden,
+                                                         bool isResolveble)
+        {
+            PatternBaseType instance = null;
+            
+            // Arrange
+            var target = (TypeDefinition ??= GetType("Annotated", "Required.BaselineTestType`1"))
+                .MakeGenericType(type);
+
+            Container.RegisterType(target, InjectionMember_Optional_ByName(type));
+
+            // Validate
+            instance = Container.Resolve(target, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(instance.Expected, instance.Value);
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            instance = Container.Resolve(target, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(registered, instance.Value);
+        }
+
+        #endregion
+
+
+        #region Optional
+
+        [DataTestMethod]
+        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        public virtual void Optional_WithRequired_ByName(string test, Type type,
+                                                         object defaultValue, object defaultAttr,
+                                                         object registered, object named,
+                                                         object injected, object overridden,
+                                                         bool isResolveble)
+        {
+            // Arrange
+            PatternBaseType instance = null;
+            var target = (TypeDefinition ??= GetType("Annotated", "Optional.BaselineTestType`1"))
+                .MakeGenericType(type);
+
+            Container.RegisterType(target, InjectionMember_Required_ByName(type));
+
+            // Unity v4 did not evaluate annotations on the dependency
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            instance = Container.Resolve(target, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(registered, instance.Value);
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        public virtual void Optional_WithOptional_ByName(string test, Type type,
+                                                         object @default, object defaultAttr,
+                                                         object registered, object named,
+                                                         object injected, object overridden,
+                                                         bool isResolveble)
+        {
+            PatternBaseType instance = null;
+            // Arrange
+            var target = (TypeDefinition ??= GetType("Annotated", "Optional.BaselineTestType`1"))
+                .MakeGenericType(type);
+
+            Container.RegisterType(target, InjectionMember_Optional_ByName(type));
+
+            // Validate
+            instance = Container.Resolve(target, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(instance.Expected, instance.Value);
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            instance = Container.Resolve(target, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(registered, instance.Value);
+        }
+
+        #endregion
     }
 }

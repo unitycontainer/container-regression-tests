@@ -7,7 +7,7 @@ namespace Regression.Annotated
     {
         #region Fields
 
-        private Type _typeDefinition;
+        protected Type TypeDefinition;
 
         #endregion
 

@@ -14,6 +14,7 @@ namespace Regression.Annotated.Properties.Required
         [Dependency] public TDependency Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+        public override object Expected => default(TDependency);
     }
 
     public class BaselineTestTypeNamed<TDependency>
@@ -22,5 +23,6 @@ namespace Regression.Annotated.Properties.Required
         [Dependency(PatternBase.Name)] public TDependency Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+        public override object Expected => default(TDependency);
     }
 }

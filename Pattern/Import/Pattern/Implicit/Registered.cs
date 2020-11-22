@@ -33,7 +33,7 @@ namespace Regression.Implicit
             // Arrange
             RegisterTypes();
 
-            var target = (_typeDefinition ??= GetType("BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act
@@ -74,7 +74,7 @@ namespace Regression.Implicit
             // Arrange
             RegisterUnResolvableTypes();
 
-            var target = (_typeDefinition ??= GetType("BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act

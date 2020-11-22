@@ -5,7 +5,12 @@ namespace Regression.Implicit
 {
     public abstract partial class Pattern : PatternBase
     {
-        private Type _typeDefinition;
+        #region Fields
+
+        protected Type TypeDefinition;
+
+        #endregion
+
 
         #region Test Data
 

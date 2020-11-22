@@ -4,6 +4,12 @@ namespace Regression
 {
     public abstract partial class InjectedPattern : PatternBase
     {
-        private Type _typeDefinition;
+        #region Fields
+
+        protected Type TypeDefinition;
+
+        #endregion
+
+
     }
 }

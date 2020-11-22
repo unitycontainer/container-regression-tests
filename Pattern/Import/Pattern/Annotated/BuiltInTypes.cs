@@ -15,7 +15,7 @@ namespace Regression.Annotated
         public virtual void Required_BuiltIn_Interface(string test, Type type)
         {
             // Arrange
-            var target = (_typeDefinition ??= GetType("Required", "BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("Required", "BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act
@@ -33,7 +33,7 @@ namespace Regression.Annotated
         public virtual void Required_BuiltIn_Named(string test, Type type)
         {
             // Arrange
-            var target = (_typeDefinition ??= GetType("Required", "BaselineTestTypeNamed`1"))
+            var target = (TypeDefinition ??= GetType("Required", "BaselineTestTypeNamed`1"))
                 .MakeGenericType(type);
 
             // Act
@@ -45,7 +45,7 @@ namespace Regression.Annotated
         public virtual void Optional_BuiltIn_Interface(string test, Type type)
         {
             // Arrange
-            var target = (_typeDefinition ??= GetType("Optional", "BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("Optional", "BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act
@@ -62,7 +62,7 @@ namespace Regression.Annotated
         public virtual void Optional_BuiltIn_Named(string test, Type type)
         {
             // Arrange
-            var target = (_typeDefinition ??= GetType("Optional", "BaselineTestTypeNamed`1"))
+            var target = (TypeDefinition ??= GetType("Optional", "BaselineTestTypeNamed`1"))
                 .MakeGenericType(type);
 
             // Act

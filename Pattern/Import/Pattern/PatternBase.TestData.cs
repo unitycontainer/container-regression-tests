@@ -51,12 +51,12 @@ namespace Regression
 
         #region Test Data Sources
 
-        public static IEnumerable<object[]> Test_Data
+        public static IEnumerable<object[]> RequiredImport_Data
         {
             get
             {
                 #region Integer
-                yield return new object[] 
+                yield return new object[]
                 {
                     typeof(int).Name,        // Name
                     typeof(int),             // Type
@@ -102,12 +102,65 @@ namespace Regression
             }
         }
 
+        public static IEnumerable<object[]> OptionalImport_Data
+        {
+            get
+            {
+                #region Integer
+#if !BEHAVIOR_V4
+                yield return new object[]
+                {
+                    typeof(int).Name,        // Name
+                    typeof(int),             // Type
+                    DefaultInt,              // Default
+                    DefaultValueInt,         // DefaultValue
+                    RegisteredInt,           // Registered
+                    NamedInt,                // Named
+                    InjectedInt,             // Injected
+                    OverriddenInt,           // Overridden
+                    false                    // Is resolvable from empty
+                };
+#endif
+                #endregion
+
+                #region String
+                yield return new object[]
+                {
+                    typeof(string).Name,     // Name
+                    typeof(string),          // Type
+                    DefaultString,           // Default
+                    DefaultValueString,      // DefaultValue
+                    RegisteredString,        // Registered
+                    NamedString,             // Named
+                    InjectedString,          // Injected
+                    OverriddenString,        // Overridden
+                    false                    // Is resolvable from empty
+                };
+                #endregion
+
+                #region Unresolvable
+                yield return new object[]
+                {
+                    typeof(Unresolvable).Name,// Name
+                    typeof(Unresolvable),     // Type
+                    null,                     // Default
+                    null,                     // DefaultValue
+                    RegisteredUnresolvable,   // Registered
+                    NamedUnresolvable,        // Named
+                    InjectedUnresolvable,     // Injected
+                    OverriddenUnresolvable,   // Overridden
+                    false                     // Is resolvable from empty
+                };
+                #endregion
+            }
+        }
+
         public static IEnumerable<object[]> BuiltInTypes_Data
         {
             get
             {
-                yield return new object[] { typeof(IUnityContainer).Name,       typeof(IUnityContainer) };
-#if !BEHAVIOR_V4 && !BEHAVIOR_V5
+                yield return new object[] { typeof(IUnityContainer).Name, typeof(IUnityContainer) };
+#if !UNITY_V4 && !UNITY_V5
                 yield return new object[] { typeof(IUnityContainerAsync).Name,  typeof(IUnityContainerAsync) };
                 yield return new object[] { typeof(IServiceProvider).Name,      typeof(IServiceProvider) };
 #endif

@@ -11,14 +11,14 @@ namespace Properties
     {
         private const string PropertyName = "Property";
 
-        public static InjectionMember GetByNameMember(Type _)
+        public static InjectionMember GetInjectionMember_ByName_Required(Type _)
             => new InjectionProperty(PropertyName);
 
-        public static InjectionMember GetByNameOptional(Type importType)
+        public static InjectionMember GetInjectionMember_ByName_Optional(Type importType)
 #if UNITY_V4
-            => new InjectionProperty(PropertyName, new OptionalParameter(importType, contractName));
+            => new InjectionProperty(PropertyName, new OptionalParameter(importType));
 #elif UNITY_V5
-            => new InjectionProperty(PropertyName, true);
+            => new InjectionProperty(PropertyName, Unity.ResolutionOption.Optional);
 #else
             => new OptionalProperty(PropertyName);
 #endif

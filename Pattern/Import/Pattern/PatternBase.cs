@@ -152,9 +152,9 @@ namespace Regression
 
         private static void LoadInjectionFuncs(Type support)
         { 
-            Get_ByNameRequired_Member  = (Func<Type, InjectionMember>)support.GetMethod("GetByNameMember")
+            InjectionMember_Required_ByName  = (Func<Type, InjectionMember>)support.GetMethod("GetInjectionMember_ByName_Required")
                                                                              .CreateDelegate(typeof(Func<Type, InjectionMember>));
-            Get_ByNameOptional_Member = (Func<Type, InjectionMember>)support.GetMethod("GetByNameOptional")
+            InjectionMember_Optional_ByName = (Func<Type, InjectionMember>)support.GetMethod("GetInjectionMember_ByName_Optional")
                                                                             .CreateDelegate(typeof(Func<Type, InjectionMember>));
             Get_Resolved_Member   = (Func<Type, string, InjectionMember>)support.GetMethod("GetResolvedMember")
                                                                                 .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
@@ -172,8 +172,8 @@ namespace Regression
                                                                          .CreateDelegate(typeof(Func<object, InjectionMember>));
         }
 
-        protected static Func<Type, InjectionMember>         Get_ByNameRequired_Member;
-        protected static Func<Type, InjectionMember>         Get_ByNameOptional_Member;
+        protected static Func<Type, InjectionMember>         InjectionMember_Required_ByName;
+        protected static Func<Type, InjectionMember>         InjectionMember_Optional_ByName;
         protected static Func<Type, string, InjectionMember> Get_Resolved_Member;
         protected static Func<Type, string, InjectionMember> Get_Optional_Member;
         protected static Func<Type, string, InjectionMember> GetOptionalOptional;

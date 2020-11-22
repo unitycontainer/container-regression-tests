@@ -11,12 +11,12 @@ namespace Fields
     {
         private const string FieldName = "Field";
 
-        public static InjectionMember GetByNameMember(Type _)
+        public static InjectionMember GetInjectionMember_ByName_Required(Type _)
             => new InjectionField(FieldName);
 
-        public static InjectionMember GetByNameOptional(Type _)
-#if V5
-            => new InjectionField(FieldName, true);
+        public static InjectionMember GetInjectionMember_ByName_Optional(Type _)
+#if UNITY_V5
+            => new InjectionField(FieldName, Unity.ResolutionOption.Optional);
 #else
             => new OptionalField(FieldName);
 #endif

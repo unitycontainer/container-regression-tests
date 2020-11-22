@@ -56,7 +56,9 @@ namespace Regression.Annotated
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
+#if !BEHAVIOR_V5
             Assert.AreEqual(Container.Resolve(instance.Dependency, null), instance.Value);
+#endif
         }
 
 

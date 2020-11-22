@@ -9,11 +9,11 @@ namespace Constructors
 {
     public static class Support
     {
-        public static InjectionMember GetByNameMember(Type _)
-            => throw new NotSupportedException();
+        public static InjectionMember GetInjectionMember_ByName_Required(Type type)
+            => new InjectionConstructor(new ResolvedParameter(type));
 
-        public static InjectionMember GetByNameOptional(Type _)
-            => throw new NotSupportedException();
+        public static InjectionMember GetInjectionMember_ByName_Optional(Type type)
+            => new InjectionConstructor(new OptionalParameter(type));
 
         public static InjectionMember GetResolvedMember(Type importType, string contractName)
             => new InjectionConstructor(new ResolvedParameter(importType, contractName));

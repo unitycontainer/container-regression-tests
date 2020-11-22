@@ -11,11 +11,11 @@ namespace Methods
     {
         private const string MethodName = "Method";
 
-        public static InjectionMember GetByNameMember(Type _)
-            => new InjectionMethod(MethodName);
+        public static InjectionMember GetInjectionMember_ByName_Required(Type type)
+            => new InjectionMethod(MethodName, new ResolvedParameter(type));
 
-        public static InjectionMember GetByNameOptional(Type _)
-            => new InjectionMethod(MethodName);
+        public static InjectionMember GetInjectionMember_ByName_Optional(Type type)
+            => new InjectionMethod(MethodName, new OptionalParameter(type));
 
         public static InjectionMember GetResolvedMember(Type importType, string contractName)
             => new InjectionMethod(MethodName, new ResolvedParameter(importType, contractName));

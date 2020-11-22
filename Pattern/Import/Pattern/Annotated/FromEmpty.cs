@@ -17,7 +17,7 @@ namespace Regression.Annotated
         public virtual void Required_FromEmpty_Valid(string test, Type type)
         {
             // Arrange
-            var target = (_typeDefinition ??= GetType("Required", "BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("Required", "BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act
@@ -34,7 +34,7 @@ namespace Regression.Annotated
         public virtual void Required_FromEmpty_Valid_Named(string test, Type type)
         {
             // Arrange
-            var target = (_typeDefinition ??= GetType("Required", "BaselineTestTypeNamed`1"))
+            var target = (TypeDefinition ??= GetType("Required", "BaselineTestTypeNamed`1"))
                 .MakeGenericType(type);
 
             // Act
@@ -52,7 +52,7 @@ namespace Regression.Annotated
         public virtual void Required_FromEmpty_Invalid(string test, Type type)
         {
             // Arrange
-            var target = (_typeDefinition ??= GetType("Required", "BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("Required", "BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act
@@ -69,7 +69,7 @@ namespace Regression.Annotated
         public virtual void Optional_FromEmpty_Valid(string test, Type type)
         {
             // Arrange
-            var target = (_typeDefinition ??= GetType("Optional", "BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("Optional", "BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act
@@ -86,7 +86,7 @@ namespace Regression.Annotated
         public virtual void Optional_FromEmpty_Invalid(string test, Type type)
         {
             // Arrange
-            var target = (_typeDefinition ??= GetType("Optional", "BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("Optional", "BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act

@@ -41,7 +41,7 @@ namespace Regression.Implicit
         public virtual void FromEmpty_Resolvable_Import(string test, Type type)
         {
             // Arrange
-            var target = (_typeDefinition ??= GetType("BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act
@@ -74,7 +74,7 @@ namespace Regression.Implicit
         public virtual void FromEmpty_UnResolvable_Import(string test, Type type)
         {
             // Arrange
-            var target = (_typeDefinition ??= GetType("BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act

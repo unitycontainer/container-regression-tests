@@ -16,7 +16,7 @@ namespace Regression.Annotated
         {
             // Arrange
             RegisterUnResolvableTypes();
-            var target = (_typeDefinition ??= GetType("Required", "BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("Required", "BaselineTestType`1"))
                 .MakeGenericType(type);
 
 
@@ -35,7 +35,7 @@ namespace Regression.Annotated
         {
             // Arrange
             RegisterUnResolvableTypes();
-            var target = (_typeDefinition ??= GetType("Optional", "BaselineTestType`1"))
+            var target = (TypeDefinition ??= GetType("Optional", "BaselineTestType`1"))
                 .MakeGenericType(type);
 
             // Act
