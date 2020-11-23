@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-#if UNITY_V4
-using Microsoft.Practices.Unity;
-#else
-using Unity;
-#endif
 
 namespace Regression
 {
@@ -22,15 +17,14 @@ namespace Regression
 
         [DataTestMethod]
         [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
-        public virtual void ByName_Implicit_WithRequired(string test,       Type type, 
-                                                         object @default,   object defaultAttr, 
-                                                         object registered, object named, 
-                                                         object injected,   object overridden, 
-                                                         bool isResolveble)
-        {
-            TestRequiredImport("Implicit", "BaselineTestType`1", type, 
+        public virtual void ByName_Implicit_WithRequired(string test, Type type,
+                                                         object @default, object defaultAttr,
+                                                         object registered, object named,
+                                                         object injected, object overridden,
+                                                         bool isResolveble) 
+            => TestRequiredImport("Implicit", "BaselineTestType`1", type, 
                 InjectionMember_Required_ByName(type), registered);
-        }
+
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
@@ -38,11 +32,9 @@ namespace Regression
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
-                                                         bool isResolveble)
-        {
-            TestOptionalImport("Implicit", "BaselineTestType`1", type,
+                                                         bool isResolveble) 
+            => TestOptionalImport("Implicit", "BaselineTestType`1", type,
                 InjectionMember_Optional_ByName(type), registered);
-        }
 
 
         #endregion
@@ -53,14 +45,12 @@ namespace Regression
         [DataTestMethod]
         [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
         public virtual void ByName_Required_WithRequired(string test, Type type,
-                                                         object @default,   object defaultAttr,
+                                                         object @default, object defaultAttr,
                                                          object registered, object named,
-                                                         object injected,   object overridden,
-                                                         bool isResolveble)
-        {
-            TestRequiredImport("Annotated", "Required.BaselineTestType`1", type,
+                                                         object injected, object overridden,
+                                                         bool isResolveble) 
+            => TestRequiredImport("Annotated", "Required.BaselineTestType`1", type,
                 InjectionMember_Required_ByName(type), registered);
-        }
 
 
         [DataTestMethod]
@@ -69,11 +59,9 @@ namespace Regression
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
-                                                         bool isResolveble)
-        {
-            TestOptionalImport("Annotated", "Required.BaselineTestType`1", type,
+                                                         bool isResolveble) 
+            => TestOptionalImport("Annotated", "Required.BaselineTestType`1", type,
                 InjectionMember_Optional_ByName(type), registered);
-        }
 
         #endregion
 
@@ -86,11 +74,9 @@ namespace Regression
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
-                                                         bool isResolveble)
-        {
-            TestRequiredImport("Annotated", "Optional.BaselineTestType`1", type,
+                                                         bool isResolveble) 
+            => TestRequiredImport("Annotated", "Optional.BaselineTestType`1", type,
                 InjectionMember_Required_ByName(type), registered);
-        }
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
@@ -99,10 +85,8 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble)
-        {
-            TestOptionalImport("Annotated", "Optional.BaselineTestType`1", type,
+            => TestOptionalImport("Annotated", "Optional.BaselineTestType`1", type,
                 InjectionMember_Optional_ByName(type), registered);
-        }
 
         #endregion
     }
