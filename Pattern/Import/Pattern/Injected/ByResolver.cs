@@ -20,7 +20,7 @@ namespace Regression
         #region Implicit
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
         public virtual void ByResolver_Implicit_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -45,7 +45,7 @@ namespace Regression
         #region Required
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
         public virtual void ByResolver_Required_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,

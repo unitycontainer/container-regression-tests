@@ -67,13 +67,13 @@
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net45'))">
 	  <Compile Remove="Import\Data\Fields\**" />
 	  <Compile Remove="Import\Tests\Fields\**" />
-	  <!--<Compile Remove="Import\Pattern\Implicit\WithDefaults.cs" />-->
+	  <Compile Remove="Import\Pattern\Injected\ByResolver.cs" />
 	</ItemGroup>
 
 	<!-- v5 Exclusions -->
 
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net46'))">
-		<!--<Compile Remove="Import\Pattern\Implicit\WithDefaults.cs" />-->
+		<Compile Remove="Import\Pattern\Injected\ByResolver.cs" />
 	</ItemGroup>
 
 	
