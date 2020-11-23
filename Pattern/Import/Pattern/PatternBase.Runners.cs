@@ -20,39 +20,56 @@ namespace Regression
 
         #region Runners
 
-        protected void TestRequiredImport(string @namespace, string testType, Type importType, InjectionMember injected, object expected)
+        protected void TestRequiredImport(Type definition, Type importType, InjectionMember injected, object expected)
         {
-            var target = (TypeDefinition ??= GetType(@namespace, testType))
-                .MakeGenericType(importType);
+            var type = definition.MakeGenericType(importType);
 
-            Container.RegisterType(target, injected);
+            Container.RegisterType(null, type, null, null, injected);
 
             // Validate
-            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(type, null));
 
             // Register missing types
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(target, null) as PatternBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
             Assert.AreEqual(expected, instance.Value);
-
         }
 
-        protected void TestOptionalImport(string @namespace, string testType, Type importType, InjectionMember injected, object expected)
+        protected void TestRequiredGeneric(Type definition, Type importType, InjectionMember injected, object expected)
+        {
+            var type = definition.MakeGenericType(importType);
+
+            Container.RegisterType(null, definition, null, null, injected);
+
+            // Validate
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(type, null));
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            var instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(expected, instance.Value);
+        }
+
+        protected void TestOptionalImport(Type definition, Type importType, InjectionMember injected, object expected)
         {
 
             // Arrange
-            var target = (TypeDefinition ??= GetType(@namespace, testType))
-                .MakeGenericType(importType);
+            var type = definition.MakeGenericType(importType);
 
-            Container.RegisterType(target, injected);
+            Container.RegisterType(null, type, null, null, injected);
 
             // Validate
-            var instance = Container.Resolve(target, null) as PatternBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -62,24 +79,49 @@ namespace Regression
             RegisterTypes();
 
             // Act
-            instance = Container.Resolve(target, null) as PatternBaseType;
+            instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
             Assert.AreEqual(expected, instance.Value);
         }
 
-        protected void TestWithDefaultValue(string @namespace, string testType, Type importType, InjectionMember injected, object expected, object @default)
+        protected void TestOptionalGeneric(Type definition, Type importType, InjectionMember injected, object expected)
         {
 
             // Arrange
-            var target = (TypeDefinition ??= GetType(@namespace, testType))
-                .MakeGenericType(importType);
+            var type = definition.MakeGenericType(importType);
 
-            Container.RegisterType(target, injected);
+            Container.RegisterType(null, type, null, null, injected);
 
             // Validate
-            var instance = Container.Resolve(target, null) as PatternBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(instance.Expected, instance.Value);
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(expected, instance.Value);
+        }
+
+        protected void TestWithDefaultValue(Type definition, Type importType, InjectionMember injected, object expected, object @default)
+        {
+
+            // Arrange
+            var type = definition.MakeGenericType(importType);
+
+            Container.RegisterType(null, type, null, null, injected);
+
+            // Validate
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -89,7 +131,7 @@ namespace Regression
             RegisterTypes();
 
             // Act
-            instance = Container.Resolve(target, null) as PatternBaseType;
+            instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

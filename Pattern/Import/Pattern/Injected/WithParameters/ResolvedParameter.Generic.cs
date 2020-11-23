@@ -1,43 +1,45 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+#if UNITY_V4
+using Microsoft.Practices.Unity;
+#else
+using Unity.Injection;
+#endif
 
 namespace Regression
 {
     /// <summary>
-    /// Tests injecting dependencies by resolver or resolver factory
+    /// Tests injecting dependencies with InjectionParameter
     /// </summary>
-    /// <remarks>
-    /// A resolver is an object that implements "IResolve" interface
-    /// </remarks>
     /// <example>
-    /// Container.RegisterType(target, new InjectionConstructor(resolver), 
-    ///                                new InjectionMethod("Method", resolver) , 
-    ///                                new InjectionField("Field", resolver), 
-    ///                                new InjectionProperty("Property", resolver));
+    /// Container.RegisterType(target, new InjectionConstructor(new GenericParameter(...)), 
+    ///                                new InjectionMethod("Method", new GenericParameter(...)) , 
+    ///                                new InjectionField("Field", new GenericParameter(...)), 
+    ///                                new InjectionProperty("Property", new GenericParameter(...)));
     /// </example>
     public abstract partial class InjectedPattern
     {
         #region Implicit
 
         [DataTestMethod]
-        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
-        public virtual void ByResolver_Implicit_WithResolver(string test, Type type,
+        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        public virtual void ByGenericParameter_Implicit_Default(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestWithDefaultValue(ImplicitImportType, type,
-                InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
+            => TestRequiredImport(ImplicitImportType, type,
+                InjectionMember_Value(new GenericParameter("TDependency")), registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
-        public virtual void ByResolver_Implicit_WithResolverFactory(string test, Type type,
+        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        public virtual void ByGenericParameter_Implicit_WithName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestWithDefaultValue(ImplicitImportType, type,
-                InjectionMember_Value(new ValidatingResolverFactory(injected)), injected, injected);
+            => TestRequiredImport(ImplicitImportType, type,
+                InjectionMember_Value(new GenericParameter("TDependency", Name)), named);
 
         #endregion
 
@@ -45,24 +47,24 @@ namespace Regression
         #region Required
 
         [DataTestMethod]
-        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
-        public virtual void ByResolver_Required_WithResolver(string test, Type type,
+        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        public virtual void ByGenericParameter_Required_Default(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestWithDefaultValue(RequiredImportType, type,
-                InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
+            => TestRequiredImport(RequiredImportType, type,
+                InjectionMember_Value(new GenericParameter("TDependency")), registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
-        public virtual void ByResolver_Required_WithResolverFactory(string test, Type type,
+        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        public virtual void ByGenericParameter_Required_WithName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestWithDefaultValue(RequiredImportType, type,
-                InjectionMember_Value(new ValidatingResolverFactory(injected)), injected, injected);
+            => TestRequiredImport(RequiredImportType, type,
+                InjectionMember_Value(new GenericParameter("TDependency", Name)), named);
 
         #endregion
 
@@ -71,23 +73,23 @@ namespace Regression
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
-        public virtual void ByResolver_Optional_WithResolver(string test, Type type,
+        public virtual void ByGenericParameter_Optional_Default(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestWithDefaultValue(OptionalImportType, type,
-                InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
+            => TestRequiredImport(OptionalImportType, type,
+                InjectionMember_Value(new GenericParameter("TDependency")), registered);
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
-        public virtual void ByResolver_Optional_WithResolverFactory(string test, Type type,
+        public virtual void ByGenericParameter_Optional_WithName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestWithDefaultValue(OptionalImportType, type,
-                InjectionMember_Value(new ValidatingResolverFactory(injected)), injected, injected);
+            => TestRequiredImport(OptionalImportType, type,
+                InjectionMember_Value(new GenericParameter("TDependency", Name)), named);
 
         #endregion
     }

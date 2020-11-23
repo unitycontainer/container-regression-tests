@@ -24,6 +24,10 @@ namespace Regression
 
         public const string Name = "name";
 
+        protected static Type ImplicitImportType;
+        protected static Type RequiredImportType;
+        protected static Type OptionalImportType;
+
         #region Integer
         public const int NamedInt        = 1234;
         public const int DefaultInt      = 3456;
@@ -79,6 +83,11 @@ namespace Regression
             _prefix = _data.Substring(0, _data.IndexOf("."));
 
             LoadInjectionFuncs(Type.GetType($"{_root}.Support"));
+
+            ImplicitImportType = GetType("Implicit", "BaselineTestType`1");
+            RequiredImportType = GetType("Annotated", "Required.BaselineTestType`1");
+            OptionalImportType = GetType("Annotated", "Optional.BaselineTestType`1");
+
         }
 
         public virtual void TestInitialize() => Container = new UnityContainer();

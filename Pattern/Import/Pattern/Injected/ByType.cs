@@ -23,7 +23,7 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestRequiredImport("Implicit", "BaselineTestType`1", type,
+            => TestRequiredImport(ImplicitImportType, type,
                 InjectionMember_Required_ByType(type), registered);
 
 
@@ -34,7 +34,7 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestOptionalImport("Implicit", "BaselineTestType`1", type,
+            => TestOptionalImport(ImplicitImportType, type,
                 InjectionMember_Optional_ByType(type), registered);
 
         #endregion
@@ -49,7 +49,7 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestRequiredImport("Annotated", "Required.BaselineTestType`1", type,
+            => TestRequiredImport(RequiredImportType, type,
                 InjectionMember_Required_ByType(type), registered);
 
 
@@ -60,7 +60,7 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestOptionalImport("Annotated", "Required.BaselineTestType`1", type,
+            => TestOptionalImport(RequiredImportType, type,
                 InjectionMember_Optional_ByType(type), registered);
 
         #endregion
@@ -75,7 +75,7 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestRequiredImport("Annotated", "Optional.BaselineTestType`1", type,
+            => TestRequiredImport(OptionalImportType, type,
                 InjectionMember_Required_ByType(type), registered);
 
         [DataTestMethod]
@@ -85,7 +85,7 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestOptionalImport("Annotated", "Optional.BaselineTestType`1", type,
+            => TestOptionalImport(OptionalImportType, type,
                 InjectionMember_Optional_ByType(type), registered);
 
         #endregion

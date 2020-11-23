@@ -23,7 +23,7 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestWithDefaultValue("Implicit", "BaselineTestType`1", type,
+            => TestWithDefaultValue(ImplicitImportType, type,
                 InjectionMember_Value(injected), injected, injected);
 
         #endregion
@@ -38,7 +38,7 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestWithDefaultValue("Annotated", "Required.BaselineTestType`1", type,
+            => TestWithDefaultValue(RequiredImportType, type,
                 InjectionMember_Value(injected), injected, injected);
 
         #endregion
@@ -53,7 +53,7 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestWithDefaultValue("Annotated", "Optional.BaselineTestType`1", type,
+            => TestWithDefaultValue(OptionalImportType, type,
                 InjectionMember_Value(injected), injected, injected);
 
         #endregion
