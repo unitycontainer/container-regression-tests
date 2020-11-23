@@ -5,13 +5,6 @@ namespace Regression.Annotated
 {
     public abstract partial class Pattern : PatternBase
     {
-        #region Fields
-
-        protected Type TypeDefinition;
-
-        #endregion
-
-
         #region Test Data
 
         public static IEnumerable<object[]> Required_WithDefaults_Data

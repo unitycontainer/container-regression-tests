@@ -4,7 +4,6 @@ using System;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
-using Unity.Injection;
 #endif
 
 namespace Regression
@@ -30,24 +29,8 @@ namespace Regression
                                                          object injected, object overridden,
                                                          bool isResolveble)
         {
-            // Arrange
-            var target = (TypeDefinition ??= GetType("Implicit", "BaselineTestType`1"))
-                .MakeGenericType(type);
-
-            Container.RegisterType(target, InjectionMember_Required_ByType(type));
-
-            // Validate
-            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
-
-            // Register missing types
-            RegisterTypes();
-
-            // Act
-            var instance = Container.Resolve(target, null) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(registered, instance.Value);
+            TestRequiredImport("Implicit", "BaselineTestType`1", type,
+                InjectionMember_Required_ByType(type), registered);
         }
 
 
@@ -59,29 +42,8 @@ namespace Regression
                                                          object injected, object overridden,
                                                          bool isResolveble)
         {
-            PatternBaseType instance = null;
-            // Arrange
-            var target = (TypeDefinition ??= GetType("Implicit", "BaselineTestType`1"))
-                .MakeGenericType(type);
-
-            Container.RegisterType(target, InjectionMember_Optional_ByType(type));
-
-            // Validate
-            instance = Container.Resolve(target, null) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(instance.Expected, instance.Value);
-
-            // Register missing types
-            RegisterTypes();
-
-            // Act
-            instance = Container.Resolve(target, null) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(registered, instance.Value);
+            TestOptionalImport("Implicit", "BaselineTestType`1", type,
+                InjectionMember_Optional_ByType(type), registered);
         }
 
         #endregion
@@ -97,24 +59,8 @@ namespace Regression
                                                          object injected, object overridden,
                                                          bool isResolveble)
         {
-            // Arrange
-            var target = (TypeDefinition ??= GetType("Annotated", "Required.BaselineTestType`1"))
-                .MakeGenericType(type);
-
-            Container.RegisterType(target, InjectionMember_Required_ByType(type));
-
-            // Validate
-            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
-
-            // Register missing types
-            RegisterTypes();
-
-            // Act
-            var instance = Container.Resolve(target, null) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(registered, instance.Value);
+            TestRequiredImport("Annotated", "Required.BaselineTestType`1", type,
+                InjectionMember_Required_ByType(type), registered);
         }
 
 
@@ -126,30 +72,8 @@ namespace Regression
                                                          object injected, object overridden,
                                                          bool isResolveble)
         {
-            PatternBaseType instance = null;
-
-            // Arrange
-            var target = (TypeDefinition ??= GetType("Annotated", "Required.BaselineTestType`1"))
-                .MakeGenericType(type);
-
-            Container.RegisterType(target, InjectionMember_Optional_ByType(type));
-
-            // Validate
-            instance = Container.Resolve(target, null) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(instance.Expected, instance.Value);
-
-            // Register missing types
-            RegisterTypes();
-
-            // Act
-            instance = Container.Resolve(target, null) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(registered, instance.Value);
+            TestOptionalImport("Annotated", "Required.BaselineTestType`1", type,
+                InjectionMember_Optional_ByType(type), registered);
         }
 
         #endregion
@@ -165,25 +89,8 @@ namespace Regression
                                                          object injected, object overridden,
                                                          bool isResolveble)
         {
-            // Arrange
-            PatternBaseType instance = null;
-            var target = (TypeDefinition ??= GetType("Annotated", "Optional.BaselineTestType`1"))
-                .MakeGenericType(type);
-
-            Container.RegisterType(target, InjectionMember_Required_ByType(type));
-
-            // Unity v4 did not evaluate annotations on the dependency
-            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
-
-            // Register missing types
-            RegisterTypes();
-
-            // Act
-            instance = Container.Resolve(target, null) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(registered, instance.Value);
+            TestRequiredImport("Annotated", "Optional.BaselineTestType`1", type,
+                InjectionMember_Required_ByType(type), registered);
         }
 
         [DataTestMethod]
@@ -194,29 +101,8 @@ namespace Regression
                                                          object injected, object overridden,
                                                          bool isResolveble)
         {
-            PatternBaseType instance = null;
-            // Arrange
-            var target = (TypeDefinition ??= GetType("Annotated", "Optional.BaselineTestType`1"))
-                .MakeGenericType(type);
-
-            Container.RegisterType(target, InjectionMember_Optional_ByType(type));
-
-            // Validate
-            instance = Container.Resolve(target, null) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(instance.Expected, instance.Value);
-
-            // Register missing types
-            RegisterTypes();
-
-            // Act
-            instance = Container.Resolve(target, null) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(registered, instance.Value);
+            TestOptionalImport("Annotated", "Optional.BaselineTestType`1", type,
+                InjectionMember_Optional_ByType(type), registered);
         }
 
         #endregion

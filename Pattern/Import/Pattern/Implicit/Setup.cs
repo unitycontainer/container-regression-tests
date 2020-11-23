@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Regression.Implicit
 {
     public abstract partial class Pattern : PatternBase
     {
-        #region Fields
-
-        protected Type TypeDefinition;
-
-        #endregion
-
-
         #region Test Data
 
         public static IEnumerable<object[]> WithDefaultValue_Data
