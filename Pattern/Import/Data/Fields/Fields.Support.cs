@@ -11,6 +11,8 @@ namespace Fields
     {
         private const string FieldName = "Field";
 
+        #region By Name
+
         public static InjectionMember GetInjectionMember_ByName_Required(Type importType)
             => new InjectionField(FieldName);
 
@@ -20,17 +22,21 @@ namespace Fields
 #else
             => new OptionalField(FieldName);
 #endif
+        #endregion
+
+
+        #region By Type
 
         public static InjectionMember GetInjectionMember_ByType_Required(Type importType)
             => new InjectionField(FieldName, importType);
 
         public static InjectionMember GetInjectionMember_ByType_Optional(Type importType)
 #if UNITY_V5
-            => new InjectionField(FieldName, importType, Unity.ResolutionOption.Optional);
+            => new InjectionField(FieldName, new OptionalParameter(importType));
 #else
             => new OptionalField(FieldName, importType);
 #endif
-
+        #endregion
 
         public static InjectionMember GetResolvedMember(Type importType, string contractName)
             => new InjectionField(FieldName, new ResolvedParameter(importType, contractName));

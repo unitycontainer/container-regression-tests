@@ -11,6 +11,8 @@ namespace Properties
     {
         private const string PropertyName = "Property";
 
+        #region By Name
+
         public static InjectionMember GetInjectionMember_ByName_Required(Type _)
             => new InjectionProperty(PropertyName);
 
@@ -22,20 +24,21 @@ namespace Properties
 #else
             => new OptionalProperty(PropertyName);
 #endif
+        #endregion
 
+
+        #region By Type
 
         public static InjectionMember GetInjectionMember_ByType_Required(Type importType)
             => new InjectionProperty(PropertyName, importType);
 
         public static InjectionMember GetInjectionMember_ByType_Optional(Type importType)
-#if UNITY_V4
+#if UNITY_V4 || UNITY_V5
             => new InjectionProperty(PropertyName, new OptionalParameter(importType));
-#elif UNITY_V5
-            => new InjectionProperty(PropertyName, importType, Unity.ResolutionOption.Optional);
 #else
             => new OptionalProperty(PropertyName, importType);
 #endif
-
+        #endregion
 
         public static InjectionMember GetResolvedMember(Type importType, string contractName)
             => new InjectionProperty(PropertyName, new ResolvedParameter(importType, contractName));
