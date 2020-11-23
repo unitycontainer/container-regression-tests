@@ -11,15 +11,26 @@ namespace Fields
     {
         private const string FieldName = "Field";
 
-        public static InjectionMember GetInjectionMember_ByName_Required(Type _)
+        public static InjectionMember GetInjectionMember_ByName_Required(Type importType)
             => new InjectionField(FieldName);
 
-        public static InjectionMember GetInjectionMember_ByName_Optional(Type _)
+        public static InjectionMember GetInjectionMember_ByName_Optional(Type importType)
 #if UNITY_V5
             => new InjectionField(FieldName, Unity.ResolutionOption.Optional);
 #else
             => new OptionalField(FieldName);
 #endif
+
+        public static InjectionMember GetInjectionMember_ByType_Required(Type importType)
+            => new InjectionField(FieldName, importType);
+
+        public static InjectionMember GetInjectionMember_ByType_Optional(Type importType)
+#if UNITY_V5
+            => new InjectionField(FieldName, importType, Unity.ResolutionOption.Optional);
+#else
+            => new OptionalField(FieldName, importType);
+#endif
+
 
         public static InjectionMember GetResolvedMember(Type importType, string contractName)
             => new InjectionField(FieldName, new ResolvedParameter(importType, contractName));

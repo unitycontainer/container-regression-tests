@@ -23,6 +23,20 @@ namespace Properties
             => new OptionalProperty(PropertyName);
 #endif
 
+
+        public static InjectionMember GetInjectionMember_ByType_Required(Type importType)
+            => new InjectionProperty(PropertyName, importType);
+
+        public static InjectionMember GetInjectionMember_ByType_Optional(Type importType)
+#if UNITY_V4
+            => new InjectionProperty(PropertyName, new OptionalParameter(importType));
+#elif UNITY_V5
+            => new InjectionProperty(PropertyName, importType, Unity.ResolutionOption.Optional);
+#else
+            => new OptionalProperty(PropertyName, importType);
+#endif
+
+
         public static InjectionMember GetResolvedMember(Type importType, string contractName)
             => new InjectionProperty(PropertyName, new ResolvedParameter(importType, contractName));
 
