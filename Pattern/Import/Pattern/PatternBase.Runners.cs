@@ -92,7 +92,7 @@ namespace Regression
             // Arrange
             var type = definition.MakeGenericType(importType);
 
-            Container.RegisterType(null, type, null, null, injected);
+            Container.RegisterType(null, definition, null, null, injected);
 
             // Validate
             var instance = Container.Resolve(type, null) as PatternBaseType;
