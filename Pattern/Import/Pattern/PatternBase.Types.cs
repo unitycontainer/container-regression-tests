@@ -1,4 +1,10 @@
 ﻿using System;
+#if UNITY_V4
+using Microsoft.Practices.Unity;
+#else
+using Unity;
+using Unity.Resolution;
+#endif
 
 namespace Regression
 {
@@ -40,6 +46,53 @@ namespace Regression
         public override string ToString() => $"SubUnresolvable.{Value}";
 
         public new static SubUnresolvable Create(string name) => new SubUnresolvable(name);
+    }
+
+    public class ValidatingResolver : IResolve
+    {
+        private object _value;
+
+        public ValidatingResolver(object value)
+        {
+            _value = value;
+        }
+
+        public object Resolve<TContext>(ref TContext context) where TContext : IResolveContext
+        {
+            Type = context.Type;
+            Name = context.Name;
+
+            return _value;
+        }
+
+        public Type Type { get; private set; }
+
+        public string Name { get; private set; }
+    }
+
+    public class ValidatingResolverFactory : IResolverFactory<Type>
+    {
+        private object _value;
+
+        public ValidatingResolverFactory(object value)
+        {
+            _value = value;
+        }
+
+        public Type Type { get; private set; }
+        public string Name { get; private set; }
+
+        public ResolveDelegate<TContext> GetResolver<TContext>(Type info)
+            where TContext : IResolveContext
+        {
+            return (ref TContext context) =>
+            {
+                Type = context.Type;
+                Name = context.Name;
+
+                return _value;
+            };
+        }
     }
 }
 

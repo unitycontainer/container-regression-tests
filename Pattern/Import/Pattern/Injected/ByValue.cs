@@ -1,14 +1,17 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-#if UNITY_V4
-using Microsoft.Practices.Unity;
-#else
-using Unity;
-using Unity.Injection;
-#endif
 
 namespace Regression
 {
+    /// <summary>
+    /// Tests injecting dependencies by value
+    /// </summary>
+    /// <example>
+    /// Container.RegisterType(target, new InjectionConstructor(15), 
+    ///                                new InjectionMethod("Method", 15) , 
+    ///                                new InjectionField("Field", 15), 
+    ///                                new InjectionProperty("Property", 15));
+    /// </example>
     public abstract partial class InjectedPattern
     {
         #region Implicit
@@ -22,16 +25,6 @@ namespace Regression
                                                          bool isResolveble) 
             => TestWithDefaultValue("Implicit", "BaselineTestType`1", type,
                 InjectionMember_Value(injected), injected, injected);
-
-        [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
-        public virtual void ByValue_Implicit_WithResolver(string test, Type type,
-                                                          object @default, object defaultAttr,
-                                                          object registered, object named,
-                                                          object injected, object overridden,
-                                                          bool isResolveble) 
-            => TestRequiredImport("Implicit", "BaselineTestType`1", type,
-                InjectionMember_Value(new ResolvedParameter(type)), registered);
 
         #endregion
 
@@ -48,16 +41,6 @@ namespace Regression
             => TestWithDefaultValue("Annotated", "Required.BaselineTestType`1", type,
                 InjectionMember_Value(injected), injected, injected);
 
-        [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
-        public virtual void ByValue_Required_WithResolver(string test, Type type,
-                                                          object @default, object defaultAttr,
-                                                          object registered, object named,
-                                                          object injected, object overridden,
-                                                          bool isResolveble) 
-            => TestRequiredImport("Annotated", "Required.BaselineTestType`1", type,
-                InjectionMember_Value(new ResolvedParameter(type)), registered);
-
         #endregion
 
 
@@ -72,16 +55,6 @@ namespace Regression
                                                          bool isResolveble) 
             => TestWithDefaultValue("Annotated", "Optional.BaselineTestType`1", type,
                 InjectionMember_Value(injected), injected, injected);
-
-        [DataTestMethod]
-        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
-        public virtual void ByValue_Optional_WithResolver(string test, Type type,
-                                                          object @default, object defaultAttr,
-                                                          object registered, object named,
-                                                          object injected, object overridden,
-                                                          bool isResolveble)
-            => TestOptionalImport("Annotated", "Optional.BaselineTestType`1", type,
-                InjectionMember_Value(new OptionalParameter(type)), registered);
 
         #endregion
     }

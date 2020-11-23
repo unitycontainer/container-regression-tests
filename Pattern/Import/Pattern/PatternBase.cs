@@ -164,20 +164,6 @@ namespace Regression
 
             InjectionMember_Value = (Func<object, InjectionMember>)support.GetMethod("GetInjectionValue")
                                                                           .CreateDelegate(typeof(Func<object, InjectionMember>));
-
-
-            Get_Resolved_Member = (Func<Type, string, InjectionMember>)support.GetMethod("GetResolvedMember")
-                                                                                .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
-            Get_Optional_Member   = (Func<Type, string, InjectionMember>)support.GetMethod("GetOptionalMember")
-                                                                                .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
-            GetOptionalOptional = (Func<Type, string, InjectionMember>)support.GetMethod("GetOptionalOptional")
-                                                                              .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
-            GetGenericMember    = (Func<Type, string, InjectionMember>)support.GetMethod("GetGenericMember")
-                                                                              .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
-            GetGenericOptional  = (Func<Type, string, InjectionMember>)support.GetMethod("GetGenericOptional")
-                                                                              .CreateDelegate(typeof(Func<Type, string, InjectionMember>));
-            GetInjectionOptional = (Func<object, InjectionMember>)support.GetMethod("GetInjectionOptional")
-                                                                         .CreateDelegate(typeof(Func<object, InjectionMember>));
         }
 
         protected static Func<Type, InjectionMember> InjectionMember_Required_ByName;
@@ -186,14 +172,7 @@ namespace Regression
         protected static Func<Type, InjectionMember> InjectionMember_Required_ByType;
         protected static Func<Type, InjectionMember> InjectionMember_Optional_ByType;
         
-        protected static Func<object, InjectionMember>       InjectionMember_Value;
-        
-        protected static Func<Type, string, InjectionMember> Get_Resolved_Member;
-        protected static Func<Type, string, InjectionMember> Get_Optional_Member;
-        protected static Func<Type, string, InjectionMember> GetOptionalOptional;
-        protected static Func<Type, string, InjectionMember> GetGenericMember;
-        protected static Func<Type, string, InjectionMember> GetGenericOptional;
-        protected static Func<object, InjectionMember>       GetInjectionOptional;
+        protected static Func<object, InjectionMember> InjectionMember_Value;
 
         #endregion
     }

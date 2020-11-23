@@ -46,23 +46,5 @@ namespace Methods
             => new InjectionMethod(MethodName, argument);
 
         #endregion
-
-        public static InjectionMember GetResolvedMember(Type importType, string contractName)
-            => new InjectionMethod(MethodName, new ResolvedParameter(importType, contractName));
-
-        public static InjectionMember GetOptionalMember(Type importType, string contractName)
-            => new InjectionMethod(MethodName, new ResolvedParameter(importType, contractName));
-
-        public static InjectionMember GetOptionalOptional(Type importType, string contractName)
-            => new InjectionMethod(MethodName, new OptionalParameter(importType, contractName));
-
-        public static InjectionMember GetGenericMember(Type _, string contractName)
-            => new InjectionMethod(MethodName, new GenericParameter("T", contractName));
-
-        public static InjectionMember GetGenericOptional(Type importType, string contractName)
-            => new InjectionMethod(MethodName, new OptionalGenericParameter("T", contractName));
-
-        public static InjectionMember GetInjectionOptional(object argument)
-            => new InjectionMethod(MethodName, argument);
     }
 }

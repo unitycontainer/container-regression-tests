@@ -45,31 +45,5 @@ namespace Fields
             => new InjectionField(FieldName, argument);
 
         #endregion
-
-        public static InjectionMember GetResolvedMember(Type importType, string contractName)
-            => new InjectionField(FieldName, new ResolvedParameter(importType, contractName));
-
-        public static InjectionMember GetOptionalMember(Type importType, string contractName)
-            => new InjectionField(FieldName, new OptionalParameter(importType, contractName));
-
-        public static InjectionMember GetOptionalOptional(Type importType, string contractName)
-#if V5
-            => new InjectionField(FieldName, new OptionalParameter(importType, contractName));
-#else
-            => new OptionalField(FieldName, new OptionalParameter(importType, contractName));
-#endif
-
-        public static InjectionMember GetGenericMember(Type _, string contractName)
-            => new InjectionField(FieldName, new GenericParameter("T", contractName));
-
-        public static InjectionMember GetGenericOptional(Type importType, string contractName)
-            => new InjectionField(FieldName, new OptionalGenericParameter("T", contractName));
-
-        public static InjectionMember GetInjectionOptional(object argument)
-#if V5
-            => new InjectionField(FieldName, argument);
-#else
-            => new OptionalField(FieldName, argument);
-#endif
     }
 }
