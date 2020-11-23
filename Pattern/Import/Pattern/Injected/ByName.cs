@@ -22,7 +22,7 @@ namespace Regression
 
         [DataTestMethod]
         [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
-        public virtual void Implicit_WithRequired_ByName(string test,       Type type, 
+        public virtual void ByName_Implicit_WithRequired(string test,       Type type, 
                                                          object @default,   object defaultAttr, 
                                                          object registered, object named, 
                                                          object injected,   object overridden, 
@@ -51,7 +51,7 @@ namespace Regression
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
-        public virtual void Implicit_WithOptional_ByName(string test, Type type,
+        public virtual void ByName_Implicit_WithOptional(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
@@ -89,7 +89,7 @@ namespace Regression
 
         [DataTestMethod]
         [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
-        public virtual void Required_WithRequired_ByName(string test, Type type,
+        public virtual void ByName_Required_WithRequired(string test, Type type,
                                                          object @default,   object defaultAttr,
                                                          object registered, object named,
                                                          object injected,   object overridden,
@@ -118,7 +118,7 @@ namespace Regression
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
-        public virtual void Required_WithOptional_ByName(string test, Type type,
+        public virtual void ByName_Required_WithOptional(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
@@ -157,7 +157,7 @@ namespace Regression
 
         [DataTestMethod]
         [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
-        public virtual void Optional_WithRequired_ByName(string test, Type type,
+        public virtual void ByName_Optional_WithRequired(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
@@ -186,7 +186,7 @@ namespace Regression
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
-        public virtual void Optional_WithOptional_ByName(string test, Type type,
+        public virtual void ByName_Optional_WithOptional(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
