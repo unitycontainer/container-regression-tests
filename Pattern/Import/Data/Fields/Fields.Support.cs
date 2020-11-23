@@ -38,6 +38,14 @@ namespace Fields
 #endif
         #endregion
 
+
+        #region Value
+
+        public static InjectionMember GetInjectionValue(object argument)
+            => new InjectionField(FieldName, argument);
+
+        #endregion
+
         public static InjectionMember GetResolvedMember(Type importType, string contractName)
             => new InjectionField(FieldName, new ResolvedParameter(importType, contractName));
 
@@ -56,9 +64,6 @@ namespace Fields
 
         public static InjectionMember GetGenericOptional(Type importType, string contractName)
             => new InjectionField(FieldName, new OptionalGenericParameter("T", contractName));
-
-        public static InjectionMember GetInjectionValue(object argument)
-            => new InjectionField(FieldName, argument);
 
         public static InjectionMember GetInjectionOptional(object argument)
 #if V5

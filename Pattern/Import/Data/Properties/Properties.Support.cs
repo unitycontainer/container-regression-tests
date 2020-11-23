@@ -40,6 +40,14 @@ namespace Properties
 #endif
         #endregion
 
+
+        #region Value
+
+        public static InjectionMember GetInjectionValue(object argument)
+            => new InjectionProperty(PropertyName, argument);
+
+        #endregion
+
         public static InjectionMember GetResolvedMember(Type importType, string contractName)
             => new InjectionProperty(PropertyName, new ResolvedParameter(importType, contractName));
 
@@ -60,9 +68,6 @@ namespace Properties
 
         public static InjectionMember GetGenericOptional(Type importType, string contractName)
             => new InjectionProperty(PropertyName, new OptionalGenericParameter("T", contractName));
-
-        public static InjectionMember GetInjectionValue(object argument)
-            => new InjectionProperty(PropertyName, argument);
 
         public static InjectionMember GetInjectionOptional(object argument)
 #if UNITY_V4

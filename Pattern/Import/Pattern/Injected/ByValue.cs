@@ -4,6 +4,7 @@ using System;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
+using Unity.Injection;
 #endif
 
 namespace Regression
@@ -33,7 +34,7 @@ namespace Regression
                                                           bool isResolveble)
         {
             TestRequiredImport("Implicit", "BaselineTestType`1", type,
-                InjectionMember_Value(InjectionMember_Required_ByType(type)), registered);
+                InjectionMember_Value(new ResolvedParameter(type)), registered);
         }
 
         #endregion
@@ -62,7 +63,7 @@ namespace Regression
                                                           bool isResolveble)
         {
             TestRequiredImport("Annotated", "Required.BaselineTestType`1", type,
-                InjectionMember_Value(InjectionMember_Required_ByType(type)), registered);
+                InjectionMember_Value(new ResolvedParameter(type)), registered);
         }
 
         #endregion
@@ -83,7 +84,7 @@ namespace Regression
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
         public virtual void ByValue_Optional_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -91,7 +92,7 @@ namespace Regression
                                                           bool isResolveble)
         {
             TestOptionalImport("Annotated", "Optional.BaselineTestType`1", type,
-                InjectionMember_Value(InjectionMember_Optional_ByType(type)), registered);
+                InjectionMember_Value(new OptionalParameter(type)), registered);
         }
 
         #endregion

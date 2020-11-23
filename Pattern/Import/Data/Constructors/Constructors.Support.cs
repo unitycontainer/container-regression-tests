@@ -37,6 +37,14 @@ namespace Constructors
 
         #endregion
 
+
+        #region Value
+
+        public static InjectionMember GetInjectionValue(object argument)
+            => new InjectionConstructor(argument);
+
+        #endregion
+
         public static InjectionMember GetResolvedMember(Type importType, string contractName)
             => new InjectionConstructor(new ResolvedParameter(importType, contractName));
 
@@ -51,9 +59,6 @@ namespace Constructors
 
         public static InjectionMember GetGenericOptional(Type importType, string contractName)
             => new InjectionConstructor(new OptionalGenericParameter("T", contractName));
-
-        public static InjectionMember GetInjectionValue(object argument)
-            => new InjectionConstructor(argument);
 
         public static InjectionMember GetInjectionOptional(object argument)
             => new InjectionConstructor(argument);
