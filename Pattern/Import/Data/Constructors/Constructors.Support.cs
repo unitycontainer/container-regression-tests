@@ -53,10 +53,18 @@ namespace Constructors
             => new ParameterOverride(name, value);
 
         public static ResolverOverride GetMemberOverrideWithType(Type type, string name, object value)
+#if UNITY_V4
+            => new ParameterOverride(name, value);
+#else
             => new ParameterOverride(type, name, value);
+#endif
 
         public static ResolverOverride GetMemberOverrideOnType(Type target, Type type, string name, object value)
+#if UNITY_V4
+            => new ParameterOverride(name, value).OnType(target);
+#else
             => new ParameterOverride(type, name, value).OnType(target);
+#endif
 
         #endregion
     }

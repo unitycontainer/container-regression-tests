@@ -24,5 +24,16 @@ namespace Methods
                    .ParameterType;
 
         #endregion
+
+
+        #region Not Supported in Unity v4
+
+#if UNITY_V4
+        public override void Implicit_With_MemberOverride(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble) { }
+        public override void Implicit_With_ParameterType(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble) { }
+        public override void Implicit_With_TargetType(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble) { }
+#endif
+
+        #endregion
     }
 }
