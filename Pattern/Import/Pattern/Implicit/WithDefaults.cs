@@ -1,10 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
-#else
-using Unity;
 #endif
 
 namespace Regression.Implicit
@@ -27,7 +24,7 @@ namespace Regression.Implicit
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
-            Assert.AreEqual(instance.Expected, instance.Value);
+            Assert.AreEqual(instance.Default, instance.Value);
         }
 
 
@@ -47,7 +44,7 @@ namespace Regression.Implicit
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
-            Assert.AreEqual(instance.Expected, instance.Value);
+            Assert.AreEqual(instance.Default, instance.Value);
         }
 
 
@@ -67,7 +64,7 @@ namespace Regression.Implicit
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
-            Assert.AreEqual(instance.Expected, instance.Value);
+            Assert.AreEqual(instance.Default, instance.Value);
         }
     }
 }

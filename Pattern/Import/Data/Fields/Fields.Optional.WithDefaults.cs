@@ -21,9 +21,9 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
 #if  BEHAVIOR_V5 // Unity v5 did not support default values for fields
         public override object Expected => 0;
 #else
-        public override object Expected => PatternBase.DefaultInt;
+        public override object Default => PatternBase.DefaultInt;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
     public class Optional_DerivedFromInt_WithDefault : Optional_Field_Int_WithDefault
@@ -42,9 +42,9 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
 #if  BEHAVIOR_V4 || BEHAVIOR_V5 // Unity v4 and v5 did not support default values for fields
         public override object Expected => null;
 #else
-        public override object Expected => PatternBase.DefaultString;
+        public override object Default => PatternBase.DefaultString;
 #endif
-        public override Type Dependency => typeof(string);
+        public override Type ImportType => typeof(string);
     }
 
     public class Optional_DerivedFromString_WithDefault : Optional_Field_String_WithDefault
@@ -67,9 +67,9 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => 0;
 #else
-        public override object Expected => PatternBase.DefaultValueInt;
+        public override object Default => PatternBase.DefaultValueInt;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
     public class Optional_WithDefaultAttribute_Int : PatternBaseType
@@ -81,9 +81,9 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => 0;
 #else
-        public override object Expected => PatternBase.DefaultValueInt;
+        public override object Default => PatternBase.DefaultValueInt;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
     public class Optional_Derived_WithDefaultAttribute : Optional_Int_WithDefaultAttribute
@@ -100,9 +100,9 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => null;
 #else
-        public override object Expected => PatternBase.DefaultValueString;
+        public override object Default => PatternBase.DefaultValueString;
 #endif
-        public override Type Dependency => typeof(string);
+        public override Type ImportType => typeof(string);
     }
 
     public class Optional_WithDefaultAttribute_String : PatternBaseType
@@ -114,9 +114,9 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => null;
 #else
-        public override object Expected => PatternBase.DefaultValueString;
+        public override object Default => PatternBase.DefaultValueString;
 #endif
-        public override Type Dependency => typeof(string);
+        public override Type ImportType => typeof(string);
     }
 
     #endregion
@@ -135,9 +135,9 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
 #if BEHAVIOR_V5   // Unity v5 did not support default value for fields
         public override object Expected => 0;
 #else
-        public override object Expected => PatternBase.DefaultValueInt;
+        public override object Default => PatternBase.DefaultValueInt;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
     public class Optional_WithDefaultAndAttribute_Int : PatternBaseType
@@ -149,9 +149,9 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
 #if BEHAVIOR_V5   // Unity v5 did not support default value for fields
         public override object Expected => 0;
 #else
-        public override object Expected => PatternBase.DefaultValueInt;
+        public override object Default => PatternBase.DefaultValueInt;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
     public class Optional_Derived_WithDefaultAndAttribute : Optional_Int_WithDefaultAndAttribute
@@ -169,9 +169,9 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
 #if BEHAVIOR_V4 ||  BEHAVIOR_V5 // Unity v4 and v5 did not support default values for fields
         public override object Expected => null;
 #else
-        public override object Expected => PatternBase.DefaultValueString;
+        public override object Default => PatternBase.DefaultValueString;
 #endif
-        public override Type Dependency => typeof(string);
+        public override Type ImportType => typeof(string);
     }
 
     public class Optional_WithDefaultAndAttribute_String : PatternBaseType
@@ -184,9 +184,9 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
 #if BEHAVIOR_V4 ||  BEHAVIOR_V5 // Unity v4 and v5 did not support default values for fields
         public override object Expected => null;
 #else
-        public override object Expected => PatternBase.DefaultValueString;
+        public override object Default => PatternBase.DefaultValueString;
 #endif
-        public override Type Dependency => typeof(string);
+        public override Type ImportType => typeof(string);
     }
 
     #endregion

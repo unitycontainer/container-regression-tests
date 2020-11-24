@@ -1,10 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace Regression.Implicit
 {
     public abstract partial class Pattern : PatternBase
     {
-        #region Test Data
+        #region Fields
+
+        private static Type _inherited;
+        private static Type _twice;
+
+        #endregion
+
+
+        #region Scaffolding
+
+        new protected static void ClassInitialize(TestContext context)
+        {
+            PatternBase.ClassInitialize(context);
+
+            _inherited  = GetType("BaselineInheritedType`1");
+            _twice      = GetType("BaselineInheritedTwice`1");
+        }
+
+        #endregion
+
+
+        #region Defaults
 
         public static IEnumerable<object[]> WithDefaultValue_Data
         {

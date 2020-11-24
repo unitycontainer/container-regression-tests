@@ -10,8 +10,8 @@ namespace Regression.Override.Fields.WithDefaultAttribute
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
-        public override object Expected => PatternBase.DefaultValueInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultValueInt;
+        public override Type ImportType => typeof(int);
     }
 
     public class Implicit_String_WithDefaultAttribute : PatternBaseType
@@ -20,7 +20,7 @@ namespace Regression.Override.Fields.WithDefaultAttribute
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
-        public override object Expected => PatternBase.DefaultValueString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultValueString;
+        public override Type ImportType => typeof(string);
     }
 }

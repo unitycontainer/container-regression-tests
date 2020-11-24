@@ -24,7 +24,7 @@ namespace Regression.Annotated
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
-            Assert.AreEqual(instance.Expected, instance.Value);
+            Assert.AreEqual(instance.Default, instance.Value);
         }
 
 
@@ -38,7 +38,7 @@ namespace Regression.Annotated
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
-            Assert.AreEqual(instance.Expected, instance.Value);
+            Assert.AreEqual(instance.Default, instance.Value);
         }
 
 
@@ -57,7 +57,7 @@ namespace Regression.Annotated
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
 #if !BEHAVIOR_V5
-            Assert.AreEqual(Container.Resolve(instance.Dependency, null), instance.Value);
+            Assert.AreEqual(Container.Resolve(instance.ImportType, null), instance.Value);
 #endif
         }
 
@@ -75,7 +75,7 @@ namespace Regression.Annotated
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
-            Assert.AreEqual(Container.Resolve(instance.Dependency, null), instance.Value);
+            Assert.AreEqual(Container.Resolve(instance.ImportType, null), instance.Value);
         }
     }
 }

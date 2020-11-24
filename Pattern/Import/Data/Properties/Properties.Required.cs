@@ -8,13 +8,15 @@ using Unity;
 
 namespace Regression.Annotated.Properties.Required
 {
+    #region Generic
+
     public class BaselineTestType<TDependency>
         : PatternBaseType
     {
         [Dependency] public TDependency Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Expected => default(TDependency);
+        public override object Default => default(TDependency);
     }
 
     public class BaselineTestTypeNamed<TDependency>
@@ -23,6 +25,60 @@ namespace Regression.Annotated.Properties.Required
         [Dependency(PatternBase.Name)] public TDependency Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Expected => default(TDependency);
+        public override object Default => default(TDependency);
     }
+
+    public class BaselineInheritedType<TDependency>
+        : BaselineTestType<TDependency>
+    {
+    }
+
+    public class BaselineInheritedTwice<TDependency>
+        : BaselineInheritedType<TDependency>
+    {
+    }
+
+
+    #endregion
+
+
+    #region Test Data
+
+    public class Required_Int : PatternBaseType
+    {
+        [Dependency] public int Property { get; set; }
+
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+
+        public override object Default => 0;
+        public override object Injected => PatternBase.InjectedInt;
+        public override object Registered => PatternBase.RegisteredInt;
+        public override Type ImportType => typeof(int);
+    }
+
+    public class Required_String : PatternBaseType
+    {
+        [Dependency] public string Property { get; set; }
+
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+
+        public override object Default => null;
+        public override object Injected => PatternBase.InjectedString;
+        public override object Registered => PatternBase.RegisteredString;
+        public override Type ImportType => typeof(string);
+    }
+
+    public class Required_Unresolvable : PatternBaseType
+    {
+        [Dependency] public Unresolvable Property { get; set; }
+
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+
+        public override object Default => null;
+        public override object Injected => PatternBase.InjectedUnresolvable;
+        public override object Registered => PatternBase.RegisteredUnresolvable;
+        public override Type ImportType => typeof(Unresolvable);
+    }
+
+    #endregion
 }

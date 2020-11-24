@@ -15,8 +15,7 @@ namespace Regression.Annotated
         public virtual void Required_BuiltIn_Interface(string test, Type type)
         {
             // Arrange
-            var target = (TypeDefinition ??= GetType("Required", "BaselineTestType`1"))
-                .MakeGenericType(type);
+            var target = RequiredImportType.MakeGenericType(type);
 
             // Act
             var instance = Container.Resolve(target, null) as PatternBaseType;
@@ -33,8 +32,7 @@ namespace Regression.Annotated
         public virtual void Required_BuiltIn_Named(string test, Type type)
         {
             // Arrange
-            var target = (TypeDefinition ??= GetType("Required", "BaselineTestTypeNamed`1"))
-                .MakeGenericType(type);
+            var target = _requiredNamed.MakeGenericType(type);
 
             // Act
             _ = Container.Resolve(target, null) as PatternBaseType;
@@ -45,8 +43,7 @@ namespace Regression.Annotated
         public virtual void Optional_BuiltIn_Interface(string test, Type type)
         {
             // Arrange
-            var target = (TypeDefinition ??= GetType("Optional", "BaselineTestType`1"))
-                .MakeGenericType(type);
+            var target = OptionalImportType.MakeGenericType(type);
 
             // Act
             var instance = Container.Resolve(target, null) as PatternBaseType;
@@ -62,8 +59,7 @@ namespace Regression.Annotated
         public virtual void Optional_BuiltIn_Named(string test, Type type)
         {
             // Arrange
-            var target = (TypeDefinition ??= GetType("Optional", "BaselineTestTypeNamed`1"))
-                .MakeGenericType(type);
+            var target = _optionalNamed.MakeGenericType(type);
 
             // Act
             var instance = Container.Resolve(target, null) as PatternBaseType;

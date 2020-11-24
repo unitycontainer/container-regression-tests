@@ -16,16 +16,16 @@ namespace Regression.Annotated.Methods.Required.WithDefaults
     {
         [InjectionMethod]
         public virtual void Method([Dependency] int value = PatternBase.DefaultInt) => Value = value;
-        public override object Expected => PatternBase.DefaultInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultInt;
+        public override Type ImportType => typeof(int);
     }
 
     public class Required_Parameter_String_WithDefault : PatternBaseType
     {
         [InjectionMethod]
         public virtual void Method([Dependency] string value = PatternBase.DefaultString) => Value = value;
-        public override object Expected => PatternBase.DefaultString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultString;
+        public override Type ImportType => typeof(string);
     }
 
     public class Required_DerivedFromInt_WithDefault : Required_Parameter_Int_WithDefault
@@ -36,9 +36,9 @@ namespace Regression.Annotated.Methods.Required.WithDefaults
         public override void Method([Dependency] int value = _default) => base.Method(value);
 
 #if  !BEHAVIOR_V5 // Issue: https://github.com/unitycontainer/container/issues/291
-        public override object Expected => _default;
+        public override object Default => _default;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
     #endregion
@@ -53,8 +53,8 @@ namespace Regression.Annotated.Methods.Required.WithDefaults
         [InjectionMethod]
         public virtual void Method([Dependency][DefaultValue(PatternBase.DefaultValueInt)] int value) => Value = value;
 
-        public override object Expected => PatternBase.DefaultValueInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultValueInt;
+        public override Type ImportType => typeof(int);
     }
 
     public class Required_WithDefaultAttribute_Int : PatternBaseType
@@ -62,8 +62,8 @@ namespace Regression.Annotated.Methods.Required.WithDefaults
         [InjectionMethod]
         public void Method([DefaultValue(PatternBase.DefaultValueInt)][Dependency] int value) => Value = value;
 
-        public override object Expected => PatternBase.DefaultValueInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultValueInt;
+        public override Type ImportType => typeof(int);
     }
 
     public class Required_String_WithDefaultAttribute : PatternBaseType
@@ -71,8 +71,8 @@ namespace Regression.Annotated.Methods.Required.WithDefaults
         [InjectionMethod]
         public void Method([Dependency][DefaultValue(PatternBase.DefaultValueString)] string value) => Value = value;
 
-        public override object Expected => PatternBase.DefaultValueString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultValueString;
+        public override Type ImportType => typeof(string);
     }
 
     public class Required_WithDefaultAttribute_String : PatternBaseType
@@ -80,8 +80,8 @@ namespace Regression.Annotated.Methods.Required.WithDefaults
         [InjectionMethod]
         public void Method([DefaultValue(PatternBase.DefaultValueString)][Dependency] string value) => Value = value;
 
-        public override object Expected => PatternBase.DefaultValueString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultValueString;
+        public override Type ImportType => typeof(string);
     }
 
     public class Required_Derived_WithDefaultAttribute : Required_Int_WithDefaultAttribute
@@ -90,8 +90,8 @@ namespace Regression.Annotated.Methods.Required.WithDefaults
 
         public override void Method([DefaultValue(_default), Dependency] int value) => base.Method(value);
 
-        public override object Expected => _default;
-        public override Type Dependency => typeof(int);
+        public override object Default => _default;
+        public override Type ImportType => typeof(int);
     }
 
 #endif
@@ -110,9 +110,9 @@ namespace Regression.Annotated.Methods.Required.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => PatternBase.DefaultInt;
 #else
-        public override object Expected => PatternBase.DefaultValueInt;
+        public override object Default => PatternBase.DefaultValueInt;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
     public class Required_WithDefaultAndAttribute_Int : PatternBaseType
@@ -124,9 +124,9 @@ namespace Regression.Annotated.Methods.Required.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => PatternBase.DefaultInt;
 #else
-        public override object Expected => PatternBase.DefaultValueInt;
+        public override object Default => PatternBase.DefaultValueInt;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
     public class Required_String_WithDefaultAndAttribute : PatternBaseType
@@ -138,9 +138,9 @@ namespace Regression.Annotated.Methods.Required.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => PatternBase.DefaultString;
 #else
-        public override object Expected => PatternBase.DefaultValueString;
+        public override object Default => PatternBase.DefaultValueString;
 #endif
-        public override Type Dependency => typeof(string);
+        public override Type ImportType => typeof(string);
     }
 
     public class Required_WithDefaultAndAttribute_String : PatternBaseType
@@ -152,9 +152,9 @@ namespace Regression.Annotated.Methods.Required.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => PatternBase.DefaultString;
 #else
-        public override object Expected => PatternBase.DefaultValueString;
+        public override object Default => PatternBase.DefaultValueString;
 #endif
-        public override Type Dependency => typeof(string);
+        public override Type ImportType => typeof(string);
     }
 
     public class Required_Derived_WithDefaultAndAttribute : Required_Int_WithDefaultAndAttribute
@@ -169,9 +169,9 @@ namespace Regression.Annotated.Methods.Required.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => PatternBase.DefaultInt;
 #else
-        public override object Expected => _default;
+        public override object Default => _default;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
     #endregion

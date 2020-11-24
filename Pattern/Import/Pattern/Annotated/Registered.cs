@@ -16,8 +16,7 @@ namespace Regression.Annotated
         {
             // Arrange
             RegisterUnResolvableTypes();
-            var target = (TypeDefinition ??= GetType("Required", "BaselineTestType`1"))
-                .MakeGenericType(type);
+            var target = RequiredImportType.MakeGenericType(type);
 
 
             // Act
@@ -35,8 +34,7 @@ namespace Regression.Annotated
         {
             // Arrange
             RegisterUnResolvableTypes();
-            var target = (TypeDefinition ??= GetType("Optional", "BaselineTestType`1"))
-                .MakeGenericType(type);
+            var target = OptionalImportType.MakeGenericType(type);
 
             // Act
             var instance = Container.Resolve(target, null) as PatternBaseType;

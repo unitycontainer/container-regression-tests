@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -10,184 +11,82 @@ namespace Regression
 {
     public abstract partial class PatternBase
     {
-        // Serves collection of unresolvable types
-        public static IEnumerable<Type> UnResolvableTypes
+        #region Constants
+
+        protected const string TDependency = "TDependency";
+
+        #region Integer
+        public const int NamedInt = 1234;
+        public const int DefaultInt = 3456;
+        public const int DefaultValueInt = 4567;
+        public const int InjectedInt = 6789;
+        public const int RegisteredInt = 8901;
+        public const int OverriddenInt = 9012;
+        #endregion
+
+        #region String
+        public const string Null = "null";
+        public const string NamedString = "named_string";
+        public const string DefaultString = "default_string";
+        public const string DefaultValueString = "default_value_string";
+        public const string RegisteredString = "registered_string";
+        public const string InjectedString = "injected_string";
+        public const string OverriddenString = "overridden_string";
+        #endregion
+
+        #region Unresolvable
+        public readonly static Unresolvable RegisteredUnresolvable = Unresolvable.Create("registered");
+        public readonly static Unresolvable NamedUnresolvable = Unresolvable.Create("named");
+        public readonly static Unresolvable InjectedUnresolvable = SubUnresolvable.Create("injected");
+        public readonly static Unresolvable OverriddenUnresolvable = SubUnresolvable.Create("overridden");
+        #endregion
+
+        #region Struct
+        public readonly static object RegisteredStruct = new TestStruct(55, "struct");
+        public readonly static object NamedStruct = new TestStruct(44, "named struct");
+        #endregion
+
+        #region Unresolvable Type Instances
+        public const bool RegisteredBool = true;
+        public const long RegisteredLong = 12;
+        public const short RegisteredShort = 23;
+        public const float RegisteredFloat = 34;
+        public const double RegisteredDouble = 45;
+        public static Type RegisteredType = typeof(PatternBase);
+        public static ICloneable RegisteredICloneable = new object[0];
+        public static Delegate RegisteredDelegate = (Func<int>)(() => 0);
+        #endregion
+
+        #endregion
+
+
+        #region Injected
+
+        private static IDictionary<Type, object> _injected = new Dictionary<Type, object>
         {
-            get
-            {
-                yield return typeof(Unresolvable);
-                yield return typeof(string);
+            { typeof(int),          InjectedInt },
+            { typeof(string),       InjectedString },
+            { typeof(Unresolvable), InjectedUnresolvable },
+        };
 
-#if !BEHAVIOR_V4 // Unity v4 did not support optional value types
-                yield return typeof(int);
-                yield return typeof(bool);
-                yield return typeof(long);
-                yield return typeof(short);
-                yield return typeof(float);
-                yield return typeof(double);
-                // TODO: typeof(TestStruct)
-#endif                                            
-                yield return typeof(Type);
-                yield return typeof(ICloneable);
-                yield return typeof(Delegate);
-            }
-        }
+        protected virtual object GetInjectedValue(Type type)
+            => _injected[type];
 
-        public static IEnumerable<Type> ResolvableTypes
+        #endregion
+
+
+        #region Overrides
+
+        private static IDictionary<Type, object> _overrides = new Dictionary<Type, object>
         {
-            get
-            {
-                yield return typeof(object);
-                yield return typeof(Lazy<IUnityContainer>);
-                yield return typeof(Func<IUnityContainer>);
-                yield return typeof(object[]);
-#if !BEHAVIOR_V4
-                yield return typeof(List<int>);
-                yield return typeof(List<string>);
-                yield return typeof(IEnumerable<IUnityContainer>);
-#endif
-            }
-        }
+            { typeof(int),          OverriddenInt },
+            { typeof(string),       OverriddenString },
+            { typeof(Unresolvable), OverriddenUnresolvable },
+        };
 
-        #region Test Data Sources
+        protected virtual object GetOverrideValue(Type type)
+            => _overrides[type];
 
-        public static IEnumerable<object[]> RequiredImport_Data
-        {
-            get
-            {
-                #region Integer
-                yield return new object[]
-                {
-                    typeof(int).Name,        // Name
-                    typeof(int),             // Type
-                    DefaultInt,              // Default
-                    DefaultValueInt,         // DefaultValue
-                    RegisteredInt,           // Registered
-                    NamedInt,                // Named
-                    InjectedInt,             // Injected
-                    OverriddenInt,           // Overridden
-                    false                    // Is resolvable from empty
-                };
-                #endregion
-
-                #region String
-                yield return new object[]
-                {
-                    typeof(string).Name,     // Name
-                    typeof(string),          // Type
-                    DefaultString,           // Default
-                    DefaultValueString,      // DefaultValue
-                    RegisteredString,        // Registered
-                    NamedString,             // Named
-                    InjectedString,          // Injected
-                    OverriddenString,        // Overridden
-                    false                    // Is resolvable from empty
-                };
-                #endregion
-
-                #region Unresolvable
-                yield return new object[]
-                {
-                    typeof(Unresolvable).Name,// Name
-                    typeof(Unresolvable),     // Type
-                    null,                     // Default
-                    null,                     // DefaultValue
-                    RegisteredUnresolvable,   // Registered
-                    NamedUnresolvable,        // Named
-                    InjectedUnresolvable,     // Injected
-                    OverriddenUnresolvable,   // Overridden
-                    false                     // Is resolvable from empty
-                };
-                #endregion
-            }
-        }
-
-        public static IEnumerable<object[]> OptionalImport_Data
-        {
-            get
-            {
-                #region Integer
-#if !BEHAVIOR_V4
-                yield return new object[]
-                {
-                    typeof(int).Name,        // Name
-                    typeof(int),             // Type
-                    DefaultInt,              // Default
-                    DefaultValueInt,         // DefaultValue
-                    RegisteredInt,           // Registered
-                    NamedInt,                // Named
-                    InjectedInt,             // Injected
-                    OverriddenInt,           // Overridden
-                    false                    // Is resolvable from empty
-                };
-#endif
-                #endregion
-
-                #region String
-                yield return new object[]
-                {
-                    typeof(string).Name,     // Name
-                    typeof(string),          // Type
-                    DefaultString,           // Default
-                    DefaultValueString,      // DefaultValue
-                    RegisteredString,        // Registered
-                    NamedString,             // Named
-                    InjectedString,          // Injected
-                    OverriddenString,        // Overridden
-                    false                    // Is resolvable from empty
-                };
-                #endregion
-
-                #region Unresolvable
-                yield return new object[]
-                {
-                    typeof(Unresolvable).Name,// Name
-                    typeof(Unresolvable),     // Type
-                    null,                     // Default
-                    null,                     // DefaultValue
-                    RegisteredUnresolvable,   // Registered
-                    NamedUnresolvable,        // Named
-                    InjectedUnresolvable,     // Injected
-                    OverriddenUnresolvable,   // Overridden
-                    false                     // Is resolvable from empty
-                };
-                #endregion
-            }
-        }
-
-        public static IEnumerable<object[]> BuiltInTypes_Data
-        {
-            get
-            {
-                yield return new object[] { typeof(IUnityContainer).Name, typeof(IUnityContainer) };
-#if !UNITY_V4 && !UNITY_V5
-                yield return new object[] { typeof(IUnityContainerAsync).Name,  typeof(IUnityContainerAsync) };
-                yield return new object[] { typeof(IServiceProvider).Name,      typeof(IServiceProvider) };
-#endif
-            }
-        }
-
-        public static IEnumerable<object[]> UnResolvableTypes_Data
-        {
-            get
-            {
-                foreach (var type in UnResolvableTypes)
-                {
-                    yield return new object[] { type.Name, type };
-                }
-            }
-        }
-
-        public static IEnumerable<object[]> ResolvableTypes_Data
-        {
-            get
-            {
-                foreach (var type in ResolvableTypes)
-                {
-                    yield return new object[] { type.Name, type };
-                }
-            }
-        }
 
         #endregion
     }

@@ -11,7 +11,7 @@ namespace Regression.Override
     public abstract partial class Pattern 
     {
         [DataTestMethod]
-        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
         public virtual void Implicit_With_DependencyOverride(string test, Type type,
                                                              object @default, object defaultAttr,
                                                              object registered, object named,
@@ -22,7 +22,7 @@ namespace Regression.Override
                 overridden, overridden);
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
         public virtual void Implicit_With_MemberOverride(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -33,7 +33,7 @@ namespace Regression.Override
                 overridden, overridden);
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
         public virtual void Implicit_With_ParameterType(string test, Type type,
                                                         object @default, object defaultAttr,
                                                         object registered, object named,
@@ -44,7 +44,7 @@ namespace Regression.Override
                 overridden, overridden);
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
         public virtual void Implicit_With_TargetType(string test, Type type,
                                                      object @default, object defaultAttr,
                                                      object registered, object named,

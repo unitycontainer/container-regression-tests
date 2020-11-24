@@ -20,23 +20,23 @@ namespace Regression.Injected
         #region Implicit
 
         [DataTestMethod]
-        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
         public virtual void ByResolver_Implicit_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestWithProvidedValue(ImplicitImportType, type,
+            => TestWithDefault(ImplicitImportType, type,
                 InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
         public virtual void ByResolver_Implicit_WithResolverFactory(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestWithProvidedValue(ImplicitImportType, type,
+            => TestWithDefault(ImplicitImportType, type,
                 InjectionMember_Value(new ValidatingResolverFactory(injected)), injected, injected);
 
         #endregion
@@ -45,23 +45,23 @@ namespace Regression.Injected
         #region Required
 
         [DataTestMethod]
-        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
         public virtual void ByResolver_Required_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestWithProvidedValue(RequiredImportType, type,
+            => TestWithDefault(RequiredImportType, type,
                 InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
         public virtual void ByResolver_Required_WithResolverFactory(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestWithProvidedValue(RequiredImportType, type,
+            => TestWithDefault(RequiredImportType, type,
                 InjectionMember_Value(new ValidatingResolverFactory(injected)), injected, injected);
 
         #endregion
@@ -70,23 +70,23 @@ namespace Regression.Injected
         #region Optional
 
         [DataTestMethod]
-        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
         public virtual void ByResolver_Optional_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestWithProvidedValue(OptionalImportType, type,
+            => TestWithDefault(OptionalImportType, type,
                 InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
 
         [DataTestMethod]
-        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
         public virtual void ByResolver_Optional_WithResolverFactory(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestWithProvidedValue(OptionalImportType, type,
+            => TestWithDefault(OptionalImportType, type,
                 InjectionMember_Value(new ValidatingResolverFactory(injected)), injected, injected);
 
         #endregion

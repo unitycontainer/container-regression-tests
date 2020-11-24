@@ -13,12 +13,31 @@ namespace Regression.Annotated
         #region Required
 
         [DataTestMethod]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        public virtual void Required_FromEmpty(string test, Type type,
+                                                         object @default, object defaultAttr,
+                                                         object registered, object named,
+                                                         object injected, object overridden,
+                                                         bool isResolveble)
+            => TestRequiredImport(RequiredImportType, type, registered);
+
+
+        [DataTestMethod]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        public virtual void Required_Named(string test, Type type,
+                                                         object @default, object defaultAttr,
+                                                         object registered, object named,
+                                                         object injected, object overridden,
+                                                         bool isResolveble)
+            => TestRequiredImport(_requiredNamed, type, named);
+
+
+        [DataTestMethod]
         [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void Required_FromEmpty_Valid(string test, Type type)
+        public virtual void Required_Resolvable(string test, Type type)
         {
             // Arrange
-            var target = (TypeDefinition ??= GetType("Required", "BaselineTestType`1"))
-                .MakeGenericType(type);
+            var target = RequiredImportType.MakeGenericType(type);
 
             // Act
             var instance = Container.Resolve(target, null);
@@ -26,37 +45,6 @@ namespace Regression.Annotated
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, target);
-        }
-
-
-        [DataTestMethod]
-        [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void Required_FromEmpty_Valid_Named(string test, Type type)
-        {
-            // Arrange
-            var target = (TypeDefinition ??= GetType("Required", "BaselineTestTypeNamed`1"))
-                .MakeGenericType(type);
-
-            // Act
-            var instance = Container.Resolve(target, null);
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, target);
-        }
-
-
-        [DataTestMethod]
-        [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
-        [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void Required_FromEmpty_Invalid(string test, Type type)
-        {
-            // Arrange
-            var target = (TypeDefinition ??= GetType("Required", "BaselineTestType`1"))
-                .MakeGenericType(type);
-
-            // Act
-            _ = Container.Resolve(target, null);
         }
 
         #endregion
@@ -66,11 +54,10 @@ namespace Regression.Annotated
 
         [DataTestMethod]
         [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void Optional_FromEmpty_Valid(string test, Type type)
+        public virtual void Optional_Resolvable(string test, Type type)
         {
             // Arrange
-            var target = (TypeDefinition ??= GetType("Optional", "BaselineTestType`1"))
-                .MakeGenericType(type);
+            var target = OptionalImportType.MakeGenericType(type);
 
             // Act
             var instance = Container.Resolve(target, null);
@@ -80,22 +67,23 @@ namespace Regression.Annotated
             Assert.IsInstanceOfType(instance, target);
         }
 
+        [DataTestMethod]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        public virtual void Optional_FromEmpty(string test, Type type,
+                                                         object @default, object defaultAttr,
+                                                         object registered, object named,
+                                                         object injected, object overridden,
+                                                         bool isResolveble)
+            => TestOptionalImport(OptionalImportType, type, registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
-        public virtual void Optional_FromEmpty_Invalid(string test, Type type)
-        {
-            // Arrange
-            var target = (TypeDefinition ??= GetType("Optional", "BaselineTestType`1"))
-                .MakeGenericType(type);
-
-            // Act
-            var instance = Container.Resolve(target, null) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, target);
-        }
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        public virtual void Optional_Named(string test, Type type,
+                                                     object @default, object defaultAttr,
+                                                     object registered, object named,
+                                                     object injected, object overridden,
+                                                     bool isResolveble)
+            => TestOptionalImport(_optionalNamed, type, named);
 
         #endregion
     }

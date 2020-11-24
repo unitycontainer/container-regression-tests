@@ -30,8 +30,8 @@ namespace Regression.Annotated.Fields.Required.WithDefaults
         [Dependency] [DefaultValue(PatternBase.DefaultValueInt)] public int Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Expected => PatternBase.DefaultValueInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultValueInt;
+        public override Type ImportType => typeof(int);
     }
 
     public class Required_Field_WithDefaultAttribute_Int : PatternBaseType
@@ -39,16 +39,16 @@ namespace Regression.Annotated.Fields.Required.WithDefaults
         [DefaultValue(PatternBase.DefaultValueInt)] [Dependency] public int Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Expected => PatternBase.DefaultValueInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultValueInt;
+        public override Type ImportType => typeof(int);
     }
 
     public class Required_Field_String_WithDefaultAttribute : PatternBaseType
     {
         [Dependency] [DefaultValue(PatternBase.DefaultValueString)] public string Field;
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Expected => PatternBase.DefaultValueString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultValueString;
+        public override Type ImportType => typeof(string);
     }
 
     public class Required_Field_WithDefaultAttribute_String : PatternBaseType
@@ -56,8 +56,8 @@ namespace Regression.Annotated.Fields.Required.WithDefaults
         [DefaultValue(PatternBase.DefaultValueString)] [Dependency] public string Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Expected => PatternBase.DefaultValueString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultValueString;
+        public override Type ImportType => typeof(string);
     }
 
     public class Required_Derived_WithDefaultAttribute : Required_Field_Int_WithDefaultAttribute
@@ -74,8 +74,8 @@ namespace Regression.Annotated.Fields.Required.WithDefaults
         [Dependency] [DefaultValue(PatternBase.DefaultValueInt)] public int Field = PatternBase.DefaultInt;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Expected => PatternBase.DefaultValueInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultValueInt;
+        public override Type ImportType => typeof(int);
     }
 
     public class Required_Field_WithDefaultAndAttribute_Int : PatternBaseType
@@ -83,8 +83,8 @@ namespace Regression.Annotated.Fields.Required.WithDefaults
         [DefaultValue(PatternBase.DefaultValueInt)] [Dependency] public int Field = PatternBase.DefaultInt;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Expected => PatternBase.DefaultValueInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultValueInt;
+        public override Type ImportType => typeof(int);
     }
 
     public class Required_Field_String_WithDefaultAndAttribute : PatternBaseType
@@ -92,8 +92,8 @@ namespace Regression.Annotated.Fields.Required.WithDefaults
         [Dependency] [DefaultValue(PatternBase.DefaultValueString)] public string Field = PatternBase.DefaultString;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Expected => PatternBase.DefaultValueString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultValueString;
+        public override Type ImportType => typeof(string);
     }
 
     public class Required_Field_WithDefaultAndAttribute_String : PatternBaseType
@@ -101,8 +101,8 @@ namespace Regression.Annotated.Fields.Required.WithDefaults
         [DefaultValue(PatternBase.DefaultValueString)] [Dependency] public string Field = PatternBase.DefaultString;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Expected => PatternBase.DefaultValueString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultValueString;
+        public override Type ImportType => typeof(string);
     }
 
     public class Required_Derived_WithDefaultAndAttribute : Required_Field_Int_WithDefaultAndAttribute

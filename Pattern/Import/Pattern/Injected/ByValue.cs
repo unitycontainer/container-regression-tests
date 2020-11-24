@@ -17,13 +17,13 @@ namespace Regression.Injected
         #region Implicit
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
         public virtual void ByValue_Implicit_WithValue(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestWithProvidedValue(ImplicitImportType, type,
+            => TestWithDefault(ImplicitImportType, type,
                 InjectionMember_Value(injected), injected, injected);
 
         #endregion
@@ -32,13 +32,13 @@ namespace Regression.Injected
         #region Required
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
         public virtual void ByValue_Required_WithValue(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestWithProvidedValue(RequiredImportType, type,
+            => TestWithDefault(RequiredImportType, type,
                 InjectionMember_Value(injected), injected, injected);
 
         #endregion
@@ -47,13 +47,13 @@ namespace Regression.Injected
         #region Optional
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
         public virtual void ByValue_Optional_WithValue(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestWithProvidedValue(OptionalImportType, type,
+            => TestWithDefault(OptionalImportType, type,
                 InjectionMember_Value(injected), injected, injected);
 
         #endregion

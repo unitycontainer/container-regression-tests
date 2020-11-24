@@ -14,8 +14,8 @@ namespace Regression.Implicit.Methods.WithDefault
         [InjectionMethod]
         public virtual void Method(int value = PatternBase.DefaultInt) => Value = value;
 
-        public override object Expected => PatternBase.DefaultInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultInt;
+        public override Type ImportType => typeof(int);
     }
 
     public class Implicit_Parameter_String_WithDefault : PatternBaseType
@@ -23,8 +23,8 @@ namespace Regression.Implicit.Methods.WithDefault
         [InjectionMethod]
         public virtual void Method(string value = PatternBase.DefaultString) => Value = value;
 
-        public override object Expected => PatternBase.DefaultString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultString;
+        public override Type ImportType => typeof(string);
     }
 
     public class Implicit_Derived_WithDefault : Implicit_Parameter_Int_WithDefault
@@ -38,7 +38,7 @@ namespace Regression.Implicit.Methods.WithDefault
         // BUG: See https://github.com/unitycontainer/container/issues/291
         public override object Expected => PatternBase.DefaultInt;
 #else
-        public override object Expected => _default;
+        public override object Default => _default;
 #endif
     }
 }
@@ -51,8 +51,8 @@ namespace Regression.Implicit.Methods.WithDefaultAttribute
         [InjectionMethod]
         public virtual void Method([DefaultValue(PatternBase.DefaultValueInt)] int value) => Value = value;
 
-        public override object Expected => PatternBase.DefaultValueInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultValueInt;
+        public override Type ImportType => typeof(int);
     }
 
     public class Implicit_String_WithDefaultAttribute : PatternBaseType
@@ -60,8 +60,8 @@ namespace Regression.Implicit.Methods.WithDefaultAttribute
         [InjectionMethod]
         public virtual void Method([DefaultValue(PatternBase.DefaultValueString)] string value) => Value = value;
 
-        public override object Expected => PatternBase.DefaultValueString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultValueString;
+        public override Type ImportType => typeof(string);
     }
 
     public class Implicit_Derived_WithDefaultAttribute : Implicit_Int_WithDefaultAttribute
@@ -75,9 +75,9 @@ namespace Regression.Implicit.Methods.WithDefaultAttribute
         // BUG: See https://github.com/unitycontainer/container/issues/291
         public override object Expected => PatternBase.DefaultInt;
 #else
-        public override object Expected => _default;
+        public override object Default => _default;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 }
 
@@ -93,9 +93,9 @@ namespace Regression.Implicit.Methods.WithDefaultAndAttribute
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => PatternBase.DefaultInt;
 #else
-        public override object Expected => PatternBase.DefaultValueInt;
+        public override object Default => PatternBase.DefaultValueInt;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
     public class Implicit_String_WithDefaultAndAttribute : PatternBaseType
@@ -107,9 +107,9 @@ namespace Regression.Implicit.Methods.WithDefaultAndAttribute
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => PatternBase.DefaultString;
 #else
-        public override object Expected => PatternBase.DefaultValueString;
+        public override object Default => PatternBase.DefaultValueString;
 #endif
-        public override Type Dependency => typeof(string);
+        public override Type ImportType => typeof(string);
     }
 
     public class Implicit_Derived_WithDefaultAndAttribute : Implicit_Int_WithDefaultAndAttribute
@@ -122,7 +122,7 @@ namespace Regression.Implicit.Methods.WithDefaultAndAttribute
         // BUG: See https://github.com/unitycontainer/container/issues/291
         public override object Expected => PatternBase.DefaultInt;
 #else
-        public override object Expected => _default;
+        public override object Default => _default;
 #endif
     }
 }

@@ -15,16 +15,16 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
     public class Required_Parameter_Int_WithDefault : PatternBaseType
     {
         public Required_Parameter_Int_WithDefault([Dependency] int value = PatternBase.DefaultInt) => Value = value;
-        public override object Expected => PatternBase.DefaultInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultInt;
+        public override Type ImportType => typeof(int);
     }
 
 
     public class Required_Parameter_String_WithDefault : PatternBaseType
     {
         public Required_Parameter_String_WithDefault([Dependency] string value = PatternBase.DefaultString) => Value = value;
-        public override object Expected => PatternBase.DefaultString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultString;
+        public override Type ImportType => typeof(string);
     }
 
 
@@ -33,8 +33,8 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
         private const int _default = 1111;
 
         public Required_Parameter_DerivedFromInt_WithDefault([Dependency] int value = _default) : base(value) { }
-        public override object Expected => _default;
-        public override Type Dependency => typeof(int);
+        public override object Default => _default;
+        public override Type ImportType => typeof(int);
     }
 
     #endregion
@@ -47,32 +47,32 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
     public class Required_Parameter_Int_WithDefaultAttribute : PatternBaseType
     {
         public Required_Parameter_Int_WithDefaultAttribute([Dependency][DefaultValue(PatternBase.DefaultValueInt)] int value) => Value = value;
-        public override object Expected => PatternBase.DefaultValueInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultValueInt;
+        public override Type ImportType => typeof(int);
     }
 
 
     public class Required_Parameter_WithDefaultAttribute_Int : PatternBaseType
     {
         public Required_Parameter_WithDefaultAttribute_Int([DefaultValue(PatternBase.DefaultValueInt)][Dependency] int value) => Value = value;
-        public override object Expected => PatternBase.DefaultValueInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultValueInt;
+        public override Type ImportType => typeof(int);
     }
 
 
     public class Required_Parameter_String_WithDefaultAttribute : PatternBaseType
     {
         public Required_Parameter_String_WithDefaultAttribute([Dependency][DefaultValue(PatternBase.DefaultValueString)] string value) => Value = value;
-        public override object Expected => PatternBase.DefaultValueString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultValueString;
+        public override Type ImportType => typeof(string);
     }
 
 
     public class Required_Parameter_WithDefaultAttribute_String : PatternBaseType
     {
         public Required_Parameter_WithDefaultAttribute_String([DefaultValue(PatternBase.DefaultValueString)][Dependency] string value) => Value = value;
-        public override object Expected => PatternBase.DefaultValueString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultValueString;
+        public override Type ImportType => typeof(string);
     }
 
 
@@ -81,8 +81,8 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
         private const int _default = 1111;
 
         public Required_Parameter_Derived_WithDefaultAttribute([Dependency][DefaultValue(_default)] int value) : base(value) { }
-        public override object Expected => _default;
-        public override Type Dependency => typeof(int);
+        public override object Default => _default;
+        public override Type ImportType => typeof(int);
     }
 
 #endif
@@ -100,9 +100,9 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => PatternBase.DefaultInt;
 #else
-        public override object Expected => PatternBase.DefaultValueInt;
+        public override object Default => PatternBase.DefaultValueInt;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
 
@@ -114,9 +114,9 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => PatternBase.DefaultInt;
 #else
-        public override object Expected => PatternBase.DefaultValueInt;
+        public override object Default => PatternBase.DefaultValueInt;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
 
@@ -128,9 +128,9 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => PatternBase.DefaultString;
 #else
-        public override object Expected => PatternBase.DefaultValueString;
+        public override object Default => PatternBase.DefaultValueString;
 #endif
-        public override Type Dependency => typeof(string);
+        public override Type ImportType => typeof(string);
     }
 
 
@@ -142,9 +142,9 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Expected => PatternBase.DefaultString;
 #else
-        public override object Expected => PatternBase.DefaultValueString;
+        public override object Default => PatternBase.DefaultValueString;
 #endif
-        public override Type Dependency => typeof(string);
+        public override Type ImportType => typeof(string);
     }
 
 
@@ -158,9 +158,9 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
 #if BEHAVIOR_V5
         public override object Expected => PatternBase.DefaultValueInt;
 #else
-        public override object Expected => _default;
+        public override object Default => _default;
 #endif
-        public override Type Dependency => typeof(int);
+        public override Type ImportType => typeof(int);
     }
 
     #endregion

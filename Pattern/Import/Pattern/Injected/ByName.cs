@@ -16,7 +16,7 @@ namespace Regression.Injected
         #region Implicit
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
         public virtual void ByName_Implicit_WithRequired(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -27,7 +27,7 @@ namespace Regression.Injected
 
 
         [DataTestMethod]
-        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
         public virtual void ByName_Implicit_WithOptional(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -43,7 +43,7 @@ namespace Regression.Injected
         #region Required
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
         public virtual void ByName_Required_WithRequired(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -54,7 +54,7 @@ namespace Regression.Injected
 
 
         [DataTestMethod]
-        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
         public virtual void ByName_Required_WithOptional(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -69,7 +69,7 @@ namespace Regression.Injected
         #region Optional
 
         [DataTestMethod]
-        [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
         public virtual void ByName_Optional_WithRequired(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
@@ -79,7 +79,7 @@ namespace Regression.Injected
                 InjectionMember_Required_ByName(type), registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
         public virtual void ByName_Optional_WithOptional(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,

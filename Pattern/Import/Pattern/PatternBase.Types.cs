@@ -13,9 +13,11 @@ namespace Regression
     {
         public virtual object Value { get; protected set; }
 
-        public virtual object Expected { get; }
+        public virtual object Default { get; }
+        public virtual object Injected { get; }
+        public virtual object Registered { get; }
 
-        public virtual Type Dependency => typeof(object);
+        public virtual Type ImportType => typeof(object);
     }
 
     public struct TestStruct

@@ -11,8 +11,8 @@ namespace Regression.Override.Properties.WithDefaultAttribute
 
         public override object Value { get => Property; }
 
-        public override object Expected => PatternBase.DefaultValueInt;
-        public override Type Dependency => typeof(int);
+        public override object Default => PatternBase.DefaultValueInt;
+        public override Type ImportType => typeof(int);
     }
 
     public class Implicit_String_WithDefaultAttribute : PatternBaseType
@@ -21,7 +21,7 @@ namespace Regression.Override.Properties.WithDefaultAttribute
 
         public override object Value { get => Property; }
 
-        public override object Expected => PatternBase.DefaultValueString;
-        public override Type Dependency => typeof(string);
+        public override object Default => PatternBase.DefaultValueString;
+        public override Type ImportType => typeof(string);
     }
 }

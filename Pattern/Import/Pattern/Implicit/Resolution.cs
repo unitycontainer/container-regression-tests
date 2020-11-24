@@ -11,6 +11,15 @@ namespace Regression.Implicit
     public abstract partial class Pattern
     {
         [DataTestMethod]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        public virtual void Resolving_Import(string test, Type type,
+                                                         object @default, object defaultAttr,
+                                                         object registered, object named,
+                                                         object injected, object overridden,
+                                                         bool isResolveble)
+            => TestRequiredImport(ImplicitImportType, type, registered);
+
+        [DataTestMethod]
         [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
         public virtual void BuiltIn_Interface(string test, Type type)
         {
