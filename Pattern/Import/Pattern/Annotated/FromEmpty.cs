@@ -68,7 +68,7 @@ namespace Regression.Annotated
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void Optional_FromEmpty(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -77,7 +77,7 @@ namespace Regression.Annotated
             => TestOptionalImport(OptionalImportType, type, registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void Optional_Named(string test, Type type,
                                                      object @default, object defaultAttr,
                                                      object registered, object named,

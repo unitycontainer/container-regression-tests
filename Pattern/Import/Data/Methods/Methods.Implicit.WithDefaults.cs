@@ -36,7 +36,7 @@ namespace Regression.Implicit.Methods.WithDefault
 
 #if BEHAVIOR_V5
         // BUG: See https://github.com/unitycontainer/container/issues/291
-        public override object Expected => PatternBase.DefaultInt;
+        public override object Default => PatternBase.DefaultInt;
 #else
         public override object Default => _default;
 #endif
@@ -73,7 +73,7 @@ namespace Regression.Implicit.Methods.WithDefaultAttribute
 
 #if BEHAVIOR_V5
         // BUG: See https://github.com/unitycontainer/container/issues/291
-        public override object Expected => PatternBase.DefaultInt;
+        public override object Default => PatternBase.DefaultInt;
 #else
         public override object Default => _default;
 #endif
@@ -91,7 +91,7 @@ namespace Regression.Implicit.Methods.WithDefaultAndAttribute
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => PatternBase.DefaultInt;
+        public override object Default => PatternBase.DefaultInt;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
@@ -105,7 +105,7 @@ namespace Regression.Implicit.Methods.WithDefaultAndAttribute
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => PatternBase.DefaultString;
+        public override object Default => PatternBase.DefaultString;
 #else
         public override object Default => PatternBase.DefaultValueString;
 #endif
@@ -120,7 +120,7 @@ namespace Regression.Implicit.Methods.WithDefaultAndAttribute
         public override void Method([DefaultValue(_default)] int value = PatternBase.DefaultValueInt) => base.Method(value);
 #if BEHAVIOR_V5
         // BUG: See https://github.com/unitycontainer/container/issues/291
-        public override object Expected => PatternBase.DefaultInt;
+        public override object Default => PatternBase.DefaultInt;
 #else
         public override object Default => _default;
 #endif

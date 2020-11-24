@@ -69,6 +69,7 @@
 	  <Compile Remove="Import\Tests\Fields\**" />
 	  <Compile Remove="Import\Pattern\Injected\ByResolver.cs" />
 	  <Compile Remove="Import\Pattern\Override\WithDefaultAttribute.cs" />
+	  <Compile Remove="Import\Pattern\Override\WithDefaults.cs" />
 	</ItemGroup>
 
 	<!-- v5 Exclusions -->

@@ -11,7 +11,7 @@ namespace Regression.Override
     public abstract partial class Pattern 
     {
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void Implicit_With_DependencyOverride(string test, Type type,
                                                              object @default, object defaultAttr,
                                                              object registered, object named,

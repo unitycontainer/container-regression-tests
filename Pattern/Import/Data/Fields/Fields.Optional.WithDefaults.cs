@@ -19,7 +19,7 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
 #if  BEHAVIOR_V5 // Unity v5 did not support default values for fields
-        public override object Expected => 0;
+        public override object Default => 0;
 #else
         public override object Default => PatternBase.DefaultInt;
 #endif
@@ -40,7 +40,7 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
 #if  BEHAVIOR_V4 || BEHAVIOR_V5 // Unity v4 and v5 did not support default values for fields
-        public override object Expected => null;
+        public override object Default => null;
 #else
         public override object Default => PatternBase.DefaultString;
 #endif
@@ -65,7 +65,7 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => 0;
+        public override object Default => 0;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
@@ -79,7 +79,7 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => 0;
+        public override object Default => 0;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
@@ -98,7 +98,7 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => null;
+        public override object Default => null;
 #else
         public override object Default => PatternBase.DefaultValueString;
 #endif
@@ -112,7 +112,7 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => null;
+        public override object Default => null;
 #else
         public override object Default => PatternBase.DefaultValueString;
 #endif
@@ -133,7 +133,7 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
 #if BEHAVIOR_V5   // Unity v5 did not support default value for fields
-        public override object Expected => 0;
+        public override object Default => 0;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
@@ -147,7 +147,7 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
 #if BEHAVIOR_V5   // Unity v5 did not support default value for fields
-        public override object Expected => 0;
+        public override object Default => 0;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
@@ -167,7 +167,7 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
 #if BEHAVIOR_V4 ||  BEHAVIOR_V5 // Unity v4 and v5 did not support default values for fields
-        public override object Expected => null;
+        public override object Default => null;
 #else
         public override object Default => PatternBase.DefaultValueString;
 #endif
@@ -182,7 +182,7 @@ namespace Regression.Annotated.Fields.Optional.WithDefaults
 
 
 #if BEHAVIOR_V4 ||  BEHAVIOR_V5 // Unity v4 and v5 did not support default values for fields
-        public override object Expected => null;
+        public override object Default => null;
 #else
         public override object Default => PatternBase.DefaultValueString;
 #endif

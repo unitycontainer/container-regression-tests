@@ -46,7 +46,7 @@ namespace Regression.Injected
 
 #if !UNITY_V4 && !BEHAVIOR_V5
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void ByInjectionParameter_Implicit_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -74,7 +74,7 @@ namespace Regression.Injected
         #region Required
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void ByInjectionParameter_Required_WithValue(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -99,7 +99,7 @@ namespace Regression.Injected
 #if !UNITY_V4 && !BEHAVIOR_V5
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void ByInjectionParameter_Required_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -127,7 +127,7 @@ namespace Regression.Injected
         #region Optional
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void ByInjectionParameter_Optional_WithValue(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -151,7 +151,7 @@ namespace Regression.Injected
 
 #if !UNITY_V4 && !BEHAVIOR_V5
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void ByInjectionParameter_Optional_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -162,7 +162,7 @@ namespace Regression.Injected
                 injected, injected);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void ByInjectionParameter_Optional_WithResolverFactory(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,

@@ -29,7 +29,7 @@ namespace Regression.Annotated
             => TestRequiredImport(_requiredTwice, type, registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void Optional_Inherited(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -38,7 +38,7 @@ namespace Regression.Annotated
             => TestOptionalImport(_optionalInherited, type, registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void Optional_Inherited_Twice(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,

@@ -121,7 +121,7 @@ namespace Regression.Annotated.Properties.Required.WithDefaults
     public class Dummy_Success_Type : PatternBaseType
     {
         public override object Value { get => null; }
-        public override object Expected => null;
+        public override object Default => null;
     }
 
 #endif

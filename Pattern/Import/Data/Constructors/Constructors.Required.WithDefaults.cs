@@ -98,7 +98,7 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => PatternBase.DefaultInt;
+        public override object Default => PatternBase.DefaultInt;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
@@ -112,7 +112,7 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => PatternBase.DefaultInt;
+        public override object Default => PatternBase.DefaultInt;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
@@ -126,7 +126,7 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => PatternBase.DefaultString;
+        public override object Default => PatternBase.DefaultString;
 #else
         public override object Default => PatternBase.DefaultValueString;
 #endif
@@ -140,7 +140,7 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => PatternBase.DefaultString;
+        public override object Default => PatternBase.DefaultString;
 #else
         public override object Default => PatternBase.DefaultValueString;
 #endif
@@ -156,7 +156,7 @@ namespace Regression.Annotated.Constructors.Required.WithDefaults
             : base(value) { }
 
 #if BEHAVIOR_V5
-        public override object Expected => PatternBase.DefaultValueInt;
+        public override object Default => PatternBase.DefaultValueInt;
 #else
         public override object Default => _default;
 #endif

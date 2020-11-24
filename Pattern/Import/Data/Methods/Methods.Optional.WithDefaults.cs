@@ -41,7 +41,7 @@ namespace Regression.Annotated.Methods.Optional.WithDefaults
         public virtual void Method([OptionalDependency] string value = PatternBase.DefaultString) => Value = value;
 
 #if  BEHAVIOR_V4 // Unity v4 did not support default values
-        public override object Expected => null;
+        public override object Default => null;
 #else
         public override object Default => PatternBase.DefaultString;
 #endif
@@ -61,7 +61,7 @@ namespace Regression.Annotated.Methods.Optional.WithDefaults
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => 0;
+        public override object Default => 0;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
@@ -74,7 +74,7 @@ namespace Regression.Annotated.Methods.Optional.WithDefaults
         public void Method([DefaultValue(PatternBase.DefaultValueInt)][OptionalDependency] int value) => Value = value;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => 0;
+        public override object Default => 0;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
@@ -89,7 +89,7 @@ namespace Regression.Annotated.Methods.Optional.WithDefaults
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => 0;
+        public override object Default => 0;
 #else
         public override object Default => _default;
 #endif
@@ -103,7 +103,7 @@ namespace Regression.Annotated.Methods.Optional.WithDefaults
         public void Method([OptionalDependency][DefaultValue(PatternBase.DefaultValueString)] string value) => Value = value;
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => null;
+        public override object Default => null;
 #else
         public override object Default => PatternBase.DefaultValueString;
 #endif
@@ -116,7 +116,7 @@ namespace Regression.Annotated.Methods.Optional.WithDefaults
         public void Method([DefaultValue(PatternBase.DefaultValueString)][OptionalDependency] string value) => Value = value;
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => null;
+        public override object Default => null;
 #else
         public override object Default => PatternBase.DefaultValueString;
 #endif
@@ -137,7 +137,7 @@ namespace Regression.Annotated.Methods.Optional.WithDefaults
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => PatternBase.DefaultInt;
+        public override object Default => PatternBase.DefaultInt;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
@@ -151,7 +151,7 @@ namespace Regression.Annotated.Methods.Optional.WithDefaults
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Expected => PatternBase.DefaultInt;
+        public override object Default => PatternBase.DefaultInt;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
@@ -167,7 +167,7 @@ namespace Regression.Annotated.Methods.Optional.WithDefaults
         { base.Method(value); }
 
 #if BEHAVIOR_V5
-        public override object Expected => PatternBase.DefaultInt;
+        public override object Default => PatternBase.DefaultInt;
 #else
         public override object Default => _default;
 #endif
@@ -181,9 +181,9 @@ namespace Regression.Annotated.Methods.Optional.WithDefaults
         public void Method([OptionalDependency][DefaultValue(PatternBase.DefaultValueString)] string value = PatternBase.DefaultString) => Value = value;
 
 #if BEHAVIOR_V4     // Unity v4 did not support default values
-        public override object Expected => null;
+        public override object Default => null;
 #elif BEHAVIOR_V5   // Unity v5 did not support DefaultValueAttribute
-        public override object Expected => PatternBase.DefaultString;
+        public override object Default => PatternBase.DefaultString;
 #else
         public override object Default => PatternBase.DefaultValueString;
 #endif
@@ -196,9 +196,9 @@ namespace Regression.Annotated.Methods.Optional.WithDefaults
         public void Method([DefaultValue(PatternBase.DefaultValueString)][OptionalDependency] string value = PatternBase.DefaultString) => Value = value;
 
 #if BEHAVIOR_V4     // Unity v4 did not support default values
-        public override object Expected => null;
+        public override object Default => null;
 #elif BEHAVIOR_V5   // Unity v5 did not support DefaultValueAttribute
-        public override object Expected => PatternBase.DefaultString;
+        public override object Default => PatternBase.DefaultString;
 #else
         public override object Default => PatternBase.DefaultValueString;
 #endif

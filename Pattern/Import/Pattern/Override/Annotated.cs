@@ -12,44 +12,6 @@ namespace Regression.Override
     public abstract partial class Pattern 
     {
         [DataTestMethod]
-        [DynamicData(nameof(Implicit_WithDefaultValueAttribute_Data))]
-        public virtual void Implicit_With_DefaultValueAttribute(string test, Type type)
-        {
-            var import = GetImportType(type);
-            var value = GetOverrideValue(import);
-            var @override = Override_MemberOverride_WithType(import, DependencyName, value);
-
-            // Act
-            var instance = Container.Resolve(type, null, @override) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, type);
-            Assert.IsInstanceOfType(instance.Value, instance.ImportType);
-            Assert.AreEqual(import, instance.ImportType);
-            Assert.AreEqual(value, instance.Value);
-        }
-
-        [DataTestMethod]
-        [DynamicData(nameof(Annotated_WithDefaultValueAttribute_Data))]
-        public virtual void Annotated_With_DefaultValueAttribute(string test, Type type)
-        {
-            var import = GetImportType(type);
-            var value = GetOverrideValue(import);
-            var @override = Override_MemberOverride_WithType(import, DependencyName, value);
-
-            // Act
-            var instance = Container.Resolve(type, null, @override) as PatternBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, type);
-            Assert.IsInstanceOfType(instance.Value, instance.ImportType);
-            Assert.AreEqual(import, instance.ImportType);
-            Assert.AreEqual(value, instance.Value);
-        }
-
-        [DataTestMethod]
         [DynamicData(nameof(Annotated_Required_Data), typeof(PatternBase))]
         public virtual void Annotated_With_Required(string test, Type type)
         {

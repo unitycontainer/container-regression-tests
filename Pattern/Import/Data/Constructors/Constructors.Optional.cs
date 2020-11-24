@@ -59,6 +59,7 @@ namespace Regression.Annotated.Constructors.Optional
 
     #region Test Data
 
+#if !BEHAVIOR_V4 // Unity v4 did not support value optionals
 
     public class Optional_Int : PatternBaseType
     {
@@ -69,6 +70,7 @@ namespace Regression.Annotated.Constructors.Optional
         public override object Registered => PatternBase.RegisteredInt;
         public override Type ImportType => typeof(int);
     }
+#endif
 
     public class Optional_String : PatternBaseType
     {

@@ -45,7 +45,7 @@ namespace Regression.Injected
 
 #if !UNITY_V4
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void ByResolvedParameter_Implicit_WithContractName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -94,7 +94,7 @@ namespace Regression.Injected
 
 #if !UNITY_V4
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void ByResolvedParameter_Required_WithContractName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -121,7 +121,7 @@ namespace Regression.Injected
 
 #if !UNITY_V4
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void ByResolvedParameter_Optional_Default(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -132,7 +132,7 @@ namespace Regression.Injected
 #endif
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void ByResolvedParameter_Optional_WithContractType(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -143,7 +143,7 @@ namespace Regression.Injected
 
 #if !UNITY_V4
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void ByResolvedParameter_Optional_WithContractName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -154,7 +154,7 @@ namespace Regression.Injected
 #endif
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Optional_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void ByResolvedParameter_Optional_WithContract(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,

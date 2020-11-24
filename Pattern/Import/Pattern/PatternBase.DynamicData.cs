@@ -141,7 +141,7 @@ namespace Regression
             }
         }
 
-        public static IEnumerable<object[]> Import_Optional_Data
+        public static IEnumerable<object[]> Import_Compatibility_Data
         {
             get
             {

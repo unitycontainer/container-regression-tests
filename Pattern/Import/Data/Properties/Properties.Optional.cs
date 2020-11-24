@@ -44,6 +44,7 @@ namespace Regression.Annotated.Properties.Optional
 
     #region Test Data
 
+#if !BEHAVIOR_V4 // Unity v4 did not support value optionals
     public class Optional_Int : PatternBaseType
     {
         [OptionalDependency] public int Property { get; set; }
@@ -53,8 +54,10 @@ namespace Regression.Annotated.Properties.Optional
         public override object Default => 0;
         public override object Injected => PatternBase.InjectedInt;
         public override object Registered => PatternBase.RegisteredInt;
+        public override object Override => PatternBase.OverriddenInt;
         public override Type ImportType => typeof(int);
     }
+#endif
 
     public class Optional_String : PatternBaseType
     {
@@ -65,6 +68,7 @@ namespace Regression.Annotated.Properties.Optional
         public override object Default => null;
         public override object Injected => PatternBase.InjectedString;
         public override object Registered => PatternBase.RegisteredString;
+        public override object Override => PatternBase.OverriddenString;
         public override Type ImportType => typeof(string);
     }
 
@@ -77,6 +81,7 @@ namespace Regression.Annotated.Properties.Optional
         public override object Default => null;
         public override object Injected => PatternBase.InjectedUnresolvable;
         public override object Registered => PatternBase.RegisteredUnresolvable;
+        public override object Override => PatternBase.OverriddenUnresolvable;
         public override Type ImportType => typeof(Unresolvable);
     }
 

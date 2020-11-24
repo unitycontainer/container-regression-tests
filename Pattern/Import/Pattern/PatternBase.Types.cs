@@ -16,7 +16,7 @@ namespace Regression
         public virtual object Default { get; }
         public virtual object Injected { get; }
         public virtual object Registered { get; }
-
+        public virtual object Override { get; }
         public virtual Type ImportType => typeof(object);
     }
 
