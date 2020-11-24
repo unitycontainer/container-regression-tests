@@ -26,6 +26,7 @@ namespace Regression
 
         public const string Name = "name";
 
+        protected const string TDependency = "TDependency";
         protected static Type ImplicitImportType;
         protected static Type RequiredImportType;
         protected static Type OptionalImportType;

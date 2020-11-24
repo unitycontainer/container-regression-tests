@@ -29,7 +29,7 @@ namespace Regression.Injected
                                                           object injected, object overridden,
                                                           bool isResolveble)
             => TestOptionalGeneric(ImplicitImportType, type,
-                InjectionMember_Value(new OptionalGenericParameter("TDependency")), registered);
+                InjectionMember_Value(new OptionalGenericParameter(TDependency)), registered);
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
@@ -39,7 +39,7 @@ namespace Regression.Injected
                                                           object injected, object overridden,
                                                           bool isResolveble)
             => TestOptionalGeneric(ImplicitImportType, type,
-                InjectionMember_Value(new OptionalGenericParameter("TDependency", Name)), named);
+                InjectionMember_Value(new OptionalGenericParameter(TDependency, Name)), named);
 
         #endregion
 
@@ -54,7 +54,7 @@ namespace Regression.Injected
                                                           object injected, object overridden,
                                                           bool isResolveble)
             => TestOptionalGeneric(RequiredImportType, type,
-                InjectionMember_Value(new OptionalGenericParameter("TDependency")), registered);
+                InjectionMember_Value(new OptionalGenericParameter(TDependency)), registered);
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
@@ -64,7 +64,7 @@ namespace Regression.Injected
                                                           object injected, object overridden,
                                                           bool isResolveble)
             => TestOptionalGeneric(RequiredImportType, type,
-                InjectionMember_Value(new OptionalGenericParameter("TDependency", Name)), named);
+                InjectionMember_Value(new OptionalGenericParameter(TDependency, Name)), named);
 
         #endregion
 
@@ -79,7 +79,7 @@ namespace Regression.Injected
                                                           object injected, object overridden,
                                                           bool isResolveble)
             => TestOptionalGeneric(OptionalImportType, type,
-                InjectionMember_Value(new OptionalGenericParameter("TDependency")), registered);
+                InjectionMember_Value(new OptionalGenericParameter(TDependency)), registered);
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
@@ -89,7 +89,7 @@ namespace Regression.Injected
                                                           object injected, object overridden,
                                                           bool isResolveble)
             => TestOptionalGeneric(OptionalImportType, type,
-                InjectionMember_Value(new OptionalGenericParameter("TDependency", Name)), named);
+                InjectionMember_Value(new OptionalGenericParameter(TDependency, Name)), named);
 
         #endregion
     }

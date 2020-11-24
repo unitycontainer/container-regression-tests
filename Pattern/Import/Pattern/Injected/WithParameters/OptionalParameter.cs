@@ -21,6 +21,7 @@ namespace Regression.Injected
     {
         #region Implicit
 
+#if !UNITY_V4
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
         public virtual void ByOptionalParameter_Implicit_Default(string test, Type type,
@@ -30,6 +31,7 @@ namespace Regression.Injected
                                                           bool isResolveble)
             => TestOptionalImport(ImplicitImportType, type,
                 InjectionMember_Value(new OptionalParameter()), registered);
+#endif
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
@@ -41,6 +43,7 @@ namespace Regression.Injected
             => TestOptionalImport(ImplicitImportType, type,
                 InjectionMember_Value(new OptionalParameter(type)), registered);
 
+#if !UNITY_V4
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
         public virtual void ByOptionalParameter_Implicit_WithContractName(string test, Type type,
@@ -50,6 +53,7 @@ namespace Regression.Injected
                                                           bool isResolveble)
             => TestOptionalImport(ImplicitImportType, type,
                 InjectionMember_Value(new OptionalParameter(Name)), named);
+#endif
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
@@ -66,6 +70,7 @@ namespace Regression.Injected
 
         #region Required
 
+#if !UNITY_V4
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
         public virtual void ByOptionalParameter_Required_Default(string test, Type type,
@@ -75,6 +80,7 @@ namespace Regression.Injected
                                                           bool isResolveble)
             => TestOptionalImport(RequiredImportType, type,
                 InjectionMember_Value(new OptionalParameter()), registered);
+#endif
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
@@ -86,6 +92,7 @@ namespace Regression.Injected
             => TestOptionalImport(RequiredImportType, type,
                 InjectionMember_Value(new OptionalParameter(type)), registered);
 
+#if !UNITY_V4
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
         public virtual void ByOptionalParameter_Required_WithContractName(string test, Type type,
@@ -95,6 +102,7 @@ namespace Regression.Injected
                                                           bool isResolveble)
             => TestOptionalImport(RequiredImportType, type,
                 InjectionMember_Value(new OptionalParameter(Name)), named);
+#endif
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
@@ -111,6 +119,7 @@ namespace Regression.Injected
 
         #region Optional
 
+#if !UNITY_V4
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
         public virtual void ByOptionalParameter_Optional_Default(string test, Type type,
@@ -120,6 +129,7 @@ namespace Regression.Injected
                                                           bool isResolveble)
             => TestOptionalImport(OptionalImportType, type,
                 InjectionMember_Value(new OptionalParameter()), registered);
+#endif
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
@@ -131,6 +141,7 @@ namespace Regression.Injected
             => TestOptionalImport(OptionalImportType, type,
                 InjectionMember_Value(new OptionalParameter(type)), registered);
 
+#if !UNITY_V4
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
         public virtual void ByOptionalParameter_Optional_WithContractName(string test, Type type,
@@ -140,6 +151,7 @@ namespace Regression.Injected
                                                           bool isResolveble)
             => TestOptionalImport(OptionalImportType, type,
                 InjectionMember_Value(new OptionalParameter(Name)), named);
+#endif
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
@@ -150,6 +162,7 @@ namespace Regression.Injected
                                                           bool isResolveble)
             => TestOptionalImport(OptionalImportType, type,
                 InjectionMember_Value(new OptionalParameter(type, Name)), named);
+
         #endregion
     }
 }

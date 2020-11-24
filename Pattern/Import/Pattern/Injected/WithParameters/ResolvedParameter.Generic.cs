@@ -28,7 +28,7 @@ namespace Regression.Injected
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestRequiredImport(ImplicitImportType, type,
+            => TestRequiredGeneric(ImplicitImportType, type,
                 InjectionMember_Value(new GenericParameter("TDependency")), registered);
 
         [DataTestMethod]
@@ -38,7 +38,7 @@ namespace Regression.Injected
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestRequiredImport(ImplicitImportType, type,
+            => TestRequiredGeneric(ImplicitImportType, type,
                 InjectionMember_Value(new GenericParameter("TDependency", Name)), named);
 
         #endregion
@@ -53,7 +53,7 @@ namespace Regression.Injected
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestRequiredImport(RequiredImportType, type,
+            => TestRequiredGeneric(RequiredImportType, type,
                 InjectionMember_Value(new GenericParameter("TDependency")), registered);
 
         [DataTestMethod]
@@ -63,7 +63,7 @@ namespace Regression.Injected
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestRequiredImport(RequiredImportType, type,
+            => TestRequiredGeneric(RequiredImportType, type,
                 InjectionMember_Value(new GenericParameter("TDependency", Name)), named);
 
         #endregion
@@ -78,7 +78,7 @@ namespace Regression.Injected
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestRequiredImport(OptionalImportType, type,
+            => TestRequiredGeneric(OptionalImportType, type,
                 InjectionMember_Value(new GenericParameter("TDependency")), registered);
 
         [DataTestMethod]
@@ -88,7 +88,7 @@ namespace Regression.Injected
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
-            => TestRequiredImport(OptionalImportType, type,
+            => TestRequiredGeneric(OptionalImportType, type,
                 InjectionMember_Value(new GenericParameter("TDependency", Name)), named);
 
         #endregion

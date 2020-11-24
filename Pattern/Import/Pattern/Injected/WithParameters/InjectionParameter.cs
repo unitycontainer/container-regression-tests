@@ -31,6 +31,7 @@ namespace Regression.Injected
             => TestWithProvidedValue(ImplicitImportType, type,
                 InjectionMember_Value(new InjectionParameter(injected)), injected, injected);
 
+#if !BEHAVIOR_V4 && !BEHAVIOR_V5
         [DataTestMethod]
         [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
         public virtual void ByInjectionParameter_Implicit_WithParameter(string test, Type type,
@@ -38,9 +39,12 @@ namespace Regression.Injected
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           bool isResolveble)
+            // Legacy Unity did not support nesting with more than one level
             => TestRequiredImport(ImplicitImportType, type,
                 InjectionMember_Value(new InjectionParameter(type, new ResolvedParameter(type))), registered);
+#endif
 
+#if !UNITY_V4 && !BEHAVIOR_V5
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
         public virtual void ByInjectionParameter_Implicit_WithResolver(string test, Type type,
@@ -62,6 +66,7 @@ namespace Regression.Injected
             => TestWithProvidedValue(ImplicitImportType, type,
                 InjectionMember_Value(new InjectionParameter(type, new ValidatingResolverFactory(injected))), 
                 injected, injected);
+#endif
 
         #endregion
 
@@ -79,6 +84,7 @@ namespace Regression.Injected
                 InjectionMember_Value(new InjectionParameter(injected)),
                 injected, injected);
 
+#if !BEHAVIOR_V4 && !BEHAVIOR_V5
         [DataTestMethod]
         [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
         public virtual void ByInjectionParameter_Required_WithParameter(string test, Type type,
@@ -88,6 +94,9 @@ namespace Regression.Injected
                                                           bool isResolveble)
             => TestRequiredImport(RequiredImportType, type,
                 InjectionMember_Value(new InjectionParameter(type, new ResolvedParameter(type))), registered);
+#endif
+
+#if !UNITY_V4 && !BEHAVIOR_V5
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
@@ -110,6 +119,7 @@ namespace Regression.Injected
             => TestWithProvidedValue(RequiredImportType, type,
                 InjectionMember_Value(new InjectionParameter(type, new ValidatingResolverFactory(injected))),
                 injected, injected);
+#endif
 
         #endregion
 
@@ -127,6 +137,7 @@ namespace Regression.Injected
                 InjectionMember_Value(new InjectionParameter(injected)),
                 injected, injected);
 
+#if !BEHAVIOR_V4 && !BEHAVIOR_V5
         [DataTestMethod]
         [DynamicData(nameof(RequiredImport_Data), typeof(PatternBase))]
         public virtual void ByInjectionParameter_Optional_WithParameter(string test, Type type,
@@ -136,7 +147,9 @@ namespace Regression.Injected
                                                           bool isResolveble)
             => TestRequiredImport(OptionalImportType, type,
                 InjectionMember_Value(new InjectionParameter(type, new ResolvedParameter(type))), registered);
+#endif
 
+#if !UNITY_V4 && !BEHAVIOR_V5
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
         public virtual void ByInjectionParameter_Optional_WithResolver(string test, Type type,
@@ -158,6 +171,7 @@ namespace Regression.Injected
             => TestWithProvidedValue(OptionalImportType, type,
                 InjectionMember_Value(new InjectionParameter(type, new ValidatingResolverFactory(injected))),
                 injected, injected);
+#endif
 
         #endregion
     }
