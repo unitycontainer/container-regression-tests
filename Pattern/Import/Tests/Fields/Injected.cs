@@ -4,7 +4,7 @@ using Regression;
 namespace Fields
 {
     [TestClass]
-    public partial class Injected : InjectedPattern
+    public partial class Injected : Regression.Injected.Pattern
     {
         #region Scaffolding
 

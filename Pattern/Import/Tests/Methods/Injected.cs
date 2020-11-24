@@ -9,7 +9,7 @@ using Unity;
 namespace Methods
 {
     [TestClass]
-    public partial class Injected : InjectedPattern
+    public partial class Injected : Regression.Injected.Pattern
     {
         #region Scaffolding
 

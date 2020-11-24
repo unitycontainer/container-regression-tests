@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 using Unity.Injection;
+using Unity.Resolution;
 #endif
 
 namespace Regression
@@ -87,7 +89,6 @@ namespace Regression
             ImplicitImportType = GetType("Implicit", "BaselineTestType`1");
             RequiredImportType = GetType("Annotated", "Required.BaselineTestType`1");
             OptionalImportType = GetType("Annotated", "Optional.BaselineTestType`1");
-
         }
 
         public virtual void TestInitialize() => Container = new UnityContainer();
@@ -142,6 +143,24 @@ namespace Regression
                            .Where(t => (t.Namespace?.Equals(@namespace) ?? false));
         }
 
+        protected static IEnumerable<Type> FromNamespaces(string prefix, string @namespace)
+        {
+            var regex = $"({_prefix}).*({prefix}).*({_root}).*({@namespace})";
+            return Assembly.GetExecutingAssembly()
+                           .DefinedTypes
+                           .Where(t => t.Namespace is not null)
+                           .Where(t => Regex.IsMatch(t.Namespace, regex));
+        }
+
+        protected static IEnumerable<Type> FromNamespaces(string @namespace)
+        {
+            var regex = $"({_prefix}).*({_root}).*({@namespace})";
+            return Assembly.GetExecutingAssembly()
+                           .DefinedTypes
+                           .Where(t => t.Namespace is not null)
+                           .Where(t => Regex.IsMatch(t.Namespace, regex));
+        }
+
         protected static Type GetType(string name)
         {
             return Type.GetType($"{_data}.{name}") ??
@@ -157,22 +176,50 @@ namespace Regression
         #endregion
 
 
+        #region Overrides
+
+        private static IDictionary<Type, object> _overrides = new Dictionary<Type, object>
+        {
+            { typeof(int),          OverriddenInt },
+            { typeof(string),       OverriddenString },
+            { typeof(Unresolvable), OverriddenUnresolvable },
+        };
+
+        protected virtual object GetOverrideValue(Type type) 
+            => _overrides[type];
+
+        protected virtual Type GetImportType(Type type) => type;
+
+        #endregion
+
+
         #region Injection Support
 
         private static void LoadInjectionFuncs(Type support)
         { 
-            InjectionMember_Required_ByName  = (Func<Type, InjectionMember>)support.GetMethod("GetInjectionMember_ByName_Required")
-                                                                             .CreateDelegate(typeof(Func<Type, InjectionMember>));
-            InjectionMember_Optional_ByName = (Func<Type, InjectionMember>)support.GetMethod("GetInjectionMember_ByName_Optional")
-                                                                            .CreateDelegate(typeof(Func<Type, InjectionMember>));
+            InjectionMember_Required_ByName  = (Func<Type, InjectionMember>)support
+                .GetMethod("GetInjectionMember_ByName_Required").CreateDelegate(typeof(Func<Type, InjectionMember>));
 
-            InjectionMember_Required_ByType = (Func<Type, InjectionMember>)support.GetMethod("GetInjectionMember_ByType_Required")
-                                                                                  .CreateDelegate(typeof(Func<Type, InjectionMember>));
-            InjectionMember_Optional_ByType = (Func<Type, InjectionMember>)support.GetMethod("GetInjectionMember_ByType_Optional")
-                                                                                  .CreateDelegate(typeof(Func<Type, InjectionMember>));
+            InjectionMember_Optional_ByName = (Func<Type, InjectionMember>)support
+                .GetMethod("GetInjectionMember_ByName_Optional").CreateDelegate(typeof(Func<Type, InjectionMember>));
 
-            InjectionMember_Value = (Func<object, InjectionMember>)support.GetMethod("GetInjectionValue")
-                                                                          .CreateDelegate(typeof(Func<object, InjectionMember>));
+            InjectionMember_Required_ByType = (Func<Type, InjectionMember>)support
+                .GetMethod("GetInjectionMember_ByType_Required").CreateDelegate(typeof(Func<Type, InjectionMember>));
+
+            InjectionMember_Optional_ByType = (Func<Type, InjectionMember>)support
+                .GetMethod("GetInjectionMember_ByType_Optional").CreateDelegate(typeof(Func<Type, InjectionMember>));
+
+            InjectionMember_Value = (Func<object, InjectionMember>)support
+                .GetMethod("GetInjectionValue").CreateDelegate(typeof(Func<object, InjectionMember>));
+
+            Override_MemberOverride = (Func<string, object, ResolverOverride>)support
+                .GetMethod("GetMemberOverride").CreateDelegate(typeof(Func<string, object, ResolverOverride>));
+            
+            Override_MemberOverride_WithType = (Func<Type, string, object, ResolverOverride>)support
+                .GetMethod("GetMemberOverrideWithType").CreateDelegate(typeof(Func<Type, string, object, ResolverOverride>));
+
+            Override_MemberOverride_OnType = (Func<Type, Type, string, object, ResolverOverride>)support
+                .GetMethod("GetMemberOverrideOnType").CreateDelegate(typeof(Func<Type, Type, string, object, ResolverOverride>));
         }
 
         protected static Func<Type, InjectionMember> InjectionMember_Required_ByName;
@@ -182,6 +229,10 @@ namespace Regression
         protected static Func<Type, InjectionMember> InjectionMember_Optional_ByType;
         
         protected static Func<object, InjectionMember> InjectionMember_Value;
+
+        protected static Func<string, object, ResolverOverride>       Override_MemberOverride;
+        protected static Func<Type, string, object, ResolverOverride> Override_MemberOverride_WithType;
+        protected static Func<Type, Type, string, object, ResolverOverride> Override_MemberOverride_OnType;
 
         #endregion
     }

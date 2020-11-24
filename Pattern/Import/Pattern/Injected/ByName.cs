@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Regression
+namespace Regression.Injected
 {
     /// <summary>
     /// Tests injecting dependencies by member name
@@ -11,7 +11,7 @@ namespace Regression
     ///                                new InjectionField("Field"), 
     ///                                new InjectionProperty("Property"));
     /// </example>
-    public abstract partial class InjectedPattern
+    public abstract partial class Pattern
     {
         #region Implicit
 

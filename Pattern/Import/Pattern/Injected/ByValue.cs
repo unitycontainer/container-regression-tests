@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Regression
+namespace Regression.Injected
 {
     /// <summary>
     /// Tests injecting dependencies by value
@@ -12,7 +12,7 @@ namespace Regression
     ///                                new InjectionField("Field", 15), 
     ///                                new InjectionProperty("Property", 15));
     /// </example>
-    public abstract partial class InjectedPattern
+    public abstract partial class Pattern
     {
         #region Implicit
 
@@ -23,7 +23,7 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestWithDefaultValue(ImplicitImportType, type,
+            => TestWithProvidedValue(ImplicitImportType, type,
                 InjectionMember_Value(injected), injected, injected);
 
         #endregion
@@ -38,7 +38,7 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestWithDefaultValue(RequiredImportType, type,
+            => TestWithProvidedValue(RequiredImportType, type,
                 InjectionMember_Value(injected), injected, injected);
 
         #endregion
@@ -53,7 +53,7 @@ namespace Regression
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble) 
-            => TestWithDefaultValue(OptionalImportType, type,
+            => TestWithProvidedValue(OptionalImportType, type,
                 InjectionMember_Value(injected), injected, injected);
 
         #endregion

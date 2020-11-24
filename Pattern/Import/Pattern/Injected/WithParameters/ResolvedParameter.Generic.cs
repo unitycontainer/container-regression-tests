@@ -6,7 +6,7 @@ using Microsoft.Practices.Unity;
 using Unity.Injection;
 #endif
 
-namespace Regression
+namespace Regression.Injected
 {
     /// <summary>
     /// Tests injecting dependencies with InjectionParameter
@@ -17,7 +17,7 @@ namespace Regression
     ///                                new InjectionField("Field", new GenericParameter(...)), 
     ///                                new InjectionProperty("Property", new GenericParameter(...)));
     /// </example>
-    public abstract partial class InjectedPattern
+    public abstract partial class Pattern
     {
         #region Implicit
 
@@ -33,7 +33,7 @@ namespace Regression
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
-        public virtual void ByGenericParameter_Implicit_WithName(string test, Type type,
+        public virtual void ByGenericParameter_Implicit_WithContractName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
@@ -58,7 +58,7 @@ namespace Regression
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
-        public virtual void ByGenericParameter_Required_WithName(string test, Type type,
+        public virtual void ByGenericParameter_Required_WithContractName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,
@@ -83,7 +83,7 @@ namespace Regression
 
         [DataTestMethod]
         [DynamicData(nameof(OptionalImport_Data), typeof(PatternBase))]
-        public virtual void ByGenericParameter_Optional_WithName(string test, Type type,
+        public virtual void ByGenericParameter_Optional_WithContractName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
                                                           object injected, object overridden,

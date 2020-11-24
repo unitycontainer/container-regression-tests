@@ -1,10 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-#if UNITY_V4
-using Microsoft.Practices.Unity;
-#else
-using Unity;
-#endif
 
 
 namespace Regression.Implicit.Constructors.WithDefault
@@ -63,7 +58,6 @@ namespace Regression.Implicit.Constructors.WithDefaultAttribute
             : base(value) { }
 
         public override object Expected => _default;
-        public override Type Dependency => typeof(int);
     }
 }
 

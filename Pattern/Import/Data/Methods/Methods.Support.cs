@@ -3,13 +3,14 @@
 using Microsoft.Practices.Unity;
 #else
 using Unity.Injection;
+using Unity.Resolution;
 #endif
 
 namespace Methods
 {
     public static class Support
     {
-        private const string MethodName = "Method";
+        public const string MethodName = "Method";
 
         #region By Name
 
@@ -44,6 +45,20 @@ namespace Methods
 
         public static InjectionMember GetInjectionValue(object argument)
             => new InjectionMethod(MethodName, argument);
+
+        #endregion
+
+
+        #region Override
+
+        public static ResolverOverride GetMemberOverride(string name, object value)
+            => new ParameterOverride(name, value);
+
+        public static ResolverOverride GetMemberOverrideWithType(Type type, string name, object value)
+            => new ParameterOverride(type, name, value);
+
+        public static ResolverOverride GetMemberOverrideOnType(Type target, Type type, string name, object value)
+            => new ParameterOverride(type, name, value).OnType(target);
 
         #endregion
     }

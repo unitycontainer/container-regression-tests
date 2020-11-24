@@ -68,12 +68,14 @@
 	  <Compile Remove="Import\Data\Fields\**" />
 	  <Compile Remove="Import\Tests\Fields\**" />
 	  <Compile Remove="Import\Pattern\Injected\ByResolver.cs" />
+	  <Compile Remove="Import\Pattern\Override\WithDefaultAttribute.cs" />
 	</ItemGroup>
 
 	<!-- v5 Exclusions -->
 
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net46'))">
-		<Compile Remove="Import\Pattern\Injected\ByResolver.cs" />
+	  <Compile Remove="Import\Pattern\Injected\ByResolver.cs" />
+	  <Compile Remove="Import\Pattern\Override\WithDefaultAttribute.cs" />
 	</ItemGroup>
 
 	

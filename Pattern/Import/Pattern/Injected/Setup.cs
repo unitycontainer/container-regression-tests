@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Regression
+namespace Regression.Injected
 {
-    public abstract partial class InjectedPattern : PatternBase
+    public abstract partial class Pattern : PatternBase
     {
 
 

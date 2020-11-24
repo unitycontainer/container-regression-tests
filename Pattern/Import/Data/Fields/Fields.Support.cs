@@ -3,6 +3,7 @@
 using Microsoft.Practices.Unity;
 #else
 using Unity.Injection;
+using Unity.Resolution;
 #endif
 
 namespace Fields
@@ -43,6 +44,20 @@ namespace Fields
 
         public static InjectionMember GetInjectionValue(object argument)
             => new InjectionField(FieldName, argument);
+
+        #endregion
+
+
+        #region Override
+
+        public static ResolverOverride GetMemberOverride(string name, object value)
+            => new FieldOverride(name, value);
+
+        public static ResolverOverride GetMemberOverrideWithType(Type _, string name, object value)
+            => new FieldOverride(name, value);
+
+        public static ResolverOverride GetMemberOverrideOnType(Type target, Type _, string name, object value)
+            => new FieldOverride(name, value).OnType(target);
 
         #endregion
     }

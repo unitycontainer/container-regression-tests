@@ -25,7 +25,6 @@ namespace Regression.Implicit
             Assert.IsInstanceOfType(instance, type);
         }
 
-
         [DataTestMethod]
         [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
         public virtual void Registered_Resolvable_Import(string test, Type type)
