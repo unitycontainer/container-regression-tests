@@ -37,5 +37,12 @@ namespace Regression.Annotated.Fields.Required
     {
     }
 
+    public class DownTheLineType<TDependency>
+        : PatternBaseType
+    {
+        public DownTheLineType(BaselineTestType<TDependency> import)
+            => Value = import;
+    }
+
     #endregion
 }

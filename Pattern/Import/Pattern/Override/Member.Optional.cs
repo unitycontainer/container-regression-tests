@@ -44,5 +44,47 @@ namespace Regression.Override
 
             TestImportWithOverride(target, Override_MemberOverride_OnType(target, type, DependencyName, overridden), overridden);
         }
+
+
+
+        [DataTestMethod]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        public virtual void Optional_DownTheLine_ByName(string test, Type type,
+                                                        object @default, object defaultAttr,
+                                                        object registered, object named,
+                                                        object injected, object overridden,
+                                                        bool isResolveble)
+        {
+            var target = _optionalDownTheLine.MakeGenericType(type);
+
+            TestDownTheLineImportWithOverride(target, Override_MemberOverride(DependencyName, overridden), overridden);
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        public virtual void Optional_DownTheLine_WithType(string test, Type type,
+                                                        object @default, object defaultAttr,
+                                                        object registered, object named,
+                                                        object injected, object overridden,
+                                                        bool isResolveble)
+        {
+            var target = _optionalDownTheLine.MakeGenericType(type);
+
+            TestDownTheLineImportWithOverride(target, Override_MemberOverride_WithType(type, DependencyName, overridden), overridden);
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        public virtual void Optional_DownTheLine_OnTypw(string test, Type type,
+                                                        object @default, object defaultAttr,
+                                                        object registered, object named,
+                                                        object injected, object overridden,
+                                                        bool isResolveble)
+        {
+            var target = _optionalDownTheLine.MakeGenericType(type);
+
+            TestDownTheLineImportWithOverride(target,
+                Override_MemberOverride_OnType(OptionalImportType.MakeGenericType(type), type, DependencyName, overridden), overridden);
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace Fields
         #endregion
 
 
-        #region Not Supported
+        #region No Supported For Implicit
 
         public override void Implicit_ByName(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
         {
@@ -37,6 +37,22 @@ namespace Fields
         }
 
         public override void Implicit_WithType(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
+
+        public override void Implicit_DownTheLine_ByName(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
+
+        public override void Implicit_DownTheLine_OnTypw(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
+
+        public override void Implicit_DownTheLine_WithType(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
+
+        public override void Implicit_DownTheLine_DependencyOverride(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
         {
         }
 

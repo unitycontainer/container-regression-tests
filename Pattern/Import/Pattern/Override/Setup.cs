@@ -16,6 +16,25 @@ namespace Regression.Override
 
         protected virtual string DependencyName => string.Empty;
 
+        private static Type _implicitDownTheLine;
+        private static Type _requiredDownTheLine;
+        private static Type _optionalDownTheLine;
+
+
+        #endregion
+
+
+        #region Scaffolding
+
+        new protected static void ClassInitialize(TestContext context)
+        {
+            PatternBase.ClassInitialize(context);
+
+            _implicitDownTheLine = GetType("Implicit", "DownTheLineType`1");
+            _requiredDownTheLine = GetType("Annotated", "Required.DownTheLineType`1");
+            _optionalDownTheLine = GetType("Annotated", "Optional.DownTheLineType`1");
+        }
+
         #endregion
 
 
@@ -38,6 +57,17 @@ namespace Regression.Override
             // Validate
             Assert.IsNotNull(instance);
             Assert.AreEqual(value, instance.Value);
+        }
+
+        protected void TestDownTheLineImportWithOverride(Type type, ResolverOverride @override, object value)
+        {
+            // Act
+            var instance = Container.Resolve(type, null, @override) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsNotNull(instance.Value);
+            Assert.AreEqual(value, (instance.Value as PatternBaseType)?.Value);
         }
 
         #endregion

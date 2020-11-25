@@ -35,6 +35,13 @@ namespace Regression.Annotated.Methods.Optional
     {
     }
 
+    public class DownTheLineType<TDependency>
+        : PatternBaseType
+    {
+        public DownTheLineType(BaselineTestType<TDependency> import)
+            => Value = import;
+    }
+
 
     public class BaselineTestType_Ref<TDependency>
         : PatternBaseType where TDependency : class
