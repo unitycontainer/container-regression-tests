@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Import.Annotated
 {
-    public abstract partial class Pattern : PatternBase
+    public abstract partial class Pattern : ImportBase
     {
         #region Fields
 
@@ -24,14 +24,14 @@ namespace Import.Annotated
 
         new protected static void ClassInitialize(TestContext context)
         {
-            PatternBase.ClassInitialize(context);
+            ImportBase.ClassInitialize(context);
 
-            _requiredInherited  = GetType("Required", "BaselineInheritedType`1");
-            _optionalInherited  = GetType("Optional", "BaselineInheritedType`1");
-            _requiredNamed      = GetType("Required", "BaselineTestTypeNamed`1");
-            _optionalNamed      = GetType("Optional", "BaselineTestTypeNamed`1");
-            _requiredTwice      = GetType("Required", "BaselineInheritedTwice`1");
-            _optionalTwice      = GetType("Optional", "BaselineInheritedTwice`1"); 
+            _requiredInherited  = GetType("Required.BaselineInheritedType`1");
+            _optionalInherited  = GetType("Optional.BaselineInheritedType`1");
+            _requiredNamed      = GetType("Required.BaselineTestTypeNamed`1");
+            _optionalNamed      = GetType("Optional.BaselineTestTypeNamed`1");
+            _requiredTwice      = GetType("Required.BaselineInheritedTwice`1");
+            _optionalTwice      = GetType("Optional.BaselineInheritedTwice`1"); 
         }
 
         #endregion

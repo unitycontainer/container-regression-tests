@@ -14,7 +14,7 @@ namespace Import.Implicit
     public abstract partial class Pattern
     {
         [DataTestMethod]
-        [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
+        [DynamicData(nameof(ResolvableTypes_Data), typeof(ImportBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
         public virtual void ThrowsOnRefParameter(string test, Type type)
         {
@@ -27,7 +27,7 @@ namespace Import.Implicit
 
 
         [DataTestMethod]
-        [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
+        [DynamicData(nameof(ResolvableTypes_Data), typeof(ImportBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
         public virtual void ThrowsOnOutParameter(string test, Type type)
         {

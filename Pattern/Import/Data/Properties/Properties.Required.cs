@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Regression;
+using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -22,7 +23,7 @@ namespace Import.Annotated.Properties.Required
     public class BaselineTestTypeNamed<TDependency>
         : PatternBaseType
     {
-        [Dependency(PatternBase.Name)] public TDependency Property { get; set; }
+        [Dependency(ImportBase.Name)] public TDependency Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);

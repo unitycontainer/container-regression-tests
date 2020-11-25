@@ -2,7 +2,7 @@
 
 namespace Import.Injected
 {
-    public abstract partial class Pattern : PatternBase
+    public abstract partial class Pattern : ImportBase
     {
 
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Regression;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using Unity.Resolution;
 
 namespace Import.Override
 {
-    public abstract partial class Pattern : PatternBase
+    public abstract partial class Pattern : ImportBase
     {
         #region Fields
 
@@ -28,7 +29,7 @@ namespace Import.Override
 
         new protected static void ClassInitialize(TestContext context)
         {
-            PatternBase.ClassInitialize(context);
+            ImportBase.ClassInitialize(context);
 
             _implicitDownTheLine = GetType("Implicit", "DownTheLineType`1");
             _requiredDownTheLine = GetType("Annotated", "Required.DownTheLineType`1");

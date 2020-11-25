@@ -22,7 +22,7 @@ namespace Import.Injected
         #region Implicit
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalGenericParameter_Implicit_Default(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -32,7 +32,7 @@ namespace Import.Injected
                 InjectionMember_Value(new OptionalGenericParameter(TDependency)), registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalGenericParameter_Implicit_WithContractName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -47,7 +47,7 @@ namespace Import.Injected
         #region Required
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalGenericParameter_Required_Default(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -57,7 +57,7 @@ namespace Import.Injected
                 InjectionMember_Value(new OptionalGenericParameter(TDependency)), registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalGenericParameter_Required_WithContractName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -72,7 +72,7 @@ namespace Import.Injected
         #region Optional
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalGenericParameter_Optional_Default(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -82,7 +82,7 @@ namespace Import.Injected
                 InjectionMember_Value(new OptionalGenericParameter(TDependency)), registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalGenericParameter_Optional_WithContractName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,

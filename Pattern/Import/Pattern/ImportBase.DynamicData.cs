@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Regression;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 #if UNITY_V4
@@ -9,7 +10,7 @@ using Unity;
 
 namespace Import
 {
-    public abstract partial class PatternBase
+    public abstract partial class ImportBase
     {
         #region Type Based Data
 

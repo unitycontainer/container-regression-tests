@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Regression;
+using System;
 using System.ComponentModel;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
@@ -12,24 +13,24 @@ namespace Import.Implicit.Methods.WithDefault
     public class Implicit_Parameter_Int_WithDefault : PatternBaseType
     {
         [InjectionMethod]
-        public virtual void Method(int value = PatternBase.DefaultInt) => Value = value;
+        public virtual void Method(int value = ImportBase.DefaultInt) => Value = value;
 
-        public override object Default => PatternBase.DefaultInt;
-        public override object Injected => PatternBase.InjectedInt;
-        public override object Registered => PatternBase.RegisteredInt;
-        public override object Override => PatternBase.OverriddenInt;
+        public override object Default => ImportBase.DefaultInt;
+        public override object Injected => ImportBase.InjectedInt;
+        public override object Registered => ImportBase.RegisteredInt;
+        public override object Override => ImportBase.OverriddenInt;
         public override Type ImportType => typeof(int);
     }
 
     public class Implicit_Parameter_String_WithDefault : PatternBaseType
     {
         [InjectionMethod]
-        public virtual void Method(string value = PatternBase.DefaultString) => Value = value;
+        public virtual void Method(string value = ImportBase.DefaultString) => Value = value;
 
-        public override object Default => PatternBase.DefaultString;
-        public override object Injected => PatternBase.InjectedString;
-        public override object Registered => PatternBase.RegisteredString;
-        public override object Override => PatternBase.OverriddenString;
+        public override object Default => ImportBase.DefaultString;
+        public override object Injected => ImportBase.InjectedString;
+        public override object Registered => ImportBase.RegisteredString;
+        public override object Override => ImportBase.OverriddenString;
 
         public override Type ImportType => typeof(string);
     }
@@ -56,24 +57,24 @@ namespace Import.Implicit.Methods.WithDefaultAttribute
     public class Implicit_Int_WithDefaultAttribute : PatternBaseType
     {
         [InjectionMethod]
-        public virtual void Method([DefaultValue(PatternBase.DefaultValueInt)] int value) => Value = value;
+        public virtual void Method([DefaultValue(ImportBase.DefaultValueInt)] int value) => Value = value;
 
-        public override object Default => PatternBase.DefaultValueInt;
-        public override object Injected => PatternBase.InjectedInt;
-        public override object Registered => PatternBase.RegisteredInt;
-        public override object Override => PatternBase.OverriddenInt;
+        public override object Default => ImportBase.DefaultValueInt;
+        public override object Injected => ImportBase.InjectedInt;
+        public override object Registered => ImportBase.RegisteredInt;
+        public override object Override => ImportBase.OverriddenInt;
         public override Type ImportType => typeof(int);
     }
 
     public class Implicit_String_WithDefaultAttribute : PatternBaseType
     {
         [InjectionMethod]
-        public virtual void Method([DefaultValue(PatternBase.DefaultValueString)] string value) => Value = value;
+        public virtual void Method([DefaultValue(ImportBase.DefaultValueString)] string value) => Value = value;
 
-        public override object Default => PatternBase.DefaultValueString;
-        public override object Injected => PatternBase.InjectedString;
-        public override object Registered => PatternBase.RegisteredString;
-        public override object Override => PatternBase.OverriddenString;
+        public override object Default => ImportBase.DefaultValueString;
+        public override object Injected => ImportBase.InjectedString;
+        public override object Registered => ImportBase.RegisteredString;
+        public override object Override => ImportBase.OverriddenString;
         public override Type ImportType => typeof(string);
     }
 
@@ -83,7 +84,7 @@ namespace Import.Implicit.Methods.WithDefaultAttribute
         private const int _default = 1111;
 
         [InjectionMethod]
-        public override void Method([DefaultValue(_default)] int value = PatternBase.DefaultValueInt) => base.Method(value);
+        public override void Method([DefaultValue(_default)] int value = ImportBase.DefaultValueInt) => base.Method(value);
 
         public override object Default => _default;
         public override Type ImportType => typeof(int);
@@ -97,16 +98,16 @@ namespace Import.Implicit.Methods.WithDefaultAndAttribute
     public class Implicit_Int_WithDefaultAndAttribute : PatternBaseType
     {
         [InjectionMethod]
-        public virtual void Method([DefaultValue(PatternBase.DefaultValueInt)] int value = PatternBase.DefaultInt) => Value = value;
+        public virtual void Method([DefaultValue(ImportBase.DefaultValueInt)] int value = ImportBase.DefaultInt) => Value = value;
 
-        public override object Injected => PatternBase.InjectedInt;
-        public override object Registered => PatternBase.RegisteredInt;
-        public override object Override => PatternBase.OverriddenInt;
+        public override object Injected => ImportBase.InjectedInt;
+        public override object Registered => ImportBase.RegisteredInt;
+        public override object Override => ImportBase.OverriddenInt;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => PatternBase.DefaultInt;
 #else
-        public override object Default => PatternBase.DefaultValueInt;
+        public override object Default => ImportBase.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
@@ -114,16 +115,16 @@ namespace Import.Implicit.Methods.WithDefaultAndAttribute
     public class Implicit_String_WithDefaultAndAttribute : PatternBaseType
     {
         [InjectionMethod]
-        public virtual void Method([DefaultValue(PatternBase.DefaultValueString)] string value = PatternBase.DefaultString) => Value = value;
+        public virtual void Method([DefaultValue(ImportBase.DefaultValueString)] string value = ImportBase.DefaultString) => Value = value;
 
-        public override object Injected => PatternBase.InjectedString;
-        public override object Registered => PatternBase.RegisteredString;
-        public override object Override => PatternBase.OverriddenString;
+        public override object Injected => ImportBase.InjectedString;
+        public override object Registered => ImportBase.RegisteredString;
+        public override object Override => ImportBase.OverriddenString;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => PatternBase.DefaultString;
 #else
-        public override object Default => PatternBase.DefaultValueString;
+        public override object Default => ImportBase.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
@@ -133,7 +134,7 @@ namespace Import.Implicit.Methods.WithDefaultAndAttribute
         private const int _default = 1111;
 
         [InjectionMethod]
-        public override void Method([DefaultValue(_default)] int value = PatternBase.DefaultValueInt) => base.Method(value);
+        public override void Method([DefaultValue(_default)] int value = ImportBase.DefaultValueInt) => base.Method(value);
 #if BEHAVIOR_V5
         // BUG: See https://github.com/unitycontainer/container/issues/291
         public override object Default => PatternBase.DefaultInt;

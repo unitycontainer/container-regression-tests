@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Regression;
+using System;
 using System.ComponentModel;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
@@ -30,36 +31,36 @@ namespace Import.Annotated.Properties.Required.WithDefaults
 
     public class Required_Property_Int_WithDefaultAttribute : PatternBaseType
     {
-        [Dependency] [DefaultValue(PatternBase.DefaultValueInt)] public int Property { get; set; }
+        [Dependency] [DefaultValue(ImportBase.DefaultValueInt)] public int Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueInt;
+        public override object Default => ImportBase.DefaultValueInt;
         public override Type ImportType => typeof(int);
     }
 
     public class Required_Property_WithDefaultAttribute_Int : PatternBaseType
     {
-        [DefaultValue(PatternBase.DefaultValueInt)] [Dependency] public int Property { get; set; }
+        [DefaultValue(ImportBase.DefaultValueInt)] [Dependency] public int Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueInt;
+        public override object Default => ImportBase.DefaultValueInt;
         public override Type ImportType => typeof(int);
     }
 
     public class Required_Property_String_WithDefaultAttribute : PatternBaseType
     {
-        [Dependency] [DefaultValue(PatternBase.DefaultValueString)] public string Property { get; set; }
+        [Dependency] [DefaultValue(ImportBase.DefaultValueString)] public string Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueString;
+        public override object Default => ImportBase.DefaultValueString;
         public override Type ImportType => typeof(string);
     }
 
     public class Required_Property_WithDefaultAttribute_String : PatternBaseType
     {
-        [DefaultValue(PatternBase.DefaultValueString)] [Dependency] public string Property { get; set; }
+        [DefaultValue(ImportBase.DefaultValueString)] [Dependency] public string Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueString;
+        public override object Default => ImportBase.DefaultValueString;
         public override Type ImportType => typeof(string);
     }
 
@@ -75,37 +76,37 @@ namespace Import.Annotated.Properties.Required.WithDefaults
 
     public class Required_Property_Int_WithDefaultAndAttribute : PatternBaseType
     {
-        [Dependency] [DefaultValue(PatternBase.DefaultValueInt)] public int Property { get; set; } = PatternBase.DefaultInt;
+        [Dependency] [DefaultValue(ImportBase.DefaultValueInt)] public int Property { get; set; } = ImportBase.DefaultInt;
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueInt;
+        public override object Default => ImportBase.DefaultValueInt;
         public override Type ImportType => typeof(int);
     }
 
     public class Required_Property_WithDefaultAndAttribute_Int : PatternBaseType
     {
-        [DefaultValue(PatternBase.DefaultValueInt)] [Dependency] public int Property { get; set; } = PatternBase.DefaultInt;
+        [DefaultValue(ImportBase.DefaultValueInt)] [Dependency] public int Property { get; set; } = ImportBase.DefaultInt;
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueInt;
+        public override object Default => ImportBase.DefaultValueInt;
         public override Type ImportType => typeof(int);
     }
 
     public class Required_Property_String_WithDefaultAndAttribute : PatternBaseType
     {
-        [Dependency] [DefaultValue(PatternBase.DefaultValueString)] public string Property { get; set; } = PatternBase.DefaultString;
+        [Dependency] [DefaultValue(ImportBase.DefaultValueString)] public string Property { get; set; } = ImportBase.DefaultString;
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueString;
+        public override object Default => ImportBase.DefaultValueString;
         public override Type ImportType => typeof(string);
     }
 
     public class Required_Property_WithDefaultAndAttribute_String : PatternBaseType
     {
-        [DefaultValue(PatternBase.DefaultValueString)] [Dependency] public string Property { get; set; } = PatternBase.DefaultString;
+        [DefaultValue(ImportBase.DefaultValueString)] [Dependency] public string Property { get; set; } = ImportBase.DefaultString;
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueString;
+        public override object Default => ImportBase.DefaultValueString;
         public override Type ImportType => typeof(string);
     }
 

@@ -13,7 +13,7 @@ namespace Import.Annotated
         #region Required
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Required_FromEmpty(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -23,7 +23,7 @@ namespace Import.Annotated
 
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Required_Named(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -33,7 +33,7 @@ namespace Import.Annotated
 
 
         [DataTestMethod]
-        [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
+        [DynamicData(nameof(ResolvableTypes_Data), typeof(ImportBase))]
         public virtual void Required_Resolvable(string test, Type type)
         {
             // Arrange
@@ -53,7 +53,7 @@ namespace Import.Annotated
         #region Optional
 
         [DataTestMethod]
-        [DynamicData(nameof(ResolvableTypes_Data), typeof(PatternBase))]
+        [DynamicData(nameof(ResolvableTypes_Data), typeof(ImportBase))]
         public virtual void Optional_Resolvable(string test, Type type)
         {
             // Arrange
@@ -68,7 +68,7 @@ namespace Import.Annotated
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Optional_FromEmpty(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -77,7 +77,7 @@ namespace Import.Annotated
             => TestOptionalImport(OptionalImportType, type, registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Optional_Named(string test, Type type,
                                                      object @default, object defaultAttr,
                                                      object registered, object named,

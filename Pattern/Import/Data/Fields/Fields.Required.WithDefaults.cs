@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Regression;
+using System;
 using System.ComponentModel;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
@@ -27,36 +28,36 @@ namespace Import.Annotated.Fields.Required.WithDefaults
 
     public class Required_Field_Int_WithDefaultAttribute : PatternBaseType
     {
-        [Dependency] [DefaultValue(PatternBase.DefaultValueInt)] public int Field;
+        [Dependency] [DefaultValue(ImportBase.DefaultValueInt)] public int Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueInt;
+        public override object Default => ImportBase.DefaultValueInt;
         public override Type ImportType => typeof(int);
     }
 
     public class Required_Field_WithDefaultAttribute_Int : PatternBaseType
     {
-        [DefaultValue(PatternBase.DefaultValueInt)] [Dependency] public int Field;
+        [DefaultValue(ImportBase.DefaultValueInt)] [Dependency] public int Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueInt;
+        public override object Default => ImportBase.DefaultValueInt;
         public override Type ImportType => typeof(int);
     }
 
     public class Required_Field_String_WithDefaultAttribute : PatternBaseType
     {
-        [Dependency] [DefaultValue(PatternBase.DefaultValueString)] public string Field;
+        [Dependency] [DefaultValue(ImportBase.DefaultValueString)] public string Field;
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueString;
+        public override object Default => ImportBase.DefaultValueString;
         public override Type ImportType => typeof(string);
     }
 
     public class Required_Field_WithDefaultAttribute_String : PatternBaseType
     {
-        [DefaultValue(PatternBase.DefaultValueString)] [Dependency] public string Field;
+        [DefaultValue(ImportBase.DefaultValueString)] [Dependency] public string Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueString;
+        public override object Default => ImportBase.DefaultValueString;
         public override Type ImportType => typeof(string);
     }
 
@@ -71,37 +72,37 @@ namespace Import.Annotated.Fields.Required.WithDefaults
 
     public class Required_Field_Int_WithDefaultAndAttribute : PatternBaseType
     {
-        [Dependency] [DefaultValue(PatternBase.DefaultValueInt)] public int Field = PatternBase.DefaultInt;
+        [Dependency] [DefaultValue(ImportBase.DefaultValueInt)] public int Field = ImportBase.DefaultInt;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueInt;
+        public override object Default => ImportBase.DefaultValueInt;
         public override Type ImportType => typeof(int);
     }
 
     public class Required_Field_WithDefaultAndAttribute_Int : PatternBaseType
     {
-        [DefaultValue(PatternBase.DefaultValueInt)] [Dependency] public int Field = PatternBase.DefaultInt;
+        [DefaultValue(ImportBase.DefaultValueInt)] [Dependency] public int Field = ImportBase.DefaultInt;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueInt;
+        public override object Default => ImportBase.DefaultValueInt;
         public override Type ImportType => typeof(int);
     }
 
     public class Required_Field_String_WithDefaultAndAttribute : PatternBaseType
     {
-        [Dependency] [DefaultValue(PatternBase.DefaultValueString)] public string Field = PatternBase.DefaultString;
+        [Dependency] [DefaultValue(ImportBase.DefaultValueString)] public string Field = ImportBase.DefaultString;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueString;
+        public override object Default => ImportBase.DefaultValueString;
         public override Type ImportType => typeof(string);
     }
 
     public class Required_Field_WithDefaultAndAttribute_String : PatternBaseType
     {
-        [DefaultValue(PatternBase.DefaultValueString)] [Dependency] public string Field = PatternBase.DefaultString;
+        [DefaultValue(ImportBase.DefaultValueString)] [Dependency] public string Field = ImportBase.DefaultString;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => PatternBase.DefaultValueString;
+        public override object Default => ImportBase.DefaultValueString;
         public override Type ImportType => typeof(string);
     }
 

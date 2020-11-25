@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Regression;
+using System;
 using System.ComponentModel;
 
 
@@ -6,23 +7,23 @@ namespace Import.Implicit.Constructors.WithDefault
 {
     public class Implicit_Parameter_Int_WithDefault : PatternBaseType
     {
-        public Implicit_Parameter_Int_WithDefault(int value = PatternBase.DefaultInt) => Value = value;
+        public Implicit_Parameter_Int_WithDefault(int value = ImportBase.DefaultInt) => Value = value;
 
-        public override object Default => PatternBase.DefaultInt;
-        public override object Injected => PatternBase.InjectedInt;
-        public override object Registered => PatternBase.RegisteredInt;
-        public override object Override => PatternBase.OverriddenInt;
+        public override object Default => ImportBase.DefaultInt;
+        public override object Injected => ImportBase.InjectedInt;
+        public override object Registered => ImportBase.RegisteredInt;
+        public override object Override => ImportBase.OverriddenInt;
         public override Type ImportType => typeof(int);
     }
 
     public class Implicit_Parameter_String_WithDefault : PatternBaseType
     {
-        public Implicit_Parameter_String_WithDefault(string value = PatternBase.DefaultString) => Value = value;
+        public Implicit_Parameter_String_WithDefault(string value = ImportBase.DefaultString) => Value = value;
 
-        public override object Default => PatternBase.DefaultString;
-        public override object Injected => PatternBase.InjectedString;
-        public override object Registered => PatternBase.RegisteredString;
-        public override object Override => PatternBase.OverriddenString;
+        public override object Default => ImportBase.DefaultString;
+        public override object Injected => ImportBase.InjectedString;
+        public override object Registered => ImportBase.RegisteredString;
+        public override object Override => ImportBase.OverriddenString;
         public override Type ImportType => typeof(string);
     }
 
@@ -42,23 +43,23 @@ namespace Import.Implicit.Constructors.WithDefaultAttribute
 {
     public class Implicit_Int_WithDefaultAttribute : PatternBaseType
     {
-        public Implicit_Int_WithDefaultAttribute([DefaultValue(PatternBase.DefaultValueInt)] int value) => Value = value;
+        public Implicit_Int_WithDefaultAttribute([DefaultValue(ImportBase.DefaultValueInt)] int value) => Value = value;
 
-        public override object Default => PatternBase.DefaultValueInt;
-        public override object Injected => PatternBase.InjectedInt;
-        public override object Registered => PatternBase.RegisteredInt;
-        public override object Override => PatternBase.OverriddenInt;
+        public override object Default => ImportBase.DefaultValueInt;
+        public override object Injected => ImportBase.InjectedInt;
+        public override object Registered => ImportBase.RegisteredInt;
+        public override object Override => ImportBase.OverriddenInt;
         public override Type ImportType => typeof(int);
     }
 
     public class Implicit_String_WithDefaultAttribute : PatternBaseType
     {
-        public Implicit_String_WithDefaultAttribute([DefaultValue(PatternBase.DefaultValueString)] string value) => Value = value;
+        public Implicit_String_WithDefaultAttribute([DefaultValue(ImportBase.DefaultValueString)] string value) => Value = value;
 
-        public override object Default => PatternBase.DefaultValueString;
-        public override object Injected => PatternBase.InjectedString;
-        public override object Registered => PatternBase.RegisteredString;
-        public override object Override => PatternBase.OverriddenString;
+        public override object Default => ImportBase.DefaultValueString;
+        public override object Injected => ImportBase.InjectedString;
+        public override object Registered => ImportBase.RegisteredString;
+        public override object Override => ImportBase.OverriddenString;
         public override Type ImportType => typeof(string);
     }
 
@@ -78,32 +79,32 @@ namespace Import.Implicit.Constructors.WithDefaultAndAttribute
 {
     public class Implicit_Int_WithDefaultAndAttribute : PatternBaseType
     {
-        public Implicit_Int_WithDefaultAndAttribute([DefaultValue(PatternBase.DefaultValueInt)] int value = PatternBase.DefaultInt) => Value = value;
+        public Implicit_Int_WithDefaultAndAttribute([DefaultValue(ImportBase.DefaultValueInt)] int value = ImportBase.DefaultInt) => Value = value;
 
-        public override object Injected => PatternBase.InjectedInt;
-        public override object Registered => PatternBase.RegisteredInt;
-        public override object Override => PatternBase.OverriddenInt;
+        public override object Injected => ImportBase.InjectedInt;
+        public override object Registered => ImportBase.RegisteredInt;
+        public override object Override => ImportBase.OverriddenInt;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => PatternBase.DefaultInt;
 #else
-        public override object Default => PatternBase.DefaultValueInt;
+        public override object Default => ImportBase.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
 
     public class Implicit_String_WithDefaultAndAttribute : PatternBaseType
     {
-        public Implicit_String_WithDefaultAndAttribute([DefaultValue(PatternBase.DefaultValueString)] string value = PatternBase.DefaultString) => Value = value;
+        public Implicit_String_WithDefaultAndAttribute([DefaultValue(ImportBase.DefaultValueString)] string value = ImportBase.DefaultString) => Value = value;
 
-        public override object Injected => PatternBase.InjectedString;
-        public override object Registered => PatternBase.RegisteredString;
-        public override object Override => PatternBase.OverriddenString;
+        public override object Injected => ImportBase.InjectedString;
+        public override object Registered => ImportBase.RegisteredString;
+        public override object Override => ImportBase.OverriddenString;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => PatternBase.DefaultString;
 #else
-        public override object Default => PatternBase.DefaultValueString;
+        public override object Default => ImportBase.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
@@ -112,7 +113,7 @@ namespace Import.Implicit.Constructors.WithDefaultAndAttribute
     {
         private const int _default = 1111;
 
-        public Implicit_Derived_WithDefaultAndAttribute([DefaultValue(_default)] int value = PatternBase.DefaultValueInt)
+        public Implicit_Derived_WithDefaultAndAttribute([DefaultValue(_default)] int value = ImportBase.DefaultValueInt)
             : base(value) { }
 
 #if BEHAVIOR_V5

@@ -11,7 +11,7 @@ namespace Import.Override
     public abstract partial class Pattern 
     {
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Implicit_DependencyOverride(string test, Type type,
                                                         object @default, object defaultAttr,
                                                         object registered, object named,
@@ -22,7 +22,7 @@ namespace Import.Override
                 overridden, overridden);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Required_DependencyOverride(string test, Type type,
                                                         object @default, object defaultAttr,
                                                         object registered, object named,
@@ -33,7 +33,7 @@ namespace Import.Override
                 overridden, overridden);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Optional_DependencyOverride(string test, Type type,
                                                         object @default, object defaultAttr,
                                                         object registered, object named,
@@ -45,7 +45,7 @@ namespace Import.Override
 
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Implicit_DownTheLine_DependencyOverride(string test, Type type,
                                                                     object @default, object defaultAttr,
                                                                     object registered, object named,
@@ -56,7 +56,7 @@ namespace Import.Override
 
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Required_DownTheLine_DependencyOverride(string test, Type type,
                                                                     object @default, object defaultAttr,
                                                                     object registered, object named,
@@ -66,7 +66,7 @@ namespace Import.Override
                 new DependencyOverride(type, overridden), overridden);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Optional_DownTheLine_DependencyOverride(string test, Type type,
                                                                     object @default, object defaultAttr,
                                                                     object registered, object named,

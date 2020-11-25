@@ -11,7 +11,7 @@ namespace Import.Implicit
     public abstract partial class Pattern
     {
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Resolving_Import(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -20,7 +20,7 @@ namespace Import.Implicit
             => TestRequiredImport(ImplicitImportType, type, registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
+        [DynamicData(nameof(BuiltInTypes_Data), typeof(ImportBase))]
         public virtual void BuiltIn_Interface(string test, Type type)
         {
             // Arrange
@@ -33,7 +33,7 @@ namespace Import.Implicit
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
+        [DynamicData(nameof(BuiltInTypes_Data), typeof(ImportBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
         public virtual void BuiltIn_Interface_Named(string test, Type type)
         {

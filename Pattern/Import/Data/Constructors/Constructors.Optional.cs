@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Regression;
+using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -19,7 +20,7 @@ namespace Import.Annotated.Constructors.Optional
     public class BaselineTestTypeNamed<TDependency>
         : PatternBaseType
     {
-        public BaselineTestTypeNamed([OptionalDependency(PatternBase.Name)] TDependency value) => Value = value;
+        public BaselineTestTypeNamed([OptionalDependency(ImportBase.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 

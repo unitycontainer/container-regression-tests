@@ -7,7 +7,7 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Import
+namespace Regression
 {
     public abstract partial class PatternBase
     {
@@ -56,37 +56,6 @@ namespace Import
         public static ICloneable RegisteredICloneable = new object[0];
         public static Delegate RegisteredDelegate = (Func<int>)(() => 0);
         #endregion
-
-        #endregion
-
-
-        #region Injected
-
-        private static IDictionary<Type, object> _injected = new Dictionary<Type, object>
-        {
-            { typeof(int),          InjectedInt },
-            { typeof(string),       InjectedString },
-            { typeof(Unresolvable), InjectedUnresolvable },
-        };
-
-        protected virtual object GetInjectedValue(Type type)
-            => _injected[type];
-
-        #endregion
-
-
-        #region Overrides
-
-        private static IDictionary<Type, object> _overrides = new Dictionary<Type, object>
-        {
-            { typeof(int),          OverriddenInt },
-            { typeof(string),       OverriddenString },
-            { typeof(Unresolvable), OverriddenUnresolvable },
-        };
-
-        protected virtual object GetOverrideValue(Type type)
-            => _overrides[type];
-
 
         #endregion
     }

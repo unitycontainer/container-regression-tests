@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Regression;
 using System;
+using System.Collections.Generic;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -9,7 +11,7 @@ using Unity.Resolution;
 
 namespace Import
 {
-    public abstract partial class PatternBase
+    public abstract partial class ImportBase
     {
         #region With Defaults
 
@@ -126,6 +128,37 @@ namespace Import
         public static object GetDefaultValue(Type t)
             => (t.IsValueType && Nullable.GetUnderlyingType(t) == null)
                 ? Activator.CreateInstance(t) : null;
+
+        #endregion
+
+
+        #region Injected
+
+        private static IDictionary<Type, object> _injected = new Dictionary<Type, object>
+        {
+            { typeof(int),          InjectedInt },
+            { typeof(string),       InjectedString },
+            { typeof(Unresolvable), InjectedUnresolvable },
+        };
+
+        protected virtual object GetInjectedValue(Type type)
+            => _injected[type];
+
+        #endregion
+
+
+        #region Overrides
+
+        private static IDictionary<Type, object> _overrides = new Dictionary<Type, object>
+        {
+            { typeof(int),          OverriddenInt },
+            { typeof(string),       OverriddenString },
+            { typeof(Unresolvable), OverriddenUnresolvable },
+        };
+
+        protected virtual object GetOverrideValue(Type type)
+            => _overrides[type];
+
 
         #endregion
     }

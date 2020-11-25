@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Regression;
 using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
@@ -11,7 +12,7 @@ namespace Import.Annotated
     public abstract partial class Pattern
     {
         [DataTestMethod]
-        [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
+        [DynamicData(nameof(BuiltInTypes_Data), typeof(ImportBase))]
         public virtual void Required_BuiltIn_Interface(string test, Type type)
         {
             // Arrange
@@ -27,7 +28,7 @@ namespace Import.Annotated
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
+        [DynamicData(nameof(BuiltInTypes_Data), typeof(ImportBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
         public virtual void Required_BuiltIn_Named(string test, Type type)
         {
@@ -39,7 +40,7 @@ namespace Import.Annotated
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
+        [DynamicData(nameof(BuiltInTypes_Data), typeof(ImportBase))]
         public virtual void Optional_BuiltIn_Interface(string test, Type type)
         {
             // Arrange
@@ -55,7 +56,7 @@ namespace Import.Annotated
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
+        [DynamicData(nameof(BuiltInTypes_Data), typeof(ImportBase))]
         public virtual void Optional_BuiltIn_Named(string test, Type type)
         {
             // Arrange

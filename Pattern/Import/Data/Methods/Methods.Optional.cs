@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Regression;
+using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -21,7 +22,7 @@ namespace Import.Annotated.Methods.Optional
         : PatternBaseType
     {
         [InjectionMethod]
-        public virtual void Method([OptionalDependency(PatternBase.Name)] TDependency value) => Value = value;
+        public virtual void Method([OptionalDependency(ImportBase.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 

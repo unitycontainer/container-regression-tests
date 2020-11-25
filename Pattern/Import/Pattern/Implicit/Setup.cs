@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Import.Implicit
 {
-    public abstract partial class Pattern : PatternBase
+    public abstract partial class Pattern : ImportBase
     {
         #region Fields
 
@@ -18,7 +18,7 @@ namespace Import.Implicit
 
         new protected static void ClassInitialize(TestContext context)
         {
-            PatternBase.ClassInitialize(context);
+            ImportBase.ClassInitialize(context);
 
             _inherited  = GetType("BaselineInheritedType`1");
             _twice      = GetType("BaselineInheritedTwice`1");

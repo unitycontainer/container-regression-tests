@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Regression;
 using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
@@ -11,7 +12,7 @@ namespace Import.Annotated
     public abstract partial class Pattern
     {
         [DataTestMethod]
-        [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
+        [DynamicData(nameof(UnResolvableTypes_Data), typeof(ImportBase))]
         public virtual void Required_Registered_Invalid(string test, Type type)
         {
             // Arrange
@@ -29,7 +30,7 @@ namespace Import.Annotated
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(UnResolvableTypes_Data), typeof(PatternBase))]
+        [DynamicData(nameof(UnResolvableTypes_Data), typeof(ImportBase))]
         public virtual void Optional_Registered_Invalid(string test, Type type)
         {
             // Arrange

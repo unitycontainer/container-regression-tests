@@ -12,7 +12,7 @@ namespace Import.Override
     public abstract partial class Pattern 
     {
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Optional_ByName(string test, Type type,
                                             object @default, object defaultAttr,
                                             object registered, object named,
@@ -22,7 +22,7 @@ namespace Import.Override
                                   Override_MemberOverride(DependencyName, overridden), overridden);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Optional_WithType(string test, Type type,
                                                      object @default, object defaultAttr,
                                                      object registered, object named,
@@ -33,7 +33,7 @@ namespace Import.Override
 
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Optional_OnType(string test, Type type,
                                                      object @default, object defaultAttr,
                                                      object registered, object named,
@@ -48,7 +48,7 @@ namespace Import.Override
 
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Optional_DownTheLine_ByName(string test, Type type,
                                                         object @default, object defaultAttr,
                                                         object registered, object named,
@@ -61,7 +61,7 @@ namespace Import.Override
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Optional_DownTheLine_WithType(string test, Type type,
                                                         object @default, object defaultAttr,
                                                         object registered, object named,
@@ -74,7 +74,7 @@ namespace Import.Override
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Optional_DownTheLine_OnTypw(string test, Type type,
                                                         object @default, object defaultAttr,
                                                         object registered, object named,

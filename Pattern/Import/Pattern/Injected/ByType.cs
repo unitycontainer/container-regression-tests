@@ -17,7 +17,7 @@ namespace Import.Injected
         #region Implicit
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByType_Implicit_WithRequired(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -28,7 +28,7 @@ namespace Import.Injected
 
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByType_Implicit_WithOptional(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -43,7 +43,7 @@ namespace Import.Injected
         #region Required
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByType_Required_WithRequired(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -54,7 +54,7 @@ namespace Import.Injected
 
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByType_Required_WithOptional(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -69,7 +69,7 @@ namespace Import.Injected
         #region Optional
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByType_Optional_WithRequired(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
@@ -79,7 +79,7 @@ namespace Import.Injected
                 InjectionMember_Required_ByType(type), registered);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByType_Optional_WithOptional(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
