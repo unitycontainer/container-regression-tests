@@ -56,39 +56,4 @@ namespace Regression.Annotated.Constructors.Required
     }
 
     #endregion
-
-
-    #region Test Data
-
-    public class Required_Int : PatternBaseType
-    {
-        public Required_Int([Dependency] int value) => Value = value;
-
-        public override object Default => 0;
-        public override object Injected => PatternBase.InjectedInt;
-        public override object Registered => PatternBase.RegisteredInt;
-        public override Type ImportType => typeof(int);
-    }
-
-    public class Required_String : PatternBaseType
-    {
-        public Required_String([Dependency] string value) => Value = value;
-
-        public override object Default => null;
-        public override object Injected => PatternBase.InjectedString;
-        public override object Registered => PatternBase.RegisteredString;
-        public override Type ImportType => typeof(string);
-    }
-
-    public class Required_Unresolvable : PatternBaseType
-    {
-        public Required_Unresolvable([Dependency] Unresolvable value) => Value = value;
-
-        public override object Default => null;
-        public override object Injected => PatternBase.InjectedUnresolvable;
-        public override object Registered => PatternBase.RegisteredUnresolvable;
-        public override Type ImportType => typeof(Unresolvable);
-    }
-
-    #endregion
 }
