@@ -99,12 +99,12 @@ namespace Regression.Implicit.Methods.WithDefaultAndAttribute
         [InjectionMethod]
         public virtual void Method([DefaultValue(PatternBase.DefaultValueInt)] int value = PatternBase.DefaultInt) => Value = value;
 
-#if BEHAVIOR_V5
-        // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => PatternBase.DefaultInt;
         public override object Injected => PatternBase.InjectedInt;
         public override object Registered => PatternBase.RegisteredInt;
         public override object Override => PatternBase.OverriddenInt;
+#if BEHAVIOR_V5
+        // Prior to v6 Unity did not support DefaultValueAttribute
+        public override object Default => PatternBase.DefaultInt;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
