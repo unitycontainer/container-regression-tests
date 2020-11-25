@@ -19,7 +19,7 @@ namespace Regression.Override
                                             object injected, object overridden,
                                             bool isResolveble)
             => TestImportWithOverride(ImplicitImportType.MakeGenericType(type), 
-                                  Override_MemberOverride(DependencyName, overridden));
+                                  Override_MemberOverride(DependencyName, overridden), overridden);
 
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
@@ -29,7 +29,7 @@ namespace Regression.Override
                                                      object injected, object overridden,
                                                      bool isResolveble)
             => TestImportWithOverride(ImplicitImportType.MakeGenericType(type),
-                                  Override_MemberOverride_WithType(type, DependencyName, overridden));
+                                  Override_MemberOverride_WithType(type, DependencyName, overridden), overridden);
 
 
         [DataTestMethod]
@@ -42,7 +42,7 @@ namespace Regression.Override
         {
             var target = ImplicitImportType.MakeGenericType(type);
 
-            TestImportWithOverride(target, Override_MemberOverride_OnType(target, type, DependencyName, overridden));
+            TestImportWithOverride(target, Override_MemberOverride_OnType(target, type, DependencyName, overridden), overridden);
         }
     }
 }

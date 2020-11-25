@@ -33,7 +33,7 @@ namespace Regression.Override
                 overridden, overridden);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void Optional_DependencyOverride(string test, Type type,
                                                         object @default, object defaultAttr,
                                                         object registered, object named,

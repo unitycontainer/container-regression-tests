@@ -12,28 +12,28 @@ namespace Regression.Override
     public abstract partial class Pattern 
     {
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void Optional_ByName(string test, Type type,
                                             object @default, object defaultAttr,
                                             object registered, object named,
                                             object injected, object overridden,
                                             bool isResolveble)
             => TestImportWithOverride(OptionalImportType.MakeGenericType(type),
-                                  Override_MemberOverride(DependencyName, overridden));
+                                  Override_MemberOverride(DependencyName, overridden), overridden);
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void Optional_WithType(string test, Type type,
                                                      object @default, object defaultAttr,
                                                      object registered, object named,
                                                      object injected, object overridden,
                                                      bool isResolveble)
             => TestImportWithOverride(OptionalImportType.MakeGenericType(type),
-                                  Override_MemberOverride_WithType(type, DependencyName, overridden));
+                                  Override_MemberOverride_WithType(type, DependencyName, overridden), overridden);
 
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void Optional_OnType(string test, Type type,
                                                      object @default, object defaultAttr,
                                                      object registered, object named,
@@ -42,7 +42,7 @@ namespace Regression.Override
         {
             var target = OptionalImportType.MakeGenericType(type);
 
-            TestImportWithOverride(target, Override_MemberOverride_OnType(target, type, DependencyName, overridden));
+            TestImportWithOverride(target, Override_MemberOverride_OnType(target, type, DependencyName, overridden), overridden);
         }
     }
 }

@@ -21,13 +21,13 @@ namespace Regression.Override
 
         #region Runners
 
-        protected void TestImportWithOverride(Type type, ResolverOverride @override)
+        protected void TestImportWithOverride(Type type, ResolverOverride @override, object value)
         {
             var instance = Container.Resolve(type, null, @override) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
-            Assert.AreEqual(@override.Value, instance.Value);
+            Assert.AreEqual(value, instance.Value);
 
             // Register missing types
             RegisterTypes();
@@ -37,7 +37,7 @@ namespace Regression.Override
 
             // Validate
             Assert.IsNotNull(instance);
-            Assert.AreEqual(@override.Value, instance.Value);
+            Assert.AreEqual(value, instance.Value);
         }
 
         #endregion

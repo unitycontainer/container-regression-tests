@@ -32,13 +32,40 @@ namespace Methods
         #region Not Supported in Unity v4
 
 #if BEHAVIOR_V4
-        public override void Implicit_With_MemberOverride(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble) { }
-        public override void Implicit_With_ParameterType(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble) { }
-        public override void Implicit_With_TargetType(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble) { }
-        public override void Annotated_With_Optional(string test, Type type) { }
-        public override void Annotated_With_Required(string test, Type type) { }
-        public override void Injected_Annotated(string test, Type type) { }
-        public override void Injected_Implicit(string test, Type type) { }
+        public override void Implicit_ByName(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
+
+        public override void Implicit_OnType(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
+
+        public override void Implicit_WithType(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
+
+        public override void Optional_ByName(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
+
+        public override void Optional_OnType(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
+
+        public override void Optional_WithType(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
+
+        public override void Required_ByName(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
+        public override void Required_OnType(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
+
+        public override void Required_WithType(string test, Type type, object @default, object defaultAttr, object registered, object named, object injected, object overridden, bool isResolveble)
+        {
+        }
 #endif
 
         #endregion
