@@ -9,6 +9,9 @@ namespace Regression.Implicit.Constructors.WithDefault
         public Implicit_Parameter_Int_WithDefault(int value = PatternBase.DefaultInt) => Value = value;
 
         public override object Default => PatternBase.DefaultInt;
+        public override object Injected => PatternBase.InjectedInt;
+        public override object Registered => PatternBase.RegisteredInt;
+        public override object Override => PatternBase.OverriddenInt;
         public override Type ImportType => typeof(int);
     }
 
@@ -17,6 +20,9 @@ namespace Regression.Implicit.Constructors.WithDefault
         public Implicit_Parameter_String_WithDefault(string value = PatternBase.DefaultString) => Value = value;
 
         public override object Default => PatternBase.DefaultString;
+        public override object Injected => PatternBase.InjectedString;
+        public override object Registered => PatternBase.RegisteredString;
+        public override object Override => PatternBase.OverriddenString;
         public override Type ImportType => typeof(string);
     }
 
@@ -39,6 +45,9 @@ namespace Regression.Implicit.Constructors.WithDefaultAttribute
         public Implicit_Int_WithDefaultAttribute([DefaultValue(PatternBase.DefaultValueInt)] int value) => Value = value;
 
         public override object Default => PatternBase.DefaultValueInt;
+        public override object Injected => PatternBase.InjectedInt;
+        public override object Registered => PatternBase.RegisteredInt;
+        public override object Override => PatternBase.OverriddenInt;
         public override Type ImportType => typeof(int);
     }
 
@@ -47,6 +56,9 @@ namespace Regression.Implicit.Constructors.WithDefaultAttribute
         public Implicit_String_WithDefaultAttribute([DefaultValue(PatternBase.DefaultValueString)] string value) => Value = value;
 
         public override object Default => PatternBase.DefaultValueString;
+        public override object Injected => PatternBase.InjectedString;
+        public override object Registered => PatternBase.RegisteredString;
+        public override object Override => PatternBase.OverriddenString;
         public override Type ImportType => typeof(string);
     }
 
@@ -68,6 +80,9 @@ namespace Regression.Implicit.Constructors.WithDefaultAndAttribute
     {
         public Implicit_Int_WithDefaultAndAttribute([DefaultValue(PatternBase.DefaultValueInt)] int value = PatternBase.DefaultInt) => Value = value;
 
+        public override object Injected => PatternBase.InjectedInt;
+        public override object Registered => PatternBase.RegisteredInt;
+        public override object Override => PatternBase.OverriddenInt;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => PatternBase.DefaultInt;
@@ -81,6 +96,9 @@ namespace Regression.Implicit.Constructors.WithDefaultAndAttribute
     {
         public Implicit_String_WithDefaultAndAttribute([DefaultValue(PatternBase.DefaultValueString)] string value = PatternBase.DefaultString) => Value = value;
 
+        public override object Injected => PatternBase.InjectedString;
+        public override object Registered => PatternBase.RegisteredString;
+        public override object Override => PatternBase.OverriddenString;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => PatternBase.DefaultString;

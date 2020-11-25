@@ -19,6 +19,7 @@ namespace Regression.Override
             var import = GetImportType(type);
             var injected = GetInjectedValue(import);
             var @override = GetOverrideValue(import);
+            
             Container.RegisterType(null, type, null, null, InjectionMember_Value(injected));
 
             var instance = Container.Resolve(type, null) as PatternBaseType;
@@ -28,7 +29,7 @@ namespace Regression.Override
             Assert.IsInstanceOfType(instance, type);
             Assert.IsInstanceOfType(instance.Value, instance.ImportType);
             Assert.AreEqual(import, instance.ImportType);
-            Assert.AreEqual(injected, instance.Value);
+            Assert.AreEqual(instance.Injected, instance.Value);
 
             // Act
             instance = Container.Resolve(type, null, Override_MemberOverride_WithType(import, DependencyName, @override)) as PatternBaseType;
@@ -38,7 +39,7 @@ namespace Regression.Override
             Assert.IsInstanceOfType(instance, type);
             Assert.IsInstanceOfType(instance.Value, instance.ImportType);
             Assert.AreEqual(import, instance.ImportType);
-            Assert.AreEqual(@override, instance.Value);
+            Assert.AreEqual(instance.Override, instance.Value);
         }
 
         [DataTestMethod]

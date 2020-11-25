@@ -15,6 +15,9 @@ namespace Regression.Implicit.Methods.WithDefault
         public virtual void Method(int value = PatternBase.DefaultInt) => Value = value;
 
         public override object Default => PatternBase.DefaultInt;
+        public override object Injected => PatternBase.InjectedInt;
+        public override object Registered => PatternBase.RegisteredInt;
+        public override object Override => PatternBase.OverriddenInt;
         public override Type ImportType => typeof(int);
     }
 
@@ -24,6 +27,10 @@ namespace Regression.Implicit.Methods.WithDefault
         public virtual void Method(string value = PatternBase.DefaultString) => Value = value;
 
         public override object Default => PatternBase.DefaultString;
+        public override object Injected => PatternBase.InjectedString;
+        public override object Registered => PatternBase.RegisteredString;
+        public override object Override => PatternBase.OverriddenString;
+
         public override Type ImportType => typeof(string);
     }
 
@@ -33,10 +40,10 @@ namespace Regression.Implicit.Methods.WithDefault
 
         [InjectionMethod]
         public override void Method(int value = _default) => base.Method(value);
-
 #if BEHAVIOR_V5
         // BUG: See https://github.com/unitycontainer/container/issues/291
         public override object Default => PatternBase.DefaultInt;
+        public override object Injected => PatternBase.DefaultInt;
 #else
         public override object Default => _default;
 #endif
@@ -52,6 +59,9 @@ namespace Regression.Implicit.Methods.WithDefaultAttribute
         public virtual void Method([DefaultValue(PatternBase.DefaultValueInt)] int value) => Value = value;
 
         public override object Default => PatternBase.DefaultValueInt;
+        public override object Injected => PatternBase.InjectedInt;
+        public override object Registered => PatternBase.RegisteredInt;
+        public override object Override => PatternBase.OverriddenInt;
         public override Type ImportType => typeof(int);
     }
 
@@ -61,9 +71,13 @@ namespace Regression.Implicit.Methods.WithDefaultAttribute
         public virtual void Method([DefaultValue(PatternBase.DefaultValueString)] string value) => Value = value;
 
         public override object Default => PatternBase.DefaultValueString;
+        public override object Injected => PatternBase.InjectedString;
+        public override object Registered => PatternBase.RegisteredString;
+        public override object Override => PatternBase.OverriddenString;
         public override Type ImportType => typeof(string);
     }
 
+#if !BEHAVIOR_V5 // BUG: See https://github.com/unitycontainer/container/issues/291
     public class Implicit_Derived_WithDefaultAttribute : Implicit_Int_WithDefaultAttribute
     {
         private const int _default = 1111;
@@ -71,14 +85,10 @@ namespace Regression.Implicit.Methods.WithDefaultAttribute
         [InjectionMethod]
         public override void Method([DefaultValue(_default)] int value = PatternBase.DefaultValueInt) => base.Method(value);
 
-#if BEHAVIOR_V5
-        // BUG: See https://github.com/unitycontainer/container/issues/291
-        public override object Default => PatternBase.DefaultInt;
-#else
         public override object Default => _default;
-#endif
         public override Type ImportType => typeof(int);
     }
+#endif
 }
 
 
@@ -92,6 +102,9 @@ namespace Regression.Implicit.Methods.WithDefaultAndAttribute
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => PatternBase.DefaultInt;
+        public override object Injected => PatternBase.InjectedInt;
+        public override object Registered => PatternBase.RegisteredInt;
+        public override object Override => PatternBase.OverriddenInt;
 #else
         public override object Default => PatternBase.DefaultValueInt;
 #endif
@@ -103,6 +116,9 @@ namespace Regression.Implicit.Methods.WithDefaultAndAttribute
         [InjectionMethod]
         public virtual void Method([DefaultValue(PatternBase.DefaultValueString)] string value = PatternBase.DefaultString) => Value = value;
 
+        public override object Injected => PatternBase.InjectedString;
+        public override object Registered => PatternBase.RegisteredString;
+        public override object Override => PatternBase.OverriddenString;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => PatternBase.DefaultString;
@@ -121,6 +137,7 @@ namespace Regression.Implicit.Methods.WithDefaultAndAttribute
 #if BEHAVIOR_V5
         // BUG: See https://github.com/unitycontainer/container/issues/291
         public override object Default => PatternBase.DefaultInt;
+        public override object Injected => PatternBase.DefaultInt;
 #else
         public override object Default => _default;
 #endif
