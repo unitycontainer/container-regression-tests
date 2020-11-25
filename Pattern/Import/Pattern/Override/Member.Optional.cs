@@ -48,7 +48,7 @@ namespace Regression.Override
 
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void Optional_DownTheLine_ByName(string test, Type type,
                                                         object @default, object defaultAttr,
                                                         object registered, object named,
@@ -61,7 +61,7 @@ namespace Regression.Override
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void Optional_DownTheLine_WithType(string test, Type type,
                                                         object @default, object defaultAttr,
                                                         object registered, object named,
@@ -74,7 +74,7 @@ namespace Regression.Override
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
         public virtual void Optional_DownTheLine_OnTypw(string test, Type type,
                                                         object @default, object defaultAttr,
                                                         object registered, object named,
