@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Regression.Annotated
+namespace Import.Annotated
 {
     public abstract partial class Pattern : PatternBase
     {

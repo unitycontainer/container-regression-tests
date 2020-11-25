@@ -6,7 +6,7 @@ using Microsoft.Practices.Unity;
 using Unity.Injection;
 #endif
 
-namespace Regression.Injected
+namespace Import.Injected
 {
     /// <summary>
     /// Tests injecting dependencies with InjectionParameter

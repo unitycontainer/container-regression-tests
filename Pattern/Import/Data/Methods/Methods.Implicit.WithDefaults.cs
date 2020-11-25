@@ -7,7 +7,7 @@ using Unity;
 #endif
 
 
-namespace Regression.Implicit.Methods.WithDefault
+namespace Import.Implicit.Methods.WithDefault
 {
     public class Implicit_Parameter_Int_WithDefault : PatternBaseType
     {
@@ -51,7 +51,7 @@ namespace Regression.Implicit.Methods.WithDefault
 }
 
 
-namespace Regression.Implicit.Methods.WithDefaultAttribute
+namespace Import.Implicit.Methods.WithDefaultAttribute
 {
     public class Implicit_Int_WithDefaultAttribute : PatternBaseType
     {
@@ -92,7 +92,7 @@ namespace Regression.Implicit.Methods.WithDefaultAttribute
 }
 
 
-namespace Regression.Implicit.Methods.WithDefaultAndAttribute
+namespace Import.Implicit.Methods.WithDefaultAndAttribute
 {
     public class Implicit_Int_WithDefaultAndAttribute : PatternBaseType
     {

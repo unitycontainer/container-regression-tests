@@ -2,7 +2,7 @@
 using System.ComponentModel;
 
 
-namespace Regression.Implicit.Constructors.WithDefault
+namespace Import.Implicit.Constructors.WithDefault
 {
     public class Implicit_Parameter_Int_WithDefault : PatternBaseType
     {
@@ -38,7 +38,7 @@ namespace Regression.Implicit.Constructors.WithDefault
 }
 
 
-namespace Regression.Implicit.Constructors.WithDefaultAttribute
+namespace Import.Implicit.Constructors.WithDefaultAttribute
 {
     public class Implicit_Int_WithDefaultAttribute : PatternBaseType
     {
@@ -74,7 +74,7 @@ namespace Regression.Implicit.Constructors.WithDefaultAttribute
 }
 
 
-namespace Regression.Implicit.Constructors.WithDefaultAndAttribute
+namespace Import.Implicit.Constructors.WithDefaultAndAttribute
 {
     public class Implicit_Int_WithDefaultAndAttribute : PatternBaseType
     {

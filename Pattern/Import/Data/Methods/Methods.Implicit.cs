@@ -6,7 +6,7 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Regression.Implicit.Methods
+namespace Import.Implicit.Methods
 {
     #region Generic
 

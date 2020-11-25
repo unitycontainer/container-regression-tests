@@ -2,7 +2,7 @@
 using System.ComponentModel;
 
 
-namespace Regression.Override.Fields.WithDefaultAttribute
+namespace Import.Override.Fields.WithDefaultAttribute
 {
     public class Implicit_Int_WithDefaultAttribute : PatternBaseType
     {

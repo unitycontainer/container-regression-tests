@@ -7,7 +7,7 @@ using Unity;
 #endif
 
 
-namespace Regression.Annotated.Properties.Required.WithDefaults
+namespace Import.Annotated.Properties.Required.WithDefaults
 {
 
     #region WithDefault

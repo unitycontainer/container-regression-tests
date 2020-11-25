@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Regression;
+using Import;
 
-namespace Fields
+namespace Import.Fields
 {
     [TestClass]
-    public partial class Injected : Regression.Injected.Pattern
+    public partial class Injected : Import.Injected.Pattern
     {
         #region Scaffolding
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Regression.Injected
+namespace Import.Injected
 {
     public abstract partial class Pattern : PatternBase
     {

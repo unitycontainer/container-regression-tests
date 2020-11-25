@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Regression.Implicit
+namespace Import.Implicit
 {
     public abstract partial class Pattern : PatternBase
     {

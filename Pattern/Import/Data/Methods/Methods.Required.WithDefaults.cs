@@ -8,7 +8,7 @@ using Unity;
 
 
 
-namespace Regression.Annotated.Methods.Required.WithDefaults
+namespace Import.Annotated.Methods.Required.WithDefaults
 {
     #region WithDefault
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Regression.Injected
+namespace Import.Injected
 {
     /// <summary>
     /// Tests injecting dependencies by type

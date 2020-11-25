@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Regression.Implicit.Properties
+namespace Import.Implicit.Properties
 {
     #region Generic
 

@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Regression.Implicit.Fields
+namespace Import.Implicit.Fields
 {
     #region Generic
 

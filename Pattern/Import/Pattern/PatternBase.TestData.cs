@@ -7,7 +7,7 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Regression
+namespace Import
 {
     public abstract partial class PatternBase
     {

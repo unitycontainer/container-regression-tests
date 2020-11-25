@@ -6,7 +6,7 @@ using Unity.Injection;
 using Unity.Resolution;
 #endif
 
-namespace Constructors
+namespace Import.Constructors
 {
     public static class Support
     {

@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 
 
-namespace Regression.Override.Properties.WithDefaultAttribute
+namespace Import.Override.Properties.WithDefaultAttribute
 {
     public class Implicit_Int_WithDefaultAttribute : PatternBaseType
     {

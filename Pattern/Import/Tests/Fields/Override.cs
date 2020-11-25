@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Fields
+namespace Import.Fields
 {
     [TestClass]
-    public partial class Override : Regression.Override.Pattern
+    public partial class Override : Import.Override.Pattern
     {
         #region Scaffolding
 

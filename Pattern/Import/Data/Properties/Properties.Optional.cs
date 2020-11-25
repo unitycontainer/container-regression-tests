@@ -6,7 +6,7 @@ using Unity;
 #endif
 
 
-namespace Regression.Annotated.Properties.Optional
+namespace Import.Annotated.Properties.Optional
 {
     #region Generic
 

@@ -6,7 +6,7 @@ using Unity.Injection;
 using Unity.Resolution;
 #endif
 
-namespace Methods
+namespace Import.Methods
 {
     public static class Support
     {

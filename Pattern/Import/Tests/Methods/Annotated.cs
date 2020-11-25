@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Methods
+namespace Import.Methods
 {
     [TestClass]
-    public partial class Annotated : Regression.Annotated.Pattern
+    public partial class Annotated : Import.Annotated.Pattern
     {
         #region Scaffolding
 

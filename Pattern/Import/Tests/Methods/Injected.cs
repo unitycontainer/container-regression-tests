@@ -1,15 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Regression;
+using Import;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 #endif
 
-namespace Methods
+namespace Import.Methods
 {
     [TestClass]
-    public partial class Injected : Regression.Injected.Pattern
+    public partial class Injected : Import.Injected.Pattern
     {
         #region Scaffolding
 

@@ -12,7 +12,7 @@ using Unity.Injection;
 using Unity.Resolution;
 #endif
 
-namespace Regression
+namespace Import
 {
     public abstract partial class PatternBase
     {

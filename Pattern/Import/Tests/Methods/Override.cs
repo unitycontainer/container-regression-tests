@@ -2,10 +2,10 @@
 using System;
 using System.Linq;
 
-namespace Methods
+namespace Import.Methods
 {
     [TestClass]
-    public partial class Override : Regression.Override.Pattern
+    public partial class Override : Import.Override.Pattern
     {
         #region Scaffolding
 

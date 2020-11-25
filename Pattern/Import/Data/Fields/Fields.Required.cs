@@ -5,7 +5,7 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Regression.Annotated.Fields.Required
+namespace Import.Annotated.Fields.Required
 {
     #region Generic
 

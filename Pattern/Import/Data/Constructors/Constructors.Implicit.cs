@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Regression.Implicit.Constructors
+namespace Import.Implicit.Constructors
 {
     #region Generic
 

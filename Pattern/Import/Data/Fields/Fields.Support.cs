@@ -6,7 +6,7 @@ using Unity.Injection;
 using Unity.Resolution;
 #endif
 
-namespace Fields
+namespace Import.Fields
 {
     public static class Support
     {

@@ -6,7 +6,7 @@ using Unity.Injection;
 using Unity.Resolution;
 #endif
 
-namespace Properties
+namespace Import.Properties
 {
     public static class Support
     {
@@ -51,7 +51,6 @@ namespace Properties
 
 
         #region Override
-
 
         public static ResolverOverride GetMemberOverride(string name, object value)
             => new PropertyOverride(name, value);

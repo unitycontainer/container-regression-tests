@@ -6,7 +6,7 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Regression.Implicit
+namespace Import.Implicit
 {
     public abstract partial class Pattern
     {

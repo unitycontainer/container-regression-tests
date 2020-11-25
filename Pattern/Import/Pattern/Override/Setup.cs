@@ -8,7 +8,7 @@ using Microsoft.Practices.Unity;
 using Unity.Resolution;
 #endif
 
-namespace Regression.Override
+namespace Import.Override
 {
     public abstract partial class Pattern : PatternBase
     {

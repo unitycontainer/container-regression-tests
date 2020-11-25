@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Constructors
+namespace Import.Constructors
 {
     [TestClass]
-    public partial class Implicit : Regression.Implicit.Pattern
+    public partial class Implicit : Import.Implicit.Pattern
     {
         #region Scaffolding
 
