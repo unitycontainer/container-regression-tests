@@ -15,7 +15,7 @@ using Unity.Resolution;
 
 namespace Import
 {
-    public abstract partial class ImportBase : PatternBase
+    public abstract partial class ImportBase : FixtureBase
     {
         #region Fields
 
@@ -32,7 +32,7 @@ namespace Import
 
         new protected static void ClassInitialize(TestContext context)
         {
-            PatternBase.ClassInitialize(context);
+            FixtureBase.ClassInitialize(context);
 
             ImplicitImportType = GetType("Implicit", "BaselineTestType`1");
             RequiredImportType = GetType("Annotated", "Required.BaselineTestType`1");

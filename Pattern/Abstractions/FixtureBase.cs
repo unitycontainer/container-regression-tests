@@ -8,13 +8,11 @@ using System.Text.RegularExpressions;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
-using Unity.Injection;
-using Unity.Resolution;
 #endif
 
 namespace Regression
 {
-    public abstract partial class PatternBase
+    public abstract partial class FixtureBase
     {
         #region Fields
 
