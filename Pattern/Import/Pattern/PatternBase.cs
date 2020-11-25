@@ -28,7 +28,9 @@ namespace Regression
 
         protected static Type ImplicitImportType;
         protected static Type RequiredImportType;
+        protected static Type RequiredImportNamed;
         protected static Type OptionalImportType;
+        protected static Type OptionalImportNamed;
 
         #endregion
 
@@ -47,6 +49,8 @@ namespace Regression
             ImplicitImportType = GetType("Implicit", "BaselineTestType`1");
             RequiredImportType = GetType("Annotated", "Required.BaselineTestType`1");
             OptionalImportType = GetType("Annotated", "Optional.BaselineTestType`1");
+            RequiredImportNamed = GetType("Annotated", "Required.BaselineTestTypeNamed`1");
+            OptionalImportNamed = GetType("Annotated", "Optional.BaselineTestTypeNamed`1");
         }
 
         public virtual void TestInitialize() => Container = new UnityContainer();

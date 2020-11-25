@@ -1,5 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+#if UNITY_V4
+using Microsoft.Practices.Unity;
+#else
+using Unity.Resolution;
+#endif
 
 namespace Regression.Override
 {
@@ -8,6 +15,30 @@ namespace Regression.Override
         #region Fields
 
         protected virtual string DependencyName => string.Empty;
+
+        #endregion
+
+
+        #region Runners
+
+        protected void TestImportWithOverride(Type type, ResolverOverride @override)
+        {
+            var instance = Container.Resolve(type, null, @override) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(@override.Value, instance.Value);
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            instance = Container.Resolve(type, null, @override) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(@override.Value, instance.Value);
+        }
 
         #endregion
 

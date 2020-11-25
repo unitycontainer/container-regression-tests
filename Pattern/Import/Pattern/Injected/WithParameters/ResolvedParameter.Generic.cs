@@ -29,7 +29,7 @@ namespace Regression.Injected
                                                           object injected, object overridden,
                                                           bool isResolveble)
             => TestRequiredGeneric(ImplicitImportType, type,
-                InjectionMember_Value(new GenericParameter("TDependency")), registered);
+                InjectionMember_Value(new GenericParameter(TDependency)), registered);
 
         [DataTestMethod]
         [DynamicData(nameof(Import_Compatibility_Data), typeof(PatternBase))]
@@ -39,7 +39,7 @@ namespace Regression.Injected
                                                           object injected, object overridden,
                                                           bool isResolveble)
             => TestRequiredGeneric(ImplicitImportType, type,
-                InjectionMember_Value(new GenericParameter("TDependency", Name)), named);
+                InjectionMember_Value(new GenericParameter(TDependency, Name)), named);
 
         #endregion
 
