@@ -33,7 +33,7 @@ namespace Regression
         protected static void ClassInitialize(TestContext context)
         {
             var type = Type.GetType(context.FullyQualifiedTestClassName);
-            var root = type.Namespace.Split(".");
+            var root = type.Namespace.Split('.');
 
             _type = type.Namespace;
             _prefix = root.First();
@@ -62,7 +62,7 @@ namespace Regression
                      .RegisterInstance(Name, NamedString)
                      .RegisterInstance(RegisteredUnresolvable)
                      .RegisterInstance(Name, NamedUnresolvable)
-#if !V4 // Only Unity v5 and up allow `null` as a value
+#if !BEHAVIOR_V4 // Only Unity v5 and up allow `null` as a value
                      .RegisterInstance(typeof(string),       Null, (object)null)
                      .RegisterInstance(typeof(Unresolvable), Null, (object)null)
 #endif
@@ -77,10 +77,12 @@ namespace Regression
                      .RegisterInstance<int>("int_0", 0)
                      .RegisterInstance<int>("int_1", 1)
                      .RegisterInstance<int>("int_2", 2)
+#if !BEHAVIOR_V4
                      .RegisterInstance<int>("int_3", 3)
+#endif
 
                      .RegisterInstance<string>(RegisteredString)
-#if !V4 // Only Unity v5 and up allow `null` as a value
+#if !BEHAVIOR_V4 // Only Unity v5 and up allow `null` as a value
                      .RegisterInstance<string>("string_0", (string)null)
 #endif
                      .RegisterInstance<string>("string_1", "string_1")
@@ -88,7 +90,7 @@ namespace Regression
                      .RegisterInstance<string>("string_3", "string_3")
 
                      .RegisterInstance<Unresolvable>(RegisteredUnresolvable)
-#if !V4 // Only Unity v5 and up allow `null` as a value
+#if !BEHAVIOR_V4 // Only Unity v5 and up allow `null` as a value
                      .RegisterInstance<Unresolvable>("Unresolvable_0", (Unresolvable)null)
 #endif
                      .RegisterInstance<Unresolvable>("Unresolvable_1", Unresolvable.Create("1"))

@@ -139,6 +139,7 @@ namespace Resolution
         }
 
         [TestMethod]
+        [ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
         public void HandlesConstraintViolation()
         {
             // Arrange

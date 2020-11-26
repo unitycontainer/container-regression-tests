@@ -36,7 +36,6 @@ namespace Import.Implicit
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
         }
-
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Array(string test, Type type,
@@ -46,6 +45,7 @@ namespace Import.Implicit
                                   bool isResolveble)
             => TestArrayImport(ImplicitImportType, type);
 
+#if !BEHAVIOR_V4
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Enumerable(string test, Type type,
@@ -54,6 +54,7 @@ namespace Import.Implicit
                                        object injected, object overridden,
                                        bool isResolveble)
             => TestEnumerableImport(ImplicitImportType, type);
+#endif
 
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]

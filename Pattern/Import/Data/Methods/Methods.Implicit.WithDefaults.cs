@@ -43,8 +43,8 @@ namespace Import.Implicit.Methods.WithDefault
         public override void Method(int value = _default) => base.Method(value);
 #if BEHAVIOR_V5
         // BUG: See https://github.com/unitycontainer/container/issues/291
-        public override object Default => PatternBase.DefaultInt;
-        public override object Injected => PatternBase.DefaultInt;
+        public override object Default => ImportBase.DefaultInt;
+        public override object Injected => ImportBase.DefaultInt;
 #else
         public override object Default => _default;
 #endif
@@ -105,7 +105,7 @@ namespace Import.Implicit.Methods.WithDefaultAndAttribute
         public override object Override => ImportBase.OverriddenInt;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => PatternBase.DefaultInt;
+        public override object Default => ImportBase.DefaultInt;
 #else
         public override object Default => ImportBase.DefaultValueInt;
 #endif
@@ -122,7 +122,7 @@ namespace Import.Implicit.Methods.WithDefaultAndAttribute
         public override object Override => ImportBase.OverriddenString;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => PatternBase.DefaultString;
+        public override object Default => ImportBase.DefaultString;
 #else
         public override object Default => ImportBase.DefaultValueString;
 #endif
@@ -137,8 +137,8 @@ namespace Import.Implicit.Methods.WithDefaultAndAttribute
         public override void Method([DefaultValue(_default)] int value = ImportBase.DefaultValueInt) => base.Method(value);
 #if BEHAVIOR_V5
         // BUG: See https://github.com/unitycontainer/container/issues/291
-        public override object Default => PatternBase.DefaultInt;
-        public override object Injected => PatternBase.DefaultInt;
+        public override object Default => ImportBase.DefaultInt;
+        public override object Injected => ImportBase.DefaultInt;
 #else
         public override object Default => _default;
 #endif

@@ -18,7 +18,7 @@ namespace Resolution
         public void ContainerCanResolveListOfT()
         {
             // Arrange
-            Container.RegisterType(typeof(List<>), Invoke.Constructor());
+            Container.RegisterType(typeof(List<>), new InjectionConstructor());
 
             // Act
             var result = Container.Resolve<List<Service>>();
@@ -130,7 +130,7 @@ namespace Resolution
             Container.RegisterInstance("o1", o1)
                      .RegisterInstance("o2", o2)
 
-                     .RegisterType<InjectedObject>(Invoke.Constructor(Inject.Array<object>()))
+                     .RegisterType<InjectedObject>(new InjectionConstructor(new ResolvedArrayParameter<object>()))
 
                      .RegisterType<InjectedObject>(Legacy, 
                         new InjectionConstructor(new ResolvedArrayParameter(typeof(object))));
@@ -159,7 +159,7 @@ namespace Resolution
                      .RegisterInstance("o2", o2)
                      
                      .RegisterType<InjectedObject>(
-                        Invoke.Constructor(Inject.Parameter(new object[] { o1, o3 })))
+                        new InjectionConstructor(new InjectionParameter(new object[] { o1, o3 })))
 
                      .RegisterType<InjectedObject>(Legacy, 
                         new InjectionConstructor(
@@ -196,10 +196,10 @@ namespace Resolution
                      .RegisterInstance("o3", o3)
 
                      .RegisterType<InjectedObject>(
-                        Invoke.Constructor(
-                            Inject.Array(typeof(object),
-                                Resolve.Dependency<object>("o1"),
-                                Resolve.Dependency<object>("o2") )))
+                        new InjectionConstructor(
+                            new ResolvedArrayParameter(typeof(object),
+                                new ResolvedParameter<object>("o1"),
+                                new ResolvedParameter<object>("o2") )))
 
                      .RegisterType<InjectedObject>(Legacy,
                         new InjectionConstructor(
@@ -231,7 +231,7 @@ namespace Resolution
 
             Container.RegisterInstance("o1", o1)
                      .RegisterInstance("o2", o2)
-                     .RegisterType<InjectedObject>(Invoke.Constructor(typeof(IService[])))
+                     .RegisterType<InjectedObject>(new InjectionConstructor(typeof(IService[])))
                      .RegisterType<InjectedObject>(Legacy, new InjectionConstructor(typeof(IService[])));
 
             // Act

@@ -149,7 +149,11 @@ namespace Import
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
+#if BEHAVIOR_V4
+            Assert.AreEqual(3, (instance.Value as IList)?.Count ?? -1);
+#else
             Assert.AreEqual(4, (instance.Value as IList)?.Count ?? -1);
+#endif
         }
 
         protected void TestEnumerableImport(Type definition, Type importType)

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
+using Unity.Injection;
 #endif
 
 namespace Resolution
@@ -55,6 +56,7 @@ namespace Resolution
             Assert.AreEqual(0, array.Length);
         }
 
+#if !BEHAVIOR_V4 // Not yet supported
         [TestMethod]
         public void Lazy()
         {
@@ -94,6 +96,7 @@ namespace Resolution
             Assert.IsNotNull(array);
             Assert.AreEqual(3, array.Length);
         }
+#endif
 
         [TestMethod]
         public void FuncNamed()
@@ -112,11 +115,12 @@ namespace Resolution
             Assert.AreEqual(3, array.Length);
         }
 
+#if !BEHAVIOR_V4
         [TestMethod]
         public void LazyFunc()
         {
             // Arrange
-            Container.RegisterType(typeof(IList<>), typeof(List<>), Invoke.Constructor());
+            Container.RegisterType(typeof(IList<>), typeof(List<>), new InjectionConstructor());
             Container.RegisterType(typeof(IFoo<>), typeof(Foo<>));
             Container.RegisterType<IService, Service>("1");
             Container.RegisterType<IService, Service>("2");
@@ -208,6 +212,7 @@ namespace Resolution
             Assert.IsNotNull(enumerable[1]);
             Assert.IsNotNull(enumerable[2]);
         }
+#endif
 
         [TestMethod]
         public void ClosedTrumpsOpenGeneric()

@@ -49,6 +49,7 @@ namespace Import.Annotated
                                             bool isResolveble)
             => TestArrayImport(RequiredImportType, type);
 
+#if !BEHAVIOR_V4
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Required_Enumerable(string test, Type type,
@@ -57,6 +58,7 @@ namespace Import.Annotated
                                             object injected, object overridden,
                                             bool isResolveble)
             => TestEnumerableImport(RequiredImportType, type);
+#endif
 
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
@@ -119,6 +121,7 @@ namespace Import.Annotated
                                             bool isResolveble)
             => TestArrayImport(OptionalImportType, type);
 
+#if !BEHAVIOR_V4
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Optional_Enumerable(string test, Type type,
@@ -127,6 +130,7 @@ namespace Import.Annotated
                                             object injected, object overridden,
                                             bool isResolveble)
             => TestEnumerableImport(OptionalImportType, type);
+#endif
 
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]

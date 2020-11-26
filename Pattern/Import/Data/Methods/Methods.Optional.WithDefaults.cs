@@ -138,7 +138,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => PatternBase.DefaultInt;
+        public override object Default => ImportBase.DefaultInt;
 #else
         public override object Default => ImportBase.DefaultValueInt;
 #endif
@@ -152,7 +152,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => PatternBase.DefaultInt;
+        public override object Default => ImportBase.DefaultInt;
 #else
         public override object Default => ImportBase.DefaultValueInt;
 #endif
@@ -168,7 +168,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
         { base.Method(value); }
 
 #if BEHAVIOR_V5
-        public override object Default => PatternBase.DefaultInt;
+        public override object Default => ImportBase.DefaultInt;
 #else
         public override object Default => _default;
 #endif
@@ -184,7 +184,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
 #if BEHAVIOR_V4     // Unity v4 did not support default values
         public override object Default => null;
 #elif BEHAVIOR_V5   // Unity v5 did not support DefaultValueAttribute
-        public override object Default => PatternBase.DefaultString;
+        public override object Default => ImportBase.DefaultString;
 #else
         public override object Default => ImportBase.DefaultValueString;
 #endif
@@ -199,7 +199,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
 #if BEHAVIOR_V4     // Unity v4 did not support default values
         public override object Default => null;
 #elif BEHAVIOR_V5   // Unity v5 did not support DefaultValueAttribute
-        public override object Default => PatternBase.DefaultString;
+        public override object Default => ImportBase.DefaultString;
 #else
         public override object Default => ImportBase.DefaultValueString;
 #endif
