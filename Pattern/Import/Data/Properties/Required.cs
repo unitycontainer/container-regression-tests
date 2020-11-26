@@ -8,6 +8,56 @@ using Unity;
 #endif
 
 
+namespace Import.Annotated.Properties.Required
+{
+    public class BaselineTestType<TDependency>
+        : PatternBaseType
+    {
+        [Dependency] public TDependency Property { get; set; }
+
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineTestTypeNamed<TDependency>
+        : PatternBaseType
+    {
+        [Dependency(ImportBase.Name)] public TDependency Property { get; set; }
+
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineInheritedType<TDependency>
+        : BaselineTestType<TDependency>
+    {
+    }
+
+    public class BaselineInheritedTwice<TDependency>
+        : BaselineInheritedType<TDependency>
+    {
+    }
+
+    public class DownTheLineType<TDependency>
+        : PatternBaseType
+    {
+        public DownTheLineType(BaselineTestType<TDependency> import)
+            => Value = import;
+    }
+
+    public class ArrayTestType<TDependency>
+        : PatternBaseType
+    {
+        [Dependency] public TDependency[] Property { get; set; }
+
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+}
+
+
+
+
 namespace Import.Annotated.Properties.Required.WithDefaults
 {
 

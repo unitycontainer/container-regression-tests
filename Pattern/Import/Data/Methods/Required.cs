@@ -7,6 +7,66 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
+namespace Import.Annotated.Methods.Required
+{
+    public class BaselineTestType<TDependency>
+        : PatternBaseType
+    {
+        [InjectionMethod]
+        public virtual void Method([Dependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineTestTypeNamed<TDependency>
+    : PatternBaseType
+    {
+        [InjectionMethod]
+        public virtual void Method([Dependency(ImportBase.Name)] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineInheritedType<TDependency>
+        : BaselineTestType<TDependency>
+    {
+    }
+
+    public class BaselineInheritedTwice<TDependency>
+        : BaselineInheritedType<TDependency>
+    {
+    }
+
+    public class DownTheLineType<TDependency>
+        : PatternBaseType
+    {
+        public DownTheLineType(BaselineTestType<TDependency> import)
+            => Value = import;
+    }
+
+    public class ArrayTestType<TDependency>
+        : PatternBaseType
+    {
+        [InjectionMethod]
+        public virtual void Method([Dependency] TDependency[] value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineTestType_Ref<TDependency>
+        : PatternBaseType where TDependency : class
+    {
+        [InjectionMethod]
+        public virtual void Method([Dependency] ref TDependency _)
+            => throw new InvalidOperationException("should never execute");
+    }
+
+    public class BaselineTestType_Out<TDependency>
+        : PatternBaseType where TDependency : class
+    {
+        [InjectionMethod]
+        public virtual void Method([Dependency] out TDependency _)
+            => throw new InvalidOperationException("should never execute");
+    }
+}
+
 
 
 namespace Import.Annotated.Methods.Required.WithDefaults

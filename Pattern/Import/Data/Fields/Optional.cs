@@ -7,6 +7,53 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
+namespace Import.Annotated.Fields.Optional
+{
+    public class BaselineTestType<TDependency>
+        : PatternBaseType
+    {
+        [OptionalDependency] public TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineTestTypeNamed<TDependency>
+        : PatternBaseType
+    {
+        [OptionalDependency(ImportBase.Name)] public TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineInheritedType<TDependency>
+        : BaselineTestType<TDependency>
+    {
+    }
+
+    public class BaselineInheritedTwice<TDependency>
+        : BaselineInheritedType<TDependency>
+    {
+    }
+
+    public class DownTheLineType<TDependency>
+        : PatternBaseType
+    {
+        public DownTheLineType(BaselineTestType<TDependency> import)
+            => Value = import;
+    }
+
+    public class ArrayTestType<TDependency>
+        : PatternBaseType
+    {
+        [OptionalDependency] public TDependency[] Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+}
+
 
 namespace Import.Annotated.Fields.Optional.WithDefaults
 {

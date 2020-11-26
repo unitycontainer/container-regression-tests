@@ -131,7 +131,7 @@ namespace Import
         protected void TestArrayImport(Type definition, Type importType)
         {
             // Arrange
-            var type = definition.MakeGenericType(importType.MakeArrayType());
+            var type = definition.MakeGenericType(importType);
 
             // Act
             var instance = Container.Resolve(type, null) as PatternBaseType;
@@ -154,6 +154,39 @@ namespace Import
 #else
             Assert.AreEqual(4, (instance.Value as IList)?.Count ?? -1);
 #endif
+        }
+
+
+        protected void TestArrayImport(Type definition, Type importType, InjectionMember injection)
+        {
+            // Arrange
+            var type = definition.MakeGenericType(importType);
+
+            Container.RegisterType(null, type, null, null, injection);
+
+            // Act
+            var instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+            Assert.AreEqual(6, (instance.Value as IList)?.Count ?? -1);
+        }
+
+        protected void TestGenericArrayImport(Type definition, Type importType, InjectionMember injection)
+        {
+            // Arrange
+            var type = definition.MakeGenericType(importType);
+
+            Container.RegisterType(null, definition, null, null, injection);
+
+            // Act
+            var instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+            Assert.AreEqual(6, (instance.Value as IList)?.Count ?? -1);
         }
 
         protected void TestEnumerableImport(Type definition, Type importType)

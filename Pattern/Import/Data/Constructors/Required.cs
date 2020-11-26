@@ -7,6 +7,67 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
+namespace Import.Annotated.Constructors.Required
+{
+    public class BaselineTestType<TDependency>
+        : PatternBaseType
+    {
+        public BaselineTestType([Dependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineTestTypeNamed<TDependency>
+        : PatternBaseType
+    {
+        public BaselineTestTypeNamed([Dependency(ImportBase.Name)] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineInheritedType<TDependency>
+        : BaselineTestType<TDependency>
+    {
+        public BaselineInheritedType([Dependency] TDependency value)
+            : base(value)
+        { }
+    }
+
+    public class BaselineInheritedTwice<TDependency>
+        : BaselineInheritedType<TDependency>
+    {
+        public BaselineInheritedTwice([Dependency] TDependency value)
+            : base(value)
+        { }
+    }
+
+    public class DownTheLineType<TDependency>
+        : PatternBaseType
+    {
+        public DownTheLineType(BaselineTestType<TDependency> import)
+            => Value = import;
+    }
+
+    public class ArrayTestType<TDependency>
+        : PatternBaseType
+    {
+        public ArrayTestType([Dependency] TDependency[] value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineTestType_Ref<TDependency>
+        : PatternBaseType where TDependency : class
+    {
+        public BaselineTestType_Ref([Dependency] ref TDependency _)
+            => throw new InvalidOperationException("should never execute");
+    }
+
+    public class BaselineTestType_Out<TDependency>
+        : PatternBaseType where TDependency : class
+    {
+        public BaselineTestType_Out([Dependency] out TDependency _)
+            => throw new InvalidOperationException("should never execute");
+    }
+}
+
 
 
 namespace Import.Annotated.Constructors.Required.WithDefaults

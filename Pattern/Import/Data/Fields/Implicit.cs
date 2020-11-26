@@ -1,32 +1,18 @@
 ﻿using Regression;
 using System;
-#if UNITY_V4
-using Microsoft.Practices.Unity;
-#else
-using Unity;
-#endif
 
-namespace Import.Annotated.Fields.Required
+
+namespace Import.Implicit.Fields
 {
-    #region Generic
-
     public class BaselineTestType<TDependency>
         : PatternBaseType
     {
-        [Dependency] public TDependency Field;
+        public TDependency Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestTypeNamed<TDependency>
-        : PatternBaseType
-    {
-        [Dependency(ImportBase.Name)] public TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
 
     public class BaselineInheritedType<TDependency>
         : BaselineTestType<TDependency>
@@ -45,5 +31,12 @@ namespace Import.Annotated.Fields.Required
             => Value = import;
     }
 
-    #endregion
+    public class ArrayTestType<TDependency>
+        : PatternBaseType
+    {
+        public TDependency[] Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
 }

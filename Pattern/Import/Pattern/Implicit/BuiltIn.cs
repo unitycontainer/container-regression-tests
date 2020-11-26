@@ -38,40 +38,28 @@ namespace Import.Implicit
         }
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void Array(string test, Type type,
-                                  object @default, object defaultAttr,
-                                  object registered, object named,
-                                  object injected, object overridden,
-                                  bool isResolveble)
-            => TestArrayImport(ImplicitImportType, type);
+        public virtual void Array(string test, Type type, object @default, object defaultAttr, object registered, 
+                                  object named, object injected, object overridden, bool isResolveble)
+            => TestArrayImport(ImplicitArrayType, type);
 
 #if !BEHAVIOR_V4
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void Enumerable(string test, Type type,
-                                       object @default, object defaultAttr,
-                                       object registered, object named,
-                                       object injected, object overridden,
-                                       bool isResolveble)
+        public virtual void Enumerable(string test, Type type, object @default, object defaultAttr, object registered, 
+                                       object named, object injected, object overridden, bool isResolveble)
             => TestEnumerableImport(ImplicitImportType, type);
 #endif
 
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void Lazy(string test, Type type,
-                                 object @default, object defaultAttr,
-                                 object registered, object named,
-                                 object injected, object overridden,
-                                 bool isResolveble)
+        public virtual void Lazy(string test, Type type, object @default, object defaultAttr, object registered, 
+                                 object named, object injected, object overridden, bool isResolveble)
             => TestLazyImport(ImplicitImportType, type, registered);
 
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void Func(string test, Type type,
-                                 object @default, object defaultAttr,
-                                 object registered, object named,
-                                 object injected, object overridden,
-                                 bool isResolveble)
+        public virtual void Func(string test, Type type, object @default, object defaultAttr, object registered, 
+                                 object named, object injected, object overridden, bool isResolveble)
             => TestFuncImport(ImplicitImportType, type, registered);
     }
 }

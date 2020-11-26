@@ -42,40 +42,28 @@ namespace Import.Annotated
 
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void Required_Array(string test, Type type,
-                                            object @default, object defaultAttr,
-                                            object registered, object named,
-                                            object injected, object overridden,
-                                            bool isResolveble)
-            => TestArrayImport(RequiredImportType, type);
+        public virtual void Required_Array(string test, Type type, object @default, object defaultAttr,
+                                            object registered, object named, object injected, object overridden, bool isResolveble)
+            => TestArrayImport(RequiredArrayType, type);
 
 #if !BEHAVIOR_V4
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void Required_Enumerable(string test, Type type,
-                                            object @default, object defaultAttr,
-                                            object registered, object named,
-                                            object injected, object overridden,
-                                            bool isResolveble)
+        public virtual void Required_Enumerable(string test, Type type, object @default, object defaultAttr, object registered, 
+                                                object named, object injected, object overridden, bool isResolveble)
             => TestEnumerableImport(RequiredImportType, type);
 #endif
 
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void Resolving_Lazy(string test, Type type,
-                                            object @default, object defaultAttr,
-                                            object registered, object named,
-                                            object injected, object overridden,
-                                            bool isResolveble)
+        public virtual void Resolving_Lazy(string test, Type type, object @default, object defaultAttr, object registered, 
+                                           object named, object injected, object overridden, bool isResolveble)
             => TestLazyImport(RequiredImportType, type, registered);
 
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void Required_Func(string test, Type type,
-                                            object @default, object defaultAttr,
-                                            object registered, object named,
-                                            object injected, object overridden,
-                                            bool isResolveble)
+        public virtual void Required_Func(string test, Type type, object @default, object defaultAttr, object registered, 
+                                          object named, object injected, object overridden, bool isResolveble)
             => TestFuncImport(RequiredImportType, type, registered);
 
 
@@ -119,7 +107,7 @@ namespace Import.Annotated
                                             object registered, object named,
                                             object injected, object overridden,
                                             bool isResolveble)
-            => TestArrayImport(OptionalImportType, type);
+            => TestArrayImport(OptionalArrayType, type);
 
 #if !BEHAVIOR_V4
         [DataTestMethod]

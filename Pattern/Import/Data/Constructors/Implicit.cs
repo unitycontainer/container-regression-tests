@@ -2,6 +2,61 @@
 using System;
 using System.ComponentModel;
 
+namespace Import.Implicit.Constructors
+{
+    public class BaselineTestType<TDependency>
+        : PatternBaseType
+    {
+        public BaselineTestType(TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineInheritedType<TDependency> 
+        : BaselineTestType<TDependency>
+    {
+        public BaselineInheritedType(TDependency value) 
+            : base(value)
+        { }
+    }
+
+    public class BaselineInheritedTwice<TDependency>
+        : BaselineInheritedType<TDependency>
+    {
+        public BaselineInheritedTwice(TDependency value)
+            : base(value)
+        { }
+    }
+
+    public class DownTheLineType<TDependency>
+        : PatternBaseType
+    {
+        public DownTheLineType(BaselineTestType<TDependency> import)
+            => Value = import;
+    }
+
+    public class ArrayTestType<TDependency>
+        : PatternBaseType
+    {
+        public ArrayTestType(TDependency[] value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+
+    public class BaselineTestType_Ref<TDependency>
+        : PatternBaseType where TDependency : class
+    {
+        public BaselineTestType_Ref(ref TDependency value)
+            => throw new InvalidOperationException("should never execute");
+    }
+
+    public class BaselineTestType_Out<TDependency>
+        : PatternBaseType where TDependency : class
+    {
+        public BaselineTestType_Out(out TDependency value)
+            => throw new InvalidOperationException("should never execute");
+    }
+}
+
 
 namespace Import.Implicit.Constructors.WithDefault
 {
