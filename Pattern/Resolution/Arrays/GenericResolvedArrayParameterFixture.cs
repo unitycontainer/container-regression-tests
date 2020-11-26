@@ -125,7 +125,7 @@ namespace Resolution
             // Arrange
             Container.RegisterInstance(typeof(IService), new OtherService());
             Container.RegisterInstance(typeof(IFoo<IService>),    "service", new Foo<IService>(new Service()));
-            Container.RegisterType(typeof(IFoo<>), typeof(Foo<>), "foo");
+            Container.RegisterType(typeof(IFoo<>), typeof(Foo<>), "123");
 
             // Act
             var array = Container.Resolve<IFoo<IService>[]>();
@@ -139,12 +139,17 @@ namespace Resolution
         }
 
         [TestMethod]
+#if BEHAVIOR_V4
         [ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
+#else
+        // Unity v5 and later does not throw on constraint violation when resolving
+        // collections. Violations are ignored and collection is returned without it.
+#endif
         public void HandlesConstraintViolation()
         {
             // Arrange
             Container.RegisterType(typeof(IService), typeof(Service));
-            Container.RegisterType(typeof(IConstrained<>), typeof(Constrained<>), "foo");
+            Container.RegisterType(typeof(IConstrained<>), typeof(Constrained<>), "123");
 
             // Act
             var array = Container.Resolve<IConstrained<IService>[]>();
