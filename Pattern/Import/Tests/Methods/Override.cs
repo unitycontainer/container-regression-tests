@@ -18,7 +18,7 @@ namespace Import.Methods
         protected override string DependencyName => "value";
 
         protected override Type GetImportType(Type type) 
-            => type.GetMethod(Support.MethodName)
+            => type.GetMethod(MethodName)
                    .GetParameters()
                    .First(p => p.Name.Equals(DependencyName))
                    .ParameterType;

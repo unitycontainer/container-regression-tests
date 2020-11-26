@@ -53,6 +53,27 @@ namespace Import.Annotated.Constructors.Optional
         public override object Default => default(TDependency);
     }
 
+    public class PrivateTestType<TDependency>
+        : PatternBaseType
+    {
+        private PrivateTestType([OptionalDependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class ProtectedTestType<TDependency>
+        : PatternBaseType
+    {
+        protected ProtectedTestType([OptionalDependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class InternalTestType<TDependency>
+        : PatternBaseType
+    {
+        internal InternalTestType([OptionalDependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
     public class BaselineTestType_Ref<TDependency>
         : PatternBaseType where TDependency : class
     {

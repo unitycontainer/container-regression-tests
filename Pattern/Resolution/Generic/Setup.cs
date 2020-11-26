@@ -27,16 +27,8 @@ namespace Resolution
 
         #region Test Data
 
-        public interface IFoo<TEntity>
+        public class ServiceFoo : Foo<Service>
         {
-        }
-
-        public class Foo<TEntity> : IFoo<TEntity>
-        {
-        }
-        public class ServiceFoo : IFoo<Service>
-        { 
-        
         }
 
         public class Refer<TEntity>
@@ -52,54 +44,6 @@ namespace Resolution
             public Refer()
             {
                 str = "Hello";
-            }
-        }
-
-        public interface IService
-        {
-        }
-
-        public interface IOtherService
-        {
-        }
-
-        public class Service : IService
-        {
-            public string Id { get; } = Guid.NewGuid().ToString();
-
-            public static int Instances;
-
-            public Service()
-            {
-                Interlocked.Increment(ref Instances);
-            }
-
-            public bool Disposed;
-            public void Dispose()
-            {
-                Disposed = true;
-            }
-        }
-
-        public class OtherService : IService, IOtherService, IDisposable
-        {
-            [InjectionConstructor]
-            public OtherService()
-            {
-
-            }
-
-            public OtherService(IUnityContainer container)
-            {
-
-            }
-
-
-            public bool Disposed = false;
-
-            public void Dispose()
-            {
-                Disposed = true;
             }
         }
 

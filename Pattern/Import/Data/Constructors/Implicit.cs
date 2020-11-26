@@ -41,6 +41,26 @@ namespace Import.Implicit.Constructors
         public override object Default => default(TDependency);
     }
 
+    public class PrivateTestType<TDependency>
+        : PatternBaseType
+    {
+        private PrivateTestType(TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class ProtectedTestType<TDependency>
+        : PatternBaseType
+    {
+        protected ProtectedTestType(TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class InternalTestType<TDependency>
+        : PatternBaseType
+    {
+        internal InternalTestType(TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
 
     public class BaselineTestType_Ref<TDependency>
         : PatternBaseType where TDependency : class

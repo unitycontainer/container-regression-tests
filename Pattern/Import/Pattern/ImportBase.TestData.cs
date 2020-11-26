@@ -42,21 +42,11 @@ namespace Import
         #endregion
 
 
-        public interface IFoo<TEntity>
-        {
-            TEntity Value { get; }
-        }
-
-        public class Foo<TEntity> : IFoo<TEntity>
-        {
-            public Foo() { }
-            public TEntity Value { get; protected set; }
-        }
-
-
-        public class OtherFoo<TEntity> : Foo<TEntity>
+        public class OtherFoo<TEntity> : IFoo<TEntity>
         {
             public OtherFoo(TEntity value) => Value = value;
+
+            public TEntity Value { get; }
         }
     }
 }

@@ -39,4 +39,31 @@ namespace Import.Implicit.Fields
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
     }
+
+    public class PrivateTestType<TDependency>
+        : PatternBaseType
+    {
+        private TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+
+    public class ProtectedTestType<TDependency>
+        : PatternBaseType
+    {
+        protected TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+
+    public class InternalTestType<TDependency>
+        : PatternBaseType
+    {
+        internal TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
 }

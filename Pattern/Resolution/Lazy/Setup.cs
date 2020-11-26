@@ -26,25 +26,6 @@ namespace Resolution
 
         #region Test Data
 
-        public interface IFoo<TEntity>
-        {
-            TEntity Value { get; }
-        }
-
-        public class Foo<TEntity> : IFoo<TEntity>
-        {
-            public Foo()
-            {
-            }
-
-            public Foo(TEntity value)
-            {
-                Value = value;
-            }
-
-            public TEntity Value { get; }
-        }
-
 
         public interface IBase
         {
@@ -81,50 +62,6 @@ namespace Resolution
         public class EmailService : IService, IDisposable
         {
             public string Id { get; } = Guid.NewGuid().ToString();
-
-            public bool Disposed;
-            public void Dispose()
-            {
-                Disposed = true;
-            }
-        }
-
-
-        public interface IService
-        {
-        }
-
-        public class Service : IService, IDisposable
-        {
-            public string Id { get; } = Guid.NewGuid().ToString();
-
-            public static int Instances;
-
-            public Service()
-            {
-                Interlocked.Increment(ref Instances);
-            }
-
-            public bool Disposed;
-            public void Dispose()
-            {
-                Disposed = true;
-            }
-        }
-
-        public class OtherService : IService, IDisposable
-        {
-            [InjectionConstructor]
-            public OtherService()
-            {
-
-            }
-
-            public OtherService(IUnityContainer container)
-            {
-
-            }
-
 
             public bool Disposed;
             public void Dispose()

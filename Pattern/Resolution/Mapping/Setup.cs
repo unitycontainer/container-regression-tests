@@ -26,36 +26,6 @@ namespace Resolution
 
         #region Test Data
 
-        public interface IFoo<TEntity>
-        {
-            TEntity Value { get; }
-        }
-
-        public interface IFoo1<TEntity>
-        {
-            TEntity Value { get; }
-        }
-
-        public interface IFoo2<TEntity>
-        {
-            TEntity Value { get; }
-        }
-
-        public class Foo<TEntity> : IFoo<TEntity>, IFoo1<TEntity>, IFoo2<TEntity>
-        {
-            public Foo()
-            {
-            }
-
-            public Foo(TEntity value)
-            {
-                Value = value;
-            }
-
-            public TEntity Value { get; }
-        }
-
-        public interface IService { }
 
         public interface IService1 { }
         

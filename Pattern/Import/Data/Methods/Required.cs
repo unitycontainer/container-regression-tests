@@ -50,6 +50,30 @@ namespace Import.Annotated.Methods.Required
         public override object Default => default(TDependency);
     }
 
+    public class PrivateTestType<TDependency>
+        : PatternBaseType
+    {
+        [InjectionMethod]
+        private void Method([Dependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class ProtectedTestType<TDependency>
+        : PatternBaseType
+    {
+        [InjectionMethod]
+        protected void Method([Dependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class InternalTestType<TDependency>
+        : PatternBaseType
+    {
+        [InjectionMethod]
+        internal void Method([Dependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
     public class BaselineTestType_Ref<TDependency>
         : PatternBaseType where TDependency : class
     {

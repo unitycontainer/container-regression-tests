@@ -24,6 +24,9 @@ namespace Regression
         protected IUnityContainer Container;
 
         public const string Name = "name";
+        public const string MethodName = "Method";
+        public const string FieldName = "Method";
+        public const string PropertyName = "Method";
 
         #endregion
 
@@ -39,12 +42,6 @@ namespace Regression
             _prefix = root.First();
             _member = root.Last();
             _root = $"{type.BaseType.Namespace}.{_member}";
-
-            // Import.Implicit.Constructors
-            // Import.Annotated.Constructors.Optional
-            // Import.Override.Fields.WithDefaultAttribute
-
-            var offset = type.BaseType.Namespace.LastIndexOf(".");
         }
 
         public virtual void TestInitialize() => Container = new UnityContainer();

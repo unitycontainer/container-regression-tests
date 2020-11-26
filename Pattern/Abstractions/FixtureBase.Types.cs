@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 #if UNITY_V4
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
@@ -120,6 +121,99 @@ namespace Regression
         }
     }
 #endif
+
+    #region ILogger
+
+    public interface ILogger
+    {
+    }
+
+    public class MockLogger : ILogger
+    {
+    }
+
+    #endregion
+
+
+
+    #region IFoo
+
+    public interface IFoo<TEntity>
+    {
+        TEntity Value { get; }
+    }
+    public interface IFoo1<TEntity>
+    {
+        TEntity Value { get; }
+    }
+    public interface IFoo2<TEntity>
+    {
+        TEntity Value { get; }
+    }
+    public class Foo<TEntity> : IFoo<TEntity>, 
+                                IFoo1<TEntity>, 
+                                IFoo2<TEntity>
+    {
+        public Foo() { }
+
+        public Foo(TEntity value)
+        {
+            Value = value;
+        }
+
+        public TEntity Value { get; }
+    }
+
+    #endregion
+
+
+    #region IService
+
+    public interface IService { }
+    public interface IOtherService { }
+    public interface IService1 { }
+    public interface IService2 { }
+
+    public class Service : IService, IService1, IService2, IDisposable
+    {
+        public string Id { get; } = Guid.NewGuid().ToString();
+
+        public static int Instances;
+
+        public Service()
+        {
+            Interlocked.Increment(ref Instances);
+        }
+
+        public bool Disposed;
+        public void Dispose()
+        {
+            Disposed = true;
+        }
+    }
+
+    public class OtherService : IService, IOtherService, IDisposable
+    {
+        [InjectionConstructor]
+        public OtherService()
+        {
+
+        }
+
+        public OtherService(IUnityContainer container)
+        {
+
+        }
+
+
+        public bool Disposed;
+        public void Dispose()
+        {
+            Disposed = true;
+        }
+    }
+
+    #endregion
 }
 
 

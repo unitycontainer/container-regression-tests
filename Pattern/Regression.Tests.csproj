@@ -64,6 +64,8 @@
 	  <Compile Remove="Import\Pattern\Override\WithDefaults.cs" />
 	  <Compile Remove="Resolution\Enumerable\**" />
 	  <Compile Remove="Resolution\Generic\Constrained.cs" />
+	  <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
+	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
 	</ItemGroup>
 
 	<!-- v5 Exclusions -->
@@ -71,6 +73,8 @@
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net46'))">
 	  <Compile Remove="Import\Pattern\Injected\ByResolver.cs" />
 	  <Compile Remove="Import\Pattern\Override\WithDefaults.cs" />
+	  <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
+	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
 	</ItemGroup>
 
 	
@@ -87,6 +91,13 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
 		<PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
+	</ItemGroup>
+
+	
+	
+
+	<ItemGroup>
+	  <Folder Include="Registration\Type\" />
 	</ItemGroup>
 
 </Project>
