@@ -30,6 +30,15 @@ namespace Import.Injected
             => TestGenericArrayImport(ImplicitArrayType, type,
                 InjectionMember_Value(new GenericResolvedArrayParameter(TDependency, @default, defaultAttr, registered, named, injected, overridden)));
 
+        [DataTestMethod]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        public virtual void ByGenericResolvedArrayParameter_ArrayNotation(string test, Type type,
+                                                                     object @default, object defaultAttr,
+                                                                     object registered, object named,
+                                                                     object injected, object overridden, bool isResolveble)
+            => TestGenericArrayImport(ImplicitArrayType, type,
+                InjectionMember_Value(new GenericResolvedArrayParameter(TDependency + "[]" , @default, defaultAttr, registered, named, injected, overridden)));
+
         #endregion
 
 
