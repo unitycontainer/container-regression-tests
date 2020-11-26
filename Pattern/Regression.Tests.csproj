@@ -26,13 +26,6 @@
 		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <Compile Remove="Import\Pattern\Injected\Review\**" />
-	  <EmbeddedResource Remove="Import\Pattern\Injected\Review\**" />
-	  <None Remove="Import\Pattern\Injected\Review\**" />
-	</ItemGroup>
-
-
 	<!-- Definitions -->
 
 	<ItemGroup>
@@ -69,6 +62,7 @@
 	  <Compile Remove="Import\Tests\Fields\**" />
 	  <Compile Remove="Import\Pattern\Injected\ByResolver.cs" />
 	  <Compile Remove="Import\Pattern\Override\WithDefaults.cs" />
+	  <Compile Remove="Resolution\Enumerable\**" />
 	</ItemGroup>
 
 	<!-- v5 Exclusions -->
