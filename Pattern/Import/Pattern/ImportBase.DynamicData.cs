@@ -130,8 +130,8 @@ namespace Import
                 {
                     typeof(Unresolvable).Name,// Name
                     typeof(Unresolvable),     // Type
-                    null,                     // Default
-                    null,                     // DefaultValue
+                    DefaultUnresolvable,      // Default
+                    DefaultValueUnresolvable, // DefaultValue
                     RegisteredUnresolvable,   // Registered
                     NamedUnresolvable,        // Named
                     InjectedUnresolvable,     // Injected

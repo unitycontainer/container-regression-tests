@@ -21,22 +21,24 @@ namespace Regression
         
         #region String
         
-        public const string NamedString        = "named_string";
-        public const string DefaultString      = "default_string";
-        public const string DefaultValueString = "default_value_string";
-        public const string RegisteredString   = "registered_string";
-        public const string InjectedString     = "injected_string";
-        public const string OverriddenString   = "overridden_string";
+        public const string NamedString        = "named";
+        public const string DefaultString      = "default";
+        public const string DefaultValueString = "default_value";
+        public const string RegisteredString   = "registered";
+        public const string InjectedString     = "injected";
+        public const string OverriddenString   = "overridden";
         
         #endregion
 
 
         #region Unresolvable
         
-        public readonly static Unresolvable NamedUnresolvable      = Unresolvable.Create("named");
-        public readonly static Unresolvable RegisteredUnresolvable = Unresolvable.Create("registered");
-        public readonly static Unresolvable InjectedUnresolvable   = SubUnresolvable.Create("injected");
-        public readonly static Unresolvable OverriddenUnresolvable = SubUnresolvable.Create("overridden");
+        public readonly static Unresolvable NamedUnresolvable      = Unresolvable.Create(NamedString);
+        public readonly static Unresolvable DefaultUnresolvable      = Unresolvable.Create(DefaultString);
+        public readonly static Unresolvable DefaultValueUnresolvable = Unresolvable.Create(DefaultValueString);
+        public readonly static Unresolvable RegisteredUnresolvable = Unresolvable.Create(RegisteredString);
+        public readonly static Unresolvable InjectedUnresolvable   = SubUnresolvable.Create(InjectedString);
+        public readonly static Unresolvable OverriddenUnresolvable = SubUnresolvable.Create(OverriddenString);
         
         #endregion
 
