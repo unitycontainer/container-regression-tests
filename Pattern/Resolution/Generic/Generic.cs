@@ -67,7 +67,6 @@ namespace Resolution
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ResolutionFailedException))]
         public void Named_null_Name_null()
         {
             // Arrange
@@ -114,6 +113,7 @@ namespace Resolution
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ResolutionFailedException))]
         public void HandlesConstraintViolation()
         {
             // Arrange

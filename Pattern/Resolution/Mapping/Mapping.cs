@@ -21,8 +21,11 @@ namespace Resolution
 
             Container.RegisterType<Service>();
             Container.RegisterInstance(Name, instance, new ContainerControlledLifetimeManager());
+#if UNITY_V4
+            Container.RegisterType<Service>(Legacy, new InjectionFactory((c, t, n) => factory));
+#else
             Container.RegisterFactory<Service>(Legacy, (c, t, n) => factory);
-
+#endif
             // Act
             var service1 = Container.Resolve<Service>();
             var service2 = Container.Resolve<Service>(Name);

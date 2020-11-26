@@ -229,19 +229,28 @@ namespace Resolution
         }
 
         [TestMethod]
+#if BEHAVIOR_V4
+        [ExpectedException(typeof(ResolutionFailedException))]
+        // Unity v4 wrapped all exceptions
+#else
         [ExpectedException(typeof(InvalidOperationException))]
+#endif
         public void UserExceptionIsNotWrappadInResolutionFailed()
         {
             // Arrange
             Container.RegisterType<IService, Service>("1");
+#if UNITY_V4
+            Container.RegisterType<IService>("2", new InjectionFactory(c => { throw new InvalidOperationException(); }));
+#else
             Container.RegisterFactory<IService>("2", c => { throw new InvalidOperationException(); });
-
+#endif
             // Act
             var array = Container.Resolve<IEnumerable<IService>>().ToArray();
 
             Assert.Fail("Should throw at the line above");
         }
 
+#if !BEHAVIOR_V4
         [TestMethod]
         public void CanResolveOpenGenericCollections()
         {
@@ -257,5 +266,6 @@ namespace Resolution
             Assert.IsTrue(result.Any(svc => svc is ServiceA<int>));
             Assert.IsTrue(result.Any(svc => svc is ServiceB<int>));
         }
+#endif
     }
 }

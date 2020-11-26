@@ -3,6 +3,7 @@
 using Microsoft.Practices.Unity;
 #else
 using Unity;
+using Unity.Lifetime;
 #endif
 
 namespace Resolution
@@ -13,7 +14,8 @@ namespace Resolution
         public void GenericClosed()
         {
             // Arrange
-            Container.RegisterType(typeof(Foo<int>), TypeLifetime.PerContainer);
+            Container.RegisterInstance(55);
+            Container.RegisterType(typeof(Foo<int>), new ContainerControlledLifetimeManager());
             Container.RegisterType(typeof(IFoo1<int>), typeof(Foo<int>));
             Container.RegisterType(typeof(IFoo2<int>), typeof(Foo<int>));
 
@@ -32,9 +34,10 @@ namespace Resolution
         public void GenericOpen()
         {
             // Arrange
-            Container.RegisterType(typeof(Foo<>), TypeLifetime.PerContainer);
-            Container.RegisterType(typeof(IFoo1<>), typeof(Foo<>));
-            Container.RegisterType(typeof(IFoo2<>), typeof(Foo<>));
+            Container.RegisterInstance(55)
+                     .RegisterType(typeof(Foo<>), new ContainerControlledLifetimeManager())
+                     .RegisterType(typeof(IFoo1<>), typeof(Foo<>))
+                     .RegisterType(typeof(IFoo2<>), typeof(Foo<>));
 
             // Act
             var service1 = Container.Resolve<IFoo1<int>>();
@@ -51,7 +54,7 @@ namespace Resolution
         public void OpenGenericServicesCanBeResolved()
         {
             // Arrange
-            Container.RegisterType<IService, Service>(TypeLifetime.PerContainer);
+            Container.RegisterType<IService, Service>(new ContainerControlledLifetimeManager());
             Container.RegisterType(typeof(IFoo<>), typeof(Foo<>));
 
             // Act

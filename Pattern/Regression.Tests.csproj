@@ -63,6 +63,7 @@
 	  <Compile Remove="Import\Pattern\Injected\ByResolver.cs" />
 	  <Compile Remove="Import\Pattern\Override\WithDefaults.cs" />
 	  <Compile Remove="Resolution\Enumerable\**" />
+	  <Compile Remove="Resolution\Generic\Constrained.cs" />
 	</ItemGroup>
 
 	<!-- v5 Exclusions -->
