@@ -1,10 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
 using System;
+using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
+using Unity;
 using Unity.Injection;
 using Unity.Resolution;
 #endif
@@ -65,7 +68,7 @@ namespace Import
 
         #endregion
 
-        
+
         #region With Overrides
 
         protected void TestWithOverride(Type definition, Type importType, ResolverOverride @override, object expected, object @default)
@@ -123,42 +126,167 @@ namespace Import
         #endregion
 
 
+        #region Built-In Types
+
+        protected void TestArrayImport(Type definition, Type importType)
+        {
+            // Arrange
+            var type = definition.MakeGenericType(importType.MakeArrayType());
+
+            // Act
+            var instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+            Assert.AreEqual(0, (instance.Value as IList)?.Count ?? -1);
+
+            RegisterArrayTypes();
+
+            // Act
+            instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+            Assert.AreEqual(4, (instance.Value as IList)?.Count ?? -1);
+        }
+
+        protected void TestEnumerableImport(Type definition, Type importType)
+        {
+            // Arrange
+            var type = definition.MakeGenericType(typeof(IEnumerable<>).MakeGenericType(importType));
+
+            // Act
+            var instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+            Assert.AreEqual(0, (instance.Value as IEnumerable)?.Cast<object>().Count() ?? -1);
+
+            RegisterArrayTypes();
+
+            // Act
+            instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+            Assert.AreEqual(5, (instance.Value as IEnumerable)?.Cast<object>().Count() ?? -1);
+        }
+
+        protected void TestLazyImport(Type definition, Type importType, object expected)
+        {
+            // Arrange
+            var type = definition.MakeGenericType(typeof(Lazy<>).MakeGenericType(importType));
+
+            // Act
+            var instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsNotNull(instance.Value);
+            Assert.IsInstanceOfType(instance, type);
+
+            Assert.ThrowsException<ResolutionFailedException>(() =>
+            {
+                switch (instance.Value)
+                {
+                    case Lazy<int> integer:
+                        _ = integer.Value;
+                        break;
+
+                    case Lazy<string> letters:
+                        _ = letters.Value;
+                        break;
+
+                    case Lazy<Unresolvable> unresolvable:
+                        _ = unresolvable.Value;
+                        break;
+
+                    default:
+                        Assert.Fail("Unknown");
+                        break;
+                }
+            });
+
+            RegisterTypes();
+
+            instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Act
+            var value = instance.Value switch
+            {
+                Lazy<int> integer               => (object)integer.Value,
+                Lazy<string> letters            => (object)letters.Value,
+                Lazy<Unresolvable> unresolvable => (object)unresolvable.Value,
+                _ => throw new NotImplementedException(),
+            };
+
+            // Validate
+            Assert.AreEqual(expected, value);
+        }
+
+
+        protected void TestFuncImport(Type definition, Type importType, object expected)
+        {
+            // Arrange
+            var type = definition.MakeGenericType(typeof(Func<>).MakeGenericType(importType));
+
+            // Act
+            var instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsNotNull(instance.Value);
+            Assert.IsInstanceOfType(instance, type);
+
+            Assert.ThrowsException<ResolutionFailedException>(() =>
+            {
+                switch (instance.Value)
+                {
+                    case Func<int> integer:
+                        _ = integer();
+                        break;
+
+                    case Func<string> letters:
+                        _ = letters();
+                        break;
+
+                    case Func<Unresolvable> unresolvable:
+                        _ = unresolvable();
+                        break;
+
+                    default:
+                        Assert.Fail("Unknown");
+                        break;
+                }
+            });
+
+            RegisterTypes();
+
+            // Act
+            var value = instance.Value switch
+            {
+                Func<int> integer => (object)integer(),
+                Func<string> letters => (object)letters(),
+                Func<Unresolvable> unresolvable => (object)unresolvable(),
+                _ => throw new NotImplementedException(),
+            };
+
+            // Validate
+            Assert.AreEqual(expected, value);
+        }
+
+        #endregion
+
+
         #region Implementation
 
         public static object GetDefaultValue(Type t)
             => (t.IsValueType && Nullable.GetUnderlyingType(t) == null)
                 ? Activator.CreateInstance(t) : null;
-
-        #endregion
-
-
-        #region Injected
-
-        private static IDictionary<Type, object> _injected = new Dictionary<Type, object>
-        {
-            { typeof(int),          InjectedInt },
-            { typeof(string),       InjectedString },
-            { typeof(Unresolvable), InjectedUnresolvable },
-        };
-
-        protected virtual object GetInjectedValue(Type type)
-            => _injected[type];
-
-        #endregion
-
-
-        #region Overrides
-
-        private static IDictionary<Type, object> _overrides = new Dictionary<Type, object>
-        {
-            { typeof(int),          OverriddenInt },
-            { typeof(string),       OverriddenString },
-            { typeof(Unresolvable), OverriddenUnresolvable },
-        };
-
-        protected virtual object GetOverrideValue(Type type)
-            => _overrides[type];
-
 
         #endregion
     }

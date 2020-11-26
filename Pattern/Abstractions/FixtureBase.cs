@@ -70,6 +70,33 @@ namespace Regression
                      .RegisterInstance(typeof(TestStruct), Name, NamedStruct);
         }
 
+
+        protected virtual void RegisterArrayTypes()
+        {
+            Container.RegisterInstance<int>(RegisteredInt)
+                     .RegisterInstance<int>("int_0", 0)
+                     .RegisterInstance<int>("int_1", 1)
+                     .RegisterInstance<int>("int_2", 2)
+                     .RegisterInstance<int>("int_3", 3)
+
+                     .RegisterInstance<string>(RegisteredString)
+#if !V4 // Only Unity v5 and up allow `null` as a value
+                     .RegisterInstance<string>("string_0", (string)null)
+#endif
+                     .RegisterInstance<string>("string_1", "string_1")
+                     .RegisterInstance<string>("string_2", "string_2")
+                     .RegisterInstance<string>("string_3", "string_3")
+
+                     .RegisterInstance<Unresolvable>(RegisteredUnresolvable)
+#if !V4 // Only Unity v5 and up allow `null` as a value
+                     .RegisterInstance<Unresolvable>("Unresolvable_0", (Unresolvable)null)
+#endif
+                     .RegisterInstance<Unresolvable>("Unresolvable_1", Unresolvable.Create("1"))
+                     .RegisterInstance<Unresolvable>("Unresolvable_2", Unresolvable.Create("2"))
+                     .RegisterInstance<Unresolvable>("Unresolvable_3", Unresolvable.Create("3"));
+        }
+
+
         protected virtual void RegisterUnResolvableTypes()
         {
             Container.RegisterInstance(RegisteredInt)

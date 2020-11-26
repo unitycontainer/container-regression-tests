@@ -18,32 +18,5 @@ namespace Import.Implicit
                                                          object injected, object overridden,
                                                          bool isResolveble)
             => TestRequiredImport(ImplicitImportType, type, registered);
-
-        [DataTestMethod]
-        [DynamicData(nameof(BuiltInTypes_Data), typeof(ImportBase))]
-        public virtual void BuiltIn_Interface(string test, Type type)
-        {
-            // Arrange
-            // Act
-            var instance = Container.Resolve(type, null);
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, type);
-        }
-
-        [DataTestMethod]
-        [DynamicData(nameof(BuiltInTypes_Data), typeof(ImportBase))]
-        [ExpectedException(typeof(ResolutionFailedException))]
-        public virtual void BuiltIn_Interface_Named(string test, Type type)
-        {
-            // Arrange
-            // Act
-            var instance = Container.Resolve(type, Name);
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, type);
-        }
     }
 }
