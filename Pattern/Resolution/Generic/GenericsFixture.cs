@@ -15,25 +15,6 @@ namespace Resolution
 {
     public partial class Generics
     {
-        /// <summary>
-        /// Tries to resolve a generic class that at registration, is open and contains an array property of the generic type.
-        /// </summary>
-        /// <remarks>See Bug 3849</remarks>
-        [Ignore]
-        [TestMethod]
-        public void ResolveConfiguredGenericType()
-        {
-            //// Arrange
-            //Container.RegisterType(typeof(GenericArrayPropertyDependency<>), "testing", new InjectionProperty("Stuff"))
-            //         .RegisterInstance<string>("first", "first")
-            //         .RegisterInstance<string>("second", "second");
-
-            //// Act
-            //var result = Container.Resolve<GenericArrayPropertyDependency<string>>("testing");
-
-            //// Validate
-            //CollectionAssert.AreEquivalent(new[] { "first", "second" }, result.Stuff);
-        }
 
         [TestMethod]
         [ExpectedException(typeof(ResolutionFailedException))]
@@ -73,7 +54,8 @@ namespace Resolution
         public void CanSpecializeGenericsViaTypeMappings()
         {
             // Arrange
-            Container.RegisterType(typeof(IFoo<>), typeof(Foo<>))
+            Container.RegisterInstance(Name)
+                     .RegisterType(typeof(IFoo<>), typeof(Foo<>))
                      .RegisterType<IFoo<Service>, ServiceFoo>();
 
             // Act
@@ -181,25 +163,6 @@ namespace Resolution
         }
 
         /// <summary>
-        /// have implemented constructor injection of generic type. passes
-        /// </summary>
-        [TestMethod]
-        public void ConstrucotorInjectionGenerics()
-        {
-            // Arrange
-            Refer<int> myRefer = new Refer<int>();
-            myRefer.Str = "HiHello";
-            Container.RegisterInstance<Refer<int>>(myRefer)
-                     .RegisterType<IFoo<int>, Foo<int>>();
-
-            // Act
-            IFoo<int> result = Container.Resolve<IFoo<int>>();
-
-            // Validate
-            Assert.IsInstanceOfType(result, typeof(IFoo<int>));
-        }
-
-        /// <summary>
         /// Passing a generic class as parameter to List which is generic
         /// </summary>
         [TestMethod]
@@ -214,19 +177,6 @@ namespace Resolution
 
             // Validate
             Assert.AreSame(obj1, obj);
-        }
-
-        [TestMethod]
-        public void CheckPropInjection()
-        {
-            // Arrange
-            Container.RegisterType<IFoo<int>, Foo<int>>();
-
-            // Act
-            IFoo<int> result = Container.Resolve<IFoo<int>>();
-
-            // Validate
-            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -256,11 +206,11 @@ namespace Resolution
         public void CanResolveOpenGenericCollections()
         {
             // Arrange
-            Container.RegisterType(typeof(IService<>), typeof(ServiceA<>), "A")
-                     .RegisterType(typeof(IService<>), typeof(ServiceB<>), "B");
+            Container.RegisterType(typeof(IGenericService<>), typeof(ServiceA<>), "A")
+                     .RegisterType(typeof(IGenericService<>), typeof(ServiceB<>), "B");
 
             // Act
-            List<IService<int>> result = Container.Resolve<IEnumerable<IService<int>>>().ToList();
+            List<IGenericService<int>> result = Container.Resolve<IEnumerable<IGenericService<int>>>().ToList();
 
             // Validate
             Assert.AreEqual(2, result.Count);

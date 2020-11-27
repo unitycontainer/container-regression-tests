@@ -37,7 +37,7 @@ namespace Registration
         }
 
         [TestMethod]
-        public void RegisterFactory_DefaultLifetime()
+        public void RegisterFactory_WithOverride_DefaultLifetime()
         {
             // Arrange
             var value = new object();
@@ -51,7 +51,7 @@ namespace Registration
         }
 
         [TestMethod]
-        public void RegisterFactory_CanSetLifetime()
+        public void RegisterFactory_WithOverride_CanSetLifetime()
         {
             // Arrange
             Container.RegisterFactory(typeof(object), null, (c, t, n, o) => null, new ContainerControlledLifetimeManager());
@@ -64,7 +64,7 @@ namespace Registration
         }
 
         [TestMethod]
-        public void RegisterFactory_Type_Null_Factory()
+        public void RegisterFactory_WithOverride_Type_Null_Factory()
         {
             // Arrange
             var value = new object();
@@ -78,7 +78,7 @@ namespace Registration
         }
 
         [TestMethod]
-        public void RegisterFactory_Type_Name_Factory()
+        public void RegisterFactory_WithOverride_Type_Name_Factory()
         {
             // Arrange
             var value = new object();

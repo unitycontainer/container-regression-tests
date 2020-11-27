@@ -33,7 +33,9 @@ namespace Regression
         }
     }
 
-    public class Unresolvable : PatternBaseType
+    public interface IUnresolvable { }
+
+    public class Unresolvable : PatternBaseType, IUnresolvable
     {
         protected Unresolvable(string id) { Value = id; }
 
@@ -156,6 +158,7 @@ namespace Regression
     {
         public Foo() { }
 
+        [InjectionConstructor]
         public Foo(TEntity value)
         {
             Value = value;
@@ -211,6 +214,32 @@ namespace Regression
         {
             Disposed = true;
         }
+    }
+
+    #endregion
+
+
+    #region Constrained Generic
+
+    public interface IConstrained<TEntity>
+        where TEntity : IService
+    {
+        TEntity Value { get; }
+    }
+
+    public class Constrained<TEntity> : IConstrained<TEntity>
+        where TEntity : Service
+    {
+        public Constrained()
+        {
+        }
+
+        public Constrained(TEntity value)
+        {
+            Value = value;
+        }
+
+        public TEntity Value { get; }
     }
 
     #endregion

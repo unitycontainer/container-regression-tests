@@ -1,8 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
+using Unity;
 using Unity.Injection;
 #endif
 
@@ -23,12 +25,39 @@ namespace Import.Injected
 
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void ByGenericResolvedArrayParameter_Implicit(string test, Type type,
+        public virtual void ByGenericResolvedArrayParameter_Implicit_Values(string test, Type type,
                                                                      object @default, object defaultAttr,
                                                                      object registered, object named,
                                                                      object injected, object overridden, bool isResolveble)
-            => TestGenericArrayImport(ImplicitArrayType, type,
-                InjectionMember_Value(new GenericResolvedArrayParameter(TDependency, @default, defaultAttr, registered, named, injected, overridden)));
+        {
+            TestGenericArrayImport(ImplicitArrayType, type,
+                           InjectionMember_Value(new GenericResolvedArrayParameter(TDependency, @default, defaultAttr, registered, named, injected, overridden)));
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        public virtual void ByGenericResolvedArrayParameter_Implicit_Complex(string test, Type type,
+                                                                     object @default, object defaultAttr,
+                                                                     object registered, object named,
+                                                                     object injected, object overridden, bool isResolveble)
+        {
+            Container.RegisterInstance(type, defaultAttr);
+            Container.RegisterInstance(type, "named", named);
+            Container.RegisterInstance(type, "overridden", overridden);
+
+            var instance = TestGenericArrayImport(ImplicitArrayType, type, 
+                InjectionMember_Value(new GenericResolvedArrayParameter(TDependency, 
+                    @default,   new ResolvedParameter(type), 
+                    registered, new GenericParameter(TDependency, "named"), 
+                    injected,   new GenericParameter(TDependency, "overridden"))));
+
+            Assert.IsTrue(instance.Contains(defaultAttr));
+            Assert.IsTrue(instance.Contains(named));
+            Assert.IsTrue(instance.Contains(overridden));
+            Assert.IsTrue(instance.Contains(@default));
+            Assert.IsTrue(instance.Contains(registered));
+            Assert.IsTrue(instance.Contains(injected));
+        }
 
         [DataTestMethod]
         [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
@@ -36,8 +65,47 @@ namespace Import.Injected
                                                                      object @default, object defaultAttr,
                                                                      object registered, object named,
                                                                      object injected, object overridden, bool isResolveble)
-            => TestGenericArrayImport(ImplicitArrayType, type,
-                InjectionMember_Value(new GenericResolvedArrayParameter(TDependency + "[]" , @default, defaultAttr, registered, named, injected, overridden)));
+        {
+            Container.RegisterInstance(type, "@default",    @default);
+            Container.RegisterInstance(type, "defaultAttr", defaultAttr);
+            Container.RegisterInstance(type, "registered ", registered);
+            Container.RegisterInstance(type, "named",       named);
+            Container.RegisterInstance(type, "injected ",   injected);
+            Container.RegisterInstance(type, "overridden",  overridden);
+
+            var instance = TestGenericArrayImport(ImplicitArrayType, type, InjectionMember_Value(new GenericParameter(TDependency + "[]")));
+
+            Assert.IsTrue(instance.Contains(defaultAttr));
+            Assert.IsTrue(instance.Contains(named));
+            Assert.IsTrue(instance.Contains(overridden));
+            Assert.IsTrue(instance.Contains(@default));
+            Assert.IsTrue(instance.Contains(registered));
+            Assert.IsTrue(instance.Contains(injected));
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        public virtual void ByGenericResolvedArrayParameter_ParentnessNotation(string test, Type type,
+                                                                     object @default, object defaultAttr,
+                                                                     object registered, object named,
+                                                                     object injected, object overridden, bool isResolveble)
+        {
+            Container.RegisterInstance(type, "default",     @default);
+            Container.RegisterInstance(type, "defaultAttr", defaultAttr);
+            Container.RegisterInstance(type, "registered ", registered );
+            Container.RegisterInstance(type, "named",       named );
+            Container.RegisterInstance(type, "injected",    injected );
+            Container.RegisterInstance(type, "overridden",  overridden);
+
+            var instance = TestGenericArrayImport(ImplicitArrayType, type, InjectionMember_Value(new GenericParameter(TDependency + "()")));
+
+            Assert.IsTrue(instance.Contains(defaultAttr));
+            Assert.IsTrue(instance.Contains(named));
+            Assert.IsTrue(instance.Contains(overridden));
+            Assert.IsTrue(instance.Contains(@default));
+            Assert.IsTrue(instance.Contains(registered));
+            Assert.IsTrue(instance.Contains(injected));
+        }
 
         #endregion
 

@@ -173,7 +173,7 @@ namespace Import
             Assert.AreEqual(6, (instance.Value as IList)?.Count ?? -1);
         }
 
-        protected void TestGenericArrayImport(Type definition, Type importType, InjectionMember injection)
+        protected IList TestGenericArrayImport(Type definition, Type importType, InjectionMember injection)
         {
             // Arrange
             var type = definition.MakeGenericType(importType);
@@ -186,7 +186,12 @@ namespace Import
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
-            Assert.AreEqual(6, (instance.Value as IList)?.Count ?? -1);
+            
+            var list = instance.Value as IList;
+            Assert.IsNotNull(list);
+            Assert.AreEqual(6, list?.Count ?? -1);
+
+            return list;
         }
 
         protected void TestEnumerableImport(Type definition, Type importType)

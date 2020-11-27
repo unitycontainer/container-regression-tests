@@ -61,10 +61,10 @@ namespace Registration
         public void RegisterWithParentAndChild()
         {
             //create unity container
-            Container.RegisterInstance(null, null, Guid.NewGuid().ToString(), new ContainerControlledLifetimeManager());
+            Container.RegisterInstance<string>(Guid.NewGuid().ToString(), new ContainerControlledLifetimeManager());
 
             var child = Container.CreateChildContainer();
-            child.RegisterInstance(null, null, Guid.NewGuid().ToString(), new ContainerControlledLifetimeManager());
+            child.RegisterInstance<string>(Guid.NewGuid().ToString(), new ContainerControlledLifetimeManager());
 
             // Act/Validate
             Assert.AreSame(Container.Resolve<string>(), Container.Resolve<string>());

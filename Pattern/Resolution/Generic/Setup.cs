@@ -2,7 +2,6 @@
 using Regression;
 using System;
 using System.Collections;
-using System.Threading;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -46,28 +45,6 @@ namespace Resolution
                 str = "Hello";
             }
         }
-
-        public interface IConstrained<TEntity>
-            where TEntity : IService
-        {
-            TEntity Value { get; }
-        }
-
-        public class Constrained<TEntity> : IConstrained<TEntity>
-            where TEntity : Service
-        {
-            public Constrained()
-            {
-            }
-
-            public Constrained(TEntity value)
-            {
-                Value = value;
-            }
-
-            public TEntity Value { get; }
-        }
-
 
         public interface ICommand<T>
         {
@@ -152,17 +129,17 @@ namespace Resolution
         }
 
 
-        public interface IService<T> { }
+        public interface IGenericService<T> { }
 
-        public class ServiceA<T> : IService<T> { }
+        public class ServiceA<T> : IGenericService<T> { }
 
-        public class ServiceB<T> : IService<T> { }
+        public class ServiceB<T> : IGenericService<T> { }
 
-        public class ServiceClass<T> : IService<T> where T : class { }
+        public class ServiceClass<T> : IGenericService<T> where T : class { }
 
-        public class ServiceStruct<T> : IService<T> where T : struct { }
+        public class ServiceStruct<T> : IGenericService<T> where T : struct { }
 
-        public class ServiceNewConstraint<T> : IService<T> where T : new() { }
+        public class ServiceNewConstraint<T> : IGenericService<T> where T : new() { }
 
         public class TypeWithNoPublicNoArgCtors
         {
@@ -170,7 +147,7 @@ namespace Resolution
             private TypeWithNoPublicNoArgCtors() { }
         }
 
-        public class ServiceInterfaceConstraint<T> : IService<T> where T : IEnumerable { }
+        public class ServiceInterfaceConstraint<T> : IGenericService<T> where T : IEnumerable { }
 
         #endregion
     }

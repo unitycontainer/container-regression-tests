@@ -40,77 +40,28 @@ namespace Resolution
         }
 
         [TestMethod]
-        public void GenericMapping()
+        public void GenericConstrained()
         {
-            // Arrange
-            Container.RegisterType(typeof(IFoo<>), typeof(Foo<>));
-
             // Act 
-            var instance = Container.Resolve<IFoo<IService>>();
+            var instance = Container.Resolve<Constrained<Service>>();
 
             // Validate
             Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(IFoo<IService>));
+            Assert.IsInstanceOfType(instance, typeof(Constrained<Service>));
         }
 
         [TestMethod]
-        public void Named_null_null()
+        public void GenericConstrained_Registered()
         {
             // Arrange
-            Container.RegisterType(typeof(IFoo<>), typeof(Foo<>), Name);
+            Container.RegisterType(typeof(Constrained<>));
 
             // Act 
-            var instance = Container.Resolve<IFoo<IService>>(Name);
+            var instance = Container.Resolve<Constrained<Service>>();
 
             // Validate
             Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(IFoo<IService>));
-        }
-
-        [TestMethod]
-        public void Named_null_Name_null()
-        {
-            // Arrange
-            Container.RegisterType(typeof(IFoo<>), typeof(Foo<>));
-            Container.RegisterType<IOtherService, OtherService>(Name);
-
-            // Act 
-            var instance = Container.Resolve<IFoo<IOtherService>>();
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(IFoo<IOtherService>));
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ResolutionFailedException))]
-        public void Named_null_Name_name()
-        {
-            // Arrange
-            Container.RegisterType(typeof(IFoo<>), typeof(Foo<>));
-            Container.RegisterType<IOtherService, OtherService>(Name);
-
-            // Act 
-            var instance = Container.Resolve<IFoo<IService>>(Name);
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(IFoo<IService>));
-        }
-
-        [TestMethod]
-        public void Named_Name_Name_Name()
-        {
-            // Arrange
-            Container.RegisterType(typeof(IFoo<>), typeof(Foo<>), Name);
-            Container.RegisterType<IOtherService, OtherService>(Name);
-
-            // Act 
-            var instance = Container.Resolve<IFoo<IService>>(Name);
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(IFoo<IService>));
+            Assert.IsInstanceOfType(instance, typeof(Constrained<Service>));
         }
 
         [TestMethod]
@@ -118,15 +69,14 @@ namespace Resolution
         public void HandlesConstraintViolation()
         {
             // Arrange
-            Container.RegisterType(typeof(IService), typeof(Service));
-            Container.RegisterType(typeof(IConstrained<>), typeof(Constrained<>), "123");
+            Container.RegisterType(typeof(IService), typeof(OtherService));
+            Container.RegisterType(typeof(IConstrained<>), typeof(Constrained<>));
 
             // Act
             var instance = Container.Resolve<IConstrained<IService>>();
 
             // Assert
             Assert.IsNotNull(instance);
-
         }
     }
 }

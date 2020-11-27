@@ -20,6 +20,7 @@ namespace Registration
             Assert.IsNotNull(registration.RegisteredType);
         }
 
+#if !UNITY_V4 && !UNITY_V5
         [TestMethod]
         public void LegacyQuery_FalsePositive()
         {
@@ -39,6 +40,7 @@ namespace Registration
 
             Assert.IsNull(registration);
         }
+#endif
         
         [TestMethod]
         public void RegistrationsToArray()
@@ -48,7 +50,11 @@ namespace Registration
 
             // Validate
             Assert.IsNotNull(registrations);
+#if UNITY_V5
+            Assert.IsInstanceOfType(registrations, typeof(IContainerRegistration[]));
+#else
             Assert.IsInstanceOfType(registrations, typeof(ContainerRegistration[]));
+#endif
             Assert.AreNotEqual(0, registrations.Length);
         }
     }

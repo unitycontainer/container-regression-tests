@@ -18,11 +18,38 @@ namespace Registration
         public void RegisterInstance_IsNotNull()
         {
             // Arrange
-            Container.RegisterInstance(typeof(IService), null, Unresolvable.Create(string.Empty), new ContainerControlledLifetimeManager());
+            Container.RegisterInstance(typeof(IUnresolvable), null, Unresolvable.Create(string.Empty), new ContainerControlledLifetimeManager());
             
             // Validate
-            Assert.IsNotNull(Container.Resolve<IService>());
+            Assert.IsNotNull(Container.Resolve<IUnresolvable>());
         }
+
+        [TestMethod]
+#if BEHAVIOR_V5
+        [ExpectedException(typeof(InvalidOperationException))]
+#else 
+        [ExpectedException(typeof(ArgumentNullException))]
+#endif
+        public void RegisterInstance_ThrowsOnNullNull()
+        {
+            Container.RegisterInstance(null, null, null, new ContainerControlledLifetimeManager());
+        }
+
+        [TestMethod]
+#if BEHAVIOR_V5
+        [ExpectedException(typeof(InvalidOperationException))]
+#else 
+        [ExpectedException(typeof(ArgumentNullException))]
+#endif
+        public void RegisterInstance_Null_Null_Null()
+        {
+            // Act
+            Container.RegisterInstance(null, null, null, null);
+        }
+
+        // Unity v4 did not support implicit instance lifetimes
+        
+#if !BEHAVIOR_V4
 
         [TestMethod]
         public void RegisterInstance_IsNull()
@@ -32,21 +59,6 @@ namespace Registration
 
             // Validate
             Assert.IsNull(Container.Resolve<IService>());
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void RegisterInstance_ThrowsOnNullNull()
-        {
-            Container.RegisterInstance(null, null, null, new ContainerControlledLifetimeManager());
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void RegisterInstance_Null_Null_Null()
-        {
-            // Act
-            Container.RegisterInstance(null, null, null, null);
         }
 
         [TestMethod]
@@ -129,6 +141,7 @@ namespace Registration
             // Validate
             Assert.IsInstanceOfType(registration.LifetimeManager, typeof(ContainerControlledLifetimeManager));
         }
+#endif
 
         [TestMethod]
         public void RegisterInstance_CanSetLifetime()

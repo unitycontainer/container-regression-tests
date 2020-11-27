@@ -118,12 +118,16 @@ namespace Registration
                 .RegisterType<ILogger, MockLogger>(local);
 
             var childRegistration = child.Registrations
+#if !UNITY_V4
                                          .Cast<IContainerRegistration>()
+#endif
                                          .First(r => r.RegisteredType == typeof(ILogger) &&
                                                      r.Name == local);
 
             var parentRegistration = Container.Registrations
+#if !UNITY_V4
                                               .Cast<IContainerRegistration>()
+#endif
                                               .FirstOrDefault(r => r.RegisteredType == typeof(ILogger) &&
                                                                    r.Name == local);
             Assert.IsNull(parentRegistration);
@@ -153,20 +157,24 @@ namespace Registration
         public void DefaultLifetime()
         {
             // Arrange
-            Container.RegisterType(typeof(object), null, null, null);
+            Container.RegisterType(typeof(object));
 
             // Act
             var registration = Container.Registrations.First(r => typeof(object) == r.RegisteredType);
 
             // Validate
+#if BEHAVIOR_V4
+            Assert.IsNull(registration.LifetimeManager);
+#else
             Assert.IsInstanceOfType(registration.LifetimeManager, typeof(TransientLifetimeManager));
+#endif
         }
 
         [TestMethod]
         public void CanSetLifetime()
         {
             // Arrange
-            Container.RegisterType(typeof(object), null, null, new ContainerControlledLifetimeManager());
+            Container.RegisterType(typeof(object), new ContainerControlledLifetimeManager());
 
             // Act
             var registration = Container.Registrations.First(r => typeof(object) == r.RegisteredType);
@@ -185,7 +193,7 @@ namespace Registration
         [TestMethod]
         public void Singleton()
         {
-            Container.RegisterSingleton<IService, Service>();
+            Container.RegisterType<IService, Service>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IService, Service>(Name, new ContainerControlledLifetimeManager());
 
             // Act

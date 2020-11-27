@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
-using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -16,8 +15,11 @@ namespace Registration
         public void FactoryOpenGeneric()
         {
             // Arrange
+#if UNITY_V4
+            Container.RegisterType(typeof(IFoo<>), new InjectionFactory((c, t, n) => new Foo<object>()));
+#else
             Container.RegisterFactory(typeof(IFoo<>), (c, t, n) => new Foo<object>());
-
+#endif
             // Act
             var result = Container.Resolve(typeof(IFoo<object>));
 

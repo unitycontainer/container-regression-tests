@@ -1,31 +1,27 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
-using Unity.Injection;
-using Unity.Lifetime;
 #endif
 
 namespace Resolution
 {
     public partial class Generics
     {
-
         [TestMethod]
         public void CanResolveStructConstraintsCollections()
         {
             // Arrange
-            Container.RegisterType(typeof(IService<>), typeof(ServiceA<>), "A")
-                     .RegisterType(typeof(IService<>), typeof(ServiceB<>), "B")
-                     .RegisterType(typeof(IService<>), typeof(ServiceStruct<>), "Struct");
+            Container.RegisterType(typeof(IGenericService<>), typeof(ServiceA<>), "A")
+                     .RegisterType(typeof(IGenericService<>), typeof(ServiceB<>), "B")
+                     .RegisterType(typeof(IGenericService<>), typeof(ServiceStruct<>), "Struct");
 
             // Act
-            var result = Container.Resolve<IEnumerable<IService<int>>>().ToList();
-            List<IService<string>> constrainedResult = Container.Resolve<IEnumerable<IService<string>>>().ToList();
+            var result = Container.Resolve<IEnumerable<IGenericService<int>>>().ToList();
+            List<IGenericService<string>> constrainedResult = Container.Resolve<IEnumerable<IGenericService<string>>>().ToList();
 
             // Validate
             Assert.AreEqual(3, result.Count);
@@ -42,13 +38,13 @@ namespace Resolution
         public void CanResolveClassConstraintsCollections()
         {
             // Arrange
-            Container.RegisterType(typeof(IService<>), typeof(ServiceA<>), "A")
-                     .RegisterType(typeof(IService<>), typeof(ServiceB<>), "B")
-                     .RegisterType(typeof(IService<>), typeof(ServiceClass<>), "Class");
+            Container.RegisterType(typeof(IGenericService<>), typeof(ServiceA<>), "A")
+                     .RegisterType(typeof(IGenericService<>), typeof(ServiceB<>), "B")
+                     .RegisterType(typeof(IGenericService<>), typeof(ServiceClass<>), "Class");
 
             // Act
-            List<IService<string>> result = Container.Resolve<IEnumerable<IService<string>>>().ToList();
-            List<IService<int>> constrainedResult = Container.Resolve<IEnumerable<IService<int>>>().ToList();
+            List<IGenericService<string>> result = Container.Resolve<IEnumerable<IGenericService<string>>>().ToList();
+            List<IGenericService<int>> constrainedResult = Container.Resolve<IEnumerable<IGenericService<int>>>().ToList();
 
             // Validate
             Assert.AreEqual(3, result.Count);
@@ -65,13 +61,13 @@ namespace Resolution
         public void CanResolveDefaultCtorConstraintsCollections()
         {
             // Arrange
-            Container.RegisterType(typeof(IService<>), typeof(ServiceA<>), "A")
-                     .RegisterType(typeof(IService<>), typeof(ServiceB<>), "B")
-                     .RegisterType(typeof(IService<>), typeof(ServiceNewConstraint<>), "NewConstraint");
+            Container.RegisterType(typeof(IGenericService<>), typeof(ServiceA<>), "A")
+                     .RegisterType(typeof(IGenericService<>), typeof(ServiceB<>), "B")
+                     .RegisterType(typeof(IGenericService<>), typeof(ServiceNewConstraint<>), "NewConstraint");
 
             // Act
-            List<IService<int>> result = Container.Resolve<IEnumerable<IService<int>>>().ToList();
-            List<IService<TypeWithNoPublicNoArgCtors>> constrainedResult = Container.Resolve<IEnumerable<IService<TypeWithNoPublicNoArgCtors>>>().ToList();
+            List<IGenericService<int>> result = Container.Resolve<IEnumerable<IGenericService<int>>>().ToList();
+            List<IGenericService<TypeWithNoPublicNoArgCtors>> constrainedResult = Container.Resolve<IEnumerable<IGenericService<TypeWithNoPublicNoArgCtors>>>().ToList();
 
             // Validate
             Assert.AreEqual(3, result.Count);
@@ -88,13 +84,13 @@ namespace Resolution
         public void CanResolveInterfaceConstraintsCollections()
         {
             // Arrange
-            Container.RegisterType(typeof(IService<>), typeof(ServiceA<>), "A")
-                     .RegisterType(typeof(IService<>), typeof(ServiceB<>), "B")
-                     .RegisterType(typeof(IService<>), typeof(ServiceInterfaceConstraint<>), "InterfaceConstraint");
+            Container.RegisterType(typeof(IGenericService<>), typeof(ServiceA<>), "A")
+                     .RegisterType(typeof(IGenericService<>), typeof(ServiceB<>), "B")
+                     .RegisterType(typeof(IGenericService<>), typeof(ServiceInterfaceConstraint<>), "InterfaceConstraint");
 
             // Act
-            List<IService<string>> result = Container.Resolve<IEnumerable<IService<string>>>().ToList();
-            List<IService<int>> constrainedResult = Container.Resolve<IEnumerable<IService<int>>>().ToList();
+            List<IGenericService<string>> result = Container.Resolve<IEnumerable<IGenericService<string>>>().ToList();
+            List<IGenericService<int>> constrainedResult = Container.Resolve<IEnumerable<IGenericService<int>>>().ToList();
 
             // Validate
             Assert.AreEqual(3, result.Count);
