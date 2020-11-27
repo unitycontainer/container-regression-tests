@@ -80,8 +80,14 @@
 	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
 	</ItemGroup>
 
-	
-	
+	<ItemGroup>
+		<Compile Condition="!$(TargetFramework.StartsWith('net45'))" Remove="Manager\ManagerBase.Scope.V4.cs" />
+		<Compile Condition="!$(TargetFramework.StartsWith('net46'))" Remove="Manager\ManagerBase.Scope.V5.cs" />
+		<Compile Condition="$(TargetFramework.StartsWith('net45')) OR $(TargetFramework.StartsWith('net46'))" Remove="Manager\ManagerBase.Scope.V6.cs" />
+	</ItemGroup>
+
+
+
 	<PropertyGroup>
 		<Description>Unity Container Regression Tests</Description>
 		<Copyright>Copyright © .NET Foundation and Contributors. All Rights Reserved</Copyright>

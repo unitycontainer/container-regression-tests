@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Regression;
+using Manager;
 using System;
 using System.Collections;
 #if UNITY_V4

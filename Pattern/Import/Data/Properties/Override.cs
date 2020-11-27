@@ -1,4 +1,4 @@
-﻿using Regression;
+﻿using Manager;
 using System;
 using System.ComponentModel;
 
