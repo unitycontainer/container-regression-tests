@@ -68,6 +68,8 @@
 	  <Compile Remove="Registration\Validation\Factory.cs" />
 	  <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
 	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
+	  <Compile Remove="Manager\Tests\PerContainerTransient\**" />
+	  <Compile Remove="Manager\Tests\Registration\**" />
 	</ItemGroup>
 
 	<!-- v5 Exclusions -->
@@ -78,6 +80,8 @@
 	  <Compile Remove="Registration\Validation\Factory.cs" />
 	  <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
 	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
+	  <Compile Remove="Manager\Tests\PerContainerTransient\**" />
+	  <Compile Remove="Manager\Tests\Registration\**" />
 	</ItemGroup>
 
 
@@ -92,6 +96,10 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
 		<PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Resolution\Hierarchy\" />
 	</ItemGroup>
 
 </Project>
