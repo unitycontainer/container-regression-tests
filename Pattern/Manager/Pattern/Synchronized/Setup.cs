@@ -5,7 +5,7 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Manager.Synchronized
+namespace Regression.Synchronized
 {
     public abstract partial class Pattern : ManagerBase
     {

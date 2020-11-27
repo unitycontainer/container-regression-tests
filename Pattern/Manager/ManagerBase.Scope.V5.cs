@@ -4,7 +4,7 @@ using System;
 using Microsoft.Practices.Unity;
 #endif
 
-namespace Manager
+namespace Regression
 {
     public abstract partial class ManagerBase
     {

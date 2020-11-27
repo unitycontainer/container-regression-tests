@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Manager
+namespace Regression
 {
     public abstract partial class FixtureBase
     {

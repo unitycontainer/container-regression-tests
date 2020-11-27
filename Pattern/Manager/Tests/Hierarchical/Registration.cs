@@ -9,7 +9,7 @@ using Unity.Lifetime;
 namespace Registration.Management
 {
     [TestClass]
-    public class Hierarchical : Manager.Registration.Pattern
+    public class Hierarchical : Regression.Registration.Pattern
     {
         #region Scaffolding
 

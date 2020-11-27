@@ -10,7 +10,7 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Manager
+namespace Regression
 {
     public abstract partial class FixtureBase
     {

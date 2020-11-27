@@ -8,7 +8,7 @@ using Unity;
 using Unity.Resolution;
 #endif
 
-namespace Manager
+namespace Regression
 {
     public abstract class PatternBaseType
     {

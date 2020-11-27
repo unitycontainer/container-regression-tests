@@ -9,7 +9,7 @@ using Unity.Lifetime;
 namespace Registration.Synchronization
 {
     [TestClass]
-    public class PerContainer : Manager.Synchronized.Pattern
+    public class PerContainer : Regression.Synchronized.Pattern
     {
         #region Scaffolding
 

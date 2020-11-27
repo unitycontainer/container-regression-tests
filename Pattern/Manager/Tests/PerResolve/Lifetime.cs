@@ -9,7 +9,7 @@ using Unity.Lifetime;
 namespace Registration.Lifetime
 {
     [TestClass]
-    public class PerResolve : Manager.Lifetime.Pattern
+    public class PerResolve : Regression.Lifetime.Pattern
     {
         #region Scaffolding
 

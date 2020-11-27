@@ -5,7 +5,7 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Manager.Registration
+namespace Regression.Registration
 {
     public abstract partial class Pattern : ManagerBase
     {

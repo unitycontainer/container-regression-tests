@@ -7,7 +7,7 @@ using Unity;
 using Unity.Lifetime;
 #endif
 
-namespace Manager
+namespace Regression
 {
     public abstract partial class ManagerBase
     {

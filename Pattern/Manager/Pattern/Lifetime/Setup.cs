@@ -5,7 +5,7 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Manager.Lifetime
+namespace Regression.Lifetime
 {
     public abstract partial class Pattern : ManagerBase
     {

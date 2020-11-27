@@ -8,7 +8,7 @@ using Unity.Injection;
 using Unity.Resolution;
 #endif
 
-namespace Manager
+namespace Regression
 {
     public abstract partial class FixtureBase
     {

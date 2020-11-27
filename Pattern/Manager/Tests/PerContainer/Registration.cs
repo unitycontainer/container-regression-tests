@@ -9,7 +9,7 @@ using Unity.Lifetime;
 namespace Registration.Management
 {
     [TestClass]
-    public class PerContainer : Manager.Registration.Pattern
+    public class PerContainer : Regression.Registration.Pattern
     {
         #region Scaffolding
 

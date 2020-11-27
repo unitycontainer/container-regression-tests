@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Manager;
+using Regression;
 
 namespace Registration
 {

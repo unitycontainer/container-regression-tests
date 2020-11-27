@@ -1,17 +1,15 @@
-﻿using Manager;
+﻿using Regression;
 using System;
 
 
-namespace Selection.Implicit.Fields
+namespace Selection.Implicit.Constructors
 {
     #region Generic
 
     public class BaselineTestType<TDependency>
         : PatternBaseType
     {
-        public TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public BaselineTestType(TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
