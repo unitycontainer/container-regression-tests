@@ -28,15 +28,15 @@ namespace Regression.Lifetime
             base.TestInitialize();
 
 #if UNITY_V4
-            Container.RegisterType(typeof(IService), typeof(Service), (ITypeLifetimeManager)LifetimeManager)
-                     .RegisterType(typeof(MockLogger), LifetimeManager);
+            Container.RegisterType(typeof(IService), typeof(Service), GetManager())
+                     .RegisterType(typeof(MockLogger), GetManager());
             Container.RegisterType<IPresenter, MockPresenter>()
-                     .RegisterType<IView, View>(LifetimeManager);
+                     .RegisterType<IView, View>(GetManager());
 #else
-            Container.RegisterType(typeof(IService), typeof(Service), (ITypeLifetimeManager)LifetimeManager)
-                     .RegisterType(typeof(MockLogger), (ITypeLifetimeManager)LifetimeManager);
+            Container.RegisterType(typeof(IService), typeof(Service), (ITypeLifetimeManager)GetManager())
+                     .RegisterType(typeof(MockLogger), (ITypeLifetimeManager)GetManager());
             Container.RegisterType<IPresenter, MockPresenter>()
-                     .RegisterType<IView, View>((ITypeLifetimeManager)LifetimeManager);
+                     .RegisterType<IView, View>((ITypeLifetimeManager)GetManager());
 #endif
             TargetType = typeof(IService);
         }

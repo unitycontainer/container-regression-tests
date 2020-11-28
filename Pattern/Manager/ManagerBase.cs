@@ -11,22 +11,14 @@ namespace Regression
     {
         #region Fields
 
-        protected object?         Item1;
-        protected object?         Item2;
-        protected LifetimeManager LifetimeManager;
+        protected object Item1;
+        protected object Item2;
 
         #endregion
 
 
         #region Scaffolding
 
-        public override void TestInitialize()
-        {
-            base.TestInitialize();
-
-            LifetimeManager = GetManager();
-        }
-        
         protected abstract LifetimeManager GetManager();
 
         #endregion

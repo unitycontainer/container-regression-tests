@@ -42,6 +42,7 @@ namespace Regression.Lifetime
             FromSameScope(Item1, Item2);
         }
 
+#if !BEHAVIOR_V4 // Unity v4 did not support multi-threading
         [TestMethod]
         public virtual void FromSameOnDifferentThreads()
         {
@@ -58,5 +59,6 @@ namespace Regression.Lifetime
 
             FromSameScopeDifferentThreads(Item1, Item2);
         }
+#endif
     }
 }

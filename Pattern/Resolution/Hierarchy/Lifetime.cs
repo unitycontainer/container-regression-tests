@@ -64,7 +64,7 @@ namespace Resolution
         [TestMethod]
         public void ResolveSingletonType_AsDependency_InRootContainer_THEN_ConsumerInstance_AND_SignletonInstance_CreatedInRootContainer()
         {
-            Container.RegisterType(typeof(ISingletonConsumer), typeof(SingletonConsumer), TypeLifetime.Transient);
+            Container.RegisterType(typeof(ISingletonConsumer), typeof(SingletonConsumer), new TransientLifetimeManager());
             Container.RegisterType(typeof(ISingletonService), typeof(SingletonService), new ContainerControlledLifetimeManager());
 
             var rootContainerId = Container.GetHashCode();
@@ -80,7 +80,7 @@ namespace Resolution
             Container.RegisterType(typeof(ISingletonService), typeof(SingletonService), new ContainerControlledLifetimeManager());
 
             var childContainer1 = Container.CreateChildContainer()
-                                           .RegisterType(typeof(ISingletonConsumer), typeof(SingletonConsumer), TypeLifetime.Transient);
+                                           .RegisterType(typeof(ISingletonConsumer), typeof(SingletonConsumer), new TransientLifetimeManager());
 
             var childContainer2 = childContainer1.CreateChildContainer();
 
@@ -207,6 +207,7 @@ namespace Resolution
             Assert.IsFalse(instanceFromChildContainer.IsDisposed, "instanceFromChildContainer should not be disposed when child container is disposed");
         }
 
+#if !UNITY_V4
         [TestMethod]
         public void DisposeChildContainer_WithTransientConsumer_THEN_SingletonConsumer_IsDisposed_AND_Singleton_NotDisposed()
         {
@@ -243,7 +244,7 @@ namespace Resolution
             Assert.IsFalse(instanceFromChildContainer.Element.IsDisposed, "instanceFromChildContainer.Element should not be disposed when child container is disposed");
             Assert.IsFalse(instanceFromChildContainer.IsDisposed, "instanceFromChildContainer should not be disposed when child container is disposed");
         }
-
+#endif
         [TestMethod]
         public void DisposeChildContainer_WithSingleton_WithFactoryDependency_THEN_Singleton_NotDisposed_AND_FactoryCreatesItemsInRootContainer()
         {

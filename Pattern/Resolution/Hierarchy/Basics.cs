@@ -56,7 +56,11 @@ namespace Resolution
         {
             var wr = GetWeakReferenceToChildContainer();
 
+#if UNITY_V4
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
+#else
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+#endif
             GC.WaitForPendingFinalizers();
 
             Assert.IsFalse(wr.IsAlive);
