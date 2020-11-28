@@ -14,7 +14,11 @@ namespace Registration.Lifetime
         #region Scaffolding
 
         [TestInitialize]
-        public override void TestInitialize() => base.TestInitialize();
+        public override void TestInitialize()
+        {
+            base.TestInitialize();
+            TargetType = typeof(IView);
+        }
 
         [ClassInitialize]
         public static void ClassInit(TestContext context) => ClassInitialize(context);
@@ -23,7 +27,49 @@ namespace Registration.Lifetime
 
         #endregion
 
-        [TestMethod]
-        public void Baseline() { }
+        
+        #region Validation
+
+        public override void FromSameScope(object item1, object item2)
+        {
+            Assert.AreNotSame(Item1, Item2);
+            Assert.AreSame(((IView)Item1).Presenter.View, Item1);
+            Assert.AreSame(((IView)Item2).Presenter.View, Item2);
+            Assert.AreNotSame(Item1, Item2);
+        }
+
+        public override void FromChildScope(object item1, object item2)
+        {
+            Assert.AreNotSame(Item1, Item2);
+            Assert.AreSame(((IView)Item1).Presenter.View, Item1);
+            Assert.AreSame(((IView)Item2).Presenter.View, Item2);
+            Assert.AreNotSame(Item1, Item2);
+        }
+
+        public override void FromSameScopeDifferentThreads(object item1, object item2)
+        {
+            Assert.AreNotSame(Item1, Item2);
+            Assert.AreSame(((IView)Item1).Presenter.View, Item1);
+            Assert.AreSame(((IView)Item2).Presenter.View, Item2);
+            Assert.AreNotSame(Item1, Item2);
+        }
+
+        public override void FromChildScopeDifferentThreads(object item1, object item2)
+        {
+            Assert.AreNotSame(Item1, Item2);
+            Assert.AreSame(((IView)Item1).Presenter.View, Item1);
+            Assert.AreSame(((IView)Item2).Presenter.View, Item2);
+            Assert.AreNotSame(Item1, Item2);
+        }
+
+        #endregion
+
+
+        #region Inapplicable Tests
+
+        public override void FromSameAsImport() { }
+        public override void FromChildAsImport() { }
+
+        #endregion
     }
 }

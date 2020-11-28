@@ -23,7 +23,21 @@ namespace Registration.Lifetime
 
         #endregion
 
-        [TestMethod]
-        public void Baseline() { }
+
+        #region Validation
+
+        public override void FromSameScope(object item1, object item2)
+            => Assert.AreSame(Item1, Item2);
+
+        public override void FromChildScope(object item1, object item2)
+            => Assert.AreSame(Item1, Item2);
+
+        public override void FromSameScopeDifferentThreads(object item1, object item2)
+            => Assert.AreSame(Item1, Item2);
+
+        public override void FromChildScopeDifferentThreads(object item1, object item2)
+            => Assert.AreSame(Item1, Item2);
+        
+        #endregion
     }
 }

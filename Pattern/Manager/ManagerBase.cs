@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-#if UNITY_V4
+﻿#if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
@@ -13,6 +11,8 @@ namespace Regression
     {
         #region Fields
 
+        protected object?         Item1;
+        protected object?         Item2;
         protected LifetimeManager LifetimeManager;
 
         #endregion
@@ -23,6 +23,7 @@ namespace Regression
         public override void TestInitialize()
         {
             base.TestInitialize();
+
             LifetimeManager = GetManager();
         }
         
