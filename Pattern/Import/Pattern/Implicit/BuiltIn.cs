@@ -21,6 +21,23 @@ namespace Import.Implicit
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, type);
+            Assert.AreSame(Container, instance);
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(BuiltInTypes_Data), typeof(ImportBase))]
+        public virtual void BuiltIn_Interface_InChild(string test, Type type)
+        {
+            // Arrange
+            var child = Container.CreateChildContainer();
+
+            // Act
+            var instance = child.Resolve(type, null);
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+            Assert.AreSame(child, instance);
         }
 
         [DataTestMethod]

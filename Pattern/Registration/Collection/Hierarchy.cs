@@ -61,13 +61,11 @@ namespace Registration
                                 select r;
 #if BEHAVIOR_V4 || BEHAVIOR_V5
             Assert.AreEqual(1, registrations.Count());
-            var childRegistration = registrations.First();
-            Assert.AreSame(typeof(Service), childRegistration.MappedToType);
 #else
             Assert.AreEqual(2, registrations.Count());
-            var childRegistration = registrations.First();
-            Assert.AreNotSame(typeof(Service), childRegistration.MappedToType);
 #endif
+            var childRegistration = registrations.First();
+            Assert.AreSame(typeof(Service), childRegistration.MappedToType);
         }
 
         [TestMethod]
@@ -103,13 +101,11 @@ namespace Registration
                                 select r;
 #if BEHAVIOR_V4 || BEHAVIOR_V5
             Assert.AreEqual(1, registrations.Count());
-            var childRegistration = registrations.First();
-            Assert.AreSame(typeof(OtherService), childRegistration.MappedToType);
 #else
             Assert.AreEqual(2, registrations.Count());
-            var childRegistration = registrations.First();
-            Assert.AreNotSame(typeof(OtherService), childRegistration.MappedToType);
 #endif
+            var childRegistration = registrations.First();
+            Assert.AreSame(typeof(OtherService), childRegistration.MappedToType);
         }
 
         [TestMethod]

@@ -66,7 +66,7 @@ namespace Resolution
 
         [TestMethod]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public void HandlesConstraintViolation()
+        public void GenericConstrained_Violation()
         {
             // Arrange
             Container.RegisterType(typeof(IService), typeof(OtherService));
