@@ -41,7 +41,7 @@ namespace Import
             RequiredArrayType   = GetType("Annotated", "Required.ArrayTestType`1");
             OptionalArrayType   = GetType("Annotated", "Optional.ArrayTestType`1");
 
-            LoadInjectionFuncs();
+            LoadInjectionProxies();
         }
 
         #endregion

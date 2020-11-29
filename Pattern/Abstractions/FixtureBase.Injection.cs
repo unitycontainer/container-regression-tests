@@ -21,6 +21,7 @@ namespace Regression
         protected static Func<Type, InjectionMember> InjectionMember_Optional_ByType;
 
         protected static Func<object, InjectionMember> InjectionMember_Value;
+        protected static Func<InjectionMember>         InjectionMember_Default;
 
         protected static Func<string, object, ResolverOverride> Override_MemberOverride;
         protected static Func<Type, string, object, ResolverOverride> Override_MemberOverride_WithType;
@@ -28,7 +29,7 @@ namespace Regression
 
         #endregion
 
-        protected static void LoadInjectionFuncs()
+        protected static void LoadInjectionProxies()
         {
             Type support = Type.GetType($"{typeof(FixtureBase).FullName}+{_member}");
             
@@ -48,6 +49,9 @@ namespace Regression
 
             InjectionMember_Value = (Func<object, InjectionMember>)support
                 .GetMethod("GetInjectionValue").CreateDelegate(typeof(Func<object, InjectionMember>));
+
+            InjectionMember_Default = (Func<InjectionMember>)support
+                .GetMethod("GetInjectionDefault").CreateDelegate(typeof(Func<InjectionMember>));
 
             Override_MemberOverride = (Func<string, object, ResolverOverride>)support
                 .GetMethod("GetMemberOverride").CreateDelegate(typeof(Func<string, object, ResolverOverride>));

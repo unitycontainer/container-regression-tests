@@ -40,7 +40,15 @@ namespace Regression
                 => new InjectionField(FieldName, new OptionalParameter(importType));
     #else
                 => new OptionalField(FieldName, importType);
-    #endif
+#endif
+            #endregion
+
+
+            #region Default
+
+            public static InjectionMember GetInjectionDefault()
+                => new InjectionField(FieldName);
+
             #endregion
 
 

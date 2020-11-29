@@ -42,7 +42,15 @@ namespace Regression
                 => new InjectionProperty(PropertyName, new OptionalParameter(importType));
     #else
                 => new OptionalProperty(PropertyName, importType);
-    #endif
+#endif
+            #endregion
+
+
+            #region Default
+
+            public static InjectionMember GetInjectionDefault()
+                => new InjectionProperty(PropertyName);
+
             #endregion
 
 

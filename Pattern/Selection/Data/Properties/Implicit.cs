@@ -1,19 +1,26 @@
-﻿using Regression;
-using System;
-
+﻿using System;
+using static Selection.SelectionBase;
 
 namespace Selection.Implicit.Properties
 {
-    #region Generic
-
-    public class BaselineTestType<TDependency>
-        : PatternBaseType
+    public class BaselineTestType<TDependency, TDefault>
+        : SelectionBaseType
     {
         public TDependency Property { get; set; }
 
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
     }
 
-    #endregion
+    public class NoPublicMember<TDependency>
+    {
+        private TDependency Property { get; set; }
+    }
+}
+
+
+namespace Selection.Implicit.Properties.Basics
+{
+    public class SuccessDummy : SelectionBaseType
+    {
+    }
 }

@@ -6,7 +6,5 @@ namespace Selection.Implicit
 {
     public abstract partial class Pattern : SelectionBase
     {
-        [TestMethod]
-        public void Baseline() { }
     }
 }

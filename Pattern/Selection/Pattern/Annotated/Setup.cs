@@ -6,7 +6,5 @@ namespace Selection.Annotated
 {
     public abstract partial class Pattern : SelectionBase
     {
-        [TestMethod]
-        public void Baseline() { }
     }
 }

@@ -12,7 +12,7 @@ namespace Import.Annotated
     public abstract partial class Pattern
     {
         [DataTestMethod]
-        [DynamicData(nameof(UnResolvableTypes_Data), typeof(ImportBase))]
+        [DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
         public virtual void Required_Registered_Invalid(string test, Type type)
         {
             // Arrange
@@ -30,7 +30,7 @@ namespace Import.Annotated
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(UnResolvableTypes_Data), typeof(ImportBase))]
+        [DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
         public virtual void Optional_Registered_Invalid(string test, Type type)
         {
             // Arrange

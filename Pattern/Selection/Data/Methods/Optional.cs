@@ -5,7 +5,8 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Selection.Implicit.Methods
+
+namespace Selection.Annotated.Methods.Optional
 {
     public class BaselineTestType<TDependency, TDefault>
         : SelectionBaseType
@@ -13,26 +14,28 @@ namespace Selection.Implicit.Methods
         public virtual void Method()
             => Data[0] = new object[0];
 
-        public virtual void Method(TDependency value)
+        [InjectionMethod]
+        public virtual void Method([OptionalDependency] TDependency value)
             => Data[1] = new object[] { value };
 
         public virtual void Method(TDefault import)
             => Data[2] = new object[] { import };
 
-        public virtual void Method(TDependency value, TDefault import)
+        public virtual void Method([OptionalDependency] TDependency value, TDefault import)
             => Data[3] = new object[] { value, import };
     }
 
     public class NoPublicMember<TDependency>
     {
-        private void Method(TDependency value) { }
+        [InjectionMethod]
+        private void Method([OptionalDependency] TDependency value) { }
     }
 }
 
 
-namespace Selection.Implicit.Methods.Basics
+namespace Selection.Annotated.Methods.Basics
 {
-    public class SuccessDummy : SelectionBaseType
+    public class SuccessDummyOptional : SelectionBaseType
     {
     }
 }

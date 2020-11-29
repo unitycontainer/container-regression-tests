@@ -43,6 +43,14 @@ namespace Regression
             #endregion
 
 
+            #region Default
+
+            public static InjectionMember GetInjectionDefault()
+                => new InjectionConstructor();
+            
+            #endregion
+
+
             #region Value
 
             public static InjectionMember GetInjectionValue(object argument)

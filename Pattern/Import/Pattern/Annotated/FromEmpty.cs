@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Regression;
 using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
@@ -33,7 +34,7 @@ namespace Import.Annotated
 
 
         [DataTestMethod]
-        [DynamicData(nameof(ResolvableTypes_Data), typeof(ImportBase))]
+        [DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
         public virtual void Required_Resolvable(string test, Type type)
         {
             // Arrange
@@ -53,7 +54,7 @@ namespace Import.Annotated
         #region Optional
 
         [DataTestMethod]
-        [DynamicData(nameof(ResolvableTypes_Data), typeof(ImportBase))]
+        [DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
         public virtual void Optional_Resolvable(string test, Type type)
         {
             // Arrange

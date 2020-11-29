@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Selection.Fields
 {
@@ -16,14 +17,15 @@ namespace Selection.Fields
         #endregion
 
 
-        #region Unsupported
-        //#if !V4
-        //        // Constructors cann't be injected by name
-        //        public override void Injected_ByName(string test, Type type, string name, Type dependency, object expected) { }
-        //        public override void Injected_ByName_Required(string test, Type type, string name, Type dependency, object expected) { }
-        //        public override void Injected_ByName_Optional(string test, Type type, string name, Type dependency, object expected) { }
-        //        public override void Injected_ByName_Default(string test, Type type, string name, Type dependency, object expected) { }
-        //#endif
+        #region Unsupported Tests
+
+        public override void DefaultMemberImplicit(Type dependency, Type @default) { }
+        public override void DefaultMemberImplicitGeneric(Type dependency, Type @default) { }
+        public override void DefaultMemberOptional(Type dependency, Type @default) { }
+        public override void DefaultMemberOptionalGeneric(Type dependency, Type @default) { }
+        public override void DefaultMemberRequired(Type dependency, Type @default) { }
+        public override void DefaultMemberRequiredGeneric(Type dependency, Type @default) { }
+
         #endregion
     }
 }

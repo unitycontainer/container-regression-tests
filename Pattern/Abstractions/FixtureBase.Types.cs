@@ -12,13 +12,24 @@ namespace Regression
 {
     public abstract class PatternBaseType
     {
-        public virtual object Value { get; protected set; }
+        #region Constructors
 
-        public virtual object Default { get; }
-        public virtual object Injected { get; }
-        public virtual object Registered { get; }
-        public virtual object Override { get; }
-        public virtual Type ImportType => typeof(object);
+        protected PatternBaseType() => ImportType = typeof(object);
+        public PatternBaseType(Type type) => ImportType = type;
+
+        #endregion
+
+
+        #region Properties
+
+        public virtual object   Value       { get; protected set; }
+        public virtual object   Default     { get; protected set; }
+        public virtual object   Injected    { get; protected set; }
+        public virtual object   Override    { get; protected set; }
+        public virtual object   Registered  { get; protected set; }
+        public virtual Type     ImportType  { get; protected set; }
+
+        #endregion
     }
 
     public struct TestStruct
