@@ -14,8 +14,7 @@ namespace Import.Implicit
 #if BEHAVIOR_V4
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [DynamicData(nameof(WithDefaultValue_Data))]
-        [DataTestMethod]
+        [DataTestMethod, DynamicData(nameof(WithDefaultValue_Data))]
         /// <summary>
         /// Tests providing default values
         /// </summary>
@@ -34,8 +33,7 @@ namespace Import.Implicit
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [DynamicData(nameof(WithDefaultAttribute_Data))]
-        [DataTestMethod]
+        [DataTestMethod, DynamicData(nameof(WithDefaultAttribute_Data))]
         /// <summary>
         /// Tests providing default values
         /// </summary>
@@ -54,8 +52,7 @@ namespace Import.Implicit
 #if BEHAVIOR_V4
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [DynamicData(nameof(WithDefaultAndAttribute_Data))]
-        [DataTestMethod]
+        [DataTestMethod, DynamicData(nameof(WithDefaultAndAttribute_Data))]
         /// <summary>
         /// Tests providing default values
         /// </summary>

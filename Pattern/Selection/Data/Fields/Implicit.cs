@@ -4,11 +4,10 @@ using System;
 namespace Selection.Implicit.Fields
 {
     public class BaselineTestType<TDependency, TDefault>
-        : SelectionBaseType
+        : FieldSelectionBase
     {
         public TDependency Field;
 
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }
 
     public class NoPublicMember<TDependency>
@@ -18,9 +17,7 @@ namespace Selection.Implicit.Fields
 }
 
 
-namespace Selection.Implicit.Fields.Basics
+namespace Selection.Implicit.Fields.EdgeCases
 {
-    public class SuccessDummy : SelectionBaseType
-    {
-    }
+    public class DummySelectionImplicit : SelectionBaseType { }
 }

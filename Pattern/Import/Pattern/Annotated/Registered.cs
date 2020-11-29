@@ -1,18 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
 using System;
-#if UNITY_V4
-using Microsoft.Practices.Unity;
-#else
-using Unity;
-#endif
 
 namespace Import.Annotated
 {
     public abstract partial class Pattern
     {
-        [DataTestMethod]
-        [DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
         public virtual void Required_Registered_Invalid(string test, Type type)
         {
             // Arrange
@@ -29,8 +23,7 @@ namespace Import.Annotated
             Assert.AreEqual(Container.Resolve(type, null), instance.Value);
         }
 
-        [DataTestMethod]
-        [DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
         public virtual void Optional_Registered_Invalid(string test, Type type)
         {
             // Arrange

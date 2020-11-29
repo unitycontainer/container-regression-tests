@@ -10,11 +10,10 @@ using Unity;
 namespace Selection.Annotated.Properties.Required
 {
     public class BaselineTestType<TDependency>
-        : SelectionBaseType
+        : PropertySelectionBase
     {
-        [Dependency] public TDependency Property { get; set; }
+        [Dependency] public TDependency Property { get => (TDependency)Data[0]; set => Data[0] = value; }
 
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
 
     public class NoPublicMember<TDependency>
@@ -25,9 +24,7 @@ namespace Selection.Annotated.Properties.Required
 }
 
 
-namespace Selection.Annotated.Properties.Basics
+namespace Selection.Annotated.Properties.Required.EdgeCases
 {
-    public class SuccessDummyRequired : SelectionBaseType
-    {
-    }
+    public class DummySelection : SelectionBaseType { }
 }

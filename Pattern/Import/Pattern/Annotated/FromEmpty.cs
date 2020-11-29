@@ -1,11 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
 using System;
-#if UNITY_V4
-using Microsoft.Practices.Unity;
-#else
-using Unity;
-#endif
 
 namespace Import.Annotated
 {
@@ -53,8 +48,7 @@ namespace Import.Annotated
 
         #region Optional
 
-        [DataTestMethod]
-        [DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
         public virtual void Optional_Resolvable(string test, Type type)
         {
             // Arrange
@@ -68,8 +62,7 @@ namespace Import.Annotated
             Assert.IsInstanceOfType(instance, target);
         }
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Optional_FromEmpty(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -77,8 +70,7 @@ namespace Import.Annotated
                                                          bool isResolveble)
             => TestOptionalImport(OptionalImportType, type, registered);
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Optional_Named(string test, Type type,
                                                      object @default, object defaultAttr,
                                                      object registered, object named,

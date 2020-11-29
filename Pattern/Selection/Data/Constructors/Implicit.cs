@@ -3,7 +3,7 @@
 namespace Selection.Implicit.Constructors
 {
     public class BaselineTestType<TDependency, TDefault>
-        : SelectionBaseType
+        : ConstructorSelectionBase
     {
         public BaselineTestType()
             => Data[0] = new object[0];
@@ -25,9 +25,7 @@ namespace Selection.Implicit.Constructors
 
 }
 
-namespace Selection.Implicit.Constructors.Basics
+namespace Selection.Implicit.Constructors.EdgeCases
 {
-    public class SuccessDummy : SelectionBaseType
-    {
-    }
+    public class DummySelectionImplicit : SelectionBaseType { }
 }

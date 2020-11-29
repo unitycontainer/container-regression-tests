@@ -9,7 +9,7 @@ using Unity;
 namespace Selection.Annotated.Methods.Required
 {
     public class BaselineTestType<TDependency, TDefault>
-        : SelectionBaseType
+        : MethodSelectionBase
     {
         public virtual void Method()
             => Data[0] = new object[0];
@@ -34,9 +34,7 @@ namespace Selection.Annotated.Methods.Required
 
 
 
-namespace Selection.Annotated.Methods.Basics
+namespace Selection.Annotated.Methods.Required.EdgeCases
 {
-    public class SuccessDummyRequired : SelectionBaseType
-    {
-    }
+    public class DummySelection : SelectionBaseType { }
 }

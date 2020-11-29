@@ -16,8 +16,7 @@ namespace Import.Injected
     {
         #region Implicit
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByValue_Implicit_WithValue(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -31,8 +30,7 @@ namespace Import.Injected
 
         #region Required
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByValue_Required_WithValue(string test, Type type,
                                                          object @default, object defaultAttr,
                                                          object registered, object named,
@@ -46,8 +44,7 @@ namespace Import.Injected
 
         #region Optional
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByValue_Optional_WithValue(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,

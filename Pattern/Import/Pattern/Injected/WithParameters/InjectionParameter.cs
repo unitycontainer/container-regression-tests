@@ -22,8 +22,7 @@ namespace Import.Injected
     {
         #region Implicit
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByInjectionParameter_Implicit_WithValue(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -33,8 +32,7 @@ namespace Import.Injected
                 InjectionMember_Value(new InjectionParameter(injected)), injected, injected);
 
 #if !BEHAVIOR_V4 && !BEHAVIOR_V5
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByInjectionParameter_Implicit_WithParameter(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -46,8 +44,7 @@ namespace Import.Injected
 #endif
 
 #if !UNITY_V4 && !BEHAVIOR_V5
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByInjectionParameter_Implicit_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -57,8 +54,7 @@ namespace Import.Injected
                 InjectionMember_Value(new InjectionParameter(type, new ValidatingResolver(injected))), 
                 injected, injected);
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByInjectionParameter_Implicit_WithResolverFactory(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -74,8 +70,7 @@ namespace Import.Injected
 
         #region Required
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByInjectionParameter_Required_WithValue(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -86,8 +81,7 @@ namespace Import.Injected
                 injected, injected);
 
 #if !BEHAVIOR_V4 && !BEHAVIOR_V5
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByInjectionParameter_Required_WithParameter(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -99,8 +93,7 @@ namespace Import.Injected
 
 #if !UNITY_V4 && !BEHAVIOR_V5
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByInjectionParameter_Required_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -110,8 +103,7 @@ namespace Import.Injected
                 InjectionMember_Value(new InjectionParameter(type, new ValidatingResolver(injected))), 
                 injected, injected);
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByInjectionParameter_Required_WithResolverFactory(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -127,8 +119,7 @@ namespace Import.Injected
 
         #region Optional
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByInjectionParameter_Optional_WithValue(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -139,8 +130,7 @@ namespace Import.Injected
                 injected, injected);
 
 #if !BEHAVIOR_V4 && !BEHAVIOR_V5
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByInjectionParameter_Optional_WithParameter(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -151,8 +141,7 @@ namespace Import.Injected
 #endif
 
 #if !UNITY_V4 && !BEHAVIOR_V5
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByInjectionParameter_Optional_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -162,8 +151,7 @@ namespace Import.Injected
                 InjectionMember_Value(new InjectionParameter(type, new ValidatingResolver(injected))),
                 injected, injected);
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByInjectionParameter_Optional_WithResolverFactory(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,

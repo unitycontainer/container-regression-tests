@@ -134,6 +134,15 @@ namespace Regression
                            .Where(t => Regex.IsMatch(t.Namespace, regex));
         }
 
+        protected static IEnumerable<Type> FromPatternNamespace(string @namespace)
+        {
+            var regex = $"({_root}).*({@namespace})";
+            return Assembly.GetExecutingAssembly()
+                           .DefinedTypes
+                           .Where(t => t.Namespace is not null)
+                           .Where(t => Regex.IsMatch(t.Namespace, regex));
+        }
+
         protected static IEnumerable<Type> FromNamespaces(string @namespace)
         {
             var regex = $"({_prefix}).*({_member}).*({@namespace})";

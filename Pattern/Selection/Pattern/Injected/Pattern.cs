@@ -21,7 +21,7 @@ namespace Selection.Injected
 
             Container.RegisterType(null, target, null, null, InjectionMember_Required_ByType(type));
 
-            AssertResolutionSuccessfull(target); 
+            AssertResolution(target); 
         }
 
         [DataTestMethod]
@@ -34,7 +34,7 @@ namespace Selection.Injected
 
             Container.RegisterType(null, target, null, null, InjectionMember_Required_ByType(type));
 
-            AssertResolutionSuccessfull(target);
+            AssertResolution(target);
         }
 
 
@@ -48,14 +48,8 @@ namespace Selection.Injected
 
             Container.RegisterType(null, target, null, null, InjectionMember_Required_ByType(type));
 
-            AssertResolutionSuccessfull(target);
+            AssertResolution(target);
         }
 
-
-        #region Not Supported
-
-        public override void BasicOperationTest(string test, Type type) { }
-
-        #endregion
     }
 }

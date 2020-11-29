@@ -4,19 +4,19 @@ namespace Selection
 {
     public abstract partial class SelectionBase
     {
-        public static IEnumerable<object[]> BasicOperationTests_Data
+        #region Test Data
+
+        public static IEnumerable<object[]> EdgeCases_Data
         {
             get
             {
-                foreach (var type in FromNamespace("Basics"))
+                foreach (var type in FromPatternNamespace("EdgeCases"))
                 {
-                    yield return new object[]
-                    {
-                        type.Name,
-                        type
-                    };
+                    yield return new object[] { type.Name, type };
                 }
             }
         }
+
+        #endregion
     }
 }

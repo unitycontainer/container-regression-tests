@@ -9,11 +9,10 @@ using Unity;
 namespace Selection.Annotated.Fields.Required
 {
     public class BaselineTestType<TDependency>
-        : SelectionBaseType
+        : FieldSelectionBase
     {
         [Dependency] public TDependency Field;
 
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
     }
 
     public class NoPublicMember<TDependency>
@@ -24,9 +23,7 @@ namespace Selection.Annotated.Fields.Required
 }
 
 
-namespace Selection.Annotated.Fields.Basics
+namespace Selection.Annotated.Fields.Required.EdgeCases
 {
-    public class SuccessDummyRequired : SelectionBaseType
-    {
-    }
+    public class DummySelection : SelectionBaseType { }
 }

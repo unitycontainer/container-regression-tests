@@ -9,7 +9,7 @@ using Unity;
 namespace Selection.Annotated.Constructors.Optional
 {
     public class BaselineTestType<TDependency, TDefault>
-        : SelectionBaseType
+        : ConstructorSelectionBase
     {
         public BaselineTestType()
             => Data[0] = new object[0];
@@ -33,9 +33,7 @@ namespace Selection.Annotated.Constructors.Optional
 }
 
 
-namespace Selection.Annotated.Constructors.Basics
+namespace Selection.Annotated.Constructors.Optional.EdgeCases
 {
-    public class SuccessDummyOptional : SelectionBaseType
-    {
-    }
+    public class DummySelection : SelectionBaseType { }
 }

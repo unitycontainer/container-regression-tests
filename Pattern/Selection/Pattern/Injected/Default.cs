@@ -1,11 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Regression;
 using System;
-using System.Collections.Generic;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
-using Unity;
 #endif
 
 namespace Selection.Injected
@@ -23,9 +20,9 @@ namespace Selection.Injected
             Container.RegisterType(null, target, null, null, InjectionMember_Default());
 
             // Act
-            var instance = AssertBasicPatternSuccessfull(target);
+            var instance = AssertResolutionPattern(target);
 
-            Assert.IsNotNull(instance.Data[0]);
+            Assert.IsNotNull(instance[0]);
         }
 
         [DataTestMethod]
@@ -37,8 +34,8 @@ namespace Selection.Injected
             var target = ImplicitType.MakeGenericType(new[] { dependency, @default });
 
             // Act
-            var instance = AssertBasicPatternSuccessfull(target);
-            Assert.IsNotNull(instance.Data[0]);
+            var instance = AssertResolutionPattern(target);
+            Assert.IsNotNull(instance[0]);
         }
 
         #endregion
@@ -56,8 +53,8 @@ namespace Selection.Injected
             RegisterTypes();
 
             // Act
-            var instance = AssertBasicPatternSuccessfull(target);
-            Assert.IsNotNull(instance.Data[0]);
+            var instance = AssertResolutionPattern(target);
+            Assert.IsNotNull(instance[0]);
         }
 
         [DataTestMethod]
@@ -70,8 +67,8 @@ namespace Selection.Injected
             RegisterTypes();
 
             // Act
-            var instance = AssertBasicPatternSuccessfull(target);
-            Assert.IsNotNull(instance.Data[0]);
+            var instance = AssertResolutionPattern(target);
+            Assert.IsNotNull(instance[0]);
         }
 
         #endregion
@@ -89,8 +86,8 @@ namespace Selection.Injected
             RegisterTypes();
 
             // Act
-            var instance = AssertBasicPatternSuccessfull(target);
-            Assert.IsNotNull(instance.Data[0]);
+            var instance = AssertResolutionPattern(target);
+            Assert.IsNotNull(instance[0]);
         }
 
         [DataTestMethod]
@@ -103,22 +100,10 @@ namespace Selection.Injected
             RegisterTypes();
 
             // Act
-            var instance = AssertBasicPatternSuccessfull(target);
-            Assert.IsNotNull(instance.Data[0]);
+            var instance = AssertResolutionPattern(target);
+            Assert.IsNotNull(instance[0]);
         }
 
         #endregion
-
-
-        public static IEnumerable<object[]> DefaultMemberTest_Data
-        {
-            get
-            {
-                yield return new object[] { typeof(IUnityContainer), typeof(object) };
-                yield return new object[] { typeof(int),             typeof(string) };
-                yield return new object[] { typeof(string),          typeof(int) };
-                yield return new object[] { typeof(Unresolvable),    typeof(IUnityContainer) };
-            }
-        }
     }
 }

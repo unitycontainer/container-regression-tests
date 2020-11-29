@@ -21,8 +21,7 @@ namespace Import.Injected
     {
         #region Implicit
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByResolvedArrayParameter_Implicit(string test, Type type, 
                                                               object @default, object defaultAttr, 
                                                               object registered, object named, 
@@ -35,8 +34,7 @@ namespace Import.Injected
 
         #region Required
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByResolvedArrayParameter_Required(string test, Type type,
                                                               object @default, object defaultAttr,
                                                               object registered, object named,
@@ -49,8 +47,7 @@ namespace Import.Injected
 
         #region Optional
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByResolvedArrayParameter_Optional(string test, Type type,
                                                               object @default, object defaultAttr,
                                                               object registered, object named,

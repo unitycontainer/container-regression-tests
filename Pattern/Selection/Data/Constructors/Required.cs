@@ -5,11 +5,10 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-
 namespace Selection.Annotated.Constructors.Required
 {
     public class BaselineTestType<TDependency, TDefault>
-        : SelectionBaseType
+        : ConstructorSelectionBase
     {
         public BaselineTestType()
             => Data[0] = new object[0];
@@ -33,9 +32,7 @@ namespace Selection.Annotated.Constructors.Required
 }
 
 
-namespace Selection.Annotated.Constructors.Basics
+namespace Selection.Annotated.Constructors.Required.EdgeCases
 {
-    public class SuccessDummy : SelectionBaseType
-    {
-    }
+    public class DummySelection : SelectionBaseType { }
 }

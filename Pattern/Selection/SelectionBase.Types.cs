@@ -1,19 +1,56 @@
-﻿using Regression;
-using System.Collections.Generic;
+﻿using System.Reflection;
 
 namespace Selection
 {
     public abstract partial class SelectionBase
     {
-        public abstract class SelectionBaseType : PatternBaseType
+        public abstract class SelectionBaseType
         {
-            public IList<object[]> Data = new List<object[]> { null, null, null, null, null};
+            protected static readonly BindingFlags Flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            
+            public virtual object this[int index] => new object();
+
+            public virtual bool IsSuccessfull => true;
         }
 
 
-        #region Test Data
+        #region Test Members
 
-        public class NoMembersType { }
+        public class ConstructorSelectionBase : SelectionBaseType
+        {
+            protected object[] Data;
+
+            public ConstructorSelectionBase() => Data = new object[GetType().GetConstructors(Flags).Length];
+
+            public override object this[int index] => Data[index];
+        }
+
+        public class MethodSelectionBase : SelectionBaseType
+        {
+            protected object[] Data;
+
+            public MethodSelectionBase() => Data = new object[GetType().GetMethods(Flags).Length];
+
+            public override object this[int index] => Data[index];
+        }
+
+        public class FieldSelectionBase : SelectionBaseType
+        {
+            protected FieldInfo[] Members;
+
+            public FieldSelectionBase() => Members = GetType().GetFields(Flags);
+
+            public override object this[int index] => Members[index].GetValue(this);
+        }
+
+        public class PropertySelectionBase : SelectionBaseType
+        {
+            protected object[] Data;
+
+            public PropertySelectionBase() => Data = new object[GetType().GetProperties(Flags).Length];
+
+            public override object this[int index] => Data[index];
+        }
 
         #endregion
     }

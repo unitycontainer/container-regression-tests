@@ -4,11 +4,10 @@ using static Selection.SelectionBase;
 namespace Selection.Implicit.Properties
 {
     public class BaselineTestType<TDependency, TDefault>
-        : SelectionBaseType
+        : PropertySelectionBase
     {
-        public TDependency Property { get; set; }
+        public TDependency Property { get => (TDependency)Data[0]; set => Data[0] = value; }
 
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
 
     public class NoPublicMember<TDependency>
@@ -18,9 +17,7 @@ namespace Selection.Implicit.Properties
 }
 
 
-namespace Selection.Implicit.Properties.Basics
+namespace Selection.Implicit.Properties.EdgeCases
 {
-    public class SuccessDummy : SelectionBaseType
-    {
-    }
+    public class DummySelectionImplicit : SelectionBaseType { }
 }

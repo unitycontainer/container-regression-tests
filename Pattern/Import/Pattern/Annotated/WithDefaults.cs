@@ -1,11 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
 using System;
-#if UNITY_V4
-using Microsoft.Practices.Unity;
-#else
-using Unity;
-#endif
 
 namespace Import.Annotated
 {
@@ -15,8 +10,7 @@ namespace Import.Annotated
 #if BEHAVIOR_V4
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [DataTestMethod]
-        [DynamicData(nameof(Required_WithDefaults_Data))]
+        [DataTestMethod, DynamicData(nameof(Required_WithDefaults_Data))]
         public virtual void Required_FromEmpty_WithDefaults(string test, Type type)
         {
             // Act
@@ -29,8 +23,7 @@ namespace Import.Annotated
         }
 
 
-        [DataTestMethod]
-        [DynamicData(nameof(Optional_WithDefaults_Data))]
+        [DataTestMethod, DynamicData(nameof(Optional_WithDefaults_Data))]
         public virtual void Optional_FromEmpty_WithDefaults(string test, Type type)
         {
             // Act
@@ -44,8 +37,7 @@ namespace Import.Annotated
 
 
 
-        [DataTestMethod]
-        [DynamicData(nameof(Required_WithDefaults_Data))]
+        [DataTestMethod, DynamicData(nameof(Required_WithDefaults_Data))]
         public virtual void Required_Registered_WithDefaults(string test, Type type)
         {
             // Arrange
@@ -63,8 +55,7 @@ namespace Import.Annotated
         }
 
 
-        [DataTestMethod]
-        [DynamicData(nameof(Optional_WithDefaults_Data))]
+        [DataTestMethod, DynamicData(nameof(Optional_WithDefaults_Data))]
         public virtual void Optional_Registered_WithDefaults(string test, Type type)
         {
             // Arrange

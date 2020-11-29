@@ -22,8 +22,7 @@ namespace Import.Injected
         #region Implicit
 
 #if !UNITY_V4
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalParameter_Implicit_Default(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -33,8 +32,7 @@ namespace Import.Injected
                 InjectionMember_Value(new OptionalParameter()), registered);
 #endif
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalParameter_Implicit_WithContractType(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -44,8 +42,7 @@ namespace Import.Injected
                 InjectionMember_Value(new OptionalParameter(type)), registered);
 
 #if !UNITY_V4
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalParameter_Implicit_WithContractName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -55,8 +52,7 @@ namespace Import.Injected
                 InjectionMember_Value(new OptionalParameter(Name)), named);
 #endif
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalParameter_Implicit_WithContract(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -71,8 +67,7 @@ namespace Import.Injected
         #region Required
 
 #if !UNITY_V4
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalParameter_Required_Default(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -82,8 +77,7 @@ namespace Import.Injected
                 InjectionMember_Value(new OptionalParameter()), registered);
 #endif
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalParameter_Required_WithContractType(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -93,8 +87,7 @@ namespace Import.Injected
                 InjectionMember_Value(new OptionalParameter(type)), registered);
 
 #if !UNITY_V4
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalParameter_Required_WithContractName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -104,8 +97,7 @@ namespace Import.Injected
                 InjectionMember_Value(new OptionalParameter(Name)), named);
 #endif
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalParameter_Required_WithContract(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -120,8 +112,7 @@ namespace Import.Injected
         #region Optional
 
 #if !UNITY_V4
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalParameter_Optional_Default(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -131,8 +122,7 @@ namespace Import.Injected
                 InjectionMember_Value(new OptionalParameter()), registered);
 #endif
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalParameter_Optional_WithContractType(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -142,8 +132,7 @@ namespace Import.Injected
                 InjectionMember_Value(new OptionalParameter(type)), registered);
 
 #if !UNITY_V4
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalParameter_Optional_WithContractName(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -153,8 +142,7 @@ namespace Import.Injected
                 InjectionMember_Value(new OptionalParameter(Name)), named);
 #endif
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByOptionalParameter_Optional_WithContract(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,

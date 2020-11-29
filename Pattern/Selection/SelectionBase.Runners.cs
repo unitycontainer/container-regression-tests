@@ -5,7 +5,7 @@ namespace Selection
 {
     public abstract partial class SelectionBase
     {
-        public object AssertResolutionSuccessfull(Type type)
+        public object AssertResolution(Type type)
         {
             // Act
             var instance = Container.Resolve(type, null);
@@ -17,7 +17,7 @@ namespace Selection
             return instance;
         }
 
-        public SelectionBaseType AssertBasicPatternSuccessfull(Type type)
+        public SelectionBaseType AssertResolutionPattern(Type type)
         {
             // Act
             var instance = Container.Resolve(type, null) as SelectionBaseType;

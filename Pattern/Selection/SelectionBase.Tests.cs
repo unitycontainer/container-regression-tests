@@ -1,17 +1,24 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Selection
 {
     public abstract partial class SelectionBase
     {
-        [TestMethod]
-        public void NoMebersToSelect() 
-            => AssertResolutionSuccessfull(typeof(NoMembersType));
 
-        [DataTestMethod]
-        [DynamicData(nameof(BasicOperationTests_Data))]
-        public virtual void BasicOperationTest(string test, Type type)
-            => AssertBasicPatternSuccessfull(type);
+        [DataTestMethod, DynamicData(nameof(EdgeCases_Data))]
+        public virtual void EdgeCases(string test, Type type)
+        {
+            // Arrange
+            RegisterTypes();
+
+            // Act
+            var instance = AssertResolutionPattern(type);
+
+            // Validate
+            Assert.IsTrue(instance.IsSuccessfull);
+        }
     }
 }

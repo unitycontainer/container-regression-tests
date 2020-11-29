@@ -20,8 +20,7 @@ namespace Import.Injected
     {
         #region Implicit
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByResolver_Implicit_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -30,8 +29,7 @@ namespace Import.Injected
             => TestWithDefault(ImplicitImportType, type,
                 InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByResolver_Implicit_WithResolverFactory(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -45,8 +43,7 @@ namespace Import.Injected
 
         #region Required
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByResolver_Required_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -55,8 +52,7 @@ namespace Import.Injected
             => TestWithDefault(RequiredImportType, type,
                 InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByResolver_Required_WithResolverFactory(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -70,8 +66,7 @@ namespace Import.Injected
 
         #region Optional
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByResolver_Optional_WithResolver(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,
@@ -80,8 +75,7 @@ namespace Import.Injected
             => TestWithDefault(OptionalImportType, type,
                 InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void ByResolver_Optional_WithResolverFactory(string test, Type type,
                                                           object @default, object defaultAttr,
                                                           object registered, object named,

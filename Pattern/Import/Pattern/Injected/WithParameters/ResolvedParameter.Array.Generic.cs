@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -23,8 +22,7 @@ namespace Import.Injected
     {
         #region Implicit
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByGenericResolvedArrayParameter_Implicit_Values(string test, Type type,
                                                                      object @default, object defaultAttr,
                                                                      object registered, object named,
@@ -34,8 +32,7 @@ namespace Import.Injected
                            InjectionMember_Value(new GenericResolvedArrayParameter(TDependency, @default, defaultAttr, registered, named, injected, overridden)));
         }
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByGenericResolvedArrayParameter_Implicit_Complex(string test, Type type,
                                                                      object @default, object defaultAttr,
                                                                      object registered, object named,
@@ -59,8 +56,7 @@ namespace Import.Injected
             Assert.IsTrue(instance.Contains(injected));
         }
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByGenericResolvedArrayParameter_ArrayNotation(string test, Type type,
                                                                      object @default, object defaultAttr,
                                                                      object registered, object named,
@@ -83,8 +79,7 @@ namespace Import.Injected
             Assert.IsTrue(instance.Contains(injected));
         }
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByGenericResolvedArrayParameter_ParentnessNotation(string test, Type type,
                                                                      object @default, object defaultAttr,
                                                                      object registered, object named,
@@ -112,8 +107,7 @@ namespace Import.Injected
 
         #region Required
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByGenericResolvedArrayParameter_Required(string test, Type type,
                                                                      object @default, object defaultAttr,
                                                                      object registered, object named,
@@ -126,8 +120,7 @@ namespace Import.Injected
 
         #region Optional
 
-        [DataTestMethod]
-        [DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ByGenericResolvedArrayParameter_Optional(string test, Type type,
                                                                      object @default, object defaultAttr,
                                                                      object registered, object named,

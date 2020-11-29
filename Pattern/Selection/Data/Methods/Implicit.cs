@@ -8,7 +8,7 @@ using Unity;
 namespace Selection.Implicit.Methods
 {
     public class BaselineTestType<TDependency, TDefault>
-        : SelectionBaseType
+        : MethodSelectionBase
     {
         public virtual void Method()
             => Data[0] = new object[0];
@@ -30,9 +30,7 @@ namespace Selection.Implicit.Methods
 }
 
 
-namespace Selection.Implicit.Methods.Basics
+namespace Selection.Implicit.Methods.EdgeCases
 {
-    public class SuccessDummy : SelectionBaseType
-    {
-    }
+    public class DummySelectionImplicit : SelectionBaseType { }
 }
