@@ -6,7 +6,7 @@ namespace Import.Optional
 {
     public abstract partial class Pattern : Common.Pattern
     {
-        protected override void AssertImportResolved(Type definition, Type importType, object expected)
+        protected override void AssertUnresolvableImport(Type definition, Type importType, object expected)
         {
             // Arrange
             var type = definition.MakeGenericType(importType);

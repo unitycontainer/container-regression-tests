@@ -14,29 +14,6 @@ namespace Import
 {
     public abstract partial class ImportBase
     {
-        #region Resolution
-
-        protected virtual void AssertImportResolved(Type definition, Type importType, object expected)
-        {
-            var type = definition.MakeGenericType(importType);
-
-            // Validate
-            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(type, null));
-
-            // Register missing types
-            RegisterTypes();
-
-            // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(expected, instance.Value);
-        }
-
-        #endregion
-
-
         #region With Defaults
 
         protected void TestWithDefault(Type definition, Type importType, object expected, object @default)

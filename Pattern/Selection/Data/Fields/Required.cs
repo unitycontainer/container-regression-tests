@@ -19,6 +19,11 @@ namespace Selection.Annotated.Fields.Required
     {
         [Dependency]
         private TDependency Field;
+        protected TDependency Dummy()
+        {
+            Field = default;
+            return Field;
+        }
     }
 }
 

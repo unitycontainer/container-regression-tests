@@ -24,6 +24,13 @@ namespace Import
 
             #endregion
         }
+
+        public class DummyImport : ImportBaseType 
+        {
+            public override Type ImportType => typeof(Unresolvable);
+            public override object Value => RegisteredUnresolvable;
+            public override object Default => RegisteredUnresolvable;
+        }
     }
 }
 

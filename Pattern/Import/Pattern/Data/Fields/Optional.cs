@@ -1,90 +1,26 @@
 ﻿using System;
 using System.ComponentModel;
 using static Import.ImportBase;
+using Regression;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 #endif
 
-namespace Import.Annotated.Fields.Optional
+namespace Import.Optional.Fields
 {
-    public class BaselineTestType<TDependency>
-        : ImportBaseType
+    public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [OptionalDependency] public TDependency Field;
-
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
-    }
-
-    public class BaselineTestTypeNamed<TDependency>
-        : ImportBaseType
-    {
-        [OptionalDependency(ImportBase.Name)] public TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class DownTheLineType<TDependency>
-        : ImportBaseType
-    {
-        public DownTheLineType(BaselineTestType<TDependency> import)
-            => Value = import;
-    }
-
-    public class ArrayTestType<TDependency>
-        : ImportBaseType
-    {
-        [OptionalDependency] public TDependency[] Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class PrivateTestType<TDependency>
-        : ImportBaseType
-    {
-        [OptionalDependency] private TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-        protected TDependency Dummy()
-        {
-            Field = default;
-            return Field;
-        }
-    }
-
-    public class ProtectedTestType<TDependency>
-        : ImportBaseType
-    {
-        [OptionalDependency] protected TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class InternalTestType<TDependency>
-        : ImportBaseType
-    {
-        [OptionalDependency] internal TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-        protected TDependency Dummy()
-        {
-            Field = default;
-            return Field;
-        }
     }
 }
 
 
-namespace Import.Annotated.Fields.Optional.WithDefaults
+namespace Import.Optional.Fields.WithDefault
 {
-    #region WithDefault
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
     public class Optional_Field_Int_WithDefault : ImportBaseType
@@ -125,11 +61,11 @@ namespace Import.Annotated.Fields.Optional.WithDefaults
     public class Optional_DerivedFromString_WithDefault : Optional_Field_String_WithDefault
     {
     }
+}
 
-    #endregion
 
-
-    #region WithDefaultAttribute
+namespace Import.Optional.Fields.WithDefaultAttribute
+{
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
@@ -193,11 +129,11 @@ namespace Import.Annotated.Fields.Optional.WithDefaults
 #endif
         public override Type ImportType => typeof(string);
     }
+}
 
-    #endregion
 
-
-    #region 
+namespace Import.Optional.Fields.WithDefaultAndAttribute
+{
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
@@ -264,5 +200,4 @@ namespace Import.Annotated.Fields.Optional.WithDefaults
         public override Type ImportType => typeof(string);
     }
 
-    #endregion
 }

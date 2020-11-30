@@ -12,7 +12,7 @@ namespace Import.Common
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble)
-            => AssertImportResolved(BaselineTestType, type, registered);
+            => AssertUnresolvableImport(BaselineTestType, type, registered);
 
 
         [DataTestMethod, DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]

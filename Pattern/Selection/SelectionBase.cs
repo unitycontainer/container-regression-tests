@@ -11,7 +11,6 @@ namespace Selection
         protected static Type ImplicitType;
         protected static Type RequiredType;
         protected static Type OptionalType;
-        protected static Type BaselineTestType;
         protected static Type NoPublicMemberImplicit;
         protected static Type NoPublicMemberRequired;
         protected static Type NoPublicMemberOptional;
@@ -24,8 +23,6 @@ namespace Selection
         new protected static void ClassInitialize(TestContext context)
         {
             FixtureBase.ClassInitialize(context);
-
-            BaselineTestType = GetType("BaselineTestType`2");
 
             ImplicitType = GetType("Implicit",           "BaselineTestType`2");
             RequiredType = GetType("Annotated", "Required.BaselineTestType`2");

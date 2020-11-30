@@ -1,159 +1,28 @@
-﻿using System;
+﻿using Regression;
+using System;
 using System.ComponentModel;
 using static Import.ImportBase;
-using Regression;
 #if UNITY_V4
+using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
+using Unity.Injection;
 #endif
 
 
 namespace Import.Optional.Constructors
 {
-    public class BaselineTestTypeNamed<TDependency>
-        : ImportBaseType
+    public class BaselineTestType<TDependency> : FixtureBaseType
     {
-        public BaselineTestTypeNamed([OptionalDependency(ImportBase.Name)] TDependency value) => Value = value;
+        [InjectionConstructor] public BaselineTestType([OptionalDependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
-    }
-
-    public class DownTheLineType<TDependency>
-        : ImportBaseType
-    {
-        public DownTheLineType(BaselineTestType<TDependency> import)
-            => Value = import;
-    }
-
-    public class ArrayTestType<TDependency>
-        : ImportBaseType
-    {
-        public ArrayTestType([OptionalDependency] TDependency[] value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class PrivateTestType<TDependency>
-        : ImportBaseType
-    {
-        private PrivateTestType([OptionalDependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class ProtectedTestType<TDependency>
-        : ImportBaseType
-    {
-        protected ProtectedTestType([OptionalDependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class InternalTestType<TDependency>
-        : ImportBaseType
-    {
-        internal InternalTestType([OptionalDependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class BaselineTestType_Ref<TDependency>
-        : ImportBaseType where TDependency : class
-    {
-        public BaselineTestType_Ref([OptionalDependency] ref TDependency _)
-            => throw new InvalidOperationException("should never execute");
-    }
-
-    public class BaselineTestType_Out<TDependency>
-        : ImportBaseType where TDependency : class
-    {
-        public BaselineTestType_Out([OptionalDependency] out TDependency _)
-            => throw new InvalidOperationException("should never execute");
     }
 }
 
 
-namespace Import.Annotated.Constructors.Optional
+namespace Import.Optional.Constructors.WithDefault
 {
-    public class BaselineTestType<TDependency>
-        : ImportBaseType
-    {
-        public BaselineTestType([OptionalDependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class BaselineTestTypeNamed<TDependency>
-        : ImportBaseType
-    {
-        public BaselineTestTypeNamed([OptionalDependency(ImportBase.Name)] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class BaselineInheritedType<TDependency>
-        : BaselineTestType<TDependency>
-    {
-        public BaselineInheritedType([OptionalDependency] TDependency value)
-            : base(value)
-        { }
-    }
-
-    public class BaselineInheritedTwice<TDependency>
-        : BaselineInheritedType<TDependency>
-    {
-        public BaselineInheritedTwice([OptionalDependency] TDependency value)
-            : base(value)
-        { }
-    }
-
-    public class DownTheLineType<TDependency>
-        : ImportBaseType
-    {
-        public DownTheLineType(BaselineTestType<TDependency> import)
-            => Value = import;
-    }
-
-    public class ArrayTestType<TDependency>
-        : ImportBaseType
-    {
-        public ArrayTestType([OptionalDependency] TDependency[] value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class PrivateTestType<TDependency>
-        : ImportBaseType
-    {
-        private PrivateTestType([OptionalDependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class ProtectedTestType<TDependency>
-        : ImportBaseType
-    {
-        protected ProtectedTestType([OptionalDependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class InternalTestType<TDependency>
-        : ImportBaseType
-    {
-        internal InternalTestType([OptionalDependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class BaselineTestType_Ref<TDependency>
-        : ImportBaseType where TDependency : class
-    {
-        public BaselineTestType_Ref([OptionalDependency] ref TDependency _)
-            => throw new InvalidOperationException("should never execute");
-    }
-
-    public class BaselineTestType_Out<TDependency>
-        : ImportBaseType where TDependency : class
-    {
-        public BaselineTestType_Out([OptionalDependency] out TDependency _)
-            => throw new InvalidOperationException("should never execute");
-    }
-}
-
-namespace Import.Annotated.Constructors.Optional.WithDefaults
-{
-    #region WithDefault
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
@@ -188,12 +57,12 @@ namespace Import.Annotated.Constructors.Optional.WithDefaults
 #endif
         public override Type ImportType => typeof(string);
     }
+  
+}
 
-    #endregion
 
-
-    #region WithDefaultAttribute
-
+namespace Import.Optional.Constructors.WithDefaultAttribute
+{
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
@@ -266,13 +135,11 @@ namespace Import.Annotated.Constructors.Optional.WithDefaults
 #endif
         public override Type ImportType => typeof(string);
     }
-
-    #endregion
-
-
-    #region WithDefaultAndAttribute
+}
 
 
+namespace Import.Optional.Constructors.WithDefaultAndAttribute
+{
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
     public class Optional_Int_WithDefaultAndAttribute : ImportBaseType
@@ -350,6 +217,4 @@ namespace Import.Annotated.Constructors.Optional.WithDefaults
 #endif
         public override Type ImportType => typeof(string);
     }
-
-    #endregion
 }

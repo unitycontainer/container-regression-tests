@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Regression;
 using System;
 
 namespace Import.Annotated

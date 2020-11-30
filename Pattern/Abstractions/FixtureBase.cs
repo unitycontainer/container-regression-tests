@@ -19,6 +19,7 @@ namespace Regression
         private static string _type { get; set; }
         private static string _root { get; set; }
         private static string _prefix { get; set; }
+        
         protected IUnityContainer Container;
 
         protected static Type BaselineTestType;
@@ -34,7 +35,7 @@ namespace Regression
         protected static string Dependency { get; private set; }
         protected static string Member { get; private set; }
 
-        protected Type TestTypeDefinition 
+        protected Type CorrespondingTypeDefinition 
             => Type.GetType($"{Category}.{Dependency}.{Member}.{TestContext.TestName}") ?? BaselineTestType;
 
         #endregion
@@ -85,19 +86,33 @@ namespace Regression
         #endregion
 
 
-        #region Get Type
+        #region Get Test Type
 
         protected static Type GetTestType(string name)
         {
             return Type.GetType($"{Category}.{Dependency}.{Member}.{name}") ??
                    Type.GetType($"Regression.{Dependency}.{Member}.{name}");
         }
-
+        
         protected static Type GetTestType(string dependency, string name)
         {
             return Type.GetType($"{Category}.{dependency}.{Member}.{name}") ??
                    Type.GetType($"Regression.{dependency}.{Member}.{name}");
         }
+
+        protected static IEnumerable<Type> FromTestNamespaces(string name)
+        {
+            var regex = $"({_prefix}).*({Member}).*({name})";
+            return Assembly.GetExecutingAssembly()
+                           .DefinedTypes
+                           .Where(t => t.Namespace is not null)
+                           .Where(t => Regex.IsMatch(t.Namespace, regex));
+        }
+
+        #endregion
+
+
+        #region Get Type
 
         protected static Type GetType(string name)
         {

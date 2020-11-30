@@ -13,5 +13,10 @@ namespace Selection.Implicit.Fields
     public class NoPublicMember<TDependency>
     {
         private TDependency Field;
+        protected TDependency Dummy()
+        {
+            Field = default;
+            return Field;
+        }
     }
 }

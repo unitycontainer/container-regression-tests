@@ -11,7 +11,7 @@ namespace Import.Common
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble)
-            => AssertImportResolved(TestTypeDefinition, type, registered);
+            => AssertUnresolvableImport(CorrespondingTypeDefinition, type, registered);
 
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
@@ -20,6 +20,6 @@ namespace Import.Common
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble)
-            => AssertImportResolved(TestTypeDefinition, type, registered);
+            => AssertUnresolvableImport(CorrespondingTypeDefinition, type, registered);
     }
 }

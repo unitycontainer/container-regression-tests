@@ -27,6 +27,11 @@ namespace Import.Implicit.Fields
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
+        protected TDependency Dummy()
+        {
+            Field = default;
+            return Field;
+        }
     }
 
     public class ProtectedTestType<TDependency>
@@ -45,5 +50,10 @@ namespace Import.Implicit.Fields
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
+        protected TDependency Dummy()
+        {
+            Field = default;
+            return Field;
+        }
     }
 }

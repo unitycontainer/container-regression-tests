@@ -1,96 +1,39 @@
 ﻿using System;
 using System.ComponentModel;
 using static Import.ImportBase;
+using Regression;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 #endif
 
-namespace Import.Annotated.Fields.Required
+namespace Import.Required.Fields
 {
-    public class BaselineTestType<TDependency>
-        : ImportBaseType
+    public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [Dependency] public TDependency Field;
-
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
-    }
-
-    public class BaselineTestTypeNamed<TDependency>
-        : ImportBaseType
-    {
-        [Dependency(ImportBase.Name)] public TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class DownTheLineType<TDependency>
-        : ImportBaseType
-    {
-        public DownTheLineType(BaselineTestType<TDependency> import)
-            => Value = import;
-    }
-
-    public class ArrayTestType<TDependency>
-        : ImportBaseType
-    {
-        [Dependency] public TDependency[] Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class PrivateTestType<TDependency>
-        : ImportBaseType
-    {
-        [Dependency] private TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-        protected TDependency Dummy() => (Field = default);
-    }
-
-    public class ProtectedTestType<TDependency>
-        : ImportBaseType
-    {
-        [Dependency] protected TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class InternalTestType<TDependency>
-        : ImportBaseType
-    {
-        [Dependency] internal TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-        protected TDependency Dummy() => (Field = default);
     }
 }
 
 
-namespace Import.Annotated.Fields.Required.WithDefaults
+namespace Import.Optional.Fields.WithDefault
 {
-    #region WithDefault
-
-    // Unity does not support implicit default values on fields
+    // Unity does not support implicit default values on properties
     // When resolved it will throw if not registered
     //
     //public class Required_WithDefault : PatternBaseType
     //{
-    //    [Dependency] public int Field = PatternBase.DefaultInt;
+    //    [Dependency] public TDependency Field;
     //}
+}
 
-    #endregion
 
+namespace Import.Required.Fields.WithDefaultAttribute
+{
 #if !BEHAVIOR_V5 // Unity v5 did not support DefaultValueAttribute on fields
-
-    #region WithDefaultAttribute
 
     public class Required_Field_Int_WithDefaultAttribute : ImportBaseType
     {
@@ -131,10 +74,13 @@ namespace Import.Annotated.Fields.Required.WithDefaults
     {
     }
 
-    #endregion
+#endif
+}
 
 
-    #region WithDefaultAndAttribute
+namespace Import.Required.Fields.WithDefaultAndAttribute
+{
+#if !BEHAVIOR_V5 // Unity v5 did not support DefaultValueAttribute on fields
 
     public class Required_Field_Int_WithDefaultAndAttribute : ImportBaseType
     {
@@ -175,17 +121,5 @@ namespace Import.Annotated.Fields.Required.WithDefaults
     public class Required_Derived_WithDefaultAndAttribute : Required_Field_Int_WithDefaultAndAttribute
     {
     }
-
-    #endregion
-
-#else
-
-    public class Dummy_Success_Type : PatternBaseType
-    {
-        public override object Value { get => null; }
-        public override object Default => null;
-    }
-
 #endif
-
 }

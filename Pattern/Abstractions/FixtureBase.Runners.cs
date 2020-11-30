@@ -24,5 +24,23 @@ namespace Regression
 
             return instance;
         }
+
+        protected virtual void AssertUnresolvableImport(Type definition, Type importType, object expected)
+        {
+            var type = definition.MakeGenericType(importType);
+
+            // Validate
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(type, null));
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            var instance = Container.Resolve(type, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(expected, instance.Value);
+        }
     }
 }
