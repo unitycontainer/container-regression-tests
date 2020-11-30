@@ -1,6 +1,6 @@
-﻿using Regression;
-using System;
+﻿using System;
 using System.ComponentModel;
+using static Import.ImportBase;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -10,7 +10,7 @@ using Unity;
 namespace Import.Annotated.Methods.Optional
 {
     public class BaselineTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency] TDependency value) => Value = value;
@@ -18,32 +18,22 @@ namespace Import.Annotated.Methods.Optional
     }
 
     public class BaselineTestTypeNamed<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency(ImportBase.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
-    public class BaselineInheritedType<TDependency>
-        : BaselineTestType<TDependency>
-    {
-    }
-
-    public class BaselineInheritedTwice<TDependency>
-        : BaselineInheritedType<TDependency>
-    {
-    }
-
     public class DownTheLineType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         public DownTheLineType(BaselineTestType<TDependency> import)
             => Value = import;
     }
 
     public class ArrayTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency] TDependency[] value) => Value = value;
@@ -51,7 +41,7 @@ namespace Import.Annotated.Methods.Optional
     }
 
     public class PrivateTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [InjectionMethod]
         private void Method([OptionalDependency] TDependency value) => Value = value;
@@ -59,7 +49,7 @@ namespace Import.Annotated.Methods.Optional
     }
 
     public class ProtectedTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [InjectionMethod]
         protected void Method([OptionalDependency] TDependency value) => Value = value;
@@ -67,7 +57,7 @@ namespace Import.Annotated.Methods.Optional
     }
 
     public class InternalTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [InjectionMethod]
         internal void Method([OptionalDependency] TDependency value) => Value = value;
@@ -75,7 +65,7 @@ namespace Import.Annotated.Methods.Optional
     }
 
     public class BaselineTestType_Ref<TDependency>
-        : PatternBaseType where TDependency : class
+        : ImportBaseType where TDependency : class
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency] ref TDependency _)
@@ -83,7 +73,7 @@ namespace Import.Annotated.Methods.Optional
     }
 
     public class BaselineTestType_Out<TDependency>
-        : PatternBaseType where TDependency : class
+        : ImportBaseType where TDependency : class
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency] out TDependency _)
@@ -98,7 +88,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
-    public class Optional_Parameter_Int_WithDefault : PatternBaseType
+    public class Optional_Parameter_Int_WithDefault : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency] int value = ImportBase.DefaultInt) => Value = value;
@@ -120,7 +110,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
     }
 #endif
 
-    public class Optional_Parameter_String_WithDefault : PatternBaseType
+    public class Optional_Parameter_String_WithDefault : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency] string value = ImportBase.DefaultString) => Value = value;
@@ -139,7 +129,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
     #region WithDefaultAttribute
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
-    public class Optional_Int_WithDefaultAttribute : PatternBaseType
+    public class Optional_Int_WithDefaultAttribute : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency][DefaultValue(ImportBase.DefaultValueInt)] int value) => Value = value;
@@ -153,7 +143,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
         public override Type ImportType => typeof(int);
     }
 
-    public class Optional_WithDefaultAttribute_Int : PatternBaseType
+    public class Optional_WithDefaultAttribute_Int : ImportBaseType
     {
         [InjectionMethod]
         public void Method([DefaultValue(ImportBase.DefaultValueInt)][OptionalDependency] int value) => Value = value;
@@ -182,7 +172,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
 
 #endif
 
-    public class Optional_String_WithDefaultAttribute : PatternBaseType
+    public class Optional_String_WithDefaultAttribute : ImportBaseType
     {
         [InjectionMethod]
         public void Method([OptionalDependency][DefaultValue(ImportBase.DefaultValueString)] string value) => Value = value;
@@ -195,7 +185,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
         public override Type ImportType => typeof(string);
     }
 
-    public class Optional_WithDefaultAttribute_String : PatternBaseType
+    public class Optional_WithDefaultAttribute_String : ImportBaseType
     {
         [InjectionMethod]
         public void Method([DefaultValue(ImportBase.DefaultValueString)][OptionalDependency] string value) => Value = value;
@@ -215,7 +205,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
-    public class Optional_Int_WithDefaultAndAttribute : PatternBaseType
+    public class Optional_Int_WithDefaultAndAttribute : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency][DefaultValue(ImportBase.DefaultValueInt)] int value = ImportBase.DefaultInt) => Value = value;
@@ -229,7 +219,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
         public override Type ImportType => typeof(int);
     }
 
-    public class Optional_WithDefaultAndAttribute_Int : PatternBaseType
+    public class Optional_WithDefaultAndAttribute_Int : ImportBaseType
     {
         [InjectionMethod]
         public void Method([DefaultValue(ImportBase.DefaultValueInt)][OptionalDependency] int value = ImportBase.DefaultInt) => Value = value;
@@ -260,7 +250,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
 
 #endif
 
-    public class Optional_String_WithDefaultAndAttribute : PatternBaseType
+    public class Optional_String_WithDefaultAndAttribute : ImportBaseType
     {
         [InjectionMethod]
         public void Method([OptionalDependency][DefaultValue(ImportBase.DefaultValueString)] string value = ImportBase.DefaultString) => Value = value;
@@ -275,7 +265,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
         public override Type ImportType => typeof(string);
     }
 
-    public class Optional_WithDefaultAndAttribute_String : PatternBaseType
+    public class Optional_WithDefaultAndAttribute_String : ImportBaseType
     {
         [InjectionMethod]
         public void Method([DefaultValue(ImportBase.DefaultValueString)][OptionalDependency] string value = ImportBase.DefaultString) => Value = value;

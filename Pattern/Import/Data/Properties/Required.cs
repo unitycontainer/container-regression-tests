@@ -1,6 +1,6 @@
-﻿using Regression;
-using System;
+﻿using System;
 using System.ComponentModel;
+using static Import.ImportBase;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -11,7 +11,7 @@ using Unity;
 namespace Import.Annotated.Properties.Required
 {
     public class BaselineTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [Dependency] public TDependency Property { get; set; }
 
@@ -20,7 +20,7 @@ namespace Import.Annotated.Properties.Required
     }
 
     public class BaselineTestTypeNamed<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [Dependency(ImportBase.Name)] public TDependency Property { get; set; }
 
@@ -28,25 +28,15 @@ namespace Import.Annotated.Properties.Required
         public override object Default => default(TDependency);
     }
 
-    public class BaselineInheritedType<TDependency>
-        : BaselineTestType<TDependency>
-    {
-    }
-
-    public class BaselineInheritedTwice<TDependency>
-        : BaselineInheritedType<TDependency>
-    {
-    }
-
     public class DownTheLineType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         public DownTheLineType(BaselineTestType<TDependency> import)
             => Value = import;
     }
 
     public class ArrayTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [Dependency] public TDependency[] Property { get; set; }
 
@@ -55,7 +45,7 @@ namespace Import.Annotated.Properties.Required
     }
 
     public class PrivateTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [Dependency] private TDependency Property { get; set; }
 
@@ -64,7 +54,7 @@ namespace Import.Annotated.Properties.Required
     }
 
     public class ProtectedTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [Dependency] protected TDependency Property { get; set; }
 
@@ -73,7 +63,7 @@ namespace Import.Annotated.Properties.Required
     }
 
     public class InternalTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [Dependency] internal TDependency Property { get; set; }
 
@@ -106,7 +96,7 @@ namespace Import.Annotated.Properties.Required.WithDefaults
 
     #region WithDefaultAttribute
 
-    public class Required_Property_Int_WithDefaultAttribute : PatternBaseType
+    public class Required_Property_Int_WithDefaultAttribute : ImportBaseType
     {
         [Dependency] [DefaultValue(ImportBase.DefaultValueInt)] public int Property { get; set; }
 
@@ -115,7 +105,7 @@ namespace Import.Annotated.Properties.Required.WithDefaults
         public override Type ImportType => typeof(int);
     }
 
-    public class Required_Property_WithDefaultAttribute_Int : PatternBaseType
+    public class Required_Property_WithDefaultAttribute_Int : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueInt)] [Dependency] public int Property { get; set; }
 
@@ -124,7 +114,7 @@ namespace Import.Annotated.Properties.Required.WithDefaults
         public override Type ImportType => typeof(int);
     }
 
-    public class Required_Property_String_WithDefaultAttribute : PatternBaseType
+    public class Required_Property_String_WithDefaultAttribute : ImportBaseType
     {
         [Dependency] [DefaultValue(ImportBase.DefaultValueString)] public string Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
@@ -132,7 +122,7 @@ namespace Import.Annotated.Properties.Required.WithDefaults
         public override Type ImportType => typeof(string);
     }
 
-    public class Required_Property_WithDefaultAttribute_String : PatternBaseType
+    public class Required_Property_WithDefaultAttribute_String : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueString)] [Dependency] public string Property { get; set; }
 
@@ -151,7 +141,7 @@ namespace Import.Annotated.Properties.Required.WithDefaults
 
     #region WithDefaultAndAttribute
 
-    public class Required_Property_Int_WithDefaultAndAttribute : PatternBaseType
+    public class Required_Property_Int_WithDefaultAndAttribute : ImportBaseType
     {
         [Dependency] [DefaultValue(ImportBase.DefaultValueInt)] public int Property { get; set; } = ImportBase.DefaultInt;
 
@@ -160,7 +150,7 @@ namespace Import.Annotated.Properties.Required.WithDefaults
         public override Type ImportType => typeof(int);
     }
 
-    public class Required_Property_WithDefaultAndAttribute_Int : PatternBaseType
+    public class Required_Property_WithDefaultAndAttribute_Int : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueInt)] [Dependency] public int Property { get; set; } = ImportBase.DefaultInt;
 
@@ -169,7 +159,7 @@ namespace Import.Annotated.Properties.Required.WithDefaults
         public override Type ImportType => typeof(int);
     }
 
-    public class Required_Property_String_WithDefaultAndAttribute : PatternBaseType
+    public class Required_Property_String_WithDefaultAndAttribute : ImportBaseType
     {
         [Dependency] [DefaultValue(ImportBase.DefaultValueString)] public string Property { get; set; } = ImportBase.DefaultString;
 
@@ -178,7 +168,7 @@ namespace Import.Annotated.Properties.Required.WithDefaults
         public override Type ImportType => typeof(string);
     }
 
-    public class Required_Property_WithDefaultAndAttribute_String : PatternBaseType
+    public class Required_Property_WithDefaultAndAttribute_String : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueString)] [Dependency] public string Property { get; set; } = ImportBase.DefaultString;
 

@@ -1,11 +1,11 @@
-﻿using Regression;
-using System;
+﻿using System;
 using System.ComponentModel;
+using static Import.ImportBase;
 
 
 namespace Import.Override.Fields.WithDefaultAttribute
 {
-    public class Implicit_Int_WithDefaultAttribute : PatternBaseType
+    public class Implicit_Int_WithDefaultAttribute : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueInt)] public int Field;
 
@@ -15,7 +15,7 @@ namespace Import.Override.Fields.WithDefaultAttribute
         public override Type ImportType => typeof(int);
     }
 
-    public class Implicit_String_WithDefaultAttribute : PatternBaseType
+    public class Implicit_String_WithDefaultAttribute : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueString)] public string Field;
 

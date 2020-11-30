@@ -22,11 +22,11 @@ namespace Regression
                 => new InjectionField(FieldName);
 
             public static InjectionMember GetInjectionMember_ByName_Optional(Type importType)
-    #if UNITY_V5
+#if UNITY_V5
                 => new InjectionField(FieldName, Unity.ResolutionOption.Optional);
-    #else
+#else
                 => new OptionalField(FieldName);
-    #endif
+#endif
             #endregion
 
 
@@ -36,9 +36,9 @@ namespace Regression
                 => new InjectionField(FieldName, importType);
 
             public static InjectionMember GetInjectionMember_ByType_Optional(Type importType)
-    #if UNITY_V5
+#if UNITY_V5
                 => new InjectionField(FieldName, new OptionalParameter(importType));
-    #else
+#else
                 => new OptionalField(FieldName, importType);
 #endif
             #endregion

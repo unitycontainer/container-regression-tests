@@ -1,38 +1,18 @@
-﻿using Regression;
-using System;
+﻿using System;
+using static Import.ImportBase;
 
 
 namespace Import.Implicit.Fields
 {
-    public class BaselineTestType<TDependency>
-        : PatternBaseType
-    {
-        public TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-
-    public class BaselineInheritedType<TDependency>
-        : BaselineTestType<TDependency>
-    {
-    }
-
-    public class BaselineInheritedTwice<TDependency>
-        : BaselineInheritedType<TDependency>
-    {
-    }
-
     public class DownTheLineType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         public DownTheLineType(BaselineTestType<TDependency> import)
             => Value = import;
     }
 
     public class ArrayTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         public TDependency[] Field;
 
@@ -41,7 +21,7 @@ namespace Import.Implicit.Fields
     }
 
     public class PrivateTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         private TDependency Field;
 
@@ -50,7 +30,7 @@ namespace Import.Implicit.Fields
     }
 
     public class ProtectedTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         protected TDependency Field;
 
@@ -59,7 +39,7 @@ namespace Import.Implicit.Fields
     }
 
     public class InternalTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         internal TDependency Field;
 

@@ -14,7 +14,7 @@ namespace Import.Annotated
         public virtual void Required_FromEmpty_WithDefaults(string test, Type type)
         {
             // Act
-            var instance = Container.Resolve(type, null) as PatternBaseType;
+            var instance = Container.Resolve(type, null) as ImportBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -27,7 +27,7 @@ namespace Import.Annotated
         public virtual void Optional_FromEmpty_WithDefaults(string test, Type type)
         {
             // Act
-            var instance = Container.Resolve(type, null) as PatternBaseType;
+            var instance = Container.Resolve(type, null) as ImportBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -44,7 +44,7 @@ namespace Import.Annotated
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(type, null) as PatternBaseType;
+            var instance = Container.Resolve(type, null) as ImportBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -62,7 +62,7 @@ namespace Import.Annotated
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(type, null) as PatternBaseType;
+            var instance = Container.Resolve(type, null) as ImportBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

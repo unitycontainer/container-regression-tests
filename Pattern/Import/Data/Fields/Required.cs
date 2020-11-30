@@ -1,6 +1,6 @@
-﻿using Regression;
-using System;
+﻿using System;
 using System.ComponentModel;
+using static Import.ImportBase;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -10,7 +10,7 @@ using Unity;
 namespace Import.Annotated.Fields.Required
 {
     public class BaselineTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [Dependency] public TDependency Field;
 
@@ -19,7 +19,7 @@ namespace Import.Annotated.Fields.Required
     }
 
     public class BaselineTestTypeNamed<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [Dependency(ImportBase.Name)] public TDependency Field;
 
@@ -27,25 +27,15 @@ namespace Import.Annotated.Fields.Required
         public override object Default => default(TDependency);
     }
 
-    public class BaselineInheritedType<TDependency>
-        : BaselineTestType<TDependency>
-    {
-    }
-
-    public class BaselineInheritedTwice<TDependency>
-        : BaselineInheritedType<TDependency>
-    {
-    }
-
     public class DownTheLineType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         public DownTheLineType(BaselineTestType<TDependency> import)
             => Value = import;
     }
 
     public class ArrayTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [Dependency] public TDependency[] Field;
 
@@ -54,7 +44,7 @@ namespace Import.Annotated.Fields.Required
     }
 
     public class PrivateTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [Dependency] private TDependency Field;
 
@@ -63,7 +53,7 @@ namespace Import.Annotated.Fields.Required
     }
 
     public class ProtectedTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [Dependency] protected TDependency Field;
 
@@ -72,7 +62,7 @@ namespace Import.Annotated.Fields.Required
     }
 
     public class InternalTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [Dependency] internal TDependency Field;
 
@@ -100,7 +90,7 @@ namespace Import.Annotated.Fields.Required.WithDefaults
 
     #region WithDefaultAttribute
 
-    public class Required_Field_Int_WithDefaultAttribute : PatternBaseType
+    public class Required_Field_Int_WithDefaultAttribute : ImportBaseType
     {
         [Dependency] [DefaultValue(ImportBase.DefaultValueInt)] public int Field;
 
@@ -109,7 +99,7 @@ namespace Import.Annotated.Fields.Required.WithDefaults
         public override Type ImportType => typeof(int);
     }
 
-    public class Required_Field_WithDefaultAttribute_Int : PatternBaseType
+    public class Required_Field_WithDefaultAttribute_Int : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueInt)] [Dependency] public int Field;
 
@@ -118,7 +108,7 @@ namespace Import.Annotated.Fields.Required.WithDefaults
         public override Type ImportType => typeof(int);
     }
 
-    public class Required_Field_String_WithDefaultAttribute : PatternBaseType
+    public class Required_Field_String_WithDefaultAttribute : ImportBaseType
     {
         [Dependency] [DefaultValue(ImportBase.DefaultValueString)] public string Field;
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
@@ -126,7 +116,7 @@ namespace Import.Annotated.Fields.Required.WithDefaults
         public override Type ImportType => typeof(string);
     }
 
-    public class Required_Field_WithDefaultAttribute_String : PatternBaseType
+    public class Required_Field_WithDefaultAttribute_String : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueString)] [Dependency] public string Field;
 
@@ -144,7 +134,7 @@ namespace Import.Annotated.Fields.Required.WithDefaults
 
     #region WithDefaultAndAttribute
 
-    public class Required_Field_Int_WithDefaultAndAttribute : PatternBaseType
+    public class Required_Field_Int_WithDefaultAndAttribute : ImportBaseType
     {
         [Dependency] [DefaultValue(ImportBase.DefaultValueInt)] public int Field = ImportBase.DefaultInt;
 
@@ -153,7 +143,7 @@ namespace Import.Annotated.Fields.Required.WithDefaults
         public override Type ImportType => typeof(int);
     }
 
-    public class Required_Field_WithDefaultAndAttribute_Int : PatternBaseType
+    public class Required_Field_WithDefaultAndAttribute_Int : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueInt)] [Dependency] public int Field = ImportBase.DefaultInt;
 
@@ -162,7 +152,7 @@ namespace Import.Annotated.Fields.Required.WithDefaults
         public override Type ImportType => typeof(int);
     }
 
-    public class Required_Field_String_WithDefaultAndAttribute : PatternBaseType
+    public class Required_Field_String_WithDefaultAndAttribute : ImportBaseType
     {
         [Dependency] [DefaultValue(ImportBase.DefaultValueString)] public string Field = ImportBase.DefaultString;
 
@@ -171,7 +161,7 @@ namespace Import.Annotated.Fields.Required.WithDefaults
         public override Type ImportType => typeof(string);
     }
 
-    public class Required_Field_WithDefaultAndAttribute_String : PatternBaseType
+    public class Required_Field_WithDefaultAndAttribute_String : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueString)] [Dependency] public string Field = ImportBase.DefaultString;
 

@@ -19,18 +19,18 @@ namespace Regression
             #region By Name
 
             public static InjectionMember GetInjectionMember_ByName_Required(Type importType)
-    #if UNITY_V4
+#if UNITY_V4
                 => new InjectionMethod(MethodName, new ResolvedParameter(importType));
-    #else
+#else
                 => new InjectionMethod(MethodName, new ResolvedParameter());
-    #endif
+#endif
 
             public static InjectionMember GetInjectionMember_ByName_Optional(Type importType)
-    #if UNITY_V4
+#if UNITY_V4
                 => new InjectionMethod(MethodName, new OptionalParameter(importType));
-    #else
+#else
                 => new InjectionMethod(MethodName, new OptionalParameter());
-    #endif
+#endif
             #endregion
 
 
@@ -67,18 +67,18 @@ namespace Regression
                 => new ParameterOverride(name, value);
 
             public static ResolverOverride GetMemberOverrideWithType(Type type, string name, object value)
-    #if UNITY_V4
+#if UNITY_V4
                 => new ParameterOverride(name, value);
-    #else
+#else
                 => new ParameterOverride(type, name, value);
-    #endif
+#endif
 
             public static ResolverOverride GetMemberOverrideOnType(Type target, Type type, string name, object value)
-    #if UNITY_V4
+#if UNITY_V4
                 => new ParameterOverride(name, value).OnType(target);
-    #else
+#else
                 => new ParameterOverride(type, name, value).OnType(target);
-    #endif
+#endif
 
             #endregion
         }

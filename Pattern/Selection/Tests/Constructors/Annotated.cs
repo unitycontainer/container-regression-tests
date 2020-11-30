@@ -28,14 +28,14 @@ namespace Selection.Constructors
         [DataTestMethod]
         [DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public override void NoPublicMebersToSelect_Required(string test, Type type)
-            => base.NoPublicMebersToSelect_Required(test, type);
+        public override void Selection_NoPublicMebers_Required(string test, Type type)
+            => base.Selection_NoPublicMebers_Required(test, type);
 
         [DataTestMethod]
         [DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public override void NoPublicMebersToSelect_Optional(string test, Type type)
-            => base.NoPublicMebersToSelect_Optional(test, type);
+        public override void Selection_NoPublicMebers_Optional(string test, Type type)
+            => base.Selection_NoPublicMebers_Optional(test, type);
 
         #endregion
     }

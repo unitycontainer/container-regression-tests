@@ -18,34 +18,102 @@ namespace Regression
 
         private static string _type { get; set; }
         private static string _root { get; set; }
-        private static string _member { get; set; }
         private static string _prefix { get; set; }
-
         protected IUnityContainer Container;
 
-        public const string Name = "name";
-        public const string MethodName = "Method";
-        public const string FieldName = "Method";
-        public const string PropertyName = "Method";
+        protected static Type BaselineTestType;
+
+        #endregion
+
+
+        #region Properties
+
+        public TestContext TestContext { get; set; } 
+
+        protected static string Category { get; private set; }
+        protected static string Dependency { get; private set; }
+        protected static string Member { get; private set; }
+
+        protected Type TestTypeDefinition 
+            => Type.GetType($"{Category}.{Dependency}.{Member}.{TestContext.TestName}") ?? BaselineTestType;
 
         #endregion
 
 
         #region Scaffolding
 
+        // Pattern namespace should be in this format:
+        // "ExecutedCategory.DependencyType.MemberTested"
+
+        // Category could be:
+        // 1. Import
+        // 2. Selection
+        // 3. etc.
+
+        // Recognized Dependency Types:
+        // 1. Implicit
+        // 2. Optional
+        // 3. Required
+
+        // Members are:
+        // 1. Constructors
+        // 2. Methods
+        // 3. Fields
+        // 4. Properties
+
+        // Example: Import.Implicit.Constructors
+
         protected static void ClassInitialize(TestContext context)
         {
-            var type = Type.GetType(context.FullyQualifiedTestClassName);
-            var root = type.Namespace.Split('.');
+            var type  = Type.GetType(context.FullyQualifiedTestClassName);
+            var root  = type.Namespace.Split('.');
+            var @base = type.BaseType.Namespace.Split('.');
+
+            Member     = root.Last();
+            Category   = @base.First();
+            Dependency = @base.Last();
 
             _type = type.Namespace;
             _prefix = root.First();
-            _member = root.Last();
-            _root = $"{type.BaseType.Namespace}.{_member}";
+            _root = $"{type.BaseType.Namespace}.{Member}";
+
+            BaselineTestType = GetTestType("BaselineTestType`1");
         }
 
         public virtual void TestInitialize() => Container = new UnityContainer();
 
+        #endregion
+
+
+        #region Get Type
+
+        protected static Type GetTestType(string name)
+        {
+            return Type.GetType($"{Category}.{Dependency}.{Member}.{name}") ??
+                   Type.GetType($"Regression.{Dependency}.{Member}.{name}");
+        }
+
+        protected static Type GetTestType(string dependency, string name)
+        {
+            return Type.GetType($"{Category}.{dependency}.{Member}.{name}") ??
+                   Type.GetType($"Regression.{dependency}.{Member}.{name}");
+        }
+
+        protected static Type GetType(string name)
+        {
+            return Type.GetType($"{_root}.{name}") ??
+                   Type.GetType($"{_type}.{name}");
+        }
+
+        protected static Type GetType(string @namespace, string name)
+        {
+            return Type.GetType($"{_prefix}.{@namespace}.{Member}.{name}") ??
+                   Type.GetType($"{_type}.{@namespace}.{name}");
+        }
+
+        protected virtual Type GetImportType(Type type) => type;
+        
+        
         #endregion
 
 
@@ -127,7 +195,7 @@ namespace Regression
 
         protected static IEnumerable<Type> FromNamespaces(string prefix, string @namespace)
         {
-            var regex = $"({_prefix}).*({prefix}).*({_member}).*({@namespace})$";
+            var regex = $"({_prefix}).*({prefix}).*({Member}).*({@namespace})$";
             return Assembly.GetExecutingAssembly()
                            .DefinedTypes
                            .Where(t => t.Namespace is not null)
@@ -136,7 +204,7 @@ namespace Regression
 
         protected static IEnumerable<Type> FromPatternNamespace(string @namespace)
         {
-            var regex = $"({_root}).*({@namespace})";
+            var regex = $"({_root}).*(.)({@namespace})$";
             return Assembly.GetExecutingAssembly()
                            .DefinedTypes
                            .Where(t => t.Namespace is not null)
@@ -145,26 +213,12 @@ namespace Regression
 
         protected static IEnumerable<Type> FromNamespaces(string @namespace)
         {
-            var regex = $"({_prefix}).*({_member}).*({@namespace})";
+            var regex = $"({_prefix}).*({Member}).*({@namespace})";
             return Assembly.GetExecutingAssembly()
                            .DefinedTypes
                            .Where(t => t.Namespace is not null)
                            .Where(t => Regex.IsMatch(t.Namespace, regex));
         }
-
-        protected static Type GetType(string name)
-        {
-            return Type.GetType($"{_root}.{name}") ??
-                   Type.GetType($"{_type}.{name}");
-        }
-
-        protected static Type GetType(string @namespace, string name)
-        {
-            return Type.GetType($"{_prefix}.{@namespace}.{_member}.{name}") ??
-                   Type.GetType($"{_type}.{@namespace}.{name}");
-        }
-
-        protected virtual Type GetImportType(Type type) => type;
 
         #endregion
     }

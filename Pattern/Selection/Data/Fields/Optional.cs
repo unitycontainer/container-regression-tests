@@ -8,11 +8,11 @@ using Unity;
 
 namespace Selection.Annotated.Fields.Optional
 {
-    public class BaselineTestType<TDependency>
+    public class BaselineTestType<TItem1, TItem2>
         : FieldSelectionBase
     {
-        [OptionalDependency] public TDependency Field;
-
+        [OptionalDependency] public TItem1 Field1;
+        [OptionalDependency] public TItem2 Field2;
     }
 
     public class NoPublicMember<TDependency>
@@ -23,5 +23,18 @@ namespace Selection.Annotated.Fields.Optional
 
 namespace Selection.Annotated.Fields.Optional.EdgeCases
 {
-    public class DummySelection : SelectionBaseType { }
+    public class StructField : FieldSelectionBase
+    {
+        [OptionalDependency] public TestStruct Field;
+        public override bool IsSuccessfull => this[0] is not null;
+    }
+}
+
+namespace Selection.Annotated.Fields.Optional.EdgeCasesThrowing
+{
+
+    public class OpenGenericType<T>
+    {
+        [OptionalDependency] public T Field;
+    }
 }

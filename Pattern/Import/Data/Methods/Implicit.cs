@@ -1,6 +1,6 @@
-﻿using Regression;
-using System;
+﻿using System;
 using System.ComponentModel;
+using static Import.ImportBase;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -9,33 +9,15 @@ using Unity;
 
 namespace Import.Implicit.Methods
 {
-    public class BaselineTestType<TDependency>
-        : PatternBaseType
-    {
-        [InjectionMethod]
-        public virtual void Method(TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class BaselineInheritedType<TDependency>
-        : BaselineTestType<TDependency>
-    {
-    }
-
-    public class BaselineInheritedTwice<TDependency>
-        : BaselineInheritedType<TDependency>
-    {
-    }
-
     public class DownTheLineType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         public DownTheLineType(BaselineTestType<TDependency> import)
             => Value = import;
     }
 
     public class ArrayTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method(TDependency[] value) => Value = value;
@@ -43,7 +25,7 @@ namespace Import.Implicit.Methods
     }
 
     public class PrivateTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [InjectionMethod]
         private void Method(TDependency value) => Value = value;
@@ -51,7 +33,7 @@ namespace Import.Implicit.Methods
     }
 
     public class ProtectedTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [InjectionMethod]
         protected void Method(TDependency value) => Value = value;
@@ -59,7 +41,7 @@ namespace Import.Implicit.Methods
     }
 
     public class InternalTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [InjectionMethod]
         internal void Method(TDependency value) => Value = value;
@@ -67,7 +49,7 @@ namespace Import.Implicit.Methods
     }
 
     public class BaselineTestType_Ref<TDependency>
-        : PatternBaseType where TDependency : class
+        : ImportBaseType where TDependency : class
     {
         [InjectionMethod]
         public virtual void Method(ref TDependency value)
@@ -75,7 +57,7 @@ namespace Import.Implicit.Methods
     }
 
     public class BaselineTestType_Out<TDependency>
-        : PatternBaseType where TDependency : class
+        : ImportBaseType where TDependency : class
     {
         [InjectionMethod]
         public virtual void Method(out TDependency value)
@@ -87,7 +69,7 @@ namespace Import.Implicit.Methods
 
 namespace Import.Implicit.Methods.WithDefault
 {
-    public class Implicit_Parameter_Int_WithDefault : PatternBaseType
+    public class Implicit_Parameter_Int_WithDefault : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method(int value = ImportBase.DefaultInt) => Value = value;
@@ -99,7 +81,7 @@ namespace Import.Implicit.Methods.WithDefault
         public override Type ImportType => typeof(int);
     }
 
-    public class Implicit_Parameter_String_WithDefault : PatternBaseType
+    public class Implicit_Parameter_String_WithDefault : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method(string value = ImportBase.DefaultString) => Value = value;
@@ -131,7 +113,7 @@ namespace Import.Implicit.Methods.WithDefault
 
 namespace Import.Implicit.Methods.WithDefaultAttribute
 {
-    public class Implicit_Int_WithDefaultAttribute : PatternBaseType
+    public class Implicit_Int_WithDefaultAttribute : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method([DefaultValue(ImportBase.DefaultValueInt)] int value) => Value = value;
@@ -143,7 +125,7 @@ namespace Import.Implicit.Methods.WithDefaultAttribute
         public override Type ImportType => typeof(int);
     }
 
-    public class Implicit_String_WithDefaultAttribute : PatternBaseType
+    public class Implicit_String_WithDefaultAttribute : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method([DefaultValue(ImportBase.DefaultValueString)] string value) => Value = value;
@@ -172,7 +154,7 @@ namespace Import.Implicit.Methods.WithDefaultAttribute
 
 namespace Import.Implicit.Methods.WithDefaultAndAttribute
 {
-    public class Implicit_Int_WithDefaultAndAttribute : PatternBaseType
+    public class Implicit_Int_WithDefaultAndAttribute : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method([DefaultValue(ImportBase.DefaultValueInt)] int value = ImportBase.DefaultInt) => Value = value;
@@ -189,7 +171,7 @@ namespace Import.Implicit.Methods.WithDefaultAndAttribute
         public override Type ImportType => typeof(int);
     }
 
-    public class Implicit_String_WithDefaultAndAttribute : PatternBaseType
+    public class Implicit_String_WithDefaultAndAttribute : ImportBaseType
     {
         [InjectionMethod]
         public virtual void Method([DefaultValue(ImportBase.DefaultValueString)] string value = ImportBase.DefaultString) => Value = value;

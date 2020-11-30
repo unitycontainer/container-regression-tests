@@ -1,76 +1,55 @@
 ﻿using Regression;
 using System;
 using System.ComponentModel;
+using static Import.ImportBase;
+
 
 namespace Import.Implicit.Constructors
 {
-    public class BaselineTestType<TDependency>
-        : PatternBaseType
-    {
-        public BaselineTestType(TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class BaselineInheritedType<TDependency> 
-        : BaselineTestType<TDependency>
-    {
-        public BaselineInheritedType(TDependency value) 
-            : base(value)
-        { }
-    }
-
-    public class BaselineInheritedTwice<TDependency>
-        : BaselineInheritedType<TDependency>
-    {
-        public BaselineInheritedTwice(TDependency value)
-            : base(value)
-        { }
-    }
-
-    public class DownTheLineType<TDependency>
-        : PatternBaseType
-    {
-        public DownTheLineType(BaselineTestType<TDependency> import)
-            => Value = import;
-    }
-
     public class ArrayTestType<TDependency>
-        : PatternBaseType
+        : FixtureBaseType
     {
         public ArrayTestType(TDependency[] value) => Value = value;
         public override object Default => default(TDependency);
     }
 
+    public class DownTheLineType<TDependency>
+        : ImportBaseType
+    {
+        public DownTheLineType(BaselineTestType<TDependency> import)
+            => Value = import;
+    }
+
     public class PrivateTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         private PrivateTestType(TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class ProtectedTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         protected ProtectedTestType(TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class InternalTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         internal InternalTestType(TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class BaselineTestType_Ref<TDependency>
-        : PatternBaseType where TDependency : class
+        : ImportBaseType where TDependency : class
     {
         public BaselineTestType_Ref(ref TDependency value)
             => throw new InvalidOperationException("should never execute");
     }
 
     public class BaselineTestType_Out<TDependency>
-        : PatternBaseType where TDependency : class
+        : ImportBaseType where TDependency : class
     {
         public BaselineTestType_Out(out TDependency value)
             => throw new InvalidOperationException("should never execute");
@@ -80,7 +59,7 @@ namespace Import.Implicit.Constructors
 
 namespace Import.Implicit.Constructors.WithDefault
 {
-    public class Implicit_Parameter_Int_WithDefault : PatternBaseType
+    public class Implicit_Parameter_Int_WithDefault : ImportBaseType
     {
         public Implicit_Parameter_Int_WithDefault(int value = ImportBase.DefaultInt) => Value = value;
 
@@ -91,7 +70,7 @@ namespace Import.Implicit.Constructors.WithDefault
         public override Type ImportType => typeof(int);
     }
 
-    public class Implicit_Parameter_String_WithDefault : PatternBaseType
+    public class Implicit_Parameter_String_WithDefault : ImportBaseType
     {
         public Implicit_Parameter_String_WithDefault(string value = ImportBase.DefaultString) => Value = value;
 
@@ -116,7 +95,7 @@ namespace Import.Implicit.Constructors.WithDefault
 
 namespace Import.Implicit.Constructors.WithDefaultAttribute
 {
-    public class Implicit_Int_WithDefaultAttribute : PatternBaseType
+    public class Implicit_Int_WithDefaultAttribute : ImportBaseType
     {
         public Implicit_Int_WithDefaultAttribute([DefaultValue(ImportBase.DefaultValueInt)] int value) => Value = value;
 
@@ -127,7 +106,7 @@ namespace Import.Implicit.Constructors.WithDefaultAttribute
         public override Type ImportType => typeof(int);
     }
 
-    public class Implicit_String_WithDefaultAttribute : PatternBaseType
+    public class Implicit_String_WithDefaultAttribute : ImportBaseType
     {
         public Implicit_String_WithDefaultAttribute([DefaultValue(ImportBase.DefaultValueString)] string value) => Value = value;
 
@@ -152,7 +131,7 @@ namespace Import.Implicit.Constructors.WithDefaultAttribute
 
 namespace Import.Implicit.Constructors.WithDefaultAndAttribute
 {
-    public class Implicit_Int_WithDefaultAndAttribute : PatternBaseType
+    public class Implicit_Int_WithDefaultAndAttribute : ImportBaseType
     {
         public Implicit_Int_WithDefaultAndAttribute([DefaultValue(ImportBase.DefaultValueInt)] int value = ImportBase.DefaultInt) => Value = value;
 
@@ -168,7 +147,7 @@ namespace Import.Implicit.Constructors.WithDefaultAndAttribute
         public override Type ImportType => typeof(int);
     }
 
-    public class Implicit_String_WithDefaultAndAttribute : PatternBaseType
+    public class Implicit_String_WithDefaultAndAttribute : ImportBaseType
     {
         public Implicit_String_WithDefaultAndAttribute([DefaultValue(ImportBase.DefaultValueString)] string value = ImportBase.DefaultString) => Value = value;
 

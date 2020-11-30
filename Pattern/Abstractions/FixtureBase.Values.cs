@@ -4,8 +4,15 @@ namespace Regression
 {
     public abstract partial class FixtureBase
     {
-        public const string Null           = "null";
-        protected const string TDependency = "TDependency";
+        public const string Name = "name";
+        public const string Null = "null";
+
+        // TODO: Is it used?
+        protected const string MethodName   = "Method";
+        protected const string FieldName    = "Field";
+        protected const string PropertyName = "Property";
+        protected const string TDependency  = "TDependency";
+
 
         #region Integer
 

@@ -4,6 +4,8 @@ namespace Selection
 {
     public abstract partial class SelectionBase
     {
+        #region Base Types
+
         public abstract class SelectionBaseType
         {
             protected static readonly BindingFlags Flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
@@ -12,9 +14,6 @@ namespace Selection
 
             public virtual bool IsSuccessfull => true;
         }
-
-
-        #region Test Members
 
         public class ConstructorSelectionBase : SelectionBaseType
         {
@@ -50,6 +49,22 @@ namespace Selection
             public PropertySelectionBase() => Data = new object[GetType().GetProperties(Flags).Length];
 
             public override object this[int index] => Data[index];
+        }
+
+        #endregion
+
+
+        #region Test Types
+
+        public class DummySelection : SelectionBaseType { }
+        
+        public class UnresolvableDummySelection : SelectionBaseType 
+        {
+            private UnresolvableDummySelection() { }
+        }
+
+        public struct TestStruct
+        {
         }
 
         #endregion

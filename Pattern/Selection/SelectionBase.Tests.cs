@@ -1,7 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+#if UNITY_V4
+using Microsoft.Practices.Unity;
+#else
+using Unity;
+#endif
 
 namespace Selection
 {
@@ -9,7 +12,7 @@ namespace Selection
     {
 
         [DataTestMethod, DynamicData(nameof(EdgeCases_Data))]
-        public virtual void EdgeCases(string test, Type type)
+        public virtual void Selection_EdgeCases_Successfull(string test, Type type)
         {
             // Arrange
             RegisterTypes();
@@ -19,6 +22,17 @@ namespace Selection
 
             // Validate
             Assert.IsTrue(instance.IsSuccessfull);
+        }
+
+        [ExpectedException(typeof(ResolutionFailedException))]
+        [DataTestMethod, DynamicData(nameof(EdgeCases_Throwing_Data))]
+        public virtual void Selection_EdgeCases_Throwing(string test, Type type)
+        {
+            // Arrange
+            RegisterTypes();
+
+            // Act
+            _ = AssertResolutionPattern(type);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Import.Implicit
         public virtual void WithDefaultValue(string test, Type type)
         {
             // Act
-            var instance = Container.Resolve(type, null) as PatternBaseType;
+            var instance = Container.Resolve(type, null) as ImportBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -40,7 +40,7 @@ namespace Import.Implicit
         public virtual void WithDefaultAttribute(string test, Type type)
         {
             // Act
-            var instance = Container.Resolve(type, null) as PatternBaseType;
+            var instance = Container.Resolve(type, null) as ImportBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -59,7 +59,7 @@ namespace Import.Implicit
         public virtual void WithDefaultAndAttribute(string test, Type type)
         {
             // Act
-            var instance = Container.Resolve(type, null) as PatternBaseType;
+            var instance = Container.Resolve(type, null) as ImportBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

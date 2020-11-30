@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Import.Implicit
+namespace Import.Common
 {
     public abstract partial class Pattern
     {
@@ -11,7 +11,8 @@ namespace Import.Implicit
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble)
-            => TestRequiredImport(_inherited, type, registered);
+            => AssertImportResolved(TestTypeDefinition, type, registered);
+
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Inherited_Twice(string test, Type type,
@@ -19,6 +20,6 @@ namespace Import.Implicit
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          bool isResolveble)
-            => TestRequiredImport(_twice, type, registered);
+            => AssertImportResolved(TestTypeDefinition, type, registered);
     }
 }

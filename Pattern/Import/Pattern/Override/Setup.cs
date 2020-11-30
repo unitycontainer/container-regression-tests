@@ -43,7 +43,7 @@ namespace Import.Override
 
         protected void TestImportWithOverride(Type type, ResolverOverride @override, object value)
         {
-            var instance = Container.Resolve(type, null, @override) as PatternBaseType;
+            var instance = Container.Resolve(type, null, @override) as ImportBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -53,7 +53,7 @@ namespace Import.Override
             RegisterTypes();
 
             // Act
-            instance = Container.Resolve(type, null, @override) as PatternBaseType;
+            instance = Container.Resolve(type, null, @override) as ImportBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -63,12 +63,12 @@ namespace Import.Override
         protected void TestDownTheLineImportWithOverride(Type type, ResolverOverride @override, object value)
         {
             // Act
-            var instance = Container.Resolve(type, null, @override) as PatternBaseType;
+            var instance = Container.Resolve(type, null, @override) as ImportBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsNotNull(instance.Value);
-            Assert.AreEqual(value, (instance.Value as PatternBaseType)?.Value);
+            Assert.AreEqual(value, (instance.Value as ImportBaseType)?.Value);
         }
 
         #endregion

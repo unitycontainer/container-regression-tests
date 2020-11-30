@@ -26,6 +26,22 @@
 		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <Compile Remove="Import\Pattern\Injected\**" />
+	  <Compile Remove="Import\Pattern\Override\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Import\Tests\Constructors\Injected.cs" />
+	  <Compile Remove="Import\Tests\Constructors\Override.cs" />
+	  <Compile Remove="Import\Tests\Fields\Injected.cs" />
+	  <Compile Remove="Import\Tests\Fields\Override.cs" />
+	  <Compile Remove="Import\Tests\Methods\Injected.cs" />
+	  <Compile Remove="Import\Tests\Methods\Override.cs" />
+	  <Compile Remove="Import\Tests\Properties\Injected.cs" />
+	  <Compile Remove="Import\Tests\Properties\Override.cs" />
+	</ItemGroup>
+
 	<!-- Definitions -->
 
 	<ItemGroup>
@@ -61,8 +77,6 @@
 	  <Compile Remove="Abstractions\FixtureBase.Fields.cs" />
 	  <Compile Remove="Import\Data\Fields\**" />
 	  <Compile Remove="Import\Tests\Fields\**" />
-	  <Compile Remove="Import\Pattern\Injected\ByResolver.cs" />
-	  <Compile Remove="Import\Pattern\Override\WithDefaults.cs" />
 	  <Compile Remove="Resolution\Enumerable\**" />
 	  <Compile Remove="Resolution\Generic\Constrained.cs" />
 	  <Compile Remove="Registration\Validation\Factory.cs" />
@@ -74,8 +88,6 @@
 	<!-- v5 Exclusions -->
 
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net46'))">
-	  <Compile Remove="Import\Pattern\Injected\ByResolver.cs" />
-	  <Compile Remove="Import\Pattern\Override\WithDefaults.cs" />
 	  <Compile Remove="Registration\Validation\Factory.cs" />
 	  <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
 	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />

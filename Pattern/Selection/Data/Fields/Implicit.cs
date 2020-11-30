@@ -3,21 +3,15 @@ using System;
 
 namespace Selection.Implicit.Fields
 {
-    public class BaselineTestType<TDependency, TDefault>
+    public class BaselineTestType<TItem1, TItem2>
         : FieldSelectionBase
     {
-        public TDependency Field;
-
+        public TItem1 Field1;
+        public TItem2 Field2;
     }
 
     public class NoPublicMember<TDependency>
     {
         private TDependency Field;
     }
-}
-
-
-namespace Selection.Implicit.Fields.EdgeCases
-{
-    public class DummySelectionImplicit : SelectionBaseType { }
 }

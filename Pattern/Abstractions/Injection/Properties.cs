@@ -22,13 +22,13 @@ namespace Regression
                 => new InjectionProperty(PropertyName);
 
             public static InjectionMember GetInjectionMember_ByName_Optional(Type importType)
-    #if UNITY_V4
+#if UNITY_V4
                 => new InjectionProperty(PropertyName, new OptionalParameter(importType));
-    #elif UNITY_V5
+#elif UNITY_V5
                 => new InjectionProperty(PropertyName, Unity.ResolutionOption.Optional);
-    #else
+#else
                 => new OptionalProperty(PropertyName);
-    #endif
+#endif
             #endregion
 
 
@@ -38,9 +38,9 @@ namespace Regression
                 => new InjectionProperty(PropertyName, importType);
 
             public static InjectionMember GetInjectionMember_ByType_Optional(Type importType)
-    #if UNITY_V4 || UNITY_V5
+#if UNITY_V4 || UNITY_V5
                 => new InjectionProperty(PropertyName, new OptionalParameter(importType));
-    #else
+#else
                 => new OptionalProperty(PropertyName, importType);
 #endif
             #endregion

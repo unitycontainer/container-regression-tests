@@ -1,34 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Import.Implicit
 {
-    public abstract partial class Pattern : ImportBase
+    public abstract partial class Pattern : Common.Pattern
     {
-        #region Fields
-
-        private static Type _inherited;
-        private static Type _twice;
-
-        #endregion
-
-
-        #region Scaffolding
-
-        new protected static void ClassInitialize(TestContext context)
-        {
-            ImportBase.ClassInitialize(context);
-
-            _inherited  = GetType("BaselineInheritedType`1");
-            _twice      = GetType("BaselineInheritedTwice`1");
-        }
-
-        #endregion
-
-
-        #region Defaults
-
         public static IEnumerable<object[]> WithDefaultValue_Data
         {
             get
@@ -73,7 +48,5 @@ namespace Import.Implicit
                 }
             }
         }
-
-        #endregion
     }
 }

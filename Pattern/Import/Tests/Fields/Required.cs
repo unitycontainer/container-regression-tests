@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Import.Constructors
+namespace Import.Fields
 {
     [TestClass]
-    public partial class Annotated : Import.Annotated.Pattern
+    public partial class Required : Import.Required.Pattern
     {
         #region Scaffolding
 

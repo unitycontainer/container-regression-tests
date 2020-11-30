@@ -1,23 +1,18 @@
-﻿using Regression;
-using System;
+﻿using System;
 using System.ComponentModel;
+using static Import.ImportBase;
+using Regression;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 #endif
 
-namespace Import.Annotated.Constructors.Required
-{
-    public class BaselineTestType<TDependency>
-        : PatternBaseType
-    {
-        public BaselineTestType([Dependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
 
+namespace Import.Required.Constructors
+{
     public class BaselineTestTypeNamed<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         public BaselineTestTypeNamed([Dependency(ImportBase.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
@@ -40,49 +35,131 @@ namespace Import.Annotated.Constructors.Required
     }
 
     public class DownTheLineType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         public DownTheLineType(BaselineTestType<TDependency> import)
             => Value = import;
     }
 
     public class ArrayTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         public ArrayTestType([Dependency] TDependency[] value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class PrivateTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         private PrivateTestType([Dependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class ProtectedTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         protected ProtectedTestType([Dependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class InternalTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         internal InternalTestType([Dependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class BaselineTestType_Ref<TDependency>
-        : PatternBaseType where TDependency : class
+        : ImportBaseType where TDependency : class
     {
         public BaselineTestType_Ref([Dependency] ref TDependency _)
             => throw new InvalidOperationException("should never execute");
     }
 
     public class BaselineTestType_Out<TDependency>
-        : PatternBaseType where TDependency : class
+        : ImportBaseType where TDependency : class
+    {
+        public BaselineTestType_Out([Dependency] out TDependency _)
+            => throw new InvalidOperationException("should never execute");
+    }
+}
+
+namespace Import.Annotated.Constructors.Required
+{
+    public class BaselineTestType<TDependency>
+        : ImportBaseType
+    {
+        public BaselineTestType([Dependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineTestTypeNamed<TDependency>
+        : ImportBaseType
+    {
+        public BaselineTestTypeNamed([Dependency(ImportBase.Name)] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineInheritedType<TDependency>
+        : BaselineTestType<TDependency>
+    {
+        public BaselineInheritedType([Dependency] TDependency value)
+            : base(value)
+        { }
+    }
+
+    public class BaselineInheritedTwice<TDependency>
+        : BaselineInheritedType<TDependency>
+    {
+        public BaselineInheritedTwice([Dependency] TDependency value)
+            : base(value)
+        { }
+    }
+
+    public class DownTheLineType<TDependency>
+        : ImportBaseType
+    {
+        public DownTheLineType(BaselineTestType<TDependency> import)
+            => Value = import;
+    }
+
+    public class ArrayTestType<TDependency>
+        : ImportBaseType
+    {
+        public ArrayTestType([Dependency] TDependency[] value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class PrivateTestType<TDependency>
+        : ImportBaseType
+    {
+        private PrivateTestType([Dependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class ProtectedTestType<TDependency>
+        : ImportBaseType
+    {
+        protected ProtectedTestType([Dependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class InternalTestType<TDependency>
+        : ImportBaseType
+    {
+        internal InternalTestType([Dependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineTestType_Ref<TDependency>
+        : ImportBaseType where TDependency : class
+    {
+        public BaselineTestType_Ref([Dependency] ref TDependency _)
+            => throw new InvalidOperationException("should never execute");
+    }
+
+    public class BaselineTestType_Out<TDependency>
+        : ImportBaseType where TDependency : class
     {
         public BaselineTestType_Out([Dependency] out TDependency _)
             => throw new InvalidOperationException("should never execute");
@@ -95,7 +172,7 @@ namespace Import.Annotated.Constructors.Required.WithDefaults
 {
     #region WithDefault
 
-    public class Required_Parameter_Int_WithDefault : PatternBaseType
+    public class Required_Parameter_Int_WithDefault : ImportBaseType
     {
         public Required_Parameter_Int_WithDefault([Dependency] int value = ImportBase.DefaultInt) => Value = value;
         public override object Default => ImportBase.DefaultInt;
@@ -103,7 +180,7 @@ namespace Import.Annotated.Constructors.Required.WithDefaults
     }
 
 
-    public class Required_Parameter_String_WithDefault : PatternBaseType
+    public class Required_Parameter_String_WithDefault : ImportBaseType
     {
         public Required_Parameter_String_WithDefault([Dependency] string value = ImportBase.DefaultString) => Value = value;
         public override object Default => ImportBase.DefaultString;
@@ -127,7 +204,7 @@ namespace Import.Annotated.Constructors.Required.WithDefaults
 
 #if !BEHAVIOR_V5 // Unity v5 did not support DefaultValueAttribute
 
-    public class Required_Parameter_Int_WithDefaultAttribute : PatternBaseType
+    public class Required_Parameter_Int_WithDefaultAttribute : ImportBaseType
     {
         public Required_Parameter_Int_WithDefaultAttribute([Dependency][DefaultValue(ImportBase.DefaultValueInt)] int value) => Value = value;
         public override object Default => ImportBase.DefaultValueInt;
@@ -135,7 +212,7 @@ namespace Import.Annotated.Constructors.Required.WithDefaults
     }
 
 
-    public class Required_Parameter_WithDefaultAttribute_Int : PatternBaseType
+    public class Required_Parameter_WithDefaultAttribute_Int : ImportBaseType
     {
         public Required_Parameter_WithDefaultAttribute_Int([DefaultValue(ImportBase.DefaultValueInt)][Dependency] int value) => Value = value;
         public override object Default => ImportBase.DefaultValueInt;
@@ -143,7 +220,7 @@ namespace Import.Annotated.Constructors.Required.WithDefaults
     }
 
 
-    public class Required_Parameter_String_WithDefaultAttribute : PatternBaseType
+    public class Required_Parameter_String_WithDefaultAttribute : ImportBaseType
     {
         public Required_Parameter_String_WithDefaultAttribute([Dependency][DefaultValue(ImportBase.DefaultValueString)] string value) => Value = value;
         public override object Default => ImportBase.DefaultValueString;
@@ -151,7 +228,7 @@ namespace Import.Annotated.Constructors.Required.WithDefaults
     }
 
 
-    public class Required_Parameter_WithDefaultAttribute_String : PatternBaseType
+    public class Required_Parameter_WithDefaultAttribute_String : ImportBaseType
     {
         public Required_Parameter_WithDefaultAttribute_String([DefaultValue(ImportBase.DefaultValueString)][Dependency] string value) => Value = value;
         public override object Default => ImportBase.DefaultValueString;
@@ -175,7 +252,7 @@ namespace Import.Annotated.Constructors.Required.WithDefaults
 
     #region WithDefaultAndAttribute
 
-    public class Required_Parameter_Int_WithDefaultAndAttribute : PatternBaseType
+    public class Required_Parameter_Int_WithDefaultAndAttribute : ImportBaseType
     {
         public Required_Parameter_Int_WithDefaultAndAttribute([Dependency][DefaultValue(ImportBase.DefaultValueInt)] int value = ImportBase.DefaultInt) => Value = value;
 
@@ -189,7 +266,7 @@ namespace Import.Annotated.Constructors.Required.WithDefaults
     }
 
 
-    public class Required_Parameter_WithDefaultAndAttribute_Int : PatternBaseType
+    public class Required_Parameter_WithDefaultAndAttribute_Int : ImportBaseType
     {
         public Required_Parameter_WithDefaultAndAttribute_Int([DefaultValue(ImportBase.DefaultValueInt)][Dependency] int value = ImportBase.DefaultInt) => Value = value;
 
@@ -203,7 +280,7 @@ namespace Import.Annotated.Constructors.Required.WithDefaults
     }
 
 
-    public class Required_Parameter_String_WithDefaultAndAttribute : PatternBaseType
+    public class Required_Parameter_String_WithDefaultAndAttribute : ImportBaseType
     {
         public Required_Parameter_String_WithDefaultAndAttribute([Dependency][DefaultValue(ImportBase.DefaultValueString)] string value = ImportBase.DefaultString) => Value = value;
 
@@ -217,7 +294,7 @@ namespace Import.Annotated.Constructors.Required.WithDefaults
     }
 
 
-    public class Required_Parameter_WithDefaultAndAttribute_String : PatternBaseType
+    public class Required_Parameter_WithDefaultAndAttribute_String : ImportBaseType
     {
         public Required_Parameter_WithDefaultAndAttribute_String([DefaultValue(ImportBase.DefaultValueString)][Dependency] string value = ImportBase.DefaultString) => Value = value;
 

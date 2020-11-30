@@ -1,6 +1,6 @@
-﻿using Regression;
-using System;
+﻿using System;
 using System.ComponentModel;
+using static Import.ImportBase;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -11,7 +11,7 @@ using Unity;
 namespace Import.Annotated.Properties.Optional
 {
     public class BaselineTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [OptionalDependency] public TDependency Property { get; set; }
 
@@ -20,7 +20,7 @@ namespace Import.Annotated.Properties.Optional
     }
 
     public class BaselineTestTypeNamed<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [OptionalDependency(ImportBase.Name)] public TDependency Property { get; set; }
 
@@ -28,25 +28,16 @@ namespace Import.Annotated.Properties.Optional
         public override object Default => default(TDependency);
     }
 
-    public class BaselineInheritedType<TDependency>
-        : BaselineTestType<TDependency>
-    {
-    }
-
-    public class BaselineInheritedTwice<TDependency>
-        : BaselineInheritedType<TDependency>
-    {
-    }
 
     public class DownTheLineType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         public DownTheLineType(BaselineTestType<TDependency> import)
             => Value = import;
     }
 
     public class ArrayTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [OptionalDependency] public TDependency[] Property { get; set; }
 
@@ -55,7 +46,7 @@ namespace Import.Annotated.Properties.Optional
     }
 
     public class PrivateTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [OptionalDependency] private TDependency Property { get; set; }
 
@@ -64,7 +55,7 @@ namespace Import.Annotated.Properties.Optional
     }
 
     public class ProtectedTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [OptionalDependency] protected TDependency Property { get; set; }
 
@@ -73,7 +64,7 @@ namespace Import.Annotated.Properties.Optional
     }
 
     public class InternalTestType<TDependency>
-        : PatternBaseType
+        : ImportBaseType
     {
         [OptionalDependency] internal TDependency Property { get; set; }
 
@@ -88,7 +79,7 @@ namespace Import.Annotated.Properties.Optional.WithDefaults
     #region WithDefault
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
-    public class Optional_Property_Int_WithDefault : PatternBaseType
+    public class Optional_Property_Int_WithDefault : ImportBaseType
     {
         [OptionalDependency] public int Property { get; set; } = ImportBase.DefaultInt;
 
@@ -107,7 +98,7 @@ namespace Import.Annotated.Properties.Optional.WithDefaults
     }
 #endif
 
-    public class Optional_Property_String_WithDefault : PatternBaseType
+    public class Optional_Property_String_WithDefault : ImportBaseType
     {
         [OptionalDependency] public string Property { get; set; } = ImportBase.DefaultString;
 
@@ -131,7 +122,7 @@ namespace Import.Annotated.Properties.Optional.WithDefaults
     #region WithDefaultAttribute
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
-    public class Optional_Int_WithDefaultAttribute : PatternBaseType
+    public class Optional_Int_WithDefaultAttribute : ImportBaseType
     {
         [OptionalDependency] [DefaultValue(ImportBase.DefaultValueInt)] public int Property { get; set; }
 
@@ -145,7 +136,7 @@ namespace Import.Annotated.Properties.Optional.WithDefaults
         public override Type ImportType => typeof(int);
     }
 
-    public class Optional_WithDefaultAttribute_Int : PatternBaseType
+    public class Optional_WithDefaultAttribute_Int : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueInt)] [OptionalDependency] public int Property { get; set; }
 
@@ -166,7 +157,7 @@ namespace Import.Annotated.Properties.Optional.WithDefaults
 
 #endif
 
-    public class Optional_String_WithDefaultAttribute : PatternBaseType
+    public class Optional_String_WithDefaultAttribute : ImportBaseType
     {
         [OptionalDependency] [DefaultValue(ImportBase.DefaultValueString)] public string Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
@@ -179,7 +170,7 @@ namespace Import.Annotated.Properties.Optional.WithDefaults
         public override Type ImportType => typeof(string);
     }
 
-    public class Optional_WithDefaultAttribute_String : PatternBaseType
+    public class Optional_WithDefaultAttribute_String : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueString)] [OptionalDependency] public string Property { get; set; }
 
@@ -200,7 +191,7 @@ namespace Import.Annotated.Properties.Optional.WithDefaults
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
-    public class Optional_Int_WithDefaultAndAttribute : PatternBaseType
+    public class Optional_Int_WithDefaultAndAttribute : ImportBaseType
     {
         [OptionalDependency] [DefaultValue(ImportBase.DefaultValueInt)] public int Property { get; set; } = ImportBase.DefaultInt;
 
@@ -214,7 +205,7 @@ namespace Import.Annotated.Properties.Optional.WithDefaults
         public override Type ImportType => typeof(int);
     }
 
-    public class Optional_WithDefaultAndAttribute_Int : PatternBaseType
+    public class Optional_WithDefaultAndAttribute_Int : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueInt)] [OptionalDependency] public int Property { get; set; } = ImportBase.DefaultInt;
 
@@ -234,7 +225,7 @@ namespace Import.Annotated.Properties.Optional.WithDefaults
 
 #endif
 
-    public class Optional_String_WithDefaultAndAttribute : PatternBaseType
+    public class Optional_String_WithDefaultAndAttribute : ImportBaseType
     {
         [OptionalDependency] [DefaultValue(ImportBase.DefaultValueString)] public string Property { get; set; } = ImportBase.DefaultString;
 
@@ -248,7 +239,7 @@ namespace Import.Annotated.Properties.Optional.WithDefaults
         public override Type ImportType => typeof(string);
     }
 
-    public class Optional_WithDefaultAndAttribute_String : PatternBaseType
+    public class Optional_WithDefaultAndAttribute_String : ImportBaseType
     {
         [DefaultValue(ImportBase.DefaultValueString)] [OptionalDependency] public string Property { get; set; } = ImportBase.DefaultString;
 

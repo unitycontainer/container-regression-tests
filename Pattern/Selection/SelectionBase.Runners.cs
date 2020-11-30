@@ -5,18 +5,6 @@ namespace Selection
 {
     public abstract partial class SelectionBase
     {
-        public object AssertResolution(Type type)
-        {
-            // Act
-            var instance = Container.Resolve(type, null);
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, type);
-
-            return instance;
-        }
-
         public SelectionBaseType AssertResolutionPattern(Type type)
         {
             // Act

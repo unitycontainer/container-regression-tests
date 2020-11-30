@@ -13,7 +13,7 @@ namespace Selection.Injected
     {
         #region Not Supported Tests
 
-        public override void EdgeCases(string test, Type type) { }
+        public override void Selection_EdgeCases_Successfull(string test, Type type) { }
 
         #endregion
 

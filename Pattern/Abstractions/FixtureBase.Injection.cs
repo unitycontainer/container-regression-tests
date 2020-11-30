@@ -31,7 +31,7 @@ namespace Regression
 
         protected static void LoadInjectionProxies()
         {
-            Type support = Type.GetType($"{typeof(FixtureBase).FullName}+{_member}");
+            Type support = Type.GetType($"{typeof(FixtureBase).FullName}+{Member}");
             
             if (support is null) return;
 
