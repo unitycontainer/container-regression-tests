@@ -38,7 +38,7 @@ namespace Import
             return instance;
         }
 
-        protected FixtureBaseType Assert_InjectedNamed(Type import, InjectionMember injected, object expected)
+        protected FixtureBaseType Assert_InjectNamed(Type import, InjectionMember injected, object expected)
         {
             var target = BaselineTestNamed.MakeGenericType(import);
 
@@ -60,7 +60,7 @@ namespace Import
             return instance;
         }
 
-        protected FixtureBaseType Assert_InjectedArray(Type importType, InjectionMember injection, object[] values)
+        protected FixtureBaseType Assert_InjectArray(Type importType, InjectionMember injection, object[] values)
         {
             // Arrange
             var type = BaselineTestType.MakeGenericType(importType.MakeArrayType());
@@ -83,7 +83,7 @@ namespace Import
             return instance;
         }
 
-        protected FixtureBaseType Assert_InjectedGeneric(Type import, InjectionMember injected, object expected)
+        protected FixtureBaseType Assert_InjectGeneric(Type import, InjectionMember injected, object expected)
         {
             var target = BaselineTestType.MakeGenericType(import);
 
@@ -105,7 +105,7 @@ namespace Import
             return instance;
         }
 
-        protected FixtureBaseType Assert_NamedInjectedGeneric(Type import, InjectionMember injected, object expected)
+        protected FixtureBaseType Assert_InjectNamedGeneric(Type import, InjectionMember injected, object expected)
         {
             var target = BaselineTestNamed.MakeGenericType(import);
 

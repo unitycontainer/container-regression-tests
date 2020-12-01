@@ -80,14 +80,14 @@ namespace Import
         public virtual void InjectionParameter_ByType_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                               object registered, object named, object injected, object overridden,
                                                               object @default)
-            => Assert_InjectedNamed(type, InjectionMember_Value(new InjectionParameter(type)), registered);
+            => Assert_InjectNamed(type, InjectionMember_Value(new InjectionParameter(type)), registered);
 
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void InjectionParameter_ByType_OnNamed_WithContract(string test, Type type, object defaultValue, object defaultAttr,
                                                               object registered, object named, object injected, object overridden,
                                                               object @default)
-            => Assert_InjectedNamed(type, InjectionMember_Value(new InjectionParameter(type, type)), registered);
+            => Assert_InjectNamed(type, InjectionMember_Value(new InjectionParameter(type, type)), registered);
 
 
         /// <summary>

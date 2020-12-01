@@ -30,7 +30,7 @@ namespace Import
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ResolvedParameter_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_InjectedNamed(type, InjectionMember_Value(new ResolvedParameter()), named);
+            => Assert_InjectNamed(type, InjectionMember_Value(new ResolvedParameter()), named);
 #endif
         #endregion
 
@@ -46,7 +46,7 @@ namespace Import
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ResolvedParameter_WithType_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_InjectedNamed(type, InjectionMember_Value(new ResolvedParameter(type)), registered);
+            => Assert_InjectNamed(type, InjectionMember_Value(new ResolvedParameter(type)), registered);
 
         #endregion
 
@@ -62,7 +62,7 @@ namespace Import
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ResolvedParameter_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_InjectedNamed(type, InjectionMember_Value(new ResolvedParameter((string)null)), registered);
+            => Assert_InjectNamed(type, InjectionMember_Value(new ResolvedParameter((string)null)), registered);
 
         #endregion
 
@@ -78,7 +78,7 @@ namespace Import
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ResolvedParameter_WithContract_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_InjectedNamed(type, InjectionMember_Value(new ResolvedParameter(type, null)), registered);
+            => Assert_InjectNamed(type, InjectionMember_Value(new ResolvedParameter(type, null)), registered);
         
         #endregion
     }

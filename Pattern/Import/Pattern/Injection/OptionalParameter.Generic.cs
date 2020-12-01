@@ -30,7 +30,7 @@ namespace Import
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void OptionalGenericParameter_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_InjectNamedGenericOrDefault(type, InjectionMember_Value(new OptionalGenericParameter(TDependency)), named, @default);
+            => Assert_InjectNamedGenericOrDefault(type, InjectionMember_Value(new OptionalGenericParameter(TDependency)), registered, @default);
 #endif
         #endregion
 
