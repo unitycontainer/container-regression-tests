@@ -16,6 +16,14 @@ namespace Import.Implicit.Methods
         [InjectionMethod] public void Method(TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
+
+    public class BaselineTestTypeNamed<TDependency>
+        : ImportBaseType
+    {
+        [InjectionMethod]
+        public virtual void Method(TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
 }
 
 

@@ -18,6 +18,12 @@ namespace Import.Required.Constructors
         [InjectionConstructor]public BaselineTestType([Dependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
+    public class BaselineTestTypeNamed<TDependency>
+        : ImportBaseType
+    {
+        public BaselineTestTypeNamed([Dependency(ImportBase.Name)] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
 }
 
 

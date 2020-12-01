@@ -27,18 +27,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Import\Pattern\Injected\**" />
 	  <Compile Remove="Import\Pattern\Override\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Import\Tests\Constructors\Injected.cs" />
 	  <Compile Remove="Import\Tests\Constructors\Override.cs" />
-	  <Compile Remove="Import\Tests\Fields\Injected.cs" />
 	  <Compile Remove="Import\Tests\Fields\Override.cs" />
-	  <Compile Remove="Import\Tests\Methods\Injected.cs" />
 	  <Compile Remove="Import\Tests\Methods\Override.cs" />
-	  <Compile Remove="Import\Tests\Properties\Injected.cs" />
 	  <Compile Remove="Import\Tests\Properties\Override.cs" />
 	</ItemGroup>
 

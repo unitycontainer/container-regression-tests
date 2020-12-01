@@ -18,15 +18,6 @@ namespace Import.Annotated.Fields.Required
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestTypeNamed<TDependency>
-        : ImportBaseType
-    {
-        [Dependency(ImportBase.Name)] public TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
     public class DownTheLineType<TDependency>
         : ImportBaseType
     {

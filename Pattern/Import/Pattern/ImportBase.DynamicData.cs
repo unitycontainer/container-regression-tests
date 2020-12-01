@@ -23,13 +23,13 @@ namespace Import
                 {
                     typeof(int).Name,        // Name
                     typeof(int),             // Type
-                    DefaultInt,              // Default
-                    DefaultValueInt,         // DefaultValue
+                    DefaultInt,              // DefaultValue
+                    DefaultValueInt,         // DefaultAttributeValue
                     RegisteredInt,           // Registered
                     NamedInt,                // Named
                     InjectedInt,             // Injected
                     OverriddenInt,           // Overridden
-                    false                    // Is resolvable from empty
+                    0                        // default
                 };
                 #endregion
 
@@ -38,13 +38,13 @@ namespace Import
                 {
                     typeof(string).Name,     // Name
                     typeof(string),          // Type
-                    DefaultString,           // Default
-                    DefaultValueString,      // DefaultValue
+                    DefaultString,           // DefaultValue
+                    DefaultValueString,      // DefaultAttributeValue
                     RegisteredString,        // Registered
                     NamedString,             // Named
                     InjectedString,          // Injected
                     OverriddenString,        // Overridden
-                    false                    // Is resolvable from empty
+                    null                     // default
                 };
                 #endregion
 
@@ -53,13 +53,13 @@ namespace Import
                 {
                     typeof(Unresolvable).Name,// Name
                     typeof(Unresolvable),     // Type
-                    DefaultUnresolvable,      // Default
-                    DefaultValueUnresolvable, // DefaultValue
+                    DefaultUnresolvable,      // DefaultValue
+                    DefaultValueUnresolvable, // DefaultAttributeValue
                     RegisteredUnresolvable,   // Registered
                     NamedUnresolvable,        // Named
                     InjectedUnresolvable,     // Injected
                     OverriddenUnresolvable,   // Overridden
-                    false                     // Is resolvable from empty
+                    null                      // default
                 };
                 #endregion
             }

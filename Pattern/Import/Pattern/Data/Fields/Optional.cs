@@ -13,7 +13,16 @@ namespace Import.Optional.Fields
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [OptionalDependency] public TDependency Field;
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Value { get => Field; }
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineTestTypeNamed<TDependency>
+        : ImportBaseType
+    {
+        [OptionalDependency(ImportBase.Name)] public TDependency Field;
+
+        public override object Value { get => Field; }
         public override object Default => default(TDependency);
     }
 }

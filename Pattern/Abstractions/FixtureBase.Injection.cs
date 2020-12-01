@@ -14,12 +14,6 @@ namespace Regression
     {
         #region Fields
 
-        protected static Func<Type, InjectionMember> InjectionMember_Required_ByName;
-        protected static Func<Type, InjectionMember> InjectionMember_Optional_ByName;
-
-        protected static Func<Type, InjectionMember> InjectionMember_Required_ByType;
-        protected static Func<Type, InjectionMember> InjectionMember_Optional_ByType;
-
         protected static Func<object, InjectionMember> InjectionMember_Value;
         protected static Func<InjectionMember>         InjectionMember_Default;
 
@@ -35,17 +29,6 @@ namespace Regression
             
             if (support is null) return;
 
-            InjectionMember_Required_ByName = (Func<Type, InjectionMember>)support
-                .GetMethod("GetInjectionMember_ByName_Required").CreateDelegate(typeof(Func<Type, InjectionMember>));
-
-            InjectionMember_Optional_ByName = (Func<Type, InjectionMember>)support
-                .GetMethod("GetInjectionMember_ByName_Optional").CreateDelegate(typeof(Func<Type, InjectionMember>));
-
-            InjectionMember_Required_ByType = (Func<Type, InjectionMember>)support
-                .GetMethod("GetInjectionMember_ByType_Required").CreateDelegate(typeof(Func<Type, InjectionMember>));
-
-            InjectionMember_Optional_ByType = (Func<Type, InjectionMember>)support
-                .GetMethod("GetInjectionMember_ByType_Optional").CreateDelegate(typeof(Func<Type, InjectionMember>));
 
             InjectionMember_Value = (Func<object, InjectionMember>)support
                 .GetMethod("GetInjectionValue").CreateDelegate(typeof(Func<object, InjectionMember>));

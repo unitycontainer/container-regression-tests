@@ -14,15 +14,133 @@ namespace Import
 {
     public abstract partial class ImportBase
     {
-        #region With Defaults
+        #region Injected
 
-        protected void TestWithDefault(Type definition, Type importType, object expected, object @default)
+        protected virtual FixtureBaseType Assert_Injected(Type import, InjectionMember injected, object expected)
         {
-            // Arrange
-            var type = definition.MakeGenericType(importType);
+            var target = BaselineTestType.MakeGenericType(import);
+
+            Container.RegisterType(null, target, null, null, injected);
 
             // Validate
-            var instance = Container.Resolve(type, null) as ImportBaseType;
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            var instance = Container.Resolve(target, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(expected, instance.Value);
+
+            return instance;
+        }
+
+        protected FixtureBaseType Assert_InjectedNamed(Type import, InjectionMember injected, object expected)
+        {
+            var target = BaselineTestNamed.MakeGenericType(import);
+
+            Container.RegisterType(null, target, null, null, injected);
+
+            // Validate
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            var instance = Container.Resolve(target, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(expected, instance.Value);
+
+            return instance;
+        }
+
+        protected FixtureBaseType Assert_InjectedArray(Type importType, InjectionMember injection, object[] values)
+        {
+            // Arrange
+            var type = BaselineTestType.MakeGenericType(importType.MakeArrayType());
+
+            Container.RegisterType(null, type, null, null, injection);
+
+            // Act
+            var instance = Container.Resolve(type, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+
+            var list = instance.Value as IList;
+            Assert.IsNotNull(list);
+
+            for (var i = 0; i < values.Length; i++) 
+                Assert.AreEqual(values[i], list[i]);
+
+            return instance;
+        }
+
+        protected FixtureBaseType Assert_InjectedGeneric(Type import, InjectionMember injected, object expected)
+        {
+            var target = BaselineTestType.MakeGenericType(import);
+
+            Container.RegisterType(null, BaselineTestType, null, null, injected);
+
+            // Validate
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            var instance = Container.Resolve(target, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(expected, instance.Value);
+
+            return instance;
+        }
+
+        protected FixtureBaseType Assert_NamedInjectedGeneric(Type import, InjectionMember injected, object expected)
+        {
+            var target = BaselineTestNamed.MakeGenericType(import);
+
+            Container.RegisterType(null, BaselineTestNamed, null, null, injected);
+
+            // Validate
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            var instance = Container.Resolve(target, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(expected, instance.Value);
+
+            return instance;
+        }
+
+        #endregion
+
+
+        #region With Defaults
+
+        protected void Assert_InjectedOrDefault(Type importType, InjectionMember member, object expected, object @default)
+        {
+            // Arrange
+            var target = BaselineTestType.MakeGenericType(importType);
+
+            Container.RegisterType(null, target, null, null, member);
+
+            // Validate
+            var instance = Container.Resolve(target, null) as FixtureBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -32,22 +150,22 @@ namespace Import
             RegisterTypes();
 
             // Act
-            instance = Container.Resolve(type, null) as ImportBaseType;
+            instance = Container.Resolve(target, null) as FixtureBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
             Assert.AreEqual(expected, instance.Value);
         }
 
-        protected void TestWithDefault(Type definition, Type importType, InjectionMember injected, object expected, object @default)
+        protected void Assert_InjectNamedOrDefault(Type importType, InjectionMember member, object expected, object @default)
         {
             // Arrange
-            var type = definition.MakeGenericType(importType);
+            var target = BaselineTestNamed.MakeGenericType(importType);
 
-            Container.RegisterType(null, type, null, null, injected);
+            Container.RegisterType(null, target, null, null, member);
 
             // Validate
-            var instance = Container.Resolve(type, null) as ImportBaseType;
+            var instance = Container.Resolve(target, null) as FixtureBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -57,7 +175,57 @@ namespace Import
             RegisterTypes();
 
             // Act
-            instance = Container.Resolve(type, null) as ImportBaseType;
+            instance = Container.Resolve(target, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(expected, instance.Value);
+        }
+
+        protected void Assert_InjectedGenericOrDefault(Type importType, InjectionMember member, object expected, object @default)
+        {
+            // Arrange
+            var target = BaselineTestType.MakeGenericType(importType);
+
+            Container.RegisterType(null, BaselineTestType, null, null, member);
+
+            // Validate
+            var instance = Container.Resolve(target, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(@default, instance.Value);
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            instance = Container.Resolve(target, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(expected, instance.Value);
+        }
+
+        protected void Assert_InjectNamedGenericOrDefault(Type importType, InjectionMember member, object expected, object @default)
+        {
+            // Arrange
+            var target = BaselineTestNamed.MakeGenericType(importType);
+
+            Container.RegisterType(null, BaselineTestNamed, null, null, member);
+
+            // Validate
+            var instance = Container.Resolve(target, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(@default, instance.Value);
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            instance = Container.Resolve(target, null) as FixtureBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -125,23 +293,6 @@ namespace Import
 
 
         #region Built-In Types
-
-
-        protected void TestArrayImport(Type definition, Type importType, InjectionMember injection)
-        {
-            // Arrange
-            var type = definition.MakeGenericType(importType);
-
-            Container.RegisterType(null, type, null, null, injection);
-
-            // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, type);
-            Assert.AreEqual(6, (instance.Value as IList)?.Count ?? -1);
-        }
 
         protected IList TestGenericArrayImport(Type definition, Type importType, InjectionMember injection)
         {

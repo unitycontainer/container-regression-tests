@@ -1,15 +1,18 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
 using System;
+using Unity.Injection;
 
 namespace Import.Optional
 {
-    public abstract partial class Pattern : Common.Pattern
+    public abstract partial class Pattern
     {
-        protected override void AssertUnresolvableImport(Type definition, Type importType, object expected)
+        protected override FixtureBaseType Assert_Injected(Type importType, InjectionMember injected, object expected)
         {
             // Arrange
-            var type = definition.MakeGenericType(importType);
+            var type = BaselineTestType.MakeGenericType(importType);
+
+            Container.RegisterType(null, type, null, null, injected);
 
             // Validate
             var instance = Container.Resolve(type, null) as FixtureBaseType;
@@ -27,6 +30,8 @@ namespace Import.Optional
             // Validate
             Assert.IsNotNull(instance);
             Assert.AreEqual(expected, instance.Value);
+
+            return instance;
         }
     }
 }

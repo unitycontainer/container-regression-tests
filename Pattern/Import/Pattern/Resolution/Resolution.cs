@@ -2,16 +2,16 @@
 using Regression;
 using System;
 
-namespace Import.Common
+namespace Import
 {
     public abstract partial class Pattern
     {
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void Resolution(string test, Type type,
-                                                         object @default, object defaultAttr,
+                                                         object defaultValue, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
-                                                         bool isResolveble)
+                                                         object @default)
             => AssertUnresolvableImport(BaselineTestType, type, registered);
 
 

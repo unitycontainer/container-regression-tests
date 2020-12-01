@@ -16,7 +16,7 @@ namespace Import.Implicit
     {
         [ExpectedException(typeof(ResolutionFailedException))]
         [DataTestMethod, DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
-        public virtual void ThrowsOnRefParameter(string test, Type type)
+        public virtual void Throws_OnRefParameter(string test, Type type)
         {
             // Arrange
             var target = GetType("BaselineTestType_Ref`1").MakeGenericType(type);
@@ -27,7 +27,7 @@ namespace Import.Implicit
 
         [ExpectedException(typeof(ResolutionFailedException))]
         [DataTestMethod, DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
-        public virtual void ThrowsOnOutParameter(string test, Type type)
+        public virtual void Throws_OnOutParameter(string test, Type type)
         {
             // Arrange
             var target = GetType("BaselineTestType_Out`1").MakeGenericType(type);

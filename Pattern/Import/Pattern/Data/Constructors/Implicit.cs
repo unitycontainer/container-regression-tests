@@ -17,6 +17,13 @@ namespace Import.Implicit.Constructors
         [InjectionConstructor] public BaselineTestType(TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
+
+    public class BaselineTestTypeNamed<TDependency>
+        : ImportBaseType
+    {
+        public BaselineTestTypeNamed(TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
 }
 
 namespace Import.Implicit.Constructors.WithDefault

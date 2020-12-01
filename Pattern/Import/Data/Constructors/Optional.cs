@@ -11,12 +11,6 @@ using Unity;
 
 namespace Import.Optional.Constructors
 {
-    public class BaselineTestTypeNamed<TDependency>
-        : ImportBaseType
-    {
-        public BaselineTestTypeNamed([OptionalDependency(ImportBase.Name)] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
 
     public class DownTheLineType<TDependency>
         : ImportBaseType

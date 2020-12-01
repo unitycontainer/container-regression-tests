@@ -1,16 +1,17 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Import.Common
+namespace Import
 {
-
     public abstract partial class Pattern
     {
 #if BEHAVIOR_V4
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
         [DataTestMethod, DynamicData(nameof(WithDefaultValue_Data))]
-        public virtual void WithDefaultValue(string test, Type type)
+        public virtual void WithDefault_Value(string test, Type type)
         {
             // Act
             var instance = Container.Resolve(type, null) as ImportBaseType;
@@ -41,7 +42,7 @@ namespace Import.Common
         /// <summary>
         /// Tests providing default values
         /// </summary>
-        public virtual void WithDefaultAttribute(string test, Type type)
+        public virtual void WithDefault_Attribute(string test, Type type)
         {
             // Act
             var instance = Container.Resolve(type, null) as ImportBaseType;
@@ -74,7 +75,7 @@ namespace Import.Common
         /// <summary>
         /// Tests providing default values
         /// </summary>
-        public virtual void WithDefaultAndAttribute(string test, Type type)
+        public virtual void WithDefault_ValueAndAttribute(string test, Type type)
         {
             // Act
             var instance = Container.Resolve(type, null) as ImportBaseType;
@@ -97,6 +98,44 @@ namespace Import.Common
             Assert.AreEqual(Container.Resolve(instance.ImportType, null), instance.Value);
 #endif
         }
+
+
+        #region Test Data
+
+        public static IEnumerable<object[]> WithDefaultValue_Data
+        {
+            get
+            {
+                var types = FromNamespace("WithDefault").ToArray();
+
+                foreach (var type in types) yield return new object[] { type.Name, type };
+                if (0 == types.Length) yield return new object[] { "Empty", typeof(DummyImport) };
+            }
+        }
+
+        public static IEnumerable<object[]> WithDefaultAttribute_Data
+        {
+            get
+            {
+                var types = FromNamespace("WithDefaultAttribute").ToArray();
+
+                foreach (var type in types) yield return new object[] { type.Name, type };
+                if (0 == types.Length) yield return new object[] { "Empty", typeof(DummyImport) };
+            }
+        }
+
+        public static IEnumerable<object[]> WithDefaultAndAttribute_Data
+        {
+            get
+            {
+                var types = FromNamespace("WithDefaultAndAttribute").ToArray();
+
+                foreach (var type in types) yield return new object[] { type.Name, type };
+                if (0 == types.Length) yield return new object[] { "Empty", typeof(DummyImport) };
+            }
+        }
+
+        #endregion
     }
 }
 

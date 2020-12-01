@@ -24,6 +24,8 @@ namespace Regression
 
         protected static Type BaselineTestType;
 
+        protected static Type BaselineTestNamed;
+
         #endregion
 
 
@@ -79,6 +81,7 @@ namespace Regression
             _root = $"{type.BaseType.Namespace}.{Member}";
 
             BaselineTestType = GetTestType("BaselineTestType`1");
+            BaselineTestNamed = GetTestType("BaselineTestTypeNamed`1");
         }
 
         public virtual void TestInitialize() => Container = new UnityContainer();

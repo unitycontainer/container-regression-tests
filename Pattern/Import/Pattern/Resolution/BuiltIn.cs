@@ -10,13 +10,13 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Import.Common
+namespace Import
 {
     public abstract partial class Pattern
     {
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void BuiltIn_Array(string test, Type type, object @default, object defaultAttr, object registered,
-                                  object named, object injected, object overridden, bool isResolveble)
+        public virtual void BuiltIn_Array(string test, Type type, object defaultValue, object defaultAttr, object registered,
+                                  object named, object injected, object overridden, object @default)
         {
             // Arrange
             var target = BaselineTestType.MakeGenericType(type.MakeArrayType());
@@ -47,8 +47,8 @@ namespace Import.Common
 
 #if !BEHAVIOR_V4
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void BuiltIn_Enumerable(string test, Type type, object @default, object defaultAttr, object registered,
-                                       object named, object injected, object overridden, bool isResolveble)
+        public virtual void BuiltIn_Enumerable(string test, Type type, object defaultValue, object defaultAttr, object registered,
+                                       object named, object injected, object overridden, object @default)
         {
             // Arrange
             var target = BaselineTestType.MakeGenericType(typeof(IEnumerable<>).MakeGenericType(type));
@@ -75,8 +75,8 @@ namespace Import.Common
 
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void BuiltIn_Lazy(string test, Type type, object @default, object defaultAttr, object registered,
-                                 object named, object injected, object overridden, bool isResolveble)
+        public virtual void BuiltIn_Lazy(string test, Type type, object defaultValue, object defaultAttr, object registered,
+                                 object named, object injected, object overridden, object @default)
         {
             // Arrange
             var target = BaselineTestType.MakeGenericType(typeof(Lazy<>).MakeGenericType(type));
@@ -130,8 +130,8 @@ namespace Import.Common
 
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void BuiltIn_Func(string test, Type type, object @default, object defaultAttr, object registered,
-                                 object named, object injected, object overridden, bool isResolveble)
+        public virtual void BuiltIn_Func(string test, Type type, object defaultValue, object defaultAttr, object registered,
+                                 object named, object injected, object overridden, object @default)
         {
             // Arrange
             var target = BaselineTestType.MakeGenericType(typeof(Func<>).MakeGenericType(type));

@@ -5,6 +5,7 @@ using System;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
+using Unity.Injection;
 #endif
 
 namespace Selection.Injected
@@ -19,7 +20,7 @@ namespace Selection.Injected
             // Arrange
             var target = NoPublicMemberImplicit.MakeGenericType(type);
 
-            Container.RegisterType(null, target, null, null, InjectionMember_Required_ByType(type));
+            Container.RegisterType(null, target, null, null, InjectionMember_Value(new ResolvedParameter(type)));
 
             AssertResolution(target); 
         }
@@ -32,7 +33,7 @@ namespace Selection.Injected
             // Arrange
             var target = NoPublicMemberRequired.MakeGenericType(type);
 
-            Container.RegisterType(null, target, null, null, InjectionMember_Required_ByType(type));
+            Container.RegisterType(null, target, null, null, InjectionMember_Value(new ResolvedParameter(type)));
 
             AssertResolution(target);
         }
@@ -46,7 +47,7 @@ namespace Selection.Injected
             // Arrange
             var target = NoPublicMemberOptional.MakeGenericType(type);
 
-            Container.RegisterType(null, target, null, null, InjectionMember_Required_ByType(type));
+            Container.RegisterType(null, target, null, null, InjectionMember_Value(new ResolvedParameter(type)));
 
             AssertResolution(target);
         }

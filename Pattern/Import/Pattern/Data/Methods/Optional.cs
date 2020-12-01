@@ -16,6 +16,14 @@ namespace Import.Optional.Methods
         [InjectionMethod] public void Method([OptionalDependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
+
+    public class BaselineTestTypeNamed<TDependency>
+        : ImportBaseType
+    {
+        [InjectionMethod]
+        public virtual void Method([OptionalDependency(ImportBase.Name)] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
 }
 
 
