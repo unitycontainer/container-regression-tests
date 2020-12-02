@@ -45,15 +45,5 @@ namespace Import.Optional
                                                       object registered, object named, object injected, object overridden,
                                                       object @default)
             => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type)), registered, @default);
-
-
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public override void InjectionParameter_ByValue_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
-                                                                    object registered, object named, object injected, object overridden,
-                                                                    object @default)
-        {
-            Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, type)), registered, @default);
-            Assert.Fail();
-        }
     }
 }

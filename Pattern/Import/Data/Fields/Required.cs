@@ -42,7 +42,6 @@ namespace Import.Annotated.Fields.Required.WithDefaults
 
     #endregion
 
-#if !BEHAVIOR_V5 // Unity v5 did not support DefaultValueAttribute on fields
 
     #region WithDefaultAttribute
 
@@ -131,15 +130,4 @@ namespace Import.Annotated.Fields.Required.WithDefaults
     }
 
     #endregion
-
-#else
-
-    public class Dummy_Success_Type : PatternBaseType
-    {
-        public override object Value { get => null; }
-        public override object Default => null;
-    }
-
-#endif
-
 }

@@ -45,12 +45,32 @@ namespace Import
             => Assert_InjectNamed(type, InjectionMember_Value(new InjectionParameter(type, injected)), injected, injected);
 
 
-        [ExpectedException(typeof(ResolutionFailedException))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void InjectionParameter_ByValue_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
                                                                    object registered, object named, object injected, object overridden,
                                                                    object @default)
-            => Assert_Fail(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new InjectionParameter(type, type)));
+        {
+            var target = BaselineTestType.MakeGenericType(type);
+
+            Container.RegisterType(null, target, null, null, InjectionMember_Value(new InjectionParameter(type, type)));
+
+            // Validate
+#if BEHAVIOR_V5
+            Assert.ThrowsException<ArgumentException>(() => Container.Resolve(target, null));
+#else
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
+#endif
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+#if BEHAVIOR_V5
+            Assert.ThrowsException<ArgumentException>(() => Container.Resolve(target, null));
+#else
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
+#endif
+        }
 
         #endregion
 
@@ -73,134 +93,65 @@ namespace Import
         #endregion
 
 
-        #region Parameter
-
-#if !UNITY_V4
-        /// <summary>
-        /// Tests injecting dependencies by resolver 
-        /// </summary>
-        /// <remarks>
-        /// A resolver is an object that implements <see cref="IResolve"/> interface
-        /// </remarks>
-        /// <example>
-        /// Container.RegisterType(target, new InjectionConstructor(new InjectionParameter(resolver)), 
-        ///                                new InjectionMethod("Method",    new InjectionParameter(resolver)) , 
-        ///                                new InjectionField("Field",      new InjectionParameter(resolver)), 
-        ///                                new InjectionProperty("Property", new InjectionParameter(resolver)));
-        /// </example>
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
-        public virtual void InjectionParameter_ByParameter(string test, Type type, object defaultValue, object defaultAttr,
-                                                           object registered, object named, object injected, object overridden,
-                                                           object @default)
-            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(new ResolvedParameter())), registered);
-
-
-        /// <summary>
-        /// Tests injecting dependencies by resolver 
-        /// </summary>
-        /// <remarks>
-        /// A resolver is an object that implements <see cref="IResolve"/> interface
-        /// </remarks>
-        /// <example>
-        /// Container.RegisterType(target, new InjectionConstructor(new InjectionParameter(type, resolver)), 
-        ///                                new InjectionMethod("Method",    new InjectionParameter(type, resolver)) , 
-        ///                                new InjectionField("Field",      new InjectionParameter(type, resolver)), 
-        ///                                new InjectionProperty("Property", new InjectionParameter(type, resolver)));
-        /// </example>
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
-        public virtual void InjectionParameter_ByParameter_WithContract(string test, Type type, object defaultValue, object defaultAttr,
-                                                                      object registered, object named, object injected, object overridden,
-                                                                      object @default)
-            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, new ResolvedParameter())), registered);
-#endif
-
-        #endregion
-
-
         #region Resolver
 
-#if !BEHAVIOR_V4
-        /// <summary>
-        /// Tests injecting dependencies by resolver 
-        /// </summary>
-        /// <remarks>
-        /// A resolver is an object that implements <see cref="IResolve"/> interface
-        /// </remarks>
-        /// <example>
-        /// Container.RegisterType(target, new InjectionConstructor(new InjectionParameter(resolver)), 
-        ///                                new InjectionMethod("Method",    new InjectionParameter(resolver)) , 
-        ///                                new InjectionField("Field",      new InjectionParameter(resolver)), 
-        ///                                new InjectionProperty("Property", new InjectionParameter(resolver)));
-        /// </example>
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
+        // Starting with v6 no validation during registration
+        [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         public virtual void InjectionParameter_ByResolver(string test, Type type, object defaultValue, object defaultAttr,
                                                           object registered, object named, object injected, object overridden,
                                                           object @default)
-            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(new ValidatingResolver(injected))), injected, injected);
+            => Assert_Fail(type, InjectionMember_Value(new InjectionParameter(new ValidatingResolver(injected))));
 
 
-        /// <summary>
-        /// Tests injecting dependencies by resolver 
-        /// </summary>
-        /// <remarks>
-        /// A resolver is an object that implements <see cref="IResolve"/> interface
-        /// </remarks>
-        /// <example>
-        /// Container.RegisterType(target, new InjectionConstructor(new InjectionParameter(type, resolver)), 
-        ///                                new InjectionMethod("Method",    new InjectionParameter(type, resolver)) , 
-        ///                                new InjectionField("Field",      new InjectionParameter(type, resolver)), 
-        ///                                new InjectionProperty("Property", new InjectionParameter(type, resolver)));
-        /// </example>
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
+        // Starting with v6 no validation during registration
+        [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         public virtual void InjectionParameter_ByResolver_WithContract(string test, Type type,
                                                                        object defaultValue, object defaultAttr,
                                                                        object registered, object named,
                                                                        object injected, object overridden,
                                                                        object @default)
-            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, new ValidatingResolver(injected))), injected, injected);
-#endif
+            => Assert_Fail(type, InjectionMember_Value(new InjectionParameter(type, new ValidatingResolver(injected))));
+
         #endregion
 
 
         #region Factory
 
 #if !UNITY_V4
-        /// <summary>
-        /// Tests injecting dependencies by resolver factory
-        /// </summary>
-        /// <remarks>
-        /// A resolver is an object that implements <see cref="IResolverFactory{TMemberInfo}"/> interface
-        /// </remarks>
-        /// <example>
-        /// Container.RegisterType(target, new InjectionConstructor(new InjectionParameter(resolver)), 
-        ///                                new InjectionMethod("Method",    new InjectionParameter(resolver)) , 
-        ///                                new InjectionField("Field",      new InjectionParameter(resolver)), 
-        ///                                new InjectionProperty("Property", new InjectionParameter(resolver)));
-        /// </example>
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
+        // Starting with v6 no validation during registration
+        [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         public virtual void InjectionParameter_ByFactory(string test, Type type, object defaultValue, object defaultAttr,
                                                          object registered, object named, object injected, object overridden,
                                                          object @default)
-            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(new ValidatingResolverFactory(injected))), injected, injected);
+            => Assert_Fail(type, InjectionMember_Value(new InjectionParameter(new ValidatingResolverFactory(injected))));
 
 
-        /// <summary>
-        /// Tests injecting dependencies by resolver factory
-        /// </summary>
-        /// <remarks>
-        /// A resolver is an object that implements <see cref="IResolverFactory{TMemberInfo}"/> interface
-        /// </remarks>
-        /// <example>
-        /// Container.RegisterType(target, new InjectionConstructor(new InjectionParameter(type, resolver)), 
-        ///                                new InjectionMethod("Method",    new InjectionParameter(type, resolver)) , 
-        ///                                new InjectionField("Field",      new InjectionParameter(type, resolver)), 
-        ///                                new InjectionProperty("Property", new InjectionParameter(type, resolver)));
-        /// </example>
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void InjectionParameter_ByFactory_WithContract(string test, Type type, object defaultValue, object defaultAttr,
-                                                                    object registered, object named, object injected, object overridden,
-                                                                    object @default)
-            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, new ValidatingResolverFactory(injected))), injected, injected);
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
+        // Starting with v6 no validation during registration
+        [ExpectedException(typeof(ResolutionFailedException))]
+#endif
+        public virtual void InjectionParameter_ByFactory_WithType(string test, Type type, object defaultValue, object defaultAttr,
+                                                                  object registered, object named, object injected, object overridden,
+                                                                  object @default)
+            => Assert_Fail(type, InjectionMember_Value(new InjectionParameter(type, new ValidatingResolverFactory(injected))));
 #endif
 
         #endregion

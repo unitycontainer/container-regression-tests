@@ -42,7 +42,6 @@ namespace Import.Annotated.Properties.Required
 
 namespace Import.Annotated.Properties.Required.WithDefaults
 {
-
     #region WithDefault
 
     // Unity does not support implicit default values on properties
@@ -54,9 +53,6 @@ namespace Import.Annotated.Properties.Required.WithDefaults
     //}
 
     #endregion
-
-
-#if !BEHAVIOR_V5 // Unity v5 did not support DefaultValueAttribute on properties
 
 
     #region WithDefaultAttribute
@@ -147,15 +143,4 @@ namespace Import.Annotated.Properties.Required.WithDefaults
     }
 
     #endregion
-
-
-#else
-
-    public class Dummy_Success_Type : PatternBaseType
-    {
-        public override object Value { get => null; }
-        public override object Default => null;
-    }
-
-#endif
 }

@@ -226,6 +226,7 @@ namespace Import
             var type = BaselineArrayType.MakeGenericType(importType);
 
             Container.RegisterType(null, type, null, null, injection);
+            RegisterTypes();
 
             // Act
             var instance = Container.Resolve(type, null) as FixtureBaseType;
