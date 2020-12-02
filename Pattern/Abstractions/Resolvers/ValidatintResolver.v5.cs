@@ -5,7 +5,7 @@ using Unity.Resolution;
 
 namespace Regression
 {
-    public class ValidatingResolver : IResolve, IMatchTo<ParameterInfo> 
+    public class ValidatingResolver : IResolve, IEquatable<Type>
     {
         private object _value;
 
@@ -20,12 +20,11 @@ namespace Regression
             return _value;
         }
 
+        public bool Equals(Type other) => _value.Matches(other);
+
         public Type Type { get; private set; }
 
         public string Name { get; private set; }
-
-        public MatchRank MatchTo(ParameterInfo other) 
-            => _value.MatchTo(other);
     }
 }
 

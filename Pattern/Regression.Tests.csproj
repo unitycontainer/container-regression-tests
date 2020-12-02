@@ -14,11 +14,11 @@
 		<TargetFramework>net45</TargetFramework>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln')">
+	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln') AND Exists('..\..\Container\package.props')">
 		<TargetFramework>net46</TargetFramework>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\gitversion.yml') AND Exists('..\..\Container\gitversion.yml')">
+	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln')">
 		<TargetFramework>net47</TargetFramework>
 	</PropertyGroup>
 

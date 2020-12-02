@@ -7,7 +7,7 @@ namespace Regression
 {
     public class ValidatingResolverFactory : IResolverFactory<Type>, 
                                              IResolverFactory<ParameterInfo>,
-                                             IMatchTo<ParameterInfo>
+                                             IEquatable<Type>
     {
         private object _value;
 
@@ -35,8 +35,7 @@ namespace Regression
         public ResolveDelegate<TContext> GetResolver<TContext>(ParameterInfo info)
             where TContext : IResolveContext => GetResolver<TContext>(info.ParameterType);
 
-        public MatchRank MatchTo(ParameterInfo other)
-            => _value.MatchTo(other);
+        public bool Equals(Type other) => _value.Matches(other);
     }
 }
 
