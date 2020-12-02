@@ -77,14 +77,14 @@ namespace Import
         /// Must override named
         /// </summary>
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void InjectionParameter_ByType_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void InjectionParameter_ByType_OverridesName(string test, Type type, object defaultValue, object defaultAttr,
                                                               object registered, object named, object injected, object overridden,
                                                               object @default)
             => Assert_InjectNamed(type, InjectionMember_Value(new InjectionParameter(type)), registered);
 
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void InjectionParameter_ByType_OnNamed_WithContract(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void InjectionParameter_ByType_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
                                                               object registered, object named, object injected, object overridden,
                                                               object @default)
             => Assert_InjectNamed(type, InjectionMember_Value(new InjectionParameter(type, type)), registered);

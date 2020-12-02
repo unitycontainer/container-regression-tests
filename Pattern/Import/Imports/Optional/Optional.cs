@@ -55,21 +55,18 @@ namespace Import.Optional
 
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public override void InjectionParameter_ByType_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
-                                                              object registered, object named, object injected, object overridden,
-                                                              object @default)
+        public override void InjectionParameter_ByType_OverridesName(string test, Type type, object defaultValue, object defaultAttr,
+                                                                     object registered, object named, object injected, object overridden,
+                                                                     object @default)
             => Assert_InjectNamed(type, InjectionMember_Value(new InjectionParameter(type)), registered, @default);
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public override void InjectionParameter_ByType_OnNamed_WithContract(string test, Type type, object defaultValue, object defaultAttr,
-                                                              object registered, object named, object injected, object overridden,
-                                                              object @default)
-            => Assert_InjectNamed(type, InjectionMember_Value(new InjectionParameter(type, type)), registered, @default);
-
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public override void InjectionParameter_ByType_WithContract(string test, Type type, object defaultValue, object defaultAttr,
-                                                                 object registered, object named, object injected, object overridden,
-                                                                 object @default)
-            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, type)), registered, @default);
+        public override void InjectionParameter_ByType_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
+                                                                    object registered, object named, object injected, object overridden,
+                                                                    object @default)
+        {
+            Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, type)), registered, @default);
+            Assert.Fail();
+        }
     }
 }
