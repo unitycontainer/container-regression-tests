@@ -11,22 +11,18 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="Exists('$(UnityLegacy)')">
-	    <UNITY_V4>True</UNITY_V4>
 		<TargetFramework>net45</TargetFramework>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln')">
-	    <UNITY_V5>True</UNITY_V5>
 		<TargetFramework>net46</TargetFramework>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\gitversion.yml') AND Exists('..\..\Container\gitversion.yml')">
-	    <UNITY_V5>True</UNITY_V5>
 		<TargetFramework>net47</TargetFramework>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="Exists('$(UnityContainer)') AND !Exists('..\..\Container\package.sln')">
-	    <UNITY_V6>True</UNITY_V6>
 		<TargetFramework>net5.0</TargetFramework>
 	</PropertyGroup>
 
@@ -66,41 +62,54 @@
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
 	</PropertyGroup>
 
-	<!-- v4 Exclusions -->
+	
+	<Choose>
+		<When Condition="$(TargetFramework.StartsWith('net45'))">
+			<ItemGroup> <!-- IF v4 -->
+				<Compile Remove="Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+				<Compile Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
+				<Compile Remove="Abstractions\FixtureBase.Fields.cs" />
+				<Compile Remove="Abstractions\Data\Fields\**" />
+				<Compile Remove="Import\Data\Fields\**" />
+				<Compile Remove="Import\Tests\Fields\**" />
+				<Compile Remove="Import\Pattern\Data\Fields\**" />
+				<Compile Remove="Import\Pattern\Resolution\WithDefaults.cs" />
+				<Compile Remove="Resolution\Enumerable\**" />
+				<Compile Remove="Resolution\Generic\Constrained.cs" />
+				<Compile Remove="Registration\Validation\Factory.cs" />
+				<Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
+				<Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
+				<Compile Remove="Manager\Tests\PerContainerTransient\**" />
+				<Compile Remove="Selection\Data\Fields\**" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup> <!-- IF NOT v4 -->
+				<Compile Remove="Abstractions\Resolvers\ValidatintResolver.v4.cs" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
 
-	<ItemGroup Condition="$(TargetFramework.StartsWith('net45'))">
-	  <Compile Remove="Abstractions\Resolvers\ValidatingResolverFactory.cs" />
-	  <Compile Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
-	  <Compile Remove="Abstractions\FixtureBase.Fields.cs" />
-	  <Compile Remove="Abstractions\Data\Fields\**" />
-	  <Compile Remove="Import\Data\Fields\**" />
-	  <Compile Remove="Import\Tests\Fields\**" />
-	  <Compile Remove="Import\Pattern\Data\Fields\**" />
-	  <Compile Remove="Import\Pattern\Resolution\WithDefaults.cs" />
-	  <Compile Remove="Resolution\Enumerable\**" />
-	  <Compile Remove="Resolution\Generic\Constrained.cs" />
-	  <Compile Remove="Registration\Validation\Factory.cs" />
-	  <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
-	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
-	  <Compile Remove="Manager\Tests\PerContainerTransient\**" />
-	  <Compile Remove="Selection\Data\Fields\**" />
-	</ItemGroup>
-
+	<Choose>
+		<When Condition="$(TargetFramework.StartsWith('net46')) OR $(TargetFramework.StartsWith('net47'))">
+			<ItemGroup> <!-- IF v5 -->
+				<Compile Remove="Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+				<Compile Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
+				<Compile Remove="Registration\Validation\Factory.cs" />
+				<Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
+				<Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup> <!-- IF NOT v5 -->
+				<Compile Remove="Abstractions\Resolvers\ValidatintResolver.v5.cs" />
+				<Compile Remove="Abstractions\Resolvers\ValidatingResolverFactory.v5.cs" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
 	<!-- v5 Exclusions -->
 
-	<ItemGroup Condition="$(TargetFramework.StartsWith('net46')) OR $(TargetFramework.StartsWith('net47'))">
-	  <Compile Remove="Abstractions\Resolvers\ValidatingResolverFactory.cs" />
-	  <Compile Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
-	  <Compile Remove="Registration\Validation\Factory.cs" />
-	  <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
-	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
-	</ItemGroup>
 	
-	<ItemGroup>
-		<Compile Condition="'' == $(UNITY_V4)" Remove="Abstractions\Resolvers\ValidatintResolver.v4.cs" />
-		<Compile Condition="'' == $(UNITY_V5)" Remove="Abstractions\Resolvers\ValidatintResolver.v5.cs" />
-		<Compile Condition="'' == $(UNITY_V5)" Remove="Abstractions\Resolvers\ValidatingResolverFactory.v5.cs" />
-	</ItemGroup>
 
 
 
