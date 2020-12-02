@@ -69,7 +69,7 @@ namespace Import
                                                           object @default)
             => Assert_Injected(type, InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
 
-
+#if !UNITY_V4
         /// <summary>
         /// Tests injecting dependencies by resolver factory
         /// </summary>
@@ -89,5 +89,6 @@ namespace Import
                                                           object injected, object overridden,
                                                           object @default)
             => Assert_Injected(type, InjectionMember_Value(new ValidatingResolverFactory(injected)), injected, injected);
+#endif
     }
 }

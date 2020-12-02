@@ -28,7 +28,8 @@ namespace Import
                 new ResolvedArrayParameter(type, defaultValue, defaultAttr, registered, named, injected, overridden)),
                 new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
 
-        
+
+#if !UNITY_V4
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ResolvedArrayParameter_Complex(string test, Type type, object defaultValue, object defaultAttr,
                                                            object registered, object named, object injected, object overridden, object @default)
@@ -36,5 +37,6 @@ namespace Import
                                                                   new ResolvedParameter(type), new OptionalParameter(type, Name), 
                                                                   new ValidatingResolver(injected), new ValidatingResolverFactory(overridden))),
                 new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
+#endif
     }
 }

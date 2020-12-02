@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Unity.Injection;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
+using Unity.Injection;
 using Unity.Resolution;
 #endif
 
@@ -13,6 +13,7 @@ namespace Import
     {
         #region Type
 
+#if !UNITY_V4
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void OverrideInjected_ByType_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -29,7 +30,7 @@ namespace Import
             => Assert_Override(BaselineTestNamed.MakeGenericType(type),
                                InjectionMember_Value(new ResolvedParameter(Name)),
                                new DependencyOverride(type, overridden), overridden);
-
+#endif
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void OverrideInjected_ByType_Ignored(string test, Type type, object defaultValue,
@@ -44,6 +45,7 @@ namespace Import
 
         #region Name
 
+#if !UNITY_V4
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void OverrideInjected_ByName_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -69,11 +71,13 @@ namespace Import
             => Assert_Registered(BaselineTestNamed.MakeGenericType(type),
                                  InjectionMember_Value(new ResolvedParameter(Name)),
                                  new DependencyOverride((string)null, overridden), named);
+#endif
         #endregion
 
 
         #region Contract
 
+#if !UNITY_V4
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void OverrideInjected_ByContract_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -99,6 +103,7 @@ namespace Import
             => Assert_Registered(BaselineTestType.MakeGenericType(type),
                            new DependencyOverride(type, Name, overridden),
                            registered, @default);
+#endif
         #endregion
     }
 }

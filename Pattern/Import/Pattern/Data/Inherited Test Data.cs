@@ -73,7 +73,7 @@ namespace Import.Required.Methods
 
 
 #region Fields
-
+#if !UNITY_V4
 namespace Import.Implicit.Fields
 {
     public class Inherited_Import<TDependency> : BaselineTestType<TDependency> { }
@@ -91,7 +91,7 @@ namespace Import.Required.Fields
     public class Inherited_Import<TDependency> : BaselineTestType<TDependency> { }
     public class Inherited_Twice<TDependency> : Inherited_Import<TDependency> { }
 }
-
+#endif
 #endregion
 
 

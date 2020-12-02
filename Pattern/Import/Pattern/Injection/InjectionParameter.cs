@@ -110,6 +110,7 @@ namespace Import
 
         #region Parameter
 
+#if !UNITY_V4
         /// <summary>
         /// Tests injecting dependencies by resolver 
         /// </summary>
@@ -146,12 +147,14 @@ namespace Import
                                                                       object registered, object named, object injected, object overridden,
                                                                       object @default)
             => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, new ResolvedParameter())), registered);
+#endif
 
         #endregion
 
 
         #region Resolver
 
+#if !BEHAVIOR_V4
         /// <summary>
         /// Tests injecting dependencies by resolver 
         /// </summary>
@@ -190,12 +193,13 @@ namespace Import
                                                                        object injected, object overridden,
                                                                        object @default)
             => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, new ValidatingResolver(injected))), injected, injected);
-
+#endif
         #endregion
 
 
         #region Factory
 
+#if !UNITY_V4
         /// <summary>
         /// Tests injecting dependencies by resolver factory
         /// </summary>
@@ -232,6 +236,7 @@ namespace Import
                                                                     object registered, object named, object injected, object overridden,
                                                                     object @default)
             => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, new ValidatingResolverFactory(injected))), injected, injected);
+#endif
 
         #endregion
 

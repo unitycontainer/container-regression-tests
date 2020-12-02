@@ -53,6 +53,7 @@ namespace Import
 
         #region Name
 
+#if !UNITY_V4
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ResolvedParameter_WithName(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
@@ -63,6 +64,7 @@ namespace Import
         public virtual void ResolvedParameter_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_InjectNamed(type, InjectionMember_Value(new ResolvedParameter((string)null)), registered);
+#endif
 
         #endregion
 

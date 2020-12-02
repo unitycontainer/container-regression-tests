@@ -60,14 +60,17 @@
 
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net45'))">
 	  <Compile Remove="Abstractions\FixtureBase.Fields.cs" />
+	  <Compile Remove="Abstractions\Data\Fields\**" />
 	  <Compile Remove="Import\Data\Fields\**" />
 	  <Compile Remove="Import\Tests\Fields\**" />
+	  <Compile Remove="Import\Pattern\Data\Fields\**" />
 	  <Compile Remove="Resolution\Enumerable\**" />
 	  <Compile Remove="Resolution\Generic\Constrained.cs" />
 	  <Compile Remove="Registration\Validation\Factory.cs" />
 	  <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
 	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
 	  <Compile Remove="Manager\Tests\PerContainerTransient\**" />
+	  <Compile Remove="Selection\Data\Fields\**" />
 	</ItemGroup>
 
 	<!-- v5 Exclusions -->

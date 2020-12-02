@@ -49,6 +49,7 @@ namespace Import
 
         #region Name
 
+#if !UNITY_V4
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void OverrideDepend_ByName_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -90,11 +91,13 @@ namespace Import
             => Assert_Registered(BaselineConsumer.MakeGenericType(type),
                                  new DependencyOverride(Name, overridden),
                                  registered, overridden);
+#endif
         #endregion
 
 
         #region Contract
 
+#if !UNITY_V4
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void OverrideDepend_ByContract_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -136,7 +139,7 @@ namespace Import
             => Assert_Registered(BaselineConsumer.MakeGenericType(type),
                                  new DependencyOverride(type, Name, overridden),
                                  registered, overridden);
-
+#endif
         #endregion
     }
 }
