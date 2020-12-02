@@ -13,7 +13,7 @@ namespace Regression
 {
     public abstract partial class FixtureBase
     {
-        public object AssertResolution(Type type)
+        public object Assert_Resolution(Type type)
         {
             // Act
             var instance = Container.Resolve(type, null);
@@ -25,10 +25,8 @@ namespace Regression
             return instance;
         }
 
-        protected virtual void AssertUnresolvableImport(Type definition, Type importType, object expected)
+        protected virtual void Assert_Resolution(Type type, object expected)
         {
-            var type = definition.MakeGenericType(importType);
-
             // Validate
             Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(type, null));
 

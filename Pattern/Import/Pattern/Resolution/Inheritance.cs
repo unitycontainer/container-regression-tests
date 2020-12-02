@@ -5,21 +5,21 @@ namespace Import
 {
     public abstract partial class Pattern
     {
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Inherited_Import(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          object @default)
-            => AssertUnresolvableImport(CorrespondingTypeDefinition, type, registered);
+            => Assert_Resolution(CorrespondingTypeDefinition.MakeGenericType(type), registered);
 
 
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Inherited_Twice(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          object @default)
-            => AssertUnresolvableImport(CorrespondingTypeDefinition, type, registered);
+            => Assert_Resolution(CorrespondingTypeDefinition.MakeGenericType(type), registered);
     }
 }

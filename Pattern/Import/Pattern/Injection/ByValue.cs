@@ -48,7 +48,6 @@ namespace Import
                                                          object @default)
             => Assert_Injected(type, InjectionMember_Value(type), registered);
 
-
         /// <summary>
         /// Tests injecting dependencies by resolver 
         /// </summary>

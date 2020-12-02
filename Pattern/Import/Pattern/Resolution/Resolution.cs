@@ -6,13 +6,13 @@ namespace Import
 {
     public abstract partial class Pattern
     {
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void Resolution(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          object @default)
-            => AssertUnresolvableImport(BaselineTestType, type, registered);
+            => Assert_Resolution(BaselineTestType.MakeGenericType(type), registered);
 
 
         [DataTestMethod, DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]

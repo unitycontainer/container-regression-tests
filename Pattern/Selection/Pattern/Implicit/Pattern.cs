@@ -14,6 +14,6 @@ namespace Selection.Implicit
     {
         [DataTestMethod, DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
         public virtual void Selection_NoPublicMebers(string test, Type type)
-            => AssertResolution(NoPublicMemberImplicit.MakeGenericType(type));
+            => Assert_Resolution(NoPublicMemberImplicit.MakeGenericType(type));
     }
 }

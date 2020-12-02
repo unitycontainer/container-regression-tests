@@ -37,13 +37,13 @@ namespace Import
 
         #region Name
 
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void OptionalGenericParameter_WithName(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_InjectedGeneric(type, InjectionMember_Value(new OptionalGenericParameter(TDependency, Name)), named, @default);
 
 
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void OptionalGenericParameter_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_InjectNamedGeneric(type, InjectionMember_Value(new OptionalGenericParameter(TDependency, (string)null)), registered, @default);

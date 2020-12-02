@@ -12,7 +12,7 @@ namespace Import
     {
         #region Type
 
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void OverrideDepend_ByType_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -20,7 +20,7 @@ namespace Import
                               new DependencyOverride(type, overridden), overridden);
 
 
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void OverrideDepend_ByType_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -28,7 +28,7 @@ namespace Import
                               new DependencyOverride(type, overridden), overridden);
 
 
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void OverrideDepend_ByType_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -37,7 +37,7 @@ namespace Import
                            registered, @default);
 
 
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(ImportBase))]
         public virtual void OverrideDepend_ByType_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
                                                               object injected, object overridden, object @default)

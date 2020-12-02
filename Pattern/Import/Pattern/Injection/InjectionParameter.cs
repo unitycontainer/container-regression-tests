@@ -5,6 +5,7 @@ using Regression;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #else
+using Unity;
 using Unity.Resolution;
 using Unity.Injection;
 #endif
@@ -12,25 +13,30 @@ using Unity.Injection;
 
 namespace Import
 {
+    // Tests injecting dependencies by value
+    // 
+    // Container.RegisterType(target, new InjectionConstructor(new InjectionParameter(15)), 
+    //                                new InjectionMethod("Method",     new InjectionParameter(15)) , 
+    //                                new InjectionField("Field",       new InjectionParameter(15)), 
+    //                                new InjectionProperty("Property", new InjectionParameter(15)));
     public abstract partial class Pattern
     {
         #region Value
 
-        /// <summary>
-        /// Tests injecting dependencies by value
-        /// </summary>
-        /// <example>
-        /// Container.RegisterType(target, new InjectionConstructor(new InjectionParameter(15)), 
-        ///                                new InjectionMethod("Method",     new InjectionParameter(15)) , 
-        ///                                new InjectionField("Field",       new InjectionParameter(15)), 
-        ///                                new InjectionProperty("Property", new InjectionParameter(15)));
-        /// </example>
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void InjectionParameter_ByValue(string test, Type type, object defaultValue, object defaultAttr,
-                                                       object registered, object named, object injected, object overridden, 
+                                                       object registered, object named, object injected, object overridden,
                                                        object @default)
             => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(injected)), injected, injected);
-        
+
+
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        public virtual void InjectionParameter_ByValue_WithType(string test, Type type, object defaultValue, object defaultAttr,
+                                                                  object registered, object named, object injected, object overridden,
+                                                                  object @default)
+            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, injected)), injected, injected);
+
+
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void InjectionParameter_ByValue_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
@@ -38,72 +44,31 @@ namespace Import
                                                        object @default)
             => Assert_InjectNamed(type, InjectionMember_Value(new InjectionParameter(type, injected)), injected, injected);
 
-        /// <summary>
-        /// Tests injecting dependencies by value
-        /// </summary>
-        /// <example>
-        /// Container.RegisterType(target, new InjectionConstructor(new InjectionParameter(type, 15)), 
-        ///                                new InjectionMethod("Method",     new InjectionParameter(type, 15)) , 
-        ///                                new InjectionField("Field",       new InjectionParameter(type, 15)), 
-        ///                                new InjectionProperty("Property", new InjectionParameter(type, 15)));
-        /// </example>
+
+        [ExpectedException(typeof(ResolutionFailedException))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void InjectionParameter_ByValue_WithContract(string test, Type type, object defaultValue, object defaultAttr,
-                                                                  object registered, object named, object injected, object overridden,
-                                                                  object @default)
-            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, injected)), injected, injected);
+        public virtual void InjectionParameter_ByValue_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
+                                                                   object registered, object named, object injected, object overridden,
+                                                                   object @default)
+            => Assert_Fail(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new InjectionParameter(type, type)));
 
         #endregion
 
 
         #region Type 
 
-        /// <summary>
-        /// Tests injecting dependencies by type
-        /// </summary>
-        /// <example>
-        /// Container.RegisterType(target, new InjectionConstructor(new InjectionParameter(type)), 
-        ///                                new InjectionMethod("Method",     new InjectionParameter(type)) , 
-        ///                                new InjectionField("Field",       new InjectionParameter(type)), 
-        ///                                new InjectionProperty("Property", new InjectionParameter(type)));
-        /// </example>
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
+        // Starting with v6 no validation during registration
+        [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void InjectionParameter_ByType(string test, Type type, object defaultValue, object defaultAttr,
                                                       object registered, object named, object injected, object overridden,
                                                       object @default)
-            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type)), registered);
+            => Assert_Fail(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new InjectionParameter(type)));
 
-        /// <summary>
-        /// Must override named
-        /// </summary>
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void InjectionParameter_ByType_OverridesName(string test, Type type, object defaultValue, object defaultAttr,
-                                                              object registered, object named, object injected, object overridden,
-                                                              object @default)
-            => Assert_InjectNamed(type, InjectionMember_Value(new InjectionParameter(type)), registered);
-
-
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void InjectionParameter_ByType_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
-                                                              object registered, object named, object injected, object overridden,
-                                                              object @default)
-            => Assert_InjectNamed(type, InjectionMember_Value(new InjectionParameter(type, type)), registered);
-
-
-        /// <summary>
-        /// Tests injecting dependencies by type
-        /// </summary>
-        /// <example>
-        /// Container.RegisterType(target, new InjectionConstructor(new InjectionParameter(contractType, type)), 
-        ///                                new InjectionMethod("Method",     new InjectionParameter(contractType, type)) , 
-        ///                                new InjectionField("Field",       new InjectionParameter(contractType, type)), 
-        ///                                new InjectionProperty("Property", new InjectionParameter(contractType, type)));
-        /// </example>
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void InjectionParameter_ByType_WithContract(string test, Type type, object defaultValue, object defaultAttr,
-                                                                 object registered, object named, object injected, object overridden, 
-                                                                 object @default)
-            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, type)), registered);
 
         #endregion
 
@@ -242,9 +207,9 @@ namespace Import
 
 
         #region Target
-        
+
         // TODO: Add OnType
-        
+
         #endregion
     }
 }

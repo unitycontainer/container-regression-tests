@@ -26,6 +26,9 @@
 		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
 	</PropertyGroup>
 
+	<ItemGroup>
+	</ItemGroup>
+
 	
 	<!-- Definitions -->
 
@@ -59,11 +62,13 @@
 	<!-- v4 Exclusions -->
 
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net45'))">
+	  <Compile Remove="Abstractions\Resolvers\ValidatingResolverFactory.cs" />
 	  <Compile Remove="Abstractions\FixtureBase.Fields.cs" />
 	  <Compile Remove="Abstractions\Data\Fields\**" />
 	  <Compile Remove="Import\Data\Fields\**" />
 	  <Compile Remove="Import\Tests\Fields\**" />
 	  <Compile Remove="Import\Pattern\Data\Fields\**" />
+	  <Compile Remove="Import\Pattern\Resolution\WithDefaults.cs" />
 	  <Compile Remove="Resolution\Enumerable\**" />
 	  <Compile Remove="Resolution\Generic\Constrained.cs" />
 	  <Compile Remove="Registration\Validation\Factory.cs" />
@@ -71,6 +76,7 @@
 	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
 	  <Compile Remove="Manager\Tests\PerContainerTransient\**" />
 	  <Compile Remove="Selection\Data\Fields\**" />
+	  <Compile Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
 	</ItemGroup>
 
 	<!-- v5 Exclusions -->
@@ -79,11 +85,16 @@
 	  <Compile Remove="Registration\Validation\Factory.cs" />
 	  <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
 	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
+	  <Compile Remove="Abstractions\Resolvers\ValidatintResolver.v4.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Condition="$(TargetFramework.StartsWith('net45')) == 'True'" Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
+		<Compile Condition="$(TargetFramework.StartsWith('net45')) == 'False'" Remove="Abstractions\Resolvers\ValidatintResolver.v4.cs" />
 	</ItemGroup>
 
 
-	
-	
+
 	<PropertyGroup>
 		<Description>Unity Container Regression Tests</Description>
 		<Copyright>Copyright © .NET Foundation and Contributors. All Rights Reserved</Copyright>

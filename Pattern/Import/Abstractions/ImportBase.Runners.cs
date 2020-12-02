@@ -35,7 +35,21 @@ namespace Import
             Assert.IsNotNull(instance);
             Assert.AreEqual(expected, instance.Value);
         }
-        
+
+        protected virtual void Assert_Fail(Type type, InjectionMember injected)
+        {
+            Container.RegisterType(null, type, null, null, injected);
+
+            // Validate
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(type, null));
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            _ = Container.Resolve(type, null);
+        }
+
         protected void Assert_Injected(Type importType, InjectionMember member, object expected, object @default)
         {
             // Arrange

@@ -184,12 +184,12 @@ namespace Import
 
         [DataTestMethod, DynamicData(nameof(BuiltInTypes_Data), typeof(FixtureBase))]
         public virtual void BuiltIn_Interface(string test, Type type) 
-            => AssertResolution(type);
+            => Assert_Resolution(type);
 
 
         [DataTestMethod, DynamicData(nameof(BuiltInTypes_Data), typeof(FixtureBase))]
         public virtual void BuiltIn_Interface_Import(string test, Type type)
-            => AssertResolution(BaselineTestType.MakeGenericType(type));
+            => Assert_Resolution(BaselineTestType.MakeGenericType(type));
 
 
         [DataTestMethod, DynamicData(nameof(BuiltInTypes_Data), typeof(FixtureBase))]

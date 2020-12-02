@@ -22,7 +22,7 @@ namespace Selection.Injected
 
             Container.RegisterType(null, target, null, null, InjectionMember_Value(new ResolvedParameter(type)));
 
-            AssertResolution(target); 
+            Assert_Resolution(target); 
         }
 
         [DataTestMethod]
@@ -35,7 +35,7 @@ namespace Selection.Injected
 
             Container.RegisterType(null, target, null, null, InjectionMember_Value(new ResolvedParameter(type)));
 
-            AssertResolution(target);
+            Assert_Resolution(target);
         }
 
 
@@ -49,7 +49,7 @@ namespace Selection.Injected
 
             Container.RegisterType(null, target, null, null, InjectionMember_Value(new ResolvedParameter(type)));
 
-            AssertResolution(target);
+            Assert_Resolution(target);
         }
 
     }

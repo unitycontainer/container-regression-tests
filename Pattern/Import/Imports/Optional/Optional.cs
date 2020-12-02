@@ -11,11 +11,8 @@ namespace Import.Optional
 {
     public abstract partial class Pattern : Import.Pattern
     {
-        protected override void AssertUnresolvableImport(Type definition, Type importType, object expected)
+        protected override void Assert_Resolution(Type type, object expected)
         {
-            // Arrange
-            var type = definition.MakeGenericType(importType);
-
             // Validate
             var instance = Container.Resolve(type, null) as FixtureBaseType;
 
@@ -40,7 +37,7 @@ namespace Import.Optional
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          object @default)
-            => Assert_Injected(type, InjectionMember_Value(type), registered, @default);
+            => Assert_Injected(type, InjectionMember_Value(type), registered);
 
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
@@ -50,18 +47,8 @@ namespace Import.Optional
             => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type)), registered, @default);
 
 
-
-
-
-
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public override void InjectionParameter_ByType_OverridesName(string test, Type type, object defaultValue, object defaultAttr,
-                                                                     object registered, object named, object injected, object overridden,
-                                                                     object @default)
-            => Assert_InjectNamed(type, InjectionMember_Value(new InjectionParameter(type)), registered, @default);
-
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public override void InjectionParameter_ByType_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
+        public override void InjectionParameter_ByValue_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
                                                                     object registered, object named, object injected, object overridden,
                                                                     object @default)
         {
