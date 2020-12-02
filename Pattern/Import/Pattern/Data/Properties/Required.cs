@@ -11,12 +11,36 @@ using Unity;
 
 namespace Import.Required.Properties
 {
-    public class BaselineTestType<TDependency> : FixtureBaseType
+    #region Validation
+
+    public class PrivateTestType<TDependency>
+        : FixtureBaseType
     {
-        [Dependency] public TDependency Property { get; set; }
+        [Dependency] private TDependency Property { get; set; }
+
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
     }
+
+    public class ProtectedTestType<TDependency>
+        : FixtureBaseType
+    {
+        [Dependency] protected TDependency Property { get; set; }
+
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+
+    public class InternalTestType<TDependency>
+        : FixtureBaseType
+    {
+        [Dependency] internal TDependency Property { get; set; }
+
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+
+    #endregion
 }
 
 

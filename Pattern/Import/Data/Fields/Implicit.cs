@@ -11,49 +11,4 @@ namespace Import.Implicit.Fields
             => Value = import;
     }
 
-    public class ArrayTestType<TDependency>
-        : ImportBaseType
-    {
-        public TDependency[] Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class PrivateTestType<TDependency>
-        : ImportBaseType
-    {
-        private TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-        protected TDependency Dummy()
-        {
-            Field = default;
-            return Field;
-        }
-    }
-
-    public class ProtectedTestType<TDependency>
-        : ImportBaseType
-    {
-        protected TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class InternalTestType<TDependency>
-        : ImportBaseType
-    {
-        internal TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-        protected TDependency Dummy()
-        {
-            Field = default;
-            return Field;
-        }
-    }
 }

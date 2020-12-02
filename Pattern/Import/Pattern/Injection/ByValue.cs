@@ -28,7 +28,7 @@ namespace Import
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          object @default) 
-            => Assert_InjectedOrDefault(type, InjectionMember_Value(injected), injected, injected);
+            => Assert_Injected(type, InjectionMember_Value(injected), injected, injected);
 
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Import
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           object @default)
-            => Assert_InjectedOrDefault(type, InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
+            => Assert_Injected(type, InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
 
 
         /// <summary>
@@ -88,6 +88,6 @@ namespace Import
                                                           object registered, object named,
                                                           object injected, object overridden,
                                                           object @default)
-            => Assert_InjectedOrDefault(type, InjectionMember_Value(new ValidatingResolverFactory(injected)), injected, injected);
+            => Assert_Injected(type, InjectionMember_Value(new ValidatingResolverFactory(injected)), injected, injected);
     }
 }

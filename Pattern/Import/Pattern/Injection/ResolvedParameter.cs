@@ -30,7 +30,7 @@ namespace Import
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void ResolvedParameter_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_InjectNamed(type, InjectionMember_Value(new ResolvedParameter()), named);
+            => Assert_InjectNamed(type, InjectionMember_Value(new ResolvedParameter()), registered);
 #endif
         #endregion
 

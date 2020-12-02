@@ -24,53 +24,6 @@ namespace Import.Annotated.Methods.Required
             => Value = import;
     }
 
-    public class ArrayTestType<TDependency>
-        : ImportBaseType
-    {
-        [InjectionMethod]
-        public virtual void Method([Dependency] TDependency[] value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class PrivateTestType<TDependency>
-        : ImportBaseType
-    {
-        [InjectionMethod]
-        private void Method([Dependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class ProtectedTestType<TDependency>
-        : ImportBaseType
-    {
-        [InjectionMethod]
-        protected void Method([Dependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class InternalTestType<TDependency>
-        : ImportBaseType
-    {
-        [InjectionMethod]
-        internal void Method([Dependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class BaselineTestType_Ref<TDependency>
-        : ImportBaseType where TDependency : class
-    {
-        [InjectionMethod]
-        public virtual void Method([Dependency] ref TDependency _)
-            => throw new InvalidOperationException("should never execute");
-    }
-
-    public class BaselineTestType_Out<TDependency>
-        : ImportBaseType where TDependency : class
-    {
-        [InjectionMethod]
-        public virtual void Method([Dependency] out TDependency _)
-            => throw new InvalidOperationException("should never execute");
-    }
 }
 
 

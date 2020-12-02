@@ -30,11 +30,11 @@ namespace Import
 
         
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void ResolvedArrayParameter_ByResolvers(string test, Type type, object defaultValue, object defaultAttr,
-                                                               object registered, object named, object injected, object overridden, object @default)
+        public virtual void ResolvedArrayParameter_Complex(string test, Type type, object defaultValue, object defaultAttr,
+                                                           object registered, object named, object injected, object overridden, object @default)
             => Assert_InjectArray(type, InjectionMember_Value(new ResolvedArrayParameter(type, defaultValue, defaultAttr, 
-                                                                new ResolvedParameter(type), new OptionalParameter(type, Name), 
-                                                                new ValidatingResolver(injected), new ValidatingResolverFactory(overridden))),
+                                                                  new ResolvedParameter(type), new OptionalParameter(type, Name), 
+                                                                  new ValidatingResolver(injected), new ValidatingResolverFactory(overridden))),
                 new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
     }
 }

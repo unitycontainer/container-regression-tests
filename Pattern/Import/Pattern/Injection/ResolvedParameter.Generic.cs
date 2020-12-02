@@ -3,6 +3,7 @@ using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
+using Unity;
 using Unity.Injection;
 #endif
 
@@ -23,32 +24,17 @@ namespace Import
 #if !UNITY_V4
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void GenericParameter_Default(string test, Type type, object defaultValue, object defaultAttr,
-                                                       object registered, object named, object injected, object overridden, object @default)
-            => Assert_InjectGeneric(type, InjectionMember_Value(new GenericParameter(TDependency)), registered);
+                                                     object registered, object named, object injected, object overridden, 
+                                                     object @default)
+            => Assert_InjectedGeneric(type, InjectionMember_Value(new GenericParameter(TDependency)), registered);
 
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void GenericParameter_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
-                                                       object registered, object named, object injected, object overridden, object @default)
+                                                             object registered, object named, object injected, object overridden, 
+                                                             object @default)
             => Assert_InjectNamedGeneric(type, InjectionMember_Value(new GenericParameter(TDependency)), registered);
 #endif
-        #endregion
-
-
-        #region Type
-        // TODO: Implementation?
-        /*
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void GenericParameter_WithType(string test, Type type, object defaultValue, object defaultAttr,
-                                                       object registered, object named, object injected, object overridden, object @default)
-            => AssertGenericInjected(type, InjectionMember_Value(new GenericParameter(TDependency, type)), registered);
-
-
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void GenericParameter_WithType_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
-                                                       object registered, object named, object injected, object overridden, object @default)
-            => AssertNamedGenericInjected(type, InjectionMember_Value(new GenericParameter(TDependency, type)), registered);
-        */
         #endregion
 
 
@@ -56,33 +42,54 @@ namespace Import
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void GenericParameter_WithName(string test, Type type, object defaultValue, object defaultAttr,
-                                                       object registered, object named, object injected, object overridden, object @default)
-            => Assert_InjectGeneric(type, InjectionMember_Value(new GenericParameter(TDependency, Name)), named);
+                                                      object registered, object named, object injected, object overridden, 
+                                                      object @default)
+            => Assert_InjectedGeneric(type, InjectionMember_Value(new GenericParameter(TDependency, Name)), named);
 
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void GenericParameter_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
-                                                       object registered, object named, object injected, object overridden, object @default)
+                                                              object registered, object named, object injected, object overridden, 
+                                                              object @default)
             => Assert_InjectNamedGeneric(type, InjectionMember_Value(new GenericParameter(TDependency, (string)null)), registered);
 
         #endregion
 
 
-        #region Contract
-
-        // TODO: Implementation?
-        /*
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void GenericParameter_WithContract(string test, Type type, object defaultValue, object defaultAttr,
-                                                       object registered, object named, object injected, object overridden, object @default)
-            => AssertGenericInjected(type, InjectionMember_Value(new GenericParameter(TDependency, type, Name)), named);
-
+        #region Array
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        public virtual void GenericParameter_WithContract_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
-                                                       object registered, object named, object injected, object overridden, object @default)
-            => AssertNamedGenericInjected(type, InjectionMember_Value(new GenericParameter(TDependency, type, null)), registered);
-        */
+        public virtual void GenericParameter_ArrayNotation(string test, Type type, object defaultValue, object defaultAttr,
+                                                           object registered, object named, object injected, object overridden,
+                                                           object @default)
+        {
+            Container.RegisterInstance(type, "default",     defaultValue);
+            Container.RegisterInstance(type, "defaultAttr", defaultAttr);
+            Container.RegisterInstance(type, "registered ", registered);
+            Container.RegisterInstance(type, "named",       named);
+            Container.RegisterInstance(type, "injected ",   injected);
+            Container.RegisterInstance(type, "overridden",  overridden);
+
+            Assert_GenericArray(type, InjectionMember_Value(new GenericParameter(TDependency + "[]")),
+                new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
+        }
+
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
+        public virtual void GenericParameter_ParentnessNotation(string test, Type type, object defaultValue, object defaultAttr,
+                                                                object registered, object named, object injected, object overridden, 
+                                                                object @default)
+        {
+            Container.RegisterInstance(type, "default",     defaultValue);
+            Container.RegisterInstance(type, "defaultAttr", defaultAttr);
+            Container.RegisterInstance(type, "registered ", registered);
+            Container.RegisterInstance(type, "named",       named);
+            Container.RegisterInstance(type, "injected",    injected);
+            Container.RegisterInstance(type, "overridden",  overridden);
+
+            Assert_GenericArray(type, InjectionMember_Value(new GenericParameter(TDependency + "()")),
+                           new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
+        }
+
         #endregion
     }
 }

@@ -31,6 +31,16 @@ namespace Import
             public override object Value => RegisteredUnresolvable;
             public override object Default => RegisteredUnresolvable;
         }
+
+        public class DependecyConsumer<TDependency> : FixtureBaseType
+            where TDependency : FixtureBaseType
+        {
+            public DependecyConsumer(TDependency dependency)
+            {
+                Value = dependency.Value;
+                Default = dependency.Default;
+            }
+        }
     }
 }
 

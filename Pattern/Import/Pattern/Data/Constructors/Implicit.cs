@@ -3,7 +3,6 @@ using System;
 using System.ComponentModel;
 using static Import.ImportBase;
 #if UNITY_V4
-using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
@@ -12,18 +11,44 @@ using Unity.Injection;
 
 namespace Import.Implicit.Constructors
 {
-    public class BaselineTestType<TDependency> : FixtureBaseType
+    #region Validation
+
+    public class BaselineTestType_Ref<TDependency>
+        : FixtureBaseType where TDependency : class
     {
-        [InjectionConstructor] public BaselineTestType(TDependency value) => Value = value;
+        public BaselineTestType_Ref(ref TDependency value)
+            => throw new InvalidOperationException("should never execute");
+    }
+
+    public class BaselineTestType_Out<TDependency>
+        : FixtureBaseType where TDependency : class
+    {
+        public BaselineTestType_Out(out TDependency value)
+            => throw new InvalidOperationException("should never execute");
+    }
+
+    public class PrivateTestType<TDependency>
+        : FixtureBaseType
+    {
+        private PrivateTestType(TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestTypeNamed<TDependency>
-        : ImportBaseType
+    public class ProtectedTestType<TDependency>
+        : FixtureBaseType
     {
-        public BaselineTestTypeNamed(TDependency value) => Value = value;
+        protected ProtectedTestType(TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
+
+    public class InternalTestType<TDependency>
+        : FixtureBaseType
+    {
+        internal InternalTestType(TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    #endregion
 }
 
 namespace Import.Implicit.Constructors.WithDefault

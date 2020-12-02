@@ -10,21 +10,38 @@ using Unity;
 
 namespace Import.Required.Fields
 {
-    public class BaselineTestType<TDependency> : FixtureBaseType
+    #region Validation
+
+    public class PrivateTestType<TDependency>
+        : FixtureBaseType
     {
-        [Dependency] public TDependency Field;
-        public override object Value { get => Field; }
+        [Dependency] private TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+        protected TDependency Dummy() => (Field = default);
+    }
+
+    public class ProtectedTestType<TDependency>
+        : FixtureBaseType
+    {
+        [Dependency] protected TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestTypeNamed<TDependency>
-        : ImportBaseType
+    public class InternalTestType<TDependency>
+        : FixtureBaseType
     {
-        [Dependency(ImportBase.Name)] public TDependency Field;
+        [Dependency] internal TDependency Field;
 
-        public override object Value { get => Field; }
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
+        protected TDependency Dummy() => (Field = default);
     }
+
+    #endregion
 }
 
 

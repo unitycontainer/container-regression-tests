@@ -29,14 +29,14 @@ namespace Import
         public virtual void InjectionParameter_ByValue(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, 
                                                        object @default)
-            => Assert_InjectedOrDefault(type, InjectionMember_Value(new InjectionParameter(injected)), injected, injected);
+            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(injected)), injected, injected);
         
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
         public virtual void InjectionParameter_ByValue_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden,
                                                        object @default)
-            => Assert_InjectNamedOrDefault(type, InjectionMember_Value(new InjectionParameter(type, injected)), injected, injected);
+            => Assert_InjectNamed(type, InjectionMember_Value(new InjectionParameter(type, injected)), injected, injected);
 
         /// <summary>
         /// Tests injecting dependencies by value
@@ -51,7 +51,7 @@ namespace Import
         public virtual void InjectionParameter_ByValue_WithContract(string test, Type type, object defaultValue, object defaultAttr,
                                                                   object registered, object named, object injected, object overridden,
                                                                   object @default)
-            => Assert_InjectedOrDefault(type, InjectionMember_Value(new InjectionParameter(type, injected)), injected, injected);
+            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, injected)), injected, injected);
 
         #endregion
 
@@ -168,7 +168,7 @@ namespace Import
         public virtual void InjectionParameter_ByResolver(string test, Type type, object defaultValue, object defaultAttr,
                                                           object registered, object named, object injected, object overridden,
                                                           object @default)
-            => Assert_InjectedOrDefault(type, InjectionMember_Value(new InjectionParameter(new ValidatingResolver(injected))), injected, injected);
+            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(new ValidatingResolver(injected))), injected, injected);
 
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace Import
                                                                        object registered, object named,
                                                                        object injected, object overridden,
                                                                        object @default)
-            => Assert_InjectedOrDefault(type, InjectionMember_Value(new InjectionParameter(type, new ValidatingResolver(injected))), injected, injected);
+            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, new ValidatingResolver(injected))), injected, injected);
 
         #endregion
 
@@ -212,7 +212,7 @@ namespace Import
         public virtual void InjectionParameter_ByFactory(string test, Type type, object defaultValue, object defaultAttr,
                                                          object registered, object named, object injected, object overridden,
                                                          object @default)
-            => Assert_InjectedOrDefault(type, InjectionMember_Value(new InjectionParameter(new ValidatingResolverFactory(injected))), injected, injected);
+            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(new ValidatingResolverFactory(injected))), injected, injected);
 
 
         /// <summary>
@@ -231,8 +231,15 @@ namespace Import
         public virtual void InjectionParameter_ByFactory_WithContract(string test, Type type, object defaultValue, object defaultAttr,
                                                                     object registered, object named, object injected, object overridden,
                                                                     object @default)
-            => Assert_InjectedOrDefault(type, InjectionMember_Value(new InjectionParameter(type, new ValidatingResolverFactory(injected))), injected, injected);
+            => Assert_Injected(type, InjectionMember_Value(new InjectionParameter(type, new ValidatingResolverFactory(injected))), injected, injected);
 
+        #endregion
+
+
+        #region Target
+        
+        // TODO: Add OnType
+        
         #endregion
     }
 }

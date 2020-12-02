@@ -37,14 +37,17 @@ namespace Regression
             public static ResolverOverride GetMemberOverride(string name, object value)
                 => new ParameterOverride(name, value);
 
-            public static ResolverOverride GetMemberOverrideWithType(Type type, string name, object value)
+            public static ResolverOverride GetMemberOverrideOnType(Type target, string name, object value)
+                => new ParameterOverride(name, value).OnType(target);
+
+            public static ResolverOverride GetMemberOverrideWithContract(Type type, string name, object value)
 #if UNITY_V4
                 => new ParameterOverride(name, value);
 #else
                 => new ParameterOverride(type, name, value);
 #endif
 
-            public static ResolverOverride GetMemberOverrideOnType(Type target, Type type, string name, object value)
+            public static ResolverOverride GetMemberOverrideWithContractOnType(Type target, Type type, string name, object value)
 #if UNITY_V4
                 => new ParameterOverride(name, value).OnType(target);
 #else

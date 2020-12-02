@@ -5,6 +5,13 @@ namespace Import.Properties
     [TestClass]
     public partial class Optional : Import.Optional.Pattern
     {
+        #region Properties
+
+        protected override string DependencyName => "Property";
+
+        #endregion
+
+
         #region Scaffolding
 
         [TestInitialize]

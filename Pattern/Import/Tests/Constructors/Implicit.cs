@@ -5,6 +5,12 @@ namespace Import.Constructors
     [TestClass]
     public partial class Implicit : Import.Implicit.Pattern
     {
+        #region Properties
+        protected override string DependencyName => "value";
+
+        #endregion
+
+
         #region Scaffolding
 
         [TestInitialize]

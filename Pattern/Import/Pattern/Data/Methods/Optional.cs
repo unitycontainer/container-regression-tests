@@ -11,19 +11,49 @@ using Unity;
 
 namespace Import.Optional.Methods
 {
-    public class BaselineTestType<TDependency> : FixtureBaseType
+    #region Validation
+
+    public class PrivateTestType<TDependency>
+        : FixtureBaseType
     {
-        [InjectionMethod] public void Method([OptionalDependency] TDependency value) => Value = value;
+        [InjectionMethod]
+        private void Method([OptionalDependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestTypeNamed<TDependency>
-        : ImportBaseType
+    public class ProtectedTestType<TDependency>
+        : FixtureBaseType
     {
         [InjectionMethod]
-        public virtual void Method([OptionalDependency(ImportBase.Name)] TDependency value) => Value = value;
+        protected void Method([OptionalDependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
+
+    public class InternalTestType<TDependency>
+        : FixtureBaseType
+    {
+        [InjectionMethod]
+        internal void Method([OptionalDependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineTestType_Ref<TDependency>
+        : FixtureBaseType where TDependency : class
+    {
+        [InjectionMethod]
+        public virtual void Method([OptionalDependency] ref TDependency _)
+            => throw new InvalidOperationException("should never execute");
+    }
+
+    public class BaselineTestType_Out<TDependency>
+        : FixtureBaseType where TDependency : class
+    {
+        [InjectionMethod]
+        public virtual void Method([OptionalDependency] out TDependency _)
+            => throw new InvalidOperationException("should never execute");
+    }
+
+    #endregion
 }
 
 

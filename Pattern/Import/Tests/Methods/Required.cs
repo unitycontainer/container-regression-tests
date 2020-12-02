@@ -5,6 +5,12 @@ namespace Import.Methods
     [TestClass]
     public partial class Required : Import.Required.Pattern
     {
+        #region Properties
+        protected override string DependencyName => "value";
+
+        #endregion
+
+
         #region Scaffolding
 
         [TestInitialize]

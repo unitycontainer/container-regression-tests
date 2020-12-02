@@ -26,17 +26,7 @@
 		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <Compile Remove="Import\Pattern\Override\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Remove="Import\Tests\Constructors\Override.cs" />
-	  <Compile Remove="Import\Tests\Fields\Override.cs" />
-	  <Compile Remove="Import\Tests\Methods\Override.cs" />
-	  <Compile Remove="Import\Tests\Properties\Override.cs" />
-	</ItemGroup>
-
+	
 	<!-- Definitions -->
 
 	<ItemGroup>

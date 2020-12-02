@@ -25,43 +25,6 @@ namespace Import.Annotated.Fields.Required
             => Value = import;
     }
 
-    public class ArrayTestType<TDependency>
-        : ImportBaseType
-    {
-        [Dependency] public TDependency[] Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class PrivateTestType<TDependency>
-        : ImportBaseType
-    {
-        [Dependency] private TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-        protected TDependency Dummy() => (Field = default);
-    }
-
-    public class ProtectedTestType<TDependency>
-        : ImportBaseType
-    {
-        [Dependency] protected TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class InternalTestType<TDependency>
-        : ImportBaseType
-    {
-        [Dependency] internal TDependency Field;
-
-        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-        protected TDependency Dummy() => (Field = default);
-    }
 }
 
 

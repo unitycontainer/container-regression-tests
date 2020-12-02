@@ -19,47 +19,6 @@ namespace Import.Optional.Constructors
             => Value = import;
     }
 
-    public class ArrayTestType<TDependency>
-        : ImportBaseType
-    {
-        public ArrayTestType([OptionalDependency] TDependency[] value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class PrivateTestType<TDependency>
-        : ImportBaseType
-    {
-        private PrivateTestType([OptionalDependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class ProtectedTestType<TDependency>
-        : ImportBaseType
-    {
-        protected ProtectedTestType([OptionalDependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class InternalTestType<TDependency>
-        : ImportBaseType
-    {
-        internal InternalTestType([OptionalDependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class BaselineTestType_Ref<TDependency>
-        : ImportBaseType where TDependency : class
-    {
-        public BaselineTestType_Ref([OptionalDependency] ref TDependency _)
-            => throw new InvalidOperationException("should never execute");
-    }
-
-    public class BaselineTestType_Out<TDependency>
-        : ImportBaseType where TDependency : class
-    {
-        public BaselineTestType_Out([OptionalDependency] out TDependency _)
-            => throw new InvalidOperationException("should never execute");
-    }
 }
 
 

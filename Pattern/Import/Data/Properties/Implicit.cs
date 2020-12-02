@@ -12,39 +12,4 @@ namespace Import.Implicit.Properties
             => Value = import;
     }
 
-    public class ArrayTestType<TDependency>
-        : ImportBaseType
-    {
-        public TDependency[] Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class PrivateTestType<TDependency>
-        : ImportBaseType
-    {
-        private TDependency Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-    
-    public class ProtectedTestType<TDependency>
-        : ImportBaseType
-    {
-        protected TDependency Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class InternalTestType<TDependency>
-        : ImportBaseType
-    {
-        internal TDependency Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
 }

@@ -23,8 +23,9 @@ namespace Regression
         protected IUnityContainer Container;
 
         protected static Type BaselineTestType;
-
         protected static Type BaselineTestNamed;
+        protected static Type BaselineArrayType;
+        protected static Type BaselineConsumer;
 
         #endregion
 
@@ -36,6 +37,8 @@ namespace Regression
         protected static string Category { get; private set; }
         protected static string Dependency { get; private set; }
         protected static string Member { get; private set; }
+        
+        protected virtual string DependencyName => string.Empty;
 
         protected Type CorrespondingTypeDefinition 
             => Type.GetType($"{Category}.{Dependency}.{Member}.{TestContext.TestName}") ?? BaselineTestType;
@@ -82,6 +85,8 @@ namespace Regression
 
             BaselineTestType = GetTestType("BaselineTestType`1");
             BaselineTestNamed = GetTestType("BaselineTestTypeNamed`1");
+            BaselineArrayType = GetTestType("BaselineArrayType`1");
+            BaselineConsumer = GetTestType("BaselineConsumer`1");
         }
 
         public virtual void TestInitialize() => Container = new UnityContainer();
@@ -128,8 +133,6 @@ namespace Regression
             return Type.GetType($"{_prefix}.{@namespace}.{Member}.{name}") ??
                    Type.GetType($"{_type}.{@namespace}.{name}");
         }
-
-        protected virtual Type GetImportType(Type type) => type;
         
         
         #endregion

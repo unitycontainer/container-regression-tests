@@ -10,21 +10,46 @@ using Unity;
 
 namespace Import.Optional.Fields
 {
-    public class BaselineTestType<TDependency> : FixtureBaseType
+    #region Validation
+
+    public class PrivateTestType<TDependency>
+        : FixtureBaseType
     {
-        [OptionalDependency] public TDependency Field;
-        public override object Value { get => Field; }
+        [OptionalDependency] private TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+        protected TDependency Dummy()
+        {
+            Field = default;
+            return Field;
+        }
+    }
+
+    public class ProtectedTestType<TDependency>
+        : FixtureBaseType
+    {
+        [OptionalDependency] protected TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestTypeNamed<TDependency>
-        : ImportBaseType
+    public class InternalTestType<TDependency>
+        : FixtureBaseType
     {
-        [OptionalDependency(ImportBase.Name)] public TDependency Field;
+        [OptionalDependency] internal TDependency Field;
 
-        public override object Value { get => Field; }
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
+        protected TDependency Dummy()
+        {
+            Field = default;
+            return Field;
+        }
     }
+
+    #endregion
 }
 
 

@@ -18,21 +18,6 @@ namespace Import
         {
             get
             {
-                #region Integer
-                yield return new object[]
-                {
-                    typeof(int).Name,        // Name
-                    typeof(int),             // Type
-                    DefaultInt,              // DefaultValue
-                    DefaultValueInt,         // DefaultAttributeValue
-                    RegisteredInt,           // Registered
-                    NamedInt,                // Named
-                    InjectedInt,             // Injected
-                    OverriddenInt,           // Overridden
-                    0                        // default
-                };
-                #endregion
-
                 #region String
                 yield return new object[]
                 {
@@ -45,6 +30,21 @@ namespace Import
                     InjectedString,          // Injected
                     OverriddenString,        // Overridden
                     null                     // default
+                };
+                #endregion
+
+                #region Integer
+                yield return new object[]
+                {
+                    typeof(int).Name,        // Name
+                    typeof(int),             // Type
+                    DefaultInt,              // DefaultValue
+                    DefaultValueInt,         // DefaultAttributeValue
+                    RegisteredInt,           // Registered
+                    NamedInt,                // Named
+                    InjectedInt,             // Injected
+                    OverriddenInt,           // Overridden
+                    0                        // default
                 };
                 #endregion
 

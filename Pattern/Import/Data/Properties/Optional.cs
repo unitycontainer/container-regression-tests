@@ -36,41 +36,6 @@ namespace Import.Annotated.Properties.Optional
             => Value = import;
     }
 
-    public class ArrayTestType<TDependency>
-        : ImportBaseType
-    {
-        [OptionalDependency] public TDependency[] Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class PrivateTestType<TDependency>
-        : ImportBaseType
-    {
-        [OptionalDependency] private TDependency Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class ProtectedTestType<TDependency>
-        : ImportBaseType
-    {
-        [OptionalDependency] protected TDependency Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
-
-    public class InternalTestType<TDependency>
-        : ImportBaseType
-    {
-        [OptionalDependency] internal TDependency Property { get; set; }
-
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => default(TDependency);
-    }
 }
 
 
