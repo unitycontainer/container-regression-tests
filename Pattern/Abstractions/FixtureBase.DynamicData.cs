@@ -25,7 +25,7 @@ namespace Regression
                 yield return typeof(float);
                 yield return typeof(double);
                 // TODO: typeof(TestStruct)
-#endif                                            
+#endif
                 yield return typeof(List<>);
                 yield return typeof(Type);
                 yield return typeof(ICloneable);
@@ -49,7 +49,7 @@ namespace Regression
             }
         }
 
-        #region Type Based Data
+#region Type Based Data
 
         public static IEnumerable<object[]> BuiltInTypes_Data
         {
@@ -97,7 +97,7 @@ namespace Regression
             }
         }
 
-        #endregion
+#endregion
     }
 }
 

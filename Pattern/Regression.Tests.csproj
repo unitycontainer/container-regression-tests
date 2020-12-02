@@ -11,14 +11,22 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="Exists('$(UnityLegacy)')">
+	    <UNITY_V4>True</UNITY_V4>
 		<TargetFramework>net45</TargetFramework>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\Container\package.sln')">
+	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln')">
+	    <UNITY_V5>True</UNITY_V5>
 		<TargetFramework>net46</TargetFramework>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="Exists('$(UnityContainer)') AND !Exists('..\Container\package.sln')">
+	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\gitversion.yml') AND Exists('..\..\Container\gitversion.yml')">
+	    <UNITY_V5>True</UNITY_V5>
+		<TargetFramework>net47</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="Exists('$(UnityContainer)') AND !Exists('..\..\Container\package.sln')">
+	    <UNITY_V6>True</UNITY_V6>
 		<TargetFramework>net5.0</TargetFramework>
 	</PropertyGroup>
 
@@ -26,16 +34,14 @@
 		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
 	</PropertyGroup>
 
-	<ItemGroup>
-	</ItemGroup>
-
 	
 	<!-- Definitions -->
 
 	<ItemGroup>
 		<ProjectReference Condition="'$(TargetFramework)' == 'net5.0' " Include="$(UnityContainer)" />
-		<PackageReference Condition="'$(TargetFramework)' == 'net48'" Include="Unity.Container" Version="6.0.*-*" />
-		<PackageReference Condition="'$(TargetFramework)' == 'net46' " Include="Unity.Container" Version="5.11.*" />
+		<PackageReference Condition="'$(TargetFramework)' == 'net48'  " Include="Unity.Container" Version="6.0.*-*" />
+		<ProjectReference Condition="'$(TargetFramework)' == 'net47'  " Include="$(UnityContainer)" />
+		<PackageReference Condition="'$(TargetFramework)' == 'net46'  " Include="Unity.Container" Version="5.11.*" />
 		<PackageReference Condition="'$(TargetFramework)' == 'net45' AND !Exists('$(UnityLegacy)')" Include="Unity" Version="4.0.1" />
 		<ProjectReference Condition="'$(TargetFramework)' == 'net45' AND Exists('$(UnityLegacy)')" Include="$(UnityLegacy)" />
 	</ItemGroup>
@@ -43,6 +49,7 @@
 	<PropertyGroup>
 		<DefineConstants Condition="$(TargetFramework.StartsWith('net5')) ">V6;UNITY_V6</DefineConstants>
 		<DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">V6;UNITY_V6</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">V5;UNITY_V5</DefineConstants>
 		<DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">V5;UNITY_V5</DefineConstants>
 		<DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">V4;UNITY_V4</DefineConstants>
 	</PropertyGroup>
@@ -63,6 +70,7 @@
 
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net45'))">
 	  <Compile Remove="Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+	  <Compile Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
 	  <Compile Remove="Abstractions\FixtureBase.Fields.cs" />
 	  <Compile Remove="Abstractions\Data\Fields\**" />
 	  <Compile Remove="Import\Data\Fields\**" />
@@ -76,21 +84,22 @@
 	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
 	  <Compile Remove="Manager\Tests\PerContainerTransient\**" />
 	  <Compile Remove="Selection\Data\Fields\**" />
-	  <Compile Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
 	</ItemGroup>
 
 	<!-- v5 Exclusions -->
 
-	<ItemGroup Condition="$(TargetFramework.StartsWith('net46'))">
+	<ItemGroup Condition="$(TargetFramework.StartsWith('net46')) OR $(TargetFramework.StartsWith('net47'))">
+	  <Compile Remove="Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+	  <Compile Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
 	  <Compile Remove="Registration\Validation\Factory.cs" />
 	  <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
 	  <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
-	  <Compile Remove="Abstractions\Resolvers\ValidatintResolver.v4.cs" />
 	</ItemGroup>
-
+	
 	<ItemGroup>
-		<Compile Condition="$(TargetFramework.StartsWith('net45')) == 'True'" Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
-		<Compile Condition="$(TargetFramework.StartsWith('net45')) == 'False'" Remove="Abstractions\Resolvers\ValidatintResolver.v4.cs" />
+		<Compile Condition="'' == $(UNITY_V4)" Remove="Abstractions\Resolvers\ValidatintResolver.v4.cs" />
+		<Compile Condition="'' == $(UNITY_V5)" Remove="Abstractions\Resolvers\ValidatintResolver.v5.cs" />
+		<Compile Condition="'' == $(UNITY_V5)" Remove="Abstractions\Resolvers\ValidatingResolverFactory.v5.cs" />
 	</ItemGroup>
 
 
