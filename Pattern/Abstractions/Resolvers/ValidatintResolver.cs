@@ -11,25 +11,15 @@ using Unity.Resolution;
 namespace Regression
 {
 #if UNITY_V4
-
-    public interface IResolve : IDependencyResolverPolicy
-    { 
-    }
-
-    public interface IResolveContext : IBuilderContext
-    { 
-    }
-
-#endif
-
+    public class ValidatingResolver : InjectionParameterValue, IDependencyResolverPolicy
+#else
     public class ValidatingResolver : IResolve
+#endif
     {
         private object _value;
 
-        public ValidatingResolver(object value)
-        {
-            _value = value;
-        }
+        public ValidatingResolver(object value) 
+            => _value = value;
 
 #if UNITY_V4
         public object Resolve(IBuilderContext context)
@@ -38,6 +28,18 @@ namespace Regression
             Name = context.OriginalBuildKey.Name;
             return _value;
         }
+
+        public override bool MatchesType(Type t)
+        {
+            if (_value is null) return false;
+
+            return t.IsAssignableFrom(_value.GetType());
+        }
+
+        public override IDependencyResolverPolicy GetResolverPolicy(Type typeToBuild) 
+            => this;
+
+        public override string ParameterTypeName => _value?.GetType().Name;
 #else
         public object Resolve<TContext>(ref TContext context) where TContext : IResolveContext
         {
@@ -51,6 +53,7 @@ namespace Regression
         public Type Type { get; private set; }
 
         public string Name { get; private set; }
+
     }
 
 #if !UNITY_V4

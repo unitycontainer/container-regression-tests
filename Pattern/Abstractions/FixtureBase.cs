@@ -148,7 +148,7 @@ namespace Regression
                      .RegisterInstance(Name, NamedString)
                      .RegisterInstance(RegisteredUnresolvable)
                      .RegisterInstance(Name, NamedUnresolvable)
-#if !BEHAVIOR_V4 // Only Unity v5 and up allow `null` as a value
+#if !BEHAVIOR_V4 && !UNITY_V4 // Only Unity v5 and up allow `null` as a value
                      .RegisterInstance(typeof(string),       Null, (object)null)
                      .RegisterInstance(typeof(Unresolvable), Null, (object)null)
 #endif
@@ -168,7 +168,7 @@ namespace Regression
 #endif
 
                      .RegisterInstance<string>(RegisteredString)
-#if !BEHAVIOR_V4 // Only Unity v5 and up allow `null` as a value
+#if !BEHAVIOR_V4 && !UNITY_V4 // Only Unity v5 and up allow `null` as a value
                      .RegisterInstance<string>("string_0", (string)null)
 #endif
                      .RegisterInstance<string>("string_1", "string_1")
@@ -176,7 +176,7 @@ namespace Regression
                      .RegisterInstance<string>("string_3", "string_3")
 
                      .RegisterInstance<Unresolvable>(RegisteredUnresolvable)
-#if !BEHAVIOR_V4 // Only Unity v5 and up allow `null` as a value
+#if !BEHAVIOR_V4 && !UNITY_V4 // Only Unity v5 and up allow `null` as a value
                      .RegisterInstance<Unresolvable>("Unresolvable_0", (Unresolvable)null)
 #endif
                      .RegisterInstance<Unresolvable>("Unresolvable_1", Unresolvable.Create("1"))
