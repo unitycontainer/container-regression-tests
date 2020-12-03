@@ -22,6 +22,7 @@ namespace Import
     {
         #region Default
 #if !UNITY_V4
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void GenericParameter_Default(string test, Type type, object defaultValue, object defaultAttr,
                                                      object registered, object named, object injected, object overridden, 
@@ -29,6 +30,7 @@ namespace Import
             => Assert_InjectedGeneric(type, InjectionMember_Value(new GenericParameter(TDependency)), registered);
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void GenericParameter_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                              object registered, object named, object injected, object overridden, 
@@ -40,6 +42,7 @@ namespace Import
 
         #region Name
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void GenericParameter_WithName(string test, Type type, object defaultValue, object defaultAttr,
                                                       object registered, object named, object injected, object overridden, 
@@ -47,6 +50,7 @@ namespace Import
             => Assert_InjectedGeneric(type, InjectionMember_Value(new GenericParameter(TDependency, Name)), named);
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void GenericParameter_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                               object registered, object named, object injected, object overridden, 
@@ -58,6 +62,7 @@ namespace Import
 
         #region Array
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void GenericParameter_ArrayNotation(string test, Type type, object defaultValue, object defaultAttr,
                                                            object registered, object named, object injected, object overridden,
@@ -70,10 +75,12 @@ namespace Import
             Container.RegisterInstance(type, "injected ",   injected);
             Container.RegisterInstance(type, "overridden",  overridden);
 
-            Assert_GenericArray(type, InjectionMember_Value(new GenericParameter(TDependency + "[]")),
+            Assert_Array_Import(BaselineArrayType, type, 
+                InjectionMember_Value(new GenericParameter(TDependency + "[]")),
                 new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
         }
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void GenericParameter_ParentnessNotation(string test, Type type, object defaultValue, object defaultAttr,
                                                                 object registered, object named, object injected, object overridden, 
@@ -86,8 +93,9 @@ namespace Import
             Container.RegisterInstance(type, "injected",    injected);
             Container.RegisterInstance(type, "overridden",  overridden);
 
-            Assert_GenericArray(type, InjectionMember_Value(new GenericParameter(TDependency + "()")),
-                           new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
+            Assert_Array_Import(BaselineArrayType, type, 
+                InjectionMember_Value(new GenericParameter(TDependency + "()")),
+                new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
         }
 
         #endregion

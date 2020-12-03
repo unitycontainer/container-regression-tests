@@ -20,16 +20,18 @@ namespace Import
     /// </example>
     public abstract partial class Pattern
     {
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void GenericResolvedArrayParameter_ByValues(string test, Type type, object defaultValue, object defaultAttr,
                                                                    object registered, object named, object injected, object overridden, 
                                                                    object @default)
         {
-            Assert_GenericArray(type,
+            Assert_Array_Import(BaselineArrayType, type,
                            InjectionMember_Value(new GenericResolvedArrayParameter(TDependency, defaultValue, defaultAttr, registered, named, injected, overridden)),
                            new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
         }
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void GenericResolvedArrayParameter_Complex(string test, Type type,
                                                                   object defaultValue, object defaultAttr,
@@ -41,7 +43,7 @@ namespace Import
             Container.RegisterInstance(type, "named", named);
             Container.RegisterInstance(type, "overridden", overridden);
 
-            Assert_GenericArray(type, 
+            Assert_Array_Import(BaselineArrayType, type, 
                 InjectionMember_Value(new GenericResolvedArrayParameter(TDependency, 
                     defaultValue,   new ResolvedParameter(type), 
                     registered, new GenericParameter(TDependency, "named"), 

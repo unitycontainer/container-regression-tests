@@ -22,8 +22,9 @@ namespace Import
         ///                                new InjectionField("Field", 15), 
         ///                                new InjectionProperty("Property", 15));
         /// </example>
+        [TestCategory(Category_Inject)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void Injection_ByValue(string test, Type type,
+        public virtual void Inject_ByValue(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
@@ -40,13 +41,14 @@ namespace Import
         ///                                new InjectionField("Field", type), 
         ///                                new InjectionProperty("Property", type));
         /// </example>
+        [TestCategory(Category_Inject)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void Injection_ByType(string test, Type type,
+        public virtual void Inject_ByType(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(type), registered);
+            => Assert_UnregisteredThrows_RegisteredSuccess(BaselineTestType.MakeGenericType(type), InjectionMember_Value(type), registered);
 
         /// <summary>
         /// Tests injecting dependencies by resolver 
@@ -60,12 +62,11 @@ namespace Import
         ///                                new InjectionField("Field", resolver), 
         ///                                new InjectionProperty("Property", resolver));
         /// </example>
+        [TestCategory(Category_Inject)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
-        public virtual void Injection_ByResolver(string test, Type type,
-                                                          object defaultValue, object defaultAttr,
-                                                          object registered, object named,
-                                                          object injected, object overridden,
-                                                          object @default)
+        public virtual void Inject_ByResolver(string test, Type type, object defaultValue, object defaultAttr,
+                                              object registered, object named, object injected, object overridden,
+                                              object @default)
             => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new ValidatingResolver(injected)), injected, injected);
 
 #if !UNITY_V4
@@ -81,12 +82,11 @@ namespace Import
         ///                                new InjectionField("Field", resolver), 
         ///                                new InjectionProperty("Property", resolver));
         /// </example>
+        [TestCategory(Category_Inject)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void Injection_ByResolverFactory(string test, Type type,
-                                                          object defaultValue, object defaultAttr,
-                                                          object registered, object named,
-                                                          object injected, object overridden,
-                                                          object @default)
+        public virtual void Inject_ByResolverFactory(string test, Type type, object defaultValue, object defaultAttr,
+                                                     object registered, object named, object injected, object overridden,
+                                                     object @default)
             => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new ValidatingResolverFactory(injected)), injected, injected);
 #endif
     }

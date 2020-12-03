@@ -23,6 +23,7 @@ namespace Import
     {
         #region Value
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void InjectionParameter_ByValue(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden,
@@ -30,6 +31,7 @@ namespace Import
             => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new InjectionParameter(injected)), injected, injected);
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void InjectionParameter_ByValue_WithType(string test, Type type, object defaultValue, object defaultAttr,
                                                                   object registered, object named, object injected, object overridden,
@@ -38,6 +40,7 @@ namespace Import
 
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void InjectionParameter_ByValue_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden,
@@ -45,6 +48,7 @@ namespace Import
             => Assert_Injected(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new InjectionParameter(type, injected)), injected, injected);
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void InjectionParameter_ByValue_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
                                                                    object registered, object named, object injected, object overridden,
@@ -83,6 +87,7 @@ namespace Import
         // Starting with v6 no validation during registration
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void InjectionParameter_ByType(string test, Type type, object defaultValue, object defaultAttr,
                                                       object registered, object named, object injected, object overridden,

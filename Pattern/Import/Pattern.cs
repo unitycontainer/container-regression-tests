@@ -12,6 +12,18 @@ namespace Import
 {
     public abstract partial class Pattern : FixtureBase
     {
+        #region Constants
+
+        protected const string Category_BuiltIn = "BuiltIn";
+        protected const string Category_Import = "Import";
+        protected const string Category_Inject = "Injection";
+        protected const string Category_Override = "Override";
+        protected const string Category_Parameter = "Parameters";
+        protected const string Category_Defaults = "With Defaults";
+
+        #endregion
+
+
         #region Fields
 
         protected static Type ArrayType;

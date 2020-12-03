@@ -11,31 +11,9 @@ namespace Import.Implicit
 {
     public abstract partial class Pattern : Import.Pattern
     {
-        [ExpectedException(typeof(ResolutionFailedException))]
-        [DataTestMethod, DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
-        public virtual void Throws_OnRefParameter(string test, Type type)
-        {
-            // Arrange
-            var target = GetType("BaselineTestType_Ref`1").MakeGenericType(type);
-
-            // Act
-            _ = Container.Resolve(target, null);
-        }
-
-        [ExpectedException(typeof(ResolutionFailedException))]
-        [DataTestMethod, DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
-        public virtual void Throws_OnOutParameter(string test, Type type)
-        {
-            // Arrange
-            var target = GetType("BaselineTestType_Out`1").MakeGenericType(type);
-
-            // Act
-            _ = Container.Resolve(target, null);
-        }
-
-
         #region On Named not supported
 
+        public override void Import_ByType_Named(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
 
 
         public override void OptionalParameter_WithType_OnNamed(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }

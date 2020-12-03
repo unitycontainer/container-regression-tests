@@ -79,9 +79,8 @@
 				<Compile Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
 				<Compile Remove="Abstractions\FixtureBase.Fields.cs" />
 				<Compile Remove="Abstractions\Data\Fields\**" />
-				<Compile Remove="Import\Tests\Fields\**" />
+				<Compile Remove="Import\FinalTests\Fields\**" />
 				<Compile Remove="Import\Data\Fields\**" />
-				<Compile Remove="Import\Resolution\WithDefaults.cs" />
 				<Compile Remove="Resolution\Enumerable\**" />
 				<Compile Remove="Resolution\Generic\Constrained.cs" />
 				<Compile Remove="Registration\Validation\Factory.cs" />
@@ -130,6 +129,10 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
 		<PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Import\Injection Temp\" />
 	</ItemGroup>
 
 </Project>

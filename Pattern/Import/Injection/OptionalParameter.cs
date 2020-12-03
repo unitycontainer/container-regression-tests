@@ -21,12 +21,14 @@ namespace Import
     {
         #region Default
 #if !UNITY_V4
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OptionalParameter_Default(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new OptionalParameter()), registered, @default);
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OptionalParameter_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
@@ -38,12 +40,14 @@ namespace Import
 
         #region Type
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void OptionalParameter_WithType(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new OptionalParameter(type)), registered, @default);
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void OptionalParameter_WithType_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
@@ -55,12 +59,14 @@ namespace Import
         #region Name
 
 #if !UNITY_V4
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void OptionalParameter_WithName(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new OptionalParameter(Name)), named, @default);
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void OptionalParameter_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
@@ -72,12 +78,14 @@ namespace Import
 
         #region Contract
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void OptionalParameter_WithContract(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new OptionalParameter(type, Name)), named, @default);
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void OptionalParameter_WithContract_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)

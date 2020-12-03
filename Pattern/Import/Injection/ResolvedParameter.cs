@@ -21,32 +21,36 @@ namespace Import
     {
         #region Default
 #if !UNITY_V4
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void ResolvedParameter_Default(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter()), registered);
+            => Assert_UnregisteredThrows_RegisteredSuccess(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter()), registered);
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void ResolvedParameter_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_Injected(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter()), named);
+            => Assert_UnregisteredThrows_RegisteredSuccess(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter()), named);
 #endif
         #endregion
 
 
         #region Type
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void ResolvedParameter_WithType(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter(type)), registered);
+            => Assert_UnregisteredThrows_RegisteredSuccess(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter(type)), registered);
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void ResolvedParameter_WithType_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_Injected(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter(type)), registered);
+            => Assert_UnregisteredThrows_RegisteredSuccess(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter(type)), registered);
 
         #endregion
 
@@ -54,16 +58,18 @@ namespace Import
         #region Name
 
 #if !UNITY_V4
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void ResolvedParameter_WithName(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter(Name)), named);
+            => Assert_UnregisteredThrows_RegisteredSuccess(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter(Name)), named);
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void ResolvedParameter_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_Injected(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter((string)null)), registered);
+            => Assert_UnregisteredThrows_RegisteredSuccess(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter((string)null)), registered);
 #endif
 
         #endregion
@@ -71,16 +77,18 @@ namespace Import
 
         #region Contract
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void ResolvedParameter_WithContract(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter(type, Name)), named);
+            => Assert_UnregisteredThrows_RegisteredSuccess(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter(type, Name)), named);
 
 
+        [TestCategory(Category_Parameter)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void ResolvedParameter_WithContract_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_Injected(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter(type, null)), registered);
+            => Assert_UnregisteredThrows_RegisteredSuccess(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new ResolvedParameter(type, null)), registered);
         
         #endregion
     }
