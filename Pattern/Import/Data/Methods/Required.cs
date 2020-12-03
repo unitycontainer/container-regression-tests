@@ -152,7 +152,7 @@ namespace Import.Required.Methods.WithDefaultAndAttribute
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => ImportBase.DefaultInt;
+        public override object Default => Pattern.DefaultInt;
 #else
         public override object Default => Pattern.DefaultValueInt;
 #endif
@@ -166,7 +166,7 @@ namespace Import.Required.Methods.WithDefaultAndAttribute
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => ImportBase.DefaultInt;
+        public override object Default => Pattern.DefaultInt;
 #else
         public override object Default => Pattern.DefaultValueInt;
 #endif
@@ -180,7 +180,7 @@ namespace Import.Required.Methods.WithDefaultAndAttribute
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => ImportBase.DefaultString;
+        public override object Default => Pattern.DefaultString;
 #else
         public override object Default => Pattern.DefaultValueString;
 #endif
@@ -194,7 +194,7 @@ namespace Import.Required.Methods.WithDefaultAndAttribute
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => ImportBase.DefaultString;
+        public override object Default => Pattern.DefaultString;
 #else
         public override object Default => Pattern.DefaultValueString;
 #endif
@@ -211,7 +211,7 @@ namespace Import.Required.Methods.WithDefaultAndAttribute
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => ImportBase.DefaultInt;
+        public override object Default => Pattern.DefaultInt;
 #else
         public override object Default => _default;
 #endif

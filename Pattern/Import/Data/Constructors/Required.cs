@@ -142,7 +142,7 @@ namespace Import.Required.Constructors.WithDefaultAndAttribute
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => ImportBase.DefaultInt;
+        public override object Default => Pattern.DefaultInt;
 #else
         public override object Default => Pattern.DefaultValueInt;
 #endif
@@ -156,7 +156,7 @@ namespace Import.Required.Constructors.WithDefaultAndAttribute
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => ImportBase.DefaultInt;
+        public override object Default => Pattern.DefaultInt;
 #else
         public override object Default => Pattern.DefaultValueInt;
 #endif
@@ -170,7 +170,7 @@ namespace Import.Required.Constructors.WithDefaultAndAttribute
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => ImportBase.DefaultString;
+        public override object Default => Pattern.DefaultString;
 #else
         public override object Default => Pattern.DefaultValueString;
 #endif
@@ -184,7 +184,7 @@ namespace Import.Required.Constructors.WithDefaultAndAttribute
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => ImportBase.DefaultString;
+        public override object Default => Pattern.DefaultString;
 #else
         public override object Default => Pattern.DefaultValueString;
 #endif
@@ -200,7 +200,7 @@ namespace Import.Required.Constructors.WithDefaultAndAttribute
             : base(value) { }
 
 #if BEHAVIOR_V5
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #else
         public override object Default => _default;
 #endif

@@ -66,13 +66,13 @@ namespace Regression
             Assert.AreEqual(expected, instance.Value);
         }
 
-        protected void Assert_Injected(Type tyep, InjectionMember member, object value, object @default)
+        protected void Assert_Injected(Type type, InjectionMember member, object value, object @default)
         {
             // Arrange
-            Container.RegisterType(null, tyep, null, null, member);
+            Container.RegisterType(null, type, null, null, member);
 
             // Validate
-            var instance = Container.Resolve(tyep, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as FixtureBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -82,7 +82,7 @@ namespace Regression
             RegisterTypes();
 
             // Act
-            instance = Container.Resolve(tyep, null) as FixtureBaseType;
+            instance = Container.Resolve(type, null) as FixtureBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

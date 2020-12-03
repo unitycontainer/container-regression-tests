@@ -92,8 +92,8 @@ namespace Import.Implicit.Methods.WithDefault
         public override void Method(int value = _default) => base.Method(value);
 #if BEHAVIOR_V5
         // BUG: See https://github.com/unitycontainer/container/issues/291
-        public override object Default => ImportBase.DefaultInt;
-        public override object Injected => ImportBase.DefaultInt;
+        public override object Default => Pattern.DefaultInt;
+        public override object Injected => Pattern.DefaultInt;
 #else
         public override object Default => _default;
 #endif
@@ -154,7 +154,7 @@ namespace Import.Implicit.Methods.WithDefaultAndAttribute
         public override object Override => Pattern.OverriddenInt;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => ImportBase.DefaultInt;
+        public override object Default => Pattern.DefaultInt;
 #else
         public override object Default => Pattern.DefaultValueInt;
 #endif
@@ -171,7 +171,7 @@ namespace Import.Implicit.Methods.WithDefaultAndAttribute
         public override object Override => Pattern.OverriddenString;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => ImportBase.DefaultString;
+        public override object Default => Pattern.DefaultString;
 #else
         public override object Default => Pattern.DefaultValueString;
 #endif
@@ -186,8 +186,8 @@ namespace Import.Implicit.Methods.WithDefaultAndAttribute
         public override void Method([DefaultValue(_default)] int value = Pattern.DefaultValueInt) => base.Method(value);
 #if BEHAVIOR_V5
         // BUG: See https://github.com/unitycontainer/container/issues/291
-        public override object Default => ImportBase.DefaultInt;
-        public override object Injected => ImportBase.DefaultInt;
+        public override object Default => Pattern.DefaultInt;
+        public override object Injected => Pattern.DefaultInt;
 #else
         public override object Default => _default;
 #endif
