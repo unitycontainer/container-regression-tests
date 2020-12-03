@@ -25,7 +25,7 @@ namespace Selection.Injected
 
             Container.RegisterType(null, target, null, null, InjectionMember_Value(new ResolvedParameter(type)));
 
-            Assert_Resolution(target); 
+            Assert_Resolved(target); 
         }
 
         [DataTestMethod, DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
@@ -41,7 +41,7 @@ namespace Selection.Injected
 
             Container.RegisterType(null, target, null, null, InjectionMember_Value(new ResolvedParameter(type)));
 
-            Assert_Resolution(target);
+            Assert_Resolved(target);
         }
 
 
@@ -58,7 +58,7 @@ namespace Selection.Injected
 
             Container.RegisterType(null, target, null, null, InjectionMember_Value(new ResolvedParameter(type)));
 
-            Assert_Resolution(target);
+            Assert_Resolved(target);
         }
 
     }

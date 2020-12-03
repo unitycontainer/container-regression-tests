@@ -20,7 +20,7 @@ namespace Import.Required.Constructors
     public class BaselineTestTypeNamed<TDependency>
         : FixtureBaseType
     {
-        public BaselineTestTypeNamed([Dependency(ImportBase.Name)] TDependency value) => Value = value;
+        public BaselineTestTypeNamed([Dependency(Pattern.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 

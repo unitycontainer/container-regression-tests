@@ -21,7 +21,7 @@ namespace Import.Required.Methods
         : FixtureBaseType
     {
         [InjectionMethod]
-        public virtual void Method([Dependency(ImportBase.Name)] TDependency value) => Value = value;
+        public virtual void Method([Dependency(Pattern.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 

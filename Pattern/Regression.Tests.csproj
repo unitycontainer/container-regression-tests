@@ -79,10 +79,9 @@
 				<Compile Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
 				<Compile Remove="Abstractions\FixtureBase.Fields.cs" />
 				<Compile Remove="Abstractions\Data\Fields\**" />
-				<Compile Remove="Import\Data\Fields\**" />
 				<Compile Remove="Import\Tests\Fields\**" />
-				<Compile Remove="Import\Pattern\Data\Fields\**" />
-				<Compile Remove="Import\Pattern\Resolution\WithDefaults.cs" />
+				<Compile Remove="Import\Data\Fields\**" />
+				<Compile Remove="Import\Resolution\WithDefaults.cs" />
 				<Compile Remove="Resolution\Enumerable\**" />
 				<Compile Remove="Resolution\Generic\Constrained.cs" />
 				<Compile Remove="Registration\Validation\Factory.cs" />

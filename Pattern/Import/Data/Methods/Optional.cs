@@ -1,43 +1,71 @@
 ﻿using System;
 using System.ComponentModel;
-using static Import.ImportBase;
+using static Import.Pattern;
+using Regression;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 #endif
 
-namespace Import.Annotated.Methods.Optional
+
+namespace Import.Optional.Methods
 {
-    public class BaselineTestType<TDependency>
-        : ImportBaseType
+    #region Validation
+
+    public class PrivateTestType<TDependency>
+        : FixtureBaseType
     {
         [InjectionMethod]
-        public virtual void Method([OptionalDependency] TDependency value) => Value = value;
+        private void Method([OptionalDependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
-    public class DownTheLineType<TDependency>
-        : ImportBaseType
+    public class ProtectedTestType<TDependency>
+        : FixtureBaseType
     {
-        public DownTheLineType(BaselineTestType<TDependency> import)
-            => Value = import;
+        [InjectionMethod]
+        protected void Method([OptionalDependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
     }
 
+    public class InternalTestType<TDependency>
+        : FixtureBaseType
+    {
+        [InjectionMethod]
+        internal void Method([OptionalDependency] TDependency value) => Value = value;
+        public override object Default => default(TDependency);
+    }
+
+    public class BaselineTestType_Ref<TDependency>
+        : FixtureBaseType where TDependency : class
+    {
+        [InjectionMethod]
+        public virtual void Method([OptionalDependency] ref TDependency _)
+            => throw new InvalidOperationException("should never execute");
+    }
+
+    public class BaselineTestType_Out<TDependency>
+        : FixtureBaseType where TDependency : class
+    {
+        [InjectionMethod]
+        public virtual void Method([OptionalDependency] out TDependency _)
+            => throw new InvalidOperationException("should never execute");
+    }
+
+    #endregion
 }
 
 
-namespace Import.Annotated.Methods.Optional.WithDefaults
+namespace Import.Optional.Methods.WithDefault
 {
-    #region WithDefault
-
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
     public class Optional_Parameter_Int_WithDefault : ImportBaseType
     {
         [InjectionMethod]
-        public virtual void Method([OptionalDependency] int value = ImportBase.DefaultInt) => Value = value;
-        public override object Default => ImportBase.DefaultInt;
+        public virtual void Method([OptionalDependency] int value = Pattern.DefaultInt) => Value = value;
+        public override object Default => Pattern.DefaultInt;
         public override Type ImportType => typeof(int);
     }
 
@@ -53,37 +81,37 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
 #endif
         public override Type ImportType => typeof(int);
     }
+
 #endif
 
     public class Optional_Parameter_String_WithDefault : ImportBaseType
     {
         [InjectionMethod]
-        public virtual void Method([OptionalDependency] string value = ImportBase.DefaultString) => Value = value;
+        public virtual void Method([OptionalDependency] string value = Pattern.DefaultString) => Value = value;
 
 #if  BEHAVIOR_V4 // Unity v4 did not support default values
         public override object Default => null;
 #else
-        public override object Default => ImportBase.DefaultString;
+        public override object Default => Pattern.DefaultString;
 #endif
         public override Type ImportType => typeof(string);
     }
+}
 
-    #endregion
 
-
-    #region WithDefaultAttribute
-
+namespace Import.Optional.Methods.WithDefaultAttribute
+{
 #if !BEHAVIOR_V4 // v4 did not support optional value types
     public class Optional_Int_WithDefaultAttribute : ImportBaseType
     {
         [InjectionMethod]
-        public virtual void Method([OptionalDependency][DefaultValue(ImportBase.DefaultValueInt)] int value) => Value = value;
+        public virtual void Method([OptionalDependency][DefaultValue(Pattern.DefaultValueInt)] int value) => Value = value;
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => 0;
 #else
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
@@ -91,12 +119,12 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
     public class Optional_WithDefaultAttribute_Int : ImportBaseType
     {
         [InjectionMethod]
-        public void Method([DefaultValue(ImportBase.DefaultValueInt)][OptionalDependency] int value) => Value = value;
+        public void Method([DefaultValue(Pattern.DefaultValueInt)][OptionalDependency] int value) => Value = value;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => 0;
 #else
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
@@ -120,12 +148,12 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
     public class Optional_String_WithDefaultAttribute : ImportBaseType
     {
         [InjectionMethod]
-        public void Method([OptionalDependency][DefaultValue(ImportBase.DefaultValueString)] string value) => Value = value;
+        public void Method([OptionalDependency][DefaultValue(Pattern.DefaultValueString)] string value) => Value = value;
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => null;
 #else
-        public override object Default => ImportBase.DefaultValueString;
+        public override object Default => Pattern.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
@@ -133,33 +161,32 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
     public class Optional_WithDefaultAttribute_String : ImportBaseType
     {
         [InjectionMethod]
-        public void Method([DefaultValue(ImportBase.DefaultValueString)][OptionalDependency] string value) => Value = value;
+        public void Method([DefaultValue(Pattern.DefaultValueString)][OptionalDependency] string value) => Value = value;
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => null;
 #else
-        public override object Default => ImportBase.DefaultValueString;
+        public override object Default => Pattern.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
+}
 
-    #endregion
 
-
-    #region WithDefaultAndAttribute
-
+namespace Import.Optional.Methods.WithDefaultAndAttribute
+{
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
     public class Optional_Int_WithDefaultAndAttribute : ImportBaseType
     {
         [InjectionMethod]
-        public virtual void Method([OptionalDependency][DefaultValue(ImportBase.DefaultValueInt)] int value = ImportBase.DefaultInt) => Value = value;
+        public virtual void Method([OptionalDependency][DefaultValue(Pattern.DefaultValueInt)] int value = Pattern.DefaultInt) => Value = value;
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => ImportBase.DefaultInt;
 #else
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
@@ -167,13 +194,13 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
     public class Optional_WithDefaultAndAttribute_Int : ImportBaseType
     {
         [InjectionMethod]
-        public void Method([DefaultValue(ImportBase.DefaultValueInt)][OptionalDependency] int value = ImportBase.DefaultInt) => Value = value;
+        public void Method([DefaultValue(Pattern.DefaultValueInt)][OptionalDependency] int value = Pattern.DefaultInt) => Value = value;
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => ImportBase.DefaultInt;
 #else
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
@@ -183,7 +210,7 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
         private const int _default = 1111;
 
         [InjectionMethod]
-        public override void Method([OptionalDependency][DefaultValue(_default)] int value = ImportBase.DefaultValueInt)
+        public override void Method([OptionalDependency][DefaultValue(_default)] int value = Pattern.DefaultValueInt)
         { base.Method(value); }
 
 #if BEHAVIOR_V5
@@ -198,14 +225,14 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
     public class Optional_String_WithDefaultAndAttribute : ImportBaseType
     {
         [InjectionMethod]
-        public void Method([OptionalDependency][DefaultValue(ImportBase.DefaultValueString)] string value = ImportBase.DefaultString) => Value = value;
+        public void Method([OptionalDependency][DefaultValue(Pattern.DefaultValueString)] string value = Pattern.DefaultString) => Value = value;
 
 #if BEHAVIOR_V4     // Unity v4 did not support default values
         public override object Default => null;
 #elif BEHAVIOR_V5   // Unity v5 did not support DefaultValueAttribute
         public override object Default => ImportBase.DefaultString;
 #else
-        public override object Default => ImportBase.DefaultValueString;
+        public override object Default => Pattern.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
@@ -213,17 +240,15 @@ namespace Import.Annotated.Methods.Optional.WithDefaults
     public class Optional_WithDefaultAndAttribute_String : ImportBaseType
     {
         [InjectionMethod]
-        public void Method([DefaultValue(ImportBase.DefaultValueString)][OptionalDependency] string value = ImportBase.DefaultString) => Value = value;
+        public void Method([DefaultValue(Pattern.DefaultValueString)][OptionalDependency] string value = Pattern.DefaultString) => Value = value;
 
 #if BEHAVIOR_V4     // Unity v4 did not support default values
         public override object Default => null;
 #elif BEHAVIOR_V5   // Unity v5 did not support DefaultValueAttribute
         public override object Default => ImportBase.DefaultString;
 #else
-        public override object Default => ImportBase.DefaultValueString;
+        public override object Default => Pattern.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
-
-    #endregion
 }

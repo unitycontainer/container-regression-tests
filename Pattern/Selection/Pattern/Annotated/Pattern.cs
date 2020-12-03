@@ -14,11 +14,11 @@ namespace Selection.Annotated
         [DataTestMethod]
         [DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
         public virtual void Selection_NoPublicMebers_Required(string test, Type type)
-            => Assert_Resolution(NoPublicMemberRequired.MakeGenericType(type));
+            => Assert_Resolved(NoPublicMemberRequired.MakeGenericType(type));
         
         [DataTestMethod]
         [DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
         public virtual void Selection_NoPublicMebers_Optional(string test, Type type)
-            => Assert_Resolution(NoPublicMemberOptional.MakeGenericType(type));
+            => Assert_Resolved(NoPublicMemberOptional.MakeGenericType(type));
     }
 }

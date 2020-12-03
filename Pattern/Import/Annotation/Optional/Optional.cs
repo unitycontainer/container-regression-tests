@@ -1,0 +1,29 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Regression;
+using System;
+#if UNITY_V4
+using Microsoft.Practices.Unity;
+#else
+using Unity.Injection;
+#endif
+
+namespace Import.Optional
+{
+    public abstract partial class Pattern : Import.Pattern
+    {
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Import.Pattern))]
+        public override void Injection_ByType(string test, Type type,
+                                                         object defaultValue, object defaultAttr,
+                                                         object registered, object named,
+                                                         object injected, object overridden,
+                                                         object @default)
+            => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(type), registered, @default);
+
+
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Import.Pattern))]
+        public override void InjectionParameter_ByType(string test, Type type, object defaultValue, object defaultAttr,
+                                                      object registered, object named, object injected, object overridden,
+                                                      object @default)
+            => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new InjectionParameter(type)), registered, @default);
+    }
+}

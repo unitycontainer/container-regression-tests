@@ -1,119 +1,67 @@
-﻿using System;
+﻿using Regression;
+using System;
 using System.ComponentModel;
-using static Import.ImportBase;
-using Regression;
+using static Import.Pattern;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
+using Unity.Injection;
 #endif
 
 
 namespace Import.Optional.Constructors
 {
-
-    public class DownTheLineType<TDependency>
-        : ImportBaseType
-    {
-        public DownTheLineType(BaselineTestType<TDependency> import)
-            => Value = import;
-    }
-
-}
-
-
-namespace Import.Annotated.Constructors.Optional
-{
-    public class BaselineTestType<TDependency>
-        : ImportBaseType
-    {
-        public BaselineTestType([OptionalDependency] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class BaselineTestTypeNamed<TDependency>
-        : ImportBaseType
-    {
-        public BaselineTestTypeNamed([OptionalDependency(ImportBase.Name)] TDependency value) => Value = value;
-        public override object Default => default(TDependency);
-    }
-
-    public class BaselineInheritedType<TDependency>
-        : BaselineTestType<TDependency>
-    {
-        public BaselineInheritedType([OptionalDependency] TDependency value)
-            : base(value)
-        { }
-    }
-
-    public class BaselineInheritedTwice<TDependency>
-        : BaselineInheritedType<TDependency>
-    {
-        public BaselineInheritedTwice([OptionalDependency] TDependency value)
-            : base(value)
-        { }
-    }
-
-    public class DownTheLineType<TDependency>
-        : ImportBaseType
-    {
-        public DownTheLineType(BaselineTestType<TDependency> import)
-            => Value = import;
-    }
-
-    public class ArrayTestType<TDependency>
-        : ImportBaseType
-    {
-        public ArrayTestType([OptionalDependency] TDependency[] value) => Value = value;
-        public override object Default => default(TDependency);
-    }
+    #region Validation
 
     public class PrivateTestType<TDependency>
-        : ImportBaseType
+        : FixtureBaseType
     {
         private PrivateTestType([OptionalDependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class ProtectedTestType<TDependency>
-        : ImportBaseType
+        : FixtureBaseType
     {
         protected ProtectedTestType([OptionalDependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class InternalTestType<TDependency>
-        : ImportBaseType
+        : FixtureBaseType
     {
         internal InternalTestType([OptionalDependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class BaselineTestType_Ref<TDependency>
-        : ImportBaseType where TDependency : class
+        : FixtureBaseType where TDependency : class
     {
         public BaselineTestType_Ref([OptionalDependency] ref TDependency _)
             => throw new InvalidOperationException("should never execute");
     }
 
     public class BaselineTestType_Out<TDependency>
-        : ImportBaseType where TDependency : class
+        : FixtureBaseType where TDependency : class
     {
         public BaselineTestType_Out([OptionalDependency] out TDependency _)
             => throw new InvalidOperationException("should never execute");
     }
+
+    #endregion
 }
 
-namespace Import.Annotated.Constructors.Optional.WithDefaults
+
+namespace Import.Optional.Constructors.WithDefault
 {
-    #region WithDefault
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
     public class Optional_Parameter_Int_WithDefault : ImportBaseType
     {
-        public Optional_Parameter_Int_WithDefault([OptionalDependency] int value = ImportBase.DefaultInt) => Value = value;
-        public override object Default => ImportBase.DefaultInt;
+        public Optional_Parameter_Int_WithDefault([OptionalDependency] int value = Pattern.DefaultInt) => Value = value;
+        public override object Default => Pattern.DefaultInt;
         public override Type ImportType => typeof(int);
     }
 
@@ -132,33 +80,33 @@ namespace Import.Annotated.Constructors.Optional.WithDefaults
 
     public class Optional_Parameter_String_WithDefault : ImportBaseType
     {
-        public Optional_Parameter_String_WithDefault([OptionalDependency] string value = ImportBase.DefaultString) => Value = value;
+        public Optional_Parameter_String_WithDefault([OptionalDependency] string value = Pattern.DefaultString) => Value = value;
 
 #if  BEHAVIOR_V4 // Unity v4 did not support default values
         public override object Default => null;
 #else
-        public override object Default => ImportBase.DefaultString;
+        public override object Default => Pattern.DefaultString;
 #endif
         public override Type ImportType => typeof(string);
     }
+  
+}
 
-    #endregion
 
-
-    #region WithDefaultAttribute
-
+namespace Import.Optional.Constructors.WithDefaultAttribute
+{
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
     public class Optional_Int_WithDefaultAttribute : ImportBaseType
     {
-        public Optional_Int_WithDefaultAttribute([OptionalDependency][DefaultValue(ImportBase.DefaultValueInt)] int value) => Value = value;
+        public Optional_Int_WithDefaultAttribute([OptionalDependency][DefaultValue(Pattern.DefaultValueInt)] int value) => Value = value;
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => 0;
 #else
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
@@ -166,12 +114,12 @@ namespace Import.Annotated.Constructors.Optional.WithDefaults
 
     public class Optional_WithDefaultAttribute_Int : ImportBaseType
     {
-        public Optional_WithDefaultAttribute_Int([DefaultValue(ImportBase.DefaultValueInt)][OptionalDependency] int value) => Value = value;
+        public Optional_WithDefaultAttribute_Int([DefaultValue(Pattern.DefaultValueInt)][OptionalDependency] int value) => Value = value;
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => 0;
 #else
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
@@ -197,12 +145,12 @@ namespace Import.Annotated.Constructors.Optional.WithDefaults
 
     public class Optional_String_WithDefaultAttribute : ImportBaseType
     {
-        public Optional_String_WithDefaultAttribute([OptionalDependency][DefaultValue(ImportBase.DefaultValueString)] string value) => Value = value;
+        public Optional_String_WithDefaultAttribute([OptionalDependency][DefaultValue(Pattern.DefaultValueString)] string value) => Value = value;
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => null;
 #else
-        public override object Default => ImportBase.DefaultValueString;
+        public override object Default => Pattern.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
@@ -210,33 +158,31 @@ namespace Import.Annotated.Constructors.Optional.WithDefaults
 
     public class Optional_WithDefaultAttribute_String : ImportBaseType
     {
-        public Optional_WithDefaultAttribute_String([DefaultValue(ImportBase.DefaultValueString)][OptionalDependency] string value) => Value = value;
+        public Optional_WithDefaultAttribute_String([DefaultValue(Pattern.DefaultValueString)][OptionalDependency] string value) => Value = value;
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => null;
 #else
-        public override object Default => ImportBase.DefaultValueString;
+        public override object Default => Pattern.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
-
-    #endregion
-
-
-    #region WithDefaultAndAttribute
+}
 
 
+namespace Import.Optional.Constructors.WithDefaultAndAttribute
+{
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
     public class Optional_Int_WithDefaultAndAttribute : ImportBaseType
     {
-        public Optional_Int_WithDefaultAndAttribute([OptionalDependency][DefaultValue(ImportBase.DefaultValueInt)] int value = ImportBase.DefaultInt) => Value = value;
+        public Optional_Int_WithDefaultAndAttribute([OptionalDependency][DefaultValue(Pattern.DefaultValueInt)] int value = Pattern.DefaultInt) => Value = value;
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => ImportBase.DefaultInt;
 #else
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
@@ -244,13 +190,13 @@ namespace Import.Annotated.Constructors.Optional.WithDefaults
 
     public class Optional_WithDefaultAndAttribute_Int : ImportBaseType
     {
-        public Optional_WithDefaultAndAttribute_Int([DefaultValue(ImportBase.DefaultValueInt)][OptionalDependency] int value = ImportBase.DefaultInt) => Value = value;
+        public Optional_WithDefaultAndAttribute_Int([DefaultValue(Pattern.DefaultValueInt)][OptionalDependency] int value = Pattern.DefaultInt) => Value = value;
 
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => ImportBase.DefaultInt;
 #else
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
@@ -260,7 +206,7 @@ namespace Import.Annotated.Constructors.Optional.WithDefaults
     {
         private const int _default = 1111;
 
-        public Optional_Derived_WithDefaultAndAttribute([OptionalDependency][DefaultValue(_default)] int value = ImportBase.DefaultValueInt)
+        public Optional_Derived_WithDefaultAndAttribute([OptionalDependency][DefaultValue(_default)] int value = Pattern.DefaultValueInt)
             : base(value) { }
 
 #if BEHAVIOR_V5
@@ -277,14 +223,14 @@ namespace Import.Annotated.Constructors.Optional.WithDefaults
 
     public class Optional_String_WithDefaultAndAttribute : ImportBaseType
     {
-        public Optional_String_WithDefaultAndAttribute([OptionalDependency][DefaultValue(ImportBase.DefaultValueString)] string value = ImportBase.DefaultString) => Value = value;
+        public Optional_String_WithDefaultAndAttribute([OptionalDependency][DefaultValue(Pattern.DefaultValueString)] string value = Pattern.DefaultString) => Value = value;
 
 #if BEHAVIOR_V4     // Unity v4 did not support default values
         public override object Default => null;
 #elif BEHAVIOR_V5   // Unity v5 did not support DefaultValueAttribute
         public override object Default => ImportBase.DefaultString;
 #else
-        public override object Default => ImportBase.DefaultValueString;
+        public override object Default => Pattern.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
@@ -292,17 +238,15 @@ namespace Import.Annotated.Constructors.Optional.WithDefaults
 
     public class Optional_WithDefaultAndAttribute_String : ImportBaseType
     {
-        public Optional_WithDefaultAndAttribute_String([DefaultValue(ImportBase.DefaultValueString)][OptionalDependency] string value = ImportBase.DefaultString) => Value = value;
+        public Optional_WithDefaultAndAttribute_String([DefaultValue(Pattern.DefaultValueString)][OptionalDependency] string value = Pattern.DefaultString) => Value = value;
 
 #if BEHAVIOR_V4     // Unity v4 did not support default values
         public override object Default => null;
 #elif BEHAVIOR_V5   // Unity v5 did not support DefaultValueAttribute
         public override object Default => ImportBase.DefaultString;
 #else
-        public override object Default => ImportBase.DefaultValueString;
+        public override object Default => Pattern.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
-
-    #endregion
 }

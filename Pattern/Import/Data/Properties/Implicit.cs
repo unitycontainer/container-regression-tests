@@ -1,15 +1,37 @@
-﻿using System;
-using static Import.ImportBase;
+﻿using Regression;
+using System;
 
 
 namespace Import.Implicit.Properties
 {
+    #region Validation
 
-    public class DownTheLineType<TDependency>
-        : ImportBaseType
+    public class PrivateTestType<TDependency>
+        : FixtureBaseType
     {
-        public DownTheLineType(BaselineTestType<TDependency> import)
-            => Value = import;
+        private TDependency Property { get; set; }
+
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
     }
 
+    public class ProtectedTestType<TDependency>
+        : FixtureBaseType
+    {
+        protected TDependency Property { get; set; }
+
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+
+    public class InternalTestType<TDependency>
+        : FixtureBaseType
+    {
+        internal TDependency Property { get; set; }
+
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+
+    #endregion
 }

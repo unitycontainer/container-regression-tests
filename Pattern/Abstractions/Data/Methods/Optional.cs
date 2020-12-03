@@ -20,7 +20,7 @@ namespace Import.Optional.Methods
         : FixtureBaseType
     {
         [InjectionMethod]
-        public virtual void Method([OptionalDependency(ImportBase.Name)] TDependency value) => Value = value;
+        public virtual void Method([OptionalDependency(Pattern.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 

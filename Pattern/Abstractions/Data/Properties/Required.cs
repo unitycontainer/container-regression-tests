@@ -20,7 +20,7 @@ namespace Import.Required.Properties
 
     public class BaselineTestTypeNamed<TDependency> : FixtureBaseType
     {
-        [Dependency(ImportBase.Name)] public TDependency Property { get; set; }
+        [Dependency(Pattern.Name)] public TDependency Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
     }

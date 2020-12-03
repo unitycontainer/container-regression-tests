@@ -1,14 +1,48 @@
-﻿using System;
-using static Import.ImportBase;
+﻿using Regression;
+using System;
 
 
 namespace Import.Implicit.Fields
 {
-    public class DownTheLineType<TDependency>
-        : ImportBaseType
+    #region Validation
+
+    public class PrivateTestType<TDependency>
+        : FixtureBaseType
     {
-        public DownTheLineType(BaselineTestType<TDependency> import)
-            => Value = import;
+        private TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+        protected TDependency Dummy()
+        {
+            Field = default;
+            return Field;
+        }
     }
 
+    public class ProtectedTestType<TDependency>
+        : FixtureBaseType
+    {
+        protected TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+    }
+
+    public class InternalTestType<TDependency>
+        : FixtureBaseType
+    {
+        internal TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+        protected TDependency Dummy()
+        {
+            Field = default;
+            return Field;
+        }
+    }
+
+    #endregion
 }
+

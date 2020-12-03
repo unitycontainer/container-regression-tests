@@ -1,48 +1,72 @@
 ﻿using System;
 using System.ComponentModel;
-using static Import.ImportBase;
+using static Import.Pattern;
+using Regression;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 #endif
 
-namespace Import.Annotated.Fields.Optional
+namespace Import.Optional.Fields
 {
-    public class BaselineTestType<TDependency>
-        : ImportBaseType
+    #region Validation
+
+    public class PrivateTestType<TDependency>
+        : FixtureBaseType
     {
-        [OptionalDependency] public TDependency Field;
+        [OptionalDependency] private TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+        protected TDependency Dummy()
+        {
+            Field = default;
+            return Field;
+        }
+    }
+
+    public class ProtectedTestType<TDependency>
+        : FixtureBaseType
+    {
+        [OptionalDependency] protected TDependency Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
     }
 
-    public class DownTheLineType<TDependency>
-        : ImportBaseType
+    public class InternalTestType<TDependency>
+        : FixtureBaseType
     {
-        public DownTheLineType(BaselineTestType<TDependency> import)
-            => Value = import;
+        [OptionalDependency] internal TDependency Field;
+
+        public override object Value { get => Field; protected set => throw new NotSupportedException(); }
+        public override object Default => default(TDependency);
+        protected TDependency Dummy()
+        {
+            Field = default;
+            return Field;
+        }
     }
 
+    #endregion
 }
 
 
-namespace Import.Annotated.Fields.Optional.WithDefaults
+namespace Import.Optional.Fields.WithDefault
 {
-    #region WithDefault
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
     public class Optional_Field_Int_WithDefault : ImportBaseType
     {
-        [OptionalDependency] public int Field = ImportBase.DefaultInt;
+        [OptionalDependency] public int Field = Pattern.DefaultInt;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
 #if  BEHAVIOR_V5 // Unity v5 did not support default values for fields
         public override object Default => 0;
 #else
-        public override object Default => ImportBase.DefaultInt;
+        public override object Default => Pattern.DefaultInt;
 #endif
         public override Type ImportType => typeof(int);
     }
@@ -56,14 +80,14 @@ namespace Import.Annotated.Fields.Optional.WithDefaults
 
     public class Optional_Field_String_WithDefault : ImportBaseType
     {
-        [OptionalDependency] public string Field = ImportBase.DefaultString;
+        [OptionalDependency] public string Field = Pattern.DefaultString;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
 #if  BEHAVIOR_V4 || BEHAVIOR_V5 // Unity v4 and v5 did not support default values for fields
         public override object Default => null;
 #else
-        public override object Default => ImportBase.DefaultString;
+        public override object Default => Pattern.DefaultString;
 #endif
         public override Type ImportType => typeof(string);
     }
@@ -71,38 +95,38 @@ namespace Import.Annotated.Fields.Optional.WithDefaults
     public class Optional_DerivedFromString_WithDefault : Optional_Field_String_WithDefault
     {
     }
+}
 
-    #endregion
 
-
-    #region WithDefaultAttribute
+namespace Import.Optional.Fields.WithDefaultAttribute
+{
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
     public class Optional_Int_WithDefaultAttribute : ImportBaseType
     {
-        [OptionalDependency] [DefaultValue(ImportBase.DefaultValueInt)] public int Field;
+        [OptionalDependency] [DefaultValue(Pattern.DefaultValueInt)] public int Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => 0;
 #else
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
 
     public class Optional_WithDefaultAttribute_Int : ImportBaseType
     {
-        [DefaultValue(ImportBase.DefaultValueInt)] [OptionalDependency] public int Field;
+        [DefaultValue(Pattern.DefaultValueInt)] [OptionalDependency] public int Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 #if BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => 0;
 #else
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
@@ -115,62 +139,62 @@ namespace Import.Annotated.Fields.Optional.WithDefaults
 
     public class Optional_String_WithDefaultAttribute : ImportBaseType
     {
-        [OptionalDependency] [DefaultValue(ImportBase.DefaultValueString)] public string Field;
+        [OptionalDependency] [DefaultValue(Pattern.DefaultValueString)] public string Field;
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => null;
 #else
-        public override object Default => ImportBase.DefaultValueString;
+        public override object Default => Pattern.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
 
     public class Optional_WithDefaultAttribute_String : ImportBaseType
     {
-        [DefaultValue(ImportBase.DefaultValueString)] [OptionalDependency] public string Field;
+        [DefaultValue(Pattern.DefaultValueString)] [OptionalDependency] public string Field;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         // Prior to v6 Unity did not support DefaultValueAttribute
         public override object Default => null;
 #else
-        public override object Default => ImportBase.DefaultValueString;
+        public override object Default => Pattern.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
+}
 
-    #endregion
 
-
-    #region 
+namespace Import.Optional.Fields.WithDefaultAndAttribute
+{
 
 #if !BEHAVIOR_V4 // v4 did not support optional value types
 
     public class Optional_Int_WithDefaultAndAttribute : ImportBaseType
     {
-        [OptionalDependency] [DefaultValue(ImportBase.DefaultValueInt)] public int Field = ImportBase.DefaultInt;
+        [OptionalDependency] [DefaultValue(Pattern.DefaultValueInt)] public int Field = Pattern.DefaultInt;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
 #if BEHAVIOR_V5   // Unity v5 did not support default value for fields
         public override object Default => 0;
 #else
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
 
     public class Optional_WithDefaultAndAttribute_Int : ImportBaseType
     {
-        [DefaultValue(ImportBase.DefaultValueInt)] [OptionalDependency] public int Field = ImportBase.DefaultInt;
+        [DefaultValue(Pattern.DefaultValueInt)] [OptionalDependency] public int Field = Pattern.DefaultInt;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
 #if BEHAVIOR_V5   // Unity v5 did not support default value for fields
         public override object Default => 0;
 #else
-        public override object Default => ImportBase.DefaultValueInt;
+        public override object Default => Pattern.DefaultValueInt;
 #endif
         public override Type ImportType => typeof(int);
     }
@@ -183,21 +207,21 @@ namespace Import.Annotated.Fields.Optional.WithDefaults
 
     public class Optional_String_WithDefaultAndAttribute : ImportBaseType
     {
-        [OptionalDependency] [DefaultValue(ImportBase.DefaultValueString)] public string Field = ImportBase.DefaultString;
+        [OptionalDependency] [DefaultValue(Pattern.DefaultValueString)] public string Field = Pattern.DefaultString;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
 #if BEHAVIOR_V4 ||  BEHAVIOR_V5 // Unity v4 and v5 did not support default values for fields
         public override object Default => null;
 #else
-        public override object Default => ImportBase.DefaultValueString;
+        public override object Default => Pattern.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
 
     public class Optional_WithDefaultAndAttribute_String : ImportBaseType
     {
-        [DefaultValue(ImportBase.DefaultValueString)] [OptionalDependency] public string Field = ImportBase.DefaultString;
+        [DefaultValue(Pattern.DefaultValueString)] [OptionalDependency] public string Field = Pattern.DefaultString;
 
         public override object Value { get => Field; protected set => throw new NotSupportedException(); }
 
@@ -205,10 +229,9 @@ namespace Import.Annotated.Fields.Optional.WithDefaults
 #if BEHAVIOR_V4 ||  BEHAVIOR_V5 // Unity v4 and v5 did not support default values for fields
         public override object Default => null;
 #else
-        public override object Default => ImportBase.DefaultValueString;
+        public override object Default => Pattern.DefaultValueString;
 #endif
         public override Type ImportType => typeof(string);
     }
 
-    #endregion
 }
