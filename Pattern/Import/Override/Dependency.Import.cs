@@ -50,12 +50,15 @@ namespace Import
         #region Name
 
 #if !UNITY_V4
+
+#if !BEHAVIOR_V5
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByNullName(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
             => Assert_Override(BaselineTestType.MakeGenericType(type),
                               new DependencyOverride((string)null, overridden), overridden);
+#endif
 
 
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
