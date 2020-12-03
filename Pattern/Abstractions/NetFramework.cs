@@ -13,3 +13,12 @@
 #if NET45
 // Current Framework NET4.5
 #endif
+
+
+#if BEHAVIOR_V4
+// True
+#endif
+
+#if BEHAVIOR_V5
+// True
+#endif

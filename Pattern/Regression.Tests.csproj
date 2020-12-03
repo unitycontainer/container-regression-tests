@@ -14,18 +14,23 @@
 		<TargetFramework>net45</TargetFramework>
 	</PropertyGroup>
 
+	<!-- Master -->
 	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln') AND Exists('..\..\Container\package.props')">
 		<TargetFramework>net46</TargetFramework>
+		<DefineConstants>$(DefineConstants);BEHAVIOR_V5</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln')">
+	<!-- Develop -->
+	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln') AND !Exists('..\..\Container\package.props')">
 		<TargetFramework>net47</TargetFramework>
 	</PropertyGroup>
 
+	<!-- TNG -->
 	<PropertyGroup Condition="Exists('$(UnityContainer)') AND !Exists('..\..\Container\package.sln')">
 		<TargetFramework>net5.0</TargetFramework>
 	</PropertyGroup>
 
+	<!-- Standalone -->
 	<PropertyGroup Condition="!Exists('$(UnityContainer)') AND !Exists('$(UnityLegacy)') ">
 		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
 	</PropertyGroup>
@@ -47,11 +52,11 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net5')) ">V6;UNITY_V6</DefineConstants>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">V6;UNITY_V6</DefineConstants>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">V5;UNITY_V5</DefineConstants>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">V5;UNITY_V5</DefineConstants>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">V4;UNITY_V4</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net5')) ">V6;UNITY_V6;$(DefineConstants)</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">V6;UNITY_V6;$(DefineConstants)</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">V5;UNITY_V5;$(DefineConstants)</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">V5;UNITY_V5;$(DefineConstants)</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">V4;UNITY_V4;$(DefineConstants)</DefineConstants>
 	</PropertyGroup>
 
 	<!-- Configuration Settings -->
