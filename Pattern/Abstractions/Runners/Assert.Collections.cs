@@ -43,6 +43,7 @@ namespace Regression
 
         protected void Assert_Array_Import(Type type, InjectionMember injection, object[] values)
         {
+            // Arrange
             Container.RegisterType(null, type, null, null, injection);
             RegisterTypes();
 
