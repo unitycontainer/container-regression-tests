@@ -23,7 +23,8 @@ namespace Import
             => Assert_Injected(BaselineTestType.MakeGenericType(type), 
                                InjectionMember_Value(injected), 
                                injected, injected);
-        
+
+#if !BEHAVIOR_V4 && !BEHAVIOR_V5
         [TestCategory(Category_Inject)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Inject_ByValue_Array(string test, Type type, object defaultValue, object defaultAttr,
@@ -42,5 +43,6 @@ namespace Import
                             member, instance, instance);
 
         }
+#endif
     }
 }

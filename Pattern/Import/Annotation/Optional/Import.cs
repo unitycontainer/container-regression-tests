@@ -8,7 +8,7 @@ namespace Import.Optional
 
         #region Type
 
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Import.Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Import.Pattern))]
         public override void Import_ByType_Null(string test, Type type,
                                        object defaultValue, object defaultAttr,
                                        object registered, object named,
@@ -17,7 +17,7 @@ namespace Import.Optional
             => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type), 
                 @default, registered);
 
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Import.Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Import.Pattern))]
         public override void Import_ByType_Named(string test, Type type,
                                        object defaultValue, object defaultAttr,
                                        object registered, object named,

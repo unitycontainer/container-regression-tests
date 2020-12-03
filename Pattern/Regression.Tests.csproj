@@ -39,6 +39,9 @@
 	  <Compile Remove="Selection\Tests\**" />
 	</ItemGroup>
 
+	<ItemGroup>
+	</ItemGroup>
+
 	
 	<!-- Definitions -->
 
@@ -81,6 +84,7 @@
 				<Compile Remove="Abstractions\Data\Fields\**" />
 				<Compile Remove="Import\FinalTests\Fields\**" />
 				<Compile Remove="Import\Data\Fields\**" />
+				<Compile Remove="Import\Defaults.cs" />
 				<Compile Remove="Resolution\Enumerable\**" />
 				<Compile Remove="Resolution\Generic\Constrained.cs" />
 				<Compile Remove="Registration\Validation\Factory.cs" />
