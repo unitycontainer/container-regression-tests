@@ -55,12 +55,14 @@ namespace Selection.Implicit.Methods.EdgeCasesThrowing
         public void Method(out int value) { value = 0; }
     }
 
+#if !BEHAVIOR_V4
     public class StructParameter : ConstructorSelectionBase
     {
         [InjectionMethod]
         public void Method(TestStruct value) => Data[0] = value;
         public override bool IsSuccessfull => this[0] is not null;
     }
+#endif
     
     public class OpenGenericType<T>
     {

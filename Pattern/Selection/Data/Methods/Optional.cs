@@ -42,12 +42,14 @@ namespace Selection.Annotated.Methods.Optional.EdgeCases
         public override bool IsSuccessfull => this[0] is not null;
     }
 
+#if !BEHAVIOR_V4
     public class StructParameter : ConstructorSelectionBase
     {
         [InjectionMethod]
         public void Method([OptionalDependency] TestStruct value) => Data[0] = value;
         public override bool IsSuccessfull => this[0] is not null;
     }
+#endif
 }
 
 

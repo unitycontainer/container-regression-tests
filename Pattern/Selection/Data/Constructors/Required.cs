@@ -42,15 +42,17 @@ namespace Selection.Annotated.Constructors.Required.EdgeCases
 }
 
 namespace Selection.Annotated.Constructors.Required.EdgeCasesThrowing
-{ 
+{
+#if !BEHAVIOR_V4
     public class StructParameter : ConstructorSelectionBase
     {
         public StructParameter([Dependency] TestStruct value) => Data[0] = value;
         public override bool IsSuccessfull => this[0] is not null;
     }
+#endif
+
     public class OpenGenericType<T>
     {
         public OpenGenericType([Dependency] T value) { }
     }
-
 }

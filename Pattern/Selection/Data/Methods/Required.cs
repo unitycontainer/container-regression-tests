@@ -46,13 +46,16 @@ namespace Selection.Annotated.Methods.Required.EdgeCases
 
 
 namespace Selection.Annotated.Methods.Required.EdgeCasesThrowing
-{ 
+{
+#if !BEHAVIOR_V4
     public class StructParameter : ConstructorSelectionBase
     {
         [InjectionMethod]
         public void Method([Dependency] TestStruct value) => Data[0] = value;
         public override bool IsSuccessfull => this[0] is not null;
     }
+#endif
+
     public class OpenGenericType<T>
     {
         [InjectionMethod]

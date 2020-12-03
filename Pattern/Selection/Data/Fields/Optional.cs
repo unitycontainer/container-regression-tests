@@ -30,11 +30,13 @@ namespace Selection.Annotated.Fields.Optional
 
 namespace Selection.Annotated.Fields.Optional.EdgeCases
 {
+#if !BEHAVIOR_V4
     public class StructField : FieldSelectionBase
     {
         [OptionalDependency] public TestStruct Field;
         public override bool IsSuccessfull => this[0] is not null;
     }
+#endif
 }
 
 namespace Selection.Annotated.Fields.Optional.EdgeCasesThrowing

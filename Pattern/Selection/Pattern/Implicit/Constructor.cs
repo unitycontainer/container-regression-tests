@@ -42,15 +42,15 @@ namespace Selection.Implicit
                     3                           // Index of selected member
                 );
 
-                yield return TestRecord
-                (
-                    "Default If nothing matches",
-                    typeof(object),                 // Registered instance ContractType
-                    new object(),                   // Registered instance
-                    typeof(int),                    // Type of TDependency
-                    typeof(string),                 // Type of TImport
-                    0                               // Index of selected member
-                );
+                //yield return TestRecord
+                //(
+                //    "Default If nothing matches",
+                //    typeof(object),                 // Registered instance ContractType
+                //    new object(),                   // Registered instance
+                //    typeof(string),                    // Type of TDependency
+                //    typeof(string),                 // Type of TImport
+                //    0                               // Index of selected member
+                //);
 
                 // Test cases
                 /*

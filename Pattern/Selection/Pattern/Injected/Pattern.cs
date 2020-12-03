@@ -12,9 +12,12 @@ namespace Selection.Injected
 {
     public abstract partial class Pattern 
     {
-        [DataTestMethod]
-        [DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
+#if BEHAVIOR_V4
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
         [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         public void NoPublicMebersToSelect_Implicit(string test, Type type)
         {
             // Arrange
@@ -25,9 +28,12 @@ namespace Selection.Injected
             Assert_Resolution(target); 
         }
 
-        [DataTestMethod]
-        [DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
+#if BEHAVIOR_V4
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
         [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         public void NoPublicMebersToSelect_Required(string test, Type type)
         {
             // Arrange
@@ -39,9 +45,12 @@ namespace Selection.Injected
         }
 
 
-        [DataTestMethod]
-        [DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
+#if BEHAVIOR_V4
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
         [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         public void NoPublicMebersToSelect_Optional(string test, Type type)
         {
             // Arrange

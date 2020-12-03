@@ -35,6 +35,7 @@ namespace Resolution
             Assert.AreEqual(instanceFromRootContainer, instanceFromChildContainer2, "instanceFromRootContainer and instanceFromChildContainer2 must be same");
         }
 
+#if !BEHAVIOR_V4
         [TestMethod]
         public void ResolveSingletonType_Directly_InChildContainer_THEN_InstanceIsCreatedInRootContainer_AND_SammeInstanceResolved_InAllChildContainers()
         {
@@ -60,6 +61,7 @@ namespace Resolution
             Assert.AreEqual(instanceFromRootContainer, instanceFromChildContainer2, "instanceFromRootContainer and instanceFromChildContainer2 must be same");
             Assert.AreEqual(instanceFromRootContainer, instanceFromChildContainer11, "instanceFromRootContainer and instanceFromChildContainer11 must be same");
         }
+#endif
 
         [TestMethod]
         public void ResolveSingletonType_AsDependency_InRootContainer_THEN_ConsumerInstance_AND_SignletonInstance_CreatedInRootContainer()
@@ -74,6 +76,7 @@ namespace Resolution
             Assert.AreEqual(rootContainerId, consumerInstanceFromRootContainter.SingletonService.ContainerId, "SingletonService dependency of consumerInstanceFromRootContainter should be created in root container");
         }
 
+#if !BEHAVIOR_V4 && !BEHAVIOR_V5
         [TestMethod]
         public void ResolveSingletonType_AsDependency_InChildContainer_THEN_ConsumerInstance_CreatedInChildContiner_AND_SignletonInstance_CreatedInRootContainer()
         {
@@ -92,8 +95,9 @@ namespace Resolution
             Assert.AreEqual(childContainer1id, consumerInstanceFromChildContainter2.ContainerId, "consumerInstanceFromChildContainter11 should be created in childContainer1");
             Assert.AreEqual(rootContainerId, consumerInstanceFromChildContainter2.SingletonService.ContainerId, "singletonService dependency of consumerInstanceFromRootContainter should be created in root container");
         }
+#endif
 
-
+#if !BEHAVIOR_V4
         [TestMethod]
         public void ResolveSingletonType_AsDependency_InChildContainer_THEN_ConsumerInstance_CreatedInChildContiner_AND_SignletonInstance_CreatedInRootContainer_Unregistered()
         {
@@ -113,6 +117,7 @@ namespace Resolution
             Assert.AreEqual(childContainer1id, consumerInstanceFromChildContainter1.ContainerId, "consumerInstanceFromChildContainter11 should be created in childContainer1");
             Assert.AreEqual(childContainer2id, consumerInstanceFromChildContainter2.ContainerId, "consumerInstanceFromChildContainter11 should be created in childContainer2");
         }
+#endif
 
         [TestMethod]
         public void ResolveSignletonType_WithDependency_InRootContainer_THEN_DependencyResolvedInRootContainer()
@@ -128,6 +133,7 @@ namespace Resolution
             Assert.AreEqual(rootContainerId, instanceFromRootContainer.Element.ContainerId, "instanceFromRootContainer.Element must be created in root container");
         }
 
+#if !BEHAVIOR_V4
         [TestMethod]
         public void ResolveSignletonType_WithDependency_InChildContainer_THEN_DependencyResolvedInRootContainer()
         {
@@ -141,23 +147,6 @@ namespace Resolution
 
             Assert.AreEqual(rootContainerId, instanceFromChildContainer.Element.ContainerId, "instanceFromChildContainer.Element must be created in root container");
             Assert.AreEqual(rootContainerId, instanceFromChildContainer.ContainerId, "instanceFromChildContainer must be created in root container");
-        }
-
-        [TestMethod]
-        public void ResolveSignletonType_WithFactoryDependency_InRootContainer_THEN_FactoryCreatesItemsInRootContainer()
-        {
-            var rootContainer = Container;
-            rootContainer.RegisterType(typeof(ITestElement), typeof(TestElement));
-            rootContainer.RegisterType(typeof(ITestElementFactory), typeof(TestElementFactory));
-            rootContainer.RegisterType(typeof(ISingletonServiceWithFactory), typeof(SingletonServiceWithFactory), new ContainerControlledLifetimeManager());
-
-            var rootContainerId = rootContainer.GetHashCode();
-
-            var instanceFromRootContainer = rootContainer.Resolve<ISingletonServiceWithFactory>();
-
-            var itemsByInstanceFromRootContainer = instanceFromRootContainer.GetElements();
-
-            Assert.IsTrue(itemsByInstanceFromRootContainer.All(i => i.ContainerId == rootContainerId), "all items from itemsByInstanceFromChildContainer must be created in root container");
         }
 
         [TestMethod]
@@ -178,6 +167,24 @@ namespace Resolution
             var itemsByInstanceFromChildContainer = instanceFromChildContainer.GetElements();
 
             Assert.IsTrue(itemsByInstanceFromChildContainer.All(i => i.ContainerId == rootContainerId), "all items from itemsByInstanceFromChildContainer must be created in root container");
+        }
+#endif
+
+        [TestMethod]
+        public void ResolveSignletonType_WithFactoryDependency_InRootContainer_THEN_FactoryCreatesItemsInRootContainer()
+        {
+            var rootContainer = Container;
+            rootContainer.RegisterType(typeof(ITestElement), typeof(TestElement));
+            rootContainer.RegisterType(typeof(ITestElementFactory), typeof(TestElementFactory));
+            rootContainer.RegisterType(typeof(ISingletonServiceWithFactory), typeof(SingletonServiceWithFactory), new ContainerControlledLifetimeManager());
+
+            var rootContainerId = rootContainer.GetHashCode();
+
+            var instanceFromRootContainer = rootContainer.Resolve<ISingletonServiceWithFactory>();
+
+            var itemsByInstanceFromRootContainer = instanceFromRootContainer.GetElements();
+
+            Assert.IsTrue(itemsByInstanceFromRootContainer.All(i => i.ContainerId == rootContainerId), "all items from itemsByInstanceFromChildContainer must be created in root container");
         }
 
         [TestMethod]
@@ -213,7 +220,7 @@ namespace Resolution
         {
             var rootContainer = Container;
 
-            rootContainer.RegisterType(typeof(ISingletonConsumer), typeof(SingletonConsumer), TypeLifetime.PerContainerTransient);
+            rootContainer.RegisterType(typeof(ISingletonConsumer), typeof(SingletonConsumer), new ContainerControlledTransientManager());
             rootContainer.RegisterType(typeof(ISingletonService), typeof(SingletonService), new ContainerControlledLifetimeManager());
 
             var childContainer = rootContainer.CreateChildContainer().CreateChildContainer();
@@ -231,7 +238,7 @@ namespace Resolution
         public void DisposeChildContainer_WithSingleton_WithDependency_THEN_Singleton_NotDisposed_AND_DependencyNotDisposed_StaysInRootContainer()
         {
             var rootContainer = Container;
-            rootContainer.RegisterType(typeof(ITestElement), typeof(TestElement), TypeLifetime.PerContainerTransient);
+            rootContainer.RegisterType(typeof(ITestElement), typeof(TestElement), new ContainerControlledTransientManager());
             rootContainer.RegisterType(typeof(ISingletonServiceWithDependency), typeof(SingletonServiceWithDependency), new ContainerControlledLifetimeManager());
 
             var rootContainerId = rootContainer.GetHashCode();
@@ -244,7 +251,6 @@ namespace Resolution
             Assert.IsFalse(instanceFromChildContainer.Element.IsDisposed, "instanceFromChildContainer.Element should not be disposed when child container is disposed");
             Assert.IsFalse(instanceFromChildContainer.IsDisposed, "instanceFromChildContainer should not be disposed when child container is disposed");
         }
-#endif
         [TestMethod]
         public void DisposeChildContainer_WithSingleton_WithFactoryDependency_THEN_Singleton_NotDisposed_AND_FactoryCreatesItemsInRootContainer()
         {
@@ -264,6 +270,7 @@ namespace Resolution
 
             Assert.IsTrue(itemsByInstanceFromChildContainer.All(i => i.ContainerId == rootContainerId), "all items from itemsByInstanceFromChildContainer must be created in root container");
         }
+#endif
 
         interface ISingletonService : IDisposable
         {

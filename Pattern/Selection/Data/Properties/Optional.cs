@@ -25,10 +25,12 @@ namespace Selection.Annotated.Properties.Optional
 
 namespace Selection.Annotated.Properties.Optional.EdgeCases
 {
+#if !BEHAVIOR_V4
     public class StructProperty : PropertySelectionBase
     {
         [OptionalDependency] public TestStruct  Property { get; set; }
     }
+#endif
 }
 
 namespace Selection.Annotated.Properties.Optional.EdgeCasesThrowing

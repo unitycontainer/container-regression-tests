@@ -53,11 +53,13 @@ namespace Selection.Implicit.Constructors.EdgeCasesThrowing
         public OutParameter(out int value) { value = 0; }
     }
 
+#if !BEHAVIOR_V4
     public class StructParameter : ConstructorSelectionBase
     {
         public StructParameter(TestStruct value) => Data[0] = value;
         public override bool IsSuccessfull => this[0] is not null;
     }
+#endif
     
     public class OpenGenericType<T>
     {

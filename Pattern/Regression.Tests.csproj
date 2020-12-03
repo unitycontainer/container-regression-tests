@@ -30,6 +30,10 @@
 		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
 	</PropertyGroup>
 
+	<ItemGroup> <!-- Temporary -->
+	  <Compile Remove="Selection\Tests\**" />
+	</ItemGroup>
+
 	
 	<!-- Definitions -->
 

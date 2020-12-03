@@ -30,11 +30,13 @@ namespace Selection.Annotated.Fields.Required
 
 namespace Selection.Annotated.Fields.Required.EdgeCasesThrowing
 {
+#if !BEHAVIOR_V4
     public class StructField : FieldSelectionBase
     {
         [Dependency] public TestStruct Field;
         public override bool IsSuccessfull => this[0] is not null;
     }
+#endif
 
     public class OpenGenericType<T>
     {

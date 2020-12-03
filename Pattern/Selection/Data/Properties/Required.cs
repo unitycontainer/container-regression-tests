@@ -26,10 +26,12 @@ namespace Selection.Annotated.Properties.Required
 
 namespace Selection.Annotated.Properties.Required.EdgeCasesThrowing
 {
+#if !BEHAVIOR_V4
     public class StructProperty : PropertySelectionBase
     {
         [Dependency] public TestStruct Property { get; set; }
     }
+#endif
 
     public class OpenGenericType<T>
     {
