@@ -29,7 +29,7 @@ namespace Import
                                InjectionMember_Value(new InjectionParameter(injected)), 
                                injected, injected);
 
-
+#if !BEHAVIOR_V4 // Unity v4 did not support null as valid value
         [TestProperty(PARAMETER, nameof(InjectionParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public void Parameter_default(string test, Type type, object defaultValue, object defaultAttr,
@@ -38,6 +38,7 @@ namespace Import
             => Assert_Injected(BaselineTestType.MakeGenericType(type),
                                InjectionMember_Value(new InjectionParameter(@default)),
                                @default, @default);
+#endif
 
         [TestProperty(PARAMETER, nameof(InjectionParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
@@ -56,6 +57,17 @@ namespace Import
                                          object overridden, object @default)
             => Assert_Injected(BaselineTestType.MakeGenericType(type), 
                                InjectionMember_Value(new InjectionParameter(type, injected)), 
+                               injected, injected);
+
+
+        [TestProperty(PARAMETER, nameof(InjectionParameter))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public void Parameter_null_Value(string test, Type type, object defaultValue, object defaultAttr,
+                                         object registered, object named, object injected,
+                                         object overridden, object @default)
+            => Assert_Injected(BaselineTestType.MakeGenericType(type),
+                               InjectionMember_Value(new InjectionParameter(null, injected)),
                                injected, injected);
 
 
@@ -115,16 +127,6 @@ namespace Import
                                      object overridden, object @default)
             => Assert_Fail(BaselineTestType.MakeGenericType(type), 
                            InjectionMember_Value(new InjectionParameter(type)));
-
-        #endregion
-
-
-        #region Validation
-
-        [TestProperty(PARAMETER, nameof(InjectionParameter))]
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
-        public void Parameter_Throws_OnNullType() 
-            => _ = new InjectionParameter(null, this);
 
         #endregion
     }
