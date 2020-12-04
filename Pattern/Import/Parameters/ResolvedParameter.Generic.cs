@@ -22,17 +22,17 @@ namespace Import
     {
         #region Default
 #if !UNITY_V4
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void GenericParameter_Default(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Generic_Default(string test, Type type, object defaultValue, object defaultAttr,
                                                      object registered, object named, object injected, object overridden, 
                                                      object @default)
             => Assert_InjectedGeneric(type, InjectionMember_Value(new GenericParameter(TDependency)), registered);
 
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void GenericParameter_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Generic_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                              object registered, object named, object injected, object overridden, 
                                                              object @default)
             => Assert_InjectNamedGeneric(type, InjectionMember_Value(new GenericParameter(TDependency)), registered);
@@ -42,17 +42,17 @@ namespace Import
 
         #region Name
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void GenericParameter_WithName(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Generic_WithName(string test, Type type, object defaultValue, object defaultAttr,
                                                       object registered, object named, object injected, object overridden, 
                                                       object @default)
             => Assert_InjectedGeneric(type, InjectionMember_Value(new GenericParameter(TDependency, Name)), named);
 
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void GenericParameter_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Generic_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                               object registered, object named, object injected, object overridden, 
                                                               object @default)
             => Assert_InjectNamedGeneric(type, InjectionMember_Value(new GenericParameter(TDependency, (string)null)), registered);
@@ -62,9 +62,9 @@ namespace Import
 
         #region Array
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void GenericParameter_ArrayNotation(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Generic_ArrayNotation(string test, Type type, object defaultValue, object defaultAttr,
                                                            object registered, object named, object injected, object overridden,
                                                            object @default)
         {
@@ -80,9 +80,9 @@ namespace Import
                 new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
         }
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void GenericParameter_ParentnessNotation(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Generic_ParentnessNotation(string test, Type type, object defaultValue, object defaultAttr,
                                                                 object registered, object named, object injected, object overridden, 
                                                                 object @default)
         {

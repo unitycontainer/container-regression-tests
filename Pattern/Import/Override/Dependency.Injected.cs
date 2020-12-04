@@ -14,7 +14,7 @@ namespace Import
         #region Type
 
 #if !UNITY_V4
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideInjected_ByType_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -24,7 +24,7 @@ namespace Import
                                new DependencyOverride(type, overridden), overridden);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideInjected_ByType_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -34,7 +34,7 @@ namespace Import
                                new DependencyOverride(type, overridden), overridden);
 #endif
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideInjected_ByType_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -49,7 +49,7 @@ namespace Import
         #region Name
 
 #if !UNITY_V4
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideInjected_ByName_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -59,7 +59,7 @@ namespace Import
                               new DependencyOverride((string)null, overridden), overridden);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideInjected_ByName_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -69,7 +69,7 @@ namespace Import
                                new DependencyOverride(Name, overridden), overridden);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideInjected_ByName_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -84,7 +84,7 @@ namespace Import
         #region Contract
 
 #if !UNITY_V4
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideInjected_ByContract_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -94,7 +94,7 @@ namespace Import
                                new DependencyOverride(type, null, overridden), overridden);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideInjected_ByContract_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -104,7 +104,7 @@ namespace Import
                                new DependencyOverride(type, Name, overridden), overridden);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideInjected_ByContract_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,

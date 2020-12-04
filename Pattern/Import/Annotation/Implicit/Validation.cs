@@ -11,7 +11,7 @@ namespace Import.Implicit
 {
     public abstract partial class Pattern
     {
-        [TestCategory(Category_Import)]
+        [TestCategory(CATEGORY_IMPORT)]
         [ExpectedException(typeof(ResolutionFailedException))]
         [DataTestMethod, DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
         public virtual void Throws_OnRefParameter(string test, Type type)
@@ -23,7 +23,7 @@ namespace Import.Implicit
             _ = Container.Resolve(target, null);
         }
 
-        [TestCategory(Category_Import)]
+        [TestCategory(CATEGORY_IMPORT)]
         [ExpectedException(typeof(ResolutionFailedException))]
         [DataTestMethod, DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
         public virtual void Throws_OnOutParameter(string test, Type type)

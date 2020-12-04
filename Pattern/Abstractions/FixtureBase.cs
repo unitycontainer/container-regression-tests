@@ -32,7 +32,14 @@ namespace Regression
 
         #region Properties
 
-        public TestContext TestContext { get; set; } 
+        public TestContext TestContext 
+        { 
+            get => StaticContext; set => StaticContext = value; 
+        }
+
+        public static TestContext ClassContext;
+
+        public static TestContext StaticContext;
 
         protected static string Category { get; private set; }
         protected static string Dependency { get; private set; }
@@ -71,6 +78,8 @@ namespace Regression
 
         protected static void ClassInitialize(TestContext context)
         {
+            ClassContext = context;
+
             var type  = Type.GetType(context.FullyQualifiedTestClassName);
             var root  = type.Namespace.Split('.');
             var @base = type.BaseType.Namespace.Split('.');

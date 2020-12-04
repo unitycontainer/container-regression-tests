@@ -8,7 +8,7 @@ namespace Import
 
         #region Type
 
-        [TestCategory(Category_Import)]
+        [TestCategory(CATEGORY_IMPORT)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Import_ByType_Null(string test, Type type,
                                        object defaultValue, object defaultAttr,
@@ -18,7 +18,7 @@ namespace Import
             => Assert_UnregisteredThrows_RegisteredSuccess(
                 BaselineTestType.MakeGenericType(type), registered);
 
-        [TestCategory(Category_Import)]
+        [TestCategory(CATEGORY_IMPORT)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Import_ByType_Named(string test, Type type,
                                        object defaultValue, object defaultAttr,
@@ -33,7 +33,7 @@ namespace Import
 
         #region Inherited
 
-        [TestCategory(Category_Import)]
+        [TestCategory(CATEGORY_IMPORT)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void Import_InInherited(string test, Type type,
                                                          object defaultValue, object defaultAttr,
@@ -44,7 +44,7 @@ namespace Import
                 CorrespondingTypeDefinition.MakeGenericType(type), registered);
 
 
-        [TestCategory(Category_Import)]
+        [TestCategory(CATEGORY_IMPORT)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void Import_InInherited_Twice(string test, Type type,
                                                          object defaultValue, object defaultAttr,

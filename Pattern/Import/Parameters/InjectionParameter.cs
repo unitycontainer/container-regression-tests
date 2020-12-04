@@ -1,12 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Regression;
 #if UNITY_V4
-using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
-using Unity.Resolution;
 using Unity.Injection;
 #endif
 
@@ -18,41 +15,56 @@ namespace Import
     // Container.RegisterType(target, new InjectionConstructor(new InjectionParameter(15)), 
     //                                new InjectionMethod("Method",     new InjectionParameter(15)) , 
     //                                new InjectionField("Field",       new InjectionParameter(15)), 
-    //                                new InjectionProperty("Property", new InjectionParameter(15)));
+    //                                new InjectionProperty("Property", new InjectionParameter(type, 15)));
     public abstract partial class Pattern
     {
         #region Value
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(InjectionParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void InjectionParameter_ByValue(string test, Type type, object defaultValue, object defaultAttr,
-                                                       object registered, object named, object injected, object overridden,
-                                                       object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new InjectionParameter(injected)), injected, injected);
+        public virtual void Parameter_Value(string test, Type type, object defaultValue, object defaultAttr,
+                                            object registered, object named, object injected, 
+                                            object overridden, object @default)
+            => Assert_Injected(BaselineTestType.MakeGenericType(type), 
+                               InjectionMember_Value(new InjectionParameter(injected)), 
+                               injected, injected);
 
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(InjectionParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void InjectionParameter_ByValue_WithType(string test, Type type, object defaultValue, object defaultAttr,
-                                                                  object registered, object named, object injected, object overridden,
-                                                                  object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new InjectionParameter(type, injected)), injected, injected);
+        public virtual void Parameter_WithDefault(string test, Type type, object defaultValue, object defaultAttr,
+                                                  object registered, object named, object injected, 
+                                                  object overridden, object @default)
+            => Assert_Injected(BaselineTestType.MakeGenericType(type), 
+                               InjectionMember_Value(new InjectionParameter(type, @default)), 
+                               @default, @default);
 
 
-
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(InjectionParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void InjectionParameter_ByValue_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
-                                                       object registered, object named, object injected, object overridden,
-                                                       object @default)
-            => Assert_Injected(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new InjectionParameter(type, injected)), injected, injected);
+        public virtual void Parameter_Value_WithType(string test, Type type, object defaultValue, object defaultAttr,
+                                                     object registered, object named, object injected, 
+                                                     object overridden, object @default)
+            => Assert_Injected(BaselineTestType.MakeGenericType(type), 
+                               InjectionMember_Value(new InjectionParameter(type, injected)), 
+                               injected, injected);
 
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(InjectionParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void InjectionParameter_ByValue_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
-                                                                   object registered, object named, object injected, object overridden,
-                                                                   object @default)
+        public virtual void Parameter_Named(string test, Type type, object defaultValue, object defaultAttr,
+                                            object registered, object named, object injected, 
+                                            object overridden, object @default)
+            => Assert_Injected(BaselineTestNamed.MakeGenericType(type), 
+                               InjectionMember_Value(new InjectionParameter(type, injected)), 
+                               injected, injected);
+
+
+        [TestProperty(PARAMETER, nameof(InjectionParameter))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        public virtual void Parameter_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
+                                                   object registered, object named, object injected, 
+                                                   object overridden, object @default)
         {
             var target = BaselineTestType.MakeGenericType(type);
 
@@ -87,14 +99,28 @@ namespace Import
         // Starting with v6 no validation during registration
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(InjectionParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void InjectionParameter_ByType(string test, Type type, object defaultValue, object defaultAttr,
-                                                      object registered, object named, object injected, object overridden,
-                                                      object @default)
+        public virtual void Parameter_ByType(string test, Type type, object defaultValue, object defaultAttr,
+                                             object registered, object named, object injected, 
+                                             object overridden, object @default)
             => Assert_Fail(BaselineTestType.MakeGenericType(type), 
                            InjectionMember_Value(new InjectionParameter(type)));
 
+        #endregion
+
+
+        #region Validation
+
+        [TestProperty(PARAMETER, nameof(InjectionParameter))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void Parameter_Throws_OnNull() 
+            => _ = new InjectionParameter(null);
+
+        [TestProperty(PARAMETER, nameof(InjectionParameter))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void Parameter_Throws_OnNullType() 
+            => _ = new InjectionParameter(null, this);
 
         #endregion
 

@@ -12,7 +12,7 @@ namespace Import
     {
         #region Type
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByType_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -21,7 +21,7 @@ namespace Import
                               new DependencyOverride(type, overridden), overridden);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByType_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -30,7 +30,7 @@ namespace Import
                               new DependencyOverride(type, overridden), overridden);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByType_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -40,7 +40,7 @@ namespace Import
                            registered, @default);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByType_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
@@ -56,7 +56,7 @@ namespace Import
 #if !UNITY_V4
 
 #if !BEHAVIOR_V5
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByNullName(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -66,7 +66,7 @@ namespace Import
 #endif
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByName_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -75,7 +75,7 @@ namespace Import
                               new DependencyOverride(Name, overridden), overridden);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByName_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -85,7 +85,7 @@ namespace Import
                            registered, @default);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByName_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
@@ -95,7 +95,7 @@ namespace Import
                                overridden, named);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByName_InReverse(string test, Type type, object defaultValue,
                                                                     object defaultAttr, object registered, object named,
@@ -110,7 +110,7 @@ namespace Import
         #region Contract
 
 #if !UNITY_V4
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByContract_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -119,7 +119,7 @@ namespace Import
                               new DependencyOverride(type, null, overridden), overridden);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByContract_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -128,7 +128,7 @@ namespace Import
                               new DependencyOverride(type, Name, overridden), overridden);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByContract_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -138,7 +138,7 @@ namespace Import
                            registered, @default);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByContract_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
@@ -148,7 +148,7 @@ namespace Import
                                  overridden, named);
 
 
-        [TestCategory(Category_Override)]
+        [TestCategory(CATEGORY_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OverrideDepend_ByContract_InReverse(string test, Type type, object defaultValue,
                                                                     object defaultAttr, object registered, object named,

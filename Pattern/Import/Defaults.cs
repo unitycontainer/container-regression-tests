@@ -15,7 +15,7 @@ namespace Import
 #if BEHAVIOR_V4
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [TestCategory(Category_Defaults)]
+        [TestCategory(CATEGORY_DEFAULTS)]
         [DataTestMethod, DynamicData(nameof(WithDefaultValue_Data))]
         public virtual void Import_WithDefault_Value(string test, Type type)
         {
@@ -44,7 +44,7 @@ namespace Import
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [TestCategory(Category_Defaults)]
+        [TestCategory(CATEGORY_DEFAULTS)]
         [DataTestMethod, DynamicData(nameof(WithDefaultAttribute_Data))]
         /// <summary>
         /// Tests providing default values
@@ -78,7 +78,7 @@ namespace Import
 #if BEHAVIOR_V4
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [TestCategory(Category_Defaults)]
+        [TestCategory(CATEGORY_DEFAULTS)]
         [DataTestMethod, DynamicData(nameof(WithDefaultAndAttribute_Data))]
         /// <summary>
         /// Tests providing default values

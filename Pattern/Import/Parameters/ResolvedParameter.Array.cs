@@ -20,9 +20,9 @@ namespace Import
     /// </example>
     public abstract partial class Pattern
     {
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void ResolvedArrayParameter_ByValue(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void ResolvedArray_ByValue(string test, Type type, object defaultValue, object defaultAttr,
                                                 object registered, object named, object injected, object overridden, 
                                                 object @default)
             => Assert_Array_Import(BaselineArrayType.MakeGenericType(type), 
@@ -31,14 +31,15 @@ namespace Import
 
 
 #if !UNITY_V4
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void ResolvedArrayParameter_Complex(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void ResolvedArray_Complex(string test, Type type, object defaultValue, object defaultAttr,
                                                  object registered, object named, object injected, object overridden, object @default)
             => Assert_Array_Import(BaselineArrayType.MakeGenericType(type), 
-                InjectionMember_Value(new ResolvedArrayParameter(type, defaultValue, defaultAttr, 
-                                                                  new ResolvedParameter(type), new OptionalParameter(type, Name), 
-                                                                  new ValidatingResolver(injected), new ValidatingResolverFactory(overridden))),
+                InjectionMember_Value(new ResolvedArrayParameter(type, new InjectionParameter(type, defaultValue), 
+                                                                       new InjectionParameter(defaultAttr), 
+                                                                       new ResolvedParameter(type), new OptionalParameter(type, Name), 
+                                                                       new ValidatingResolver(injected), new ValidatingResolverFactory(overridden))),
                 new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
 #endif
     }

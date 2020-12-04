@@ -12,7 +12,7 @@ namespace Import
 {
     public abstract partial class Pattern
     {
-        [TestCategory(Category_Import)]
+        [TestCategory(CATEGORY_IMPORT)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Import_Array(string test, Type type, object defaultValue, object defaultAttr,
                                                                  object registered, object named,
@@ -22,16 +22,15 @@ namespace Import
 
 
 #if !BEHAVIOR_V4
-        [TestCategory(Category_Import)]
+        [TestCategory(CATEGORY_IMPORT)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Import_Enumerable(string test, Type type, object defaultValue, object defaultAttr, object registered,
                                        object named, object injected, object overridden, object @default)
-            => Assert_Enumerable_Import
-                (BaselineTestType.MakeGenericType(typeof(IEnumerable<>).MakeGenericType(type)));
+            => Assert_Enumerable_Import(BaselineTestType.MakeGenericType(typeof(IEnumerable<>).MakeGenericType(type)));
 #endif
 
 
-        [TestCategory(Category_Import)]
+        [TestCategory(CATEGORY_IMPORT)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Import_Lazy(string test, Type type, object defaultValue, object defaultAttr, object registered,
                                  object named, object injected, object overridden, object @default)
@@ -39,7 +38,7 @@ namespace Import
                 BaselineTestType.MakeGenericType(typeof(Lazy<>).MakeGenericType(type)), registered);
 
 
-        [TestCategory(Category_Import)]
+        [TestCategory(CATEGORY_IMPORT)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Import_Func(string test, Type type, object defaultValue, object defaultAttr, object registered,
                                  object named, object injected, object overridden, object @default)
@@ -47,13 +46,13 @@ namespace Import
                 BaselineTestType.MakeGenericType(typeof(Func<>).MakeGenericType(type)), registered);
 
 
-        [TestCategory(Category_Import)]
+        [TestCategory(CATEGORY_IMPORT)]
         [DataTestMethod, DynamicData(nameof(BuiltInTypes_Data), typeof(FixtureBase))]
         public virtual void Import_BuiltIn_Interface(string test, Type type)
             => Assert_ResolutionSuccess(BaselineTestType.MakeGenericType(type));
 
 
-        [TestCategory(Category_Import)]
+        [TestCategory(CATEGORY_IMPORT)]
         [DataTestMethod, DynamicData(nameof(BuiltInTypes_Data), typeof(FixtureBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
         public virtual void Import_BuiltIn_Interface_Named(string test, Type type) 

@@ -16,7 +16,7 @@ namespace Import.Implicit
         public override void Import_ByType_Named(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
 
 
-        public override void OptionalParameter_WithType_OnNamed(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
+        public override void Optional_WithType_OnNamed(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
         public override void OverrideDepend_ByType_InGraph(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
 #if !UNITY_V4
         public override void OverrideDepend_ByName_Named(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
@@ -26,8 +26,8 @@ namespace Import.Implicit
         public override void OverrideDepend_ByContract_InGraph(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
         public override void OverrideDepend_ByContract_InReverse(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
 
-        public override void ResolvedParameter_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
-        public override void OptionalParameter_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
+        public override void Resolved_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
+        public override void Optional_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
 #endif
         #endregion
     }

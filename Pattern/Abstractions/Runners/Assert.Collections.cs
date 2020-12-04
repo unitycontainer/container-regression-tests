@@ -41,7 +41,7 @@ namespace Regression
 #endif
         }
 
-        protected void Assert_Array_Import(Type type, InjectionMember injection, object[] values)
+        protected void Assert_Array_Import(Type type, InjectionMember injection, object values)
         {
             // Arrange
             Container.RegisterType(null, type, null, null, injection);
@@ -55,10 +55,13 @@ namespace Regression
             Assert.IsInstanceOfType(instance, type);
 
             var list = instance.Value as IList;
+            var expected = values as IList;
+            
             Assert.IsNotNull(list);
+            Assert.IsNotNull(expected);
 
-            for (var i = 0; i < values.Length; i++)
-                Assert.IsTrue(list.Contains(values[i]));
+            for (var i = 0; i < expected.Count; i++)
+                Assert.IsTrue(list.Contains(expected[i]));
         }
 
         protected void Assert_Array_Import(Type definition, Type importType, InjectionMember injection, object[] values)

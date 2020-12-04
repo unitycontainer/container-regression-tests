@@ -21,16 +21,16 @@ namespace Import
     {
         #region Default
 #if !UNITY_V4
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(OptionalParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void OptionalParameter_Default(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Optional_Default(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new OptionalParameter()), registered, @default);
 
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(OptionalParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void OptionalParameter_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Optional_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_Injected(BaselineTestNamed.MakeGenericType(type),
                 InjectionMember_Value(new OptionalParameter()), named, @default);
@@ -40,16 +40,16 @@ namespace Import
 
         #region Type
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(OptionalParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
-        public virtual void OptionalParameter_WithType(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Optional_WithType(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new OptionalParameter(type)), registered, @default);
 
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(OptionalParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
-        public virtual void OptionalParameter_WithType_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Optional_WithType_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_Injected(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new OptionalParameter(type)), registered, @default);
 
@@ -59,16 +59,16 @@ namespace Import
         #region Name
 
 #if !UNITY_V4
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(OptionalParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
-        public virtual void OptionalParameter_WithName(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Optional_WithName(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new OptionalParameter(Name)), named, @default);
 
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(OptionalParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
-        public virtual void OptionalParameter_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Optional_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_Injected(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new OptionalParameter((string)null)), registered, @default);
 #endif
@@ -78,16 +78,16 @@ namespace Import
 
         #region Contract
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(OptionalParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
-        public virtual void OptionalParameter_WithContract(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Optional_WithContract(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_Injected(BaselineTestType.MakeGenericType(type), InjectionMember_Value(new OptionalParameter(type, Name)), named, @default);
 
 
-        [TestCategory(Category_Parameter)]
+        [TestProperty(PARAMETER, nameof(OptionalParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
-        public virtual void OptionalParameter_WithContract_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void Optional_WithContract_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_Injected(BaselineTestNamed.MakeGenericType(type), InjectionMember_Value(new OptionalParameter(type, null)), registered, @default);
         
