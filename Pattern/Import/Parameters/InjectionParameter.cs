@@ -32,6 +32,15 @@ namespace Import
 
         [TestProperty(PARAMETER, nameof(InjectionParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public void Parameter_default(string test, Type type, object defaultValue, object defaultAttr,
+                                      object registered, object named, object injected,
+                                      object overridden, object @default)
+            => Assert_Injected(BaselineTestType.MakeGenericType(type),
+                               InjectionMember_Value(new InjectionParameter(@default)),
+                               @default, @default);
+
+        [TestProperty(PARAMETER, nameof(InjectionParameter))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public void Parameter_Type_default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, 
                                            object overridden, object @default)
@@ -111,11 +120,6 @@ namespace Import
 
 
         #region Validation
-
-        [TestProperty(PARAMETER, nameof(InjectionParameter))]
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
-        public void Parameter_Throws_OnNull() 
-            => _ = new InjectionParameter(null);
 
         [TestProperty(PARAMETER, nameof(InjectionParameter))]
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
