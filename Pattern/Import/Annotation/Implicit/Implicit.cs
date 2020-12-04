@@ -28,6 +28,7 @@ namespace Import.Implicit
 
         public override void Resolved_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
         public override void Optional_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
+        public override void OptionalGeneric_OnNamed(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
 #endif
         #endregion
     }

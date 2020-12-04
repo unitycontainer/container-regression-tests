@@ -10,6 +10,12 @@ namespace Import.Implicit.Methods
 {
     #region Baseline
 
+    public class ObjectTestType : FixtureBaseType
+    {
+        [InjectionMethod] public void Method(object value) => Value = value;
+        public override object Default => default(object);
+    }
+
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [InjectionMethod] public void Method(TDependency value) => Value = value;

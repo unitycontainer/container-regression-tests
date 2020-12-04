@@ -9,6 +9,13 @@ namespace Import.Required.Fields
 {
     #region Baseline
 
+    public class ObjectTestType : FixtureBaseType
+    {
+        [Dependency] public object Field;
+        public override object Value { get => Field; }
+        public override object Default => default(object);
+    }
+
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [Dependency] public TDependency Field;

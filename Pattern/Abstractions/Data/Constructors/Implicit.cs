@@ -10,6 +10,12 @@ namespace Import.Implicit.Constructors
 {
     #region Baseline
 
+    public class ObjectTestType : FixtureBaseType
+    {
+        [InjectionConstructor] public ObjectTestType(object value) => Value = value;
+        public override object Default => default(object);
+    }
+
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [InjectionConstructor] public BaselineTestType(TDependency value) => Value = value;

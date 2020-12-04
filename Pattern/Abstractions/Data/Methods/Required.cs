@@ -9,6 +9,12 @@ using Unity;
 namespace Import.Required.Methods
 {
     #region Baseline
+    public class ObjectTestType : FixtureBaseType
+    {
+        [InjectionMethod]
+        public void Method([Dependency] object value) => Value = value;
+        public override object Default => default(object);
+    }
 
     public class BaselineTestType<TDependency> : FixtureBaseType
     {

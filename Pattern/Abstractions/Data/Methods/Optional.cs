@@ -10,6 +10,12 @@ namespace Import.Optional.Methods
 {
     #region Baseline
 
+    public class ObjectTestType : FixtureBaseType
+    {
+        [InjectionMethod] public void Method([OptionalDependency] object value) => Value = value;
+        public override object Default => default(object);
+    }
+
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [InjectionMethod] public void Method([OptionalDependency] TDependency value) => Value = value;

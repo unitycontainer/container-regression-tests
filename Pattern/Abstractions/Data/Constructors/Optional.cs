@@ -11,6 +11,12 @@ namespace Import.Optional.Constructors
 {
     #region Baseline
 
+    public class ObjectTestType : FixtureBaseType
+    {
+        [InjectionConstructor] public ObjectTestType([OptionalDependency] object value) => Value = value;
+        public override object Default => default(object);
+    }
+
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [InjectionConstructor] public BaselineTestType([OptionalDependency] TDependency value) => Value = value;
