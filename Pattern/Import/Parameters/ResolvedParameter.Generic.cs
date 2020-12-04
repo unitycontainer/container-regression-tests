@@ -59,20 +59,17 @@ namespace Import
         {
             var target = _resolvedTestType ??= GetTestType("ObjectTestType");
 
-            Container.RegisterType(null, target, null, null, InjectionMember_Value(new OptionalGenericParameter(TDependency)));
-
-            // Validate
-#if BEHAVIOR_V5
-            Assert.ThrowsException<ArgumentException>(() => Container.Resolve(target, null));
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+            Assert.ThrowsException<InvalidOperationException>(() 
+                => Container.RegisterType(null, target, null, null, InjectionMember_Value(new GenericParameter(TDependency))));
 #else
+            // No validation during registration 
+            Container.RegisterType(null, target, null, null, InjectionMember_Value(new GenericParameter(TDependency)));
+
             Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
-#endif
             RegisterTypes();    // Register missing types
 
             // Act
-#if BEHAVIOR_V5
-            Assert.ThrowsException<ArgumentException>(() => Container.Resolve(target, null));
-#else
             Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
 #endif
         }

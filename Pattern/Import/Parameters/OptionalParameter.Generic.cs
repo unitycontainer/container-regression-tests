@@ -22,7 +22,7 @@ namespace Import
     {
         #region Fields
 
-        Type _optionalTestType;
+        protected Type _optionalTestType;
 
         #endregion
 
@@ -30,47 +30,49 @@ namespace Import
         #region ()
 
         [TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void OptionalGeneric_Default(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(BaselineTestType, type, 
                 InjectionMember_Value(new OptionalGenericParameter(TDependency)), 
                 @default, registered);
 
+
         [TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
-        public void OptionalGeneric_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
+        public virtual void OptionalGeneric_Incompatible(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected,
                                            object overridden, object @default)
         {
             var target = _optionalTestType ??= GetTestType("ObjectTestType");
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+            Assert.ThrowsException<InvalidOperationException>(()
+                => Container.RegisterType(null, target, null, null, InjectionMember_Value(new OptionalGenericParameter(TDependency))));
+#else
+            // No validation during registration 
             Container.RegisterType(null, target, null, null, InjectionMember_Value(new OptionalGenericParameter(TDependency)));
 
-            // Validate
-#if BEHAVIOR_V5
-            Assert.ThrowsException<ArgumentException>(() => Container.Resolve(target, null));
-#else
             Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
-#endif
             RegisterTypes();    // Register missing types
 
             // Act
-#if BEHAVIOR_V5
-            Assert.ThrowsException<ArgumentException>(() => Container.Resolve(target, null));
-#else
             Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(target, null));
 #endif
         }
 
 
         [TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void OptionalGeneric_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(BaselineTestNamed, type, 
-                InjectionMember_Value(new OptionalGenericParameter(TDependency)), 
+                InjectionMember_Value(new OptionalGenericParameter(TDependency)),
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+                @default, registered);
+#else
                 @default, named);
+#endif
 
         #endregion
 

@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Unity;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
+using Unity;
 using Unity.Injection;
 #endif
 
