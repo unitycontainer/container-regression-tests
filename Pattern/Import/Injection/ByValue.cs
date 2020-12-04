@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 #if UNITY_V4
-using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #else
 using Unity.Resolution;
@@ -20,18 +19,20 @@ namespace Import
         public virtual void Inject_Value(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default) 
-            => Assert_Injected(BaselineTestType.MakeGenericType(type), 
-                               InjectionMember_Value(injected), 
-                               injected, injected);
+            => Asssert_AlwaysSuccessful(
+                BaselineTestType.MakeGenericType(type), 
+                InjectionMember_Value(injected), 
+                injected, injected);
 
         [TestCategory(CATEGORY_INJECT)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Inject_Named(string test, Type type, object defaultValue, object defaultAttr,
                                          object registered, object named, object injected, object overridden,
                                          object @default)
-            => Assert_Injected(BaselineTestNamed.MakeGenericType(type),
-                               InjectionMember_Value(injected),
-                               injected, injected);
+            => Asssert_AlwaysSuccessful(
+                BaselineTestNamed.MakeGenericType(type),
+                InjectionMember_Value(injected),
+                injected, injected);
 
 
         [TestCategory(CATEGORY_INJECT)]
@@ -69,7 +70,7 @@ namespace Import
 
             var target = BaselineTestType.MakeGenericType(typeof(IEnumerable<>).MakeGenericType(type));
 
-            Assert_Injected(target, InjectionMember_Value(instance), instance, instance);
+            Asssert_AlwaysSuccessful(target, InjectionMember_Value(instance), instance, instance);
         }
 
 #endif
@@ -78,7 +79,7 @@ namespace Import
         public virtual void Inject_Resolver(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
                                             object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type),
+            => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                                InjectionMember_Value(new ValidatingResolver(injected)),
                                injected, injected);
 #if !UNITY_V4
@@ -87,7 +88,7 @@ namespace Import
         public virtual void Inject_TypeFactory(string test, Type type, object defaultValue, object defaultAttr,
                                                object registered, object named, object injected, object overridden,
                                                object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type),
+            => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                                InjectionMember_Value(new ValidatingResolverFactory(injected)),
                                injected, injected);
 #endif

@@ -35,7 +35,7 @@ namespace Import
         public virtual void OverrideDepend_ByType_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Registered(BaselineTestType.MakeGenericType(type),
+            => Assert_SuccessfulIfRegistered(BaselineTestType.MakeGenericType(type),
                            new DependencyOverride(typeof(Pattern), overridden),
                            registered, @default);
 
@@ -45,7 +45,7 @@ namespace Import
         public virtual void OverrideDepend_ByType_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
                                                               object injected, object overridden, object @default)
-            => Assert_Registered(BaselineConsumer.MakeGenericType(type),
+            => Assert_SuccessfulIfRegistered(BaselineConsumer.MakeGenericType(type),
                                new DependencyOverride(type, overridden),
                                overridden, overridden);
         #endregion
@@ -80,7 +80,7 @@ namespace Import
         public virtual void OverrideDepend_ByName_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Registered(BaselineTestType.MakeGenericType(type),
+            => Assert_SuccessfulIfRegistered(BaselineTestType.MakeGenericType(type),
                            new DependencyOverride(Name, overridden),
                            registered, @default);
 
@@ -90,7 +90,7 @@ namespace Import
         public virtual void OverrideDepend_ByName_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
                                                               object injected, object overridden, object @default)
-            => Assert_Registered(BaselineConsumer.MakeGenericType(type),
+            => Assert_SuccessfulIfRegistered(BaselineConsumer.MakeGenericType(type),
                                new DependencyOverride((string)null, overridden),
                                overridden, named);
 
@@ -100,7 +100,7 @@ namespace Import
         public virtual void OverrideDepend_ByName_InReverse(string test, Type type, object defaultValue,
                                                                     object defaultAttr, object registered, object named,
                                                                     object injected, object overridden, object @default)
-            => Assert_Registered(BaselineConsumer.MakeGenericType(type),
+            => Assert_SuccessfulIfRegistered(BaselineConsumer.MakeGenericType(type),
                                  new DependencyOverride(Name, overridden),
                                  registered, overridden);
 #endif
@@ -133,7 +133,7 @@ namespace Import
         public virtual void OverrideDepend_ByContract_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Registered(BaselineTestType.MakeGenericType(type),
+            => Assert_SuccessfulIfRegistered(BaselineTestType.MakeGenericType(type),
                            new DependencyOverride(type, Name, overridden),
                            registered, @default);
 
@@ -143,7 +143,7 @@ namespace Import
         public virtual void OverrideDepend_ByContract_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
                                                               object injected, object overridden, object @default)
-            => Assert_Registered(BaselineConsumer.MakeGenericType(type),
+            => Assert_SuccessfulIfRegistered(BaselineConsumer.MakeGenericType(type),
                                  new DependencyOverride(type, null, overridden),
                                  overridden, named);
 
@@ -153,7 +153,7 @@ namespace Import
         public virtual void OverrideDepend_ByContract_InReverse(string test, Type type, object defaultValue,
                                                                     object defaultAttr, object registered, object named,
                                                                     object injected, object overridden, object @default)
-            => Assert_Registered(BaselineConsumer.MakeGenericType(type),
+            => Assert_SuccessfulIfRegistered(BaselineConsumer.MakeGenericType(type),
                                  new DependencyOverride(type, Name, overridden),
                                  registered, overridden);
 #endif

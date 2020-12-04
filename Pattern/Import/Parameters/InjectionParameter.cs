@@ -18,26 +18,18 @@ namespace Import
     //                                new InjectionProperty("Property", new InjectionParameter(type, 15)));
     public abstract partial class Pattern
     {
-        #region Value
-
-        [TestProperty(PARAMETER, nameof(InjectionParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
-        public void Parameter_Value(string test, Type type, object defaultValue, object defaultAttr,
-                                    object registered, object named, object injected, 
-                                    object overridden, object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type), 
-                               InjectionMember_Value(new InjectionParameter(injected)), 
-                               injected, injected);
-
+        #region default
+        
 #if !BEHAVIOR_V4 // Unity v4 did not support null as valid value
         [TestProperty(PARAMETER, nameof(InjectionParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public void Parameter_default(string test, Type type, object defaultValue, object defaultAttr,
                                       object registered, object named, object injected,
                                       object overridden, object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type),
-                               InjectionMember_Value(new InjectionParameter(@default)),
-                               @default, @default);
+            => Asssert_AlwaysSuccessful(
+                BaselineTestType.MakeGenericType(type),
+                InjectionMember_Value(new InjectionParameter(@default)),
+                @default, @default);
 #endif
 
         [TestProperty(PARAMETER, nameof(InjectionParameter))]
@@ -45,19 +37,10 @@ namespace Import
         public void Parameter_Type_default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, 
                                            object overridden, object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type), 
-                               InjectionMember_Value(new InjectionParameter(type, @default)), 
-                               @default, @default);
-
-
-        [TestProperty(PARAMETER, nameof(InjectionParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
-        public void Parameter_Type_Value(string test, Type type, object defaultValue, object defaultAttr,
-                                         object registered, object named, object injected, 
-                                         object overridden, object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type), 
-                               InjectionMember_Value(new InjectionParameter(type, injected)), 
-                               injected, injected);
+            => Asssert_AlwaysSuccessful(
+                BaselineTestType.MakeGenericType(type), 
+                InjectionMember_Value(new InjectionParameter(type, @default)), 
+                @default, @default);
 
 
         [TestProperty(PARAMETER, nameof(InjectionParameter))]
@@ -66,9 +49,36 @@ namespace Import
         public void Parameter_null_Value(string test, Type type, object defaultValue, object defaultAttr,
                                          object registered, object named, object injected,
                                          object overridden, object @default)
-            => Assert_Injected(BaselineTestType.MakeGenericType(type),
-                               InjectionMember_Value(new InjectionParameter(null, injected)),
-                               injected, injected);
+            => Asssert_AlwaysSuccessful(
+                BaselineTestType.MakeGenericType(type),
+                InjectionMember_Value(new InjectionParameter(null, injected)),
+                injected, injected);
+        
+        #endregion
+
+
+        #region Value
+
+        [TestProperty(PARAMETER, nameof(InjectionParameter))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public void Parameter_Value(string test, Type type, object defaultValue, object defaultAttr,
+                                    object registered, object named, object injected, 
+                                    object overridden, object @default)
+            => Asssert_AlwaysSuccessful(
+                BaselineTestType.MakeGenericType(type), 
+                InjectionMember_Value(new InjectionParameter(injected)), 
+                injected, injected);
+
+
+        [TestProperty(PARAMETER, nameof(InjectionParameter))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public void Parameter_Type_Value(string test, Type type, object defaultValue, object defaultAttr,
+                                         object registered, object named, object injected, 
+                                         object overridden, object @default)
+            => Asssert_AlwaysSuccessful(
+                BaselineTestType.MakeGenericType(type), 
+                InjectionMember_Value(new InjectionParameter(type, injected)), 
+                injected, injected);
 
 
         [TestProperty(PARAMETER, nameof(InjectionParameter))]
@@ -76,10 +86,15 @@ namespace Import
         public void Parameter_Named(string test, Type type, object defaultValue, object defaultAttr,
                                     object registered, object named, object injected, 
                                     object overridden, object @default)
-            => Assert_Injected(BaselineTestNamed.MakeGenericType(type), 
-                               InjectionMember_Value(new InjectionParameter(type, injected)), 
-                               injected, injected);
+            => Asssert_AlwaysSuccessful(
+                BaselineTestNamed.MakeGenericType(type), 
+                InjectionMember_Value(new InjectionParameter(type, injected)), 
+                injected, injected);
+        
+        #endregion
 
+
+        #region Type 
 
         [TestProperty(PARAMETER, nameof(InjectionParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
@@ -109,10 +124,6 @@ namespace Import
 #endif
         }
 
-        #endregion
-
-
-        #region Type 
 
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         [ExpectedException(typeof(InvalidOperationException))]

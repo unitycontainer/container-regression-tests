@@ -20,7 +20,7 @@ namespace Import
     /// </example>
     public abstract partial class Pattern
     {
-        [TestProperty(PARAMETER, nameof(GenericResolvedArrayParameter))]
+        //[TestProperty(PARAMETER, nameof(GenericResolvedArrayParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void GenericResolvedArray_ByValues(string test, Type type, object defaultValue, object defaultAttr,
                                                                    object registered, object named, object injected, object overridden, 
@@ -31,7 +31,7 @@ namespace Import
                            new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
         }
 
-        [TestProperty(PARAMETER, nameof(GenericResolvedArrayParameter))]
+        //[TestProperty(PARAMETER, nameof(GenericResolvedArrayParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void GenericResolvedArray_Complex(string test, Type type,
                                                                   object defaultValue, object defaultAttr,

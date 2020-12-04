@@ -22,7 +22,7 @@ namespace Import
     {
         #region Default
 #if !UNITY_V4
-        [TestProperty(PARAMETER, nameof(GenericParameter))]
+        //[TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Generic_Default(string test, Type type, object defaultValue, object defaultAttr,
                                                      object registered, object named, object injected, object overridden, 
@@ -30,7 +30,7 @@ namespace Import
             => Assert_InjectedGeneric(type, InjectionMember_Value(new GenericParameter(TDependency)), registered);
 
 
-        [TestProperty(PARAMETER, nameof(GenericParameter))]
+        //[TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Generic_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                              object registered, object named, object injected, object overridden, 
@@ -42,7 +42,7 @@ namespace Import
 
         #region Name
 
-        [TestProperty(PARAMETER, nameof(GenericParameter))]
+        //[TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Generic_WithName(string test, Type type, object defaultValue, object defaultAttr,
                                                       object registered, object named, object injected, object overridden, 
@@ -50,7 +50,7 @@ namespace Import
             => Assert_InjectedGeneric(type, InjectionMember_Value(new GenericParameter(TDependency, Name)), named);
 
 
-        [TestProperty(PARAMETER, nameof(GenericParameter))]
+        //[TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Generic_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                               object registered, object named, object injected, object overridden, 
@@ -62,7 +62,7 @@ namespace Import
 
         #region Array
 
-        [TestProperty(PARAMETER, nameof(GenericParameter))]
+        //[TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Generic_ArrayNotation(string test, Type type, object defaultValue, object defaultAttr,
                                                            object registered, object named, object injected, object overridden,
@@ -80,7 +80,7 @@ namespace Import
                 new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
         }
 
-        [TestProperty(PARAMETER, nameof(GenericParameter))]
+        //[TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Generic_ParentnessNotation(string test, Type type, object defaultValue, object defaultAttr,
                                                                 object registered, object named, object injected, object overridden, 

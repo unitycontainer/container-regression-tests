@@ -25,14 +25,14 @@ namespace Import
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OptionalGeneric_Default(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_InjectedGeneric(type, InjectionMember_Value(new OptionalGenericParameter(TDependency)), registered, @default);
+            => Asssert_AlwaysSuccessful(BaselineTestType, type, InjectionMember_Value(new OptionalGenericParameter(TDependency)), @default, registered);
 
 
         [TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void OptionalGeneric_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_InjectNamedGeneric(type, InjectionMember_Value(new OptionalGenericParameter(TDependency)), registered, @default);
+            => Asssert_AlwaysSuccessful(BaselineTestType, type, InjectionMember_Value(new OptionalGenericParameter(TDependency)), @default, registered);
 #endif
         #endregion
 
@@ -43,14 +43,14 @@ namespace Import
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void OptionalGeneric_WithName(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_InjectedGeneric(type, InjectionMember_Value(new OptionalGenericParameter(TDependency, Name)), named, @default);
+            => Asssert_AlwaysSuccessful(BaselineTestType, type, InjectionMember_Value(new OptionalGenericParameter(TDependency, Name)), @default, named);
 
 
         [TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
         public virtual void OptionalGeneric_WithName_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
-            => Assert_InjectNamedGeneric(type, InjectionMember_Value(new OptionalGenericParameter(TDependency, (string)null)), registered, @default);
+            => Asssert_AlwaysSuccessful(BaselineTestType, type, InjectionMember_Value(new OptionalGenericParameter(TDependency, (string)null)), @default, registered);
 
         #endregion
     }

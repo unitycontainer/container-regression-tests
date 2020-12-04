@@ -74,7 +74,7 @@ namespace Import
         public virtual void OverrideInjected_ByName_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Registered(BaselineTestNamed.MakeGenericType(type),
+            => Assert_SuccessfulIfRegistered(BaselineTestNamed.MakeGenericType(type),
                                  InjectionMember_Value(new ResolvedParameter(Name)),
                                  new DependencyOverride((string)null, overridden), named);
 #endif
@@ -109,7 +109,7 @@ namespace Import
         public virtual void OverrideInjected_ByContract_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Registered(BaselineTestType.MakeGenericType(type),
+            => Assert_SuccessfulIfRegistered(BaselineTestType.MakeGenericType(type),
                            new DependencyOverride(type, Name, overridden),
                            registered, @default);
 #endif
