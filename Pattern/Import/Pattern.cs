@@ -9,6 +9,7 @@ namespace Import
         #region Constants
 
         protected const string PARAMETER = "Inject";
+        protected const string OVERRIDE  = "Override";
 
         protected const string CATEGORY_IMPORT  = "Import";
         protected const string CATEGORY_INJECT  = "Injection";

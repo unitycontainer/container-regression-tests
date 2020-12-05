@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Linq;
 #if UNITY_V4
-using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
@@ -89,6 +88,7 @@ namespace Regression
 
 
         #region Enumerable
+
         public void Assert_Enumerable_Import(Type type)
         {
             // Act

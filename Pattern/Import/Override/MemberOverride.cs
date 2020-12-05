@@ -11,13 +11,14 @@ namespace Import
 {
     public abstract partial class Pattern 
     {
-        //[DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]
-        //public virtual void MemberOverride_ByName(string test, Type type,
-        //                                    object @default, object defaultAttr,
-        //                                    object registered, object named,
-        //                                    object injected, object overridden,
-        //                                    bool isResolveble)
-        //    => Assert_Override(type,  MemberOverride_WithName(DependencyName, overridden), overridden);
+        protected const string MemberOverride = "MemberOverride";
+
+        [TestProperty(OVERRIDE, MemberOverride)]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Member_ByType(string test, Type type, object defaultValue,
+                                          object defaultAttr, object registered, object named,
+                                          object injected, object overridden, object @default)
+            => Assert.IsTrue(true);
 
         //[DataTestMethod]
         //[DynamicData(nameof(Import_Test_Data), typeof(ImportBase))]

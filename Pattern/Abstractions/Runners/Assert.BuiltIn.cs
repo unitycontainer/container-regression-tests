@@ -1,18 +1,42 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections;
-using System.Linq;
 #if UNITY_V4
-using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
+using Unity.Injection;
 #endif
 
 namespace Regression
 {
     public abstract partial class FixtureBase
     {
+        public object Assert_ResolutionSuccess(Type type)
+        {
+            // Act
+            var instance = Container.Resolve(type, null);
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, type);
+
+            return instance;
+        }
+
+        protected virtual void Assert_Fail(Type type, InjectionMember member)
+        {
+            Container.RegisterType(null, type, null, null, member);
+
+            // Validate
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(type, null));
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            _ = Container.Resolve(type, null);
+        }
+
         public void Assert_Lazy_Import(Type type, object expected)
         {
             // Act

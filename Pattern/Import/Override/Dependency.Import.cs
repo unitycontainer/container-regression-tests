@@ -12,40 +12,41 @@ namespace Import
     {
         #region Type
 
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByType_UnNamed(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
+        public virtual void Dependency_ByType_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Override(BaselineTestType.MakeGenericType(type),
-                              new DependencyOverride(type, overridden), overridden);
+            => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
+                new DependencyOverride(type, overridden), 
+                overridden);
 
 
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByType_Named(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
+        public virtual void Dependency_ByType_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Override(BaselineTestNamed.MakeGenericType(type),
-                              new DependencyOverride(type, overridden), overridden);
+            => Asssert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
+                new DependencyOverride(type, overridden), overridden);
 
 
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByType_Ignored(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
+        public virtual void Dependency_ByType_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_SuccessfulIfRegistered(BaselineTestType.MakeGenericType(type),
+            => Assert_Consumer(BaselineTestType.MakeGenericType(type),
                            new DependencyOverride(typeof(Pattern), overridden),
                            registered, @default);
 
 
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByType_InGraph(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
+        public virtual void Dependency_ByType_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
                                                               object injected, object overridden, object @default)
-            => Assert_SuccessfulIfRegistered(BaselineConsumer.MakeGenericType(type),
+            => Assert_Consumer(BaselineConsumer.MakeGenericType(type),
                                new DependencyOverride(type, overridden),
                                overridden, overridden);
         #endregion
@@ -56,51 +57,51 @@ namespace Import
 #if !UNITY_V4
 
 #if !BEHAVIOR_V5
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByNullName(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_ByNullName(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Override(BaselineTestType.MakeGenericType(type),
+            => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                               new DependencyOverride((string)null, overridden), overridden);
 #endif
 
 
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByName_Named(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_ByName_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Override(BaselineTestNamed.MakeGenericType(type),
+            => Asssert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
                               new DependencyOverride(Name, overridden), overridden);
 
 
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByName_Ignored(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_ByName_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_SuccessfulIfRegistered(BaselineTestType.MakeGenericType(type),
+            => Assert_Consumer(BaselineTestType.MakeGenericType(type),
                            new DependencyOverride(Name, overridden),
                            registered, @default);
 
 
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByName_InGraph(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_ByName_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
                                                               object injected, object overridden, object @default)
-            => Assert_SuccessfulIfRegistered(BaselineConsumer.MakeGenericType(type),
+            => Assert_Consumer(BaselineConsumer.MakeGenericType(type),
                                new DependencyOverride((string)null, overridden),
                                overridden, named);
 
 
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByName_InReverse(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_ByName_InReverse(string test, Type type, object defaultValue,
                                                                     object defaultAttr, object registered, object named,
                                                                     object injected, object overridden, object @default)
-            => Assert_SuccessfulIfRegistered(BaselineConsumer.MakeGenericType(type),
+            => Assert_Consumer(BaselineConsumer.MakeGenericType(type),
                                  new DependencyOverride(Name, overridden),
                                  registered, overridden);
 #endif
@@ -110,50 +111,50 @@ namespace Import
         #region Contract
 
 #if !UNITY_V4
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByContract_UnNamed(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_ByContract_UnNamed(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Override(BaselineTestType.MakeGenericType(type),
+            => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                               new DependencyOverride(type, null, overridden), overridden);
 
 
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByContract_Named(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_ByContract_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Override(BaselineTestNamed.MakeGenericType(type),
+            => Asssert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
                               new DependencyOverride(type, Name, overridden), overridden);
 
 
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByContract_Ignored(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_ByContract_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_SuccessfulIfRegistered(BaselineTestType.MakeGenericType(type),
+            => Assert_Consumer(BaselineTestType.MakeGenericType(type),
                            new DependencyOverride(type, Name, overridden),
                            registered, @default);
 
 
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByContract_InGraph(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_ByContract_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
                                                               object injected, object overridden, object @default)
-            => Assert_SuccessfulIfRegistered(BaselineConsumer.MakeGenericType(type),
+            => Assert_Consumer(BaselineConsumer.MakeGenericType(type),
                                  new DependencyOverride(type, null, overridden),
                                  overridden, named);
 
 
-        [TestCategory(CATEGORY_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void OverrideDepend_ByContract_InReverse(string test, Type type, object defaultValue,
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_ByContract_InReverse(string test, Type type, object defaultValue,
                                                                     object defaultAttr, object registered, object named,
                                                                     object injected, object overridden, object @default)
-            => Assert_SuccessfulIfRegistered(BaselineConsumer.MakeGenericType(type),
+            => Assert_Consumer(BaselineConsumer.MakeGenericType(type),
                                  new DependencyOverride(type, Name, overridden),
                                  registered, overridden);
 #endif
