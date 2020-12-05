@@ -81,6 +81,9 @@
 				<Compile Remove="Abstractions\Data\Fields\**" />
 				<Compile Remove="Import\FinalTests\Fields\**" />
 				<Compile Remove="Import\Data\Fields\**" />
+				<Compile Remove="Import\Annotation\Implicit\Implicit.Dependency.Import.cs" />
+				<Compile Remove="Import\Annotation\Implicit\Implicit.OptionalParameter.cs" />
+				<Compile Remove="Import\Annotation\Implicit\Implicit.ResolvedParameter.cs" />
 				<Compile Remove="Resolution\Enumerable\**" />
 				<Compile Remove="Resolution\Generic\Constrained.cs" />
 				<Compile Remove="Registration\Validation\Factory.cs" />

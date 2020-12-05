@@ -156,7 +156,7 @@ namespace Import
 
 
         #region Target
-
+#if !UNITY_V4
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public virtual void Dependency_ByTarget(string test, Type type, object defaultValue,
@@ -185,7 +185,7 @@ namespace Import
             => Assert_Consumer(type,
                 new DependencyOverride(BaselineTestType.MakeGenericType(type), type, Name, overridden),
                 registered, named);
-
+#endif
         #endregion
     }
 }

@@ -95,12 +95,19 @@ namespace Import
 
 
         [TestCategory(CATEGORY_INJECT)]
+#if !BEHAVIOR_V4 && !BEHAVIOR_V5
         [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public virtual void Inject_NoPublicMember(string test, Type type, object defaultValue, object defaultAttr,
                                                    object registered, object named, object injected, object overridden,
-                                                   object @default) 
-            => Assert_Fail(NoPublicMember.MakeGenericType(type), 
-                           InjectionMember_Value(injected));
+                                                   object @default)
+#if BEHAVIOR_V4
+        {
+            // Unity v4 ignores injection members for nonpublic members
+        }
+#else
+            => Assert_Fail(NoPublicMember.MakeGenericType(type), InjectionMember_Value(injected));
+#endif
     }
 }

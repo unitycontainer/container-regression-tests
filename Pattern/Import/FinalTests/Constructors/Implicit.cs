@@ -20,11 +20,5 @@ namespace Import.Constructors
         public static void ClassInit(TestContext context) => ClassInitialize(context);
 
         #endregion
-
-        [TestCleanup]
-        public void testClean() 
-        {
-            Assert.IsTrue(true);
-        }
     }
 }
