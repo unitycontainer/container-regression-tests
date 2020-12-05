@@ -46,7 +46,7 @@ namespace Regression
             Assert.AreEqual(expected, instance.Value);
         }
 
-        protected void Assert_UnregisteredThrows_RegisteredSuccess(Type type, ResolverOverride @override, object expected)
+        protected virtual void Assert_UnregisteredThrows_RegisteredSuccess(Type type, ResolverOverride @override, object expected)
         {
             Container.RegisterType(null, type, null, null);
 
