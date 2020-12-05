@@ -17,7 +17,7 @@ namespace Import
 #if !UNITY_V4
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void Injected_Override_ByType(string test, Type type, object defaultValue,
+        public virtual void Dependency_Injected_ByType(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
@@ -27,7 +27,7 @@ namespace Import
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void Injected_Override_ByType_Named(string test, Type type, object defaultValue,
+        public virtual void Dependency_Injected_ByType_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
@@ -37,7 +37,7 @@ namespace Import
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void Injected_Override_ByType_Ignored(string test, Type type, object defaultValue,
+        public virtual void Dependency_Injected_ByType_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
@@ -52,7 +52,7 @@ namespace Import
 #if !UNITY_V4
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void Injected_Override_ByName(string test, Type type, object defaultValue,
+        public virtual void Dependency_Injected_ByName(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
@@ -62,7 +62,7 @@ namespace Import
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void Injected_Override_ByName_Named(string test, Type type, object defaultValue,
+        public virtual void Dependency_Injected_ByName_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
@@ -72,7 +72,7 @@ namespace Import
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void Injected_Override_ByName_Ignored(string test, Type type, object defaultValue,
+        public virtual void Dependency_Injected_ByName_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
         {
@@ -101,7 +101,7 @@ namespace Import
 #if !UNITY_V4
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void Injected_Override_ByContract(string test, Type type, object defaultValue,
+        public virtual void Dependency_Injected_ByContract(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
@@ -111,7 +111,7 @@ namespace Import
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void Injected_Override_ByContract_Named(string test, Type type, object defaultValue,
+        public virtual void Dependency_Injected_ByContract_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
@@ -121,10 +121,10 @@ namespace Import
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
-        public virtual void Injected_Override_ByContract_Ignored(string test, Type type, object defaultValue,
+        public virtual void Dependency_Injected_ByContract_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Consumer(BaselineTestType.MakeGenericType(type),
+            => Assert_FixtureBaseType(BaselineTestType.MakeGenericType(type),
                            new DependencyOverride(type, Name, overridden),
                            registered, @default);
 #endif

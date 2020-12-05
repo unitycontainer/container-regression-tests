@@ -5,12 +5,31 @@ using Microsoft.Practices.Unity;
 #else
 using Unity;
 using Unity.Injection;
+using Unity.Resolution;
 #endif
 
 namespace Regression
 {
     public abstract partial class FixtureBase
     {
+        protected virtual void Assert_FixtureBaseType(Type type, ResolverOverride @override, object value, object @default)
+        {
+            // Arrange
+            Container.RegisterType(null, type, null, null);
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            var instance = Container.Resolve(type, null, @override) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(value, instance.Value);
+            Assert.AreEqual(@default, instance.Default);
+        }
+
+
         public object Assert_ResolutionSuccess(Type type)
         {
             // Act

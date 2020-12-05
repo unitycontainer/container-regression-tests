@@ -5,6 +5,7 @@ using Microsoft.Practices.Unity;
 #else
 using Unity;
 using Unity.Injection;
+using Unity.Resolution;
 #endif
 
 namespace Regression
@@ -39,6 +40,24 @@ namespace Regression
 
             // Act
             var instance = Container.Resolve(type, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(expected, instance.Value);
+        }
+
+        protected void Assert_UnregisteredThrows_RegisteredSuccess(Type type, ResolverOverride @override, object expected)
+        {
+            Container.RegisterType(null, type, null, null);
+
+            // Validate
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(type, null, @override));
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            var instance = Container.Resolve(type, null, @override) as FixtureBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

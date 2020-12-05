@@ -15,13 +15,14 @@ namespace Import
         protected virtual void Assert_Consumer(Type type, ResolverOverride @override, object value, object @default)
         {
             // Arrange
-            Container.RegisterType(null, type, null, null);
+            var target = BaselineConsumer.MakeGenericType(type);
+            Container.RegisterType(null, target, null, null);
 
             // Register missing types
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(type, null, @override) as FixtureBaseType;
+            var instance = Container.Resolve(target, null, @override) as FixtureBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

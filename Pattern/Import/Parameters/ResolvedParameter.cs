@@ -22,7 +22,7 @@ namespace Import
         #region ()
 #if !UNITY_V4
         [TestProperty(PARAMETER, nameof(ResolvedParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public void Resolved_Default(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_UnregisteredThrows_RegisteredSuccess(
@@ -32,7 +32,7 @@ namespace Import
 
 
         [TestProperty(PARAMETER, nameof(ResolvedParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public virtual void Resolved_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_UnregisteredThrows_RegisteredSuccess(
@@ -46,7 +46,7 @@ namespace Import
         #region Type
 
         [TestProperty(PARAMETER, nameof(ResolvedParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public void Resolved_WithType(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_UnregisteredThrows_RegisteredSuccess(
@@ -56,7 +56,7 @@ namespace Import
 
 
         [TestProperty(PARAMETER, nameof(ResolvedParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public void Resolved_WithType_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_UnregisteredThrows_RegisteredSuccess(
@@ -71,7 +71,7 @@ namespace Import
 
 #if !UNITY_V4
         [TestProperty(PARAMETER, nameof(ResolvedParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public void Resolved_WithName(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_UnregisteredThrows_RegisteredSuccess(
@@ -81,7 +81,7 @@ namespace Import
 
 
         [TestProperty(PARAMETER, nameof(ResolvedParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public void Resolved_WithNullName(string test, Type type, object defaultValue, object defaultAttr,
                                                   object registered, object named, object injected, object overridden, object @default)
             => Assert_UnregisteredThrows_RegisteredSuccess(
@@ -96,7 +96,7 @@ namespace Import
         #region Contract
 
         [TestProperty(PARAMETER, nameof(ResolvedParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public void Resolved_WithContract(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_UnregisteredThrows_RegisteredSuccess(
@@ -106,7 +106,7 @@ namespace Import
 
 
         [TestProperty(PARAMETER, nameof(ResolvedParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public void Resolved_WithContract_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Assert_UnregisteredThrows_RegisteredSuccess(

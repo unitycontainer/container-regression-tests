@@ -22,7 +22,7 @@ namespace Import
         #region ()
 #if !UNITY_V4
         [TestProperty(PARAMETER, nameof(OptionalParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public virtual void Optional_Default(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(
@@ -32,7 +32,7 @@ namespace Import
 
 
         [TestProperty(PARAMETER, nameof(OptionalParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public virtual void Optional_Default_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(
@@ -46,7 +46,7 @@ namespace Import
         #region Type
 
         [TestProperty(PARAMETER, nameof(OptionalParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Optional_WithType(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(
@@ -56,7 +56,7 @@ namespace Import
 
 
         [TestProperty(PARAMETER, nameof(OptionalParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Optional_WithType_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(
@@ -71,7 +71,7 @@ namespace Import
 
 #if !UNITY_V4
         [TestProperty(PARAMETER, nameof(OptionalParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Optional_WithName(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(
@@ -81,7 +81,7 @@ namespace Import
 
 
         [TestProperty(PARAMETER, nameof(OptionalParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Optional_WithNullName(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(
@@ -96,7 +96,7 @@ namespace Import
         #region Contract
 
         [TestProperty(PARAMETER, nameof(OptionalParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Optional_WithContract(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(
@@ -106,7 +106,7 @@ namespace Import
 
 
         [TestProperty(PARAMETER, nameof(OptionalParameter))]
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Optional_WithContract_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                        object registered, object named, object injected, object overridden, object @default)
             => Asssert_AlwaysSuccessful(
