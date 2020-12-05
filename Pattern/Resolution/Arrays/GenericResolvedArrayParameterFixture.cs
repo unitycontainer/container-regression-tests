@@ -24,6 +24,9 @@ namespace Resolution
                         new InjectionProperty("Prop"));
 
             var result = Container.Resolve<GenericTypeWithArrayProperty<IService>>();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Prop);
             Assert.AreSame(expected[0], result.Prop[0]);
             Assert.AreSame(expected[1], result.Prop[1]);
         }
@@ -93,6 +96,8 @@ namespace Resolution
 
             var result = Container.Resolve<ClassWithOneArrayGenericParameter<Service>>();
 
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.InjectedValue);
             Assert.IsTrue(result.DefaultConstructorCalled);
             Assert.AreEqual(2, result.InjectedValue.Length);
             Assert.AreSame(a0, result.InjectedValue[0]);

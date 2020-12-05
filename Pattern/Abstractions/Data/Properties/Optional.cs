@@ -11,6 +11,13 @@ namespace Import.Optional.Properties
 {
     #region Baseline
 
+    public class ObjectTestType : FixtureBaseType
+    {
+        [OptionalDependency] public object Property { get; set; }
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+        public override object Default => default(object);
+    }
+
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [OptionalDependency] public TDependency Property { get; set; }

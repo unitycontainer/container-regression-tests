@@ -11,6 +11,13 @@ namespace Import.Required.Properties
 {
     #region Baseline
 
+    public class ObjectTestType : FixtureBaseType
+    {
+        [Dependency] public object Property { get; set; }
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
+        public override object Default => default(object);
+    }
+
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [Dependency] public TDependency Property { get; set; }

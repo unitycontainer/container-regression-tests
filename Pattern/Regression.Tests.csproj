@@ -118,11 +118,6 @@
 	<!-- v5 Exclusions -->
 
 
-	<ItemGroup>
-		<Compile Condition="'$(Configuration)'!='v4'" Remove="Import\FinalTests\Properties\Properties.v4.cs" />
-	</ItemGroup>
-
-
 
 
 	<PropertyGroup>
