@@ -187,5 +187,39 @@ namespace Import
                 registered, named);
 #endif
         #endregion
+
+
+        #region OnType
+#if !UNITY_V4
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_OnType(string test, Type type, object defaultValue,
+                                                                  object defaultAttr, object registered, object named,
+                                                                  object injected, object overridden, object @default)
+            => Assert_Consumer(type,
+                new DependencyOverride(type, null, overridden).OnType(BaselineTestType.MakeGenericType(type)),
+                overridden, named);
+
+
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_OnType_Named(string test, Type type, object defaultValue,
+                                                                  object defaultAttr, object registered, object named,
+                                                                  object injected, object overridden, object @default)
+            => Assert_Consumer(type,
+                new DependencyOverride(type, Name, overridden).OnType(BaselineTestNamed.MakeGenericType(type)),
+                registered, overridden);
+
+
+        [TestProperty(OVERRIDE, nameof(DependencyOverride))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Dependency_OnType_NoMatch(string test, Type type, object defaultValue,
+                                                                  object defaultAttr, object registered, object named,
+                                                                  object injected, object overridden, object @default)
+            => Assert_Consumer(type,
+                new DependencyOverride(type, Name, overridden).OnType(BaselineTestType.MakeGenericType(type)),
+                registered, named);
+#endif
+        #endregion
     }
 }

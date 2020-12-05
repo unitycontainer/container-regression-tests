@@ -106,5 +106,36 @@ namespace Import.Implicit
                 registered, registered);
 
         #endregion
+
+
+        #region OnType
+
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Import.Pattern))]
+        public override void Dependency_OnType(string test, Type type, object defaultValue,
+                                                                  object defaultAttr, object registered, object named,
+                                                                  object injected, object overridden, object @default)
+            => Assert_Consumer(type,
+                new DependencyOverride(type, null, overridden).OnType(BaselineTestType.MakeGenericType(type)),
+                overridden, registered);
+
+
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Import.Pattern))]
+        public override void Dependency_OnType_Named(string test, Type type, object defaultValue,
+                                                                  object defaultAttr, object registered, object named,
+                                                                  object injected, object overridden, object @default)
+            => Assert_Consumer(type,
+                new DependencyOverride(type, Name, overridden).OnType(BaselineTestNamed.MakeGenericType(type)),
+                registered, registered);
+
+
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Import.Pattern))]
+        public override void Dependency_OnType_NoMatch(string test, Type type, object defaultValue,
+                                                                  object defaultAttr, object registered, object named,
+                                                                  object injected, object overridden, object @default)
+            => Assert_Consumer(type,
+                new DependencyOverride(type, Name, overridden).OnType(BaselineTestType.MakeGenericType(type)),
+                registered, registered);
+
+        #endregion
     }
 }
