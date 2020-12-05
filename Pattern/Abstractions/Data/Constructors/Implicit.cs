@@ -32,6 +32,16 @@ namespace Import.Implicit.Constructors
     #endregion
 
 
+    #region No Public Members
+
+    public class NoPublicMember<TDependency>
+    {
+        private NoPublicMember(TDependency value) { }
+    }
+
+    #endregion
+
+
     #region Array
 
     public class BaselineArrayType<TDependency> : FixtureBaseType

@@ -35,6 +35,16 @@ namespace Import.Optional.Properties
     #endregion
 
 
+    #region No Public Members
+
+    public class NoPublicMember<TDependency>
+    {
+        [OptionalDependency] private TDependency Property { get; set; }
+    }
+
+    #endregion
+
+
     #region Array
 
     public class BaselineArrayType<TDependency> : FixtureBaseType

@@ -33,6 +33,17 @@ namespace Import.Optional.Constructors
     #endregion
 
 
+    #region No Public Members
+
+    public class NoPublicMember<TDependency>
+    {
+        [InjectionConstructor]
+        private NoPublicMember([OptionalDependency] TDependency value) { }
+    }
+
+    #endregion
+
+
     #region Array
 
     public class BaselineArrayType<TDependency> : FixtureBaseType

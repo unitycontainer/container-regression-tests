@@ -19,7 +19,7 @@ namespace Import.Implicit
         public override void Optional_WithType_OnNamed(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
         public override void Dependency_ByType_InGraph(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
 #if !UNITY_V4
-        public override void Dependency_ByName_Named(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
+        public override void Dependency_ByName(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
         public override void Dependency_ByName_InGraph(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default){ }
         public override void Dependency_ByName_InReverse(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
         public override void Dependency_ByContract_Named(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }

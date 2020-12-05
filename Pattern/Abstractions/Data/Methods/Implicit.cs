@@ -33,6 +33,16 @@ namespace Import.Implicit.Methods
     #endregion
 
 
+    #region No Public Members
+
+    public class NoPublicMember<TDependency>
+    {
+        private void Method(TDependency value) { }
+    }
+
+    #endregion
+
+
     #region Array
 
     public class BaselineArrayType<TDependency> : FixtureBaseType

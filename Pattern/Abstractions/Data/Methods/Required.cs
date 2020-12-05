@@ -34,6 +34,17 @@ namespace Import.Required.Methods
     #endregion
 
 
+    #region No Public Members
+
+    public class NoPublicMember<TDependency>
+    {
+        [InjectionMethod]
+        private void Method([Dependency] TDependency value) { }
+    }
+
+    #endregion
+
+
     #region Array
 
     public class BaselineArrayType<TDependency> : FixtureBaseType

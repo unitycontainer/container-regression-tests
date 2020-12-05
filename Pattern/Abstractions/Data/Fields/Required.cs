@@ -35,6 +35,22 @@ namespace Import.Required.Fields
     #endregion
 
 
+    #region No Public Members
+
+    public class NoPublicMember<TDependency>
+    {
+        [Dependency]
+        private TDependency Field;
+        protected TDependency Dummy()
+        {
+            Field = default;
+            return Field;
+        }
+    }
+
+    #endregion
+
+
     #region Array
 
     public class BaselineArrayType<TDependency> : FixtureBaseType

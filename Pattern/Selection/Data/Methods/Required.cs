@@ -24,12 +24,6 @@ namespace Selection.Annotated.Methods.Required
         public virtual void Method([Dependency] TItem1 item1, TItem2 item2)
             => Data[3] = new object[] { item1, item2 };
     }
-
-    public class NoPublicMember<TDependency>
-    {
-        [InjectionMethod]
-        private void Method([Dependency] TDependency value) { }
-    }
 }
 
 

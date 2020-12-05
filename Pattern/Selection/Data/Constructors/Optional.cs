@@ -24,12 +24,6 @@ namespace Selection.Annotated.Constructors.Optional
         public BaselineTestType([OptionalDependency] TItem1 item1, TItem2 item2)
             => Data[3] = new object[] { item1, item2 };
     }
-
-    public class NoPublicMember<TDependency>
-    {
-        [InjectionConstructor]
-        private NoPublicMember([OptionalDependency] TDependency value) { }
-    }
 }
 
 

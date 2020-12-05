@@ -6,7 +6,7 @@ using System.Collections.Generic;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
-using Unity.Resolution;
+using Unity;
 #endif
 
 
@@ -92,5 +92,15 @@ namespace Import
                                InjectionMember_Value(new ValidatingResolverFactory(injected)),
                                injected, injected);
 #endif
+
+
+        [TestCategory(CATEGORY_INJECT)]
+        [ExpectedException(typeof(ResolutionFailedException))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        public virtual void Inject_NoPublicMember(string test, Type type, object defaultValue, object defaultAttr,
+                                                   object registered, object named, object injected, object overridden,
+                                                   object @default) 
+            => Assert_Fail(NoPublicMember.MakeGenericType(type), 
+                           InjectionMember_Value(injected));
     }
 }

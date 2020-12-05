@@ -14,6 +14,16 @@ namespace Regression
 {
     public abstract partial class FixtureBase
     {
+        #region Constants
+
+        protected const string OVERRIDE = "Override";
+        protected const string PARAMETER = "Inject";
+        protected const string CATEGORY_IMPORT = "Import";
+        protected const string CATEGORY_INJECT = "Injection";
+
+        #endregion
+
+
         #region Fields
 
         private static string _type { get; set; }
@@ -26,6 +36,7 @@ namespace Regression
         protected static Type BaselineTestNamed;
         protected static Type BaselineArrayType;
         protected static Type BaselineConsumer;
+        protected static Type NoPublicMember;
 
         #endregion
 
@@ -96,6 +107,9 @@ namespace Regression
             BaselineTestNamed = GetTestType("BaselineTestTypeNamed`1");
             BaselineArrayType = GetTestType("BaselineArrayType`1");
             BaselineConsumer = GetTestType("BaselineConsumer`1");
+            NoPublicMember = GetTestType("NoPublicMember`1");
+
+            LoadInjectionProxies();
         }
 
         public virtual void TestInitialize() => Container = new UnityContainer();

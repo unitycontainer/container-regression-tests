@@ -9,14 +9,4 @@ namespace Selection.Implicit.Fields
         public TItem1 Field1;
         public TItem2 Field2;
     }
-
-    public class NoPublicMember<TDependency>
-    {
-        private TDependency Field;
-        protected TDependency Dummy()
-        {
-            Field = default;
-            return Field;
-        }
-    }
 }

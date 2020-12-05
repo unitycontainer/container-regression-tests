@@ -24,12 +24,6 @@ namespace Selection.Annotated.Methods.Optional
         public virtual void Method([OptionalDependency] TItem1 item1, TItem2 item2)
             => Data[3] = new object[] { item1, item2 };
     }
-
-    public class NoPublicMember<TDependency>
-    {
-        [InjectionMethod]
-        private void Method([OptionalDependency] TDependency value) { }
-    }
 }
 
 

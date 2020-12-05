@@ -14,17 +14,6 @@ namespace Selection.Annotated.Fields.Required
         [Dependency] public TItem1 Field1;
         [Dependency] public TItem2 Field2;
     }
-
-    public class NoPublicMember<TDependency>
-    {
-        [Dependency]
-        private TDependency Field;
-        protected TDependency Dummy()
-        {
-            Field = default;
-            return Field;
-        }
-    }
 }
 
 

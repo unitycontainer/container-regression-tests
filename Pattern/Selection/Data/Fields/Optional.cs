@@ -14,18 +14,6 @@ namespace Selection.Annotated.Fields.Optional
         [OptionalDependency] public TItem1 Field1;
         [OptionalDependency] public TItem2 Field2;
     }
-
-    public class NoPublicMember<TDependency>
-    {
-#pragma warning disable IDE0052 // Remove unread private members
-        [OptionalDependency] private TDependency Field;
-#pragma warning restore IDE0052 // Remove unread private members
-        protected TDependency Dummy()
-        {
-            Field = default;
-            return Field;
-        }
-    }
 }
 
 namespace Selection.Annotated.Fields.Optional.EdgeCases

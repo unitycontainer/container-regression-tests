@@ -32,6 +32,21 @@ namespace Import.Implicit.Fields
     #endregion
 
 
+    #region No Public Members
+
+    public class NoPublicMember<TDependency>
+    {
+        private TDependency Field;
+        protected TDependency Dummy()
+        {
+            Field = default;
+            return Field;
+        }
+    }
+
+    #endregion
+
+
     #region Array
 
     public class BaselineArrayType<TDependency> : FixtureBaseType

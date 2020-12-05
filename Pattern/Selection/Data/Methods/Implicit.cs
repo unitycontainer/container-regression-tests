@@ -22,11 +22,6 @@ namespace Selection.Implicit.Methods
         public virtual void Method(TItem1 item1, TItem2 item2)
             => Data[3] = new object[] { item1, item2 };
     }
-
-    public class NoPublicMember<TDependency>
-    {
-        private void Method(TDependency value) { }
-    }
 }
 
 
