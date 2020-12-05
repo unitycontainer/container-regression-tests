@@ -14,7 +14,7 @@ namespace Regression
     {
         #region Import
 
-        protected void Asssert_AlwaysSuccessful(Type type, object @default, object registered)
+        protected void Assert_AlwaysSuccessful(Type type, object @default, object registered)
         {
             // Act
             var instance = Container.Resolve(type, null) as FixtureBaseType;
@@ -34,7 +34,7 @@ namespace Regression
             Assert.AreEqual(registered, instance.Value);
         }
 
-        protected void Asssert_AlwaysSuccessful(Type type, ResolverOverride @override, object expected)
+        protected void Assert_AlwaysSuccessful(Type type, ResolverOverride @override, object expected)
         {
             // Arrange
             Container.RegisterType(null, type, null, null);
@@ -63,7 +63,7 @@ namespace Regression
 
         #region Injected
 
-        protected void Asssert_AlwaysSuccessful(Type type, InjectionMember member, object @default, object registered)
+        protected void Assert_AlwaysSuccessful(Type type, InjectionMember member, object @default, object registered)
         {
             // Inject
             Container.RegisterType(null, type, null, null, member);
@@ -86,7 +86,7 @@ namespace Regression
             Assert.AreEqual(registered, instance.Value);
         }
         
-        protected void Asssert_AlwaysSuccessful(Type type, InjectionMember member, ResolverOverride @override, object expected)
+        protected void Assert_AlwaysSuccessful(Type type, InjectionMember member, ResolverOverride @override, object expected)
         {
             // Arrange
             Container.RegisterType(null, type, null, null, member);
@@ -109,7 +109,7 @@ namespace Regression
             Assert.AreEqual(expected, instance.Value);
         }
         
-        protected void Asssert_AlwaysSuccessful(Type definition, Type type, InjectionMember member, object @default, object registered)
+        protected void Assert_AlwaysSuccessful(Type definition, Type type, InjectionMember member, object @default, object registered)
         {
             var target = definition.MakeGenericType(type);
 

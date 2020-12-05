@@ -14,7 +14,7 @@ namespace Import.Implicit
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Import.Pattern))]
         public override void OptionalGeneric_OnNamed(string test, Type type, object defaultValue, object defaultAttr,
                                                      object registered, object named, object injected, object overridden, object @default)
-            => Asssert_AlwaysSuccessful(BaselineTestNamed, type, 
+            => Assert_AlwaysSuccessful(BaselineTestNamed, type, 
                 InjectionMember_Value(new OptionalGenericParameter(TDependency)),
                 @default, registered);
     }

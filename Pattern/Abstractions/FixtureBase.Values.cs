@@ -12,6 +12,7 @@ namespace Regression
         protected const string FieldName    = "Field";
         protected const string PropertyName = "Property";
         protected const string TDependency  = "TDependency";
+        protected const string ParamName    = "value";
 
 
         #region Integer

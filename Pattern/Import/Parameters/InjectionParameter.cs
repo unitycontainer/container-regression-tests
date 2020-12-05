@@ -26,7 +26,7 @@ namespace Import
         public void Parameter_default(string test, Type type, object defaultValue, object defaultAttr,
                                       object registered, object named, object injected,
                                       object overridden, object @default)
-            => Asssert_AlwaysSuccessful(
+            => Assert_AlwaysSuccessful(
                 BaselineTestType.MakeGenericType(type),
                 InjectionMember_Value(new InjectionParameter(@default)),
                 @default, @default);
@@ -37,7 +37,7 @@ namespace Import
         public void Parameter_Type_default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, 
                                            object overridden, object @default)
-            => Asssert_AlwaysSuccessful(
+            => Assert_AlwaysSuccessful(
                 BaselineTestType.MakeGenericType(type), 
                 InjectionMember_Value(new InjectionParameter(type, @default)), 
                 @default, @default);
@@ -49,7 +49,7 @@ namespace Import
         public void Parameter_null_Value(string test, Type type, object defaultValue, object defaultAttr,
                                          object registered, object named, object injected,
                                          object overridden, object @default)
-            => Asssert_AlwaysSuccessful(
+            => Assert_AlwaysSuccessful(
                 BaselineTestType.MakeGenericType(type),
                 InjectionMember_Value(new InjectionParameter(null, injected)),
                 injected, injected);
@@ -64,7 +64,7 @@ namespace Import
         public void Parameter_Value(string test, Type type, object defaultValue, object defaultAttr,
                                     object registered, object named, object injected, 
                                     object overridden, object @default)
-            => Asssert_AlwaysSuccessful(
+            => Assert_AlwaysSuccessful(
                 BaselineTestType.MakeGenericType(type), 
                 InjectionMember_Value(new InjectionParameter(injected)), 
                 injected, injected);
@@ -75,7 +75,7 @@ namespace Import
         public void Parameter_Type_Value(string test, Type type, object defaultValue, object defaultAttr,
                                          object registered, object named, object injected, 
                                          object overridden, object @default)
-            => Asssert_AlwaysSuccessful(
+            => Assert_AlwaysSuccessful(
                 BaselineTestType.MakeGenericType(type), 
                 InjectionMember_Value(new InjectionParameter(type, injected)), 
                 injected, injected);
@@ -86,7 +86,7 @@ namespace Import
         public void Parameter_Named(string test, Type type, object defaultValue, object defaultAttr,
                                     object registered, object named, object injected, 
                                     object overridden, object @default)
-            => Asssert_AlwaysSuccessful(
+            => Assert_AlwaysSuccessful(
                 BaselineTestNamed.MakeGenericType(type), 
                 InjectionMember_Value(new InjectionParameter(type, injected)), 
                 injected, injected);

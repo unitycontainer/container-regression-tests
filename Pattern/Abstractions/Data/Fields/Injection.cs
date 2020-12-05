@@ -14,8 +14,6 @@ namespace Regression
     {
         private static class Fields
         {
-            private const string FieldName = "Field";
-
             #region Default
 
             public static InjectionMember GetInjectionDefault()
@@ -34,17 +32,14 @@ namespace Regression
 
             #region Override
 
-            public static ResolverOverride GetMemberOverride(string name, object value)
-                => new FieldOverride(name, value);
+            public static ResolverOverride GetMemberOverride(object value)
+                => new FieldOverride(FieldName, value);
 
-            public static ResolverOverride GetMemberOverrideOnType(Type target, string name, object value)
-                => new FieldOverride(name, value).OnType(target);
+            public static ResolverOverride GetMemberOverrideByName(string name, object value)
+                => new FieldOverride(name, value);
 
             public static ResolverOverride GetMemberOverrideWithContract(Type _, string name, object value)
                 => new FieldOverride(name, value);
-
-            public static ResolverOverride GetMemberOverrideWithContractOnType(Type target, Type _, string name, object value)
-                => new FieldOverride(name, value).OnType(target);
 
             #endregion
         }

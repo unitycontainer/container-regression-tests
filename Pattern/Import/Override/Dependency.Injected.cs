@@ -20,7 +20,7 @@ namespace Import
         public virtual void Dependency_Injected_ByType(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
+            => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                                InjectionMember_Value(new ResolvedParameter()),
                                new DependencyOverride(type, overridden), overridden);
 
@@ -30,7 +30,7 @@ namespace Import
         public virtual void Dependency_Injected_ByType_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Asssert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
+            => Assert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
                                InjectionMember_Value(new ResolvedParameter(Name)),
                                new DependencyOverride(type, overridden), overridden);
 #endif
@@ -40,7 +40,7 @@ namespace Import
         public virtual void Dependency_Injected_ByType_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
+            => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                               InjectionMember_Value(new InjectionParameter(injected)),
                               new DependencyOverride(typeof(Pattern), overridden),
                               injected);
@@ -55,7 +55,7 @@ namespace Import
         public virtual void Dependency_Injected_ByName(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
+            => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                               InjectionMember_Value(injected),
                               new DependencyOverride((string)null, overridden), overridden);
 
@@ -65,7 +65,7 @@ namespace Import
         public virtual void Dependency_Injected_ByName_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Asssert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
+            => Assert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
                                InjectionMember_Value(new ResolvedParameter(Name)),
                                new DependencyOverride(Name, overridden), overridden);
 
@@ -104,7 +104,7 @@ namespace Import
         public virtual void Dependency_Injected_ByContract(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
+            => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                                InjectionMember_Value(new ResolvedParameter()),
                                new DependencyOverride(type, null, overridden), overridden);
 
@@ -114,7 +114,7 @@ namespace Import
         public virtual void Dependency_Injected_ByContract_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Asssert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
+            => Assert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
                                InjectionMember_Value(new ResolvedParameter(Name)),
                                new DependencyOverride(type, Name, overridden), overridden);
 

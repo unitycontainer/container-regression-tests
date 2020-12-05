@@ -14,7 +14,7 @@ namespace Import.Optional
                                        object registered, object named,
                                        object injected, object overridden,
                                        object @default)
-            => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type), 
+            => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type), 
                 @default, registered);
 
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Import.Pattern))]
@@ -23,7 +23,7 @@ namespace Import.Optional
                                        object registered, object named,
                                        object injected, object overridden,
                                        object @default)
-            => Asssert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type), 
+            => Assert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type), 
                 @default, named);
 
         #endregion
@@ -37,7 +37,7 @@ namespace Import.Optional
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          object @default)
-            => Asssert_AlwaysSuccessful(CorrespondingTypeDefinition.MakeGenericType(type), 
+            => Assert_AlwaysSuccessful(CorrespondingTypeDefinition.MakeGenericType(type), 
                 @default, registered);
 
 
@@ -47,7 +47,7 @@ namespace Import.Optional
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          object @default)
-            => Asssert_AlwaysSuccessful(CorrespondingTypeDefinition.MakeGenericType(type), 
+            => Assert_AlwaysSuccessful(CorrespondingTypeDefinition.MakeGenericType(type), 
                 @default, registered);
 
         #endregion

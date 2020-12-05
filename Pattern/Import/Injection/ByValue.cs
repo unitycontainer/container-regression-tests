@@ -19,7 +19,7 @@ namespace Import
         public virtual void Inject_Value(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default) 
-            => Asssert_AlwaysSuccessful(
+            => Assert_AlwaysSuccessful(
                 BaselineTestType.MakeGenericType(type), 
                 InjectionMember_Value(injected), 
                 injected, injected);
@@ -29,7 +29,7 @@ namespace Import
         public virtual void Inject_Named(string test, Type type, object defaultValue, object defaultAttr,
                                          object registered, object named, object injected, object overridden,
                                          object @default)
-            => Asssert_AlwaysSuccessful(
+            => Assert_AlwaysSuccessful(
                 BaselineTestNamed.MakeGenericType(type),
                 InjectionMember_Value(injected),
                 injected, injected);
@@ -70,7 +70,7 @@ namespace Import
 
             var target = BaselineTestType.MakeGenericType(typeof(IEnumerable<>).MakeGenericType(type));
 
-            Asssert_AlwaysSuccessful(target, InjectionMember_Value(instance), instance, instance);
+            Assert_AlwaysSuccessful(target, InjectionMember_Value(instance), instance, instance);
         }
 
 #endif
@@ -79,7 +79,7 @@ namespace Import
         public virtual void Inject_Resolver(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
                                             object @default)
-            => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
+            => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                                InjectionMember_Value(new ValidatingResolver(injected)),
                                injected, injected);
 #if !UNITY_V4
@@ -88,7 +88,7 @@ namespace Import
         public virtual void Inject_TypeFactory(string test, Type type, object defaultValue, object defaultAttr,
                                                object registered, object named, object injected, object overridden,
                                                object @default)
-            => Asssert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
+            => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                                InjectionMember_Value(new ValidatingResolverFactory(injected)),
                                injected, injected);
 #endif
