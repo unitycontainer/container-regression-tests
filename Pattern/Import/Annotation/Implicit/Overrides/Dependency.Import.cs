@@ -83,8 +83,7 @@ namespace Import.Implicit
         public override void Dependency_ByTarget(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Consumer(type,
-                new DependencyOverride(BaselineTestType.MakeGenericType(type), type, null, overridden),
+            => Assert_Consumer(type, new DependencyOverride(BaselineTestType.MakeGenericType(type), type, null, overridden),
                 overridden, registered);
 
 
@@ -92,8 +91,7 @@ namespace Import.Implicit
         public override void Dependency_ByTarget_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Consumer(type,
-                new DependencyOverride(BaselineTestNamed.MakeGenericType(type), type, Name, overridden),
+            => Assert_Consumer(type, new DependencyOverride(BaselineTestNamed.MakeGenericType(type), type, Name, overridden),
                 registered, registered);
 
 
@@ -101,8 +99,7 @@ namespace Import.Implicit
         public override void Dependency_ByTarget_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Consumer(type,
-                new DependencyOverride(BaselineTestType.MakeGenericType(type), type, Name, overridden),
+            => Assert_Consumer(type, new DependencyOverride(BaselineTestType.MakeGenericType(type), type, Name, overridden),
                 registered, registered);
 
         #endregion
@@ -114,8 +111,7 @@ namespace Import.Implicit
         public override void Dependency_OnType(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Consumer(type,
-                new DependencyOverride(type, null, overridden).OnType(BaselineTestType.MakeGenericType(type)),
+            => Assert_Consumer(type, new DependencyOverride(type, null, overridden).OnType(BaselineTestType.MakeGenericType(type)),
                 overridden, registered);
 
 
@@ -123,8 +119,7 @@ namespace Import.Implicit
         public override void Dependency_OnType_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Consumer(type,
-                new DependencyOverride(type, Name, overridden).OnType(BaselineTestNamed.MakeGenericType(type)),
+            => Assert_Consumer(type, new DependencyOverride(type, Name, overridden).OnType(BaselineTestNamed.MakeGenericType(type)),
                 registered, registered);
 
 
@@ -132,8 +127,7 @@ namespace Import.Implicit
         public override void Dependency_OnType_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_Consumer(type,
-                new DependencyOverride(type, Name, overridden).OnType(BaselineTestType.MakeGenericType(type)),
+            => Assert_Consumer(type, new DependencyOverride(type, Name, overridden).OnType(BaselineTestType.MakeGenericType(type)),
                 registered, registered);
 
         #endregion

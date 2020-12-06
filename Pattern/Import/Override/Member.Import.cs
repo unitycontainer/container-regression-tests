@@ -3,6 +3,7 @@ using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
+using Unity;
 using Unity.Injection;
 #endif
 
@@ -10,47 +11,83 @@ namespace Import
 {
     public abstract partial class Pattern
     {
+        #region Value
+
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Member_ByValue(string test, Type type, object defaultValue,
                                            object defaultAttr, object registered, object named,
-                                           object injected, object overridden, object @default)
-        {
-            Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
+                                           object injected, object overridden, object @default) 
+            => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                 MemberOverride(overridden), overridden);
-        }
+
+        #endregion
+
+
+        #region Injection Members
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
-        public virtual void Member_ByInjectionMember(string test, Type type, object defaultValue,
-                                                     object defaultAttr, object registered, object named,
-                                                     object injected, object overridden, object @default)
-        {
-            Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
+        public virtual void Member_ByInjectionParameter(string test, Type type, object defaultValue,
+                                                        object defaultAttr, object registered, object named,
+                                                        object injected, object overridden, object @default) 
+            => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                 MemberOverride(new InjectionParameter(injected)), injected);
-        }
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Member_ByResolvedMember(string test, Type type, object defaultValue,
                                                      object defaultAttr, object registered, object named,
-                                                     object injected, object overridden, object @default)
-        {
-            Assert_UnregisteredThrows_RegisteredSuccess(
+                                                     object injected, object overridden, object @default) 
+            => Assert_UnregisteredThrows_RegisteredSuccess(
                 BaselineTestType.MakeGenericType(type),
                 MemberOverride(new ResolvedParameter(type)), registered);
-        }
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Member_ByResolvedNamed(string test, Type type, object defaultValue,
                                                      object defaultAttr, object registered, object named,
-                                                     object injected, object overridden, object @default)
-        {
-            Assert_UnregisteredThrows_RegisteredSuccess(
+                                                     object injected, object overridden, object @default) 
+            => Assert_UnregisteredThrows_RegisteredSuccess(
                 BaselineTestType.MakeGenericType(type),
                 MemberOverride(new ResolvedParameter(type, Name)),
                 named);
-        }
+
+        #endregion
+
+
+        #region On Type
+
+        [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Member_OnType(string test, Type type, object defaultValue,
+                                                                  object defaultAttr, object registered, object named,
+                                                                  object injected, object overridden, object @default)
+            => Assert_Consumer(type,
+                MemberOverride(overridden).OnType(BaselineTestType.MakeGenericType(type)),
+                overridden, named);
+
+
+        [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Member_OnType_Named(string test, Type type, object defaultValue,
+                                                                  object defaultAttr, object registered, object named,
+                                                                  object injected, object overridden, object @default)
+            => Assert_Consumer(type,
+                MemberOverride(overridden).OnType(BaselineTestNamed.MakeGenericType(type)),
+                registered, overridden);
+
+
+        [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        public virtual void Member_OnType_NoMatch(string test, Type type, object defaultValue,
+                                                                  object defaultAttr, object registered, object named,
+                                                                  object injected, object overridden, object @default)
+            => Assert_UnregisteredThrows_RegisteredSuccess(
+                BaselineTestType.MakeGenericType(type),
+                MemberOverride(new ResolvedParameter(type, Name)).OnType(type),
+                registered);
+        
+        #endregion
     }
 }
