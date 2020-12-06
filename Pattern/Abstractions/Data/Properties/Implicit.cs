@@ -56,11 +56,17 @@ namespace Import.Implicit.Properties
 
     public class BaselineConsumer<TDependency> : FixtureBaseType
     {
-        public BaselineConsumer(BaselineTestType<TDependency> dependency, BaselineTestTypeNamed<TDependency> dummy)
+        public readonly BaselineTestType<TDependency> Item1;
+        public readonly BaselineTestTypeNamed<TDependency> Item2;
+
+        public BaselineConsumer(BaselineTestType<TDependency> item1, BaselineTestTypeNamed<TDependency> item2)
         {
-            Value = dependency.Value;
-            Default = dummy.Value;
+            Item1 = item1;
+            Item2 = item2;
         }
+
+        public override object Value => Item1.Value;
+        public override object Default => Item2.Value;
     }
 
     #endregion

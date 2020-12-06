@@ -59,7 +59,7 @@ namespace Import
         #region On Type
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Member_OnType(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -69,7 +69,7 @@ namespace Import
 
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Member_OnType_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -79,7 +79,7 @@ namespace Import
 
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Member_OnType_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)

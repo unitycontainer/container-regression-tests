@@ -6,7 +6,7 @@ namespace Import.Implicit
 {
     public abstract partial class Pattern
     {
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Import.Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Import.Pattern))]
         public override void Member_OnType(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)

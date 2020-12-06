@@ -14,7 +14,7 @@ namespace Import
         #region Type
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Parameter_Override_ByType(string test, Type type, object defaultValue,
                                                       object defaultAttr, object registered, object named,
                                                       object injected, object overridden, object @default) 

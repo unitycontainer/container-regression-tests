@@ -39,6 +39,10 @@
 	  <Compile Remove="Selection\Tests\**" />
 	</ItemGroup>
 
+	<ItemGroup>
+	</ItemGroup>
+
+
 
 	
 	<!-- Definitions -->
@@ -100,7 +104,7 @@
 		<Otherwise>
 			<ItemGroup> <!-- IF NOT v4 -->
 				<Compile Remove="Abstractions\Resolvers\ValidatintResolver.v4.cs" />
-				<Compile Remove="Import\FinalTests\Methods\Methods.v4.cs" />
+				<Compile Remove="Import\FinalTests\Methods\Override.v4.cs" />
 			</ItemGroup>
 		</Otherwise>
 	</Choose>
