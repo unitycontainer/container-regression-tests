@@ -34,6 +34,16 @@ namespace Import
             => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                 MemberOverride(new InjectionParameter(injected)), injected);
 
+
+        [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
+        [ExpectedException(typeof(ResolutionFailedException))]
+        public virtual void Member_ByParameterRecursive(string test, Type type, object defaultValue,
+                                                        object defaultAttr, object registered, object named,
+                                                        object injected, object overridden, object @default)
+            => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
+                MemberOverride(new InjectionParameter(new InjectionParameter(injected))), injected);
+
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Member_ByResolvedMember(string test, Type type, object defaultValue,
