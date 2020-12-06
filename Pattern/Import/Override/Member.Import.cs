@@ -65,6 +65,27 @@ namespace Import
 
         #endregion
 
+        
+        #region With Type
+
+        [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
+        public virtual void Parameter_Override_ByType(string test, Type type, object defaultValue,
+                                                      object defaultAttr, object registered, object named,
+                                                      object injected, object overridden, object @default)
+            => Assert_Consumer(type, MemberOverride_ByType(type, overridden), overridden, overridden);
+
+
+        [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
+        public virtual void Parameter_Override_ByNameType(string test, Type type, object defaultValue,
+                                                          object defaultAttr, object registered, object named,
+                                                          object injected, object overridden, object @default)
+            => Assert_Consumer(type, MemberOverride_ByContract(type, overridden), overridden, overridden);
+
+        #endregion
+
+
 
         #region On Type
 
@@ -97,7 +118,27 @@ namespace Import
                 BaselineTestType.MakeGenericType(type),
                 MemberOverride(new ResolvedParameter(type, Name)).OnType(type),
                 registered);
+
+
+        [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
+        public virtual void Parameter_Override_OnType_ByType(string test, Type type, object defaultValue,
+                                                             object defaultAttr, object registered, object named,
+                                                             object injected, object overridden, object @default)
+            => Assert_Consumer(type, 
+                MemberOverride_ByType(type, overridden).OnType(BaselineTestNamed.MakeGenericType(type)),
+                registered, overridden);
         
+
+        [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
+        public virtual void Parameter_Override_OnType_ByNameType(string test, Type type, object defaultValue,
+                                                          object defaultAttr, object registered, object named,
+                                                          object injected, object overridden, object @default)
+            => Assert_Consumer(type, 
+                MemberOverride_ByContract(type, overridden).OnType(BaselineTestNamed.MakeGenericType(type)), 
+                registered, overridden);
+
         #endregion
     }
 }

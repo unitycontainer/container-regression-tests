@@ -12,5 +12,7 @@ namespace Import.Implicit
                                                                   object injected, object overridden, object @default)
             => Assert_Consumer(type, MemberOverride(overridden).OnType(BaselineTestType.MakeGenericType(type)), 
                 overridden, registered);
+
+        public override void Parameter_Override_ByNameType(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
     }
 }

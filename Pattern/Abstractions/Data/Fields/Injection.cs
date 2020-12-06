@@ -38,8 +38,11 @@ namespace Regression
             public static ResolverOverride GetMemberOverrideByName(string name, object value)
                 => new FieldOverride(name, value);
 
-            public static ResolverOverride GetMemberOverrideWithContract(Type _, string name, object value)
-                => new FieldOverride(name, value);
+            public static ResolverOverride GetMemberOverrideByType(Type type, object value)
+                => throw new NotSupportedException();
+
+            public static ResolverOverride GetMemberOverrideWithContract(Type _, object value)
+                => throw new NotSupportedException();
 
             #endregion
         }

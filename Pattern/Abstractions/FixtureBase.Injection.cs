@@ -19,8 +19,8 @@ namespace Regression
 
         protected static Func<object, ResolverOverride> MemberOverride;
         protected static Func<string, object, ResolverOverride> MemberOverride_ByName;
-
-        protected static Func<Type, string, object, ResolverOverride> MemberOverride_WithContract;
+        protected static Func<Type, object, ResolverOverride>   MemberOverride_ByType;
+        protected static Func<Type, object, ResolverOverride>   MemberOverride_ByContract;
 
         #endregion
 
@@ -37,15 +37,17 @@ namespace Regression
             InjectionMember_Default = (Func<InjectionMember>)support
                 .GetMethod("GetInjectionDefault").CreateDelegate(typeof(Func<InjectionMember>));
 
-
             MemberOverride = (Func<object, ResolverOverride>)support
                 .GetMethod("GetMemberOverride").CreateDelegate(typeof(Func<object, ResolverOverride>));
 
             MemberOverride_ByName = (Func<string, object, ResolverOverride>)support
                 .GetMethod("GetMemberOverrideByName").CreateDelegate(typeof(Func<string, object, ResolverOverride>));
 
-            MemberOverride_WithContract = (Func<Type, string, object, ResolverOverride>)support
-                .GetMethod("GetMemberOverrideWithContract").CreateDelegate(typeof(Func<Type, string, object, ResolverOverride>));
+            MemberOverride_ByType = (Func<Type, object, ResolverOverride>)support
+                .GetMethod("GetMemberOverrideByType").CreateDelegate(typeof(Func<Type, object, ResolverOverride>));
+
+            MemberOverride_ByContract = (Func<Type, object, ResolverOverride>)support
+                .GetMethod("GetMemberOverrideWithContract").CreateDelegate(typeof(Func<Type, object, ResolverOverride>));
         }
     }
 }
