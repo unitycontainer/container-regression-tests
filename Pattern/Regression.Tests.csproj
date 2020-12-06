@@ -39,6 +39,7 @@
 	  <Compile Remove="Selection\Tests\**" />
 	</ItemGroup>
 
+
 	
 	<!-- Definitions -->
 
@@ -84,6 +85,9 @@
 				<Compile Remove="Import\Annotation\Implicit\Implicit.Dependency.Import.cs" />
 				<Compile Remove="Import\Annotation\Implicit\Implicit.OptionalParameter.cs" />
 				<Compile Remove="Import\Annotation\Implicit\Implicit.ResolvedParameter.cs" />
+				<Compile Remove="Import\Annotation\Implicit\Overrides\Dependency.Import.cs" />
+				<Compile Remove="Import\Annotation\Implicit\Overrides\OptionalParameter.cs" />
+				<Compile Remove="Import\Annotation\Implicit\Overrides\ResolvedParameter.cs" />
 				<Compile Remove="Resolution\Enumerable\**" />
 				<Compile Remove="Resolution\Generic\Constrained.cs" />
 				<Compile Remove="Registration\Validation\Factory.cs" />

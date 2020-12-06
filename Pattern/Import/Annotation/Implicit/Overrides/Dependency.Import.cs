@@ -12,8 +12,6 @@ namespace Import.Implicit
     {
         #region Name
 
-#if !UNITY_V4
-
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Import.Pattern))]
         public override void Dependency_ByName(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -40,13 +38,13 @@ namespace Import.Implicit
             => Assert_Consumer(type, 
                 new DependencyOverride(Name, overridden),
                 registered, registered);
-#endif
+
         #endregion
 
 
         #region Contract
 
-#if !UNITY_V4
+
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Import.Pattern))]
         public override void Dependency_ByContract_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
@@ -73,7 +71,7 @@ namespace Import.Implicit
             => Assert_Consumer(type, 
                 new DependencyOverride(type, Name, overridden),
                 registered, registered);
-#endif
+
         #endregion
 
 
