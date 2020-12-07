@@ -1,14 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
-namespace Injection.Fields
+namespace Properties
 {
     [TestClass]
-    public partial class Required : Injection.Required.Pattern
+    public partial class Injecting_Optional_With_Required : Injection.Optional.Pattern
     {
         #region Properties
 
-        protected override string DependencyName => "Field";
+        protected override string DependencyName => "Property";
 
         #endregion
 

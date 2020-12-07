@@ -25,6 +25,16 @@ namespace Regression
             public static InjectionMember GetInjectionContract(Type type, string name)
                 => new InjectionField(FieldName, type, name);
 
+
+            public static InjectionMember GetInjectionDefaultOptional()
+                => new OptionalField(FieldName);
+
+            public static InjectionMember GetInjectionValueOptional(object argument)
+                => new OptionalField(FieldName, argument);
+
+            public static InjectionMember GetInjectionContractOptional(Type type, string name)
+                => new OptionalField(FieldName, type, name);
+
             #endregion
 
 

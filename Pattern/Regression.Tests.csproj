@@ -82,14 +82,14 @@
 				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
 				<Compile Remove="Patterns\Abstractions\FixtureBase.Fields.cs" />
 				<Compile Remove="Patterns\Abstractions\Data\Fields\**" />
-				<Compile Remove="Import\FinalTests\Fields\**" />
-				<Compile Remove="Import\Data\Fields\**" />
-				<Compile Remove="Import\Annotation\Implicit\Implicit.Dependency.Import.cs" />
-				<Compile Remove="Import\Annotation\Implicit\Implicit.OptionalParameter.cs" />
-				<Compile Remove="Import\Annotation\Implicit\Implicit.ResolvedParameter.cs" />
-				<Compile Remove="Import\Annotation\Implicit\Overrides\Dependency.Import.cs" />
-				<Compile Remove="Import\Annotation\Implicit\Overrides\OptionalParameter.cs" />
-				<Compile Remove="Import\Annotation\Implicit\Overrides\ResolvedParameter.cs" />
+				<Compile Remove="Patterns\Injection\Final\Fields\**" />
+				<Compile Remove="Patterns\Injection\Data\Fields\**" />
+				<Compile Remove="Patterns\Injection\Annotation\Implicit\Implicit.Dependency.Import.cs" />
+				<Compile Remove="Patterns\Injection\Annotation\Implicit\Implicit.OptionalParameter.cs" />
+				<Compile Remove="Patterns\Injection\Annotation\Implicit\Implicit.ResolvedParameter.cs" />
+				<Compile Remove="Patterns\Injection\Annotation\Implicit\Overrides\Dependency.Import.cs" />
+				<Compile Remove="Patterns\Injection\Annotation\Implicit\Overrides\OptionalParameter.cs" />
+				<Compile Remove="Patterns\Injection\Annotation\Implicit\Overrides\ResolvedParameter.cs" />
 				<Compile Remove="Resolution\Enumerable\**" />
 				<Compile Remove="Resolution\Generic\Constrained.cs" />
 				<Compile Remove="Registration\Validation\Factory.cs" />
@@ -102,7 +102,7 @@
 		<Otherwise>
 			<ItemGroup> <!-- IF NOT v4 -->
 				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.v4.cs" />
-				<Compile Remove="Import\FinalTests\Methods\Override.v4.cs" />
+				<Compile Remove="Patterns\Injection\Final\Methods\Override.v4.cs" />
 			</ItemGroup>
 		</Otherwise>
 	</Choose>

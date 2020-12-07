@@ -25,6 +25,16 @@ namespace Regression
             public static InjectionMember GetInjectionContract(Type type, string name)
                 => new InjectionProperty(PropertyName, type, name);
 
+
+            public static InjectionMember GetInjectionDefaultOptional()
+                => new OptionalProperty(PropertyName);
+
+            public static InjectionMember GetInjectionValueOptional(object argument)
+                => new OptionalProperty(PropertyName, argument);
+
+            public static InjectionMember GetInjectionContractOptional(Type type, string name)
+                => new OptionalProperty(PropertyName, type, name);
+
             #endregion
 
 
