@@ -6,13 +6,6 @@ namespace Import.Implicit.Fields
 {
     #region Baseline
 
-    public class ObjectTestType : FixtureBaseType
-    {
-        public object Field;
-        public override object Value { get => Field; }
-        public override object Default => default(object);
-    }
-
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         public TDependency Field;
@@ -27,6 +20,17 @@ namespace Import.Implicit.Fields
 
         public override object Value { get => Field; }
         public override object Default => default(TDependency);
+    }
+
+    #endregion
+
+
+    #region Object
+
+    public class ObjectTestType : FixtureBaseType
+    {
+        public object Field;
+        public override object Value { get => Field; }
     }
 
     #endregion
@@ -54,6 +58,12 @@ namespace Import.Implicit.Fields
         public TDependency[] Field;
         public override object Value { get => Field; }
         public override object Default => default(TDependency);
+    }
+
+    public class ObjectArrayType : FixtureBaseType
+    {
+        public object[] Field;
+        public override object Value { get => Field; }
     }
 
     #endregion

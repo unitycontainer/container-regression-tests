@@ -34,5 +34,15 @@ namespace Import.Implicit
             // Act
             _ = Container.Resolve(target, null);
         }
+
+
+
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Import.Pattern))]
+        public override void Inject_Named_Default(string test, Type type, object defaultValue, object defaultAttr,
+                                           object registered, object named, object injected, object overridden,
+                                           object @default)
+            => Assert_UnregisteredThrows_RegisteredSuccess(
+                BaselineTestNamed.MakeGenericType(type),
+                InjectionMember_Default(), registered);
     }
 }

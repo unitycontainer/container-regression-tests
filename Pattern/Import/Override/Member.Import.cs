@@ -32,7 +32,7 @@ namespace Import
                                                         object defaultAttr, object registered, object named,
                                                         object injected, object overridden, object @default) 
             => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
-                MemberOverride(new InjectionParameter(injected)), injected);
+                MemberOverride(new InjectionParameter(overridden)), overridden);
 
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
@@ -42,7 +42,7 @@ namespace Import
                                                         object defaultAttr, object registered, object named,
                                                         object injected, object overridden, object @default)
             => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
-                MemberOverride(new InjectionParameter(new InjectionParameter(injected))), injected);
+                MemberOverride(new InjectionParameter(new InjectionParameter(overridden))), overridden);
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
@@ -84,7 +84,6 @@ namespace Import
             => Assert_Consumer(type, MemberOverride_ByContract(type, overridden), overridden, overridden);
 
         #endregion
-
 
 
         #region On Type

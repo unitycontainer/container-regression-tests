@@ -14,18 +14,16 @@ namespace Regression
     {
         private static class Constructors
         {
-            #region Default
+            #region Injection
 
             public static InjectionMember GetInjectionDefault()
                 => new InjectionConstructor();
-            
-            #endregion
-
-
-            #region Value
 
             public static InjectionMember GetInjectionValue(object argument)
                 => new InjectionConstructor(argument);
+
+            public static InjectionMember GetInjectionContract(Type type, string name)
+                => new InjectionConstructor(new ResolvedParameter(type, name));
 
             #endregion
 

@@ -3,7 +3,6 @@ using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
-using Unity;
 using Unity.Injection;
 using Unity.Resolution;
 #endif
@@ -12,9 +11,7 @@ namespace Regression
 {
     public abstract partial class FixtureBase
     {
-        #region Import
-
-        protected void Assert_AlwaysSuccessful(Type type, object @default, object registered)
+        protected void Assert_AlwaysSuccessful(Type type, object @default, object expected)
         {
             // Act
             var instance = Container.Resolve(type, null) as FixtureBaseType;
@@ -31,9 +28,9 @@ namespace Regression
 
             // Validate
             Assert.IsNotNull(instance);
-            Assert.AreEqual(registered, instance.Value);
+            Assert.AreEqual(expected, instance.Value);
         }
-
+        
         protected void Assert_AlwaysSuccessful(Type type, ResolverOverride @override, object expected)
         {
             // Arrange
@@ -56,14 +53,8 @@ namespace Regression
             Assert.IsNotNull(instance);
             Assert.AreEqual(expected, instance.Value);
         }
-
-
-        #endregion
-
-
-        #region Injected
-
-        protected void Assert_AlwaysSuccessful(Type type, InjectionMember member, object @default, object registered)
+        
+        protected void Assert_AlwaysSuccessful(Type type, InjectionMember member, object @default, object expected)
         {
             // Inject
             Container.RegisterType(null, type, null, null, member);
@@ -83,7 +74,7 @@ namespace Regression
 
             // Validate
             Assert.IsNotNull(instance);
-            Assert.AreEqual(registered, instance.Value);
+            Assert.AreEqual(expected, instance.Value);
         }
         
         protected void Assert_AlwaysSuccessful(Type type, InjectionMember member, ResolverOverride @override, object expected)
@@ -108,32 +99,5 @@ namespace Regression
             Assert.IsNotNull(instance);
             Assert.AreEqual(expected, instance.Value);
         }
-        
-        protected void Assert_AlwaysSuccessful(Type definition, Type type, InjectionMember member, object @default, object registered)
-        {
-            var target = definition.MakeGenericType(type);
-
-            // Inject
-            Container.RegisterType(null, definition, null, null, member);
-
-            // Act
-            var instance = Container.Resolve(target, null) as FixtureBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(@default, instance.Value);
-
-            // Register missing types
-            RegisterTypes();
-
-            // Act
-            instance = Container.Resolve(target, null) as FixtureBaseType;
-
-            // Validate
-            Assert.IsNotNull(instance);
-            Assert.AreEqual(registered, instance.Value);
-        }
-
-        #endregion
     }
 }

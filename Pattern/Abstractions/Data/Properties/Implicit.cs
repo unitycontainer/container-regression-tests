@@ -6,13 +6,6 @@ namespace Import.Implicit.Properties
 {
     #region Baseline
 
-    public class ObjectTestType : FixtureBaseType
-    {
-        public object Property { get; set; }
-        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
-        public override object Default => default(object);
-    }
-
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         public TDependency Property { get; set; }
@@ -25,6 +18,17 @@ namespace Import.Implicit.Properties
         public TDependency Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
+    }
+
+    #endregion
+
+
+    #region Object
+
+    public class ObjectTestType : FixtureBaseType
+    {
+        public object Property { get; set; }
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
 
     #endregion
@@ -47,6 +51,12 @@ namespace Import.Implicit.Properties
         public TDependency[] Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
+    }
+
+    public class ObjectArrayType : FixtureBaseType
+    {
+        public object[] Property { get; set; }
+        public override object Value { get => Property; protected set => throw new NotSupportedException(); }
     }
 
     #endregion

@@ -14,18 +14,16 @@ namespace Regression
     {
         private static class Methods
         {
-            #region Default
+            #region Injection
 
             public static InjectionMember GetInjectionDefault()
                 => new InjectionMethod(MethodName);
 
-            #endregion
-
-
-            #region Value
-
             public static InjectionMember GetInjectionValue(object argument)
                 => new InjectionMethod(MethodName, argument);
+
+            public static InjectionMember GetInjectionContract(Type type, string name)
+                => new InjectionMethod(MethodName, new ResolvedParameter(type, name));
 
             #endregion
 

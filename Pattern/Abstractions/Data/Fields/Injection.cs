@@ -14,18 +14,16 @@ namespace Regression
     {
         private static class Fields
         {
-            #region Default
+            #region Injection
 
             public static InjectionMember GetInjectionDefault()
                 => new InjectionField(FieldName);
 
-            #endregion
-
-
-            #region Value
-
             public static InjectionMember GetInjectionValue(object argument)
                 => new InjectionField(FieldName, argument);
+
+            public static InjectionMember GetInjectionContract(Type type, string name)
+                => new InjectionField(FieldName, type, name);
 
             #endregion
 

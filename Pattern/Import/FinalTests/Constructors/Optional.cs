@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Import.Constructors
 {
@@ -18,6 +19,14 @@ namespace Import.Constructors
 
         [ClassInitialize]
         public static void ClassInit(TestContext context) => ClassInitialize(context);
+
+        #endregion
+
+
+        #region Not Supported
+
+        public override void Inject_Default(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
+        public override void Inject_Named_Default(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
 
         #endregion
     }

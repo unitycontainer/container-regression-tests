@@ -14,18 +14,16 @@ namespace Regression
     {
         private static class Properties
         {
-            #region Default
+            #region Injection
 
             public static InjectionMember GetInjectionDefault()
                 => new InjectionProperty(PropertyName);
 
-            #endregion
-
-
-            #region Value
-
             public static InjectionMember GetInjectionValue(object argument)
                 => new InjectionProperty(PropertyName, argument);
+
+            public static InjectionMember GetInjectionContract(Type type, string name)
+                => new InjectionProperty(PropertyName, type, name);
 
             #endregion
 

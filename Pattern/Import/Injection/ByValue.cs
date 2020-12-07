@@ -15,7 +15,7 @@ namespace Import
     public abstract partial class Pattern
     {
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public virtual void Inject_Value(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default) 
@@ -25,7 +25,7 @@ namespace Import
                 injected, injected);
 
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public virtual void Inject_Named(string test, Type type, object defaultValue, object defaultAttr,
                                          object registered, object named, object injected, object overridden,
                                          object @default)
@@ -36,7 +36,7 @@ namespace Import
 
 
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public virtual void Inject_WithType(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
                                             object @default)
@@ -45,9 +45,29 @@ namespace Import
                 InjectionMember_Value(type), registered);
 
 
+
+        [TestCategory(CATEGORY_INJECT)]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        [ExpectedException(typeof(ResolutionFailedException))]
+        public virtual void Inject_NoMarch(string test, Type type, object defaultValue, object defaultAttr,
+                                            object registered, object named, object injected, object overridden,
+                                            object @default)
+        {
+            var target = BaselineConsumer.MakeGenericType(type);
+            var inject = InjectionMember_Value(injected);
+            Container.RegisterType(null, target, null, null, inject);
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            _ = Container.Resolve(target, null);
+        }
+
+
 #if !BEHAVIOR_V4 && !BEHAVIOR_V5
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public virtual void Inject_Array(string test, Type type, object defaultValue, object defaultAttr,
                                          object registered, object named, object injected, object overridden,
                                          object @default)
@@ -60,7 +80,7 @@ namespace Import
 
 
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public virtual void Inject_Enumerable(string test, Type type, object defaultValue, object defaultAttr, 
                                               object registered, object named, object injected, object overridden, 
                                               object @default)
@@ -75,7 +95,7 @@ namespace Import
 
 #endif
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Compatibility_Data))]
         public virtual void Inject_Resolver(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
                                             object @default)
@@ -84,7 +104,7 @@ namespace Import
                                injected, injected);
 #if !UNITY_V4
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public virtual void Inject_TypeFactory(string test, Type type, object defaultValue, object defaultAttr,
                                                object registered, object named, object injected, object overridden,
                                                object @default)
@@ -98,7 +118,7 @@ namespace Import
 #if !BEHAVIOR_V4 && !BEHAVIOR_V5
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
         public virtual void Inject_NoPublicMember(string test, Type type, object defaultValue, object defaultAttr,
                                                    object registered, object named, object injected, object overridden,
                                                    object @default)

@@ -10,12 +10,6 @@ namespace Import.Implicit.Methods
 {
     #region Baseline
 
-    public class ObjectTestType : FixtureBaseType
-    {
-        [InjectionMethod] public void Method(object value) => Value = value;
-        public override object Default => default(object);
-    }
-
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [InjectionMethod] public void Method(TDependency value) => Value = value;
@@ -28,6 +22,16 @@ namespace Import.Implicit.Methods
         [InjectionMethod]
         public virtual void Method(TDependency value) => Value = value;
         public override object Default => default(TDependency);
+    }
+
+    #endregion
+
+
+    #region Object
+
+    public class ObjectTestType : FixtureBaseType
+    {
+        [InjectionMethod] public void Method(object value) => Value = value;
     }
 
     #endregion
@@ -51,6 +55,11 @@ namespace Import.Implicit.Methods
         public override object Default => default(TDependency);
     }
 
+    public class ObjectArrayType : FixtureBaseType
+    {
+        [InjectionMethod] public void Method(object[] value) => Value = value;
+    }
+
     #endregion
 
 
@@ -58,10 +67,11 @@ namespace Import.Implicit.Methods
 
     public class BaselineConsumer<TDependency> : FixtureBaseType
     {
-        public readonly BaselineTestType<TDependency> Item1;
-        public readonly BaselineTestTypeNamed<TDependency> Item2;
+        public BaselineTestType<TDependency> Item1 { get; private set; }
+        public BaselineTestTypeNamed<TDependency> Item2 { get; private set; }
 
-        public BaselineConsumer(BaselineTestType<TDependency> item1, BaselineTestTypeNamed<TDependency> item2)
+        [InjectionMethod]
+        public void Method(BaselineTestType<TDependency> item1, BaselineTestTypeNamed<TDependency> item2)
         {
             Item1 = item1;
             Item2 = item2;

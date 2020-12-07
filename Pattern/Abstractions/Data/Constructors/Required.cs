@@ -11,12 +11,6 @@ namespace Import.Required.Constructors
 {
     #region Baseline
 
-    public class ObjectTestType : FixtureBaseType
-    {
-        [InjectionConstructor] public ObjectTestType([Dependency] object value) => Value = value;
-        public override object Default => default(object);
-    }
-
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [InjectionConstructor]public BaselineTestType([Dependency] TDependency value) => Value = value;
@@ -28,6 +22,16 @@ namespace Import.Required.Constructors
     {
         public BaselineTestTypeNamed([Dependency(Pattern.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
+    }
+
+    #endregion
+
+
+    #region Object
+
+    public class ObjectTestType : FixtureBaseType
+    {
+        [InjectionConstructor] public ObjectTestType([Dependency] object value) => Value = value;
     }
 
     #endregion
@@ -50,6 +54,11 @@ namespace Import.Required.Constructors
     {
         [InjectionConstructor] public BaselineArrayType([Dependency] TDependency[] value) => Value = value;
         public override object Default => default(TDependency);
+    }
+
+    public class ObjectArrayType : FixtureBaseType
+    {
+        [InjectionConstructor] public ObjectArrayType([Dependency] object[] value) => Value = value;
     }
 
     #endregion

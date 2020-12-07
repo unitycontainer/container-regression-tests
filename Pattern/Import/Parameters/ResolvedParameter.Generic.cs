@@ -35,7 +35,7 @@ namespace Import
                                                      object registered, object named, object injected, object overridden, 
                                                      object @default)
             => Assert_UnregisteredThrows_RegisteredSuccess(
-                BaselineTestType, type, 
+                BaselineTestType.MakeGenericType(type), 
                 InjectionMember_Value(new GenericParameter(TDependency)), 
                 registered);
 
@@ -46,7 +46,7 @@ namespace Import
                                                              object registered, object named, object injected, object overridden, 
                                                              object @default)
             => Assert_UnregisteredThrows_RegisteredSuccess(
-                BaselineTestNamed, type, 
+                BaselineTestNamed.MakeGenericType(type), 
                 InjectionMember_Value(new GenericParameter(TDependency)), 
                 registered);
 
@@ -85,10 +85,33 @@ namespace Import
                                                       object registered, object named, object injected, object overridden, 
                                                       object @default)
             => Assert_UnregisteredThrows_RegisteredSuccess(
-                BaselineTestType, type, 
+                BaselineTestType.MakeGenericType(type), 
                 InjectionMember_Value(new GenericParameter(TDependency, Name)), 
                 named);
 
+
+        [TestProperty(PARAMETER, nameof(GenericParameter))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        [ExpectedException(typeof(ResolutionFailedException))]
+        public virtual void ResolvedGeneric_NoMatch(string test, Type type, object defaultValue, object defaultAttr,
+                                                      object registered, object named, object injected, object overridden,
+                                                      object @default)
+            => Assert_UnregisteredThrows_RegisteredSuccess(
+                BaselineTestType.MakeGenericType(type),
+                InjectionMember_Value(new GenericParameter("Dependency", Name)),
+                named);
+
+
+        [TestProperty(PARAMETER, nameof(GenericParameter))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        [ExpectedException(typeof(ResolutionFailedException))]
+        public virtual void ResolvedGeneric_NotArray(string test, Type type, object defaultValue, object defaultAttr,
+                                                      object registered, object named, object injected, object overridden,
+                                                      object @default)
+            => Assert_UnregisteredThrows_RegisteredSuccess(
+                BaselineTestType.MakeGenericType(type),
+                InjectionMember_Value(new GenericParameter(TDependency + "[]")),
+                named);
 
         [TestProperty(PARAMETER, nameof(GenericParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
@@ -96,7 +119,7 @@ namespace Import
                                                               object registered, object named, object injected, object overridden, 
                                                               object @default)
             => Assert_UnregisteredThrows_RegisteredSuccess(
-                BaselineTestNamed, type, 
+                BaselineTestNamed.MakeGenericType(type), 
                 InjectionMember_Value(new GenericParameter(TDependency, null)), 
                 registered);
 
@@ -117,10 +140,25 @@ namespace Import
             Container.RegisterInstance(type, "named",       named);
             Container.RegisterInstance(type, "injected ",   injected);
             Container.RegisterInstance(type, "overridden",  overridden);
+            var parameter = new GenericParameter(TDependency + "[]");
 
+            Assert.AreEqual(TDependency, parameter.ParameterTypeName);
             Assert_Array_Import(BaselineArrayType, type, 
-                InjectionMember_Value(new GenericParameter(TDependency + "[]")),
+                InjectionMember_Value(parameter),
                 new object[] { defaultValue, defaultAttr, registered, named, injected, overridden });
+        }
+
+
+        [TestProperty(PARAMETER, nameof(GenericParameter))]
+        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        [ExpectedException(typeof(ResolutionFailedException))]
+        public virtual void ResolvedGeneric_ArrayNoMatch(string test, Type type, object defaultValue, object defaultAttr,
+                                                         object registered, object named, object injected, object overridden,
+                                                         object @default)
+        {
+            Assert_Array_Import(BaselineArrayType, type,
+                InjectionMember_Value(new GenericParameter("Dependency[]")),
+                new object[0]);
         }
 
         [TestProperty(PARAMETER, nameof(GenericParameter))]

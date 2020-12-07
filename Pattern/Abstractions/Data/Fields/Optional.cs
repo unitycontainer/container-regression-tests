@@ -9,13 +9,6 @@ namespace Import.Optional.Fields
 {
     #region Baseline
 
-    public class ObjectTestType : FixtureBaseType
-    {
-        [OptionalDependency] public object Field;
-        public override object Value { get => Field; }
-        public override object Default => default(object);
-    }
-
     public class BaselineTestType<TDependency> : FixtureBaseType
     {
         [OptionalDependency] public TDependency Field;
@@ -30,6 +23,17 @@ namespace Import.Optional.Fields
 
         public override object Value { get => Field; }
         public override object Default => default(TDependency);
+    }
+
+    #endregion
+
+
+    #region Object
+
+    public class ObjectTestType : FixtureBaseType
+    {
+        [OptionalDependency] public object Field;
+        public override object Value { get => Field; }
     }
 
     #endregion
@@ -59,6 +63,12 @@ namespace Import.Optional.Fields
         [OptionalDependency] public TDependency[] Field;
         public override object Value { get => Field; }
         public override object Default => default(TDependency);
+    }
+
+    public class ObjectArrayType : FixtureBaseType
+    {
+        [OptionalDependency] public object[] Field;
+        public override object Value { get => Field; }
     }
 
     #endregion
