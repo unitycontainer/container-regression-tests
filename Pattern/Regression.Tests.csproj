@@ -39,9 +39,6 @@
 	  <Compile Remove="Selection\Tests\**" />
 	</ItemGroup>
 
-	<ItemGroup>
-	</ItemGroup>
-
 
 
 	
@@ -68,6 +65,7 @@
 	<PropertyGroup>
 		<DefineConstants Condition="'$(Configuration)'=='v4'">$(DefineConstants);BEHAVIOR_V4</DefineConstants>
 		<DefineConstants Condition="'$(Configuration)'=='v5'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
+		<DefineConstants Condition="'$(Configuration)'!='v4' AND '$(Configuration)'!='v5'">$(DefineConstants);BEHAVIOR_V6</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -80,10 +78,10 @@
 	<Choose>
 		<When Condition="$(TargetFramework.StartsWith('net45'))">
 			<ItemGroup> <!-- IF v4 -->
-				<Compile Remove="Abstractions\Resolvers\ValidatingResolverFactory.cs" />
-				<Compile Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
-				<Compile Remove="Abstractions\FixtureBase.Fields.cs" />
-				<Compile Remove="Abstractions\Data\Fields\**" />
+				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
+				<Compile Remove="Patterns\Abstractions\FixtureBase.Fields.cs" />
+				<Compile Remove="Patterns\Abstractions\Data\Fields\**" />
 				<Compile Remove="Import\FinalTests\Fields\**" />
 				<Compile Remove="Import\Data\Fields\**" />
 				<Compile Remove="Import\Annotation\Implicit\Implicit.Dependency.Import.cs" />
@@ -103,7 +101,7 @@
 		</When>
 		<Otherwise>
 			<ItemGroup> <!-- IF NOT v4 -->
-				<Compile Remove="Abstractions\Resolvers\ValidatintResolver.v4.cs" />
+				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.v4.cs" />
 				<Compile Remove="Import\FinalTests\Methods\Override.v4.cs" />
 			</ItemGroup>
 		</Otherwise>
@@ -112,8 +110,8 @@
 	<Choose>
 		<When Condition="$(TargetFramework.StartsWith('net46')) OR $(TargetFramework.StartsWith('net47'))">
 			<ItemGroup> <!-- IF v5 -->
-				<Compile Remove="Abstractions\Resolvers\ValidatingResolverFactory.cs" />
-				<Compile Remove="Abstractions\Resolvers\ValidatintResolver.cs" />
+				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
 				<Compile Remove="Registration\Validation\Factory.cs" />
 				<Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
 				<Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
@@ -121,8 +119,8 @@
 		</When>
 		<Otherwise>
 			<ItemGroup> <!-- IF NOT v5 -->
-				<Compile Remove="Abstractions\Resolvers\ValidatintResolver.v5.cs" />
-				<Compile Remove="Abstractions\Resolvers\ValidatingResolverFactory.v5.cs" />
+				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.v5.cs" />
+				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.v5.cs" />
 			</ItemGroup>
 		</Otherwise>
 	</Choose>
@@ -140,6 +138,10 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
 		<PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Patterns\Dependency\" />
 	</ItemGroup>
 
 </Project>
