@@ -1,5 +1,4 @@
 ﻿using System;
-using Regression;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -7,7 +6,7 @@ using Unity;
 #endif
 
 
-namespace Import.Required.Properties
+namespace Regression.Required.Properties
 {
     #region Baseline
 
@@ -20,7 +19,7 @@ namespace Import.Required.Properties
 
     public class BaselineTestTypeNamed<TDependency> : FixtureBaseType
     {
-        [Dependency(Pattern.Name)] public TDependency Property { get; set; }
+        [Dependency(FixtureBase.Name)] public TDependency Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
     }

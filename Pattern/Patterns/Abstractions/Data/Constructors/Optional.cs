@@ -1,5 +1,4 @@
-﻿using Regression;
-#if UNITY_V4
+﻿#if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
@@ -7,7 +6,7 @@ using Unity.Injection;
 #endif
 
 
-namespace Import.Optional.Constructors
+namespace Regression.Optional.Constructors
 {
     #region Baseline
 
@@ -20,7 +19,7 @@ namespace Import.Optional.Constructors
     public class BaselineTestTypeNamed<TDependency>
         : FixtureBaseType
     {
-        public BaselineTestTypeNamed([OptionalDependency(Pattern.Name)] TDependency value) => Value = value;
+        public BaselineTestTypeNamed([OptionalDependency(FixtureBase.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 

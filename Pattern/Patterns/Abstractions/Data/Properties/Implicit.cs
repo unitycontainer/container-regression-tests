@@ -1,8 +1,7 @@
-﻿using Regression;
-using System;
+﻿using System;
 
 
-namespace Import.Implicit.Properties
+namespace Regression.Implicit.Properties
 {
     #region Baseline
 

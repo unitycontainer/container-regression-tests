@@ -1,12 +1,11 @@
-﻿using Regression;
-#if UNITY_V4
+﻿#if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 #endif
 
 
-namespace Import.Implicit.Methods
+namespace Regression.Implicit.Methods
 {
     #region Baseline
 

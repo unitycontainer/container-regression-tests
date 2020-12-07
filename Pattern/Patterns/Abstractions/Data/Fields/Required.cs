@@ -1,11 +1,10 @@
-﻿using Regression;
-#if UNITY_V4
+﻿#if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 #endif
 
-namespace Import.Required.Fields
+namespace Regression.Required.Fields
 {
     #region Baseline
 
@@ -19,7 +18,7 @@ namespace Import.Required.Fields
     public class BaselineTestTypeNamed<TDependency>
         : FixtureBaseType
     {
-        [Dependency(Pattern.Name)] public TDependency Field;
+        [Dependency(FixtureBase.Name)] public TDependency Field;
 
         public override object Value { get => Field; }
         public override object Default => default(TDependency);

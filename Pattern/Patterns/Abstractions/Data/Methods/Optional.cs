@@ -1,12 +1,11 @@
-﻿using Regression;
-#if UNITY_V4
+﻿#if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 #endif
 
 
-namespace Import.Optional.Methods
+namespace Regression.Optional.Methods
 {
     #region Baseline
 
@@ -20,7 +19,7 @@ namespace Import.Optional.Methods
         : FixtureBaseType
     {
         [InjectionMethod]
-        public virtual void Method([OptionalDependency(Pattern.Name)] TDependency value) => Value = value;
+        public virtual void Method([OptionalDependency(FixtureBase.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 

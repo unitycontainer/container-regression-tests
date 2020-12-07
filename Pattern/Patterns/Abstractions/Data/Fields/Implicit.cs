@@ -1,8 +1,4 @@
-﻿using Regression;
-using System;
-
-
-namespace Import.Implicit.Fields
+﻿namespace Regression.Implicit.Fields
 {
     #region Baseline
 

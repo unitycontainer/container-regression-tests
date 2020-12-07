@@ -2,7 +2,7 @@
 using Regression;
 using System;
 
-namespace Import
+namespace Injection
 {
     public abstract partial class Pattern
     {
