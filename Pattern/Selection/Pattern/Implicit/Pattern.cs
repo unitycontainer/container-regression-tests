@@ -10,7 +10,7 @@ using Unity;
 
 namespace Selection.Implicit
 {
-    public abstract partial class Pattern 
+    public abstract partial class OldPattern 
     {
         [DataTestMethod, DynamicData(nameof(Unsupported_Data), typeof(FixtureBase))]
         public virtual void Selection_NoPublicMebers(string test, Type type)

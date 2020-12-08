@@ -3,7 +3,7 @@
 namespace Constructors
 {
     [TestClass]
-    public class Selecting_Annotated : Selection.Pattern
+    public class Selecting_Optional : Selection.Optional.Pattern
     {
         #region Properties
         protected override string DependencyName => "value";

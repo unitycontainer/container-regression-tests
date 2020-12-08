@@ -16,19 +16,3 @@ namespace Selection.Annotated.Properties.Required
         [Dependency] public TItem2 Property2 { get => (TItem2)Data[1]; set => Data[1] = value; }
     }
 }
-
-
-namespace Selection.Annotated.Properties.Required.EdgeCasesThrowing
-{
-#if !BEHAVIOR_V4
-    public class StructProperty : PropertySelectionBase
-    {
-        [Dependency] public TestStruct Property { get; set; }
-    }
-#endif
-
-    public class OpenGenericType<T>
-    {
-        [Dependency] public T Property { get; set; }
-    }
-}

@@ -3,7 +3,7 @@
 namespace Methods
 {
     [TestClass]
-    public class Selecting_Annotated : Selection.Pattern
+    public class Selecting_Required : Selection.Required.Pattern
     {
         #region Properties
         protected override string DependencyName => "value";

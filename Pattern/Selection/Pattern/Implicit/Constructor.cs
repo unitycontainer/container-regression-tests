@@ -9,7 +9,7 @@ using Unity;
 
 namespace Selection.Implicit
 {
-    public abstract partial class Pattern 
+    public abstract partial class OldPattern 
     {
         [DataTestMethod, DynamicData(nameof(Selection_Data))]
         public virtual void Selection_Constructor_Implicit(string test, Type contract, object registered, 

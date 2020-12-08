@@ -25,30 +25,3 @@ namespace Selection.Annotated.Constructors.Optional
             => Data[3] = new object[] { item1, item2 };
     }
 }
-
-
-namespace Selection.Annotated.Constructors.Optional.EdgeCases
-{
-    public class DynamicParameter : ConstructorSelectionBase
-    {
-        public DynamicParameter([OptionalDependency] dynamic value) => Data[0] = value;
-        public override bool IsSuccessfull => this[0] is not null;
-    }
-
-    // TODO: Requires investigation
-#if !BEHAVIOR_V4
-    public class StructParameter : ConstructorSelectionBase
-    {
-        public StructParameter([OptionalDependency] TestStruct value) => Data[0] = value;
-        public override bool IsSuccessfull => this[0] is not null;
-    }
-#endif
-}
-
-namespace Selection.Annotated.Constructors.Optional.EdgeCasesThrowing
-{ 
-    public class OpenGenericType<T>
-    {
-        public OpenGenericType([OptionalDependency] T value) { }
-    }
-}

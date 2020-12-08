@@ -2,7 +2,7 @@
 
 namespace Selection.Implicit
 {
-    public abstract partial class Pattern : SelectionBase
+    public abstract partial class OldPattern : SelectionBase
     {
 
         private static object[] TestRecord(string name, Type contract, object instance, Type dependency, Type import, int index)

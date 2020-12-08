@@ -15,20 +15,3 @@ namespace Selection.Annotated.Fields.Required
         [Dependency] public TItem2 Field2;
     }
 }
-
-
-namespace Selection.Annotated.Fields.Required.EdgeCasesThrowing
-{
-#if !BEHAVIOR_V4
-    public class StructField : FieldSelectionBase
-    {
-        [Dependency] public TestStruct Field;
-        public override bool IsSuccessfull => this[0] is not null;
-    }
-#endif
-
-    public class OpenGenericType<T>
-    {
-        [Dependency] public T Field;
-    }
-}

@@ -1,67 +1,95 @@
-﻿using System.Reflection;
+﻿using Regression;
+using System;
+using System.Reflection;
 
 namespace Selection
 {
     public abstract partial class Pattern
     {
+        public static readonly BindingFlags PatternDefaultFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+
         #region Base Types
 
-        public abstract class SelectionBaseType
+
+        public abstract class SelectionBaseType : FixtureBaseType
         {
-            protected static readonly BindingFlags Flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            protected SelectionBaseType() => Value = new object[0];
+            
+            protected SelectionBaseType(Func<Type, MemberInfo[]> func)
+            {
+                var members = func(GetType());
 
-            public virtual object this[int index] => new object();
+                Default = members;
+                Value = new object[members.Length];
+            }
 
-            public virtual bool IsSuccessfull => true;
+            public object[] Data => (object[])Value;
+            
+            public virtual object this[int index] => ((object[])Value)[index];
+
+            public virtual bool IsSuccessful => true;
         }
 
-        public class ConstructorSelectionBase : SelectionBaseType
+        public abstract class SelectionBaseType<TMemberInfo> : SelectionBaseType
+            where TMemberInfo : MemberInfo
         {
-            protected object[] Data;
+            protected SelectionBaseType(Func<Type, MemberInfo[]> func)
+                : base(func) { }
 
-            public ConstructorSelectionBase() => Data = new object[GetType().GetConstructors(Flags).Length];
-
-            public override object this[int index] => Data[index];
+            public MemberInfo[] Members => (MemberInfo[])Default;
         }
 
-        public class MethodSelectionBase : SelectionBaseType
+
+        public class ConstructorSelectionBase : SelectionBaseType<ConstructorInfo>
         {
-            protected object[] Data;
-
-            public MethodSelectionBase() => Data = new object[GetType().GetMethods(Flags).Length];
-
-            public override object this[int index] => Data[index];
+            public ConstructorSelectionBase() 
+                : base(t => t.GetConstructors(PatternDefaultFlags))
+            { }
         }
 
-        public class FieldSelectionBase : SelectionBaseType
+        public class MethodSelectionBase : SelectionBaseType<MethodInfo>
         {
-            protected FieldInfo[] Members;
-
-            public FieldSelectionBase() => Members = GetType().GetFields(Flags);
-
-            public override object this[int index] => Members[index].GetValue(this);
+            public MethodSelectionBase()
+                : base(t => t.GetMethods(PatternDefaultFlags))
+            { }
         }
 
-        public class PropertySelectionBase : SelectionBaseType
+        public class FieldSelectionBase : SelectionBaseType<FieldInfo>
         {
-            protected object[] Data;
+            public FieldSelectionBase()
+                : base(t => t.GetFields(PatternDefaultFlags))
+            { }
 
-            public PropertySelectionBase() => Data = new object[GetType().GetProperties(Flags).Length];
+            public override object this[int index] => ((FieldInfo[])Default)[index].GetValue(this);
+        }
 
-            public override object this[int index] => Data[index];
+        public class PropertySelectionBase : SelectionBaseType<PropertyInfo>
+        {
+            public PropertySelectionBase()
+                : base(t => t.GetProperties(PatternDefaultFlags))
+            { }
+        }
+
+        #endregion
+
+
+        #region Empty Types
+
+        public class DummySelection : SelectionBaseType 
+        {
+        }
+
+        public class UnresolvableDummySelection : SelectionBaseType
+        {
+            private UnresolvableDummySelection()
+            {
+            }
         }
 
         #endregion
 
 
         #region Test Types
-
-        public class DummySelection : SelectionBaseType { }
-
-        public class UnresolvableDummySelection : SelectionBaseType
-        {
-            private UnresolvableDummySelection() { }
-        }
 
         public struct TestStruct
         {

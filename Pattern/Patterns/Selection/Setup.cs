@@ -1,16 +1,10 @@
-﻿using Regression;
-#if UNITY_V4
-using Microsoft.Practices.Unity;
-#else
-using Unity.Resolution;
-#endif
-
-namespace Selection
+﻿namespace Selection
 {
-    public abstract partial class Pattern : FixtureBase
+    public abstract partial class Pattern : Regression.FixtureBase
     {
         #region Constants
 
+        protected const string SELECTION_TEST = "Test Cases";
         protected const string SELECTION_EDGE = "Edge Cases";
 
         #endregion

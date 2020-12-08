@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Methods
+namespace Constructors
 {
     [TestClass]
-    public class Selecting_Implicit : Selection.Implicit.Pattern
+    public class Selecting_Required : Selection.Required.Pattern
     {
         #region Properties
         protected override string DependencyName => "value";

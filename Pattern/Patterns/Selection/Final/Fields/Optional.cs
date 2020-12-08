@@ -3,7 +3,7 @@
 namespace Fields
 {
     [TestClass]
-    public class Selecting_Optional : Selection.Pattern
+    public class Selecting_Optional : Selection.Optional.Pattern
     {
         #region Properties
 
