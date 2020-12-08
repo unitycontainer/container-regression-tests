@@ -140,5 +140,17 @@ namespace Injection
                            InjectionMember_Value(new InjectionParameter(type)));
 
         #endregion
+
+
+        #region Validation
+
+        [TestMethod, TestProperty(PARAMETER, nameof(InjectionParameter))]
+        public void Parameter_ToString()
+        {
+            var parameter = new InjectionParameter(this).ToString();
+            Assert.IsTrue(parameter.StartsWith(typeof(InjectionParameter).Name));
+        }
+
+        #endregion
     }
 }

@@ -20,6 +20,7 @@ namespace Regression
         protected const string PARAMETER = "Injecting";
         protected const string CATEGORY_INJECT = "Injecting";
         protected const string MEMBER_OVERRIDE = "MemberOverride";
+        protected const string VALIDATION = "Validation";
 
         #endregion
 
