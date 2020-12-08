@@ -1,11 +1,12 @@
-﻿using static Selection.SelectionBase;
+﻿using static Selection.Pattern;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 #endif
 
-namespace Selection.Implicit.Methods
+
+namespace Selection.Annotated.Methods.Required
 {
     public class BaselineTestType<TItem1, TItem2>
         : MethodSelectionBase
@@ -13,55 +14,45 @@ namespace Selection.Implicit.Methods
         public virtual void Method()
             => Data[0] = new object[0];
 
-        public virtual void Method(TItem1 value)
+        [InjectionMethod]
+        public virtual void Method([Dependency] TItem1 value)
             => Data[1] = new object[] { value };
 
         public virtual void Method(TItem2 value)
             => Data[2] = new object[] { value };
 
-        public virtual void Method(TItem1 item1, TItem2 item2)
+        public virtual void Method([Dependency] TItem1 item1, TItem2 item2)
             => Data[3] = new object[] { item1, item2 };
     }
 }
 
 
-namespace Selection.Implicit.Methods.EdgeCases
+namespace Selection.Annotated.Methods.Required.EdgeCases
 {
     public class DynamicParameter : MethodSelectionBase
     {
         [InjectionMethod]
-        public void Method(dynamic value) => Data[0] = value;
+        public void Method([Dependency] dynamic value) => Data[0] = value;
         public override bool IsSuccessfull => this[0] is not null;
     }
+
 }
 
 
-namespace Selection.Implicit.Methods.EdgeCasesThrowing
+namespace Selection.Annotated.Methods.Required.EdgeCasesThrowing
 {
-    public class RefParameter : SelectionBaseType
-    {
-        [InjectionMethod]
-        public void Method(ref int value) { }
-    }
-
-    public class OutParameter : SelectionBaseType
-    {
-        [InjectionMethod]
-        public void Method(out int value) { value = 0; }
-    }
-
 #if !BEHAVIOR_V4
     public class StructParameter : ConstructorSelectionBase
     {
         [InjectionMethod]
-        public void Method(TestStruct value) => Data[0] = value;
+        public void Method([Dependency] TestStruct value) => Data[0] = value;
         public override bool IsSuccessfull => this[0] is not null;
     }
 #endif
-    
+
     public class OpenGenericType<T>
     {
         [InjectionMethod]
-        public void Method(T value) { }
+        public void Method([Dependency] T value) { }
     }
 }

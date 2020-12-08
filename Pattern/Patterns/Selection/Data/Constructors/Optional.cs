@@ -1,11 +1,12 @@
-﻿using static Selection.SelectionBase;
+﻿using static Selection.Pattern;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
 #endif
 
-namespace Selection.Annotated.Constructors.Required
+
+namespace Selection.Annotated.Constructors.Optional
 {
     public class BaselineTestType<TItem1, TItem2>
         : ConstructorSelectionBase
@@ -14,39 +15,40 @@ namespace Selection.Annotated.Constructors.Required
             => Data[0] = new object[0];
 
         [InjectionConstructor]
-        public BaselineTestType([Dependency] TItem1 value)
+        public BaselineTestType([OptionalDependency] TItem1 value)
             => Data[1] = new object[] { value };
 
         public BaselineTestType(TItem2 value)
             => Data[2] = new object[] { value };
 
-        public BaselineTestType([Dependency] TItem1 item1, TItem2 item2)
+        public BaselineTestType([OptionalDependency] TItem1 item1, TItem2 item2)
             => Data[3] = new object[] { item1, item2 };
     }
 }
 
 
-namespace Selection.Annotated.Constructors.Required.EdgeCases
+namespace Selection.Annotated.Constructors.Optional.EdgeCases
 {
     public class DynamicParameter : ConstructorSelectionBase
     {
-        public DynamicParameter([Dependency] dynamic value) => Data[0] = value;
+        public DynamicParameter([OptionalDependency] dynamic value) => Data[0] = value;
         public override bool IsSuccessfull => this[0] is not null;
     }
-}
 
-namespace Selection.Annotated.Constructors.Required.EdgeCasesThrowing
-{
+    // TODO: Requires investigation
 #if !BEHAVIOR_V4
     public class StructParameter : ConstructorSelectionBase
     {
-        public StructParameter([Dependency] TestStruct value) => Data[0] = value;
+        public StructParameter([OptionalDependency] TestStruct value) => Data[0] = value;
         public override bool IsSuccessfull => this[0] is not null;
     }
 #endif
+}
 
+namespace Selection.Annotated.Constructors.Optional.EdgeCasesThrowing
+{ 
     public class OpenGenericType<T>
     {
-        public OpenGenericType([Dependency] T value) { }
+        public OpenGenericType([OptionalDependency] T value) { }
     }
 }

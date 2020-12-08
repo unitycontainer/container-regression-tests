@@ -11,13 +11,6 @@ namespace Selection.Injected
 {
     public abstract partial class Pattern : SelectionBase
     {
-        #region Not Supported Tests
-
-        public override void Selection_EdgeCases_Successfull(string test, Type type) { }
-
-        #endregion
-
-
         #region Test Data
 
         public static IEnumerable<object[]> DefaultMemberTest_Data

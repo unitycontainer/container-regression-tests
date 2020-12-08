@@ -1,4 +1,4 @@
-﻿using static Selection.SelectionBase;
+﻿using static Selection.Pattern;
 using System;
 
 namespace Selection.Implicit.Fields

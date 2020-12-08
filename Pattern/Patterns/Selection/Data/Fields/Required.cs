@@ -1,5 +1,5 @@
 ﻿using System;
-using static Selection.SelectionBase;
+using static Selection.Pattern;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else

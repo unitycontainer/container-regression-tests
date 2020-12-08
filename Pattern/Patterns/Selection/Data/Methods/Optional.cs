@@ -1,4 +1,4 @@
-﻿using static Selection.SelectionBase;
+﻿using static Selection.Pattern;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -6,7 +6,7 @@ using Unity;
 #endif
 
 
-namespace Selection.Annotated.Methods.Required
+namespace Selection.Annotated.Methods.Optional
 {
     public class BaselineTestType<TItem1, TItem2>
         : MethodSelectionBase
@@ -15,44 +15,43 @@ namespace Selection.Annotated.Methods.Required
             => Data[0] = new object[0];
 
         [InjectionMethod]
-        public virtual void Method([Dependency] TItem1 value)
+        public virtual void Method([OptionalDependency] TItem1 value)
             => Data[1] = new object[] { value };
 
         public virtual void Method(TItem2 value)
             => Data[2] = new object[] { value };
 
-        public virtual void Method([Dependency] TItem1 item1, TItem2 item2)
+        public virtual void Method([OptionalDependency] TItem1 item1, TItem2 item2)
             => Data[3] = new object[] { item1, item2 };
     }
 }
 
 
-namespace Selection.Annotated.Methods.Required.EdgeCases
+namespace Selection.Annotated.Methods.Optional.EdgeCases
 {
     public class DynamicParameter : MethodSelectionBase
     {
         [InjectionMethod]
-        public void Method([Dependency] dynamic value) => Data[0] = value;
+        public void Method([OptionalDependency] dynamic value) => Data[0] = value;
         public override bool IsSuccessfull => this[0] is not null;
     }
 
-}
-
-
-namespace Selection.Annotated.Methods.Required.EdgeCasesThrowing
-{
 #if !BEHAVIOR_V4
     public class StructParameter : ConstructorSelectionBase
     {
         [InjectionMethod]
-        public void Method([Dependency] TestStruct value) => Data[0] = value;
+        public void Method([OptionalDependency] TestStruct value) => Data[0] = value;
         public override bool IsSuccessfull => this[0] is not null;
     }
 #endif
+}
 
+
+namespace Selection.Annotated.Methods.Optional.EdgeCasesThrowing
+{
     public class OpenGenericType<T>
     {
         [InjectionMethod]
-        public void Method([Dependency] T value) { }
+        public void Method([OptionalDependency] T value) { }
     }
 }

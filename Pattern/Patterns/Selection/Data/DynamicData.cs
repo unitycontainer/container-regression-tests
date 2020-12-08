@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+
 namespace Selection
 {
-    public abstract partial class SelectionBase
+    public abstract partial class Pattern
     {
         #region Test Data
 

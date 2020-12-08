@@ -1,4 +1,4 @@
-﻿using static Selection.SelectionBase;
+﻿using static Selection.Pattern;
 
 namespace Selection.Implicit.Properties
 {

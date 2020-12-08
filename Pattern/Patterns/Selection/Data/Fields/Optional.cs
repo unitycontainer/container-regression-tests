@@ -1,4 +1,4 @@
-﻿using static Selection.SelectionBase;
+﻿using static Selection.Pattern;
 using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
