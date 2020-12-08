@@ -3,7 +3,7 @@
 namespace Constructors
 {
     [TestClass]
-    public partial class Optional_Resolving : Dependency.Optional.Pattern
+    public partial class Resolving_Optional : Dependency.Optional.Pattern
     {
         #region Properties
         protected override string DependencyName => "value";

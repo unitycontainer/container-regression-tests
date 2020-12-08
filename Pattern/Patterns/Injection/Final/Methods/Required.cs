@@ -3,7 +3,7 @@
 namespace Methods
 {
     [TestClass]
-    public partial class Required_Injecting : Injection.Required.Pattern
+    public partial class Injecting_Required : Injection.Required.Pattern
     {
         #region Properties
         protected override string DependencyName => "value";

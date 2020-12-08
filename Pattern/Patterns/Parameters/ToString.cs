@@ -11,7 +11,7 @@ namespace Parameters
 {
     public abstract partial class Pattern
     {
-        [TestCategory(VALIDATION)]
+        [TestCategory(nameof(ParameterBase))]
         [DataTestMethod, DynamicData(nameof(Injection_Parameters_Data))]
         public virtual void ToString(string test, ParameterValue value, string startsWith, string[] contains)
         {
@@ -25,7 +25,7 @@ namespace Parameters
         {
             get
             {
-                var type = typeof(ParameterBase);
+                var type = typeof(Validating);
 
 
                 #region ResolvedArrayParameter
@@ -98,7 +98,7 @@ namespace Parameters
                 yield return new object[]
                 {
                     "ResolvedParameter(Type)",      // Name
-                    new ResolvedParameter<ParameterBase>(),
+                    new ResolvedParameter<Validating>(),
                     typeof(ResolvedParameter).Name, // Starts with
                     new string [] {
                         type.Name,
@@ -119,7 +119,7 @@ namespace Parameters
                 yield return new object[]
                 {
                     "ResolvedParameter(Type)",      // Name
-                    new ResolvedParameter<ParameterBase>(Name),
+                    new ResolvedParameter<Validating>(Name),
                     typeof(ResolvedParameter).Name, // Starts with
                     new string [] {
                         type.Name,
@@ -158,7 +158,7 @@ namespace Parameters
                 yield return new object[]
                 {
                     "OptionalParameter(Type)",      // Name
-                    new OptionalParameter<ParameterBase>(),
+                    new OptionalParameter<Validating>(),
                     typeof(OptionalParameter).Name, // Starts with
                     new string [] {
                         type.Name,
@@ -178,7 +178,7 @@ namespace Parameters
                 yield return new object[]
                 {
                     "OptionalParameter(Type)",      // Name
-                    new OptionalParameter<ParameterBase>(Name),
+                    new OptionalParameter<Validating>(Name),
                     typeof(OptionalParameter).Name, // Starts with
                     new string [] {
                         type.Name,

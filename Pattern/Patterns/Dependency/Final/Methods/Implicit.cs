@@ -9,7 +9,7 @@ using Unity;
 namespace Methods
 {
     [TestClass]
-    public partial class Implicit_Resolving : Dependency.Implicit.Pattern
+    public partial class Resolving_Implicit : Dependency.Implicit.Pattern
     {
         #region Properties
         protected override string DependencyName => "value";

@@ -8,7 +8,7 @@ using Unity;
 namespace Methods
 {
     [TestClass]
-    public partial class Implicit_Injecting : Injection.Implicit.Pattern
+    public partial class Injecting_Implicit : Injection.Implicit.Pattern
     {
         #region Properties
         protected override string DependencyName => "value";

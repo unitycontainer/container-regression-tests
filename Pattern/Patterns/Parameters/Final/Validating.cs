@@ -3,7 +3,7 @@
 namespace Parameters
 {
     [TestClass]
-    public partial class ParameterBase : Parameters.Pattern
+    public partial class Validating : Parameters.Pattern
     {
 
     }

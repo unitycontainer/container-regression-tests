@@ -3,7 +3,7 @@
 namespace Constructors
 {
     [TestClass]
-    public partial class Implicit_Resolving : Dependency.Implicit.Pattern
+    public partial class Resolving_Implicit : Dependency.Implicit.Pattern
     {
         #region Properties
         protected override string DependencyName => "value";

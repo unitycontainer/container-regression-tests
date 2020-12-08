@@ -4,7 +4,7 @@ using Regression;
 namespace Methods
 {
     [TestClass]
-    public partial class Required_Resolving : Dependency.Required.Pattern
+    public partial class Resolving_Required : Dependency.Required.Pattern
     {
         #region Properties
         protected override string DependencyName => "value";
