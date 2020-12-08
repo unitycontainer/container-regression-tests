@@ -1,10 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Regression;
 
 namespace Constructors
 {
     [TestClass]
-    public partial class Resolving_Required : Dependency.Required.Pattern
+    public partial class Required_Resolving : Dependency.Required.Pattern
     {
         #region Properties
         protected override string DependencyName => "value";

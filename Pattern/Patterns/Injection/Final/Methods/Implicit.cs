@@ -1,9 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+#if UNITY_V4
+using Microsoft.Practices.Unity;
+#else
+using Unity;
+#endif
 
 namespace Methods
 {
     [TestClass]
-    public partial class Injecting_Required : Injection.Required.Pattern
+    public partial class Implicit_Injecting : Injection.Implicit.Pattern
     {
         #region Properties
         protected override string DependencyName => "value";
@@ -18,6 +23,11 @@ namespace Methods
 
         [ClassInitialize]
         public static void ClassInit(TestContext context) => ClassInitialize(context);
+
+        #endregion
+
+
+        #region Special Cases
 
         #endregion
     }

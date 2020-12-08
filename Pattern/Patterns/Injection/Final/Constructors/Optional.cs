@@ -4,7 +4,7 @@ using System;
 namespace Constructors
 {
     [TestClass]
-    public partial class Injecting_Implicit : Injection.Implicit.Pattern
+    public partial class Optional_Injecting : Injection.Optional.Pattern
     {
         #region Properties
         protected override string DependencyName => "value";
