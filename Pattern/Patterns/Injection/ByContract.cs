@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Regression;
 using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
@@ -11,63 +12,69 @@ namespace Injection
 {
     public abstract partial class Pattern
     {
-        [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        [DynamicData(nameof(Import_Test_Data))]
+        [PatternTestMethod("Inject Unnamed dependency by XxxMember()"), TestCategory(CATEGORY_INJECT)]
         public virtual void Inject_Default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default)
-            => Assert_UnregisteredThrows_RegisteredSuccess(
+            => Assert_Injection(
                 BaselineTestType.MakeGenericType(type),
-                InjectionMember_Default(), registered);
+                InjectionMember_Default(), 
+                @default, registered);
 
 
-        [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+        [DynamicData(nameof(Import_Test_Data))]
+        [PatternTestMethod("Inject Named dependency by XxxMember()"), TestCategory(CATEGORY_INJECT)]
         public virtual void Inject_Named_Default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default)
-            => Assert_UnregisteredThrows_RegisteredSuccess(
+            => Assert_Injection(
                 BaselineTestNamed.MakeGenericType(type),
-                InjectionMember_Default(), named);
+                InjectionMember_Default(), 
+                @default, named);
 
 
-        [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
-        public virtual void Inject_ByTypeNull(string test, Type type, object defaultValue, object defaultAttr,
+        [DynamicData(nameof(Import_Test_Data))]
+        [PatternTestMethod("Inject {1} dependency by {2} and {3}"), TestCategory(CATEGORY_INJECT)]
+        public virtual void Inject_Unnamed_Type_Null(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default) 
-            => Assert_UnregisteredThrows_RegisteredSuccess(
+            => Assert_Injection(
                    BaselineTestType.MakeGenericType(type),
-                   InjectionMember_Contract(type, null), registered);
+                   InjectionMember_Contract(type, null), 
+                   @default, registered);
 
 
-        [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
-        public virtual void Inject_Named_ByTypeNull(string test, Type type, object defaultValue, object defaultAttr,
+        [DynamicData(nameof(Import_Test_Data))]
+        [PatternTestMethod("Inject {1} dependency by {2} and {3}"), TestCategory(CATEGORY_INJECT)]
+        public virtual void Inject_Named_Type_Null(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default) 
-            => Assert_UnregisteredThrows_RegisteredSuccess(
+            => Assert_Injection(
                    BaselineTestNamed.MakeGenericType(type),
-                   InjectionMember_Contract(type, null), registered);
+                   InjectionMember_Contract(type, null),
+                   @default, registered);
 
 
-        [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
-        public virtual void Inject_ByTypeName(string test, Type type, object defaultValue, object defaultAttr,
+        
+        [DynamicData(nameof(Import_Test_Data))]
+        [PatternTestMethod("Inject {1} dependency by {2} and {3}"), TestCategory(CATEGORY_INJECT)]
+        public virtual void Inject_Unnamed_Type_Name(string test, Type type, object defaultValue, object defaultAttr,
                                               object registered, object named, object injected, object overridden,
                                               object @default) 
-            => Assert_UnregisteredThrows_RegisteredSuccess(
-                   BaselineTestType.MakeGenericType(type),
-                   InjectionMember_Contract(type, Name), named);
+            => Assert_Injection(
+                BaselineTestType.MakeGenericType(type), 
+                InjectionMember_Contract(type, Name), 
+                @default, named);
 
-
-        [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
-        public virtual void Inject_Named_ByTypeName(string test, Type type, object defaultValue, object defaultAttr,
+        [DynamicData(nameof(Import_Test_Data))]
+        [PatternTestMethod("Inject {1} dependency by {2} and {3}"), TestCategory(CATEGORY_INJECT)]
+        public virtual void Inject_Named_Type_Name(string test, Type type, object defaultValue, object defaultAttr,
                                               object registered, object named, object injected, object overridden,
-                                              object @default) 
-            => Assert_UnregisteredThrows_RegisteredSuccess(
-                   BaselineTestNamed.MakeGenericType(type),
-                   InjectionMember_Contract(type, Name), named);
+                                              object @default)
+            => Assert_Injection(
+                BaselineTestType.MakeGenericType(type),
+                InjectionMember_Contract(type, Name),
+                @default, named);
     }
 }

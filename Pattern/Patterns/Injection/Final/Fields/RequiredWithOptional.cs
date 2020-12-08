@@ -5,6 +5,7 @@ using System;
 using Microsoft.Practices.Unity;
 #else
 using Unity.Injection;
+using Unity.Resolution;
 #endif
 
 namespace Fields
@@ -42,6 +43,34 @@ namespace Fields
 
             InjectionMember_Contract = (Func<Type, string, InjectionMember>)support
                 .GetMethod("GetInjectionContractOptional").CreateDelegate(typeof(Func<Type, string, InjectionMember>));
+        }
+
+        #endregion
+
+
+        #region Overrides
+
+        protected override void Assert_Injection(Type type, InjectionMember member, object @default, object expected)
+        {
+            // Inject
+            Container.RegisterType(null, type, null, null, member);
+
+            // Act
+            var instance = Container.Resolve(type, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(@default, instance.Value);
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            instance = Container.Resolve(type, null) as FixtureBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(expected, instance.Value);
         }
 
         #endregion

@@ -1,9 +1,14 @@
 ﻿using Regression;
+using Regression.Implicit.Fields;
 using System;
 
 
 namespace Injection.Implicit.Fields
 {
+    public class Inherited_Import<TDependency> : BaselineTestType<TDependency> { }
+    public class Inherited_Twice<TDependency> : Inherited_Import<TDependency> { }
+
+
     #region Validation
 
     public class PrivateTestType<TDependency>

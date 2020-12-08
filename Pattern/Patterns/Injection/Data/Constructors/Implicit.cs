@@ -1,16 +1,25 @@
 ﻿using Regression;
+using Regression.Implicit.Constructors;
 using System;
-using System.ComponentModel;
-using static Injection.Pattern;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
-using Unity.Injection;
 #endif
 
 namespace Injection.Implicit.Constructors
 {
+    public class Inherited_Import<TDependency> : BaselineTestType<TDependency>
+    {
+        public Inherited_Import(TDependency value) : base(value) { }
+    }
+
+    public class Inherited_Twice<TDependency> : Inherited_Import<TDependency>
+    {
+        public Inherited_Twice(TDependency value) : base(value) { }
+    }
+
+
     #region Validation
 
     public class BaselineTestType_Ref<TDependency>
@@ -49,126 +58,4 @@ namespace Injection.Implicit.Constructors
     }
 
     #endregion
-}
-
-namespace Injection.Implicit.Constructors.WithDefault
-{
-    public class Implicit_Parameter_Int_WithDefault : DependencyBaseType
-    {
-        public Implicit_Parameter_Int_WithDefault(int value = Pattern.DefaultInt) => Value = value;
-
-        public override object Default => Pattern.DefaultInt;
-        public override object Injected => Pattern.InjectedInt;
-        public override object Registered => Pattern.RegisteredInt;
-        public override object Override => Pattern.OverriddenInt;
-        public override Type ImportType => typeof(int);
-    }
-
-    public class Implicit_Parameter_String_WithDefault : DependencyBaseType
-    {
-        public Implicit_Parameter_String_WithDefault(string value = Pattern.DefaultString) => Value = value;
-
-        public override object Default => Pattern.DefaultString;
-        public override object Injected => Pattern.InjectedString;
-        public override object Registered => Pattern.RegisteredString;
-        public override object Override => Pattern.OverriddenString;
-        public override Type ImportType => typeof(string);
-    }
-
-    public class Implicit_Derived_WithDefault : Implicit_Parameter_Int_WithDefault
-    {
-        private const int _default = 1111;
-
-        public Implicit_Derived_WithDefault(int value = _default)
-            : base(value) { }
-
-        public override object Default => _default;
-    }
-}
-
-
-namespace Injection.Implicit.Constructors.WithDefaultAttribute
-{
-    public class Implicit_Int_WithDefaultAttribute : DependencyBaseType
-    {
-        public Implicit_Int_WithDefaultAttribute([DefaultValue(Pattern.DefaultValueInt)] int value) => Value = value;
-
-        public override object Default => Pattern.DefaultValueInt;
-        public override object Injected => Pattern.InjectedInt;
-        public override object Registered => Pattern.RegisteredInt;
-        public override object Override => Pattern.OverriddenInt;
-        public override Type ImportType => typeof(int);
-    }
-
-    public class Implicit_String_WithDefaultAttribute : DependencyBaseType
-    {
-        public Implicit_String_WithDefaultAttribute([DefaultValue(Pattern.DefaultValueString)] string value) => Value = value;
-
-        public override object Default => Pattern.DefaultValueString;
-        public override object Injected => Pattern.InjectedString;
-        public override object Registered => Pattern.RegisteredString;
-        public override object Override => Pattern.OverriddenString;
-        public override Type ImportType => typeof(string);
-    }
-
-    public class Implicit_Derived_WithDefaultAttribute : Implicit_Int_WithDefaultAttribute
-    {
-        private const int _default = 1111;
-
-        public Implicit_Derived_WithDefaultAttribute([DefaultValue(_default)] int value)
-            : base(value) { }
-
-        public override object Default => _default;
-    }
-}
-
-
-namespace Injection.Implicit.Constructors.WithDefaultAndAttribute
-{
-    public class Implicit_Int_WithDefaultAndAttribute : DependencyBaseType
-    {
-        public Implicit_Int_WithDefaultAndAttribute([DefaultValue(Pattern.DefaultValueInt)] int value = Pattern.DefaultInt) => Value = value;
-
-        public override object Injected => Pattern.InjectedInt;
-        public override object Registered => Pattern.RegisteredInt;
-        public override object Override => Pattern.OverriddenInt;
-#if BEHAVIOR_V5
-        // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => Pattern.DefaultInt;
-#else
-        public override object Default => Pattern.DefaultValueInt;
-#endif
-        public override Type ImportType => typeof(int);
-    }
-
-    public class Implicit_String_WithDefaultAndAttribute : DependencyBaseType
-    {
-        public Implicit_String_WithDefaultAndAttribute([DefaultValue(Pattern.DefaultValueString)] string value = Pattern.DefaultString) => Value = value;
-
-        public override object Injected => Pattern.InjectedString;
-        public override object Registered => Pattern.RegisteredString;
-        public override object Override => Pattern.OverriddenString;
-#if BEHAVIOR_V5
-        // Prior to v6 Unity did not support DefaultValueAttribute
-        public override object Default => Pattern.DefaultString;
-#else
-        public override object Default => Pattern.DefaultValueString;
-#endif
-        public override Type ImportType => typeof(string);
-    }
-
-    public class Implicit_Derived_WithDefaultAndAttribute : Implicit_Int_WithDefaultAndAttribute
-    {
-        private const int _default = 1111;
-
-        public Implicit_Derived_WithDefaultAndAttribute([DefaultValue(_default)] int value = Pattern.DefaultValueInt)
-            : base(value) { }
-
-#if BEHAVIOR_V5
-        public override object Default => Pattern.DefaultValueInt;
-#else
-        public override object Default => _default;
-#endif
-        public override Type ImportType => typeof(int);
-    }
 }

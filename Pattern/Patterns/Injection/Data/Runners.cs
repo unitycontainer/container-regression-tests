@@ -8,33 +8,11 @@ using Unity.Injection;
 using Unity;
 #endif
 
-
-namespace Fields
+namespace Injection
 {
-    [TestClass]
-    public partial class Injecting_Required_With_Required : Injection.Required.Pattern
+    public abstract partial class Pattern
     {
-        #region Properties
-
-        protected override string DependencyName => "Field";
-
-        #endregion
-
-
-        #region Scaffolding
-
-        [TestInitialize]
-        public override void TestInitialize() => base.TestInitialize();
-
-        [ClassInitialize]
-        public static void ClassInit(TestContext context) => ClassInitialize(context);
-
-        #endregion
-
-
-        #region Overrides
-
-        protected override void Assert_Injection(Type type, InjectionMember member, object @default, object expected)
+        protected virtual void Assert_Injection(Type type, InjectionMember member, object @default, object expected)
         {
             // Inject
             Container.RegisterType(null, type, null, null, member);
@@ -52,7 +30,5 @@ namespace Fields
             Assert.IsNotNull(instance);
             Assert.AreEqual(expected, instance.Value);
         }
-
-        #endregion
     }
 }

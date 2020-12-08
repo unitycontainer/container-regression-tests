@@ -84,12 +84,9 @@
 				<Compile Remove="Patterns\Abstractions\Data\Fields\**" />
 				<Compile Remove="Patterns\Injection\Final\Fields\**" />
 				<Compile Remove="Patterns\Injection\Data\Fields\**" />
-				<Compile Remove="Patterns\Injection\Annotation\Implicit\Implicit.Dependency.Import.cs" />
-				<Compile Remove="Patterns\Injection\Annotation\Implicit\Implicit.OptionalParameter.cs" />
-				<Compile Remove="Patterns\Injection\Annotation\Implicit\Implicit.ResolvedParameter.cs" />
-				<Compile Remove="Patterns\Injection\Annotation\Implicit\Overrides\Dependency.Import.cs" />
-				<Compile Remove="Patterns\Injection\Annotation\Implicit\Overrides\OptionalParameter.cs" />
-				<Compile Remove="Patterns\Injection\Annotation\Implicit\Overrides\ResolvedParameter.cs" />
+				<Compile Remove="Patterns\Injection\Annotation\Overrides\Dependency.Import.cs" />
+				<Compile Remove="Patterns\Injection\Annotation\Overrides\OptionalParameter.cs" />
+				<Compile Remove="Patterns\Injection\Annotation\Overrides\ResolvedParameter.cs" />
 				<Compile Remove="Resolution\Enumerable\**" />
 				<Compile Remove="Resolution\Generic\Constrained.cs" />
 				<Compile Remove="Registration\Validation\Factory.cs" />
