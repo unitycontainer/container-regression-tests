@@ -1,12 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Constructors 
+namespace Fields
 {
     [TestClass]
-    public class Selecting : Selection.Pattern
+    public class Selecting_Required : Selection.Pattern
     {
         #region Properties
-        protected override string DependencyName => "value";
+
+        protected override string DependencyName => "Field";
 
         #endregion
 

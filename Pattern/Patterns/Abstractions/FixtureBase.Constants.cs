@@ -4,15 +4,24 @@ namespace Regression
 {
     public abstract partial class FixtureBase
     {
+        #region Constants
+
         public const string Name = "name";
         public const string Null = "null";
 
         // TODO: Is it used?
-        protected const string MethodName   = "Method";
-        protected const string FieldName    = "Field";
-        protected const string PropertyName = "Property";
-        protected const string TDependency  = "TDependency";
-        protected const string ParamName    = "value";
+        protected const string MethodName       = "Method";
+        protected const string FieldName        = "Field";
+        protected const string PropertyName     = "Property";
+        protected const string TDependency      = "TDependency";
+        protected const string ParamName        = "value";
+        protected const string OVERRIDE         = "Override";
+        protected const string PARAMETER        = "Injecting";
+        protected const string CATEGORY_INJECT  = "Injecting";
+        protected const string MEMBER_OVERRIDE  = "MemberOverride";
+        protected const string VALIDATION       = "Validation";
+
+        #endregion
 
 
         #region Integer

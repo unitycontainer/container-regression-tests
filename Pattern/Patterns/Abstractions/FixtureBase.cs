@@ -14,17 +14,6 @@ namespace Regression
 {
     public abstract partial class FixtureBase
     {
-        #region Constants
-
-        protected const string OVERRIDE = "Override";
-        protected const string PARAMETER = "Injecting";
-        protected const string CATEGORY_INJECT = "Injecting";
-        protected const string MEMBER_OVERRIDE = "MemberOverride";
-        protected const string VALIDATION = "Validation";
-
-        #endregion
-
-
         #region Fields
 
         private static string _type { get; set; }

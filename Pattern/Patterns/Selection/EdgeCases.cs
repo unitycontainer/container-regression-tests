@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Regression;
 using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
@@ -10,30 +11,15 @@ namespace Selection
 {
     public abstract partial class Pattern
     {
-        [Ignore]
-        [DataTestMethod, DynamicData(nameof(EdgeCases_Data))]
-        public virtual void Selection_EdgeCases_Successfull(string test, Type type)
-        {
-            //// Arrange
-            //RegisterTypes();
+        [DynamicData(nameof(EdgeCases_Data))]
+        [PatternTestMethod("Edge Cases ({2})"), TestCategory(SELECTION_EDGE)]
+        public virtual void Selection_EdgeCases_Successfull(string test, Type type) 
+            => Assert_ResolutionSuccess(type);
 
-            //// Act
-            //var instance = AssertResolutionPattern(type);
-
-            //// Validate
-            //Assert.IsTrue(instance.IsSuccessfull);
-        }
-
-        [Ignore]
         [ExpectedException(typeof(ResolutionFailedException))]
-        [DataTestMethod, DynamicData(nameof(EdgeCases_Throwing_Data))]
+        [DynamicData(nameof(EdgeCases_Throwing_Data))]
+        [PatternTestMethod("Edge Cases ({2})"), TestCategory(SELECTION_EDGE)]
         public virtual void Selection_EdgeCases_Throwing(string test, Type type)
-        {
-            // Arrange
-            RegisterTypes();
-
-            // Act
-            //_ = AssertResolutionPattern(type);
-        }
+            => Assert_ResolutionSuccess(type);
     }
 }
