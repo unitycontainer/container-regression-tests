@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Selection
@@ -25,5 +26,32 @@ namespace Selection
                 if (0 == types.Length) yield return new object[] { "Empty", typeof(UnresolvableDummySelection) };
             }
         }
+
+        public static IEnumerable<Type> Validation_Types
+        {
+            get
+            {
+                yield return GetTestType("NoPublicMember`1");
+            }
+        }
+
+
+        public static IEnumerable<object[]> Validation_Data
+        {
+            get
+            {
+                var types = new[] { typeof(object), typeof(string) };
+                foreach (var definition in Validation_Types)
+                { 
+                    foreach (var type in types)
+                    {
+                        var target = definition.MakeGenericType(type);
+                        yield return new object[] { target.Name, target };
+                    }
+                }
+            }
+        }
+
+
     }
 }

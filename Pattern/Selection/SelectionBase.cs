@@ -11,9 +11,6 @@ namespace Selection
         protected static Type ImplicitType;
         protected static Type RequiredType;
         protected static Type OptionalType;
-        protected static Type NoPublicMemberImplicit;
-        protected static Type NoPublicMemberRequired;
-        protected static Type NoPublicMemberOptional;
 
         #endregion
 
@@ -27,9 +24,6 @@ namespace Selection
             ImplicitType = GetType("Implicit",           "BaselineTestType`2");
             RequiredType = GetType("Annotated", "Required.BaselineTestType`2");
             OptionalType = GetType("Annotated", "Optional.BaselineTestType`2");
-            NoPublicMemberImplicit = GetType("Implicit",           "NoPublicMember`1");
-            NoPublicMemberRequired = GetType("Annotated", "Required.NoPublicMember`1");
-            NoPublicMemberOptional = GetType("Annotated", "Optional.NoPublicMember`1");
 
             LoadInjectionProxies();
         }
