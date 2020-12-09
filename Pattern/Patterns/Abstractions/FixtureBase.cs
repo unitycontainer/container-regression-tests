@@ -146,8 +146,18 @@ namespace Regression
             return Type.GetType($"{_prefix}.{@namespace}.{Member}.{name}") ??
                    Type.GetType($"{_type}.{@namespace}.{name}");
         }
-        
-        
+
+        protected static Type GetTestType(string name, string annotation, string member)
+        {
+            return Type.GetType($"Regression.{annotation}.{member}.{name}");
+        }
+
+        protected static Type GetTestType(string name, string annotation, string member, string @namespace)
+        {
+            return Type.GetType($"{@namespace}.{annotation}.{member}.{name}") ??
+                   Type.GetType($"Regression.{annotation}.{member}.{name}");
+        }
+
         #endregion
 
 

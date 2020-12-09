@@ -25,7 +25,7 @@ namespace Parameters
         {
             get
             {
-                var type = typeof(Validating);
+                var type = typeof(Pattern);
 
 
                 #region ResolvedArrayParameter
@@ -98,7 +98,7 @@ namespace Parameters
                 yield return new object[]
                 {
                     "ResolvedParameter(Type)",      // Name
-                    new ResolvedParameter<Validating>(),
+                    new ResolvedParameter<Pattern>(),
                     typeof(ResolvedParameter).Name, // Starts with
                     new string [] {
                         type.Name,
@@ -119,7 +119,7 @@ namespace Parameters
                 yield return new object[]
                 {
                     "ResolvedParameter(Type)",      // Name
-                    new ResolvedParameter<Validating>(Name),
+                    new ResolvedParameter<Pattern>(Name),
                     typeof(ResolvedParameter).Name, // Starts with
                     new string [] {
                         type.Name,
@@ -158,7 +158,7 @@ namespace Parameters
                 yield return new object[]
                 {
                     "OptionalParameter(Type)",      // Name
-                    new OptionalParameter<Validating>(),
+                    new OptionalParameter<Pattern>(),
                     typeof(OptionalParameter).Name, // Starts with
                     new string [] {
                         type.Name,
@@ -178,7 +178,7 @@ namespace Parameters
                 yield return new object[]
                 {
                     "OptionalParameter(Type)",      // Name
-                    new OptionalParameter<Validating>(Name),
+                    new OptionalParameter<Pattern>(Name),
                     typeof(OptionalParameter).Name, // Starts with
                     new string [] {
                         type.Name,

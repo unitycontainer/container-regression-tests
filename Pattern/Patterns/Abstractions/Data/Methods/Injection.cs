@@ -31,7 +31,7 @@ namespace Regression
             #region Override
 
             public static ResolverOverride GetMemberOverride(object value)
-                => new ParameterOverride(ParamName, value);
+                => new ParameterOverride(ParameterName, value);
 
             public static ResolverOverride GetMemberOverrideByName(string name, object value)
                 => new ParameterOverride(name, value);
@@ -43,7 +43,7 @@ namespace Regression
 #if UNITY_V4
                 => new ParameterOverride(ParamName, value);
 #else
-                => new ParameterOverride(ParamName, type, value);
+                => new ParameterOverride(ParameterName, type, value);
 #endif
 
             #endregion

@@ -13,14 +13,35 @@ namespace Regression
         protected const string MethodName       = "Method";
         protected const string FieldName        = "Field";
         protected const string PropertyName     = "Property";
+        protected const string ParameterName    = "value";
+
         protected const string TDependency      = "TDependency";
-        protected const string ParamName        = "value";
+
         protected const string OVERRIDE         = "Override";
         protected const string PARAMETER        = "Injecting";
         protected const string CATEGORY_INJECT  = "Injecting";
         protected const string MEMBER_OVERRIDE  = "MemberOverride";
         protected const string VALIDATION       = "Validation";
 
+        #endregion
+
+
+        #region Members
+
+        protected const string CONSTRUCTORS = "Constructors";
+        protected const string METHODS      = "Methods";
+        protected const string FIELDS       = "Fields";
+        protected const string PROPERTIES   = "Properties";
+
+        #endregion
+
+
+        #region Annotations
+
+        protected const string IMPLICIT = "Implicit";
+        protected const string REQUIRED = "Required";
+        protected const string OPTIONAL = "Optional";
+        
         #endregion
 
 
