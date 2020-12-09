@@ -41,8 +41,8 @@ namespace Parameters
         {
             get
             {
-                yield return ("BaselineTestTypeNamed`1", true);
                 yield return ("BaselineTestType`1",     false);
+                yield return ("BaselineTestTypeNamed`1", true);
             }
         }
 

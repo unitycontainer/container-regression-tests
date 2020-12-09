@@ -29,6 +29,7 @@ namespace Selection
         public virtual void Selection_TestCases_Throwing(string test, Type type)
             => Assert_ResolutionSuccess(type);
 
+        [Ignore]
         [ExpectedException(typeof(ResolutionFailedException))]
         [DynamicData(nameof(Validation_Data))]
         [PatternTestMethod("Validation ({2})"), TestCategory(SELECTION_EDGE)]
