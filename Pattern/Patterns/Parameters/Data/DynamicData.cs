@@ -20,7 +20,9 @@ namespace Parameters
             {
                 yield return CONSTRUCTORS;
                 yield return METHODS;
+#if !UNITY_V4
                 yield return FIELDS;
+#endif
                 yield return PROPERTIES;
             }
         }
@@ -93,6 +95,7 @@ namespace Parameters
                             #endregion
 
                             #region Integer
+#if !BEHAVIOR_V4
                             yield return new object[]
                             {
                                 typeof(int),        // Type
@@ -106,6 +109,7 @@ namespace Parameters
                                 0,                  // default
                                 nameInfo.Item2      // Is Named
                             };
+#endif
                             #endregion
 
                             #region Unresolvable

@@ -97,7 +97,11 @@ namespace Parameters
 
         [PatternTestMethod("Ctor(T[]) on regular type")]
         [DynamicData(nameof(Test_Variants_Data)), TestProperty(PARAMETER, nameof(GenericParameter))]
+#if BEHAVIOR_V4
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
         [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         public void GenericParameter_NoArray(Type type, Type definition, string member, string import,
                                              Func<object, InjectionMember> func, object registered, object named,
                                              object injected, object @default, bool isNamed)
@@ -107,7 +111,11 @@ namespace Parameters
 
         [PatternTestMethod("Ctor(WrongTypeName) throws on resolve")]
         [DynamicData(nameof(Test_Variants_Data)), TestProperty(PARAMETER, nameof(GenericParameter))]
+#if BEHAVIOR_V4
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
         [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         public void GenericParameter_NoMatch(Type type, Type definition, string member, string import,
                                      Func<object, InjectionMember> func, object registered, object named,
                                      object injected, object @default, bool isNamed)

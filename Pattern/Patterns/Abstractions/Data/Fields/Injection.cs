@@ -23,17 +23,32 @@ namespace Regression
                 => new InjectionField(FieldName, argument);
 
             public static InjectionMember GetInjectionContract(Type type, string name)
+#if UNITY_V5
+                => new InjectionField(FieldName, new ResolvedParameter(type, name));
+#else
                 => new InjectionField(FieldName, type, name);
-
+#endif
 
             public static InjectionMember GetInjectionDefaultOptional()
+#if UNITY_V5
+                => new InjectionField(FieldName, ResolutionOption.Optional);
+#else
                 => new OptionalField(FieldName);
+#endif
 
             public static InjectionMember GetInjectionValueOptional(object argument)
+#if UNITY_V5
+                => new InjectionField(FieldName, argument);
+#else
                 => new OptionalField(FieldName, argument);
+#endif
 
             public static InjectionMember GetInjectionContractOptional(Type type, string name)
+#if UNITY_V5
+                => new InjectionField(FieldName, new OptionalParameter(type, name));
+#else
                 => new OptionalField(FieldName, type, name);
+#endif
 
             #endregion
 

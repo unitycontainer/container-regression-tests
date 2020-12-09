@@ -12,6 +12,7 @@ namespace Injection
 {
     public abstract partial class Pattern
     {
+#if !UNITY_V4
         [DynamicData(nameof(Import_Test_Data))]
         [PatternTestMethod("Inject Unnamed dependency by XxxMember()"), TestCategory(CATEGORY_INJECT)]
         public virtual void Inject_Default(string test, Type type, object defaultValue, object defaultAttr,
@@ -32,7 +33,7 @@ namespace Injection
                 BaselineTestNamed.MakeGenericType(type),
                 InjectionMember_Default(), 
                 @default, named);
-
+#endif
 
         [DynamicData(nameof(Import_Test_Data))]
         [PatternTestMethod("Inject {1} dependency by {2} and {3}"), TestCategory(CATEGORY_INJECT)]

@@ -11,7 +11,13 @@ namespace Selection.Annotated.Fields.Required
     public class BaselineTestType<TItem1, TItem2>
         : FieldSelectionBase
     {
-        [Dependency] public TItem1 Field1;
-        [Dependency] public TItem2 Field2;
+#if !UNITY_V4
+        [Dependency] 
+#endif
+        public TItem1 Field1;
+#if !UNITY_V4
+        [Dependency] 
+#endif
+        public TItem2 Field2;
     }
 }

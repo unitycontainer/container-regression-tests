@@ -36,8 +36,7 @@ namespace Injection.Implicit
             _ = Container.Resolve(target, null);
         }
 
-
-
+#if !UNITY_V4
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Injection.Pattern))]
         public override void Inject_Named_Default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
@@ -45,5 +44,6 @@ namespace Injection.Implicit
             => Assert_UnregisteredThrows_RegisteredSuccess(
                 BaselineTestNamed.MakeGenericType(type),
                 InjectionMember_Default(), registered);
+#endif
     }
 }

@@ -37,14 +37,18 @@ namespace Regression
                 => new ParameterOverride(name, value);
 
             public static ResolverOverride GetMemberOverrideByType(Type type, object value)
+#if UNITY_V4
+                => new ParameterOverride(ParameterName, value);
+#else
                 => new ParameterOverride(type, value);
+#endif
 
             public static ResolverOverride GetMemberOverrideWithContract(Type type, object value)
-#if UNITY_V4
-                => new ParameterOverride(ParamName, value);
+#if UNITY_V4 || UNITY_V5
+                => new ParameterOverride(ParameterName, value);
 #else
                 => new ParameterOverride(ParameterName, type, value);
-    #endif
+#endif
 
             #endregion
         }

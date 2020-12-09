@@ -11,15 +11,17 @@ namespace Parameters
 {
     public abstract partial class Pattern
     {
-        [TestCategory(nameof(ParameterBase))]
+#if !UNITY_V4 && !UNITY_V5
+        [TestCategory("ParameterBase")]
         [DataTestMethod, DynamicData(nameof(Injection_Parameters_Data))]
         public virtual void ToString(string test, ParameterValue value, string startsWith, string[] contains)
         {
             var parameter = value.ToString();
-
+            
             Assert.IsTrue(parameter.StartsWith(startsWith));
             foreach (var term in contains) Assert.IsTrue(parameter.Contains(term));
         }
+#endif
 
         public static IEnumerable<object[]> Injection_Parameters_Data
         {
@@ -72,6 +74,7 @@ namespace Parameters
 
                 #region ResolvedParameter
 
+#if !UNITY_V4 && !UNITY_V5
                 yield return new object[]
                 {
                     "ResolvedParameter()",         // Name
@@ -83,6 +86,7 @@ namespace Parameters
                         Contract.AnyContractName
                     }
                 };
+#endif
 
                 yield return new object[]
                 {
@@ -106,6 +110,7 @@ namespace Parameters
                     }
                 };
 
+#if !UNITY_V4
                 yield return new object[]
                 {
                     "ResolvedParameter(string)",    // Name
@@ -115,7 +120,7 @@ namespace Parameters
                         Name
                     }
                 };
-
+#endif
                 yield return new object[]
                 {
                     "ResolvedParameter(Type)",      // Name
@@ -132,6 +137,7 @@ namespace Parameters
 
                 #region OptionalParameter
 
+#if !UNITY_V4 && !UNITY_V5
                 yield return new object[]
                 {
                     "OptionalParameter()",         // Name
@@ -143,7 +149,7 @@ namespace Parameters
                         Contract.AnyContractName
                     }
                 };
-
+#endif
                 yield return new object[]
                 {
                     "OptionalParameter(Type)",      // Name
@@ -165,6 +171,7 @@ namespace Parameters
                     }
                 };
 
+#if !UNITY_V4
                 yield return new object[]
                 {
                     "OptionalParameter(string)",    // Name
@@ -174,6 +181,7 @@ namespace Parameters
                         Name
                     }
                 };
+#endif
 
                 yield return new object[]
                 {

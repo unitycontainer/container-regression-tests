@@ -34,6 +34,7 @@ namespace Parameters
                 func(new OptionalParameter(type)), @default, import, isNamed, registered, registered);
 
 
+#if !UNITY_V4
         [PatternTestMethod("Ctor(null) forces contract: AnnotatedType, null")]
         [DynamicData(nameof(Test_Variants_Data)), TestProperty(PARAMETER, nameof(OptionalParameter))]
         public void OptionalParameter_Null(Type type, Type definition, string member, string import,
@@ -50,7 +51,7 @@ namespace Parameters
                                            object injected, object @default, bool isNamed)
             => Assert_Optionally_Injected(definition.MakeGenericType(type),
                 func(new OptionalParameter(Name)), @default, import, isNamed, named, named);
-
+#endif
 
         [PatternTestMethod("Ctor(type, null) forces contract: type, null")]
         [DynamicData(nameof(Test_Variants_Data)), TestProperty(PARAMETER, nameof(OptionalParameter))]

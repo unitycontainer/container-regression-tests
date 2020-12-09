@@ -33,6 +33,7 @@ namespace Parameters
                 func(new ResolvedParameter(type)), import, isNamed, registered, registered);
 
 
+#if !UNITY_V4
         [PatternTestMethod("Ctor(null) forces contract: AnnotatedType, null")]
         [DynamicData(nameof(Test_Variants_Data)), TestProperty(PARAMETER, nameof(ResolvedParameter))]
         public void ResolvedParameter_Null(Type type, Type definition, string member, string import,
@@ -49,7 +50,7 @@ namespace Parameters
                                            object injected, object @default, bool isNamed)
             => Assert_Parameter_Injected(definition.MakeGenericType(type),
                 func(new ResolvedParameter(Name)), import, isNamed, named, named);
-
+#endif
 
         [PatternTestMethod("Ctor(type, null) forces contract: type, null")]
         [DynamicData(nameof(Test_Variants_Data)), TestProperty(PARAMETER, nameof(ResolvedParameter))]

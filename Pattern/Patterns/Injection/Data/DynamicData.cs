@@ -34,6 +34,7 @@ namespace Injection
                 #endregion
 
                 #region Integer
+#if !BEHAVIOR_V4
                 yield return new object[]
                 {
                     typeof(int).Name,        // Name
@@ -46,6 +47,7 @@ namespace Injection
                     OverriddenInt,           // Overridden
                     0                        // default
                 };
+#endif
                 #endregion
 
                 #region Unresolvable

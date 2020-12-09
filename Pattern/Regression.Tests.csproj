@@ -35,11 +35,6 @@
 		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
 	</PropertyGroup>
 
-	<ItemGroup> <!-- Temporary -->
-	  <Compile Remove="Selection\Tests\**" />
-	</ItemGroup>
-
-
 
 	
 	<!-- Definitions -->
@@ -82,11 +77,14 @@
 				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
 				<Compile Remove="Patterns\Abstractions\FixtureBase.Fields.cs" />
 				<Compile Remove="Patterns\Abstractions\Data\Fields\**" />
+				<Compile Remove="Patterns\Dependency\Final\Fields\**" />
+				<Compile Remove="Patterns\Dependency\Data\Fields\**" />
 				<Compile Remove="Patterns\Injection\Final\Fields\**" />
 				<Compile Remove="Patterns\Injection\Data\Fields\**" />
 				<Compile Remove="Patterns\Injection\Annotation\Overrides\Dependency.Import.cs" />
 				<Compile Remove="Patterns\Injection\Annotation\Overrides\OptionalParameter.cs" />
 				<Compile Remove="Patterns\Injection\Annotation\Overrides\ResolvedParameter.cs" />
+				<Compile Remove="Patterns\Selection\Final\Fields\**" />
 				<Compile Remove="Resolution\Enumerable\**" />
 				<Compile Remove="Resolution\Generic\Constrained.cs" />
 				<Compile Remove="Registration\Validation\Factory.cs" />
@@ -134,6 +132,8 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
 		<PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
+
+		<PackageReference Condition="$(TargetFramework.StartsWith('net4'))" Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>
 
 </Project>

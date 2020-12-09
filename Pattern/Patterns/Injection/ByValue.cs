@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else

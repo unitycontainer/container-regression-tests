@@ -18,6 +18,9 @@ namespace Selection.Annotated.Fields.Required.TestCasesThrowing
 
     public class OpenGenericType<T>
     {
-        [Dependency] public T Field;
+#if !UNITY_V4
+        [Dependency] 
+#endif
+        public T Field;
     }
 }

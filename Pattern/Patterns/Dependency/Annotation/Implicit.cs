@@ -20,7 +20,7 @@ namespace Dependency.Implicit
 
 
         #region DependencyOverride
-
+#if !UNITY_V4
         #region Name
 
         [DataTestMethod, DynamicData(nameof(Type_Test_Data), typeof(FixtureBase))]
@@ -140,7 +140,7 @@ namespace Dependency.Implicit
                 registered, registered);
 
         #endregion
-
+#endif
         #endregion
 
 

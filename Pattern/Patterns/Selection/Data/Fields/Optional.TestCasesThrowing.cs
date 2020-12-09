@@ -11,6 +11,9 @@ namespace Selection.Annotated.Fields.Optional.TestCasesThrowing
 
     public class OpenGenericType<T>
     {
-        [OptionalDependency] public T Field;
+#if !UNITY_V4
+        [OptionalDependency] 
+#endif
+        public T Field;
     }
 }

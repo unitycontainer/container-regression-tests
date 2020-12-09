@@ -63,7 +63,11 @@ namespace Injection
 
         [TestProperty(PARAMETER, nameof(GenericResolvedArrayParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+#if BEHAVIOR_V4
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
         [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         public virtual void GenericResolvedArray_NoMatch(string test, Type type, object defaultValue, object defaultAttr,
                                                                    object registered, object named, object injected, object overridden,
                                                                    object @default)
@@ -74,7 +78,11 @@ namespace Injection
 
         [TestProperty(PARAMETER, nameof(GenericResolvedArrayParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+#if BEHAVIOR_V4
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
         [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         public virtual void GenericResolvedArray_NotArray(string test, Type type, object defaultValue, object defaultAttr,
                                                       object registered, object named, object injected, object overridden,
                                                       object @default)
@@ -86,7 +94,11 @@ namespace Injection
 
         [TestProperty(PARAMETER, nameof(GenericResolvedArrayParameter))]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data))]
+#if BEHAVIOR_V4
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
         [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         public virtual void GenericResolvedArray_NotGeneric(string test, Type type, object defaultValue, object defaultAttr,
                                                             object registered, object named, object injected, object overridden,
                                                             object @default)

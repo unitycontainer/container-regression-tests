@@ -26,6 +26,8 @@ namespace Methods
 
         #region Special Cases
 
+#if !UNITY_V4
+
         [TestCategory(CATEGORY_INJECT)]
         [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
         public override void Inject_Default(string test, Type type, object defaultValue, object defaultAttr,
@@ -44,7 +46,7 @@ namespace Methods
             => Assert_AlwaysSuccessful(
                 BaselineTestNamed.MakeGenericType(type),
                 InjectionMember_Default(), @default, named);
-
+#endif
         #endregion
     }
 }
