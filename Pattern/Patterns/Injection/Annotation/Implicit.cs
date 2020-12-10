@@ -37,7 +37,7 @@ namespace Injection.Implicit
         }
 
 #if !UNITY_V4
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Injection.Pattern))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
         public override void Inject_Named_Default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default)

@@ -1,5 +1,5 @@
-﻿using Injection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Regression;
 using System;
 
 namespace Methods
@@ -29,7 +29,7 @@ namespace Methods
 #if !UNITY_V4
 
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
         public override void Inject_Default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default)
@@ -39,7 +39,7 @@ namespace Methods
 
 
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Import_Test_Data), typeof(Pattern))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
         public override void Inject_Named_Default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default)
