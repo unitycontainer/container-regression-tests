@@ -84,7 +84,6 @@
 				<Compile Remove="Patterns\Injection\Annotation\Overrides\Dependency.Import.cs" />
 				<Compile Remove="Patterns\Injection\Annotation\Overrides\OptionalParameter.cs" />
 				<Compile Remove="Patterns\Injection\Annotation\Overrides\ResolvedParameter.cs" />
-				<Compile Remove="Patterns\Selection\Final\Fields\**" />
 				<Compile Remove="Resolution\Enumerable\**" />
 				<Compile Remove="Resolution\Generic\Constrained.cs" />
 				<Compile Remove="Registration\Validation\Factory.cs" />
