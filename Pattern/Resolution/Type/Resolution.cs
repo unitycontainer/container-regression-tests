@@ -22,7 +22,7 @@ namespace Resolution
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Unity_Recognized_Types_Data), typeof(FixtureBase))]
         public virtual void Supported(string test, Type type)
         {
             // Act

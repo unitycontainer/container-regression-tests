@@ -14,7 +14,7 @@ namespace Injection.Implicit
 
         [TestCategory(CATEGORY_INJECT)]
         [ExpectedException(typeof(ResolutionFailedException))]
-        [DataTestMethod, DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Unity_Recognized_Types_Data), typeof(FixtureBase))]
         public virtual void Throws_OnRefParameter(string test, Type type)
         {
             // Arrange
@@ -26,7 +26,7 @@ namespace Injection.Implicit
 
         [TestCategory(CATEGORY_INJECT)]
         [ExpectedException(typeof(ResolutionFailedException))]
-        [DataTestMethod, DynamicData(nameof(SupportedTypes_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Unity_Recognized_Types_Data), typeof(FixtureBase))]
         public virtual void Throws_OnOutParameter(string test, Type type)
         {
             // Arrange

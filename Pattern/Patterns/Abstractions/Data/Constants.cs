@@ -71,12 +71,12 @@ namespace Regression
 
         #region Unresolvable
         
-        public readonly static Unresolvable NamedUnresolvable      = Unresolvable.Create(NamedString);
+        public readonly static Unresolvable NamedUnresolvable        = Unresolvable.Create(NamedString);
         public readonly static Unresolvable DefaultUnresolvable      = Unresolvable.Create(DefaultString);
         public readonly static Unresolvable DefaultValueUnresolvable = Unresolvable.Create(DefaultValueString);
-        public readonly static Unresolvable RegisteredUnresolvable = Unresolvable.Create(RegisteredString);
-        public readonly static Unresolvable InjectedUnresolvable   = SubUnresolvable.Create(InjectedString);
-        public readonly static Unresolvable OverriddenUnresolvable = SubUnresolvable.Create(OverriddenString);
+        public readonly static Unresolvable RegisteredUnresolvable   = Unresolvable.Create(RegisteredString);
+        public readonly static Unresolvable InjectedUnresolvable     = SubUnresolvable.Create(InjectedString);
+        public readonly static Unresolvable OverriddenUnresolvable   = SubUnresolvable.Create(OverriddenString);
         
         #endregion
 
@@ -99,8 +99,56 @@ namespace Regression
         public static Type RegisteredType             = typeof(FixtureBase);
         public static ICloneable RegisteredICloneable = new object[0];
         public static Delegate RegisteredDelegate     = (Func<int>)(() => 0);
-        
+
         #endregion
+
+        
+        protected static TestDataSource[] Test_Data_Set = new TestDataSource[]
+        {
+            #region String
+
+            new TestDataSource<string>(
+                    null,                       // default
+                    DefaultString,              // DefaultValue
+                    DefaultValueString,         // DefaultAttributeValue
+                    RegisteredString,           // Registered
+                    NamedString,                // Named
+                    InjectedString,             // Injected
+                    OverriddenString            // Overridden
+                ),
+                
+            #endregion
+
+
+            #region Integer
+                
+            new TestDataSource<int>(
+                    0,                          // default
+                    DefaultInt,                 // DefaultValue
+                    DefaultValueInt,            // DefaultAttributeValue
+                    RegisteredInt,              // Registered
+                    NamedInt,                   // Named
+                    InjectedInt,                // Injected
+                    OverriddenInt               // Overridden
+                ),
+                
+            #endregion
+
+
+            #region Unresolvable
+                
+            new TestDataSource<Unresolvable>(
+                    null,                       // default
+                    DefaultUnresolvable,        // DefaultValue
+                    DefaultValueUnresolvable,   // DefaultAttributeValue
+                    RegisteredUnresolvable,     // Registered
+                    NamedUnresolvable,          // Named
+                    InjectedUnresolvable,       // Injected
+                    OverriddenUnresolvable      // Overridden
+                ),
+            
+            #endregion
+        };
     }
 }
 

@@ -16,7 +16,7 @@ namespace Parameters
         #region Success
 
         [PatternTestMethod("Ctor(T) preserves annotated contract")]
-        [DynamicData(nameof(Test_Variants_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
+        [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
         public void OptionalGenericParameter(Type type, Type definition, string member, string import,
                                      Func<object, InjectionMember> func, object registered, object named,
                                      object injected, object @default, bool isNamed)
@@ -25,7 +25,7 @@ namespace Parameters
 
 
         [PatternTestMethod("Ctor(T, null) forces contract: T, null")]
-        [DynamicData(nameof(Test_Variants_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
+        [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
         public void OptionalGenericParameter_Null(Type type, Type definition, string member, string import,
                                      Func<object, InjectionMember> func, object registered, object named,
                                      object injected, object @default, bool isNamed)
@@ -34,7 +34,7 @@ namespace Parameters
 
 
         [PatternTestMethod("Ctor(T, Name) forces contract: T, Name")]
-        [DynamicData(nameof(Test_Variants_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
+        [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
         public void OptionalGenericParameter_Name(Type type, Type definition, string member, string import,
                                      Func<object, InjectionMember> func, object registered, object named,
                                      object injected, object @default, bool isNamed)
@@ -43,7 +43,7 @@ namespace Parameters
 
 
         [PatternTestMethod("Ctor(T[]) on Array")]
-        [DynamicData(nameof(Test_Array_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
+        [DynamicData(nameof(Array_Parameters_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
         public void OptionalGenericParameter_OnArray(Type type, Type definition, string member, string import,
                                              Func<object, InjectionMember> func, object registered, object named,
                                              object injected, object @default, bool isNamed)
@@ -64,7 +64,7 @@ namespace Parameters
 
 
         [PatternTestMethod("Ctor(T()) on Array")]
-        [DynamicData(nameof(Test_Array_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
+        [DynamicData(nameof(Array_Parameters_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
         public void OptionalGenericParameter_Brackets(Type type, Type definition, string member, string import,
                                              Func<object, InjectionMember> func, object registered, object named,
                                              object injected, object @default, bool isNamed)
@@ -89,7 +89,7 @@ namespace Parameters
         #region Failing
 
         [PatternTestMethod("Ctor(T[]) on regular type")]
-        [DynamicData(nameof(Test_Variants_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
+        [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
 #if BEHAVIOR_V4
         [ExpectedException(typeof(InvalidOperationException))]
 #else
@@ -103,7 +103,7 @@ namespace Parameters
 
 
         [PatternTestMethod("Ctor(WrongTypeName) throws on resolve")]
-        [DynamicData(nameof(Test_Variants_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
+        [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
 #if BEHAVIOR_V4
         [ExpectedException(typeof(InvalidOperationException))]
 #else
@@ -117,7 +117,7 @@ namespace Parameters
 
 
         [PatternTestMethod("Ctor(T) on incompatible type")]
-        [DynamicData(nameof(Test_Variants_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
+        [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalGenericParameter))]
         public void OptionalGenericParameter_Incompatible(Type type, Type definition, string member, string import,
                                                   Func<object, InjectionMember> func, object registered, object named,
                                                   object injected, object @default, bool isNamed)

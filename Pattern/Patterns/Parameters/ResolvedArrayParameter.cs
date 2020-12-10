@@ -17,7 +17,7 @@ namespace Parameters
         #region Success
 
         [PatternTestMethod("Ctor(type) with no arguments"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
-        [DynamicData(nameof(Test_Variants_Data))]
+        [DynamicData(nameof(Parameters_Test_Data))]
         public void ResolvedArrayParameter_Type(Type type, Type definition,
                                                 string member, string import,
                                                 Func<object, InjectionMember> func,
@@ -29,7 +29,7 @@ namespace Parameters
 
 
         [PatternTestMethod("Ctor(type, ...) with values"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
-        [DynamicData(nameof(Test_Variants_Data))]
+        [DynamicData(nameof(Parameters_Test_Data))]
         public void ResolvedArrayParameter_Value(Type type, Type definition,
                                                  string member, string import,
                                                  Func<object, InjectionMember> func,
@@ -41,7 +41,7 @@ namespace Parameters
 
 
         [PatternTestMethod("Ctor(type, ...) with resolvers"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
-        [DynamicData(nameof(Test_Variants_Data))]
+        [DynamicData(nameof(Parameters_Test_Data))]
         public void ResolvedArrayParameter_Resolvers(Type type, Type definition,
                                                      string member, string import,
                                                      Func<object, InjectionMember> func,
@@ -62,7 +62,7 @@ namespace Parameters
 
 
         [PatternTestMethod("Ctor(type, values) on object[] array"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
-        [DynamicData(nameof(Test_Array_Data))]
+        [DynamicData(nameof(Array_Parameters_Data))]
         public void ResolvedArrayParameter_Object(Type type, Type definition,
                                                   string member, string import,
                                                   Func<object, InjectionMember> func,
@@ -99,7 +99,7 @@ namespace Parameters
         #region Failing
 
         [PatternTestMethod("Ctor(null) with no arguments"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
-        [DynamicData(nameof(Test_Variants_Data))]
+        [DynamicData(nameof(Parameters_Test_Data))]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ResolvedArrayParameter_Null(Type type, Type definition,
                                                 string member, string import,
@@ -114,7 +114,7 @@ namespace Parameters
 
 
         [PatternTestMethod("Ctor(generic, ...) throws"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
-        [DynamicData(nameof(Test_Variants_Data))]
+        [DynamicData(nameof(Parameters_Test_Data))]
         [ExpectedException(typeof(InvalidOperationException))]
         public void ResolvedArrayParameter_Generic(Type type, Type definition,
                                                    string member, string import,

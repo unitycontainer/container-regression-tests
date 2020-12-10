@@ -5,7 +5,6 @@ using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
-using Unity.Resolution;
 #endif
 
 namespace Regression
@@ -20,6 +19,7 @@ namespace Regression
         #endregion
     }
 
+    #region struct
 
     public struct TestStruct
     {
@@ -32,6 +32,11 @@ namespace Regression
             Instance = instance;
         }
     }
+
+    #endregion
+
+
+    #region Unresolvable
 
     public interface IUnresolvable { }
 
@@ -54,6 +59,9 @@ namespace Regression
         public new static SubUnresolvable Create(string name) => new SubUnresolvable(name);
     }
 
+    #endregion
+
+
     #region ILogger
 
     public interface ILogger
@@ -65,7 +73,6 @@ namespace Regression
     }
 
     #endregion
-
 
 
     #region IFoo

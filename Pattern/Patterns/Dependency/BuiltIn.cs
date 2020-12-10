@@ -12,7 +12,7 @@ namespace Dependency
 {
     public abstract partial class Pattern
     {
-        [DynamicData(nameof(Type_Test_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
         [PatternTestMethod("{0} dependency as {1}"), TestCategory(CATEGORY_DEPENDENCY)] 
         public virtual void Unnamed_Array(string test, Type type, object defaultValue, object defaultAttr,
                                                                  object registered, object named,
@@ -21,7 +21,7 @@ namespace Dependency
             => Assert_Array_Import(BaselineTestType.MakeGenericType(type.MakeArrayType()));
 
 
-        [DynamicData(nameof(Type_Test_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
         [PatternTestMethod("{0} dependency as {1}"), TestCategory(CATEGORY_DEPENDENCY)]
         public virtual void Named_Array(string test, Type type, object defaultValue, object defaultAttr,
                                                                  object registered, object named,
@@ -31,7 +31,7 @@ namespace Dependency
 
 
 #if !BEHAVIOR_V4
-        [DynamicData(nameof(Type_Test_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
         [PatternTestMethod("{0} dependency as {1}"), TestCategory(CATEGORY_DEPENDENCY)]
         public virtual void Unnamed_Enumerable(string test, Type type, object defaultValue, object defaultAttr, object registered,
                                                object named, object injected, object overridden, object @default)
@@ -39,7 +39,7 @@ namespace Dependency
 #endif
 
 
-        [DynamicData(nameof(Type_Test_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
         [PatternTestMethod("{0} dependency as {1}"), TestCategory(CATEGORY_DEPENDENCY)]
         public virtual void Unnamed_Lazy(string test, Type type, object defaultValue, object defaultAttr, object registered,
                                  object named, object injected, object overridden, object @default)
@@ -47,7 +47,7 @@ namespace Dependency
                 BaselineTestType.MakeGenericType(typeof(Lazy<>).MakeGenericType(type)), registered);
 
 
-        [DynamicData(nameof(Type_Test_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
         [PatternTestMethod("{0} dependency as {1}"), TestCategory(CATEGORY_DEPENDENCY)]
         public virtual void Unnamed_Func(string test, Type type, object defaultValue, object defaultAttr, object registered,
                                  object named, object injected, object overridden, object @default)
