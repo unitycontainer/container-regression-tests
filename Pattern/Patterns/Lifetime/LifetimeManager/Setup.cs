@@ -23,20 +23,24 @@ namespace Lifetime.Manager
 
         #region Implementation
 
-        protected virtual void ArrangeTest(LifetimeManager manager, Type type = null)
+        protected virtual bool ArrangeTest(Func<LifetimeManager> factory, Type type = null)
         {
+            var manager = factory();
 #if UNITY_V4
             Container.RegisterType(typeof(IService), typeof(Service), manager)
-                     .RegisterType(typeof(MockLogger), manager);
+                     .RegisterType(typeof(MockLogger), factory());
             Container.RegisterType<IPresenter, MockPresenter>()
-                     .RegisterType<IView, View>(manager);
+                     .RegisterType<IView, View>(factory());
 #else
             Container.RegisterType(typeof(IService), typeof(Service), (ITypeLifetimeManager)manager)
-                     .RegisterType(typeof(MockLogger), (ITypeLifetimeManager)manager);
+                     .RegisterType(typeof(MockLogger), (ITypeLifetimeManager)factory());
             Container.RegisterType<IPresenter, MockPresenter>()
-                     .RegisterType<IView, View>((ITypeLifetimeManager)manager);
+                     .RegisterType<IView, View>((ITypeLifetimeManager)factory());
 #endif
             TargetType = type ?? typeof(IService);
+
+            return manager is PerResolveLifetimeManager 
+                ? true : false;
         }
 
         #endregion

@@ -16,14 +16,14 @@ namespace Lifetime.Manager
     {
         [DynamicData(nameof(Scope_Lifetime_Data))]
         [PatternTestMethod("Same Container"), TestCategory(SAME_SCOPE)]
-        public virtual void FromSameContainer(LifetimeManager manager, Type type,
+        public virtual void FromSameContainer(Func<LifetimeManager> factory, Type type,
                                               Action<object, object> fromSameScope,
                                               Action<object, object> fromChildScope,
                                               Action<object, object> fromSameScopeDifferentThreads,
                                               Action<object, object> fromChildScopeDifferentThreads)
         {
             // Arrange
-            ArrangeTest(manager, type);
+            ArrangeTest(factory, type);
 
             // Act
             Item1 = Container.Resolve(TargetType);
@@ -42,17 +42,14 @@ namespace Lifetime.Manager
 
         [DynamicData(nameof(Scope_Lifetime_Data))]
         [PatternTestMethod("Same Container as import"), TestCategory(SAME_SCOPE)]
-        public virtual void FromSameContainer_Import(LifetimeManager manager, Type type,
+        public virtual void FromSameContainer_Import(Func<LifetimeManager> factory, Type type,
                                                      Action<object, object> fromSameScope,
                                                      Action<object, object> fromChildScope,
                                                      Action<object, object> fromSameScopeDifferentThreads,
                                                      Action<object, object> fromChildScopeDifferentThreads)
         {
             // Exclusion
-            if (manager is PerResolveLifetimeManager) return;
-
-            // Arrange
-            ArrangeTest(manager, type);
+            if (ArrangeTest(factory, type)) return;
 
             // Act
             Item1 = Container.Resolve<Foo<MockLogger>>().Value;
@@ -69,14 +66,14 @@ namespace Lifetime.Manager
 #if !BEHAVIOR_V4 // Unity v4 did not support multi-threading
         [DynamicData(nameof(Scope_Lifetime_Data))]
         [PatternTestMethod("Same Container on different threads"), TestCategory(SAME_SCOPE)]
-        public virtual void FromSameContainer_DifferentThreads(LifetimeManager manager, Type type,
+        public virtual void FromSameContainer_DifferentThreads(Func<LifetimeManager> factory, Type type,
                                                                Action<object, object> fromSameScope,
                                                                Action<object, object> fromChildScope,
                                                                Action<object, object> fromSameScopeDifferentThreads,
                                                                Action<object, object> fromChildScopeDifferentThreads)
         {
             // Arrange
-            ArrangeTest(manager, type);
+            ArrangeTest(factory, type);
 
             // Act
             Thread t1 = new Thread(new ParameterizedThreadStart((c) => Item1 = Container.Resolve(TargetType)));

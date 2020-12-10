@@ -3,6 +3,7 @@ using Regression;
 using System;
 using System.Collections.Generic;
 #if UNITY_V4
+using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
@@ -33,16 +34,23 @@ namespace Lifetime.Manager
         }
 
 
+#if !UNITY_V4
         [DynamicData(nameof(Managers_Data))]
         [DataTestMethod, TestCategory(LIFETIME_MANAGER)]
         public virtual void Clone(LifetimeManager manager)
         {
+#if UNITY_V5
+            var clone = manager.CreateLifetimePolicy();
+#else
             var clone = manager.Clone();
+#endif
 
             Assert.IsInstanceOfType(clone, manager.GetType());
             Assert.AreNotSame(manager, clone);
         }
+#endif
 
+#if !UNITY_V4 && !UNITY_V5
 
         [DynamicData(nameof(Managers_Data))]
         [PatternTestMethod("TryGetValue returns NoValue"), TestCategory(LIFETIME_MANAGER)]
@@ -51,5 +59,6 @@ namespace Lifetime.Manager
             var value = manager.TryGetValue(scope);
             Assert.AreSame(RegistrationManager.NoValue, value);
         }
+#endif
     }
 }

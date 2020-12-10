@@ -8,7 +8,7 @@ using Unity;
 
 namespace Selection.Annotated.Fields.Optional.TestCases
 {
-#if !BEHAVIOR_V4
+#if !UNITY_V4 && !BEHAVIOR_V4
     public class StructField : FieldSelectionBase
     {
         [OptionalDependency] public TestStruct Field;

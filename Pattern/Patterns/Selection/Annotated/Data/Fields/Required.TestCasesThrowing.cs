@@ -11,7 +11,10 @@ namespace Selection.Annotated.Fields.Required.TestCasesThrowing
 #if !BEHAVIOR_V4
     public class StructField : FieldSelectionBase
     {
-        [Dependency] public TestStruct Field;
+#if !UNITY_V4
+        [Dependency]
+#endif
+        public TestStruct Field;
         public override bool IsSuccessful => this[0] is not null;
     }
 #endif

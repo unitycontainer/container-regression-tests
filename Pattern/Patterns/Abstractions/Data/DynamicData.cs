@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-
+using System;
 
 namespace Regression
 {
@@ -11,8 +11,7 @@ namespace Regression
 
         public static IEnumerable<object[]> Type_Compatibility_Data
 #if BEHAVIOR_V4
-            => Type_Test_Data
-            .Where(set => set[1] is Type type && !type.IsValueType);
+            => Test_Type_Data.Where(set => set[1] is Type type && !type.IsValueType);
 #else
             => Test_Type_Data;
 #endif

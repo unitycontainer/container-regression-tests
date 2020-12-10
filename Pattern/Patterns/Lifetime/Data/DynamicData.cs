@@ -19,7 +19,9 @@ namespace Lifetime.Manager
                 yield return new object[] { new TransientLifetimeManager() };
                 yield return new object[] { new PerThreadLifetimeManager() };
                 yield return new object[] { new PerResolveLifetimeManager() };
+#if !UNITY_V4
                 yield return new object[] { new ContainerControlledTransientManager() };
+#endif
                 yield return new object[] { new ContainerControlledLifetimeManager() };
                 yield return new object[] { new HierarchicalLifetimeManager() };
                 yield return new object[] { new ExternallyControlledLifetimeManager() };
@@ -35,18 +37,19 @@ namespace Lifetime.Manager
 
                 yield return new object[]
                 {
-                    new TransientLifetimeManager(),             // Manager
+                    (Func<LifetimeManager>)(() =>               // Manager factory
+                    new TransientLifetimeManager()),            
 
                     typeof(IService),                           // Target Type
 
                     (Action<object, object>)((item1, item2)     // FromSameScope
-                        => Assert.AreNotSame(item1, item2)),    
+                        => Assert.AreNotSame(item1, item2)),
 
                     (Action<object, object>)((item1, item2)     // FromChildScope
-                        => Assert.AreNotSame(item1, item2)),    
+                        => Assert.AreNotSame(item1, item2)),
 
                     (Action<object, object>)((item1, item2)     // FromSameScopeDifferentThreads
-                        => Assert.AreNotSame(item1, item2)),    
+                        => Assert.AreNotSame(item1, item2)),
 
                     (Action<object, object>)((item1, item2)     // FromChildScopeDifferentThreads
                         => Assert.AreNotSame(item1, item2)),
@@ -59,7 +62,8 @@ namespace Lifetime.Manager
 
                 yield return new object[]
                 {
-                    new PerThreadLifetimeManager(),             // Manager
+                    (Func<LifetimeManager>)(() =>               // Manager factory
+                    new PerThreadLifetimeManager()),             
 
                     typeof(IService),                           // Target Type
 
@@ -70,7 +74,7 @@ namespace Lifetime.Manager
                         => Assert.AreSame(item1, item2)),
 
                     (Action<object, object>)((item1, item2)     // FromSameScopeDifferentThreads
-                        => Assert.AreNotSame(item1, item2)),    
+                        => Assert.AreNotSame(item1, item2)),
 
                     (Action<object, object>)((item1, item2)     // FromChildScopeDifferentThreads
                         => Assert.AreNotSame(item1, item2)),
@@ -83,7 +87,8 @@ namespace Lifetime.Manager
 
                 yield return new object[]
                 {
-                    new PerResolveLifetimeManager(),            // Manager
+                    (Func<LifetimeManager>)(() =>               // Manager factory
+                    new PerResolveLifetimeManager()),            
 
                     typeof(IView),                              // Target Type
 
@@ -106,7 +111,7 @@ namespace Lifetime.Manager
                     }),
 
                     (Action<object, object>)((item1, item2)     // FromSameScopeDifferentThreads
-                    => 
+                    =>
                     {
                         Assert.AreNotSame(item1, item2);
                         Assert.AreSame(((IView)item1).Presenter.View, item1);
@@ -115,7 +120,7 @@ namespace Lifetime.Manager
                     }),
 
                     (Action<object, object>)((item1, item2)     // FromChildScopeDifferentThreads
-                    => 
+                    =>
                     {
                         Assert.AreNotSame(item1, item2);
                         Assert.AreSame(((IView)item1).Presenter.View, item1);
@@ -128,27 +133,27 @@ namespace Lifetime.Manager
 
 
                 #region ContainerControlledTransientManager
-
-
+#if !UNITY_V4
                 yield return new object[]
                 {
-                    new ContainerControlledTransientManager(),  // Manager
+                    (Func<LifetimeManager>)(() =>               // Manager factory
+                    new ContainerControlledTransientManager()), 
 
                     typeof(IService),                           // Target Type
 
                     (Action<object, object>)((item1, item2)     // FromSameScope
-                        => Assert.AreNotSame(item1, item2)),    
+                        => Assert.AreNotSame(item1, item2)),
 
                     (Action<object, object>)((item1, item2)     // FromChildScope
-                        => Assert.AreNotSame(item1, item2)),    
+                        => Assert.AreNotSame(item1, item2)),
 
                     (Action<object, object>)((item1, item2)     // FromSameScopeDifferentThreads
-                        => Assert.AreNotSame(item1, item2)),    
+                        => Assert.AreNotSame(item1, item2)),
 
                     (Action<object, object>)((item1, item2)     // FromChildScopeDifferentThreads
                         => Assert.AreNotSame(item1, item2)),
                 };
-
+#endif
                 #endregion
 
 
@@ -156,7 +161,8 @@ namespace Lifetime.Manager
 
                 yield return new object[]
                 {
-                    new ContainerControlledLifetimeManager(),   // Manager
+                    (Func<LifetimeManager>)(() =>
+                    new ContainerControlledLifetimeManager()),  // Manager factory
 
                     typeof(IService),                           // Target Type
 
@@ -180,7 +186,8 @@ namespace Lifetime.Manager
 
                 yield return new object[]
                 {
-                    new HierarchicalLifetimeManager(),          // Manager
+                    (Func<LifetimeManager>)(() =>
+                    new HierarchicalLifetimeManager()),         // Manager factory
 
                     typeof(IService),                           // Target Type
 
@@ -188,7 +195,7 @@ namespace Lifetime.Manager
                         => Assert.AreSame(item1, item2)),
 
                     (Action<object, object>)((item1, item2)     // FromChildScope
-                        => Assert.AreNotSame(item1, item2)),    
+                        => Assert.AreNotSame(item1, item2)),
 
                     (Action<object, object>)((item1, item2)     // FromSameScopeDifferentThreads
                         => Assert.AreSame(item1, item2)),
@@ -204,7 +211,8 @@ namespace Lifetime.Manager
 
                 yield return new object[]
                 {
-                    new ExternallyControlledLifetimeManager(),  // Manager
+                    (Func<LifetimeManager>)(() =>
+                    new ExternallyControlledLifetimeManager()), // Manager factory
 
                     typeof(IService),                           // Target Type
 
