@@ -13,86 +13,101 @@ namespace Lifetime.Manager
 {
     public abstract partial class Pattern : Lifetime.Pattern
     {
-        #region Fields
-
-        protected object Item1;
-        protected object Item2;
-        protected Type TargetType;
-
-        #endregion
-
-
-        #region Implementation
-
-        protected virtual bool ArrangeTest(Func<LifetimeManager> factory, Type type = null)
-        {
-            var manager = factory();
-#if UNITY_V4
-            Container.RegisterType(typeof(IService), typeof(Service), manager)
-                     .RegisterType(typeof(MockLogger), factory());
-            Container.RegisterType<IPresenter, MockPresenter>()
-                     .RegisterType<IView, View>(factory());
-#else
-            Container.RegisterType(typeof(IService), typeof(Service), (ITypeLifetimeManager)manager)
-                     .RegisterType(typeof(MockLogger), (ITypeLifetimeManager)factory());
-            Container.RegisterType<IPresenter, MockPresenter>()
-                     .RegisterType<IView, View>((ITypeLifetimeManager)factory());
-#endif
-            TargetType = type ?? typeof(IService);
-
-            return manager is PerResolveLifetimeManager 
-                ? true : false;
-        }
-
-        #endregion
-
-
-        #region Test Types
-
-        public interface IPresenter
-        {
-            IView View { get; }
-        }
-
-        public class MockPresenter : IPresenter
-        {
-            public IView View { get; set; }
-
-            public MockPresenter(IView view)
-            {
-                View = view;
-            }
-        }
-
-        public interface IView
-        {
-            IPresenter Presenter { get; set; }
-        }
-
-        public class View : IView
-        {
-            [Dependency]
-            public IPresenter Presenter { get; set; }
-        }
-
-        #endregion
-
-
         #region Test Data
 
-        public static IEnumerable<object[]> Managers_Data
+        public static IEnumerable<object[]> Set_Value_Data
         {
             get
             {
-                yield return new object[] { new TransientLifetimeManager() };
-                yield return new object[] { new PerThreadLifetimeManager() };
-                yield return new object[] { new PerResolveLifetimeManager() };
+                #region TransientLifetimeManager
+
+                yield return new object[]
+                {
+                    new TransientLifetimeManager(),             // Manager
+
+                    (Action<object, object>)((item1, item2)     // Assert
+                        => Assert.AreNotSame(item1, item2))
+                };
+
+                #endregion
+
+
+                #region PerThreadLifetimeManager
+
+                yield return new object[]
+                {
+                    new PerThreadLifetimeManager(),             // Manager
+
+                    (Action<object, object>)((item1, item2)     // Assert
+                        => Assert.AreSame(item1, item2)),
+                };
+
+                #endregion
+
+
+                #region PerResolveLifetimeManager
+
+                yield return new object[]
+                {
+                    new PerResolveLifetimeManager(),            // Manager
+
+                    (Action<object, object>)((item1, item2)     // Assert
+                        => Assert.AreNotSame(item1, item2))
+                };
+
+                #endregion
+
+
+                #region ContainerControlledTransientManager
 #if !UNITY_V4
-                yield return new object[] { new ContainerControlledTransientManager() };
+                yield return new object[]
+                {
+                    new ContainerControlledTransientManager(),  // Manager
+
+                    (Action<object, object>)((item1, item2)     // Assert
+                        => Assert.AreNotSame(item1, item2)),
+                };
 #endif
-                yield return new object[] { new ContainerControlledLifetimeManager() };
-                yield return new object[] { new HierarchicalLifetimeManager() };
-                yield return new object[] { new ExternallyControlledLifetimeManager() };
+                #endregion
+
+
+                #region ContainerControlledLifetimeManager
+
+                yield return new object[]
+                {
+                    new ContainerControlledLifetimeManager(),  // Manager
+
+                    (Action<object, object>)((item1, item2)    // Assert
+                        => Assert.AreSame(item1, item2)),
+                };
+
+                #endregion
+
+
+                #region HierarchicalLifetimeManager
+
+                yield return new object[]
+                {
+                    new HierarchicalLifetimeManager(),         // Manager
+
+                    (Action<object, object>)((item1, item2)    // Assert
+                        => Assert.AreSame(item1, item2)),
+                };
+
+                #endregion
+
+
+                #region ExternallyControlledLifetimeManager
+
+                yield return new object[]
+                {
+                    new ExternallyControlledLifetimeManager(), // Manager
+
+                    (Action<object, object>)((item1, item2)    // FromSameScopeDifferentThreads
+                        => Assert.AreSame(item1, item2))
+                };
+
+                #endregion
             }
         }
 
@@ -426,7 +441,7 @@ namespace Lifetime.Manager
         }
 
 
-        public static IEnumerable<object[]> Two_Scopes_Data
+        public static IEnumerable<object[]> Sibling_Scopes_Data
         {
             get
             {

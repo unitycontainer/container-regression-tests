@@ -38,6 +38,31 @@ namespace Lifetime.Manager
             assert(Item1, Item2);
         }
 
+        [DynamicData(nameof(Child_Scope_Data))]
+        [PatternTestMethod("Registered in Child and Root"), TestCategory(CHILD_SCOPE)]
+        public virtual void RegisteredInChildAndRoot(string name,
+                                                     Func<LifetimeManager> factory, Type type,
+                                                     Action<object, object> assert,
+                                                     Action<object, object> assertDifferentThreads)
+        {
+            // Arrange
+            var child = Container.CreateChildContainer();
+            ArrangeTest(factory, type, child);
+
+            // Act
+            Item1 = Container.Resolve(TargetType);
+            Item2 = child.Resolve(TargetType);
+
+            // Validate
+            Assert.IsNotNull(Item1);
+            Assert.IsNotNull(Item2);
+
+            Assert.IsInstanceOfType(Item1, TargetType);
+            Assert.IsInstanceOfType(Item1, TargetType);
+
+            Assert.AreNotSame(Item1, Item2);
+        }
+
 
         [DynamicData(nameof(Child_Scope_Data))]
         [PatternTestMethod("Child Container as import"), TestCategory(CHILD_SCOPE)]

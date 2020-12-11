@@ -13,14 +13,14 @@ namespace Lifetime.Manager
 {
     public abstract partial class Pattern
     {
-        [DynamicData(nameof(Two_Scopes_Data))]
-        [PatternTestMethod("Two Child Containers"), TestCategory(TWO_SCOPES)]
+        [DynamicData(nameof(Sibling_Scopes_Data))]
+        [PatternTestMethod("Two Child Containers"), TestCategory(SIBLING_SCOPES)]
         public virtual void TwoChildContainers(string name,
                                                Func<LifetimeManager> factory, Type type,
                                                Action<object, object> assert,
                                                Action<object, object> assertDifferentThreads)
         {
-            // Arrange
+            // Arrange 
             ArrangeTest(factory, type);
 
             // Act
@@ -40,8 +40,8 @@ namespace Lifetime.Manager
         }
 
 
-        [DynamicData(nameof(Two_Scopes_Data))]
-        [PatternTestMethod("Two Child Containers as import"), TestCategory(TWO_SCOPES)]
+        [DynamicData(nameof(Sibling_Scopes_Data))]
+        [PatternTestMethod("Two Child Containers as import"), TestCategory(SIBLING_SCOPES)]
         public virtual void TwoChildContainers_Import(string name,
                                                       Func<LifetimeManager> factory, Type type,
                                                       Action<object, object> assert,
@@ -65,8 +65,8 @@ namespace Lifetime.Manager
 
 
 #if !BEHAVIOR_V4 // Unity v4 did not support multi-threading
-        [DynamicData(nameof(Two_Scopes_Data))]
-        [PatternTestMethod("Child Container on different threads"), TestCategory(TWO_SCOPES)]
+        [DynamicData(nameof(Sibling_Scopes_Data))]
+        [PatternTestMethod("Child Container on different threads"), TestCategory(SIBLING_SCOPES)]
         public virtual void TwoChildContainers_DifferentThreads(string name,
                                                                 Func<LifetimeManager> factory, Type type,
                                                                 Action<object, object> assert,

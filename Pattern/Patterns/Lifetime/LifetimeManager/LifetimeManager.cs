@@ -14,9 +14,9 @@ namespace Lifetime.Manager
 {
     public abstract partial class Pattern
     {
-        public static ICollection<IDisposable> scope = new List<IDisposable>();
+        private static ICollection<IDisposable> scope = new List<IDisposable>();
 
-        [DynamicData(nameof(Managers_Data))]
+        [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
         [DataTestMethod, TestCategory(LIFETIME_MANAGER)]
         public virtual void ToString(LifetimeManager manager)
         {
@@ -25,7 +25,7 @@ namespace Lifetime.Manager
         }
 
 
-        [DynamicData(nameof(Managers_Data))]
+        [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
         [DataTestMethod, TestCategory(LIFETIME_MANAGER)]
         public virtual void GetHashCode(LifetimeManager manager)
         {
@@ -35,7 +35,7 @@ namespace Lifetime.Manager
 
 
 #if !UNITY_V4
-        [DynamicData(nameof(Managers_Data))]
+        [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
         [DataTestMethod, TestCategory(LIFETIME_MANAGER)]
         public virtual void Clone(LifetimeManager manager)
         {
@@ -52,7 +52,7 @@ namespace Lifetime.Manager
 
 #if !UNITY_V4 && !UNITY_V5
 
-        [DynamicData(nameof(Managers_Data))]
+        [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
         [PatternTestMethod("TryGetValue returns NoValue"), TestCategory(LIFETIME_MANAGER)]
         public virtual void TryGetValue(LifetimeManager manager)
         {
@@ -60,5 +60,13 @@ namespace Lifetime.Manager
             Assert.AreSame(RegistrationManager.NoValue, value);
         }
 #endif
+
+        [DynamicData(nameof(Set_Value_Data))]
+        [PatternTestMethod("GetValue() same as saved by SetValue()"), TestCategory(LIFETIME_MANAGER)]
+        public virtual void SetGetValue(LifetimeManager manager, Action<object, object> assert)
+        {
+            manager.SetValue(this, scope);
+            assert(this, manager.GetValue(scope));
+        }
     }
 }
