@@ -13,9 +13,9 @@ namespace Lifetime.Manager
 {
     public abstract partial class Pattern
     {
-        [DynamicData(nameof(Child_Scope_Data))]
-        [PatternTestMethod("Child Container"), TestCategory(CHILD_SCOPE)]
-        public virtual void FromChildContainer(string name,
+        [DynamicData(nameof(Two_Scopes_Data))]
+        [PatternTestMethod("Two Child Containers"), TestCategory(TWO_SCOPES)]
+        public virtual void TwoChildContainers(string name,
                                                Func<LifetimeManager> factory, Type type,
                                                Action<object, object> assert,
                                                Action<object, object> assertDifferentThreads)
@@ -24,7 +24,8 @@ namespace Lifetime.Manager
             ArrangeTest(factory, type);
 
             // Act
-            Item1 = Container.Resolve(TargetType);
+            Item1 = Container.CreateChildContainer()
+                             .Resolve(TargetType);
             Item2 = Container.CreateChildContainer()
                              .Resolve(TargetType);
 
@@ -39,9 +40,9 @@ namespace Lifetime.Manager
         }
 
 
-        [DynamicData(nameof(Child_Scope_Data))]
-        [PatternTestMethod("Child Container as import"), TestCategory(CHILD_SCOPE)]
-        public virtual void FromChildContainer_Import(string name,
+        [DynamicData(nameof(Two_Scopes_Data))]
+        [PatternTestMethod("Two Child Containers as import"), TestCategory(TWO_SCOPES)]
+        public virtual void TwoChildContainers_Import(string name,
                                                       Func<LifetimeManager> factory, Type type,
                                                       Action<object, object> assert,
                                                       Action<object, object> assertDifferentThreads)
@@ -50,7 +51,8 @@ namespace Lifetime.Manager
             if (ArrangeTest(factory, type)) return;
 
             // Act
-            Item1 = Container.Resolve<Foo<MockLogger>>().Value;
+            Item1 = Container.CreateChildContainer()
+                             .Resolve<Foo<MockLogger>>().Value;
             Item2 = Container.CreateChildContainer()
                              .Resolve<Foo<MockLogger>>().Value;
 
@@ -63,9 +65,9 @@ namespace Lifetime.Manager
 
 
 #if !BEHAVIOR_V4 // Unity v4 did not support multi-threading
-        [DynamicData(nameof(Child_Scope_Data))]
-        [PatternTestMethod("Child Container on different threads"), TestCategory(CHILD_SCOPE)]
-        public virtual void FromChildContainer_DifferentThreads(string name,
+        [DynamicData(nameof(Two_Scopes_Data))]
+        [PatternTestMethod("Child Container on different threads"), TestCategory(TWO_SCOPES)]
+        public virtual void TwoChildContainers_DifferentThreads(string name,
                                                                 Func<LifetimeManager> factory, Type type,
                                                                 Action<object, object> assert,
                                                                 Action<object, object> assertDifferentThreads)
@@ -74,7 +76,8 @@ namespace Lifetime.Manager
             ArrangeTest(factory, type);
 
             // Act
-            Thread t1 = new Thread(new ParameterizedThreadStart((c) => Item1 = Container.Resolve(TargetType)));
+            Thread t1 = new Thread(new ParameterizedThreadStart((c) => Item1 = Container.CreateChildContainer()
+                                                                                        .Resolve(TargetType)));
             Thread t2 = new Thread(new ParameterizedThreadStart((c) => Item2 = Container.CreateChildContainer()
                                                                                         .Resolve(TargetType)));
 
