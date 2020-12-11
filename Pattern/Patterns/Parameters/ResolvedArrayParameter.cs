@@ -36,8 +36,21 @@ namespace Parameters
                                                  object registered, object named, object injected, object @default,
                                                  bool isNamed) 
             => Assert_ResolvedArray_Injected(definition, type,
-                func(new ResolvedArrayParameter(type, registered, named, injected, @default)),
-                new object[] { registered, named, injected, @default });
+                func(new ResolvedArrayParameter(type, 
+                    registered, named,  injected
+#if !BEHAVIOR_V4
+                    , @default
+#endif
+                    )),
+                new object[] 
+                { 
+                    registered, 
+                    named, 
+                    injected
+#if !BEHAVIOR_V4
+                    , @default 
+#endif
+                });
 
 
         [PatternTestMethod("Ctor(type, ...) with resolvers"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
@@ -55,9 +68,16 @@ namespace Parameters
                            func(new ResolvedArrayParameter(type, 
                                                            new ResolvedParameter(type), 
                                                            new OptionalParameter(type, Name), 
-                                                           new InjectionParameter(injected),
-                                                           new ValidatingResolver(@default))),
-                           new object[] { registered, named, injected, @default });
+                                                           new InjectionParameter(injected)
+#if !BEHAVIOR_V4
+                                                           , new ValidatingResolver(@default)
+#endif
+                           )),
+                           new object[] { registered, named, injected
+#if !BEHAVIOR_V4
+                           , @default 
+#endif
+                           });
         }
 
 
@@ -70,7 +90,11 @@ namespace Parameters
                                                   bool isNamed)
         {
             var target = definition.MakeGenericType(type);
-            var injection = func(new ResolvedArrayParameter(type, registered, named, injected, @default));
+            var injection = func(new ResolvedArrayParameter(type, registered, named, injected
+#if !BEHAVIOR_V4
+                , @default
+#endif
+                ));
 
             // Arrange
             Container.RegisterType(null, target, null, null, injection);
@@ -84,7 +108,11 @@ namespace Parameters
             Assert.IsInstanceOfType(instance.Value, type.MakeArrayType());
 
             var list = instance.Value as IList;
-            var expected = new object[] { registered, named, injected, @default };
+            var expected = new object[] { registered, named, injected
+#if !BEHAVIOR_V4
+                , @default 
+#endif
+            };
 
             Assert.IsNotNull(list);
             Assert.IsNotNull(expected);
@@ -115,7 +143,11 @@ namespace Parameters
 
         [PatternTestMethod("Ctor(generic, ...) throws"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
         [DynamicData(nameof(Parameters_Test_Data))]
+#if BEHAVIOR_V4
+        [ExpectedException(typeof(ArgumentNullException))]
+#else
         [ExpectedException(typeof(InvalidOperationException))]
+#endif
         public void ResolvedArrayParameter_Generic(Type type, Type definition,
                                                    string member, string import,
                                                    Func<object, InjectionMember> func,

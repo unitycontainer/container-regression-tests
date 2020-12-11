@@ -55,12 +55,12 @@ namespace Lifetime
             if (child is not null)
             {
 #if UNITY_V4
-                child.RegisterType(typeof(IService), typeof(Service), manager)
+                child.RegisterType(typeof(IService), typeof(Service), factory())
                      .RegisterType(typeof(MockLogger), factory())
                      .RegisterType<IPresenter, MockPresenter>()
                      .RegisterType<IView, View>(factory());
 #else
-                child.RegisterType(typeof(IService), typeof(Service), (ITypeLifetimeManager)manager)
+                child.RegisterType(typeof(IService), typeof(Service), (ITypeLifetimeManager)factory())
                      .RegisterType(typeof(MockLogger), (ITypeLifetimeManager)factory())
                      .RegisterType<IPresenter, MockPresenter>()
                      .RegisterType<IView, View>((ITypeLifetimeManager)factory());
@@ -115,8 +115,6 @@ namespace Lifetime
         #endregion
 
 
-
-
         #region Test Data
 
         public static IEnumerable<object[]> Lifetime_Managers_Data
@@ -128,5 +126,31 @@ namespace Lifetime
                                     .Select(source => new object[] { source.Factory() });
 
         #endregion
+    }
+
+    public static class PatternExtensions
+    {
+        public static object GetTestValue(this LifetimeManager manager, object scope)
+        {
+#if UNITY_V4
+            return manager.GetValue();
+#elif UNITY_V5
+            return manager.GetValue((ILifetimeContainer)scope);
+#else
+            return manager.GetValue((ICollection<IDisposable>)scope);
+#endif
+
+        }
+
+        public static void SetTestValue(this LifetimeManager manager, object value, object scope)
+        {
+#if UNITY_V4
+            manager.SetValue(value);
+#elif UNITY_V5
+            manager.SetValue(value, (ILifetimeContainer)scope);
+#else
+            manager.SetValue(value, (ICollection<IDisposable>)scope);
+#endif
+        }
     }
 }

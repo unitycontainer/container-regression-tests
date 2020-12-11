@@ -36,8 +36,22 @@ namespace Parameters
                                                  object registered, object named, object injected, object @default,
                                                  bool isNamed)
             => Assert_GenericArray_Injected(definition, type,
-                func(new GenericResolvedArrayParameter(TDependency, registered, named, injected, @default)),
-                new object[] { registered, named, injected, @default });
+                func(new GenericResolvedArrayParameter(TDependency, 
+                    registered, 
+                    named, 
+                    injected
+#if !BEHAVIOR_V4
+                    ,@default
+#endif
+                    )),
+                new object[] { 
+                    registered, 
+                    named, 
+                    injected 
+#if !BEHAVIOR_V4
+                    ,@default
+#endif
+                });
 
 
         [PatternTestMethod("Ctor(T, ...) with resolvers"), TestProperty(PARAMETER, nameof(GenericResolvedArrayParameter))]
@@ -60,7 +74,7 @@ namespace Parameters
                            new object[] { registered, named, injected, @default });
         }
 
-
+#if !BEHAVIOR_V4
         [PatternTestMethod("Ctor(T, values) on object[] array"), TestProperty(PARAMETER, nameof(GenericResolvedArrayParameter))]
         [DynamicData(nameof(Array_Parameters_Data))]
         public void GenericResolvedArrayParameter_Object(Type type, Type definition,
@@ -92,6 +106,7 @@ namespace Parameters
             for (var i = 0; i < expected.Length; i++)
                 Assert.IsTrue(list.Contains(expected[i]));
         }
+#endif
 
         #endregion
 

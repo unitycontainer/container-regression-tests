@@ -19,13 +19,13 @@ namespace Lifetime.Manager
         public void SetValueAddsLifetime(string name, Func<LifetimeManager> factory, bool isDisposable)
         {
             // Arrange
-            var scope = new List<IDisposable>();
+            var scope = new LifetimeContainer();
             object instance = new object();
             object disposable = new TestDisposable();
 
             // Act
             var manager = factory();
-            manager.SetValue(instance, scope);
+            manager.SetTestValue(instance, scope);
 
             // Validate object does not add IDIsposable
             var expected = manager is HierarchicalLifetimeManager ? 1 : 0;
@@ -33,7 +33,7 @@ namespace Lifetime.Manager
             scope.Clear();
 
             manager = factory();
-            manager.SetValue(disposable, scope);
+            manager.SetTestValue(disposable, scope);
 
             // Validate object does add IDIsposable
             expected = isDisposable ? 1 : 0;

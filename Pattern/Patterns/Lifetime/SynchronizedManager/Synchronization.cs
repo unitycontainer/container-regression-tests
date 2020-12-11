@@ -14,13 +14,7 @@ namespace Lifetime.Synchronization
 {
     public abstract partial class Pattern
     {
-        #region Fields
-
-        private ICollection<IDisposable> _scope = new List<IDisposable>();
-        
-        #endregion
-
-
+#if !UNITY_V4 && !UNITY_V5
         [PatternTestMethod("SynchronizedManager.GetValue(...) blocks")]
         [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
         public override void GetValueBlocks(LifetimeManager manager)
@@ -31,12 +25,13 @@ namespace Lifetime.Synchronization
                 return;
             }
 
-            var value = manager.GetValue(_scope);
+            var scope = new LifetimeContainer();
+            var value = manager.GetValue(scope);
 
             // Act
             Thread thread = new Thread(new ParameterizedThreadStart((c) =>
             {
-                Assert.ThrowsException<TimeoutException>(() => _ = manager.GetValue(_scope));
+                Assert.ThrowsException<TimeoutException>(() => _ = manager.GetValue(scope));
             }));
 
             SynchronizedLifetimeManager.ResolveTimeout = 10;
@@ -44,7 +39,7 @@ namespace Lifetime.Synchronization
             thread.Join();
             SynchronizedLifetimeManager.ResolveTimeout = Timeout.Infinite;
         }
-
+#endif
 
         [PatternTestMethod("SetValue(...) releases a blocks"), TestCategory(SYNCHRONIZED_MANAGER)]
         [DynamicData(nameof(Synchronized_Managers_Data), typeof(Lifetime.Pattern))]
@@ -53,13 +48,14 @@ namespace Lifetime.Synchronization
             object other = null;
             var instance = new object();
             var semaphore = new ManualResetEventSlim();
-            var NoValue = manager.GetValue(_scope);
+            var scope = new LifetimeContainer();
+            var NoValue = manager.GetTestValue(scope);
 
             // Act
             Thread thread = new Thread(new ParameterizedThreadStart((c) =>
             {
                 semaphore.Set();
-                other = manager.GetValue(_scope);
+                other = manager.GetTestValue(scope);
             }));
             
             // Wait for thread to reach semaphore and some
@@ -68,7 +64,7 @@ namespace Lifetime.Synchronization
             Thread.Sleep(5);
             
             // Set value and wait
-            manager.SetValue(instance, _scope);
+            manager.SetTestValue(instance, scope);
             thread.Join();
 
             // Validate
@@ -82,14 +78,15 @@ namespace Lifetime.Synchronization
         public void RecoverReleasesBlock(SynchronizedLifetimeManager manager)
         {
             var semaphore = new ManualResetEventSlim();
-            var NoValue = manager.GetValue(_scope);
+            var scope = new LifetimeContainer();
+            var NoValue = manager.GetTestValue(scope);
             object other = null;
 
             // Act
             Thread thread = new Thread(new ParameterizedThreadStart((c) =>
             {
                 semaphore.Set();
-                other = manager.GetValue(_scope);
+                other = manager.GetTestValue(scope);
             }));
 
             // Wait for thread to reach semaphore and some

@@ -47,6 +47,7 @@ namespace Methods
                 BaselineTestNamed.MakeGenericType(type),
                 InjectionMember_Default(), @default, named);
 #endif
+
         #endregion
     }
 }

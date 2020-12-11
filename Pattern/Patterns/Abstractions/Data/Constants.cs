@@ -121,7 +121,7 @@ namespace Regression
 
 
             #region Integer
-                
+#if !BEHAVIOR_V4
             new TestDataSource<int>(
                     0,                          // default
                     DefaultInt,                 // DefaultValue
@@ -131,7 +131,7 @@ namespace Regression
                     InjectedInt,                // Injected
                     OverriddenInt               // Overridden
                 ),
-                
+#endif
             #endregion
 
 

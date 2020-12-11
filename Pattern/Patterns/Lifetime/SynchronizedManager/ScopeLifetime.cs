@@ -21,11 +21,11 @@ namespace Lifetime.Synchronization
             if (manager is ExternallyControlledLifetimeManager) return;
 
             var instance = new object();
-            var scope = new List<IDisposable>();
+            var scope = new LifetimeContainer();
 
-            manager.SetValue(instance, scope);
+            manager.SetTestValue(instance, scope);
 
-            Assert.AreSame(instance, manager.GetValue(_scope));
+            Assert.AreSame(instance, manager.GetTestValue(scope));
             Assert.AreEqual(0, scope.Count);
         }
 
@@ -38,11 +38,11 @@ namespace Lifetime.Synchronization
             if (manager is ExternallyControlledLifetimeManager) return;
 
             var instance = new TestDisposable();
-            var scope = new List<IDisposable>();
+            var scope = new LifetimeContainer();
 
-            manager.SetValue(instance, scope);
+            manager.SetTestValue(instance, scope);
 
-            Assert.AreSame(instance, manager.GetValue(_scope));
+            Assert.AreSame(instance, manager.GetTestValue(scope));
             Assert.AreEqual(0, scope.Count);
         }
     }

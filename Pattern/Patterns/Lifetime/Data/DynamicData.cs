@@ -14,7 +14,7 @@ namespace Lifetime
         #region Fields
 
         private static Action<object, object> Action_Verify_AreNotSame = (item1, item2) => Assert.AreNotSame(item1, item2);
-        private static Action<object, object> Action_Verify_AreSame    = (item1, item2) => Assert.AreSame(item1, item2);
+        private static Action<object, object> Action_Verify_AreSame = (item1, item2) => Assert.AreSame(item1, item2);
         private static Action<object, object> Action_Verify_PerResolve = (item1, item2) =>
         {
             Assert.AreNotSame(item1, item2);
@@ -137,7 +137,12 @@ namespace Lifetime
 
             new TestManagerSource<ExternallyControlledLifetimeManager>(
                     factory: () => new ExternallyControlledLifetimeManager(),
-                    synchronized: true, disposable: false,
+#if UNITY_V4
+                    synchronized: false,
+#else
+                    synchronized: true,
+#endif
+                    disposable: false,
                     target: typeof(IService),
                     set_get:                Action_Verify_AreSame,
                     same_scope:             Action_Verify_AreSame,

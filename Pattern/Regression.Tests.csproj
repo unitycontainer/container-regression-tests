@@ -84,6 +84,9 @@
 				<Compile Remove="Patterns\Injection\Annotation\Overrides\Dependency.Import.cs" />
 				<Compile Remove="Patterns\Injection\Annotation\Overrides\OptionalParameter.cs" />
 				<Compile Remove="Patterns\Injection\Annotation\Overrides\ResolvedParameter.cs" />
+				<Compile Remove="Patterns\Lifetime\LifetimeManager.cs" />
+				<Compile Remove="Patterns\Lifetime\LifetimeManager\Disposable.cs" />
+				<Compile Remove="Patterns\Selection\Implementation\Fields.cs" />
 				<Compile Remove="Resolution\Enumerable\**" />
 				<Compile Remove="Resolution\Generic\Constrained.cs" />
 				<Compile Remove="Registration\Validation\Factory.cs" />
@@ -104,6 +107,7 @@
 			<ItemGroup> <!-- IF v5 -->
 				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
 				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
+				<Compile Remove="Patterns\Lifetime\LifetimeManager.cs" />
 				<Compile Remove="Registration\Validation\Factory.cs" />
 				<Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
 				<Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />

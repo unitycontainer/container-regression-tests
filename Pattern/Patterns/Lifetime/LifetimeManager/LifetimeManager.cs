@@ -14,8 +14,6 @@ namespace Lifetime.Manager
 {
     public abstract partial class Pattern
     {
-        private static ICollection<IDisposable> _scope = new List<IDisposable>();
-
         [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
         [DataTestMethod, TestCategory(LIFETIME_MANAGER)]
         public virtual void ToString(LifetimeManager manager)
@@ -56,7 +54,8 @@ namespace Lifetime.Manager
         [PatternTestMethod("TryGetValue returns NoValue"), TestCategory(LIFETIME_MANAGER)]
         public virtual void TryGetValue(LifetimeManager manager)
         {
-            var value = manager.TryGetValue(_scope);
+            var scope = new LifetimeContainer();
+            var value = manager.TryGetValue(scope);
             Assert.AreSame(RegistrationManager.NoValue, value);
         }
 #endif
@@ -65,8 +64,10 @@ namespace Lifetime.Manager
         [PatternTestMethod("GetValue() same as saved by SetValue()"), TestCategory(LIFETIME_MANAGER)]
         public virtual void SetGetValue(LifetimeManager manager, Action<object, object> assert)
         {
-            manager.SetValue(this, _scope);
-            assert(this, manager.GetValue(_scope));
+            var scope = new LifetimeContainer();
+
+            manager.SetTestValue(this, scope);
+            assert(this, manager.GetTestValue(scope));
         }
     }
 }
