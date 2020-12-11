@@ -102,30 +102,30 @@ namespace Lifetime
             public IPresenter Presenter { get; set; }
         }
 
+        protected class TestDisposable : IDisposable
+        {
+            public bool IsDisposed { get; private set; }
+
+            public void Dispose()
+            {
+                IsDisposed = true;
+            }
+        }
+
         #endregion
+
+
 
 
         #region Test Data
 
         public static IEnumerable<object[]> Lifetime_Managers_Data
-        {
-            get
-            {
-                yield return new object[] { new TransientLifetimeManager() };
-                yield return new object[] { new PerThreadLifetimeManager() };
-                yield return new object[] { new PerResolveLifetimeManager() };
-#if !UNITY_V4
-                yield return new object[] { new ContainerControlledTransientManager() };
-#endif
-                yield return new object[] { new ContainerControlledLifetimeManager() };
-                yield return new object[] { new HierarchicalLifetimeManager() };
-                yield return new object[] { new ExternallyControlledLifetimeManager() };
-            }
-        }
+            => Lifetime_Managers_Set.Select(source => new object[] { source.Factory() });
 
 
         public static IEnumerable<object[]> Synchronized_Managers_Data
-            => Lifetime_Managers_Data.Where(set => set[0] is SynchronizedLifetimeManager);
+            => Lifetime_Managers_Set.Where(source => source.IsSynchronized)
+                                    .Select(source => new object[] { source.Factory() });
 
         #endregion
     }

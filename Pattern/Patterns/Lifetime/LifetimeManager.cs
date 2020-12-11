@@ -14,7 +14,7 @@ namespace Lifetime
 {
     public abstract partial class Pattern
     {
-        private ICollection<IDisposable> scope = new List<IDisposable>();
+        private ICollection<IDisposable> _scope = new List<IDisposable>();
 
 
 
@@ -22,13 +22,13 @@ namespace Lifetime
         [DynamicData(nameof(Lifetime_Managers_Data))]
         public void TryGetValueDoesNotBlock(LifetimeManager manager)
         {
-            var value = manager.TryGetValue(scope);
+            var value = manager.TryGetValue(_scope);
             object other = null;
 
             // Act
             Thread thread = new Thread(new ParameterizedThreadStart((c) => 
             {
-                other = manager.TryGetValue(scope);
+                other = manager.TryGetValue(_scope);
             }));
 
             thread.Start("1");
@@ -44,13 +44,13 @@ namespace Lifetime
         {
             if (manager is SynchronizedLifetimeManager) return;
 
-            var value = manager.GetValue(scope);
+            var value = manager.GetValue(_scope);
             object other = null;
 
             // Act
             Thread thread = new Thread(new ParameterizedThreadStart((c) =>
             {
-                other = manager.GetValue(scope);
+                other = manager.GetValue(_scope);
             }));
 
             thread.Start("1");

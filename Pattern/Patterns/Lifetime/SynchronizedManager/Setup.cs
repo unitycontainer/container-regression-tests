@@ -11,21 +11,6 @@ namespace Lifetime.Synchronization
 {
     public abstract partial class Pattern : Lifetime.Pattern
     {
-        #region Test Types
-
-        protected class TestDisposable : IDisposable
-        {
-            public bool IsDisposed { get; private set; }
-
-            public void Dispose()
-            {
-                IsDisposed = true;
-            }
-        }
-
-        #endregion
-
-
         #region Test Data
 
         public static IEnumerable<object[]> Synchronized_Managers_Extended_Data
