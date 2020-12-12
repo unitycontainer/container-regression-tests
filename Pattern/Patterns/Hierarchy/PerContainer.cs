@@ -17,7 +17,7 @@ namespace Container
         [DynamicData(nameof(Hierarchy_Unnamed_Data)), TestProperty(HIERARCHY, nameof(ContainerControlledLifetimeManager))]
         public void ResolveSingleton_Directly_InRootContainer(Type type)
         {
-            var target = type.MakeGenericType(typeof(IUnityContainer));
+            var target = type.MakeGenericType(typeof(IUnityContainer), typeof(IUnityContainer));
             Container.RegisterType(target, new ContainerControlledLifetimeManager());
 
             var rootContainerId = Container.GetHashCode();
@@ -41,7 +41,7 @@ namespace Container
         [DynamicData(nameof(Hierarchy_Unnamed_Data)), TestProperty(HIERARCHY, nameof(ContainerControlledLifetimeManager))]
         public void ResolveSingleton_Directly_InChildContainer(Type type)
         {
-            var target = type.MakeGenericType(typeof(IUnityContainer));
+            var target = type.MakeGenericType(typeof(IUnityContainer), typeof(IUnityContainer));
             Container.RegisterType(target, new ContainerControlledLifetimeManager());
 
             var rootContainerId = Container.GetHashCode();
@@ -71,35 +71,34 @@ namespace Container
         {
             Container.RegisterType(typeof(ISingletonService), typeof(SingletonService), new ContainerControlledLifetimeManager());
 
-            var target = type.MakeGenericType(typeof(ISingletonService));
+            var target = type.MakeGenericType(typeof(ISingletonService), typeof(IUnityContainer));
 
             var consumerInstanceFromRootContainter = Container.Resolve(target) as FixtureBaseType;
             var service = consumerInstanceFromRootContainter.Value as SingletonService;
 
+            Assert.AreEqual(Container.GetHashCode(), consumerInstanceFromRootContainter.Default.GetHashCode(), "consumerInstanceFromRootContainter should be created in root container");
             Assert.AreEqual(Container.GetHashCode(), service.ContainerId, "SingletonService dependency of consumerInstanceFromRootContainter should be created in root container");
         }
 
 #if !BEHAVIOR_V4 && !BEHAVIOR_V5
-        [TestMethod]
+        [TestMethod("Resolve Singleton As Dependency In Child Container THEN_ConsumerInstance_CreatedInChildContiner_AND_SignletonInstance_CreatedInRootContainer")]
         [DynamicData(nameof(Hierarchy_Unnamed_Data)), TestProperty(HIERARCHY, nameof(ContainerControlledLifetimeManager))]
-        public void ResolveSingletonType_AsDependency_InChildContainer_THEN_ConsumerInstance_CreatedInChildContiner_AND_SignletonInstance_CreatedInRootContainer(Type type)
+        public void ResolveSingletonType_AsDependency_InChildContainer(Type type)
         {
             Container.RegisterType(typeof(ISingletonService), typeof(SingletonService), new ContainerControlledLifetimeManager());
             
-            var target = type.MakeGenericType(typeof(ISingletonService));
+            var target = type.MakeGenericType(typeof(ISingletonService), typeof(IUnityContainer));
 
             var childContainer1 = Container.CreateChildContainer()
                                            .RegisterType(target, new TransientLifetimeManager());
-
             var childContainer2 = childContainer1.CreateChildContainer();
-
-            var rootContainerId = Container.GetHashCode();
-            var childContainer1id = childContainer1.GetHashCode();
 
             var consumerInstanceFromChildContainter2 = childContainer2.Resolve(target) as FixtureBaseType;
             var service = consumerInstanceFromChildContainter2.Value as SingletonService;
+            var container = consumerInstanceFromChildContainter2.Default;
 
-            Assert.AreEqual(rootContainerId, service.ContainerId, "singletonService dependency of consumerInstanceFromRootContainter should be created in root container");
+            Assert.AreSame(childContainer1, container, "consumerInstanceFromRootContainter should be created in root container");
+            Assert.AreEqual(Container.GetHashCode(), service.ContainerId, "singletonService dependency of consumerInstanceFromRootContainter should be created in root container");
         }
 #endif
     }

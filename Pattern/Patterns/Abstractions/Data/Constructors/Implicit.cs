@@ -22,6 +22,16 @@ namespace Regression.Implicit.Constructors
         public override object Default => default(TDependency);
     }
 
+    public class BaselineTestType<TItem1, TItem2> : FixtureBaseType
+    {
+        [InjectionConstructor]
+        public BaselineTestType(TItem1 item1, TItem2 item2)
+        {
+            Value = item1;
+            Default = item2;
+        }
+    }
+
     #endregion
 
 

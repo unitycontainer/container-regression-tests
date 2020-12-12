@@ -24,6 +24,15 @@ namespace Regression.Required.Fields
         public override object Default => default(TDependency);
     }
 
+    public class BaselineTestType<TItem1, TItem2> : FixtureBaseType
+    {
+        [Dependency] public TItem1 Item1;
+        [Dependency] public TItem2 Item2;
+        
+        public override object Value => Item1; 
+        public override object Default => Item2;
+    }
+
     #endregion
 
 

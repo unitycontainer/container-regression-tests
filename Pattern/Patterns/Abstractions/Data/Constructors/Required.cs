@@ -23,10 +23,14 @@ namespace Regression.Required.Constructors
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTest_Type<TItem1> : FixtureBaseType
+    public class BaselineTestType<TItem1, TItem2> : FixtureBaseType
     {
-        [InjectionConstructor] public BaselineTestType([Dependency] TItem1 value) => Value = value;
-        public override object Default => default(TItem1);
+        [InjectionConstructor]
+        public BaselineTestType([Dependency] TItem1 item1, [Dependency] TItem2 item2)
+        {
+            Value = item1;
+            Default = item2;
+        }
     }
 
     #endregion

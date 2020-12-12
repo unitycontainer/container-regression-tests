@@ -29,8 +29,6 @@ namespace Container
                         {
                             var definition = GetTestType(nameInfo.Item1, annotation, member, @namespace);
 
-                            if (definition is null) continue;
-
                             yield return new object[]
                             {
                                 definition.Name,
@@ -56,19 +54,9 @@ namespace Container
                         // Exclude implicit fields and properties
                         if (IMPLICIT.Equals(annotation)) continue;
 
-                        foreach (var nameInfo in BaselineTestType_Names)
-                        {
-                            if (nameInfo.Item2) continue;
+                        var definition = GetTestType("BaselineTestType`2", annotation, member, @namespace);
 
-                            var definition = GetTestType(nameInfo.Item1, annotation, member, @namespace);
-
-                            if (definition is null) continue;
-
-                            yield return new object[]
-                            {
-                                definition
-                            };
-                        }
+                        yield return new object[] { definition };
                     }
                 }
             }

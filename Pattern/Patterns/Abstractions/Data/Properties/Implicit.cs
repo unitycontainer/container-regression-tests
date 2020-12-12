@@ -19,6 +19,15 @@ namespace Regression.Implicit.Properties
         public override object Default => default(TDependency);
     }
 
+    public class BaselineTestType<TItem1, TItem2> : FixtureBaseType
+    {
+        public TItem1 Item1 { get; set; }
+        public TItem2 Item2 { get; set; }
+
+        public override object Value => Item1;
+        public override object Default => Item2;
+    }
+
     #endregion
 
 
