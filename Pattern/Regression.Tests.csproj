@@ -138,4 +138,8 @@
 		<PackageReference Condition="$(TargetFramework.StartsWith('net4'))" Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Resolution\Hierarchy\" />
+	</ItemGroup>
+
 </Project>

@@ -9,9 +9,9 @@ using Unity;
 using Unity.Lifetime;
 #endif
 
-namespace Resolution
+namespace Container
 {
-    public partial class Hierarchy
+    public partial class Basics
     {
         [TestMethod]
         public void ResolveSignletonType_Directly_InRootContainer_THEN_InstanceIsCreatedInRootContainer_AND_SammeInstanceResolved_InAllChildContainers()

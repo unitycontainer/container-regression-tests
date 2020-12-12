@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Regression;
 using System;
 using System.Collections.Generic;
 #if UNITY_V4
@@ -8,48 +9,35 @@ using Unity;
 using Unity.Lifetime;
 #endif
 
-namespace Resolution
+namespace Container
 {
-    public partial class Hierarchy
+    public partial class Basics
     {
-        [TestMethod]
-        public void WhenResolvingAnIUnityContainerItResolvesItself()
+        [PatternTestMethod("IUnityContainer Resolves Itself"), TestCategory(nameof(IUnityContainer))]
+        public void IUnityContainer_Itself()
         {
             IUnityContainer resolvedContainer = Container.Resolve<IUnityContainer>();
 
             Assert.AreSame(Container, resolvedContainer);
         }
 
-        [TestMethod]
-        public void WhenResolveingInAChildContainerItResolvesTheChildContainer()
+        [PatternTestMethod("Child container resolves itself"), TestCategory(nameof(IUnityContainer))]
+        public void IUnityContainer_ChildContainer()
         {
-            IUnityContainer childContainer = Container.CreateChildContainer();
+            IUnityContainer childContainer1 = Container.CreateChildContainer();
+            IUnityContainer childContainer2 = childContainer1.CreateChildContainer();
+            IUnityContainer childContainer3 = childContainer2.CreateChildContainer();
 
-            IUnityContainer resolvedContainer = childContainer.Resolve<IUnityContainer>();
+            IUnityContainer resolvedContainer1 = childContainer1.Resolve<IUnityContainer>();
+            IUnityContainer resolvedContainer2 = childContainer2.Resolve<IUnityContainer>();
+            IUnityContainer resolvedContainer3 = childContainer3.Resolve<IUnityContainer>();
 
-            Assert.AreSame(childContainer, resolvedContainer);
+            Assert.AreSame(childContainer1, resolvedContainer1);
+            Assert.AreSame(childContainer2, resolvedContainer2);
+            Assert.AreSame(childContainer3, resolvedContainer3);
         }
 
-        [TestMethod]
-        public void AClassThatHasADependencyOnTheContainerGetsItInjected()
-        {
-            IUnityContainerInjectionClass obj;
-            
-            obj = Container.Resolve<IUnityContainerInjectionClass>();
 
-            Assert.AreSame(Container, obj.Container);
-        }
-
-        [TestMethod]
-        public void AClassThatHasADependencyOnTheChildContainerGetsItInjected()
-        {
-            IUnityContainerInjectionClass obj;
-            IUnityContainer childContainer = Container.CreateChildContainer();
-
-            obj = childContainer.Resolve<IUnityContainerInjectionClass>();
-
-            Assert.AreSame(childContainer, obj.Container);
-        }
 
         [TestMethod]
         public void ChildContainersAreAllowedToBeCollectedWhenDisposed()
@@ -75,77 +63,6 @@ namespace Resolution
             }
         }
 
-        [TestMethod]
-        public void CanResolveItselfInScopes()
-        {
-            var container = Container; 
-            var child0 = container.CreateChildContainer();
-            var child1 = child0.CreateChildContainer();
-
-            Assert.AreSame(container, container.Resolve<IUnityContainer>());
-            Assert.AreSame(child0, child0.Resolve<IUnityContainer>());
-            Assert.AreSame(child1, child1.Resolve<IUnityContainer>());
-
-            Assert.AreNotSame(container, child0);
-            Assert.AreNotSame(container, child1);
-            Assert.AreNotSame(child0, child1);
-        }
-
-        [TestMethod]
-        public void CreateChildUsingParentsConfiguration()
-        {
-            var parent = Container;
-            parent.RegisterType<ITemporary, Temporary>();
-            var child = parent.CreateChildContainer();
-
-            ITemporary temp = child.Resolve<ITemporary>();
-
-            Assert.IsNotNull(temp);
-            Assert.IsInstanceOfType(temp, typeof(Temporary));
-        }
-
-        [TestMethod]
-        public void NamesRegisteredInParentAppearInChild()
-        {
-            var parent = Container;
-            parent.RegisterType<ITemporary, SpecialTemp>("test");
-            var child = parent.CreateChildContainer();
-
-            ITemporary temp = child.Resolve<ITemporary>("test");
-
-            Assert.IsInstanceOfType(temp, typeof(SpecialTemp));
-        }
-
-        [TestMethod]
-        public void NamesRegisteredInParentAppearInChildGetAll()
-        {
-            string[] numbers = { "first", "second", "third" };
-            var parent = Container;
-            parent.RegisterInstance(numbers[0], "first")
-                .RegisterInstance(numbers[1], "second");
-
-            var child = parent.CreateChildContainer()
-                .RegisterInstance(numbers[2], "third");
-
-            List<string> nums = new List<string>(child.ResolveAll<string>());
-            CollectionAssert.AreEquivalent(numbers, nums);
-        }
-
-        [TestMethod]
-        public void ChildConfigurationOverridesParentConfiguration()
-        {
-            var parent = Container;
-            parent.RegisterType<ITemporary, Temporary>();
-
-            var child = parent.CreateChildContainer()
-                .RegisterType<ITemporary, SpecialTemp>();
-
-            ITemporary parentTemp = parent.Resolve<ITemporary>();
-            ITemporary childTemp = child.Resolve<ITemporary>();
-
-            Assert.IsInstanceOfType(parentTemp, typeof(Temporary));
-            Assert.IsInstanceOfType(childTemp, typeof(SpecialTemp));
-        }
 
         [TestMethod]
         public void DisposingParentDisposesChild()
@@ -198,29 +115,6 @@ namespace Resolution
         }
 
         [TestMethod]
-        public void ChangesInParentReflectsInChild()
-        {
-            string[] numbers = { "first", "second", "third", "fourth" };
-            var parent = Container;
-
-            parent.RegisterInstance(numbers[0], "1")
-                  .RegisterInstance(numbers[1], "2");
-            var child = parent.CreateChildContainer();
-
-            List<string> childnums = new List<string>(child.ResolveAll<string>());
-            List<string> parentnums = new List<string>(parent.ResolveAll<string>());
-
-            CollectionAssert.AreEquivalent(childnums, parentnums);
-
-            parent.RegisterInstance(numbers[3], "4"); //Register an instance in Parent but not in child
-
-            List<string> childnums2 = new List<string>(child.ResolveAll<string>());
-            List<string> parentnums2 = new List<string>(parent.ResolveAll<string>());
-
-            CollectionAssert.AreEquivalent(childnums2, parentnums2); //Both parent child should have same instances
-        }
-
-        [TestMethod]
         public void DuplicateRegInParentAndChild()
         {
             string[] numbers = { "first", "second", "third", "fourth" };
@@ -260,6 +154,31 @@ namespace Resolution
 
             CollectionAssert.AreEquivalent(numbers, nums);
         }
+
+
+        [TestMethod("Changes in parent array reflects in child")]
+        public void ChangesInParentArray()
+        {
+            string[] numbers = { "first", "second", "third", "fourth" };
+            var parent = Container;
+
+            parent.RegisterInstance(numbers[0], "1")
+                  .RegisterInstance(numbers[1], "2");
+            var child = parent.CreateChildContainer();
+
+            List<string> childnums = new List<string>(child.ResolveAll<string>());
+            List<string> parentnums = new List<string>(parent.ResolveAll<string>());
+
+            CollectionAssert.AreEquivalent(childnums, parentnums);
+
+            parent.RegisterInstance(numbers[3], "4"); //Register an instance in Parent but not in child
+
+            List<string> childnums2 = new List<string>(child.ResolveAll<string>());
+            List<string> parentnums2 = new List<string>(parent.ResolveAll<string>());
+
+            CollectionAssert.AreEquivalent(childnums2, parentnums2); //Both parent child should have same instances
+        }
+
 
         [TestMethod]
         public void CreateParentChildContainersWithSameName()

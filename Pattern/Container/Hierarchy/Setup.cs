@@ -7,10 +7,10 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Resolution
+namespace Container
 {
     [TestClass]
-    public partial class Hierarchy : FixtureBase
+    public partial class Basics : FixtureBase
     {
         #region Scaffolding
 

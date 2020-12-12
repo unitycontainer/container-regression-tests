@@ -7,6 +7,7 @@ using Microsoft.Practices.Unity;
 using Unity;
 using Unity.Injection;
 #endif
+
 namespace Dependency
 {
     public abstract partial class Pattern
