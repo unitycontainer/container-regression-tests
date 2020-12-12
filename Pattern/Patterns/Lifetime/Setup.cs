@@ -104,11 +104,27 @@ namespace Lifetime
 
         protected class TestDisposable : IDisposable
         {
-            public bool IsDisposed { get; private set; }
+            int _count;
+
+            // Dispose only once
+            public TestDisposable()
+            {
+                _count = 1;
+            }
+
+            // Allows multiple disposes
+            public TestDisposable(int count)
+            {
+                _count = count;
+            }
+
+            public bool IsDisposed => 0 >= _count;
 
             public void Dispose()
             {
-                IsDisposed = true;
+                if (IsDisposed) throw new InvalidOperationException("Disposed already");
+                
+                _count -= 1;
             }
         }
 
