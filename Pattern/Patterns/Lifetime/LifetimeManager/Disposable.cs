@@ -53,7 +53,7 @@ namespace Lifetime.Manager
 
 
 
-        [PatternTestMethod("Manager is immune to multiple Dispose() calls"), TestCategory(LIFETIME_MANAGER)]
+        [PatternTestMethod("Supports multiple Dispose() calls"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Disposable_Data))]
         public void ImmuneToMultiDisposes(string name, Func<LifetimeManager> factory, bool isDisposable)
         {
