@@ -16,7 +16,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Child_Scope_Data))]
         [PatternTestMethod("Child Container"), TestCategory(CHILD_SCOPE)]
         public virtual void FromChildContainer(string name,
-                                               Func<LifetimeManager> factory, Type type,
+                                               LifetimeManagerFactory factory, Type type,
                                                Action<object, object> assert,
                                                Action<object, object> assertDifferentThreads)
         {
@@ -41,7 +41,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Child_Scope_Data))]
         [PatternTestMethod("Registered in Child and Root"), TestCategory(CHILD_SCOPE)]
         public virtual void RegisteredInChildAndRoot(string name,
-                                                     Func<LifetimeManager> factory, Type type,
+                                                     LifetimeManagerFactory factory, Type type,
                                                      Action<object, object> assert,
                                                      Action<object, object> assertDifferentThreads)
         {
@@ -67,7 +67,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Child_Scope_Data))]
         [PatternTestMethod("Child Container as import"), TestCategory(CHILD_SCOPE)]
         public virtual void FromChildContainer_Import(string name,
-                                                      Func<LifetimeManager> factory, Type type,
+                                                      LifetimeManagerFactory factory, Type type,
                                                       Action<object, object> assert,
                                                       Action<object, object> assertDifferentThreads)
         {
@@ -91,7 +91,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Child_Scope_Data))]
         [PatternTestMethod("Child Container on different threads"), TestCategory(CHILD_SCOPE)]
         public virtual void FromChildContainer_DifferentThreads(string name,
-                                                                Func<LifetimeManager> factory, Type type,
+                                                                LifetimeManagerFactory factory, Type type,
                                                                 Action<object, object> assert,
                                                                 Action<object, object> assertDifferentThreads)
         {

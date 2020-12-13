@@ -25,6 +25,17 @@ namespace Lifetime
         #endregion
 
 
+        #region Delegates
+
+#if UNITY_V4
+        public delegate LifetimeManager LifetimeManagerFactory();
+#else
+        public delegate ITypeLifetimeManager LifetimeManagerFactory();
+#endif
+
+        #endregion
+
+
         #region Fields
 
         protected object Item1;
@@ -36,7 +47,7 @@ namespace Lifetime
 
         #region Implementation
 
-        protected virtual bool ArrangeTest(Func<LifetimeManager> factory, Type type, IUnityContainer child = null)
+        protected virtual bool ArrangeTest(LifetimeManagerFactory factory, Type type, IUnityContainer child = null)
         {
             var manager = factory();
 #if UNITY_V4

@@ -3,6 +3,7 @@
 using Microsoft.Practices.Unity;
 #else
 using Unity.Lifetime;
+using static Lifetime.Pattern;
 #endif
 
 namespace Lifetime
@@ -10,7 +11,7 @@ namespace Lifetime
     public class TestManagerSource
     {
         protected TestManagerSource(Type type,
-            Func<LifetimeManager> factory, 
+            LifetimeManagerFactory factory, 
             bool synchronized, 
             bool disposable,
             Type target,
@@ -47,7 +48,7 @@ namespace Lifetime
 
         public Type Target { get; }
 
-        public virtual Func<LifetimeManager> Factory { get; }
+        public virtual LifetimeManagerFactory Factory { get; }
 
         public Action<object, object> Assert_SetGet { get; }
 
@@ -67,7 +68,7 @@ namespace Lifetime
     public class TestManagerSource<T> : TestManagerSource
         where T : LifetimeManager
     {
-        public TestManagerSource(Func<T> factory, bool synchronized, bool disposable,
+        public TestManagerSource(LifetimeManagerFactory factory, bool synchronized, bool disposable,
                                  Type target,
                                  Action<object, object> set_get,
                                  Action<object, object> same_scope,

@@ -13,8 +13,9 @@ namespace Lifetime.Hierarchies
     {
         #region Constants
 
-        protected const string REGISTERED_IN_ROOT  = "Registered In Root";
-        protected const string REGISTERED_IN_CHILD = "Registered In Child";
+        protected const string REGISTRATION_NONE   = "Unregistered";
+        protected const string REGISTRATION_ROOT   = "Registered In Root";
+        protected const string REGISTRATION_CHILD  = "Registered In Child";
         protected const string PATTERN_NAME_FORMAT = "{0} {3} in {1} then in {2} ({4})";
 
         #endregion
@@ -199,12 +200,18 @@ namespace Lifetime.Hierarchies
 
         #region Test Data
 
-        class SingletonService : FixtureBaseType, IDisposable
+        public class SingletonService : FixtureBaseType, IDisposable
         {
             public SingletonService(IUnityContainer container)
             {
                 Default = container;
                 Value = container.GetHashCode();
+            }
+
+            public override object Default
+            {
+                get { return (base.Default as WeakReference)?.Target; }
+                protected set => base.Default = new WeakReference(value);
             }
 
             public bool IsDisposed { get; private set; }

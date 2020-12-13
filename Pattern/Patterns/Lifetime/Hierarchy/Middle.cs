@@ -16,13 +16,13 @@ namespace Lifetime.Hierarchies
         #region Registered Singleton
 
         [TestMethod("Resolving from root to the top child")]
-        [DynamicData(nameof(Hierarchy_Middle_Data)), TestProperty(RESOLVING, REGISTERED_IN_CHILD)]
-        public void InMiddleContainer_Singleton(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        [DynamicData(nameof(Hierarchy_Middle_Data)), TestProperty(RESOLVING, REGISTRATION_CHILD)]
+        public void InMiddleContainer_Singleton(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
 
             var child1 = Container.CreateChildContainer()
-                                  .RegisterType(typeof(SingletonService), (ITypeLifetimeManager)factory());
+                                  .RegisterType(typeof(SingletonService), factory());
             var child2 = child1.CreateChildContainer();
 
             var instance_from_root = Container.Resolve(target) as FixtureBaseType;
@@ -39,13 +39,13 @@ namespace Lifetime.Hierarchies
 
 
         [TestMethod("Resolving from the top child to root")]
-        [DynamicData(nameof(Hierarchy_Middle_Data)), TestProperty(RESOLVING, REGISTERED_IN_CHILD)]
-        public void Child_InParentContainer_Singleton(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        [DynamicData(nameof(Hierarchy_Middle_Data)), TestProperty(RESOLVING, REGISTRATION_CHILD)]
+        public void Child_InParentContainer_Singleton(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
         {
 
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
             var child1 = Container.CreateChildContainer()
-                                  .RegisterType(typeof(SingletonService), (ITypeLifetimeManager)factory());
+                                  .RegisterType(typeof(SingletonService), factory());
             var child2 = child1.CreateChildContainer();
 
             var instanceFromChild2 = child2.Resolve(target)    as FixtureBaseType;
@@ -79,7 +79,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(HierarchicalLifetimeManager).Name,
                         definition,                 // Test type
-                        (Func<LifetimeManager>)(() => new HierarchicalLifetimeManager()),
+                        (LifetimeManagerFactory)(() => new HierarchicalLifetimeManager()),
                         (AssertResolutionDelegate)Import_From_Resolved,
                         (AssertResolutionDelegate)Imports_AreNotSame
                     };
@@ -92,7 +92,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(ContainerControlledLifetimeManager).Name,
                         definition,                 // Test type
-                        (Func<LifetimeManager>)(() => new ContainerControlledLifetimeManager()),
+                        (LifetimeManagerFactory)(() => new ContainerControlledLifetimeManager()),
                         (AssertResolutionDelegate)Import_From_Middle,
                         (AssertResolutionDelegate)Singleton_From_Middle
                     };

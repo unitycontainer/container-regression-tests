@@ -16,14 +16,14 @@ namespace Lifetime.Manager
     {
         [PatternTestMethod("SetValue(...) ignores lifetime on object"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Disposable_Data))]
-        public void SetValueIgnoresLifetimeOnObject(string name, Func<LifetimeManager> factory, bool isDisposable)
+        public void SetValueIgnoresLifetimeOnObject(string name, LifetimeManagerFactory factory, bool isDisposable)
         {
             // Arrange
             var scope = new LifetimeContainer();
             object instance = new object();
 
             // Act
-            var manager = factory();
+            var manager = (LifetimeManager)factory();
             manager.SetTestValue(instance, scope);
 
             // Validate object does not add IDIsposable
@@ -34,12 +34,12 @@ namespace Lifetime.Manager
 
         [PatternTestMethod("SetValue(...) adds IDisposable to scope"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Disposable_Data))]
-        public void SetValueAddsLifetime(string name, Func<LifetimeManager> factory, bool isDisposable)
+        public void SetValueAddsLifetime(string name, LifetimeManagerFactory factory, bool isDisposable)
         {
             // Arrange
             var scope = new LifetimeContainer();
             var disposable = new TestDisposable();
-            var manager = factory();
+            var manager = (LifetimeManager)factory();
 
             // Act
             manager.SetTestValue(disposable, scope);
@@ -55,12 +55,12 @@ namespace Lifetime.Manager
 
         [PatternTestMethod("Supports multiple Dispose() calls"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Disposable_Data))]
-        public void ImmuneToMultiDisposes(string name, Func<LifetimeManager> factory, bool isDisposable)
+        public void ImmuneToMultiDisposes(string name, LifetimeManagerFactory factory, bool isDisposable)
         {
             // Arrange
             var scope = new LifetimeContainer();
             var disposable = new TestDisposable(2);
-            var manager = factory();
+            var manager = (LifetimeManager)factory();
 
             // Act
             manager.SetTestValue(disposable, scope);

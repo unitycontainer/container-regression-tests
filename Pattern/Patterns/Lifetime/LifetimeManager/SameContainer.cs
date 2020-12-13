@@ -16,7 +16,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Same_Scope_Data))]
         [PatternTestMethod("Same Container"), TestCategory(SAME_SCOPE)]
         public virtual void FromSameContainer(string name, 
-                                              Func<LifetimeManager> factory, Type type,
+                                              LifetimeManagerFactory factory, Type type,
                                               Action<object, object> assertScope,
                                               Action<object, object> assertDifferentThreads)
         {
@@ -41,7 +41,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Same_Scope_Data))]
         [PatternTestMethod("Same child Container"), TestCategory(SAME_SCOPE)]
         public virtual void SameChildContainer(string name,
-                                               Func<LifetimeManager> factory, Type type,
+                                               LifetimeManagerFactory factory, Type type,
                                                Action<object, object> assertScope,
                                                Action<object, object> assertDifferentThreads)
         {
@@ -67,7 +67,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Same_Scope_Data))]
         [PatternTestMethod("Same Container as import"), TestCategory(SAME_SCOPE)]
         public virtual void FromSameContainer_Import(string name,
-                                                     Func<LifetimeManager> factory, Type type,
+                                                     LifetimeManagerFactory factory, Type type,
                                                      Action<object, object> assertScope,
                                                      Action<object, object> assertDifferentThreads)
         {
@@ -89,7 +89,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Same_Scope_Data))]
         [PatternTestMethod("Same child Container as import"), TestCategory(SAME_SCOPE)]
         public virtual void SameChildContainer_Import(string name,
-                                                      Func<LifetimeManager> factory, Type type,
+                                                      LifetimeManagerFactory factory, Type type,
                                                       Action<object, object> assertScope,
                                                       Action<object, object> assertThreads)
         {
@@ -113,7 +113,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Same_Scope_Data))]
         [PatternTestMethod("Same container on different threads"), TestCategory(SAME_SCOPE)]
         public virtual void FromSameContainer_DifferentThreads(string name,
-                                                               Func<LifetimeManager> factory, Type type,
+                                                               LifetimeManagerFactory factory, Type type,
                                                                Action<object, object> assertScope,
                                                                Action<object, object> assertDifferentThreads)
         {
@@ -138,7 +138,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Same_Scope_Data))]
         [PatternTestMethod("Same child container on different threads"), TestCategory(SAME_SCOPE)]
         public virtual void SameChildContainer_DifferentThreads(string name,
-                                                                Func<LifetimeManager> factory, Type type,
+                                                                LifetimeManagerFactory factory, Type type,
                                                                 Action<object, object> assertScope,
                                                                 Action<object, object> assertDifferentThreads)
         {
