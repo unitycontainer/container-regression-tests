@@ -1,0 +1,206 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Regression;
+using System;
+#if UNITY_V4
+using Microsoft.Practices.Unity;
+#else
+using Unity;
+using Unity.Lifetime;
+#endif
+
+namespace Lifetime.Hierarchies
+{
+    public abstract partial class Pattern
+    {
+        #region Generic Direct
+
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Dependency_Data))]
+        public void Generic_Root_Children_Type_Siblings(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        {
+            var target = type.MakeGenericType(typeof(IUnityContainer), typeof(IUnityContainer));
+            Container.RegisterType(type, (ITypeLifetimeManager)factory());
+
+            var child1 = Container.CreateChildContainer();
+            var child2 = Container.CreateChildContainer();
+
+            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+
+            foreach (var assert in methods)
+            { 
+                assert(Container, instance_from_root,
+                          child1, instanceFromChild1,
+                          child2, instanceFromChild2);
+            }
+        }
+
+
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Dependency_Data))]
+        public void Generic_Root_Children_Type_Hierarchical(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        {
+            var target = type.MakeGenericType(typeof(IUnityContainer), typeof(IUnityContainer));
+            Container.RegisterType(type, (ITypeLifetimeManager)factory());
+
+            var child1 = Container.CreateChildContainer();
+            var child2 = child1.CreateChildContainer();
+
+            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+
+            foreach (var assert in methods)
+            {
+                assert(Container, instance_from_root,
+                          child1, instanceFromChild1,
+                          child2, instanceFromChild2);
+            }
+        }
+
+
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Dependency_Data))]
+        public void Generic_Children_Root_Type_Siblings(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        {
+            var target = type.MakeGenericType(typeof(IUnityContainer), typeof(IUnityContainer));
+            Container.RegisterType(type, (ITypeLifetimeManager)factory());
+
+            var child1 = Container.CreateChildContainer();
+            var child2 = Container.CreateChildContainer();
+
+            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
+            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+
+            foreach (var assert in methods)
+            {
+                assert(Container, instance_from_root,
+                          child1, instanceFromChild1,
+                          child2, instanceFromChild2);
+            }
+        }
+
+
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Dependency_Data))]
+        public void Generic_Children_Root_Type_Hierarchical(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        {
+            var target = type.MakeGenericType(typeof(IUnityContainer), typeof(IUnityContainer));
+            Container.RegisterType(type, (ITypeLifetimeManager)factory());
+
+            var child1 = Container.CreateChildContainer();
+            var child2 = child1.CreateChildContainer();
+
+            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
+            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+
+            foreach (var assert in methods)
+            {
+                assert(Container, instance_from_root,
+                          child1, instanceFromChild1,
+                          child2, instanceFromChild2);
+            }
+        }
+
+        #endregion
+
+
+        #region Unregistered Import
+
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Generic_Root_Children_Import_Siblings(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        {
+            var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
+            Container.RegisterType(type, (ITypeLifetimeManager)factory());
+
+            var child1 = Container.CreateChildContainer();
+            var child2 = Container.CreateChildContainer();
+
+            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+
+            foreach (var assert in methods)
+            {
+                assert(Container, instance_from_root,
+                          child1, instanceFromChild1,
+                          child2, instanceFromChild2);
+            }
+        }
+
+
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Generic_Root_Children_Import_Hierarchical(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        {
+            var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
+            Container.RegisterType(type, (ITypeLifetimeManager)factory());
+
+            var child1 = Container.CreateChildContainer();
+            var child2 = child1.CreateChildContainer();
+
+            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+
+            foreach (var assert in methods)
+            {
+                assert(Container, instance_from_root,
+                          child1, instanceFromChild1,
+                          child2, instanceFromChild2);
+            }
+        }
+
+
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Generic_Children_Root_Import_Siblings(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        {
+            var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
+            Container.RegisterType(type, (ITypeLifetimeManager)factory());
+
+            var child1 = Container.CreateChildContainer();
+            var child2 = Container.CreateChildContainer();
+
+            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
+
+            foreach (var assert in methods)
+            {
+                assert(Container, instance_from_root,
+                          child1, instanceFromChild1,
+                          child2, instanceFromChild2);
+            }
+        }
+
+
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Generic_Children_Root_Import_Hierarchical(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        {
+            var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
+            Container.RegisterType(type, (ITypeLifetimeManager)factory());
+
+            var child1 = Container.CreateChildContainer();
+            var child2 = child1.CreateChildContainer();
+
+            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
+
+            foreach (var assert in methods)
+            {
+                assert(Container, instance_from_root,
+                          child1, instanceFromChild1,
+                          child2, instanceFromChild2);
+            }
+        }
+
+        #endregion
+    }
+}

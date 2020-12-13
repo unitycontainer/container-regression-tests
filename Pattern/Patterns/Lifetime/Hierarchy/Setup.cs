@@ -15,13 +15,7 @@ namespace Lifetime.Hierarchies
 
         protected const string REGISTERED_IN_ROOT  = "Registered In Root";
         protected const string REGISTERED_IN_CHILD = "Registered In Child";
-
-        protected const string DIRECTLY_IN_ROOT_XXX = "Resolve in root than in child containers";
-        protected const string DIRECTLY_IN_CHILD_XXX = "Resolve in child than in root & child containers";
-
-        protected const string SINGLETON_IN_ROOT_XXX = "Registered singleton in root then in child containers";
-        protected const string SINGLETON_IN_CHILD_XXX = "Registered singleton in child then in root containers";
-        protected const string SINGLETON_IN_SAME_XXX = "Registered singleton in child then in child container";
+        protected const string PATTERN_NAME_FORMAT = "{0} {3} in {1} then in {2} ({4})";
 
         #endregion
 
@@ -34,27 +28,27 @@ namespace Lifetime.Hierarchies
         #endregion
 
 
-        #region Default
+        #region Parameters
 
-        public static void Default_From_Root(IUnityContainer root,   FixtureBaseType instance,
-                                             IUnityContainer child1, FixtureBaseType instance1,
-                                             IUnityContainer child2, FixtureBaseType instance2)
+        public static void TType2_From_Root(IUnityContainer root,   FixtureBaseType instance,
+                                            IUnityContainer child1, FixtureBaseType instance1,
+                                            IUnityContainer child2, FixtureBaseType instance2)
         {
             Assert.AreSame(root, instance.Default,  $"{nameof(instance)} should be created in root container");
             Assert.AreSame(root, instance1.Default, $"{nameof(instance1)} should be created in root container");
             Assert.AreSame(root, instance2.Default, $"{nameof(instance2)} should be created in root container");
         }
 
-        public static void Default_From_Resolved(IUnityContainer root, FixtureBaseType instance,
-                                                 IUnityContainer child1, FixtureBaseType instance1,
-                                                 IUnityContainer child2, FixtureBaseType instance2)
+        public static void TType2_From_Resolved(IUnityContainer root, FixtureBaseType instance,
+                                                IUnityContainer child1, FixtureBaseType instance1,
+                                                IUnityContainer child2, FixtureBaseType instance2)
         {
             Assert.AreSame(root,   instance.Default,  $"{nameof(instance)} should be created in root container");
             Assert.AreSame(child1, instance1.Default, $"{nameof(instance1)} should be created in child1 container");
             Assert.AreSame(child2, instance2.Default, $"{nameof(instance2)} should be created in child2 container");
         }
 
-        public static void Defaults_AreSame(IUnityContainer root, FixtureBaseType instance,
+        public static void TTypes2_AreSame(IUnityContainer root, FixtureBaseType instance,
                                             IUnityContainer child1, FixtureBaseType instance1,
                                             IUnityContainer child2, FixtureBaseType instance2)
         {
@@ -62,53 +56,58 @@ namespace Lifetime.Hierarchies
             Assert.AreSame(instance.Default, instance2.Default, $"{nameof(instance2)}.Default should be same as {nameof(instance)}.Default");
         }
 
-        public static void Defaults_AreNotSame(IUnityContainer root, FixtureBaseType instance,
-                                               IUnityContainer child1, FixtureBaseType instance1,
-                                               IUnityContainer child2, FixtureBaseType instance2)
+        public static void TTypes2_AreNotSame(IUnityContainer root, FixtureBaseType instance,
+                                              IUnityContainer child1, FixtureBaseType instance1,
+                                              IUnityContainer child2, FixtureBaseType instance2)
         {
             Assert.AreNotSame(instance.Default, instance1.Default, $"{nameof(instance1)}.Default should not be the same as {nameof(instance)}.Default");
             Assert.AreNotSame(instance.Default, instance2.Default, $"{nameof(instance2)}.Default should not be the same as {nameof(instance)}.Default");
             Assert.AreNotSame(instance1.Default, instance2.Default, $"{nameof(instance2)}.Default should not be the same as {nameof(instance1)}.Default");
         }
 
-        #endregion
 
-        
-        #region Value
-
-        public static void Value_From_Root(IUnityContainer root, FixtureBaseType instance,
-                                           IUnityContainer child1, FixtureBaseType instance1,
-                                           IUnityContainer child2, FixtureBaseType instance2)
+        public static void TTypes1_From_Root(IUnityContainer root, FixtureBaseType instance,
+                                             IUnityContainer child1, FixtureBaseType instance1,
+                                             IUnityContainer child2, FixtureBaseType instance2)
         {
             Assert.AreSame(root, instance.Value,  $"{nameof(instance)} should be created in root container");
             Assert.AreSame(root, instance1.Value, $"{nameof(instance1)} should be created in root container");
             Assert.AreSame(root, instance2.Value, $"{nameof(instance2)} should be created in root container");
         }
 
-        public static void Value_From_Resolved(IUnityContainer root, FixtureBaseType instance,
-                                               IUnityContainer child1, FixtureBaseType instance1,
-                                               IUnityContainer child2, FixtureBaseType instance2)
+        public static void TType1_From_Resolved(IUnityContainer root, FixtureBaseType instance,
+                                                IUnityContainer child1, FixtureBaseType instance1,
+                                                IUnityContainer child2, FixtureBaseType instance2)
         {
             Assert.AreSame(root, instance.Value, $"{nameof(instance)} should be created in root container");
             Assert.AreSame(child1, instance1.Value, $"{nameof(instance1)} should be created in child1 container");
             Assert.AreSame(child2, instance2.Value, $"{nameof(instance2)} should be created in child2 container");
         }
 
-        public static void Values_AreSame(IUnityContainer root, FixtureBaseType instance,
-                                          IUnityContainer child1, FixtureBaseType instance1,
-                                          IUnityContainer child2, FixtureBaseType instance2)
+        public static void TTypes1_AreSame(IUnityContainer root, FixtureBaseType instance,
+                                           IUnityContainer child1, FixtureBaseType instance1,
+                                           IUnityContainer child2, FixtureBaseType instance2)
         {
             Assert.AreSame(instance.Value, instance1.Value, $"{nameof(instance1)}.Value should be same as {nameof(instance)}.Value");
             Assert.AreSame(instance.Value, instance2.Value, $"{nameof(instance2)}.Value should be same as {nameof(instance)}.Value");
         }
 
-        public static void Values_AreNotSame(IUnityContainer root, FixtureBaseType instance,
-                                             IUnityContainer child1, FixtureBaseType instance1,
-                                             IUnityContainer child2, FixtureBaseType instance2)
+        public static void TTypes1_AreNotSame(IUnityContainer root, FixtureBaseType instance,
+                                              IUnityContainer child1, FixtureBaseType instance1,
+                                              IUnityContainer child2, FixtureBaseType instance2)
         {
             Assert.AreNotSame(instance.Value, instance1.Value, $"{nameof(instance1)}.Value should not be the same as {nameof(instance)}.Value");
             Assert.AreNotSame(instance.Value, instance2.Value, $"{nameof(instance2)}.Value should not be the same as {nameof(instance)}.Value");
             Assert.AreNotSame(instance1.Value, instance2.Value, $"{nameof(instance2)}.Value should not be the same as {nameof(instance1)}.Value");
+        }
+
+        public static void Items_AreNotSame(IUnityContainer root, FixtureBaseType instance,
+                                            IUnityContainer child1, FixtureBaseType instance1,
+                                            IUnityContainer child2, FixtureBaseType instance2)
+        {
+            Assert.AreNotSame(instance, instance1, $"{nameof(instance1)} should not be the same as {nameof(instance)}");
+            Assert.AreNotSame(instance, instance2, $"{nameof(instance2)} should not be the same as {nameof(instance)}");
+            Assert.AreNotSame(instance1, instance2, $"{nameof(instance2)} should not be the same as {nameof(instance1)}");
         }
 
         #endregion

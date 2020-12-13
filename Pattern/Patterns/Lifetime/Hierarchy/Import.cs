@@ -13,19 +13,11 @@ namespace Lifetime.Hierarchies
 {
     public abstract partial class Pattern
     {
-        #region Constants
-
-        const string IMPORT_IN_ROOT_XXX = "Import in root then in child ({3})";
-        const string IMPORT_IN_CHILD_XXX = "Import in child then in root ({3})";
-
-        #endregion
-
-
         #region Registered Singleton
 
-        [TestMethod(SINGLETON_IN_ROOT_XXX)]
-        [DynamicData(nameof(Hierarchy_Import_Data)), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
-        public void Root_InRootContainer_Singleton_Siblings(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Resolve_Root_Children_Singleton_Siblings(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
         {
             Container.RegisterType(typeof(SingletonService), (ITypeLifetimeManager)factory());
 
@@ -46,9 +38,9 @@ namespace Lifetime.Hierarchies
         }
 
 
-        [TestMethod(SINGLETON_IN_ROOT_XXX)]
-        [DynamicData(nameof(Hierarchy_Import_Data)), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
-        public void Root_InRootContainer_Singleton_Hierarchical(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Resolve_Root_Children_Singleton_Hierarchical(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
         {
             Container.RegisterType(typeof(SingletonService), (ITypeLifetimeManager)factory());
 
@@ -69,9 +61,9 @@ namespace Lifetime.Hierarchies
         }
 
 
-        [TestMethod(SINGLETON_IN_CHILD_XXX)]
-        [DynamicData(nameof(Hierarchy_Import_Data)), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
-        public void Root_InChildContainer_Singleton_Siblings(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Resolve_Children_Root_Singleton_Siblings(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
         {
             Container.RegisterType(typeof(SingletonService), (ITypeLifetimeManager)factory());
 
@@ -92,9 +84,9 @@ namespace Lifetime.Hierarchies
         }
 
 
-        [TestMethod(SINGLETON_IN_CHILD_XXX)]
-        [DynamicData(nameof(Hierarchy_Import_Data)), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
-        public void Root_InChildContainer_Singleton_Hierarchical(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Resolve_Children_Root_Singleton_Hierarchical(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
         {
             Container.RegisterType(typeof(SingletonService), (ITypeLifetimeManager)factory());
 
@@ -119,9 +111,9 @@ namespace Lifetime.Hierarchies
 
         #region Unregistered Import
 
-        [PatternTestMethod(IMPORT_IN_ROOT_XXX)]
-        [DynamicData(nameof(Hierarchy_Import_Data)), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
-        public void Root_InRootContainer_Import_Siblings(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Resolve_Root_Children_Import_Siblings(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
             Container.RegisterType(target, (ITypeLifetimeManager)factory());
@@ -142,9 +134,9 @@ namespace Lifetime.Hierarchies
         }
 
 
-        [PatternTestMethod(IMPORT_IN_ROOT_XXX)]
-        [DynamicData(nameof(Hierarchy_Import_Data)), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
-        public void Root_InRootContainer_Import_Hierarchical(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Resolve_Root_Children_Import_Hierarchical(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
             Container.RegisterType(target, (ITypeLifetimeManager)factory());
@@ -165,9 +157,9 @@ namespace Lifetime.Hierarchies
         }
 
 
-        [PatternTestMethod(IMPORT_IN_ROOT_XXX)]
-        [DynamicData(nameof(Hierarchy_Import_Data)), TestProperty(RESOLVING, "Unregistered")]
-        public void Singleton_Service_Unregistered_Resolvable(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, "Unregistered")]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Resolve_Root_Children_Service_Resolvable(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
 
@@ -178,19 +170,31 @@ namespace Lifetime.Hierarchies
             var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
             var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
 
-            Default_From_Resolved(Container, instance_from_root,
-                                     child1, instanceFromChild1,
-                                     child2, instanceFromChild2);
+            var service  = instance_from_root.Value as SingletonService;
+            var service1 = instanceFromChild1.Value as SingletonService;
+            var service2 = instanceFromChild2.Value as SingletonService;
 
-            Values_AreNotSame(Container, instance_from_root,
-                                 child1, instanceFromChild1,
-                                 child2, instanceFromChild2);
+            TType2_From_Resolved(Container, instance_from_root,
+                                    child1, instanceFromChild1,
+                                    child2, instanceFromChild2);
+
+            Assert.AreSame(Container, service.Default);
+            Assert.AreSame(child1,   service1.Default);
+            Assert.AreSame(child2,   service2.Default);
+
+            Assert.AreNotSame(service, service1);
+            Assert.AreNotSame(service, service2);
+            Assert.AreNotSame(service1, service2);
+            
+            Assert.AreNotSame(instance_from_root, instanceFromChild1);
+            Assert.AreNotSame(instance_from_root, instanceFromChild2);
+            Assert.AreNotSame(instanceFromChild1, instanceFromChild2);
         }
 
 
-        [PatternTestMethod(IMPORT_IN_CHILD_XXX)]
-        [DynamicData(nameof(Hierarchy_Import_Data)), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
-        public void Root_InChildContainer_Import_Siblings(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Resolve_Children_Root_Import_Siblings(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
             Container.RegisterType(target, (ITypeLifetimeManager)factory());
@@ -211,9 +215,9 @@ namespace Lifetime.Hierarchies
         }
 
 
-        [PatternTestMethod(IMPORT_IN_CHILD_XXX)]
-        [DynamicData(nameof(Hierarchy_Import_Data)), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
-        public void Root_InChildContainer_Import_Hierarchical(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
+        [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTERED_IN_ROOT)]
+        [DynamicData(nameof(Hierarchy_Import_Data))]
+        public void Resolve_Children_Root_Import_Hierarchical(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
             Container.RegisterType(target, (ITypeLifetimeManager)factory());
@@ -246,6 +250,45 @@ namespace Lifetime.Hierarchies
                 {
                     var definition = GetTestType("BaselineTestType`2", IMPORT_REQUIRED, member);
 
+                    #region ContainerControlledLifetimeManager
+
+                    yield return new object[]
+                    {
+                        typeof(ContainerControlledLifetimeManager).Name,
+                        definition,                 // Test type
+                        (Func<LifetimeManager>)(() => new ContainerControlledLifetimeManager()),
+                        (AssertResolutionDelegate)Import_From_Root,
+                        (AssertResolutionDelegate)Imports_AreSame
+                    };
+
+                    #endregion
+
+                    #region ContainerControlledTransientManager
+
+                    yield return new object[]
+                    {
+                        typeof(ContainerControlledTransientManager).Name,
+                        definition,                 // Test type
+                        (Func<LifetimeManager>)(() => new ContainerControlledTransientManager()),
+                        (AssertResolutionDelegate)Import_From_Resolved,
+                        (AssertResolutionDelegate)Imports_AreNotSame
+                    };
+
+                    #endregion
+
+                    #region ExternallyControlledLifetimeManager
+
+                    yield return new object[]
+                    {
+                        typeof(ExternallyControlledLifetimeManager).Name,
+                        definition,                 // Test type
+                        (Func<LifetimeManager>)(() => new ExternallyControlledLifetimeManager()),
+                        (AssertResolutionDelegate)Import_From_Root,
+                        (AssertResolutionDelegate)Imports_AreSame
+                    };
+
+                    #endregion
+
                     #region HierarchicalLifetimeManager
 
                     yield return new object[]
@@ -259,15 +302,28 @@ namespace Lifetime.Hierarchies
 
                     #endregion
 
-                    #region ContainerControlledLifetimeManager
+                    #region PerThreadLifetimeManager
 
                     yield return new object[]
                     {
-                        typeof(ContainerControlledLifetimeManager).Name,
+                        typeof(PerThreadLifetimeManager).Name,
                         definition,                 // Test type
-                        (Func<LifetimeManager>)(() => new ContainerControlledLifetimeManager()),
+                        (Func<LifetimeManager>)(() => new PerThreadLifetimeManager()),
                         (AssertResolutionDelegate)Import_From_Root,
                         (AssertResolutionDelegate)Imports_AreSame
+                    };
+
+                    #endregion
+
+                    #region TransientLifetimeManager
+
+                    yield return new object[]
+                    {
+                        typeof(TransientLifetimeManager).Name,
+                        definition,                 // Test type
+                        (Func<LifetimeManager>)(() => new TransientLifetimeManager()),
+                        (AssertResolutionDelegate)Import_From_Root,
+                        (AssertResolutionDelegate)Imports_AreNotSame
                     };
 
                     #endregion
