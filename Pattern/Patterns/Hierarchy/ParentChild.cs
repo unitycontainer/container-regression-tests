@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
 using System;
-using System.Collections.Generic;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -51,7 +50,6 @@ namespace Container
         }
 
 
-
         [TestMethod("Changes in parent reflects in child")]
         [DynamicData(nameof(Hierarchy_Test_Data)), TestCategory(HIERARCHY)]
         public void ChangesInParent(string name, Type definition, bool isNamed)
@@ -78,7 +76,5 @@ namespace Container
             Assert.IsInstanceOfType(instance, target);
             Assert.IsInstanceOfType(instance.Value, isNamed ? typeof(Service) : typeof(OtherService));
         }
-
-
     }
 }
