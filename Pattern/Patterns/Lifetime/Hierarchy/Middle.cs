@@ -13,11 +13,10 @@ namespace Lifetime.Hierarchies
 {
     public abstract partial class Pattern
     {
-
         #region Registered Singleton
 
         [TestMethod("Resolving from root to the top child")]
-        [DynamicData(nameof(Hierarchy_InChild_Data)), TestProperty(RESOLVING, REGISTERED_IN_CHILD)]
+        [DynamicData(nameof(Hierarchy_Middle_Data)), TestProperty(RESOLVING, REGISTERED_IN_CHILD)]
         public void InMiddleContainer_Singleton(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
@@ -40,7 +39,7 @@ namespace Lifetime.Hierarchies
 
 
         [TestMethod("Resolving from the top child to root")]
-        [DynamicData(nameof(Hierarchy_InChild_Data)), TestProperty(RESOLVING, REGISTERED_IN_CHILD)]
+        [DynamicData(nameof(Hierarchy_Middle_Data)), TestProperty(RESOLVING, REGISTERED_IN_CHILD)]
         public void Child_InParentContainer_Singleton(string name, Type type, Func<LifetimeManager> factory, params AssertResolutionDelegate[] methods)
         {
 
@@ -66,7 +65,7 @@ namespace Lifetime.Hierarchies
 
         #region Test Data
 
-        public static IEnumerable<object[]> Hierarchy_InChild_Data
+        public static IEnumerable<object[]> Hierarchy_Middle_Data
         {
             get
             {

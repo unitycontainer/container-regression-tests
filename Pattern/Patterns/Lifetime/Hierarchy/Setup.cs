@@ -1,12 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
 using System;
-using System.Collections.Generic;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
 using Unity;
-using Unity.Lifetime;
 #endif
 
 namespace Lifetime.Hierarchies
