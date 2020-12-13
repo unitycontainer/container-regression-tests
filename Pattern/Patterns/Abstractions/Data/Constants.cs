@@ -23,6 +23,10 @@ namespace Regression
         protected const string MEMBER_OVERRIDE  = "MemberOverride";
         protected const string VALIDATION       = "Validation";
         protected const string IMPORTING        = "Importing";
+        protected const string HIERARCHY        = "Hierarchy";
+        protected const string RESOLVING        = "Resolving";
+        protected const string ROOT_CONTAINER   = "Root Container";
+        protected const string CHILD_CONTAINER  = "Child Container";
 
         #endregion
 
@@ -39,9 +43,9 @@ namespace Regression
 
         #region Annotations
 
-        protected const string IMPLICIT = "Implicit";
-        protected const string REQUIRED = "Required";
-        protected const string OPTIONAL = "Optional";
+        protected const string IMPORT_IMPLICIT = "Implicit";
+        protected const string IMPORT_REQUIRED = "Required";
+        protected const string IMPORT_OPTIONAL = "Optional";
         
         #endregion
 

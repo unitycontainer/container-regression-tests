@@ -27,9 +27,9 @@ namespace Regression
         {
             get
             {
-                yield return IMPLICIT;
-                yield return REQUIRED;
-                yield return OPTIONAL;
+                yield return IMPORT_IMPLICIT;
+                yield return IMPORT_REQUIRED;
+                yield return IMPORT_OPTIONAL;
             }
         }
 

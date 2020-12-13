@@ -12,9 +12,6 @@ namespace Container
 {
     public abstract partial class Pattern : FixtureBase
     {
-        protected const string HIERARCHY = "Hierarchy";
-
-
         #region Test Data
 
         interface ISingletonService : IDisposable

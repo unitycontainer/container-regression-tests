@@ -23,7 +23,7 @@ namespace Container
                     foreach (var annotation in Annotation_Category_Names)
                     {
                         // Exclude implicit fields and properties
-                        if (IMPLICIT.Equals(annotation)) continue;
+                        if (IMPORT_IMPLICIT.Equals(annotation)) continue;
 
                         foreach (var nameInfo in BaselineTestType_Names)
                         {
@@ -52,7 +52,7 @@ namespace Container
                     foreach (var annotation in Annotation_Category_Names)
                     {
                         // Exclude implicit fields and properties
-                        if (IMPLICIT.Equals(annotation)) continue;
+                        if (IMPORT_IMPLICIT.Equals(annotation)) continue;
 
                         var definition = GetTestType("BaselineTestType`2", annotation, member, @namespace);
 

@@ -15,15 +15,11 @@ namespace Lifetime.Synchronization
     public abstract partial class Pattern
     {
 #if !UNITY_V4 && !UNITY_V5
-        [PatternTestMethod("SynchronizedManager.GetValue(...) blocks")]
+        [PatternTestMethod("SynchronizedManager.GetValue(...) blocks"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
-        public override void GetValueBlocks(LifetimeManager manager)
+        public void GetValueBlocks(LifetimeManager manager)
         {
-            if (manager is not SynchronizedLifetimeManager)
-            { 
-                base.GetValueBlocks(manager);
-                return;
-            }
+            if (manager is not SynchronizedLifetimeManager) return;
 
             var scope = new LifetimeContainer();
             var value = manager.GetValue(scope);
@@ -100,6 +96,26 @@ namespace Lifetime.Synchronization
 
             // Validate
             Assert.AreSame(NoValue, other);
+        }
+
+        [PatternTestMethod("TryGetValue(...) does not block"), TestCategory(LIFETIME_MANAGER)]
+        [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
+        public void TryGetValueDoesNotBlock(LifetimeManager manager)
+        {
+            var scope = new LifetimeContainer();
+            var value = manager.TryGetValue(scope);
+            object other = null;
+
+            // Act
+            Thread thread = new Thread(new ParameterizedThreadStart((c) =>
+            {
+                other = manager.TryGetValue(scope);
+            }));
+
+            thread.Start("1");
+            thread.Join();
+
+            Assert.AreSame(value, other);
         }
     }
 }

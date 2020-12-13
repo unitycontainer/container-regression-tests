@@ -86,7 +86,7 @@ namespace Parameters
 
             // Act
             var instance = Container.Resolve(type, null) as FixtureBaseType;
-            var expected = !IMPLICIT.Equals(import) && isNamed ? named : registered;
+            var expected = !IMPORT_IMPLICIT.Equals(import) && isNamed ? named : registered;
 
             // Validate
             Assert.IsNotNull(instance);
