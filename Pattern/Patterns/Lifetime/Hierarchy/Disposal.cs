@@ -13,7 +13,7 @@ namespace Lifetime.Hierarchies
 {
     public abstract partial class Pattern
     {
-        protected const string DISPOSE_NAME_FORMAT = "Setup in {0}, imported in {1}, {2} is disposed";
+        protected const string DISPOSE_NAME_FORMAT = "Setup in {0}, imported in {1}, {2} is {4}";
 
         #region Not Registered
 
@@ -91,6 +91,32 @@ namespace Lifetime.Hierarchies
             }
         }
 
+        [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
+        [DynamicData(nameof(Disposable_Managers_Data))]
+        public void Root_Root_Root_root_discarded(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        {
+            var (weak, instance) = CreateResolveAndDispose(factory);
+
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.WaitForPendingFinalizers();
+
+            Assert.IsFalse(weak.IsAlive);
+            foreach (var assert in asserts) assert(instance);
+
+            (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactory factory)
+            {
+                var weak = new WeakReference(Container);
+
+                Container.RegisterType(typeof(SingletonService), factory());
+
+                var instance = Container.Resolve<SingletonService>();
+
+                Container = new UnityContainer(); // Must replace to change reference
+
+                return (weak, instance);
+            }
+        }
+
 
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Disposable_Managers_Data))]
@@ -119,6 +145,32 @@ namespace Lifetime.Hierarchies
             }
         }
 
+        [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
+        [DynamicData(nameof(Disposable_Managers_Data))]
+        public void Root_Child_Root_root_discarded(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        {
+            var (weak, instance) = CreateResolveAndDispose(factory);
+
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.WaitForPendingFinalizers();
+
+            Assert.IsFalse(weak.IsAlive);
+            foreach (var assert in asserts) assert(instance);
+
+            (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactory factory)
+            {
+                var weak = new WeakReference(Container);
+
+                Container.RegisterType(typeof(SingletonService), factory());
+
+                var instance = Container.CreateChildContainer()
+                                        .Resolve<SingletonService>();
+                Container = new UnityContainer(); // Must replace to change reference
+
+                return (weak, instance);
+            }
+        }
+
 
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Disposable_Managers_Data))]
@@ -136,13 +188,49 @@ namespace Lifetime.Hierarchies
                 Disposed_True(instance);
             else
                 Disposed_False(instance);
+
+            (WeakReference, SingletonService) ResolveAndDispose()
+            {
+                var child = Container.CreateChildContainer();
+                var value = child.Resolve<SingletonService>();
+
+                child.Dispose();
+
+                return (new WeakReference(child), value);
+            }
         }
+
+        [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
+        [DynamicData(nameof(Disposable_Managers_Data))]
+        public void Root_Child_Child_child_discarded(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        {
+            Container.RegisterType(typeof(SingletonService), factory());
+
+            var (weak, instance) = ResolveAndDiscard();
+
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
+            GC.WaitForPendingFinalizers();
+
+            Assert.IsFalse(weak.IsAlive);
+            if (instance.Default is null)
+                Disposed_True(instance);
+            else
+                Disposed_False(instance);
+
+            (WeakReference, SingletonService) ResolveAndDiscard()
+            {
+                var child = Container.CreateChildContainer();
+                var value = child.Resolve<SingletonService>();
+
+                return (new WeakReference(child), value);
+            }
+        }
+
 
         #endregion
 
 
         #region Register In Child
-
 
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_CHILD)]
         [DynamicData(nameof(Disposable_Managers_Data))]
@@ -165,6 +253,30 @@ namespace Lifetime.Hierarchies
                 var instance = child.Resolve<SingletonService>();
 
                 child.Dispose();
+
+                return (weak, instance);
+            }
+        }
+
+        [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_CHILD)]
+        [DynamicData(nameof(Disposable_Managers_Data))]
+        public void Child_Child_Child_child_discarded(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        {
+            var (weakChild, instance) = CreateResolveDiscard(factory);
+
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.WaitForPendingFinalizers();
+
+            Assert.IsFalse(weakChild.IsAlive);
+            foreach (var assert in asserts) assert(instance);
+
+            (WeakReference, SingletonService) CreateResolveDiscard(LifetimeManagerFactory factory)
+            {
+                var child = Container.CreateChildContainer()
+                                     .RegisterType(typeof(SingletonService), factory());
+
+                var weak = new WeakReference(child);
+                var instance = child.Resolve<SingletonService>();
 
                 return (weak, instance);
             }
@@ -199,20 +311,38 @@ namespace Lifetime.Hierarchies
             }
         }
 
+        [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_CHILD)]
+        [DynamicData(nameof(Disposable_Managers_Data))]
+        public void Child_Child_Root_child_discarded(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        {
+            var weak = new WeakReference(Container);
+            var (weakChild, instance) = CreateResolveDiscard(factory);
+
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.WaitForPendingFinalizers();
+
+            Assert.IsFalse(weak.IsAlive);
+            Assert.IsFalse(weakChild.IsAlive);
+            foreach (var assert in asserts) assert(instance);
+
+            (WeakReference, SingletonService) CreateResolveDiscard(LifetimeManagerFactory factory)
+            {
+                var child = Container.CreateChildContainer()
+                                     .RegisterType(typeof(SingletonService), factory());
+
+                var weak = new WeakReference(child);
+                var instance = child.Resolve<SingletonService>();
+
+                Container = new UnityContainer(); // Must replace so GC collects
+
+                return (weak, instance);
+            }
+        }
+
         #endregion
 
 
         #region Implementation
-
-        (WeakReference, SingletonService) ResolveAndDispose()
-        {
-            var child = Container.CreateChildContainer();
-            var value = child.Resolve<SingletonService>();
-
-            child.Dispose();
-
-            return (new WeakReference(child), value);
-        }
 
         (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactory factory)
         {
@@ -225,7 +355,6 @@ namespace Lifetime.Hierarchies
 
             return (weak, instance);
         }
-
 
         static void Disposed_True(SingletonService singleton) => Assert.IsTrue(singleton.IsDisposed, $"{nameof(singleton)} should be disposed");
         static void Disposed_False(SingletonService singleton) => Assert.IsFalse(singleton.IsDisposed, $"{nameof(singleton)} should not be disposed");
