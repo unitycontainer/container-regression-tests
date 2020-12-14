@@ -15,7 +15,7 @@ namespace Dependency
         #region Value
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Member_ByValue(string test, Type type, object defaultValue,
                                            object defaultAttr, object registered, object named,
                                            object injected, object overridden, object @default) 
@@ -28,7 +28,7 @@ namespace Dependency
         #region Injection Members
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Member_ByInjectionParameter(string test, Type type, object defaultValue,
                                                         object defaultAttr, object registered, object named,
                                                         object injected, object overridden, object @default) 
@@ -37,7 +37,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
         public virtual void Member_ByParameterRecursive(string test, Type type, object defaultValue,
                                                         object defaultAttr, object registered, object named,
@@ -46,7 +46,7 @@ namespace Dependency
                 MemberOverride(new InjectionParameter(new InjectionParameter(overridden))), overridden);
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Member_ByResolvedMember(string test, Type type, object defaultValue,
                                                      object defaultAttr, object registered, object named,
                                                      object injected, object overridden, object @default) 
@@ -55,7 +55,7 @@ namespace Dependency
                 MemberOverride(new ResolvedParameter(type)), registered);
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Member_ByResolvedNamed(string test, Type type, object defaultValue,
                                                      object defaultAttr, object registered, object named,
                                                      object injected, object overridden, object @default) 
@@ -70,7 +70,7 @@ namespace Dependency
         #region With Type
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Parameter_Override_ByType(string test, Type type, object defaultValue,
                                                       object defaultAttr, object registered, object named,
                                                       object injected, object overridden, object @default)
@@ -78,7 +78,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Parameter_Override_ByNameType(string test, Type type, object defaultValue,
                                                           object defaultAttr, object registered, object named,
                                                           object injected, object overridden, object @default)
@@ -90,7 +90,7 @@ namespace Dependency
         #region On Type
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Member_OnType(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -100,7 +100,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Member_OnType_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -110,7 +110,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Member_OnType_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -121,7 +121,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Parameter_Override_OnType_ByType(string test, Type type, object defaultValue,
                                                              object defaultAttr, object registered, object named,
                                                              object injected, object overridden, object @default)
@@ -131,7 +131,7 @@ namespace Dependency
         
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Parameter_Override_OnType_ByNameType(string test, Type type, object defaultValue,
                                                           object defaultAttr, object registered, object named,
                                                           object injected, object overridden, object @default)

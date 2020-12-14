@@ -10,7 +10,7 @@ using Unity;
 
 namespace Container
 {
-    public abstract partial class Pattern : FixtureBase
+    public abstract partial class Pattern : PatternBase
     {
         #region Test Data
 

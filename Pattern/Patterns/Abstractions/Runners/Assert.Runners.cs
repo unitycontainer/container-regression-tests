@@ -10,7 +10,7 @@ using Unity.Resolution;
 
 namespace Regression
 {
-    public abstract partial class FixtureBase
+    public abstract partial class PatternBase
     {
         protected virtual void Assert_FixtureBaseType(Type type, ResolverOverride @override, object value, object @default)
         {
@@ -21,7 +21,7 @@ namespace Regression
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(type, null, @override) as FixtureBaseType;
+            var instance = Container.Resolve(type, null, @override) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -59,7 +59,7 @@ namespace Regression
         public void Assert_Lazy_Import(Type type, object expected)
         {
             // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -90,7 +90,7 @@ namespace Regression
 
             RegisterTypes();
 
-            instance = Container.Resolve(type, null) as FixtureBaseType;
+            instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Act
             var value = instance.Value switch
@@ -108,7 +108,7 @@ namespace Regression
         public void Assert_Func_Import(Type type, object expected)
         {
             // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

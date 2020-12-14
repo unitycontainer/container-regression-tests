@@ -8,7 +8,7 @@ namespace Regression.Optional.Fields
 {
     #region Baseline
 
-    public class BaselineTestType<TDependency> : FixtureBaseType
+    public class BaselineTestType<TDependency> : PatternBaseType
     {
         [OptionalDependency] public TDependency Field;
         public override object Value { get => Field; }
@@ -16,15 +16,15 @@ namespace Regression.Optional.Fields
     }
 
     public class BaselineTestTypeNamed<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
-        [OptionalDependency(FixtureBase.Name)] public TDependency Field;
+        [OptionalDependency(PatternBase.Name)] public TDependency Field;
 
         public override object Value { get => Field; }
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestType<TItem1, TItem2> : FixtureBaseType
+    public class BaselineTestType<TItem1, TItem2> : PatternBaseType
     {
         [OptionalDependency] public TItem1 Item1;
         [OptionalDependency] public TItem2 Item2;
@@ -38,7 +38,7 @@ namespace Regression.Optional.Fields
 
     #region Object
 
-    public class ObjectTestType : FixtureBaseType
+    public class ObjectTestType : PatternBaseType
     {
         [OptionalDependency] public object Field;
         public override object Value { get => Field; }
@@ -66,14 +66,14 @@ namespace Regression.Optional.Fields
 
     #region Array
 
-    public class BaselineArrayType<TDependency> : FixtureBaseType
+    public class BaselineArrayType<TDependency> : PatternBaseType
     {
         [OptionalDependency] public TDependency[] Field;
         public override object Value { get => Field; }
         public override object Default => default(TDependency);
     }
 
-    public class ObjectArrayType : FixtureBaseType
+    public class ObjectArrayType : PatternBaseType
     {
         [OptionalDependency] public object[] Field;
         public override object Value { get => Field; }
@@ -84,7 +84,7 @@ namespace Regression.Optional.Fields
 
     #region Consumer
 
-    public class BaselineConsumer<TDependency> : FixtureBaseType
+    public class BaselineConsumer<TDependency> : PatternBaseType
     {
         public readonly BaselineTestType<TDependency> Item1;
         public readonly BaselineTestTypeNamed<TDependency> Item2;

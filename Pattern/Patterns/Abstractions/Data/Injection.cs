@@ -8,7 +8,7 @@ using Unity.Resolution;
 
 namespace Regression
 {
-    public abstract partial class FixtureBase
+    public abstract partial class PatternBase
     {
         #region Fields
 
@@ -25,7 +25,7 @@ namespace Regression
 
         protected static void LoadInjectionProxies()
         {
-            Type support = Type.GetType($"{typeof(FixtureBase).FullName}+{Member}");
+            Type support = Type.GetType($"{typeof(PatternBase).FullName}+{Member}");
             
             if (support is null) return;
 

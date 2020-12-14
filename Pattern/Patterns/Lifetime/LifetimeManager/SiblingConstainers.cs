@@ -52,9 +52,9 @@ namespace Lifetime.Manager
 
             // Act
             Item1 = Container.CreateChildContainer()
-                             .Resolve<Foo<MockLogger>>().Value;
+                             .Resolve<Foo<Service>>().Value;
             Item2 = Container.CreateChildContainer()
-                             .Resolve<Foo<MockLogger>>().Value;
+                             .Resolve<Foo<Service>>().Value;
 
             // Validate
             Assert.IsNotNull(Item1);

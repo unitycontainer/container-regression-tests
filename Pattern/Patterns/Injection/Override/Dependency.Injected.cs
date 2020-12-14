@@ -16,7 +16,7 @@ namespace Injection
 
 #if !UNITY_V4
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_Injected_ByType(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -26,7 +26,7 @@ namespace Injection
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_Injected_ByType_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -36,7 +36,7 @@ namespace Injection
 #endif
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_Injected_ByType_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -51,7 +51,7 @@ namespace Injection
 
 #if !UNITY_V4
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_Injected_ByName(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -61,7 +61,7 @@ namespace Injection
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_Injected_ByName_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -71,7 +71,7 @@ namespace Injection
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_Injected_ByName_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -85,7 +85,7 @@ namespace Injection
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(target, null, new DependencyOverride((string)null, overridden)) as FixtureBaseType;
+            var instance = Container.Resolve(target, null, new DependencyOverride((string)null, overridden)) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -100,7 +100,7 @@ namespace Injection
 
 #if !UNITY_V4
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_Injected_ByContract(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -110,7 +110,7 @@ namespace Injection
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_Injected_ByContract_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -120,7 +120,7 @@ namespace Injection
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_Injected_ByContract_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)

@@ -10,7 +10,7 @@ using Unity.Resolution;
 
 namespace Regression
 {
-    public abstract partial class FixtureBase
+    public abstract partial class PatternBase
     {
         protected void Assert_UnregisteredThrows_RegisteredSuccess(Type type, object expected)
         {
@@ -21,7 +21,7 @@ namespace Regression
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -39,7 +39,7 @@ namespace Regression
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -57,7 +57,7 @@ namespace Regression
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(type, null, @override) as FixtureBaseType;
+            var instance = Container.Resolve(type, null, @override) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

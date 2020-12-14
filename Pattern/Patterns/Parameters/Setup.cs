@@ -2,7 +2,7 @@
 
 namespace Parameters
 {
-    public abstract partial class Pattern : FixtureBase
+    public abstract partial class Pattern : PatternBase
     {
     }
 }

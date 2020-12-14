@@ -9,12 +9,12 @@ using Unity.Resolution;
 
 namespace Regression
 {
-    public abstract partial class FixtureBase
+    public abstract partial class PatternBase
     {
         protected void Assert_AlwaysSuccessful(Type type, object @default, object expected)
         {
             // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -24,7 +24,7 @@ namespace Regression
             RegisterTypes();
 
             // Act
-            instance = Container.Resolve(type, null) as FixtureBaseType;
+            instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -37,7 +37,7 @@ namespace Regression
             Container.RegisterType(null, type, null, null);
 
             // Validate
-            var instance = Container.Resolve(type, null, @override) as FixtureBaseType;
+            var instance = Container.Resolve(type, null, @override) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -47,7 +47,7 @@ namespace Regression
             RegisterTypes();
 
             // Act
-            instance = Container.Resolve(type, null, @override) as FixtureBaseType;
+            instance = Container.Resolve(type, null, @override) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -60,7 +60,7 @@ namespace Regression
             Container.RegisterType(null, type, null, null, member);
 
             // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -70,7 +70,7 @@ namespace Regression
             RegisterTypes();
 
             // Act
-            instance = Container.Resolve(type, null) as FixtureBaseType;
+            instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -83,7 +83,7 @@ namespace Regression
             Container.RegisterType(null, type, null, null, member);
 
             // Validate
-            var instance = Container.Resolve(type, null, @override) as FixtureBaseType;
+            var instance = Container.Resolve(type, null, @override) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -93,7 +93,7 @@ namespace Regression
             RegisterTypes();
 
             // Act
-            instance = Container.Resolve(type, null, @override) as FixtureBaseType;
+            instance = Container.Resolve(type, null, @override) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

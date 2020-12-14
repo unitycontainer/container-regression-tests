@@ -11,7 +11,7 @@ using Unity.Lifetime;
 
 namespace Lifetime
 {
-    public abstract partial class Pattern : FixtureBase
+    public abstract partial class Pattern : PatternBase
     {
         #region Constants
 
@@ -52,12 +52,12 @@ namespace Lifetime
             var manager = factory();
 #if UNITY_V4
             Container.RegisterType(typeof(IService), typeof(Service), manager)
-                     .RegisterType(typeof(MockLogger), factory())
+                     .RegisterType(typeof(Service), factory())
                      .RegisterType<IPresenter, MockPresenter>()
                      .RegisterType<IView, View>(factory());
 #else
             Container.RegisterType(typeof(IService), typeof(Service), (ITypeLifetimeManager)manager)
-                     .RegisterType(typeof(MockLogger), (ITypeLifetimeManager)factory())
+                     .RegisterType(typeof(Service), (ITypeLifetimeManager)factory())
                      .RegisterType<IPresenter, MockPresenter>()
                      .RegisterType<IView, View>((ITypeLifetimeManager)factory());
 #endif
@@ -67,12 +67,12 @@ namespace Lifetime
             {
 #if UNITY_V4
                 child.RegisterType(typeof(IService), typeof(Service), factory())
-                     .RegisterType(typeof(MockLogger), factory())
+                     .RegisterType(typeof(Service), factory())
                      .RegisterType<IPresenter, MockPresenter>()
                      .RegisterType<IView, View>(factory());
 #else
                 child.RegisterType(typeof(IService), typeof(Service), (ITypeLifetimeManager)factory())
-                     .RegisterType(typeof(MockLogger), (ITypeLifetimeManager)factory())
+                     .RegisterType(typeof(Service), (ITypeLifetimeManager)factory())
                      .RegisterType<IPresenter, MockPresenter>()
                      .RegisterType<IView, View>((ITypeLifetimeManager)factory());
 #endif

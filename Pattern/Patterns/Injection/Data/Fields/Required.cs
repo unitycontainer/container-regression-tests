@@ -16,7 +16,7 @@ namespace Injection.Required.Fields
     #region Validation
 
     public class PrivateTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [Dependency] private TDependency Field;
 
@@ -26,7 +26,7 @@ namespace Injection.Required.Fields
     }
 
     public class ProtectedTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [Dependency] protected TDependency Field;
 
@@ -35,7 +35,7 @@ namespace Injection.Required.Fields
     }
 
     public class InternalTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [Dependency] internal TDependency Field;
 

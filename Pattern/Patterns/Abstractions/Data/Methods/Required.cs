@@ -9,7 +9,7 @@ namespace Regression.Required.Methods
 {
     #region Baseline
 
-    public class BaselineTestType<TDependency> : FixtureBaseType
+    public class BaselineTestType<TDependency> : PatternBaseType
     {
         [InjectionMethod]
         public void Method([Dependency] TDependency value) => Value = value;
@@ -17,14 +17,14 @@ namespace Regression.Required.Methods
     }
 
     public class BaselineTestTypeNamed<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [InjectionMethod]
-        public virtual void Method([Dependency(FixtureBase.Name)] TDependency value) => Value = value;
+        public virtual void Method([Dependency(PatternBase.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestType<TItem1, TItem2> : FixtureBaseType
+    public class BaselineTestType<TItem1, TItem2> : PatternBaseType
     {
         [InjectionMethod]
         public virtual void Method([Dependency] TItem1 item1, [Dependency] TItem2 item2)
@@ -39,7 +39,7 @@ namespace Regression.Required.Methods
 
     #region Object
 
-    public class ObjectTestType : FixtureBaseType
+    public class ObjectTestType : PatternBaseType
     {
         [InjectionMethod]
         public void Method([Dependency] object value) => Value = value;
@@ -61,14 +61,14 @@ namespace Regression.Required.Methods
 
     #region Array
 
-    public class BaselineArrayType<TDependency> : FixtureBaseType
+    public class BaselineArrayType<TDependency> : PatternBaseType
     {
         [InjectionMethod]
         public void Method([Dependency] TDependency[] value) => Value = value;
         public override object Default => default(TDependency);
     }
 
-    public class ObjectArrayType : FixtureBaseType
+    public class ObjectArrayType : PatternBaseType
     {
         [InjectionMethod]
         public void Method([Dependency] object[] value) => Value = value;
@@ -79,7 +79,7 @@ namespace Regression.Required.Methods
 
     #region Consumer
 
-    public class BaselineConsumer<TDependency> : FixtureBaseType
+    public class BaselineConsumer<TDependency> : PatternBaseType
     {
         public BaselineTestType<TDependency> Item1 { get; private set; }
         public BaselineTestTypeNamed<TDependency> Item2 { get; private set; }

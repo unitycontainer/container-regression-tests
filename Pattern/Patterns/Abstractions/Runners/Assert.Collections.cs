@@ -11,14 +11,14 @@ using Unity.Injection;
 
 namespace Regression
 {
-    public abstract partial class FixtureBase
+    public abstract partial class PatternBase
     {
         #region Array
 
         protected void Assert_Array_Import(Type type)
         {
             // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -28,7 +28,7 @@ namespace Regression
             RegisterArrayTypes();
 
             // Act
-            instance = Container.Resolve(type, null) as FixtureBaseType;
+            instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -47,7 +47,7 @@ namespace Regression
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -71,7 +71,7 @@ namespace Regression
             Container.RegisterType(null, definition, null, null, injection);
 
             // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -92,7 +92,7 @@ namespace Regression
         public void Assert_Enumerable_Import(Type type)
         {
             // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -102,7 +102,7 @@ namespace Regression
             RegisterArrayTypes();
 
             // Act
-            instance = Container.Resolve(type, null) as FixtureBaseType;
+            instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

@@ -14,7 +14,7 @@ namespace Dependency
         #region Type
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public void Dependency_ByType(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -24,7 +24,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public void Dependency_ByType_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -33,7 +33,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public void Dependency_ByType_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -43,7 +43,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public void Dependency_ByType_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
                                                               object injected, object overridden, object @default)
@@ -58,7 +58,7 @@ namespace Dependency
 
 #if !BEHAVIOR_V5
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public void Dependency_ByNullName(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -67,7 +67,7 @@ namespace Dependency
 #endif
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_ByName(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -76,7 +76,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public void Dependency_ByName_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -86,7 +86,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_ByName_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
                                                               object injected, object overridden, object @default)
@@ -95,7 +95,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_ByName_InReverse(string test, Type type, object defaultValue,
                                                                     object defaultAttr, object registered, object named,
                                                                     object injected, object overridden, object @default)
@@ -109,7 +109,7 @@ namespace Dependency
 
 #if !UNITY_V4
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public void Dependency_ByContract(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -118,7 +118,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_ByContract_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -127,7 +127,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public void Dependency_ByContract_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -137,7 +137,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_ByContract_InGraph(string test, Type type, object defaultValue,
                                                               object defaultAttr, object registered, object named,
                                                               object injected, object overridden, object @default)
@@ -146,7 +146,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_ByContract_InReverse(string test, Type type, object defaultValue,
                                                                     object defaultAttr, object registered, object named,
                                                                     object injected, object overridden, object @default)
@@ -159,7 +159,7 @@ namespace Dependency
         #region Target
 #if !UNITY_V4
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_ByTarget(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default) 
@@ -169,7 +169,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_ByTarget_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -179,7 +179,7 @@ namespace Dependency
 
         
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_ByTarget_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -193,7 +193,7 @@ namespace Dependency
         #region OnType
 #if !UNITY_V4
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_OnType(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -203,7 +203,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_OnType_Named(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
@@ -213,7 +213,7 @@ namespace Dependency
 
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_OnType_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)

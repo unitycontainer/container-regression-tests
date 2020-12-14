@@ -15,7 +15,7 @@ namespace Injection
     public abstract partial class Pattern
     {
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_Value(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default) 
@@ -25,7 +25,7 @@ namespace Injection
                 injected, injected);
 
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_Named(string test, Type type, object defaultValue, object defaultAttr,
                                          object registered, object named, object injected, object overridden,
                                          object @default)
@@ -36,7 +36,7 @@ namespace Injection
 
 
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_WithType(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
                                             object @default)
@@ -47,7 +47,7 @@ namespace Injection
 
         [Ignore("TODO: Need a fix")]
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
         public virtual void Inject_NoMatch(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
@@ -67,7 +67,7 @@ namespace Injection
 
 #if !BEHAVIOR_V4 && !BEHAVIOR_V5
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_Array(string test, Type type, object defaultValue, object defaultAttr,
                                          object registered, object named, object injected, object overridden,
                                          object @default)
@@ -80,7 +80,7 @@ namespace Injection
 
 
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_Enumerable(string test, Type type, object defaultValue, object defaultAttr, 
                                               object registered, object named, object injected, object overridden, 
                                               object @default)
@@ -95,7 +95,7 @@ namespace Injection
 
 #endif
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Inject_Resolver(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
                                             object @default)
@@ -104,7 +104,7 @@ namespace Injection
                                injected, injected);
 #if !UNITY_V4
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_TypeFactory(string test, Type type, object defaultValue, object defaultAttr,
                                                object registered, object named, object injected, object overridden,
                                                object @default)
@@ -118,7 +118,7 @@ namespace Injection
 #if !BEHAVIOR_V4 && !BEHAVIOR_V5
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_NoPublicMember(string test, Type type, object defaultValue, object defaultAttr,
                                                    object registered, object named, object injected, object overridden,
                                                    object @default)

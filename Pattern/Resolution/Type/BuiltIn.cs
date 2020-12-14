@@ -13,7 +13,7 @@ namespace Resolution
     public partial class FromEmpty
     {
         [DataTestMethod]
-        [DynamicData(nameof(BuiltInTypes_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
         public virtual void BuiltIn_Interface(string test, Type type)
         {
             // Act
@@ -26,7 +26,7 @@ namespace Resolution
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(BuiltInTypes_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
         public virtual void BuiltIn_InChild(string test, Type type)
         {
             // Arrange
@@ -42,7 +42,7 @@ namespace Resolution
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(BuiltInTypes_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(BuiltInTypes_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
         public virtual void BuiltIn_Named(string test, Type type)
         {

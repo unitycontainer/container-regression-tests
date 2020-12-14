@@ -21,7 +21,7 @@ namespace Dependency
         #region Type
 
         [PatternTestMethod(XX_FROM_COMPUTER), TestCategory(CATEGORY_DEPENDENCY)]
-        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Unnamed_ByType(string test, Type type,
                                                 object defaultValue, object defaultAttr,
                                                 object registered, object named,
@@ -31,7 +31,7 @@ namespace Dependency
                 BaselineTestType.MakeGenericType(type), registered);
 
         [PatternTestMethod(XX_FROM_COMPUTER), TestCategory(CATEGORY_DEPENDENCY)]
-        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Named_ByType(string test, Type type,
                                        object defaultValue, object defaultAttr,
                                        object registered, object named,
@@ -46,7 +46,7 @@ namespace Dependency
         #region Inherited
 
         [DataTestMethod, TestCategory(CATEGORY_DEPENDENCY)]
-        [DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void InInherited_Type(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
@@ -57,7 +57,7 @@ namespace Dependency
 
 
         [DataTestMethod, TestCategory(CATEGORY_DEPENDENCY)]
-        [DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Twice_InInherited_Type(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,

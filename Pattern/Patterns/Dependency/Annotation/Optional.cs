@@ -15,7 +15,7 @@ namespace Dependency.Optional
     {
         #region Dependency
 
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public override void Unnamed_ByType(string test, Type type,
                                        object defaultValue, object defaultAttr,
                                        object registered, object named,
@@ -24,7 +24,7 @@ namespace Dependency.Optional
             => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                 @default, registered);
 
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public override void Named_ByType(string test, Type type,
                                        object defaultValue, object defaultAttr,
                                        object registered, object named,
@@ -33,7 +33,7 @@ namespace Dependency.Optional
             => Assert_AlwaysSuccessful(BaselineTestNamed.MakeGenericType(type),
                 @default, named);
 
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public override void InInherited_Type(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
@@ -43,7 +43,7 @@ namespace Dependency.Optional
                 @default, registered);
 
 
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public override void Twice_InInherited_Type(string test, Type type,
                                                          object defaultValue, object defaultAttr,
                                                          object registered, object named,
@@ -65,7 +65,7 @@ namespace Dependency.Optional
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(type, null, @override) as FixtureBaseType;
+            var instance = Container.Resolve(type, null, @override) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

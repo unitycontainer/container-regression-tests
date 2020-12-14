@@ -21,7 +21,7 @@ namespace Injection.Optional
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(type, null, @override) as FixtureBaseType;
+            var instance = Container.Resolve(type, null, @override) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

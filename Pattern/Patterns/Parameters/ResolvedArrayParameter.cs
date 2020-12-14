@@ -100,7 +100,7 @@ namespace Parameters
             Container.RegisterType(null, target, null, null, injection);
 
             // Act
-            var instance = Container.Resolve(target, null) as FixtureBaseType;
+            var instance = Container.Resolve(target, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -171,7 +171,7 @@ namespace Parameters
             Container.RegisterType(null, target, null, null, injection);
 
             // Act
-            var instance = Container.Resolve(target, null) as FixtureBaseType;
+            var instance = Container.Resolve(target, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

@@ -11,7 +11,7 @@ using Unity.Resolution;
 
 namespace Dependency
 {
-    public abstract partial class Pattern : FixtureBase
+    public abstract partial class Pattern : PatternBase
     {
         #region Constants
 
@@ -32,7 +32,7 @@ namespace Dependency
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(target, null, @override) as FixtureBaseType;
+            var instance = Container.Resolve(target, null, @override) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

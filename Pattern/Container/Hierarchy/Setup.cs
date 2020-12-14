@@ -10,7 +10,7 @@ using Unity;
 namespace Container
 {
     [TestClass]
-    public partial class Basics : FixtureBase
+    public partial class Basics : PatternBase
     {
         #region Scaffolding
 

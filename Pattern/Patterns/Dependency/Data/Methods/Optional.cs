@@ -14,7 +14,7 @@ namespace Dependency.Optional.Methods
     #region Validation
 
     public class PrivateTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [InjectionMethod]
         private void Method([OptionalDependency] TDependency value) => Value = value;
@@ -22,7 +22,7 @@ namespace Dependency.Optional.Methods
     }
 
     public class ProtectedTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [InjectionMethod]
         protected void Method([OptionalDependency] TDependency value) => Value = value;
@@ -30,7 +30,7 @@ namespace Dependency.Optional.Methods
     }
 
     public class InternalTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [InjectionMethod]
         internal void Method([OptionalDependency] TDependency value) => Value = value;
@@ -38,7 +38,7 @@ namespace Dependency.Optional.Methods
     }
 
     public class BaselineTestType_Ref<TDependency>
-        : FixtureBaseType where TDependency : class
+        : PatternBaseType where TDependency : class
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency] ref TDependency _)
@@ -46,7 +46,7 @@ namespace Dependency.Optional.Methods
     }
 
     public class BaselineTestType_Out<TDependency>
-        : FixtureBaseType where TDependency : class
+        : PatternBaseType where TDependency : class
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency] out TDependency _)

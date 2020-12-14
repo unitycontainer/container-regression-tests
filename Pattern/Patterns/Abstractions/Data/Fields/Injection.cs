@@ -10,7 +10,7 @@ using Unity.Resolution;
 
 namespace Regression
 {
-    public abstract partial class FixtureBase
+    public abstract partial class PatternBase
     {
         private static class Fields
         {

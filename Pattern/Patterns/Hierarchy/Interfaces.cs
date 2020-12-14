@@ -18,7 +18,7 @@ namespace Container
             if (isNamed) return;
 
             var type = definition.MakeGenericType(typeof(IUnityContainer));
-            var instance = Container.Resolve(type) as FixtureBaseType;
+            var instance = Container.Resolve(type) as PatternBaseType;
             Assert.AreSame(Container, instance.Value);
         }
 
@@ -30,7 +30,7 @@ namespace Container
 
             var type = definition.MakeGenericType(typeof(IUnityContainer));
             IUnityContainer childContainer = Container.CreateChildContainer();
-            var instance = childContainer.Resolve(type) as FixtureBaseType;
+            var instance = childContainer.Resolve(type) as PatternBaseType;
             Assert.AreSame(childContainer, instance.Value);
         }
 
@@ -43,7 +43,7 @@ namespace Container
             if (isNamed) return;
 
             var type = definition.MakeGenericType(typeof(IUnityContainerAsync));
-            var instance = Container.Resolve(type) as FixtureBaseType;
+            var instance = Container.Resolve(type) as PatternBaseType;
             Assert.AreSame(Container, instance.Value);
         }
 
@@ -55,7 +55,7 @@ namespace Container
 
             var type = definition.MakeGenericType(typeof(IUnityContainer));
             IUnityContainer childContainer = Container.CreateChildContainer();
-            var instance = childContainer.Resolve(type) as FixtureBaseType;
+            var instance = childContainer.Resolve(type) as PatternBaseType;
             Assert.AreSame(childContainer, instance.Value);
         }
 
@@ -69,7 +69,7 @@ namespace Container
             if (isNamed) return;
 
             var type = definition.MakeGenericType(typeof(IServiceProvider));
-            var instance = Container.Resolve(type) as FixtureBaseType;
+            var instance = Container.Resolve(type) as PatternBaseType;
             Assert.AreSame(Container, instance.Value);
         }
 
@@ -81,7 +81,7 @@ namespace Container
 
             var type = definition.MakeGenericType(typeof(IServiceProvider));
             IUnityContainer childContainer = Container.CreateChildContainer();
-            var instance = childContainer.Resolve(type) as FixtureBaseType;
+            var instance = childContainer.Resolve(type) as PatternBaseType;
             Assert.AreSame(childContainer, instance.Value);
         }
     }

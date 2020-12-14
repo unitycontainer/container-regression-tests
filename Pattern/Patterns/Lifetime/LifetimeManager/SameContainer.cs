@@ -75,8 +75,8 @@ namespace Lifetime.Manager
             if (ArrangeTest(factory, type)) return;
 
             // Act
-            Item1 = Container.Resolve<Foo<MockLogger>>().Value;
-            Item2 = Container.Resolve<Foo<MockLogger>>().Value;
+            Item1 = Container.Resolve<Foo<Service>>().Value;
+            Item2 = Container.Resolve<Foo<Service>>().Value;
 
             // Validate
             Assert.IsNotNull(Item1);
@@ -98,8 +98,8 @@ namespace Lifetime.Manager
             var child = Container.CreateChildContainer();
 
             // Act
-            Item1 = child.Resolve<Foo<MockLogger>>().Value;
-            Item2 = child.Resolve<Foo<MockLogger>>().Value;
+            Item1 = child.Resolve<Foo<Service>>().Value;
+            Item2 = child.Resolve<Foo<Service>>().Value;
 
             // Validate
             Assert.IsNotNull(Item1);

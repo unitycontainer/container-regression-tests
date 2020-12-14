@@ -32,18 +32,14 @@ namespace Registration
         {
             // Arrange
             Container.RegisterInstance(Name);
-            Container.RegisterType<ILogger, MockLogger>();
-            Container.RegisterType<ILogger, MockLogger>(Name);
-
-            var service = new Service();
-            Container.RegisterInstance<IService>(service);
-            Container.RegisterInstance<IService>(Name, service);
+            Container.RegisterType<IService, Service>();
+            Container.RegisterType<IService, Service>(Name);
 
             Container.RegisterType(typeof(IFoo<>), typeof(Foo<>));
             Container.RegisterType(typeof(IFoo<>), typeof(Foo<>), Name);
 
             var registrations = (from r in Container.Registrations
-                                 where r.RegisteredType == typeof(ILogger)
+                                 where r.RegisteredType == typeof(IService)
                                  select r).ToList();
 
             Assert.AreEqual(2, registrations.Count);
@@ -58,8 +54,8 @@ namespace Registration
             // Arrange
             Container.RegisterInstance(Name);
 
-            Container.RegisterType<ILogger, MockLogger>();
-            Container.RegisterType<ILogger, MockLogger>(Name);
+            Container.RegisterType<IService, Service>();
+            Container.RegisterType<IService, Service>(Name);
 
             var service = new Service();
             Container.RegisterInstance<IService>(service);
@@ -70,18 +66,18 @@ namespace Registration
 
             var registration =
                 (from r in Container.Registrations
-                 where r.RegisteredType == typeof(ILogger)
+                 where r.RegisteredType == typeof(IService)
                  select r).First();
 
-            Assert.AreSame(typeof(MockLogger), registration.MappedToType);
+            Assert.AreSame(typeof(Service), registration.MappedToType);
         }
 
         [TestMethod]
         public void NonMappingRegistrationShowsUpInRegistrationsSequence()
         {
-            Container.RegisterType<MockLogger>();
+            Container.RegisterType<Service>();
             var registration = (from r in Container.Registrations
-                                where r.RegisteredType == typeof(MockLogger)
+                                where r.RegisteredType == typeof(Service)
                                 select r).First();
 
             Assert.AreSame(registration.RegisteredType, registration.MappedToType);
@@ -101,13 +97,13 @@ namespace Registration
         [TestMethod]
         public void Registration_InParentContainerAppearInChild()
         {
-            Container.RegisterType<ILogger, MockLogger>();
+            Container.RegisterType<IService, Service>();
             var child = Container.CreateChildContainer();
 
             var registration =
-                (from r in child.Registrations where r.RegisteredType == typeof(ILogger) select r).First();
+                (from r in child.Registrations where r.RegisteredType == typeof(IService) select r).First();
 
-            Assert.AreSame(typeof(MockLogger), registration.MappedToType);
+            Assert.AreSame(typeof(Service), registration.MappedToType);
         }
 
         [TestMethod]
@@ -115,20 +111,20 @@ namespace Registration
         {
             var local = "local";
             var child = Container.CreateChildContainer()
-                .RegisterType<ILogger, MockLogger>(local);
+                .RegisterType<IService, Service>(local);
 
             var childRegistration = child.Registrations
 #if !UNITY_V4
                                          .Cast<IContainerRegistration>()
 #endif
-                                         .First(r => r.RegisteredType == typeof(ILogger) &&
+                                         .First(r => r.RegisteredType == typeof(IService) &&
                                                      r.Name == local);
 
             var parentRegistration = Container.Registrations
 #if !UNITY_V4
                                               .Cast<IContainerRegistration>()
 #endif
-                                              .FirstOrDefault(r => r.RegisteredType == typeof(ILogger) &&
+                                              .FirstOrDefault(r => r.RegisteredType == typeof(IService) &&
                                                                    r.Name == local);
             Assert.IsNull(parentRegistration);
             Assert.IsNotNull(childRegistration);

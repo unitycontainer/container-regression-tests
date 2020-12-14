@@ -5,7 +5,7 @@ namespace Dependency
 {
     public abstract partial class Pattern 
     {
-        public abstract class DependencyBaseType : FixtureBaseType
+        public abstract class DependencyBaseType : PatternBaseType
         {
             #region Constructors
 
@@ -32,8 +32,8 @@ namespace Dependency
             public override object Default => RegisteredUnresolvable;
         }
 
-        public class DependecyConsumer<TDependency> : FixtureBaseType
-            where TDependency : FixtureBaseType
+        public class DependecyConsumer<TDependency> : PatternBaseType
+            where TDependency : PatternBaseType
         {
             public DependecyConsumer(TDependency dependency)
             {

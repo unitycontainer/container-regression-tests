@@ -216,19 +216,19 @@ namespace Resolution
             {
                 var service = scope.Resolve<IService>();
                 disposableService1 = (Service)service;
-                Assert.IsFalse(disposableService1.Disposed);
+                Assert.IsFalse(disposableService1.IsDisposed);
             }
 
-            Assert.IsFalse(disposableService1.Disposed);
+            Assert.IsFalse(disposableService1.IsDisposed);
 
             using (var scope = Container.CreateChildContainer())
             {
                 var service = scope.Resolve<IService>();
                 disposableService2 = (Service)service;
-                Assert.IsFalse(disposableService2.Disposed);
+                Assert.IsFalse(disposableService2.IsDisposed);
             }
 
-            Assert.IsFalse(disposableService2.Disposed);
+            Assert.IsFalse(disposableService2.IsDisposed);
             Assert.AreSame(disposableService1, disposableService2);
         }
 

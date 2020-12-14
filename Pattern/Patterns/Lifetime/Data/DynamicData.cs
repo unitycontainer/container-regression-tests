@@ -9,7 +9,7 @@ using Unity.Lifetime;
 
 namespace Lifetime
 {
-    public abstract partial class Pattern : FixtureBase
+    public abstract partial class Pattern : PatternBase
     {
         #region Fields
 

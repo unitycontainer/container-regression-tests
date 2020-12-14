@@ -25,9 +25,9 @@ namespace Lifetime.Hierarchies
             var child1 = Container.CreateChildContainer();
             var child2 = Container.CreateChildContainer();
 
-            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
-            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
-            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+            var instance_from_root = Container.Resolve(target) as PatternBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as PatternBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as PatternBaseType;
 
             foreach (var assert in methods)
             {
@@ -48,9 +48,9 @@ namespace Lifetime.Hierarchies
             var child1 = Container.CreateChildContainer();
             var child2 = child1.CreateChildContainer();
 
-            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
-            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
-            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+            var instance_from_root = Container.Resolve(target) as PatternBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as PatternBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as PatternBaseType;
 
             foreach (var assert in methods)
             {
@@ -71,9 +71,9 @@ namespace Lifetime.Hierarchies
             var child1 = Container.CreateChildContainer();
             var child2 = Container.CreateChildContainer();
 
-            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
-            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
-            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as PatternBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as PatternBaseType;
+            var instance_from_root = Container.Resolve(target) as PatternBaseType;
 
             foreach (var assert in methods)
             {
@@ -94,9 +94,9 @@ namespace Lifetime.Hierarchies
             var child1 = Container.CreateChildContainer();
             var child2 = child1.CreateChildContainer();
 
-            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
-            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
-            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as PatternBaseType;
+            var instance_from_root = Container.Resolve(target) as PatternBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as PatternBaseType;
 
             foreach (var assert in methods)
             {
@@ -121,9 +121,9 @@ namespace Lifetime.Hierarchies
             var child1 = Container.CreateChildContainer();
             var child2 = Container.CreateChildContainer();
 
-            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
-            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
-            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+            var instance_from_root = Container.Resolve(target) as PatternBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as PatternBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as PatternBaseType;
 
             foreach (var assert in methods)
             {
@@ -144,9 +144,9 @@ namespace Lifetime.Hierarchies
             var child1 = Container.CreateChildContainer();
             var child2 = child1.CreateChildContainer();
 
-            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
-            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
-            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+            var instance_from_root = Container.Resolve(target) as PatternBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as PatternBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as PatternBaseType;
 
             foreach (var assert in methods)
             {
@@ -166,9 +166,9 @@ namespace Lifetime.Hierarchies
             var child1 = Container.CreateChildContainer();
             var child2 = child1.CreateChildContainer();
 
-            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
-            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
-            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
+            var instance_from_root = Container.Resolve(target) as PatternBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as PatternBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as PatternBaseType;
 
             var service  = instance_from_root.Value as SingletonService;
             var service1 = instanceFromChild1.Value as SingletonService;
@@ -202,9 +202,9 @@ namespace Lifetime.Hierarchies
             var child1 = Container.CreateChildContainer();
             var child2 = Container.CreateChildContainer();
 
-            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
-            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
-            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as PatternBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as PatternBaseType;
+            var instance_from_root = Container.Resolve(target) as PatternBaseType;
 
             foreach (var assert in methods)
             {
@@ -225,9 +225,9 @@ namespace Lifetime.Hierarchies
             var child1 = Container.CreateChildContainer();
             var child2 = child1.CreateChildContainer();
 
-            var instanceFromChild1 = child1.Resolve(target) as FixtureBaseType;
-            var instanceFromChild2 = child2.Resolve(target) as FixtureBaseType;
-            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
+            var instanceFromChild1 = child1.Resolve(target) as PatternBaseType;
+            var instanceFromChild2 = child2.Resolve(target) as PatternBaseType;
+            var instance_from_root = Container.Resolve(target) as PatternBaseType;
 
             foreach (var assert in methods)
             {

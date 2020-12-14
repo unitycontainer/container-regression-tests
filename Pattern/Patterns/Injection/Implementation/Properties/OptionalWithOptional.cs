@@ -29,7 +29,7 @@ namespace Properties
         {
             ClassInitialize(context);
 
-            Type support = Type.GetType($"{typeof(FixtureBase).FullName}+{Member}");
+            Type support = Type.GetType($"{typeof(PatternBase).FullName}+{Member}");
 
             if (support is null) return;
 
@@ -55,7 +55,7 @@ namespace Properties
             Container.RegisterType(null, type, null, null, member);
 
             // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);
@@ -65,7 +65,7 @@ namespace Properties
             RegisterTypes();
 
             // Act
-            instance = Container.Resolve(type, null) as FixtureBaseType;
+            instance = Container.Resolve(type, null) as PatternBaseType;
 
             // Validate
             Assert.IsNotNull(instance);

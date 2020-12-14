@@ -13,7 +13,7 @@ namespace Injection
     public abstract partial class Pattern
     {
 #if !UNITY_V4
-        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         [PatternTestMethod("Inject Unnamed dependency by XxxMember()"), TestCategory(CATEGORY_INJECT)]
         public virtual void Inject_Default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
@@ -24,7 +24,7 @@ namespace Injection
                 @default, registered);
 
 
-        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         [PatternTestMethod("Inject Named dependency by XxxMember()"), TestCategory(CATEGORY_INJECT)]
         public virtual void Inject_Named_Default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
@@ -35,7 +35,7 @@ namespace Injection
                 @default, named);
 #endif
 
-        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         [PatternTestMethod("Inject {1} dependency by {2} and {3}"), TestCategory(CATEGORY_INJECT)]
         public virtual void Inject_Unnamed_Type_Null(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
@@ -46,7 +46,7 @@ namespace Injection
                    @default, registered);
 
 
-        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         [PatternTestMethod("Inject {1} dependency by {2} and {3}"), TestCategory(CATEGORY_INJECT)]
         public virtual void Inject_Named_Type_Null(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
@@ -58,7 +58,7 @@ namespace Injection
 
 
         
-        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         [PatternTestMethod("Inject {1} dependency by {2} and {3}"), TestCategory(CATEGORY_INJECT)]
         public virtual void Inject_Unnamed_Type_Name(string test, Type type, object defaultValue, object defaultAttr,
                                               object registered, object named, object injected, object overridden,
@@ -68,7 +68,7 @@ namespace Injection
                 InjectionMember_Contract(type, Name), 
                 @default, named);
 
-        [DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         [PatternTestMethod("Inject {1} dependency by {2} and {3}"), TestCategory(CATEGORY_INJECT)]
         public virtual void Inject_Named_Type_Name(string test, Type type, object defaultValue, object defaultAttr,
                                               object registered, object named, object injected, object overridden,

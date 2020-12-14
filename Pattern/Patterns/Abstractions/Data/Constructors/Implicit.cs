@@ -9,20 +9,20 @@ namespace Regression.Implicit.Constructors
 {
     #region Baseline
 
-    public class BaselineTestType<TDependency> : FixtureBaseType
+    public class BaselineTestType<TDependency> : PatternBaseType
     {
         [InjectionConstructor] public BaselineTestType(TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class BaselineTestTypeNamed<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         public BaselineTestTypeNamed(TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestType<TItem1, TItem2> : FixtureBaseType
+    public class BaselineTestType<TItem1, TItem2> : PatternBaseType
     {
         [InjectionConstructor]
         public BaselineTestType(TItem1 item1, TItem2 item2)
@@ -37,7 +37,7 @@ namespace Regression.Implicit.Constructors
 
     #region Object
 
-    public class ObjectTestType : FixtureBaseType
+    public class ObjectTestType : PatternBaseType
     {
         [InjectionConstructor] public ObjectTestType(object value) => Value = value;
     }
@@ -57,13 +57,13 @@ namespace Regression.Implicit.Constructors
 
     #region Array
 
-    public class BaselineArrayType<TDependency> : FixtureBaseType
+    public class BaselineArrayType<TDependency> : PatternBaseType
     {
         [InjectionConstructor] public BaselineArrayType(TDependency[] value) => Value = value;
         public override object Default => default(TDependency);
     }
 
-    public class ObjectArrayType : FixtureBaseType
+    public class ObjectArrayType : PatternBaseType
     {
         [InjectionConstructor] public ObjectArrayType(object[] value) => Value = value;
     }
@@ -73,7 +73,7 @@ namespace Regression.Implicit.Constructors
 
     #region Consumer
 
-    public class BaselineConsumer<TDependency> : FixtureBaseType
+    public class BaselineConsumer<TDependency> : PatternBaseType
     {
         public readonly BaselineTestType<TDependency>      Item1;
         public readonly BaselineTestTypeNamed<TDependency> Item2;

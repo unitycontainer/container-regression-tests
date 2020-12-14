@@ -4,7 +4,7 @@ using Regression;
 namespace Registration
 {
     [TestClass]
-    public partial class Linq : FixtureBase
+    public partial class Linq : PatternBase
     {
         #region Scaffolding
 

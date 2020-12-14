@@ -14,7 +14,7 @@ namespace Dependency.Required.Properties
     #region Validation
 
     public class PrivateTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [Dependency] private TDependency Property { get; set; }
 
@@ -23,7 +23,7 @@ namespace Dependency.Required.Properties
     }
 
     public class ProtectedTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [Dependency] protected TDependency Property { get; set; }
 
@@ -32,7 +32,7 @@ namespace Dependency.Required.Properties
     }
 
     public class InternalTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [Dependency] internal TDependency Property { get; set; }
 

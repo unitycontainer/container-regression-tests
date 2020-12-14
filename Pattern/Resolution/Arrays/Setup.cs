@@ -11,7 +11,7 @@ using Unity;
 namespace Resolution
 {
     [TestClass]
-    public partial class Arrays : FixtureBase
+    public partial class Arrays : PatternBase
     {
         #region Scaffolding
 

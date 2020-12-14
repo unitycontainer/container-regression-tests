@@ -15,11 +15,11 @@ namespace Registration
         public void TypeRegistrationShowsUpInRegistrations()
         {
             // Act
-            Container.RegisterType<MockLogger>();
+            Container.RegisterType<Service>();
 
             // Validate
             var registration = (from r in Container.Registrations
-                                where r.RegisteredType == typeof(MockLogger)
+                                where r.RegisteredType == typeof(Service)
                                 select r).First();
 
             Assert.AreSame(registration.RegisteredType, registration.MappedToType);
@@ -30,11 +30,11 @@ namespace Registration
         public void NamedRegistrationShowsUpInRegistrations()
         {
             // Act
-            Container.RegisterType<MockLogger>("name");
+            Container.RegisterType<Service>("name");
 
             // Validate
             var registration = (from r in Container.Registrations
-                                where r.RegisteredType == typeof(MockLogger)
+                                where r.RegisteredType == typeof(Service)
                                 select r).First();
 
             Assert.AreSame(registration.RegisteredType, registration.MappedToType);
@@ -45,25 +45,25 @@ namespace Registration
         public void MappingShowsUpInRegistrations()
         {
             // Act
-            Container.RegisterType<ILogger, MockLogger>();
+            Container.RegisterType<IService, Service>();
 
             // Validate
             var registration =
-                (from r in Container.Registrations where r.RegisteredType == typeof(ILogger) select r).First();
+                (from r in Container.Registrations where r.RegisteredType == typeof(IService) select r).First();
 
-            Assert.AreSame(typeof(MockLogger), registration.MappedToType);
+            Assert.AreSame(typeof(Service), registration.MappedToType);
         }
 
         [TestMethod]
         public void NamedMappingShowUpInRegistrations()
         {
             // Act
-            Container.RegisterType<ILogger, MockLogger>()
-                     .RegisterType<ILogger, MockLogger>("second");
+            Container.RegisterType<IService, Service>()
+                     .RegisterType<IService, Service>("second");
 
             // Validate
             var registrations = (from r in Container.Registrations
-                                 where r.RegisteredType == typeof(ILogger)
+                                 where r.RegisteredType == typeof(IService)
                                  select r).ToList();
 
             Assert.AreEqual(2, registrations.Count);

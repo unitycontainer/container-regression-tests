@@ -36,7 +36,7 @@ namespace Lifetime.Hierarchies
             var weak = new WeakReference(Container);
             var (weakChild, instance) = CreateResolveAndDispose(factory);
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
             GC.WaitForPendingFinalizers();
 
             Assert.IsFalse(weak.IsAlive);
@@ -51,7 +51,7 @@ namespace Lifetime.Hierarchies
         {
             var (weakChild, instance) = CreateResolveAndDispose(factory);
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
             GC.WaitForPendingFinalizers();
 
             Assert.IsFalse(weakChild.IsAlive);
@@ -70,7 +70,7 @@ namespace Lifetime.Hierarchies
         {
             var (weak, instance) = CreateResolveAndDispose(factory);
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
             GC.WaitForPendingFinalizers();
 
             Assert.IsFalse(weak.IsAlive);
@@ -97,7 +97,7 @@ namespace Lifetime.Hierarchies
         {
             var (weak, instance) = CreateResolveAndDispose(factory);
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
             GC.WaitForPendingFinalizers();
 
             Assert.IsFalse(weak.IsAlive);
@@ -124,7 +124,7 @@ namespace Lifetime.Hierarchies
         {
             var (weak, instance) = CreateResolveAndDispose(factory);
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
             GC.WaitForPendingFinalizers();
 
             Assert.IsFalse(weak.IsAlive);
@@ -151,7 +151,7 @@ namespace Lifetime.Hierarchies
         {
             var (weak, instance) = CreateResolveAndDispose(factory);
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
             GC.WaitForPendingFinalizers();
 
             Assert.IsFalse(weak.IsAlive);
@@ -238,7 +238,7 @@ namespace Lifetime.Hierarchies
         {
             var (weakChild, instance) = CreateResolveDispose(factory);
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
             GC.WaitForPendingFinalizers();
 
             Assert.IsFalse(weakChild.IsAlive);
@@ -264,7 +264,7 @@ namespace Lifetime.Hierarchies
         {
             var (weakChild, instance) = CreateResolveDiscard(factory);
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
             GC.WaitForPendingFinalizers();
 
             Assert.IsFalse(weakChild.IsAlive);
@@ -289,7 +289,7 @@ namespace Lifetime.Hierarchies
             var weak = new WeakReference(Container);
             var (weakChild, instance) = CreateResolveDispose(factory);
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
             GC.WaitForPendingFinalizers();
 
             Assert.IsFalse(weak.IsAlive);
@@ -318,7 +318,7 @@ namespace Lifetime.Hierarchies
             var weak = new WeakReference(Container);
             var (weakChild, instance) = CreateResolveDiscard(factory);
 
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
             GC.WaitForPendingFinalizers();
 
             Assert.IsFalse(weak.IsAlive);

@@ -85,7 +85,7 @@ namespace Parameters
             RegisterTypes();
 
             // Act
-            var instance = Container.Resolve(type, null) as FixtureBaseType;
+            var instance = Container.Resolve(type, null) as PatternBaseType;
             var expected = !IMPORT_IMPLICIT.Equals(import) && isNamed ? named : registered;
 
             // Validate

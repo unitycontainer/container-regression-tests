@@ -2,7 +2,7 @@
 {
     #region Baseline
 
-    public class BaselineTestType<TDependency> : FixtureBaseType
+    public class BaselineTestType<TDependency> : PatternBaseType
     {
         public TDependency Field;
         public override object Value { get => Field; }
@@ -10,7 +10,7 @@
     }
 
     public class BaselineTestTypeNamed<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         public TDependency Field;
 
@@ -18,7 +18,7 @@
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestType<TItem1, TItem2> : FixtureBaseType
+    public class BaselineTestType<TItem1, TItem2> : PatternBaseType
     {
         public TItem1 Item1;
         public TItem2 Item2;
@@ -32,7 +32,7 @@
 
     #region Object
 
-    public class ObjectTestType : FixtureBaseType
+    public class ObjectTestType : PatternBaseType
     {
         public object Field;
         public override object Value { get => Field; }
@@ -58,14 +58,14 @@
 
     #region Array
 
-    public class BaselineArrayType<TDependency> : FixtureBaseType
+    public class BaselineArrayType<TDependency> : PatternBaseType
     {
         public TDependency[] Field;
         public override object Value { get => Field; }
         public override object Default => default(TDependency);
     }
 
-    public class ObjectArrayType : FixtureBaseType
+    public class ObjectArrayType : PatternBaseType
     {
         public object[] Field;
         public override object Value { get => Field; }
@@ -76,7 +76,7 @@
 
     #region Consumer
 
-    public class BaselineConsumer<TDependency> : FixtureBaseType
+    public class BaselineConsumer<TDependency> : PatternBaseType
     {
         public readonly BaselineTestType<TDependency> Item1;
         public readonly BaselineTestTypeNamed<TDependency> Item2;

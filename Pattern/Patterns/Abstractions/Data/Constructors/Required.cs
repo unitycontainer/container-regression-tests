@@ -10,20 +10,20 @@ namespace Regression.Required.Constructors
 {
     #region Baseline
 
-    public class BaselineTestType<TDependency> : FixtureBaseType
+    public class BaselineTestType<TDependency> : PatternBaseType
     {
         [InjectionConstructor]public BaselineTestType([Dependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
     
     public class BaselineTestTypeNamed<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
-        public BaselineTestTypeNamed([Dependency(FixtureBase.Name)] TDependency value) => Value = value;
+        public BaselineTestTypeNamed([Dependency(PatternBase.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestType<TItem1, TItem2> : FixtureBaseType
+    public class BaselineTestType<TItem1, TItem2> : PatternBaseType
     {
         [InjectionConstructor]
         public BaselineTestType([Dependency] TItem1 item1, [Dependency] TItem2 item2)
@@ -38,7 +38,7 @@ namespace Regression.Required.Constructors
 
     #region Object
 
-    public class ObjectTestType : FixtureBaseType
+    public class ObjectTestType : PatternBaseType
     {
         [InjectionConstructor] public ObjectTestType([Dependency] object value) => Value = value;
     }
@@ -59,13 +59,13 @@ namespace Regression.Required.Constructors
 
     #region Array
 
-    public class BaselineArrayType<TDependency> : FixtureBaseType
+    public class BaselineArrayType<TDependency> : PatternBaseType
     {
         [InjectionConstructor] public BaselineArrayType([Dependency] TDependency[] value) => Value = value;
         public override object Default => default(TDependency);
     }
 
-    public class ObjectArrayType : FixtureBaseType
+    public class ObjectArrayType : PatternBaseType
     {
         [InjectionConstructor] public ObjectArrayType([Dependency] object[] value) => Value = value;
     }
@@ -75,7 +75,7 @@ namespace Regression.Required.Constructors
 
     #region Consumer
 
-    public class BaselineConsumer<TDependency> : FixtureBaseType
+    public class BaselineConsumer<TDependency> : PatternBaseType
     {
         public readonly BaselineTestType<TDependency> Item1;
         public readonly BaselineTestTypeNamed<TDependency> Item2;

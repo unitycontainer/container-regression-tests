@@ -4,7 +4,7 @@ using Regression;
 namespace Resolution
 {
     [TestClass]
-    public partial class FromEmpty : FixtureBase
+    public partial class FromEmpty : PatternBase
     {
         #region Scaffolding
 

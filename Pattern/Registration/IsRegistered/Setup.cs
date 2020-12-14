@@ -11,7 +11,7 @@ using Unity;
 namespace Registration
 {
     [TestClass]
-    public partial class IsRegistered : FixtureBase
+    public partial class IsRegistered : PatternBase
     {
         private string other = "other";
 

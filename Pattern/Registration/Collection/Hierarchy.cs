@@ -15,33 +15,33 @@ namespace Registration
         [TestMethod]
         public void RegistrationsInParentAppearInChild()
         {
-            Container.RegisterType<ILogger, MockLogger>();
+            Container.RegisterType<IService, Service>();
             var child = Container.CreateChildContainer();
 
             var registration =
-                (from r in child.Registrations where r.RegisteredType == typeof(ILogger) select r).First();
+                (from r in child.Registrations where r.RegisteredType == typeof(IService) select r).First();
 
-            Assert.AreSame(typeof(MockLogger), registration.MappedToType);
+            Assert.AreSame(typeof(Service), registration.MappedToType);
         }
 
         [TestMethod]
         public void RegistrationsInChildDoNotAppearInParent()
         {
             var child = Container.CreateChildContainer()
-                .RegisterType<ILogger, MockLogger>("named");
+                .RegisterType<IService, Service>("named");
 
             var childRegistration = child.Registrations
 #if !UNITY_V4 && !BEHAVIOR_V5
                                          .Cast<IContainerRegistration>()
 #endif
-                                         .Where(r => r.RegisteredType == typeof(ILogger))
+                                         .Where(r => r.RegisteredType == typeof(IService))
                                          .First();
 
             var parentRegistration = Container.Registrations
 #if !UNITY_V4 && !BEHAVIOR_V5
                                               .Cast<IContainerRegistration>()
 #endif
-                                              .Where(r => r.RegisteredType == typeof(ILogger))
+                                              .Where(r => r.RegisteredType == typeof(IService))
                                               .FirstOrDefault();
 
             Assert.IsNull(parentRegistration);

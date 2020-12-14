@@ -16,7 +16,7 @@ using Unity.Injection;
 namespace Resolution
 {
     [TestClass]
-    public partial class Deferred : FixtureBase
+    public partial class Deferred : PatternBase
     {
         #region Scaffolding
 

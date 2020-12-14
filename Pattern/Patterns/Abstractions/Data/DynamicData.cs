@@ -4,7 +4,7 @@ using System;
 
 namespace Regression
 {
-    public abstract partial class FixtureBase
+    public abstract partial class PatternBase
     {
         public static IEnumerable<object[]> Test_Type_Data 
             => Test_Data_Set.Select(set => (object[])set);

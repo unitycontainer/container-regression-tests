@@ -25,9 +25,9 @@ namespace Lifetime.Hierarchies
                                   .RegisterType(typeof(SingletonService), factory());
             var child2 = child1.CreateChildContainer();
 
-            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
-            var instanceFromChild1 = child1.Resolve(target)    as FixtureBaseType;
-            var instanceFromChild2 = child2.Resolve(target)    as FixtureBaseType;
+            var instance_from_root = Container.Resolve(target) as PatternBaseType;
+            var instanceFromChild1 = child1.Resolve(target)    as PatternBaseType;
+            var instanceFromChild2 = child2.Resolve(target)    as PatternBaseType;
 
             foreach (var assert in methods)
             {
@@ -48,9 +48,9 @@ namespace Lifetime.Hierarchies
                                   .RegisterType(typeof(SingletonService), factory());
             var child2 = child1.CreateChildContainer();
 
-            var instanceFromChild2 = child2.Resolve(target)    as FixtureBaseType;
-            var instanceFromChild1 = child1.Resolve(target)    as FixtureBaseType;
-            var instance_from_root = Container.Resolve(target) as FixtureBaseType;
+            var instanceFromChild2 = child2.Resolve(target)    as PatternBaseType;
+            var instanceFromChild1 = child1.Resolve(target)    as PatternBaseType;
+            var instance_from_root = Container.Resolve(target) as PatternBaseType;
 
             foreach (var assert in methods)
             {

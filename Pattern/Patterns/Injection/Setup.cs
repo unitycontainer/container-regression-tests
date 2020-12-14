@@ -11,7 +11,7 @@ using Unity.Resolution;
 
 namespace Injection
 {
-    public abstract partial class Pattern : FixtureBase
+    public abstract partial class Pattern : PatternBase
     {
     }
 }

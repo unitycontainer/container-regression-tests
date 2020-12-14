@@ -21,7 +21,7 @@ namespace Container
             var target = definition.MakeGenericType(typeof(IService));
             
             var instance = Container.CreateChildContainer()
-                                    .Resolve(target) as FixtureBaseType;
+                                    .Resolve(target) as PatternBaseType;
 
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, target);
@@ -42,7 +42,7 @@ namespace Container
             var instance = Container.CreateChildContainer()
                                     .RegisterType<IService, OtherService>()
                                     .RegisterType<IService, Service>(Name)
-                                    .Resolve(target) as FixtureBaseType;
+                                    .Resolve(target) as PatternBaseType;
 
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, target);
@@ -61,7 +61,7 @@ namespace Container
             
             var child = Container.CreateChildContainer();
 
-            var instance = child.Resolve(target) as FixtureBaseType;
+            var instance = child.Resolve(target) as PatternBaseType;
 
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, target);
@@ -70,7 +70,7 @@ namespace Container
             Container.RegisterType<IService, OtherService>()
                      .RegisterType<IService, Service>(Name);
             
-            instance = child.Resolve(target) as FixtureBaseType;
+            instance = child.Resolve(target) as PatternBaseType;
 
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, target);

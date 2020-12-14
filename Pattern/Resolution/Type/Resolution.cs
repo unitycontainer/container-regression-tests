@@ -13,7 +13,7 @@ namespace Resolution
     public partial class FromEmpty
     {
         [DataTestMethod]
-        [DynamicData(nameof(InvalidTypes_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(InvalidTypes_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
         public virtual void Unsupported(string test, Type type)
         {
@@ -22,7 +22,7 @@ namespace Resolution
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(Unity_Recognized_Types_Data), typeof(FixtureBase))]
+        [DynamicData(nameof(Unity_Recognized_Types_Data), typeof(PatternBase))]
         public virtual void Supported(string test, Type type)
         {
             // Act

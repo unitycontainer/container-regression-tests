@@ -17,7 +17,7 @@ namespace Injection.Optional.Properties
     #region Validation
 
     public class PrivateTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [OptionalDependency] private TDependency Property { get; set; }
 
@@ -26,7 +26,7 @@ namespace Injection.Optional.Properties
     }
 
     public class ProtectedTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [OptionalDependency] protected TDependency Property { get; set; }
 
@@ -35,7 +35,7 @@ namespace Injection.Optional.Properties
     }
 
     public class InternalTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [OptionalDependency] internal TDependency Property { get; set; }
 

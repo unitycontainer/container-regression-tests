@@ -8,7 +8,7 @@ using Unity;
 
 namespace Regression
 {
-    public abstract partial class FixtureBase
+    public abstract partial class PatternBase
     {
         public static IEnumerable<string> MemberInfo_Namespace_Names
         {

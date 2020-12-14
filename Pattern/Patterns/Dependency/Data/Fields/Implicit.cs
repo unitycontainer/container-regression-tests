@@ -7,7 +7,7 @@ namespace Dependency.Implicit.Fields
     #region Validation
 
     public class PrivateTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         private TDependency Field;
 
@@ -21,7 +21,7 @@ namespace Dependency.Implicit.Fields
     }
 
     public class ProtectedTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         protected TDependency Field;
 
@@ -30,7 +30,7 @@ namespace Dependency.Implicit.Fields
     }
 
     public class InternalTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         internal TDependency Field;
 

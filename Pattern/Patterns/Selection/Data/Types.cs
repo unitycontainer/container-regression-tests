@@ -11,7 +11,7 @@ namespace Selection
         #region Base Types
 
 
-        public abstract class SelectionBaseType : FixtureBaseType
+        public abstract class SelectionBaseType : PatternBaseType
         {
             protected SelectionBaseType() => Value = new object[0];
             

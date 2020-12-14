@@ -20,7 +20,7 @@ namespace Parameters
                 var @namespace = MethodBase.GetCurrentMethod().DeclaringType.Namespace;
                 foreach (var member in MemberInfo_Namespace_Names)
                 {
-                    var method = Type.GetType($"{typeof(Regression.FixtureBase).FullName}+{member}")
+                    var method = Type.GetType($"{typeof(Regression.PatternBase).FullName}+{member}")
                                      .GetMethod("GetInjectionValue")
                                      .CreateDelegate(typeof(Func<object, InjectionMember>));
 
@@ -69,7 +69,7 @@ namespace Parameters
                 var @namespace = MethodBase.GetCurrentMethod().DeclaringType.Namespace;
                 foreach (var member in MemberInfo_Namespace_Names)
                 {
-                    var method = Type.GetType($"{typeof(Regression.FixtureBase).FullName}+{member}")
+                    var method = Type.GetType($"{typeof(Regression.PatternBase).FullName}+{member}")
                                      .GetMethod("GetInjectionValue")
                                      .CreateDelegate(typeof(Func<object, InjectionMember>));
 

@@ -4,7 +4,7 @@ using Regression;
 namespace Registration
 {
     [TestClass]
-    public partial class Collection : FixtureBase
+    public partial class Collection : PatternBase
     {
         #region Scaffolding
 

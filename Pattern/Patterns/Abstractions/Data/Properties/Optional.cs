@@ -10,21 +10,21 @@ namespace Regression.Optional.Properties
 {
     #region Baseline
 
-    public class BaselineTestType<TDependency> : FixtureBaseType
+    public class BaselineTestType<TDependency> : PatternBaseType
     {
         [OptionalDependency] public TDependency Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestTypeNamed<TDependency> : FixtureBaseType
+    public class BaselineTestTypeNamed<TDependency> : PatternBaseType
     {
-        [OptionalDependency(FixtureBase.Name)] public TDependency Property { get; set; }
+        [OptionalDependency(PatternBase.Name)] public TDependency Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestType<TItem1, TItem2> : FixtureBaseType
+    public class BaselineTestType<TItem1, TItem2> : PatternBaseType
     {
         [OptionalDependency] public TItem1 Item1 { get; set; }
         [OptionalDependency] public TItem2 Item2 { get; set; }
@@ -38,7 +38,7 @@ namespace Regression.Optional.Properties
 
     #region Object
 
-    public class ObjectTestType : FixtureBaseType
+    public class ObjectTestType : PatternBaseType
     {
         [OptionalDependency] public object Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
@@ -59,14 +59,14 @@ namespace Regression.Optional.Properties
 
     #region Array
 
-    public class BaselineArrayType<TDependency> : FixtureBaseType
+    public class BaselineArrayType<TDependency> : PatternBaseType
     {
         [OptionalDependency] public TDependency[] Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
         public override object Default => default(TDependency);
     }
 
-    public class ObjectArrayType : FixtureBaseType
+    public class ObjectArrayType : PatternBaseType
     {
         [OptionalDependency] public object[] Property { get; set; }
         public override object Value { get => Property; protected set => throw new NotSupportedException(); }
@@ -77,7 +77,7 @@ namespace Regression.Optional.Properties
 
     #region Consumer
 
-    public class BaselineConsumer<TDependency> : FixtureBaseType
+    public class BaselineConsumer<TDependency> : PatternBaseType
     {
         public readonly BaselineTestType<TDependency> Item1;
         public readonly BaselineTestTypeNamed<TDependency> Item2;

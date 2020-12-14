@@ -23,35 +23,35 @@ namespace Injection.Implicit.Constructors
     #region Validation
 
     public class BaselineTestType_Ref<TDependency>
-        : FixtureBaseType where TDependency : class
+        : PatternBaseType where TDependency : class
     {
         public BaselineTestType_Ref(ref TDependency value)
             => throw new InvalidOperationException("should never execute");
     }
 
     public class BaselineTestType_Out<TDependency>
-        : FixtureBaseType where TDependency : class
+        : PatternBaseType where TDependency : class
     {
         public BaselineTestType_Out(out TDependency value)
             => throw new InvalidOperationException("should never execute");
     }
 
     public class PrivateTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         private PrivateTestType(TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class ProtectedTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         protected ProtectedTestType(TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class InternalTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         internal InternalTestType(TDependency value) => Value = value;
         public override object Default => default(TDependency);

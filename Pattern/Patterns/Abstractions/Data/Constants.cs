@@ -2,7 +2,7 @@
 
 namespace Regression
 {
-    public abstract partial class FixtureBase
+    public abstract partial class PatternBase
     {
         #region Constants
 
@@ -101,7 +101,7 @@ namespace Regression
         public const short RegisteredShort            = 23;
         public const float RegisteredFloat            = 34;
         public const double RegisteredDouble          = 45;
-        public static Type RegisteredType             = typeof(FixtureBase);
+        public static Type RegisteredType             = typeof(PatternBase);
         public static ICloneable RegisteredICloneable = new object[0];
         public static Delegate RegisteredDelegate     = (Func<int>)(() => 0);
 

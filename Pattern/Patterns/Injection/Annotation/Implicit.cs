@@ -14,7 +14,7 @@ namespace Injection.Implicit
 
         [TestCategory(CATEGORY_INJECT)]
         [ExpectedException(typeof(ResolutionFailedException))]
-        [DataTestMethod, DynamicData(nameof(Unity_Recognized_Types_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Unity_Recognized_Types_Data), typeof(PatternBase))]
         public virtual void Throws_OnRefParameter(string test, Type type)
         {
             // Arrange
@@ -26,7 +26,7 @@ namespace Injection.Implicit
 
         [TestCategory(CATEGORY_INJECT)]
         [ExpectedException(typeof(ResolutionFailedException))]
-        [DataTestMethod, DynamicData(nameof(Unity_Recognized_Types_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Unity_Recognized_Types_Data), typeof(PatternBase))]
         public virtual void Throws_OnOutParameter(string test, Type type)
         {
             // Arrange
@@ -37,7 +37,7 @@ namespace Injection.Implicit
         }
 
 #if !UNITY_V4
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(FixtureBase))]
+        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public override void Inject_Named_Default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default)

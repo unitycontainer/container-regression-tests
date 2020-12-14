@@ -14,35 +14,35 @@ namespace Dependency.Optional.Constructors
     #region Validation
 
     public class PrivateTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         private PrivateTestType([OptionalDependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class ProtectedTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         protected ProtectedTestType([OptionalDependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class InternalTestType<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         internal InternalTestType([OptionalDependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class BaselineTestType_Ref<TDependency>
-        : FixtureBaseType where TDependency : class
+        : PatternBaseType where TDependency : class
     {
         public BaselineTestType_Ref([OptionalDependency] ref TDependency _)
             => throw new InvalidOperationException("should never execute");
     }
 
     public class BaselineTestType_Out<TDependency>
-        : FixtureBaseType where TDependency : class
+        : PatternBaseType where TDependency : class
     {
         public BaselineTestType_Out([OptionalDependency] out TDependency _)
             => throw new InvalidOperationException("should never execute");

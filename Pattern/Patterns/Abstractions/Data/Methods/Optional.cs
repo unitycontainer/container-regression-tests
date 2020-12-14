@@ -9,21 +9,21 @@ namespace Regression.Optional.Methods
 {
     #region Baseline
 
-    public class BaselineTestType<TDependency> : FixtureBaseType
+    public class BaselineTestType<TDependency> : PatternBaseType
     {
         [InjectionMethod] public void Method([OptionalDependency] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
     public class BaselineTestTypeNamed<TDependency>
-        : FixtureBaseType
+        : PatternBaseType
     {
         [InjectionMethod]
-        public virtual void Method([OptionalDependency(FixtureBase.Name)] TDependency value) => Value = value;
+        public virtual void Method([OptionalDependency(PatternBase.Name)] TDependency value) => Value = value;
         public override object Default => default(TDependency);
     }
 
-    public class BaselineTestType<TItem1, TItem2> : FixtureBaseType
+    public class BaselineTestType<TItem1, TItem2> : PatternBaseType
     {
         [InjectionMethod]
         public virtual void Method([OptionalDependency] TItem1 item1, [OptionalDependency] TItem2 item2)
@@ -38,7 +38,7 @@ namespace Regression.Optional.Methods
 
     #region Object
 
-    public class ObjectTestType : FixtureBaseType
+    public class ObjectTestType : PatternBaseType
     {
         [InjectionMethod] public void Method([OptionalDependency] object value) => Value = value;
     }
@@ -59,13 +59,13 @@ namespace Regression.Optional.Methods
 
     #region Array
 
-    public class BaselineArrayType<TDependency> : FixtureBaseType
+    public class BaselineArrayType<TDependency> : PatternBaseType
     {
         [InjectionMethod] public void Method([OptionalDependency] TDependency[] value) => Value = value;
         public override object Default => default(TDependency);
     }
 
-    public class ObjectArrayType : FixtureBaseType
+    public class ObjectArrayType : PatternBaseType
     {
         [InjectionMethod] public void Method([OptionalDependency] object[] value) => Value = value;
     }
@@ -75,7 +75,7 @@ namespace Regression.Optional.Methods
 
     #region Consumer
 
-    public class BaselineConsumer<TDependency> : FixtureBaseType
+    public class BaselineConsumer<TDependency> : PatternBaseType
     {
         public BaselineTestType<TDependency> Item1 { get; private set; }
         public BaselineTestTypeNamed<TDependency> Item2 { get; private set; }
