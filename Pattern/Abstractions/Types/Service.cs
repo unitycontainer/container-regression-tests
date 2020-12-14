@@ -17,18 +17,44 @@ namespace Regression
 
     public class Service : IService, IService1, IService2, IDisposable
     {
-        public readonly string Id = Guid.NewGuid().ToString();
+        #region Fields
 
+        public readonly string Id = Guid.NewGuid().ToString();
         public static int Instances;
+
+        #endregion
+
+
+        #region Constructors
 
         public Service() => Interlocked.Increment(ref Instances);
 
-        public bool IsDisposed { get; private set; }
+        #endregion
 
-        public void Dispose()
-        {
-            IsDisposed = true;
+        
+        #region Properties
+
+        public int Disposals { get; protected set; }
+        public bool IsDisposed 
+        { 
+            get => 0 < Disposals;
+            private set
+            {
+                if (value)
+                    Disposals += 1;
+                else
+                    Disposals = 0;
+            }
         }
+
+        #endregion
+
+
+        #region IDisposable
+
+        public void Dispose() => IsDisposed = true;
+
+        #endregion
     }
 
 
