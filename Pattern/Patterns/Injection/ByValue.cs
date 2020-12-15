@@ -45,7 +45,6 @@ namespace Injection
                 InjectionMember_Value(type), @default, registered);
 
 
-        [Ignore("TODO: Need a fix")]
         [TestCategory(CATEGORY_INJECT)]
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]

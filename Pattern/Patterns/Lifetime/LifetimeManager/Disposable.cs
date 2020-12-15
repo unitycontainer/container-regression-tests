@@ -27,8 +27,7 @@ namespace Lifetime.Manager
             manager.SetTestValue(instance, scope);
 
             // Validate object does not add IDIsposable
-            var expected = manager is HierarchicalLifetimeManager ? 1 : 0;
-            Assert.AreEqual(expected, scope.Count);
+            Assert.AreEqual(0, scope.Count);
         }
 
 
