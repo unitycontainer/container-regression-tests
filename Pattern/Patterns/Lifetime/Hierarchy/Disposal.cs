@@ -19,7 +19,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_NONE)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void None_Root_Root_root_disposed(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void None_Root_Root_root_disposed(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             var unregistered = Container.Resolve<SingletonService>();
 
@@ -31,7 +31,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_NONE)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void None_Child_Root_child_disposed(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void None_Child_Root_child_disposed(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             var weak = new WeakReference(Container);
             var (weakChild, instance) = CreateResolveAndDispose(factory);
@@ -47,7 +47,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_NONE)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void None_Child_Child_child_disposed(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void None_Child_Child_child_disposed(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             var (weakChild, instance) = CreateResolveAndDispose(factory);
 
@@ -66,7 +66,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void Root_Root_Root_root_disposed(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void Root_Root_Root_root_disposed(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             var (weak, instance) = CreateResolveAndDispose(factory);
 
@@ -76,7 +76,7 @@ namespace Lifetime.Hierarchies
             Assert.IsFalse(weak.IsAlive);
             foreach (var assert in asserts) assert(instance);
 
-            (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactory factory)
+            (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactoryDelegate factory)
             {
                 var weak = new WeakReference(Container);
 
@@ -91,9 +91,10 @@ namespace Lifetime.Hierarchies
             }
         }
 
+#if !BEHAVIOR_V4
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void Root_Root_Root_root_discarded(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void Root_Root_Root_root_discarded(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             var (weak, instance) = CreateResolveAndDispose(factory);
 
@@ -103,7 +104,7 @@ namespace Lifetime.Hierarchies
             Assert.IsFalse(weak.IsAlive);
             foreach (var assert in asserts) assert(instance);
 
-            (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactory factory)
+            (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactoryDelegate factory)
             {
                 var weak = new WeakReference(Container);
 
@@ -116,11 +117,11 @@ namespace Lifetime.Hierarchies
                 return (weak, instance);
             }
         }
-
+#endif
 
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void Root_Child_Root_root_disposed(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void Root_Child_Root_root_disposed(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             var (weak, instance) = CreateResolveAndDispose(factory);
 
@@ -130,7 +131,7 @@ namespace Lifetime.Hierarchies
             Assert.IsFalse(weak.IsAlive);
             foreach (var assert in asserts) assert(instance);
 
-            (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactory factory)
+            (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactoryDelegate factory)
             {
                 var weak = new WeakReference(Container);
 
@@ -145,9 +146,10 @@ namespace Lifetime.Hierarchies
             }
         }
 
+#if !BEHAVIOR_V4
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void Root_Child_Root_root_discarded(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void Root_Child_Root_root_discarded(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             var (weak, instance) = CreateResolveAndDispose(factory);
 
@@ -157,7 +159,7 @@ namespace Lifetime.Hierarchies
             Assert.IsFalse(weak.IsAlive);
             foreach (var assert in asserts) assert(instance);
 
-            (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactory factory)
+            (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactoryDelegate factory)
             {
                 var weak = new WeakReference(Container);
 
@@ -174,7 +176,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void Root_Child_Child_child_disposed(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void Root_Child_Child_child_disposed(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             Container.RegisterType(typeof(SingletonService), factory());
 
@@ -202,7 +204,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void Root_Child_Child_child_discarded(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void Root_Child_Child_child_discarded(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             Container.RegisterType(typeof(SingletonService), factory());
 
@@ -225,6 +227,7 @@ namespace Lifetime.Hierarchies
                 return (new WeakReference(child), value);
             }
         }
+#endif
 
 
         #endregion
@@ -234,7 +237,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_CHILD)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void Child_Child_Child_child_disposed(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void Child_Child_Child_child_disposed(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             var (weakChild, instance) = CreateResolveDispose(factory);
 
@@ -244,7 +247,7 @@ namespace Lifetime.Hierarchies
             Assert.IsFalse(weakChild.IsAlive);
             foreach (var assert in asserts) assert(instance);
 
-            (WeakReference, SingletonService) CreateResolveDispose(LifetimeManagerFactory factory)
+            (WeakReference, SingletonService) CreateResolveDispose(LifetimeManagerFactoryDelegate factory)
             {
                 var child = Container.CreateChildContainer()
                                      .RegisterType(typeof(SingletonService), factory());
@@ -258,9 +261,10 @@ namespace Lifetime.Hierarchies
             }
         }
 
+#if !BEHAVIOR_V4
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_CHILD)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void Child_Child_Child_child_discarded(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void Child_Child_Child_child_discarded(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             var (weakChild, instance) = CreateResolveDiscard(factory);
 
@@ -270,7 +274,7 @@ namespace Lifetime.Hierarchies
             Assert.IsFalse(weakChild.IsAlive);
             foreach (var assert in asserts) assert(instance);
 
-            (WeakReference, SingletonService) CreateResolveDiscard(LifetimeManagerFactory factory)
+            (WeakReference, SingletonService) CreateResolveDiscard(LifetimeManagerFactoryDelegate factory)
             {
                 var child = Container.CreateChildContainer()
                                      .RegisterType(typeof(SingletonService), factory());
@@ -281,10 +285,11 @@ namespace Lifetime.Hierarchies
                 return (weak, instance);
             }
         }
+#endif
 
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_CHILD)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void Child_Child_Root_child_disposed(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void Child_Child_Root_child_disposed(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             var weak = new WeakReference(Container);
             var (weakChild, instance) = CreateResolveDispose(factory);
@@ -296,7 +301,7 @@ namespace Lifetime.Hierarchies
             Assert.IsFalse(weakChild.IsAlive);
             foreach (var assert in asserts) assert(instance);
 
-            (WeakReference, SingletonService) CreateResolveDispose(LifetimeManagerFactory factory)
+            (WeakReference, SingletonService) CreateResolveDispose(LifetimeManagerFactoryDelegate factory)
             {
                 var child = Container.CreateChildContainer()
                                      .RegisterType(typeof(SingletonService), factory());
@@ -311,9 +316,10 @@ namespace Lifetime.Hierarchies
             }
         }
 
+#if !BEHAVIOR_V4
         [PatternTestMethod(DISPOSE_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_CHILD)]
         [DynamicData(nameof(Disposable_Managers_Data))]
-        public void Child_Child_Root_child_discarded(string name, LifetimeManagerFactory factory, params Action<SingletonService>[] asserts)
+        public void Child_Child_Root_child_discarded(string name, LifetimeManagerFactoryDelegate factory, params Action<SingletonService>[] asserts)
         {
             var weak = new WeakReference(Container);
             var (weakChild, instance) = CreateResolveDiscard(factory);
@@ -325,7 +331,7 @@ namespace Lifetime.Hierarchies
             Assert.IsFalse(weakChild.IsAlive);
             foreach (var assert in asserts) assert(instance);
 
-            (WeakReference, SingletonService) CreateResolveDiscard(LifetimeManagerFactory factory)
+            (WeakReference, SingletonService) CreateResolveDiscard(LifetimeManagerFactoryDelegate factory)
             {
                 var child = Container.CreateChildContainer()
                                      .RegisterType(typeof(SingletonService), factory());
@@ -338,13 +344,14 @@ namespace Lifetime.Hierarchies
                 return (weak, instance);
             }
         }
+#endif
 
         #endregion
 
 
         #region Implementation
 
-        (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactory factory)
+        (WeakReference, SingletonService) CreateResolveAndDispose(LifetimeManagerFactoryDelegate factory)
         {
             var child = Container.CreateChildContainer();
             var weak = new WeakReference(child);
@@ -373,21 +380,21 @@ namespace Lifetime.Hierarchies
                 yield return new object[]
                 {
                         typeof(ContainerControlledLifetimeManager).Name,
-                        (LifetimeManagerFactory)(() => new ContainerControlledLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new ContainerControlledLifetimeManager()),
                         (Action<SingletonService>)Disposed_True
                 };
 
                 #endregion
 
                 #region ContainerControlledTransientManager
-
+#if !UNITY_V4
                 yield return new object[]
                 {
                         typeof(ContainerControlledTransientManager).Name,
-                        (LifetimeManagerFactory)(() => new ContainerControlledTransientManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new ContainerControlledTransientManager()),
                         (Action<SingletonService>)Disposed_True
                 };
-
+#endif
                 #endregion
 
                 #region ExternallyControlledLifetimeManager
@@ -395,7 +402,7 @@ namespace Lifetime.Hierarchies
                 yield return new object[]
                 {
                         typeof(ExternallyControlledLifetimeManager).Name,
-                        (LifetimeManagerFactory)(() => new ExternallyControlledLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new ExternallyControlledLifetimeManager()),
                         (Action<SingletonService>)Disposed_False
                 };
 
@@ -406,7 +413,7 @@ namespace Lifetime.Hierarchies
                 yield return new object[]
                 {
                         typeof(HierarchicalLifetimeManager).Name,
-                        (LifetimeManagerFactory)(() => new HierarchicalLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new HierarchicalLifetimeManager()),
                         (Action<SingletonService>)Disposed_True
                 };
 
@@ -417,7 +424,7 @@ namespace Lifetime.Hierarchies
                 yield return new object[]
                 {
                         typeof(PerThreadLifetimeManager).Name,
-                        (LifetimeManagerFactory)(() => new PerThreadLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new PerThreadLifetimeManager()),
                         (Action<SingletonService>)Disposed_False
                 };
 
@@ -428,7 +435,7 @@ namespace Lifetime.Hierarchies
                 yield return new object[]
                 {
                         typeof(TransientLifetimeManager).Name,
-                        (LifetimeManagerFactory)(() => new TransientLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new TransientLifetimeManager()),
                         (Action<SingletonService>)Disposed_False
                 };
 

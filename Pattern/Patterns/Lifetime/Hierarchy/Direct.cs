@@ -15,9 +15,10 @@ namespace Lifetime.Hierarchies
     {
         #region Direct
         
+#if !BEHAVIOR_V4
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Dependency_Data))]
-        public void Resolve_Root_Children_Type_Siblings(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Root_Children_Type_Siblings(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(IUnityContainer), typeof(IUnityContainer));
             Container.RegisterType(target, factory());
@@ -40,7 +41,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Dependency_Data))]
-        public void Resolve_Root_Children_Type_Hierarchical(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Root_Children_Type_Hierarchical(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(IUnityContainer), typeof(IUnityContainer));
             Container.RegisterType(target, factory());
@@ -63,7 +64,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Dependency_Data))]
-        public void Resolve_Children_Root_Type_Siblings(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Children_Root_Type_Siblings(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(IUnityContainer), typeof(IUnityContainer));
             Container.RegisterType(target, factory());
@@ -86,7 +87,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Dependency_Data))]
-        public void Resolve_Children_Root_Type_Hierarchical(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Children_Root_Type_Hierarchical(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(IUnityContainer), typeof(IUnityContainer));
             Container.RegisterType(target, factory());
@@ -105,6 +106,7 @@ namespace Lifetime.Hierarchies
                           child2, instanceFromChild2);
             }
         }
+#endif
 
         #endregion
 
@@ -125,7 +127,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(ContainerControlledLifetimeManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new ContainerControlledLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new ContainerControlledLifetimeManager()),
                         (AssertResolutionDelegate)TTypes1_From_Root,
                         (AssertResolutionDelegate)TType2_From_Root,
                         (AssertResolutionDelegate)TTypes1_AreSame
@@ -134,17 +136,17 @@ namespace Lifetime.Hierarchies
                     #endregion
 
                     #region ContainerControlledTransientManager
-
+#if !UNITY_V4
                     yield return new object[]
                     {
                         typeof(ContainerControlledTransientManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new ContainerControlledTransientManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new ContainerControlledTransientManager()),
                         (AssertResolutionDelegate)TType1_From_Resolved,
                         (AssertResolutionDelegate)TType2_From_Resolved,
                         (AssertResolutionDelegate)TTypes1_AreNotSame
                     };
-
+#endif
                     #endregion
 
                     #region ExternallyControlledLifetimeManager
@@ -153,7 +155,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(ExternallyControlledLifetimeManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new ExternallyControlledLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new ExternallyControlledLifetimeManager()),
                         (AssertResolutionDelegate)TTypes1_From_Root,
                         (AssertResolutionDelegate)TType2_From_Root,
                         (AssertResolutionDelegate)TTypes1_AreSame
@@ -167,7 +169,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(HierarchicalLifetimeManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new HierarchicalLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new HierarchicalLifetimeManager()),
                         (AssertResolutionDelegate)TType1_From_Resolved,
                         (AssertResolutionDelegate)TType2_From_Resolved,
                         (AssertResolutionDelegate)TTypes1_AreNotSame
@@ -181,7 +183,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(PerThreadLifetimeManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new PerThreadLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new PerThreadLifetimeManager()),
                         (AssertResolutionDelegate)TTypes1_From_Root,
                         (AssertResolutionDelegate)TType2_From_Root,
                         (AssertResolutionDelegate)TTypes1_AreSame
@@ -195,7 +197,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(TransientLifetimeManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new TransientLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new TransientLifetimeManager()),
                         (AssertResolutionDelegate)TTypes1_From_Root,
                         (AssertResolutionDelegate)TType2_From_Root,
                         (AssertResolutionDelegate)Items_AreNotSame

@@ -80,13 +80,13 @@ namespace Lifetime.Manager
             if (manager is SynchronizedLifetimeManager) return;
 
             var scope = new LifetimeContainer();
-            var value = manager.GetValue(scope);
+            var value = manager.GetTestValue(scope);
             object other = null;
 
             // Act
             Thread thread = new Thread(new ParameterizedThreadStart((c) =>
             {
-                other = manager.GetValue(scope);
+                other = manager.GetTestValue(scope);
             }));
 
             thread.Start("1");
@@ -95,6 +95,7 @@ namespace Lifetime.Manager
             Assert.AreSame(value, other);
         }
 
+#if !UNITY_V4 && !UNITY_V5
         [PatternTestMethod("TryGetValue(...) does not block"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
         public void TryGetValueDoesNotBlock(LifetimeManager manager)
@@ -114,5 +115,6 @@ namespace Lifetime.Manager
 
             Assert.AreSame(value, other);
         }
+#endif
     }
 }

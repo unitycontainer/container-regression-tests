@@ -69,7 +69,12 @@ namespace Registration
                  where r.RegisteredType == typeof(IService)
                  select r).First();
 
+#if BEHAVIOR_V4
+            // Unity v4 incorrectly pointed mapped type
+            Assert.AreSame(typeof(IService), registration.MappedToType);
+#else
             Assert.AreSame(typeof(Service), registration.MappedToType);
+#endif
         }
 
         [TestMethod]

@@ -16,7 +16,7 @@ namespace Lifetime.Manager
     {
         [PatternTestMethod("SetValue(...) ignores lifetime on object"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Disposable_Data))]
-        public void SetValueIgnoresLifetimeOnObject(string name, LifetimeManagerFactory factory, bool isDisposable)
+        public void SetValueIgnoresLifetimeOnObject(string name, LifetimeManagerFactoryDelegate factory, bool isDisposable)
         {
             // Arrange
             var scope = new LifetimeContainer();
@@ -33,7 +33,7 @@ namespace Lifetime.Manager
 
         [PatternTestMethod("SetValue(...) adds IDisposable to scope"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Disposable_Data))]
-        public void SetValueAddsLifetime(string name, LifetimeManagerFactory factory, bool isDisposable)
+        public void SetValueAddsLifetime(string name, LifetimeManagerFactoryDelegate factory, bool isDisposable)
         {
             // Arrange
             var scope = new LifetimeContainer();
@@ -54,7 +54,7 @@ namespace Lifetime.Manager
 
         [PatternTestMethod("Supports multiple Dispose() calls"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Disposable_Data))]
-        public void ImmuneToMultiDisposes(string name, LifetimeManagerFactory factory, bool isDisposable)
+        public void ImmuneToMultiDisposes(string name, LifetimeManagerFactoryDelegate factory, bool isDisposable)
         {
             // Arrange
             var scope = new LifetimeContainer();

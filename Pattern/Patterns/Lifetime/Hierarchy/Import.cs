@@ -15,9 +15,10 @@ namespace Lifetime.Hierarchies
     {
         #region Registered Singleton
 
+#if !BEHAVIOR_V4
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
-        public void Resolve_Root_Children_Singleton_Siblings(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Root_Children_Singleton_Siblings(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             Container.RegisterType(typeof(SingletonService), factory());
 
@@ -40,7 +41,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
-        public void Resolve_Root_Children_Singleton_Hierarchical(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Root_Children_Singleton_Hierarchical(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             Container.RegisterType(typeof(SingletonService), factory());
 
@@ -63,7 +64,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
-        public void Resolve_Children_Root_Singleton_Siblings(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Children_Root_Singleton_Siblings(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             Container.RegisterType(typeof(SingletonService), factory());
 
@@ -86,7 +87,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
-        public void Resolve_Children_Root_Singleton_Hierarchical(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Children_Root_Singleton_Hierarchical(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             Container.RegisterType(typeof(SingletonService), factory());
 
@@ -105,15 +106,17 @@ namespace Lifetime.Hierarchies
                           child2, instanceFromChild2);
             }
         }
+#endif
 
         #endregion
 
 
         #region Unregistered Import
 
+#if !BEHAVIOR_V4
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
-        public void Resolve_Root_Children_Import_Siblings(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Root_Children_Import_Siblings(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
             Container.RegisterType(target, factory());
@@ -136,7 +139,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
-        public void Resolve_Root_Children_Import_Hierarchical(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Root_Children_Import_Hierarchical(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
             Container.RegisterType(target, factory());
@@ -155,11 +158,12 @@ namespace Lifetime.Hierarchies
                           child2, instanceFromChild2);
             }
         }
+#endif
 
 
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_NONE)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
-        public void Resolve_Root_Children_Service_Resolvable(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Root_Children_Service_Resolvable(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
 
@@ -192,9 +196,10 @@ namespace Lifetime.Hierarchies
         }
 
 
+#if !BEHAVIOR_V4
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
-        public void Resolve_Children_Root_Import_Siblings(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Children_Root_Import_Siblings(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
             Container.RegisterType(target, factory());
@@ -217,7 +222,7 @@ namespace Lifetime.Hierarchies
 
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
-        public void Resolve_Children_Root_Import_Hierarchical(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Resolve_Children_Root_Import_Hierarchical(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
             Container.RegisterType(target, factory());
@@ -236,6 +241,7 @@ namespace Lifetime.Hierarchies
                           child2, instanceFromChild2);
             }
         }
+#endif
 
         #endregion
 
@@ -256,7 +262,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(ContainerControlledLifetimeManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new ContainerControlledLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new ContainerControlledLifetimeManager()),
                         (AssertResolutionDelegate)Import_From_Root,
                         (AssertResolutionDelegate)Imports_AreSame
                     };
@@ -264,16 +270,16 @@ namespace Lifetime.Hierarchies
                     #endregion
 
                     #region ContainerControlledTransientManager
-
+#if !UNITY_V4
                     yield return new object[]
                     {
                         typeof(ContainerControlledTransientManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new ContainerControlledTransientManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new ContainerControlledTransientManager()),
                         (AssertResolutionDelegate)Import_From_Resolved,
                         (AssertResolutionDelegate)Imports_AreNotSame
                     };
-
+#endif
                     #endregion
 
                     #region ExternallyControlledLifetimeManager
@@ -282,7 +288,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(ExternallyControlledLifetimeManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new ExternallyControlledLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new ExternallyControlledLifetimeManager()),
                         (AssertResolutionDelegate)Import_From_Root,
                         (AssertResolutionDelegate)Imports_AreSame
                     };
@@ -295,7 +301,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(HierarchicalLifetimeManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new HierarchicalLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new HierarchicalLifetimeManager()),
                         (AssertResolutionDelegate)Import_From_Resolved,
                         (AssertResolutionDelegate)Imports_AreNotSame
                     };
@@ -308,7 +314,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(PerThreadLifetimeManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new PerThreadLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new PerThreadLifetimeManager()),
                         (AssertResolutionDelegate)Import_From_Root,
                         (AssertResolutionDelegate)Imports_AreSame
                     };
@@ -321,7 +327,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(TransientLifetimeManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new TransientLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new TransientLifetimeManager()),
                         (AssertResolutionDelegate)Import_From_Root,
                         (AssertResolutionDelegate)Imports_AreNotSame
                     };

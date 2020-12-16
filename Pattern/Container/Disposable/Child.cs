@@ -42,6 +42,7 @@ namespace Container
             Assert.AreEqual(1, service.Disposals);
         }
 
+#if !BEHAVIOR_V4
         [PatternTestMethod(InstanceAccessibleAfterDispose), TestProperty(DISPOSING, CHILD)]
         public void Child_InstanceAccessibleAfterDispose()
         {
@@ -71,6 +72,10 @@ namespace Container
             Assert.IsTrue(service.IsDisposed);
             Assert.AreEqual(1, service.Disposals);
         }
+#endif
+
+#if !UNITY_V4
+        // Unity v4 did not have ContainerControlledTransientManager
 
         [PatternTestMethod(SubsequentResolutionsDisposed), TestProperty(DISPOSING, CHILD)]
         public void Child_SubsequentResolutionsDisposed()
@@ -110,7 +115,9 @@ namespace Container
             Assert.IsTrue(explosive.IsDisposed);
             Assert.AreEqual(1, explosive.Disposals);
         }
+#endif
 
+#if !BEHAVIOR_V4
         [PatternTestMethod(DisposesWhenDiscarded), TestProperty(DISPOSING, CHILD)]
         public void Child_DisposesWhenDiscarded()
         {
@@ -136,6 +143,6 @@ namespace Container
                 return (weak, instance);
             }
         }
-
+#endif
     }
 }

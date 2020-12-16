@@ -38,6 +38,7 @@ namespace Container
             Assert.AreEqual(1, service.Disposals);
         }
 
+#if !BEHAVIOR_V4
         [PatternTestMethod(InstanceAccessibleAfterDispose), TestProperty(DISPOSING, ROOT)]
         public void Root_InstanceAccessibleAfterDispose()
         {
@@ -67,7 +68,9 @@ namespace Container
             Assert.IsTrue(service.IsDisposed);
             Assert.AreEqual(1, service.Disposals);
         }
+#endif
 
+#if !UNITY_V4
         [PatternTestMethod(SubsequentResolutionsDisposed), TestProperty(DISPOSING, ROOT)]
         public void Root_SubsequentResolutionsDisposed()
         {
@@ -104,7 +107,9 @@ namespace Container
 
             Assert.IsTrue(explosive.IsDisposed);
         }
+#endif
 
+#if !BEHAVIOR_V4
         [PatternTestMethod(DisposesWhenDiscarded), TestProperty(DISPOSING, ROOT)]
         public void Root_DisposesWhenDiscarded()
         {
@@ -131,5 +136,6 @@ namespace Container
                 return (weak, instance);
             }
         }
+#endif
     }
 }

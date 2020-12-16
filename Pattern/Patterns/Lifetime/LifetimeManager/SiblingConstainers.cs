@@ -16,7 +16,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Sibling_Scopes_Data))]
         [PatternTestMethod("Two Child Containers"), TestCategory(SIBLING_SCOPES)]
         public virtual void TwoChildContainers(string name,
-                                               LifetimeManagerFactory factory, Type type,
+                                               LifetimeManagerFactoryDelegate factory, Type type,
                                                Action<object, object> assert,
                                                Action<object, object> assertDifferentThreads)
         {
@@ -43,7 +43,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Sibling_Scopes_Data))]
         [PatternTestMethod("Two Child Containers as import"), TestCategory(SIBLING_SCOPES)]
         public virtual void TwoChildContainers_Import(string name,
-                                                      LifetimeManagerFactory factory, Type type,
+                                                      LifetimeManagerFactoryDelegate factory, Type type,
                                                       Action<object, object> assert,
                                                       Action<object, object> assertDifferentThreads)
         {

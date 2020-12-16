@@ -21,5 +21,17 @@ namespace Methods
         public static void ClassInit(TestContext context) => ClassInitialize(context);
 
         #endregion
+
+
+        #region Special Cases
+
+#if BEHAVIOR_V4
+        // This only worked in constructor
+        public override void Member_Injected_ByInjectionParameter(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
+        public override void Member_Injected_ByParameterRecursive(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
+        public override void Member_Injected_ByValue(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
+#endif
+
+        #endregion
     }
 }

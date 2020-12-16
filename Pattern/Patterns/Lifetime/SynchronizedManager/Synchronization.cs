@@ -98,6 +98,7 @@ namespace Lifetime.Synchronization
             Assert.AreSame(NoValue, other);
         }
 
+#if !UNITY_V4 && !UNITY_V5
         [PatternTestMethod("TryGetValue(...) does not block"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
         public void TryGetValueDoesNotBlock(LifetimeManager manager)
@@ -117,5 +118,6 @@ namespace Lifetime.Synchronization
 
             Assert.AreSame(value, other);
         }
+#endif
     }
 }

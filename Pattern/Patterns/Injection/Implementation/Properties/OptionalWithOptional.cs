@@ -72,10 +72,10 @@ namespace Properties
             Assert.AreEqual(expected, instance.Value);
         }
 
-        #endregion
+#if BEHAVIOR_V4
+        public override void Inject_WithType(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
+#endif
 
-
-        #region Special Cases
         #endregion
     }
 }

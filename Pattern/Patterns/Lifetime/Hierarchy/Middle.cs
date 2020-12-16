@@ -17,7 +17,7 @@ namespace Lifetime.Hierarchies
 
         [TestMethod("Resolving from root to the top child")]
         [DynamicData(nameof(Hierarchy_Middle_Data)), TestProperty(RESOLVING, REGISTRATION_CHILD)]
-        public void InMiddleContainer_Singleton(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void InMiddleContainer_Singleton(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
 
@@ -40,7 +40,7 @@ namespace Lifetime.Hierarchies
 
         [TestMethod("Resolving from the top child to root")]
         [DynamicData(nameof(Hierarchy_Middle_Data)), TestProperty(RESOLVING, REGISTRATION_CHILD)]
-        public void Child_InParentContainer_Singleton(string name, Type type, LifetimeManagerFactory factory, params AssertResolutionDelegate[] methods)
+        public void Child_InParentContainer_Singleton(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
         {
 
             var target = type.MakeGenericType(typeof(SingletonService), typeof(IUnityContainer));
@@ -79,7 +79,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(HierarchicalLifetimeManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new HierarchicalLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new HierarchicalLifetimeManager()),
                         (AssertResolutionDelegate)Import_From_Resolved,
                         (AssertResolutionDelegate)Imports_AreNotSame
                     };
@@ -92,7 +92,7 @@ namespace Lifetime.Hierarchies
                     {
                         typeof(ContainerControlledLifetimeManager).Name,
                         definition,                 // Test type
-                        (LifetimeManagerFactory)(() => new ContainerControlledLifetimeManager()),
+                        (LifetimeManagerFactoryDelegate)(() => new ContainerControlledLifetimeManager()),
                         (AssertResolutionDelegate)Import_From_Middle,
                         (AssertResolutionDelegate)Singleton_From_Middle
                     };

@@ -28,9 +28,9 @@ namespace Lifetime
         #region Delegates
 
 #if UNITY_V4
-        public delegate LifetimeManager LifetimeManagerFactory();
+        public delegate LifetimeManager LifetimeManagerFactoryDelegate();
 #else
-        public delegate ITypeLifetimeManager LifetimeManagerFactory();
+        public delegate ITypeLifetimeManager LifetimeManagerFactoryDelegate();
 #endif
 
         #endregion
@@ -47,7 +47,7 @@ namespace Lifetime
 
         #region Implementation
 
-        protected virtual bool ArrangeTest(LifetimeManagerFactory factory, Type type, IUnityContainer child = null)
+        protected virtual bool ArrangeTest(LifetimeManagerFactoryDelegate factory, Type type, IUnityContainer child = null)
         {
             var manager = factory();
 #if UNITY_V4
@@ -169,6 +169,13 @@ namespace Lifetime
 
         }
 
+#if UNITY_V4
+        public static object TryGetValue(this LifetimeManager manager, object scope)
+        {
+            return manager.GetValue();
+        }
+#endif
+
         public static void SetTestValue(this LifetimeManager manager, object value, object scope)
         {
 #if UNITY_V4
@@ -179,5 +186,9 @@ namespace Lifetime
             manager.SetValue(value, (ICollection<IDisposable>)scope);
 #endif
         }
+
+#if !UNITY_V4 && !UNITY_V5
+#endif
+
     }
 }
