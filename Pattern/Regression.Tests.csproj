@@ -139,7 +139,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Container\Extension\" />
 	  <Folder Include="Resolution\Hierarchy\" />
 	</ItemGroup>
 
