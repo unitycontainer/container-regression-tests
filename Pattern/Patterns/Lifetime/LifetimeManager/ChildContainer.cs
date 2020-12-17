@@ -91,7 +91,7 @@ namespace Lifetime.Manager
         [DynamicData(nameof(Child_Scope_Data))]
         [PatternTestMethod("Child Container on different threads"), TestCategory(CHILD_SCOPE)]
         public virtual void FromChildContainer_DifferentThreads(string name,
-                                                                LifetimeManagerFactory factory, Type type,
+                                                                LifetimeManagerFactoryDelegate factory, Type type,
                                                                 Action<object, object> assert,
                                                                 Action<object, object> assertDifferentThreads)
         {

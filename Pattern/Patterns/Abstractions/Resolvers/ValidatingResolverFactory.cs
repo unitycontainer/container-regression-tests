@@ -5,6 +5,7 @@ using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
+using Unity.Extension;
 using Unity.Resolution;
 #endif
 
