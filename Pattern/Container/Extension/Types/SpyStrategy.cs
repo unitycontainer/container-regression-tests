@@ -21,13 +21,15 @@ namespace Regression.Container
 
         private bool _called = false;
         private object _existing = null;
-        
+
         #endregion
 
 #if UNITY_V4
         public override void PreBuildUp(IBuilderContext context)
-#else
+#elif UNITY_V5
         public override void PreBuildUp(ref BuilderContext context)
+#else
+        public override void PreBuildUp<TContext>(ref TContext context)
 #endif
         {
             _called = true;
@@ -35,18 +37,26 @@ namespace Regression.Container
 
 #if UNITY_V4
             SpyPolicy policy = context.Policies.Get<SpyPolicy>(context.BuildKey);
-#else
+#elif UNITY_V5
             // 'null' type and name indicate that default should be used
             SpyPolicy policy = (SpyPolicy)context.Get(null, null, typeof(SpyPolicy));
+#else
+#if BEHAVIOR_V4
+            // TODO: SpyPolicy policy = context.Policies.Get<SpyPolicy>(context.BuildKey);
+#else
+            // TODO: SpyPolicy policy = (SpyPolicy)context.Get(null, null, typeof(SpyPolicy));
+#endif
 #endif
             // Mark the policy
-            if (policy != null) policy.WasSpiedOn = true;
+            // TODO: if (policy != null) policy.WasSpiedOn = true;
         }
 
 #if UNITY_V4
         public override void PostBuildUp(IBuilderContext context)
-#else
+#elif UNITY_V5
         public override void PostBuildUp(ref BuilderContext context)
+#else
+        public override void PostBuildUp<TContext>(ref TContext context)
 #endif
         {
             // Spy on created object
