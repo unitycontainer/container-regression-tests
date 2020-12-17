@@ -22,10 +22,8 @@ namespace Regression.Container
             _called = true;
             _existing = context.Existing;
 
-            // 'null' type and name indicate that policy applies to current registration
-            SpyPolicy policy = (SpyPolicy)context.Get(null, null, typeof(SpyPolicy));
+            var policy = (SpyPolicy)context.Get(null, typeof(SpyPolicy));
 
-            // Mark the policy
             if (policy != null) policy.WasSpiedOn = true;
         }
 

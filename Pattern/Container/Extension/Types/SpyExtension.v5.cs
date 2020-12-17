@@ -56,7 +56,7 @@ namespace Regression.Container
             Context.Strategies.Add(this._strategy, this._stage);
             
             if (_policy != null)
-                Context.Policies.Set(null, null, _policyType, _policy);
+                Context.Policies.Set(null, _policyType, _policy);
         }
     }
 }

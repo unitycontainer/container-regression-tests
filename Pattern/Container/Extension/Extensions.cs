@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression.Container;
+using Regression;
 #if UNITY_V4
 using Microsoft.Practices.Unity.ObjectBuilder;
 using Microsoft.Practices.Unity;
@@ -8,14 +9,23 @@ using Unity.Builder;
 using Unity;
 #else
 using Unity.Extension;
+using Unity;
 #endif
 
 namespace Container
 {
     public partial class Extending
     {
-#if UNITY_V4 || UNITY_V5
-        [TestMethod]
+        #region Constants
+
+        const string TESTING = "Adding";
+        const string POLICY = "Policy";
+        const string EXTENSION = "Container Extension";
+        const string NAME_PATTERN = "Can add strategy to {1} step";
+
+        #endregion
+
+        [PatternTestMethod(NAME_PATTERN), TestProperty(TESTING, nameof(BuilderStrategy))]
         public void ExtensionCanAddStrategy_PreCreation()
         {
             SpyStrategy spy = new SpyStrategy();
@@ -29,7 +39,7 @@ namespace Container
             Assert.AreSame(result, spy.Existing);
         }
 
-        [TestMethod]
+        [PatternTestMethod(NAME_PATTERN), TestProperty(TESTING, nameof(BuilderStrategy))]
         public void ExtensionCanAddStrategy_PostInitialization()
         {
             SpyStrategy spy = new SpyStrategy();
@@ -42,6 +52,40 @@ namespace Container
             Assert.IsTrue(spy.BuildUpWasCalled);
             Assert.AreSame(result, spy.Existing);
         }
-#endif
+
+
+        [TestMethod("Can Add Default Policy"), TestProperty(TESTING, POLICY)]
+        public void ExtensionCanAddDefaultPolicy()
+        {
+            SpyStrategy spy = new SpyStrategy();
+            SpyPolicy spyPolicy = new SpyPolicy();
+
+            SpyExtension extension =
+                new SpyExtension(spy, UnityBuildStage.PreCreation, spyPolicy, typeof(SpyPolicy));
+
+            IUnityContainer container = new UnityContainer()
+                .AddExtension(extension);
+
+            container.Resolve<object>();
+
+            Assert.IsTrue(spyPolicy.WasSpiedOn);
+        }
+
+        [TestMethod("Can Add Default Policy"), TestProperty(TESTING, POLICY)]
+        public void ExtensionCanAddPolicy()
+        {
+            SpyStrategy spy = new SpyStrategy();
+            SpyPolicy spyPolicy = new SpyPolicy();
+
+            SpyExtension extension =
+                new SpyExtension(spy, UnityBuildStage.PreCreation, spyPolicy, typeof(SpyPolicy));
+
+            IUnityContainer container = new UnityContainer()
+                .AddExtension(extension);
+
+            container.Resolve<object>();
+
+            Assert.IsTrue(spyPolicy.WasSpiedOn);
+        }
     }
 }

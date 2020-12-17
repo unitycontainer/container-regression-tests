@@ -1,6 +1,7 @@
 ﻿using System;
 using Unity.Extension;
 
+#pragma warning disable CS0618 // Type or member is obsolete
 namespace Regression.Container
 {
     /// <summary>
@@ -51,24 +52,33 @@ namespace Regression.Container
 
         protected override void Initialize()
         {
+            // Add Spy strategy
+#if BEHAVIOR_V4 || BEHAVIOR_V5
 
-#if   BEHAVIOR_V4
-            Context.Strategies.Add(this._strategy, this._stage);
-
-            if (_policy != null)
-                Context.Policies.SetDefault(_policyType, _policy);
-#elif BEHAVIOR_V5
-            Context.Strategies.Add(this._strategy, this._stage);
-
-            if (this._policy != null)
-                Context.Policies.Set(null, null, _policyType, _policy);
+            Context.Strategies.Add(_strategy, _stage);
 #else
-            //Context.Strategies.Add(this._strategy, this._stage);
-
-            //if (this._policy != null)
-            //    Context.Policies.Set(_policyType, _policy);
+            Context.TypePipelineChain.Add(_stage, _strategy);
 #endif
+
+            // Add Spy Policy to storage
+            if (_policy is not null)
+            { 
+#if BEHAVIOR_V4
+
+                // Set policy with no target type (default)
+                Context.Policies.SetDefault(_policyType, _policy);
+
+#elif BEHAVIOR_V5
+
+                // Set policy with target type = null (default)
+                Context.Policies.Set(null, _policyType, _policy);
+
+#else
+                Context.Policies.Set(_policyType, _policy);
+#endif
+            }
 
         }
     }
 }
+#pragma warning restore CS0618 // Type or member is obsolete

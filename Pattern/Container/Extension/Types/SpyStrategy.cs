@@ -20,15 +20,13 @@ namespace Regression.Container
             _called = true;
             _existing = context.Target;
 
-#if BEHAVIOR_V4
-            //            SpyPolicy policy = context.Policies.Get<SpyPolicy>(context.BuildKey);
-#elif  BEHAVIOR_V5
-            //            SpyPolicy policy = (SpyPolicy)context.Get(null, null, typeof(SpyPolicy));
+#if BEHAVIOR_V5
+            var policy = (SpyPolicy)context.Get(null, typeof(SpyPolicy));
 #else
-            //            SpyPolicy policy = context.Get<SpyPolicy>();
+            var policy = (context.Policies as IPolicySet)?.Get<SpyPolicy>();
 #endif
-            //            // Mark the policy
-            //            if (policy != null) policy.WasSpiedOn = true;
+            // Mark the policy
+            if (policy != null) policy.WasSpiedOn = true;
         }
 
         public override void PostBuildUp<TContext>(ref TContext context)
