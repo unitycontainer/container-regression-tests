@@ -14,7 +14,6 @@ using Unity.Extension;
 
 namespace Regression.Container
 {
-/*
     /// <summary>
     /// A simple extension that puts the supplied strategy into the
     /// chain at the indicated stage.
@@ -26,8 +25,8 @@ namespace Regression.Container
 #else
         private object _policy;
 #endif
-        private BuilderStrategy _strategy;
-        private UnityBuildStage _stage;
+        //private BuilderStrategy _strategy;
+        //private UnityBuildStage _stage;
         private Type _policyType;
 
         /// <summary>
@@ -35,11 +34,11 @@ namespace Regression.Container
         /// </summary>
         /// <param name="strategy"></param>
         /// <param name="stage"></param>
-        public SpyExtension(BuilderStrategy strategy, UnityBuildStage stage)
-        {
-            _strategy = strategy;
-            _stage = stage;
-        }
+        //public SpyExtension(BuilderStrategy strategy, UnityBuildStage stage)
+        //{
+        //    _strategy = strategy;
+        //    _stage = stage;
+        //}
 
         /// <summary>
         /// Constructor
@@ -57,21 +56,21 @@ namespace Regression.Container
         /// </para>
         /// </param>
         /// <param name="policyType"><see cref="Type"/> of the policy</param>
-#if UNITY_V4
-        public SpyExtension(BuilderStrategy strategy, UnityBuildStage stage, IBuilderPolicy policy, Type policyType)
-#else
-        public SpyExtension(BuilderStrategy strategy, UnityBuildStage stage, object policy, Type policyType)
-#endif
-        {
-            _strategy = strategy;
-            _stage = stage;
-            _policy = policy;
-            _policyType = policyType;
-        }
+//#if UNITY_V4
+//        public SpyExtension(BuilderStrategy strategy, UnityBuildStage stage, IBuilderPolicy policy, Type policyType)
+//#else
+//        public SpyExtension(BuilderStrategy strategy, UnityBuildStage stage, object policy, Type policyType)
+//#endif
+//        {
+//            _strategy = strategy;
+//            _stage = stage;
+//            _policy = policy;
+//            _policyType = policyType;
+//        }
 
         protected override void Initialize()
         {
-            Context.Strategies.Add(this._strategy, this._stage);
+//            Context.Strategies.Add(this._strategy, this._stage);
 #if UNITY_V4
             if (_policy != null)
                 Context.Policies.SetDefault(_policyType, _policy);
@@ -83,5 +82,4 @@ namespace Regression.Container
 
         }
     }
-*/
 }

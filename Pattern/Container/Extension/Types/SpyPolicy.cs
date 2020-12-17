@@ -1,5 +1,4 @@
-﻿using System;
-#if UNITY_V4
+﻿#if UNITY_V4
 using Microsoft.Practices.ObjectBuilder2;
 #endif
 
