@@ -1,5 +1,6 @@
 ﻿using System;
-using Unity.Extension;
+using Unity.Builder;
+using Unity.Strategies;
 
 namespace Regression.Container
 {
@@ -16,21 +17,19 @@ namespace Regression.Container
 
         #endregion
 
-        public override void PreBuildUp<TContext>(ref TContext context)
+        public override void PreBuildUp(ref BuilderContext context)
         {
             _called = true;
             _existing = context.Existing;
 
-//#if BEHAVIOR_V4
-//            SpyPolicy policy = context.Policies.Get<SpyPolicy>(context.BuildKey);
-//#else
-//            SpyPolicy policy = (SpyPolicy)context.Get(null, null, typeof(SpyPolicy));
-//#endif
-//            // Mark the policy
-//            if (policy != null) policy.WasSpiedOn = true;
+            // 'null' type and name indicate that policy applies to current registration
+            SpyPolicy policy = (SpyPolicy)context.Get(null, null, typeof(SpyPolicy));
+
+            // Mark the policy
+            if (policy != null) policy.WasSpiedOn = true;
         }
 
-        public override void PostBuildUp<TContext>(ref TContext context)
+        public override void PostBuildUp(ref BuilderContext context)
         {
             // Spy on created object
             _existing = context.Existing;

@@ -34,6 +34,8 @@
 	<PropertyGroup Condition="!Exists('$(UnityContainer)') AND !Exists('$(UnityLegacy)') ">
 		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
 	</PropertyGroup>
+	<ItemGroup>
+	</ItemGroup>
 
 
 	
@@ -92,12 +94,16 @@
 				<Compile Remove="Registration\Validation\Factory.cs" />
 				<Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
 				<Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
+				<Compile Remove="Container\Extension\Types\SpyStrategy.cs" />
+				<Compile Remove="Container\Extension\Types\SpyExtension.cs" />
 			</ItemGroup>
 		</When>
 		<Otherwise>
 			<ItemGroup> <!-- IF NOT v4 -->
 				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.v4.cs" />
 				<Compile Remove="Patterns\Injection\Implementation\Methods\Override.v4.cs" />
+				<Compile Remove="Container\Extension\Types\SpyStrategy.v4.cs" />
+				<Compile Remove="Container\Extension\Types\SpyExtension.v4.cs" />
 			</ItemGroup>
 		</Otherwise>
 	</Choose>
@@ -111,12 +117,16 @@
 				<Compile Remove="Registration\Validation\Factory.cs" />
 				<Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
 				<Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
+				<Compile Remove="Container\Extension\Types\SpyStrategy.cs" />
+				<Compile Remove="Container\Extension\Types\SpyExtension.cs" />
 			</ItemGroup>
 		</When>
 		<Otherwise>
 			<ItemGroup> <!-- IF NOT v5 -->
 				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.v5.cs" />
 				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.v5.cs" />
+				<Compile Remove="Container\Extension\Types\SpyStrategy.v5.cs" />
+				<Compile Remove="Container\Extension\Types\SpyExtension.v5.cs" />
 			</ItemGroup>
 		</Otherwise>
 	</Choose>
