@@ -5,6 +5,7 @@ using Microsoft.Practices.Unity.ObjectBuilder;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
+using Unity.Extension;
 #endif
 
 namespace Container
