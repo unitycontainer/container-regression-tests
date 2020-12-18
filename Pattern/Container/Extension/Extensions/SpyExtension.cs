@@ -19,7 +19,8 @@ namespace Regression.Container
     /// A simple extension that puts the supplied strategy into the
     /// chain at the indicated stage.
     /// </summary>
-    public partial class SpyExtension : UnityContainerExtension
+    public partial class SpyExtension : UnityContainerExtension,
+                                        IUnityContainerExtensionConfigurator
     {
         private Type _policyType;
         private object _policy;
@@ -60,6 +61,8 @@ namespace Regression.Container
             _policy = policy;
             _policyType = policyType;
         }
+
+        public ExtensionContext ExtensionContext => Context;
 
         // Different variants and versions of Initialize
 

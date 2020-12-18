@@ -15,5 +15,11 @@ namespace Container
         const string LEGACY = "Legacy";
 
         #endregion
+
+
+        #region Abstraction Layer
+        
+        
+        #endregion
     }
 }
