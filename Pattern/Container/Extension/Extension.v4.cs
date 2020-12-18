@@ -138,7 +138,7 @@ namespace Container
             var child = container.CreateChildContainer();
             Assert.IsTrue(childContainerEventRaised);
         }
-/*
+
         [TestMethod]
         public void ChildContainerCreatedEventGivesChildContainerToExtension()
         {
@@ -150,7 +150,11 @@ namespace Container
 
             mockExtension.Context.ChildContainerCreated += (sender, ev) =>
             {
+#if UNITY_V4 || UNITY_V5
                 childContext = ev.ChildContext;
+#else
+                childContext = ev;
+#endif
             };
 
             var child = container.CreateChildContainer();
@@ -165,6 +169,5 @@ namespace Container
             var extension = container.Configure(typeof(ContainerExtensionWithNonDefaultConstructor));
             Assert.IsNotNull(extension);
         }
- */
     }
 }
