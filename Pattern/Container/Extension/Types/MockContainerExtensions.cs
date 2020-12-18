@@ -32,7 +32,8 @@ namespace Regression.Container
     }
 
 
-    public class ContainerExtensionWithNonDefaultConstructor : UnityContainerExtension
+    public class ContainerExtensionWithNonDefaultConstructor : UnityContainerExtension,
+                                                               IUnityContainerExtensionConfigurator
     {
         public ContainerExtensionWithNonDefaultConstructor(IUnityContainer container)
         {
