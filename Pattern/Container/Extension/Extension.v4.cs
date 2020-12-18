@@ -15,9 +15,10 @@ using Unity;
 
 namespace Container
 {
-    public partial class Extending
+    public partial class Extensions
     {
-        [TestMethod]
+
+        [TestMethod, TestProperty(TESTING, LEGACY)]
         public void ContainerCallsExtensionsInitializeMethod()
         {
             MockContainerExtension extension = new MockContainerExtension();
@@ -27,7 +28,7 @@ namespace Container
             Assert.IsTrue(extension.InitializeWasCalled);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(TESTING, LEGACY)]
         public void ExtensionReceivesExtensionContextInInitialize()
         {
             MockContainerExtension extension = new MockContainerExtension();
@@ -38,7 +39,7 @@ namespace Container
             Assert.AreSame(container, extension.Context.Container);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(TESTING, LEGACY)]
         public void CanGetConfigurationInterfaceFromExtension()
         {
             MockContainerExtension extension = new MockContainerExtension();
@@ -51,7 +52,7 @@ namespace Container
             Assert.AreSame(container, config.Container);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(TESTING, LEGACY)]
         public void CanGetConfigurationWithoutGenericMethod()
         {
             MockContainerExtension extension = new MockContainerExtension();
@@ -64,7 +65,7 @@ namespace Container
             Assert.AreSame(container, config.Container);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(TESTING, LEGACY)]
         public void ExtensionCanAddStrategy()
         {
             SpyStrategy spy = new SpyStrategy();
@@ -78,7 +79,7 @@ namespace Container
             Assert.AreSame(result, spy.Existing);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(TESTING, LEGACY)]
         public void ExtensionCanAddPolicy()
         {
             SpyStrategy spy = new SpyStrategy();
@@ -95,7 +96,7 @@ namespace Container
             Assert.IsTrue(spyPolicy.WasSpiedOn);
         }
 #if UNITY_V4
-        [TestMethod]
+        [TestMethod, TestProperty(TESTING, LEGACY)]
         public void CanReinstallDefaultBehavior()
         {
             // This behavior no longer supported
@@ -109,7 +110,7 @@ namespace Container
         }
 #endif
 
-        [TestMethod]
+        [TestMethod, TestProperty(TESTING, LEGACY)]
         public void CanLookupExtensionByClassName()
         {
             MockContainerExtension extension = new MockContainerExtension();
@@ -121,7 +122,7 @@ namespace Container
             Assert.AreSame(extension, result);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(TESTING, LEGACY)]
         public void ContainerRaisesChildContainerCreatedToExtension()
         {
             bool childContainerEventRaised = false;
@@ -139,7 +140,7 @@ namespace Container
             Assert.IsTrue(childContainerEventRaised);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(TESTING, LEGACY)]
         public void ChildContainerCreatedEventGivesChildContainerToExtension()
         {
             var mockExtension = new MockContainerExtension();
@@ -161,7 +162,7 @@ namespace Container
             Assert.AreSame(child, childContext.Container);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(TESTING, LEGACY)]
         public void CanAddExtensionWithNonDefaultConstructor()
         {
             IUnityContainer container = new UnityContainer();

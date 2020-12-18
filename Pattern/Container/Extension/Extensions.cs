@@ -16,17 +16,8 @@ using Unity;
 
 namespace Container
 {
-    public partial class Extending
+    public partial class Extensions
     {
-        #region Constants
-
-        const string TESTING = "Adding";
-        const string POLICY = "Policy";
-        const string EXTENSION = "Container Extension";
-        const string NAME_PATTERN = "Can add strategy to {1} step";
-
-        #endregion
-
         [PatternTestMethod(NAME_PATTERN), TestProperty(TESTING, nameof(BuilderStrategy))]
         public void ExtensionCanAddStrategy_PreCreation()
         {
