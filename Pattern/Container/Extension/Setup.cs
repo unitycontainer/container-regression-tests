@@ -1,5 +1,21 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
+using System.Collections;
+using System.Collections.Generic;
+#if UNITY_V4
+using Microsoft.Practices.Unity.ObjectBuilder;
+using Microsoft.Practices.ObjectBuilder2;
+using Microsoft.Practices.Unity;
+#elif UNITY_V5
+using Unity.Storage;
+using Unity.Strategies;
+using Unity.Builder;
+using Unity;
+#else
+using Unity.Extension;
+using Unity;
+#endif
+
 
 namespace Container
 {
@@ -18,8 +34,23 @@ namespace Container
 
 
         #region Abstraction Layer
-        
-        
+#if UNITY_V4
+        IEnumerable AsEnumerable(IStagedStrategyChain chain)
+        {
+            return chain.MakeStrategyChain();
+        }
+#elif UNITY_V5
+        IEnumerable AsEnumerable(IStagedStrategyChain<BuilderStrategy, UnityBuildStage> chain)
+        {
+            return chain as IEnumerable;
+        }
+#else
+        IEnumerable AsEnumerable(IDictionary<UnityBuildStage, BuilderStrategy> chain)
+        {
+            return chain;
+        }
+#endif
+
         #endregion
     }
 }

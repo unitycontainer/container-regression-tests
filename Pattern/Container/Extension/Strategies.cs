@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression.Container;
-using Regression;
+using System.Collections;
+using System.Linq;
+using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity.ObjectBuilder;
 using Microsoft.Practices.ObjectBuilder2;
@@ -30,6 +32,63 @@ namespace Container
             Assert.IsNotNull(extension);
             Assert.IsNotNull(extension.Container);
             Assert.IsNotNull(extension.ExtensionContext);
+        }
+
+        [TestMethod("Can Enumerate Strategies"), TestProperty(TESTING, nameof(BuilderStrategy))]
+        [Obsolete]
+        public void CanEnumerateStrategies()
+        {
+            SpyStrategy spy = new SpyStrategy();
+
+            var extension = new UnityContainer()
+                .AddExtension(new SpyExtension(spy, UnityBuildStage.PreCreation))
+                .Configure<SpyExtension>();
+
+            var enumerable = AsEnumerable(extension.ExtensionContext.Strategies);
+
+            Assert.IsTrue(enumerable is IEnumerable);
+        }
+
+        [TestMethod("Can Add Strategy"), TestProperty(TESTING, nameof(BuilderStrategy))]
+        [Obsolete]
+        public void CanAddStrategy()
+        {
+            SpyStrategy spy = new SpyStrategy();
+
+            var extension = new UnityContainer()
+                .AddExtension(new SpyExtension(spy, UnityBuildStage.PreCreation))
+                .Configure<SpyExtension>();
+
+            var strategies = AsEnumerable(extension.ExtensionContext.Strategies)
+                .Cast<BuilderStrategy>()
+                .ToArray();
+
+            Assert.IsTrue(strategies.Contains(spy));
+        }
+
+        [TestMethod("Can Add Strategy Twice"), TestProperty(TESTING, nameof(BuilderStrategy))]
+        [Obsolete]
+        public void CanAddStrategyTwice()
+        {
+            SpyStrategy spy = new SpyStrategy();
+
+            var extension = new UnityContainer()
+                .AddExtension(new SpyExtension(spy, UnityBuildStage.PreCreation))
+                .Configure<SpyExtension>();
+
+            var before = AsEnumerable(extension.ExtensionContext.Strategies)
+                .Cast<BuilderStrategy>()
+                .ToArray();
+
+            Assert.IsTrue(before.Contains(spy));
+
+            extension.ExtensionContext.Strategies.Add(spy, UnityBuildStage.PreCreation);
+            
+            var after = AsEnumerable(extension.ExtensionContext.Strategies)
+                .Cast<BuilderStrategy>()
+                .ToArray();
+
+            Assert.AreNotEqual(before.Length, after.Length);
         }
     }
 }
