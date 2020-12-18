@@ -1,5 +1,16 @@
 ﻿using System;
+#if UNITY_V4
+using Microsoft.Practices.Unity.ObjectBuilder;
+using Microsoft.Practices.ObjectBuilder2;
+using Microsoft.Practices.Unity;
+#elif UNITY_V5
+using Unity.Strategies;
+using Unity.Builder;
 using Unity.Extension;
+#else
+using Unity.Extension;
+using Unity;
+#endif
 
 #pragma warning disable CS0618 // Type or member is obsolete
 namespace Regression.Container
@@ -8,10 +19,10 @@ namespace Regression.Container
     /// A simple extension that puts the supplied strategy into the
     /// chain at the indicated stage.
     /// </summary>
-    public class SpyExtension : UnityContainerExtension
+    public partial class SpyExtension : UnityContainerExtension
     {
-        private Type    _policyType;
-        private object  _policy;
+        private Type _policyType;
+        private object _policy;
         private BuilderStrategy _strategy;
         private UnityBuildStage _stage;
 
@@ -50,11 +61,50 @@ namespace Regression.Container
             _policyType = policyType;
         }
 
+        // Different variants and versions of Initialize
+
+        #region Unity v4
+        #if UNITY_V4
+
+        /// <summary>
+        /// A simple extension that puts the supplied strategy into the
+        /// chain at the indicated stage.
+        /// </summary>
         protected override void Initialize()
         {
-            // Add Spy strategy
-#if BEHAVIOR_V4 || BEHAVIOR_V5
+            Context.Strategies.Add(_strategy, _stage);
 
+            if (_policy != null)
+                Context.Policies.SetDefault(_policyType, (IBuilderPolicy)_policy);
+        }
+
+        #endif
+        #endregion
+
+
+        #region Unity v5 
+        #if UNITY_V5
+
+        protected override void Initialize()
+        {
+            Context.Strategies.Add(this._strategy, this._stage);
+            
+            if (_policy != null)
+                Context.Policies.Set(null, _policyType, _policy);
+        }
+
+        #endif
+        #endregion
+
+
+        #region Unity v6+
+        #if !UNITY_V4 && !UNITY_V5
+
+        protected override void Initialize()
+        {
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+            
+            // v4 & v5 syntax
             Context.Strategies.Add(_strategy, _stage);
 #else
             Context.TypePipelineChain.Add(_stage, _strategy);
@@ -62,23 +112,21 @@ namespace Regression.Container
 
             // Add Spy Policy to storage
             if (_policy is not null)
-            { 
+            {
 #if BEHAVIOR_V4
-
-                // Set policy with no target type (default)
+                // v4 syntax
                 Context.Policies.SetDefault(_policyType, _policy);
-
 #elif BEHAVIOR_V5
-
-                // Set policy with target type = null (default)
+                // v5 syntax
                 Context.Policies.Set(null, _policyType, _policy);
-
 #else
                 Context.Policies.Set(_policyType, _policy);
 #endif
             }
-
         }
+
+        #endif
+        #endregion
     }
 }
 #pragma warning restore CS0618 // Type or member is obsolete
