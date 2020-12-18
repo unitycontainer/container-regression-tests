@@ -68,6 +68,9 @@ namespace Container
 
         [TestMethod("Can Add Strategy Twice"), TestProperty(TESTING, nameof(BuilderStrategy))]
         [Obsolete]
+#if !BEHAVIOR_V4 && !BEHAVIOR_V4
+        [ExpectedException(typeof(ArgumentException))]
+#endif
         public void CanAddStrategyTwice()
         {
             SpyStrategy spy = new SpyStrategy();
