@@ -94,6 +94,8 @@
 				<Compile Remove="Registration\Validation\Factory.cs" />
 				<Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
 				<Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
+				<Compile Remove="Container\Extension\BuilderAware\BuilderAwareStrategy.cs" />
+				<Compile Remove="Container\Extension\BuilderAware\IBuilderAware.cs" />
 			</ItemGroup>
 		</When>
 		<Otherwise>

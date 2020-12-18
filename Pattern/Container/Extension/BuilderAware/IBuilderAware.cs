@@ -1,10 +1,4 @@
 ﻿using System;
-#if UNITY_V5
-using Unity;
-using Unity.Extension;
-#else
-using Unity.Extension;
-#endif
 
 
 namespace Regression.Container
@@ -18,12 +12,9 @@ namespace Regression.Container
         /// <summary>
         /// Called by the <see cref="BuilderAwareStrategy"/> when the object is being built up.
         /// </summary>
-        /// <param name="buildKey">The key of the object that was just built up.</param>
-        void OnBuiltUp(Type type, string? name);
+        void OnBuiltUp(Type type, string name);
 
-        /// <summary>
-        /// Called by the <see cref="BuilderAwareStrategy"/> when the object is being torn down.
-        /// </summary>
-        void OnTearingDown();
+        // Unity v5 and up do not support tear-down.
+        // void OnTearingDown();
     }
 }

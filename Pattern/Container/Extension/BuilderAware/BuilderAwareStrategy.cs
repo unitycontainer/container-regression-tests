@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 #if UNITY_V5
 using Unity;
+using Unity.Builder;
 using Unity.Extension;
+using Unity.Strategies;
 #else
 using Unity.Extension;
 #endif
@@ -35,15 +37,18 @@ namespace Regression.Container
         /// forward direction.
         /// </summary>
         /// <param name="context">Context of the build operation.</param>
-        //public override void PreBuildUp(IBuilderContext context)
-        //{
-        //    Guard.ArgumentNotNull(context, "context");
-        //    IBuilderAware awareObject = context.Existing as IBuilderAware;
-
-        //    if (awareObject != null)
-        //    {
-        //        awareObject.OnBuiltUp(context.BuildKey);
-        //    }
-        //}
+#if UNITY_V5
+        public override void PreBuildUp(ref BuilderContext context)
+        {
+            if (context.Existing is IBuilderAware aware)
+                aware.OnBuiltUp(context.Type, context.Name);
+        }
+#else
+        public override void PreBuildUp<TContext>(ref TContext context)
+        {
+            if (context.Target is IBuilderAware aware)
+                aware.OnBuiltUp(context.Type, context.Name);
+        }
+#endif
     }
 }
