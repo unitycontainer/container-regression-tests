@@ -3,8 +3,10 @@ using Regression.Container;
 using Regression;
 #if UNITY_V4
 using Microsoft.Practices.Unity.ObjectBuilder;
+using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #elif UNITY_V5
+using Unity.Strategies;
 using Unity.Builder;
 using Unity;
 #else
@@ -56,23 +58,6 @@ namespace Container
 
         [TestMethod("Can Add Default Policy"), TestProperty(TESTING, POLICY)]
         public void ExtensionCanAddDefaultPolicy()
-        {
-            SpyStrategy spy = new SpyStrategy();
-            SpyPolicy spyPolicy = new SpyPolicy();
-
-            SpyExtension extension =
-                new SpyExtension(spy, UnityBuildStage.PreCreation, spyPolicy, typeof(SpyPolicy));
-
-            IUnityContainer container = new UnityContainer()
-                .AddExtension(extension);
-
-            container.Resolve<object>();
-
-            Assert.IsTrue(spyPolicy.WasSpiedOn);
-        }
-
-        [TestMethod("Can Add Default Policy"), TestProperty(TESTING, POLICY)]
-        public void ExtensionCanAddPolicy()
         {
             SpyStrategy spy = new SpyStrategy();
             SpyPolicy spyPolicy = new SpyPolicy();

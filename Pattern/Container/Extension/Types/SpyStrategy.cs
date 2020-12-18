@@ -23,7 +23,7 @@ namespace Regression.Container
 #if BEHAVIOR_V5
             var policy = (SpyPolicy)context.Get(null, typeof(SpyPolicy));
 #else
-            var policy = (context.Policies as IPolicySet)?.Get<SpyPolicy>();
+            var policy = context.Policies.GetDefault<SpyPolicy>();
 #endif
             // Mark the policy
             if (policy != null) policy.WasSpiedOn = true;
