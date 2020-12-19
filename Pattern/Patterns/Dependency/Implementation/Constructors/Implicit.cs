@@ -17,7 +17,7 @@ namespace Constructors
         public override void TestInitialize() => base.TestInitialize();
 
         [ClassInitialize]
-        public static void ClassInit(TestContext context) => ClassInitialize(context);
+        public static void Resolving_Implicit_Initialize(TestContext context) => PatternBaseInitialize(context.FullyQualifiedTestClassName);
 
         #endregion
     }

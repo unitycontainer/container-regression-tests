@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
 using System;
+using System.Reflection;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -25,9 +26,12 @@ namespace Properties
         public override void TestInitialize() => base.TestInitialize();
 
         [ClassInitialize]
-        public static void ClassInit(TestContext context)
+        public static void Injecting_Required_With_Optional_Initialize(TestContext context) 
+            => Injecting_Required_With_Optional_Initialize(context.FullyQualifiedTestClassName);
+
+        public static void Injecting_Required_With_Optional_Initialize(string name, Assembly assembly = null)
         {
-            ClassInitialize(context);
+            PatternBaseInitialize(name, assembly);
 
             Type support = Type.GetType($"{typeof(PatternBase).FullName}+{Member}");
 

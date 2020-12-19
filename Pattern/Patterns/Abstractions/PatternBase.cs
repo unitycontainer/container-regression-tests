@@ -21,6 +21,7 @@ namespace Regression
         private static string _prefix { get; set; }
         
         protected IUnityContainer Container;
+        protected static string FullyQualifiedTestClassName;
 
         protected static Type BaselineTestType;
         protected static Type BaselineTestNamed;
@@ -33,14 +34,7 @@ namespace Regression
 
         #region Properties
 
-        public TestContext TestContext 
-        { 
-            get => StaticContext; set => StaticContext = value; 
-        }
-
-        public static TestContext ClassContext;
-
-        public static TestContext StaticContext;
+        public TestContext TestContext { get; set; }
 
         protected static string Category { get; private set; }
         protected static string Dependency { get; private set; }
@@ -77,11 +71,13 @@ namespace Regression
 
         // Example: Import.Implicit.Constructors
 
-        protected static void ClassInitialize(TestContext context)
+        protected static void PatternBaseInitialize(string name, Assembly assembly = null)
         {
-            ClassContext = context;
+            FullyQualifiedTestClassName = name;
 
-            var type  = Type.GetType(context.FullyQualifiedTestClassName);
+            var type  = assembly is null 
+                ? Type.GetType(FullyQualifiedTestClassName)
+                : Type.GetType($"{FullyQualifiedTestClassName}, {assembly.GetName().Name}");
             var root  = type.Namespace.Split('.');
             var @base = type.BaseType.Namespace.Split('.');
 

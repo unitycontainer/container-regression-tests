@@ -13,7 +13,7 @@ namespace Selection.Annotated
             {
                 var @namespace = MethodBase.GetCurrentMethod().DeclaringType.Namespace;
                 var set = @namespace.Substring(0, @namespace.IndexOf('.'));
-                var member = ClassContext.FullyQualifiedTestClassName.Substring(0, ClassContext.FullyQualifiedTestClassName.IndexOf('.'));
+                var member = FullyQualifiedTestClassName.Substring(0, FullyQualifiedTestClassName.IndexOf('.'));
 
                 foreach (var annotation in Annotation_Category_Names)
                 {

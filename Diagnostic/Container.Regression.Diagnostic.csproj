@@ -1,0 +1,118 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Configurations>Debug;Release;v4;v5</Configurations>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<UnityContainer>..\..\Container\src\Unity.Container.csproj</UnityContainer>
+		<UnityLegacy>..\..\unity\source\Unity\Src\Unity.csproj</UnityLegacy>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="Exists('$(UnityLegacy)')">
+		<TargetFramework>net45</TargetFramework>
+	</PropertyGroup>
+
+	<!-- Master -->
+	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln') AND Exists('..\..\Container\package.props')">
+		<TargetFramework>net46</TargetFramework>
+		<DefineConstants>$(DefineConstants);BEHAVIOR_V5</DefineConstants>
+	</PropertyGroup>
+
+	<!-- Develop -->
+	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln') AND !Exists('..\..\Container\package.props')">
+		<TargetFramework>net47</TargetFramework>
+	</PropertyGroup>
+
+	<!-- TNG -->
+	<PropertyGroup Condition="Exists('$(UnityContainer)') AND !Exists('..\..\Container\package.sln')">
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<!-- Standalone -->
+	<PropertyGroup Condition="!Exists('$(UnityContainer)') AND !Exists('$(UnityLegacy)') ">
+		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
+	</PropertyGroup>
+
+	<!-- Regression Tests -->
+
+	<ItemGroup>
+		<ProjectReference Include="..\Pattern\Container.Regression.Tests.csproj" />
+	</ItemGroup>
+
+
+	
+	<!-- Definitions -->
+
+	<ItemGroup>
+		<ProjectReference Condition="'$(TargetFramework)' == 'net5.0' " Include="$(UnityContainer)" />
+		<PackageReference Condition="'$(TargetFramework)' == 'net48'  " Include="Unity.Container" Version="6.0.*-*" />
+		<ProjectReference Condition="'$(TargetFramework)' == 'net47'  " Include="$(UnityContainer)" />
+		<PackageReference Condition="'$(TargetFramework)' == 'net46'  " Include="Unity.Container" Version="5.11.*" />
+		<PackageReference Condition="'$(TargetFramework)' == 'net45' AND !Exists('$(UnityLegacy)')" Include="Unity" Version="4.0.1" />
+		<ProjectReference Condition="'$(TargetFramework)' == 'net45' AND Exists('$(UnityLegacy)')" Include="$(UnityLegacy)" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net5')) ">V6;UNITY_V6;$(DefineConstants)</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">V6;UNITY_V6;$(DefineConstants)</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">V5;UNITY_V5;$(DefineConstants)</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">V5;UNITY_V5;$(DefineConstants)</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">V4;UNITY_V4;$(DefineConstants)</DefineConstants>
+	</PropertyGroup>
+
+	<!-- Configuration Settings -->
+	<PropertyGroup>
+		<DefineConstants Condition="'$(Configuration)'=='v4'">$(DefineConstants);BEHAVIOR_V4</DefineConstants>
+		<DefineConstants Condition="'$(Configuration)'=='v5'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
+		<DefineConstants Condition="'$(Configuration)'!='v4' AND '$(Configuration)'!='v5'">$(DefineConstants);BEHAVIOR_V6</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+	</PropertyGroup>
+
+	
+	<Choose>
+		<When Condition="$(TargetFramework.StartsWith('net45'))">
+			<ItemGroup> <!-- IF v4 -->
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup> <!-- IF NOT v4 -->
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
+	<Choose>
+		<When Condition="$(TargetFramework.StartsWith('net46')) OR $(TargetFramework.StartsWith('net47'))">
+			<ItemGroup> <!-- IF v5 -->
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup> <!-- IF NOT v5 -->
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+	<!-- v5 Exclusions -->
+
+
+
+
+	<PropertyGroup>
+		<Description>Unity Container Regression Tests</Description>
+		<Copyright>Copyright © .NET Foundation and Contributors. All Rights Reserved</Copyright>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
+		<PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
+
+		<PackageReference Condition="$(TargetFramework.StartsWith('net4'))" Include="System.ValueTuple" Version="4.5.0" />
+	</ItemGroup>
+
+</Project>
