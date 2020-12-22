@@ -57,7 +57,7 @@ namespace Lifetime.Manager
         {
             var scope = new LifetimeContainer();
             var value = manager.TryGetValue(scope);
-            Assert.AreSame(RegistrationManager.NoValue, value);
+            Assert.AreSame(UnityContainer.NoValue, value);
         }
 #endif
 
