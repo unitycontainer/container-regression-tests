@@ -34,9 +34,6 @@
 	<PropertyGroup Condition="!Exists('$(UnityContainer)') AND !Exists('$(UnityLegacy)') ">
 		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
 	</PropertyGroup>
-	<ItemGroup>
-	</ItemGroup>
-
 
 	
 	<!-- Definitions -->
@@ -143,6 +140,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Patterns\Unregistered\" />
 	  <Folder Include="Resolution\Hierarchy\" />
 	</ItemGroup>
 
