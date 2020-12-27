@@ -45,7 +45,7 @@ namespace Container
             return chain as IEnumerable;
         }
 #else
-        IEnumerable AsEnumerable(IDictionary<UnityBuildStage, BuilderStrategy> chain)
+        IEnumerable AsEnumerable(IStagedStrategyChain chain)
         {
             return chain;
         }
