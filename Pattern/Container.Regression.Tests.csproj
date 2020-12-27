@@ -5,55 +5,99 @@
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
-	<PropertyGroup>
-		<UnityContainer>..\..\Container\src\Unity.Container.csproj</UnityContainer>
-		<UnityLegacy>..\..\unity\source\Unity\Src\Unity.csproj</UnityLegacy>
-	</PropertyGroup>
+  <Choose>
+    <When Condition="'$(UnityTarget)' == 'LEGACY'">
+      <PropertyGroup>
+        <TargetFramework>net462</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UnityTarget)' == 'MASTER'">
+      <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UnityTarget)' == 'DEVELOP'">
+      <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UnityTarget)' == 'LATEST'">
+      <PropertyGroup>
+        <TargetFramework>net50</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <DefineConstants>STANDALONE;$(DefineConstants)</DefineConstants>
+        <TargetFrameworks>net462;net472;net50</TargetFrameworks>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
 
-	<PropertyGroup Condition="Exists('$(UnityLegacy)')">
-		<TargetFramework>net45</TargetFramework>
-	</PropertyGroup>
-
-	<!-- Master -->
-	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln') AND Exists('..\..\Container\package.props')">
-		<TargetFramework>net46</TargetFramework>
-		<DefineConstants>$(DefineConstants);BEHAVIOR_V5</DefineConstants>
-	</PropertyGroup>
-
-	<!-- Develop -->
-	<PropertyGroup Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln') AND !Exists('..\..\Container\package.props')">
-		<TargetFramework>net47</TargetFramework>
-	</PropertyGroup>
-
-	<!-- TNG -->
-	<PropertyGroup Condition="Exists('$(UnityContainer)') AND !Exists('..\..\Container\package.sln')">
-		<TargetFramework>net5.0</TargetFramework>
-	</PropertyGroup>
-
-	<!-- Standalone -->
-	<PropertyGroup Condition="!Exists('$(UnityContainer)') AND !Exists('$(UnityLegacy)') ">
-		<TargetFrameworks>net48;net46;net45</TargetFrameworks>
-	</PropertyGroup>
-
+  <Choose>
+    <When Condition="'$(UnityTarget)' == 'LEGACY'">
+      <PropertyGroup>
+        <TargetFramework>net462</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UnityTarget)' == 'MASTER'">
+      <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UnityTarget)' == 'DEVELOP'">
+      <PropertyGroup>
+        <TargetFramework>net472</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UnityTarget)' == 'LATEST'">
+      <PropertyGroup>
+        <TargetFramework>net50</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <DefineConstants>STANDALONE;$(DefineConstants)</DefineConstants>
+        <TargetFrameworks>net462;net472;net50</TargetFrameworks>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>  
 	
 	<!-- Definitions -->
 
-	<ItemGroup>
-		<ProjectReference Condition="'$(TargetFramework)' == 'net5.0' " Include="$(UnityContainer)" />
-		<PackageReference Condition="'$(TargetFramework)' == 'net48'  " Include="Unity.Container" Version="6.0.*-*" />
-		<ProjectReference Condition="'$(TargetFramework)' == 'net47'  " Include="$(UnityContainer)" />
-		<PackageReference Condition="'$(TargetFramework)' == 'net46'  " Include="Unity.Container" Version="5.11.*" />
-		<PackageReference Condition="'$(TargetFramework)' == 'net45' AND !Exists('$(UnityLegacy)')" Include="Unity" Version="4.0.1" />
-		<ProjectReference Condition="'$(TargetFramework)' == 'net45' AND Exists('$(UnityLegacy)')" Include="$(UnityLegacy)" />
-	</ItemGroup>
+  <!-- Unity v6 -->
 
-	<PropertyGroup>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net5')) ">V6;UNITY_V6;$(DefineConstants)</DefineConstants>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">V6;UNITY_V6;$(DefineConstants)</DefineConstants>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">V5;UNITY_V5;$(DefineConstants)</DefineConstants>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">V5;UNITY_V5;$(DefineConstants)</DefineConstants>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">V4;UNITY_V4;$(DefineConstants)</DefineConstants>
-	</PropertyGroup>
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net5')) ">
+    <ProjectReference Condition="Exists('$(UnityContainer)') " Include="$(UnityContainer)" />
+    <PackageReference Condition="!Exists('$(UnityContainer)')" Include="Unity.Container" Version="6.0.*-*" />
+  </ItemGroup>
+  
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net5')) ">
+    <DefineConstants>UNITY_V6;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <!-- Unity v5 -->
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net47')) ">
+    <ProjectReference Condition="Exists('$(UnityContainer)') " Include="$(UnityContainer)" />
+    <PackageReference Condition="!Exists('$(UnityContainer)')" Include="Unity.Container" Version="5.11.*" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net47')) ">
+		<DefineConstants>UNITY_V5;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+
+  <!-- Unity v4 -->
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net46')) ">
+    <ProjectReference Condition="Exists('$(UnityLegacy)') " Include="$(UnityLegacy)" />
+    <PackageReference Condition="!Exists('$(UnityLegacy)')" Include="Unity" Version="4.0.1" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net46')) ">
+    <DefineConstants>UNITY_V4;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
 
 	<!-- Configuration Settings -->
 	<PropertyGroup>
@@ -68,9 +112,11 @@
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
 	</PropertyGroup>
 
-	
-	<Choose>
-		<When Condition="$(TargetFramework.StartsWith('net45'))">
+
+  <!-- v4 Exclusions -->
+  
+  <Choose>
+		<When Condition="$(TargetFramework.StartsWith('net46'))">
 			<ItemGroup> <!-- IF v4 -->
 				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
 				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
@@ -103,8 +149,10 @@
 		</Otherwise>
 	</Choose>
 
+	<!-- v5 Exclusions -->
+  
 	<Choose>
-		<When Condition="$(TargetFramework.StartsWith('net46')) OR $(TargetFramework.StartsWith('net47'))">
+		<When Condition="$(TargetFramework.StartsWith('net47'))">
 			<ItemGroup> <!-- IF v5 -->
 				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
 				<Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
@@ -121,7 +169,6 @@
 			</ItemGroup>
 		</Otherwise>
 	</Choose>
-	<!-- v5 Exclusions -->
 
 
 

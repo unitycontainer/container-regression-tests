@@ -41,6 +41,9 @@
 #if NET471
 // Current Framework NET4.7.1
 #endif
+#if NET472
+// Current Framework NET4.7.2
+#endif
 #if NET46
 // Current Framework NET4.6
 #endif
