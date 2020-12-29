@@ -54,7 +54,7 @@ namespace Resolution
             _ = Container.Resolve(type, Name);
         }
 
-
+#if !UNITY_V4
         [TestMethod("Enumerable<..> from different threads"), TestProperty(RESOLVING, nameof(FromEmpty))]
         public void Enumerable_Multithreaded()
         {
@@ -85,6 +85,6 @@ namespace Resolution
             Assert.AreEqual(1, storage[0].Count());
             Assert.AreEqual(1, storage[1].Count());
         }
-
+#endif
     }
 }
