@@ -12,9 +12,7 @@ namespace Selection.Injected
 {
     public abstract partial class Pattern
     {
-        Type[] TypesForward = new[] { typeof(IUnityContainer), typeof(object) };
-        Type[] TypesReverse = new[] { typeof(object), typeof(IUnityContainer) };
-
+#if !UNITY_V4
         [TestMethod, TestProperty(SELECTION, BY_COUNT)]
         [DynamicData(nameof(Test_Types_Data), typeof(Selection.Pattern))]
         public virtual void Select_ByCount_Takes_First(string test, Type type)
@@ -50,5 +48,6 @@ namespace Selection.Injected
             Assert.IsNotNull(instance);
             Assert.IsNotInstanceOfType(instance, typeof(Array));
         }
+#endif
     }
 }
