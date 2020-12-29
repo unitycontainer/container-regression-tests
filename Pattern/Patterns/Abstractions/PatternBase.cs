@@ -16,18 +16,13 @@ namespace Regression
     {
         #region Fields
 
+        protected IUnityContainer Container;
+
         private static string _type { get; set; }
         private static string _root { get; set; }
         private static string _prefix { get; set; }
         
-        protected IUnityContainer Container;
         protected static string FullyQualifiedTestClassName;
-
-        protected static Type BaselineTestType;
-        protected static Type BaselineTestNamed;
-        protected static Type BaselineArrayType;
-        protected static Type BaselineConsumer;
-        protected static Type NoPublicMember;
 
         #endregion
 
@@ -37,13 +32,12 @@ namespace Regression
         public TestContext TestContext { get; set; }
 
         protected static string Category { get; private set; }
+
         protected static string Dependency { get; private set; }
+
         protected static string Member { get; private set; }
         
         protected virtual string DependencyName => string.Empty;
-
-        protected Type CorrespondingTypeDefinition 
-            => Type.GetType($"{Category}.{Dependency}.{Member}.{TestContext.TestName}") ?? BaselineTestType;
 
         #endregion
 
@@ -78,6 +72,7 @@ namespace Regression
             var type  = assembly is null 
                 ? Type.GetType(FullyQualifiedTestClassName)
                 : Type.GetType($"{FullyQualifiedTestClassName}, {assembly.GetName().Name}");
+
             var root  = type.Namespace.Split('.');
             var @base = type.BaseType.Namespace.Split('.');
 
@@ -88,12 +83,6 @@ namespace Regression
             _type = type.Namespace;
             _prefix = root.First();
             _root = $"{type.BaseType.Namespace}.{Member}";
-
-            BaselineTestType = GetTestType("BaselineTestType`1");
-            BaselineTestNamed = GetTestType("BaselineTestTypeNamed`1");
-            BaselineArrayType = GetTestType("BaselineArrayType`1");
-            BaselineConsumer = GetTestType("BaselineConsumer`1");
-            NoPublicMember = GetTestType("NoPublicMember`1");
 
             LoadInjectionProxies();
         }

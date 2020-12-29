@@ -18,7 +18,7 @@ namespace Fields
 
         [ClassInitialize]
         public static void Selecting_Annotated_Initialize(TestContext context) 
-            => PatternBaseInitialize(context.FullyQualifiedTestClassName);
+            => Pattern_Initialize(context.FullyQualifiedTestClassName);
 
         #endregion
     }

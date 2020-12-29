@@ -3,10 +3,9 @@
 namespace Properties
 {
     [TestClass]
-    public partial class Injecting_Optional_With_Required : Injection.Optional.Pattern
+    public class Selecting_Annotated : Selection.Annotated.Pattern
     {
         #region Properties
-
         protected override string DependencyName => "Property";
 
         #endregion
@@ -18,7 +17,8 @@ namespace Properties
         public override void TestInitialize() => base.TestInitialize();
 
         [ClassInitialize]
-        public static void ClassInit(TestContext context) => Pattern_Initialize(context.FullyQualifiedTestClassName);
+        public static void Selecting_Annotated_Initialize(TestContext context) 
+            => Pattern_Initialize(context.FullyQualifiedTestClassName);
 
         #endregion
     }

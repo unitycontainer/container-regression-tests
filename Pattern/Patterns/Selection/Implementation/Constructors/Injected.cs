@@ -1,13 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Properties
+namespace Constructors
 {
     [TestClass]
-    public partial class Injecting_Optional_With_Required : Injection.Optional.Pattern
+    public class Selecting_Injected : Selection.Injected.Pattern
     {
         #region Properties
 
-        protected override string DependencyName => "Property";
+        protected override string DependencyName => "value";
 
         #endregion
 
@@ -18,7 +18,8 @@ namespace Properties
         public override void TestInitialize() => base.TestInitialize();
 
         [ClassInitialize]
-        public static void ClassInit(TestContext context) => Pattern_Initialize(context.FullyQualifiedTestClassName);
+        public static void Selecting_Injected_Initialize(TestContext context) 
+            => Pattern_Initialize(context.FullyQualifiedTestClassName);
 
         #endregion
     }

@@ -7,7 +7,7 @@ using Unity;
 #endif
 
 
-namespace Selection.Annotated.Properties.Optional
+namespace Selection.Optional.Properties
 {
     public class BaselineTestType<TItem1, TItem2>
         : PropertySelectionBase

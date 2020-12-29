@@ -1,11 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Methods
+namespace Constructors
 {
     [TestClass]
-    public class Selecting_Annotated : Selection.Annotated.Pattern
+    public class Selecting_Implicit : Selection.Implicit.Pattern
     {
         #region Properties
+
         protected override string DependencyName => "value";
 
         #endregion
@@ -17,7 +18,8 @@ namespace Methods
         public override void TestInitialize() => base.TestInitialize();
 
         [ClassInitialize]
-        public static void ClassInit(TestContext context) => PatternBaseInitialize(context.FullyQualifiedTestClassName);
+        public static void Selecting_Implicit_Initialize(TestContext context) 
+            => Pattern_Initialize(context.FullyQualifiedTestClassName);
 
         #endregion
     }

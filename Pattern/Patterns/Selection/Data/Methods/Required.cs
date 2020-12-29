@@ -6,7 +6,7 @@ using Unity;
 #endif
 
 
-namespace Selection.Annotated.Methods.Required
+namespace Selection.Required.Methods
 {
     public class BaselineTestType<TItem1, TItem2>
         : MethodSelectionBase

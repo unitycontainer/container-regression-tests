@@ -32,7 +32,7 @@ namespace Fields
 
         public static void Injecting_Required_With_Optional_Initialize(string name, Assembly assembly = null)
         {
-            PatternBaseInitialize(name);
+            Pattern_Initialize(name);
 
             Type support = Type.GetType($"{typeof(PatternBase).FullName}+{Member}");
 

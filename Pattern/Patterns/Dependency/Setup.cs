@@ -3,6 +3,7 @@ using Regression;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -16,6 +17,32 @@ namespace Dependency
         #region Constants
 
         protected const string CATEGORY_DEPENDENCY = "Resolve";
+
+        #endregion
+
+
+        #region Properties
+
+        protected static Type BaselineConsumer;
+        protected static Type BaselineTestNamed;
+        protected static Type BaselineTestType;
+
+        protected Type CorrespondingTypeDefinition
+            => Type.GetType($"{Category}.{Dependency}.{Member}.{TestContext.TestName}") ?? BaselineTestType;
+
+        #endregion
+
+
+        #region Scaffolding
+
+        public static void Pattern_Initialize(string name, Assembly assembly = null)
+        {
+            PatternBaseInitialize(name);
+
+            BaselineTestType = GetTestType("BaselineTestType`1");
+            BaselineConsumer = GetTestType("BaselineConsumer`1");
+            BaselineTestNamed = GetTestType("BaselineTestTypeNamed`1");
+        }
 
         #endregion
 

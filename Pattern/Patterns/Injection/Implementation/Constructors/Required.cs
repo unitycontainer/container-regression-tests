@@ -19,7 +19,7 @@ namespace Constructors
 
         [ClassInitialize]
         public static void Injecting_Required_Initialize(TestContext context) 
-            => PatternBaseInitialize(context.FullyQualifiedTestClassName);
+            => Pattern_Initialize(context.FullyQualifiedTestClassName);
 
         #endregion
 

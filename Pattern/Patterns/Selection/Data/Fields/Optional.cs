@@ -6,7 +6,7 @@ using Microsoft.Practices.Unity;
 using Unity;
 #endif
 
-namespace Selection.Annotated.Fields.Optional
+namespace Selection.Optional.Fields
 {
     public class BaselineTestType<TItem1, TItem2>
         : FieldSelectionBase

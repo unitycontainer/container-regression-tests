@@ -6,7 +6,7 @@ using Unity;
 #endif
 
 
-namespace Selection.Annotated.Constructors.Optional
+namespace Selection.Optional.Constructors
 {
     public class BaselineTestType<TItem1, TItem2>
         : ConstructorSelectionBase

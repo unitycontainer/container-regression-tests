@@ -11,13 +11,10 @@ namespace Selection.Annotated
         {
             get
             {
-                var @namespace = MethodBase.GetCurrentMethod().DeclaringType.Namespace;
-                var set = @namespace.Substring(0, @namespace.IndexOf('.'));
-                var member = FullyQualifiedTestClassName.Substring(0, FullyQualifiedTestClassName.IndexOf('.'));
-
+                var set = MethodBase.GetCurrentMethod().DeclaringType.Namespace.Split('.')[0];
                 foreach (var annotation in Annotation_Category_Names)
                 {
-                    yield return GetTestType("NoPublicMember`1", annotation, member, set);
+                    yield return GetTestType("NoPublicMember`1", annotation, Member, set);
                 }
             }
         }

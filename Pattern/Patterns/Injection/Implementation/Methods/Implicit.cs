@@ -23,7 +23,7 @@ namespace Methods
         public override void TestInitialize() => base.TestInitialize();
 
         [ClassInitialize]
-        public static void ClassInit(TestContext context) => PatternBaseInitialize(context.FullyQualifiedTestClassName);
+        public static void ClassInit(TestContext context) => Pattern_Initialize(context.FullyQualifiedTestClassName);
 
         #endregion
 

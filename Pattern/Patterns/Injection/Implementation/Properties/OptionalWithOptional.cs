@@ -31,7 +31,7 @@ namespace Properties
 
         public static void Injecting_Optional_With_Optional_Initialize(string name, Assembly assembly = null)
         {
-            PatternBaseInitialize(name, assembly);
+            Pattern_Initialize(name, assembly);
 
             Type support = Type.GetType($"{typeof(PatternBase).FullName}+{Member}");
 

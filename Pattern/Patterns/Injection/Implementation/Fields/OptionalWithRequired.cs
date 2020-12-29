@@ -19,7 +19,7 @@ namespace Fields
 
         [ClassInitialize]
         public static void Resolving_Optional_Initialize(TestContext context) 
-            => PatternBaseInitialize(context.FullyQualifiedTestClassName);
+            => Pattern_Initialize(context.FullyQualifiedTestClassName);
 
         #endregion
     }

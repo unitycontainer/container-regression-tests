@@ -187,7 +187,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Patterns\Unregistered\" />
 	  <Folder Include="Resolution\Hierarchy\" />
 	</ItemGroup>
 
