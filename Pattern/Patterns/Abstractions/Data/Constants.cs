@@ -27,6 +27,8 @@ namespace Regression
         protected const string RESOLVING        = "Resolving";
         protected const string ROOT_CONTAINER   = "Root Container";
         protected const string CHILD_CONTAINER  = "Child Container";
+        protected const string REGISTERED       = "Registered";
+        protected const string UNREGISTERED     = "Unregistered";
 
         #endregion
 

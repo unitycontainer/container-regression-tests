@@ -27,13 +27,18 @@ namespace Regression
 
         #region Constructors
 
-        public Service() => Interlocked.Increment(ref Instances);
+        public Service()
+        {
+            Interlocked.Increment(ref Instances);
+            ThreadId = Thread.CurrentThread.ManagedThreadId;
+        }
 
         #endregion
 
-        
+
         #region Properties
 
+        public int ThreadId { get; }
         public int Disposals { get; protected set; }
         public bool IsDisposed 
         { 

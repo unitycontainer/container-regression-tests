@@ -13,8 +13,8 @@ namespace Resolution
 {
     public partial class Deferred
     {
-        [TestMethod]
-        public void Registered()
+        [TestMethod("Registered Deferred"), TestProperty(RESOLVING, REGISTERED)]
+        public void Func_Registered()
         {
             // Act
             var resolver = Container.Resolve<Func<IService>>();
@@ -24,8 +24,8 @@ namespace Resolution
             Assert.IsInstanceOfType(resolver, typeof(Func<IService>));
         }
 
-        [TestMethod]
-        public void ResolvesThroughContainer()
+        [TestMethod("Deferred resolves via container"), TestProperty(RESOLVING, REGISTERED)]
+        public void Func_ResolvesThroughContainer()
         {
             // Act
             var resolver = Container.Resolve<Func<IService>>();
@@ -37,8 +37,8 @@ namespace Resolution
             Assert.IsInstanceOfType(logger, typeof(Service));
         }
 
-        [TestMethod]
-        public void GetsInjectedAsADependency()
+        [TestMethod("Deferred imported as dependency"), TestProperty(RESOLVING, REGISTERED)]
+        public void Func_GetsInjectedAsADependency()
         {
             // Setup
 
@@ -51,8 +51,8 @@ namespace Resolution
             Assert.IsInstanceOfType(result.LoggerResolver(), typeof(Service));
         }
 
-        [TestMethod]
-        public void WithMatchingName()
+        [TestMethod("Deferred with matching name"), TestProperty(RESOLVING, REGISTERED)]
+        public void Func_WithMatchingName()
         {
             // Act
             var resolver = Container.Resolve<Func<IService>>("1");
@@ -63,8 +63,8 @@ namespace Resolution
             Assert.IsInstanceOfType(resolver(), typeof(Service));
         }
 
-        [TestMethod]
-        public void WithOtherName()
+        [TestMethod("Deferred with other name"), TestProperty(RESOLVING, REGISTERED)]
+        public void Func_WithOtherName()
         {
             // Act
             var resolver = Container.Resolve<Func<IService>>("3");
@@ -75,9 +75,9 @@ namespace Resolution
             Assert.IsInstanceOfType(resolver(), typeof(OtherService));
         }
 
-        [TestMethod]
+        [TestMethod("Deferred with not matching name"), TestProperty(RESOLVING, REGISTERED)]
         [ExpectedException(typeof(ResolutionFailedException))]
-        public void WithNotMatchingName()
+        public void Func_WithNotMatchingName()
         {
             // Act
             var resolver = Container.Resolve<Func<IService>>("10");
@@ -94,8 +94,8 @@ namespace Resolution
             Assert.Fail($"Failed to throw and the instance is not null: {null != instance}");
         }
 
-        [TestMethod]
-        public void OfIEnumerableCallsResolveAll()
+        [TestMethod("Deferred enumerable"), TestProperty(RESOLVING, REGISTERED)]
+        public void Func_OfIEnumerableCallsResolveAll()
         {
             // Setup
             Container.RegisterInstance("one", "first")

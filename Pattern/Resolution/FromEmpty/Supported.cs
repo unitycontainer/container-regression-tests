@@ -12,7 +12,7 @@ namespace Resolution
 {
     public partial class FromEmpty
     {
-        [DataTestMethod]
+        [DataTestMethod, TestProperty(RESOLVING, nameof(FromEmpty))]
         [DynamicData(nameof(InvalidTypes_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
         public virtual void Unsupported(string test, Type type)
@@ -21,7 +21,7 @@ namespace Resolution
             _ = Container.Resolve(type, null);
         }
 
-        [DataTestMethod]
+        [DataTestMethod, TestProperty(RESOLVING, nameof(FromEmpty))]
         [DynamicData(nameof(Unity_Recognized_Types_Data), typeof(PatternBase))]
         public virtual void Supported(string test, Type type)
         {
