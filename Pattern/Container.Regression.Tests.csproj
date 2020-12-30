@@ -131,6 +131,7 @@
 				<Compile Remove="Patterns\Injection\Annotation\Overrides\ResolvedParameter.cs" />
 				<Compile Remove="Patterns\Lifetime\LifetimeManager.cs" />
 				<Compile Remove="Patterns\Lifetime\LifetimeManager\Disposable.cs" />
+        <Compile Remove="Patterns\Selection\Implementation\Fields\Annotated.cs" />
 				<Compile Remove="Patterns\Selection\Implementation\Fields.cs" />
 				<Compile Remove="Resolution\Enumerable\**" />
 				<Compile Remove="Resolution\Generic\Constrained.cs" />
@@ -139,7 +140,7 @@
 				<Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
 				<Compile Remove="Container\Extension\BuilderAware\BuilderAwareStrategy.cs" />
 				<Compile Remove="Container\Extension\BuilderAware\IBuilderAware.cs" />
-			</ItemGroup>
+      </ItemGroup>
 		</When>
 		<Otherwise>
 			<ItemGroup> <!-- IF NOT v4 -->
@@ -178,6 +179,17 @@
 		<Copyright>Copyright © .NET Foundation and Contributors. All Rights Reserved</Copyright>
 	</PropertyGroup>
 
+
+
+
+	<ItemGroup>
+	  <Compile Remove="Resolution\Hierarchy\**" />
+	  <EmbeddedResource Remove="Resolution\Hierarchy\**" />
+	  <None Remove="Resolution\Hierarchy\**" />
+	</ItemGroup>
+
+
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
@@ -187,7 +199,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Resolution\Hierarchy\" />
+	  <Folder Include="Patterns\Selection\Implementation\Fields\" />
 	</ItemGroup>
 
 </Project>

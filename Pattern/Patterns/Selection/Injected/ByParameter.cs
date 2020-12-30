@@ -62,7 +62,7 @@ namespace Selection.Injected
 
             // Arrange
             Container.RegisterInstance(Name)
-                     .RegisterType(target, InjectionMember_Value(new ResolvedParameter(TypesForward[1])));
+                     .RegisterType(target, InjectionMember_Value(new ResolvedParameter(TypesReverse[1])));
 
             // Act
             var instance = Container.Resolve(target) as SelectionBaseType;
@@ -70,11 +70,28 @@ namespace Selection.Injected
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, target);
+#if BEHAVIOR_V4
 
+            // With two constructors:
+            //
+            // public BaselineTestType(object value)
+            // public BaselineTestType(string value)
+            //
+            // and registration like this: 
+            //
+            // .RegisterType(target, new InjectionConstructor(new ResolvedParameter(typeof(string))))
+            // 
+            // Unity v4 with correctly resolve string, but incorrectly pickup first 
+            // compatible constructor. Since 'BaselineTestType(object value)' can be assigned 'string',
+            // unity will accept this constructor if it comes first. 
+
+            var parameters = instance.Data[1] as object[];
+#else
             var parameters = instance.Data[2] as object[];
+#endif
             Assert.IsNotNull(parameters);
             Assert.AreEqual(1, parameters.Length);
-            Assert.IsInstanceOfType(parameters[0], TypesForward[1]);
+            Assert.IsInstanceOfType(parameters[0], TypesReverse[1]);
         }
 
         [TestMethod("Select by Parameter (First Two)"), TestProperty(SELECTION, BY_TYPE)]
