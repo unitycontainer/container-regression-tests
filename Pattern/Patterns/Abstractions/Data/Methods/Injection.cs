@@ -22,6 +22,9 @@ namespace Regression
             public static InjectionMember GetInjectionValue(object argument)
                 => new InjectionMethod(MethodName, argument);
 
+            public static InjectionMember GetInjectionArgs(params object[] arguments)
+                => new InjectionMethod(MethodName, arguments);
+
             public static InjectionMember GetInjectionContract(Type type, string name)
                 => new InjectionMethod(MethodName, new ResolvedParameter(type, name));
 

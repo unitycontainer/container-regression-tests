@@ -21,8 +21,9 @@ namespace Selection.Injected
 
         #region Fields
 
-        Type[] TypesForward = new[] { typeof(IUnityContainer), typeof(object) };
-        Type[] TypesReverse = new[] { typeof(object), typeof(IUnityContainer) };
+        Type[] TypesForward = new[] { typeof(IUnityContainer), typeof(string), typeof(object), };
+        Type[] TypesReverse = new[] { typeof(object), typeof(string), typeof(IUnityContainer) };
+        
 
         #endregion
     }

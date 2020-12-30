@@ -36,7 +36,7 @@ namespace Regression
         protected static string Dependency { get; private set; }
 
         protected static string Member { get; private set; }
-        
+       
         protected virtual string DependencyName => string.Empty;
 
         #endregion

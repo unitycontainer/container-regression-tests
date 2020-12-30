@@ -12,13 +12,13 @@ namespace Selection.Injected
 {
     public abstract partial class Pattern
     {
-        [TestMethod("Select by Type (First)"), TestProperty(SELECTION, BY_TYPE)]
-        public virtual void Select_ByType_First()
+        [TestMethod("Select by Parameter (First)"), TestProperty(SELECTION, BY_TYPE)]
+        public virtual void Select_ByParameter_First()
         {
             var target = BaselineTestType.MakeGenericType(TypesForward);
 
             // Arrange
-            Container.RegisterType(target, InjectionMember_Value(TypesForward[0]));
+            Container.RegisterType(target, InjectionMember_Value(new ResolvedParameter(TypesForward[0])));
 
             // Act
             var instance = Container.Resolve(target) as SelectionBaseType;
@@ -33,14 +33,14 @@ namespace Selection.Injected
             Assert.IsInstanceOfType(parameters[0], TypesForward[0]);
         }
 
-        [TestMethod("Select by Type (Second)"), TestProperty(SELECTION, BY_TYPE)]
-        public virtual void Select_ByType_Second()
+        [TestMethod("Select by Parameter (Second)"), TestProperty(SELECTION, BY_TYPE)]
+        public virtual void Select_ByParameter_Second()
         {
             var target = BaselineTestType.MakeGenericType(TypesForward);
 
             // Arrange
             Container.RegisterInstance(Name)
-                     .RegisterType(target, InjectionMember_Value(TypesForward[1]));
+                     .RegisterType(target, InjectionMember_Value(new ResolvedParameter(TypesForward[1])));
 
             // Act
             var instance = Container.Resolve(target) as SelectionBaseType;
@@ -55,14 +55,14 @@ namespace Selection.Injected
             Assert.IsInstanceOfType(parameters[0], TypesForward[1]);
         }
 
-        [TestMethod("Select by Type (Reversed)"), TestProperty(SELECTION, BY_TYPE)]
-        public virtual void Select_ByType_Reversed()
+        [TestMethod("Select by Parameter (Reversed)"), TestProperty(SELECTION, BY_TYPE)]
+        public virtual void Select_ByParameter_Reversed()
         {
             var target = BaselineTestType.MakeGenericType(TypesReverse);
 
             // Arrange
             Container.RegisterInstance(Name)
-                     .RegisterType(target, InjectionMember_Value(TypesForward[1]));
+                     .RegisterType(target, InjectionMember_Value(new ResolvedParameter(TypesForward[1])));
 
             // Act
             var instance = Container.Resolve(target) as SelectionBaseType;
@@ -77,14 +77,16 @@ namespace Selection.Injected
             Assert.IsInstanceOfType(parameters[0], TypesForward[1]);
         }
 
-        [TestMethod("Select by Type (First Two)"), TestProperty(SELECTION, BY_TYPE)]
-        public virtual void Select_ByType_FirstTwo()
+        [TestMethod("Select by Parameter (First Two)"), TestProperty(SELECTION, BY_TYPE)]
+        public virtual void Select_ByParameter_FirstTwo()
         {
             var target = BaselineTestType.MakeGenericType(TypesForward);
 
             // Arrange
             Container.RegisterInstance(Name)
-                     .RegisterType(target, InjectionMember_Args(new[] { TypesForward[0], TypesForward[1] }));
+                     .RegisterType(target, InjectionMember_Args(new[] 
+                        { new ResolvedParameter(TypesForward[0]), 
+                          new ResolvedParameter(TypesForward[1]) }));
 
             // Act
             var instance = Container.Resolve(target) as SelectionBaseType;

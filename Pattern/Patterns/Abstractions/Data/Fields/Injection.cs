@@ -22,6 +22,9 @@ namespace Regression
             public static InjectionMember GetInjectionValue(object argument)
                 => new InjectionField(FieldName, argument);
 
+            public static InjectionMember GetInjectionArgs(params object[] arguments)
+                => throw new NotSupportedException();
+
             public static InjectionMember GetInjectionContract(Type type, string name)
 #if UNITY_V5
                 => new InjectionField(FieldName, new ResolvedParameter(type, name));

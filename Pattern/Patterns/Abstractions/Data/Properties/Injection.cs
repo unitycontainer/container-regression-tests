@@ -22,6 +22,9 @@ namespace Regression
             public static InjectionMember GetInjectionValue(object argument)
                 => new InjectionProperty(PropertyName, argument);
 
+            public static InjectionMember GetInjectionArgs(params object[] arguments)
+                => throw new NotSupportedException();
+
             public static InjectionMember GetInjectionContract(Type type, string name)
 #if UNITY_V4
                 => new InjectionProperty(PropertyName, new ResolvedParameter(type, name));

@@ -13,10 +13,11 @@ namespace Regression
         #region Fields
 
         protected static Func<object, InjectionMember>       InjectionMember_Value;
+        protected static Func<object[], InjectionMember>     InjectionMember_Args;
         protected static Func<InjectionMember>               InjectionMember_Default;
         protected static Func<Type, string, InjectionMember> InjectionMember_Contract;
 
-        protected static Func<object, ResolverOverride> MemberOverride;
+        protected static Func<object, ResolverOverride>         MemberOverride;
         protected static Func<string, object, ResolverOverride> MemberOverride_ByName;
         protected static Func<Type, object, ResolverOverride>   MemberOverride_ByType;
         protected static Func<Type, object, ResolverOverride>   MemberOverride_ByContract;
@@ -32,6 +33,9 @@ namespace Regression
 
             InjectionMember_Value = (Func<object, InjectionMember>)support
                 .GetMethod("GetInjectionValue").CreateDelegate(typeof(Func<object, InjectionMember>));
+
+            InjectionMember_Args = (Func<object[], InjectionMember>)support
+                .GetMethod("GetInjectionArgs").CreateDelegate(typeof(Func<object[], InjectionMember>));
 
             InjectionMember_Default = (Func<InjectionMember>)support
                 .GetMethod("GetInjectionDefault").CreateDelegate(typeof(Func<InjectionMember>));
