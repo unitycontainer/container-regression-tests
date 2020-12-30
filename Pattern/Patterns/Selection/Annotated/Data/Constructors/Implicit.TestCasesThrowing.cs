@@ -1,4 +1,5 @@
-﻿using static Selection.Pattern;
+﻿using Regression;
+using static Selection.Pattern;
 
 
 namespace Selection.Implicit.Constructors.TestCasesThrowing

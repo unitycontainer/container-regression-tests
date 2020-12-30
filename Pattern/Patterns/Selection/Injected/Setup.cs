@@ -12,9 +12,11 @@ namespace Selection.Injected
     {
         #region Constants
 
-        const string SELECTION = "Selection";
-        const string BY_COUNT  = "By Count";
-        const string BY_TYPE   = "By Type";
+        const string SELECTION    = "Selection";
+        const string BY_COUNT     = "By Count";
+        const string BY_TYPE      = "By Type";
+        const string BY_VALUE     = "By Value";
+        const string BY_PARAMETER = "By Parameter";
 
         #endregion
 

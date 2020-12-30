@@ -4,7 +4,6 @@ using System;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
-using Unity.Injection;
 #endif
 
 
@@ -12,7 +11,7 @@ namespace Selection.Injected
 {
     public abstract partial class Pattern
     {
-        [TestMethod("Select by Type (First)"), TestProperty(SELECTION, BY_TYPE)]
+        [TestMethod("Select first matching"), TestProperty(SELECTION, BY_TYPE)]
         public virtual void Select_ByType_First()
         {
             var target = BaselineTestType.MakeGenericType(TypesForward);
@@ -33,7 +32,28 @@ namespace Selection.Injected
             Assert.IsInstanceOfType(parameters[0], TypesForward[0]);
         }
 
-        [TestMethod("Select by Type (Second)"), TestProperty(SELECTION, BY_TYPE)]
+        [TestMethod("Select generic"), TestProperty(SELECTION, BY_TYPE)]
+        public virtual void Select_ByType_Generic()
+        {
+            var target = BaselineTestType.MakeGenericType(TypesForward);
+
+            // Arrange
+            Container.RegisterType(BaselineTestType, InjectionMember_Value(TypesForward[0]));
+
+            // Act
+            var instance = Container.Resolve(target) as SelectionBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.IsInstanceOfType(instance, target);
+
+            var parameters = instance.Data[1] as object[];
+            Assert.IsNotNull(parameters);
+            Assert.AreEqual(1, parameters.Length);
+            Assert.IsInstanceOfType(parameters[0], TypesForward[0]);
+        }
+
+        [TestMethod("Select second"), TestProperty(SELECTION, BY_TYPE)]
         public virtual void Select_ByType_Second()
         {
             var target = BaselineTestType.MakeGenericType(TypesForward);
@@ -55,7 +75,7 @@ namespace Selection.Injected
             Assert.IsInstanceOfType(parameters[0], TypesForward[1]);
         }
 
-        [TestMethod("Select by Type (Reversed)"), TestProperty(SELECTION, BY_TYPE)]
+        [TestMethod("Select reversed"), TestProperty(SELECTION, BY_TYPE)]
         public virtual void Select_ByType_Reversed()
         {
             var target = BaselineTestType.MakeGenericType(TypesReverse);
@@ -75,16 +95,17 @@ namespace Selection.Injected
 
             // With two constructors:
             //
-            // public BaselineTestType(object value)
-            // public BaselineTestType(string value)
+            // public TestType(object value)
+            // public TestType(string value)
             //
             // and registration like this: 
             //
-            // .RegisterType(target, new InjectionConstructor(new ResolvedParameter(typeof(string))))
+            // .RegisterType<TestType>(new InjectionConstructor(typeof(string)))
             // 
-            // Unity v4 with correctly resolve string, but incorrectly pickup first 
-            // compatible constructor. Since 'BaselineTestType(object value)' can be assigned 'string',
-            // unity will accept this constructor if it comes first. 
+            // Unity v4 will correctly resolve string, but incorrectly pickup first 
+            // compatible constructor: 'TestType(object value)'. 
+            // Since 'string' can be assigned to 'object', it is good enough for v4.
+            // If it comes first, unity will accept this constructor. 
 
             var parameters = instance.Data[1] as object[];
 #else
@@ -95,7 +116,7 @@ namespace Selection.Injected
             Assert.IsInstanceOfType(parameters[0], TypesReverse[1]);
         }
 
-        [TestMethod("Select by Type (First Two)"), TestProperty(SELECTION, BY_TYPE)]
+        [TestMethod("Select First Two"), TestProperty(SELECTION, BY_TYPE)]
         public virtual void Select_ByType_FirstTwo()
         {
             var target = BaselineTestType.MakeGenericType(TypesForward);

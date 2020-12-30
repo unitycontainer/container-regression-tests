@@ -54,5 +54,21 @@ namespace Selection.Annotated
                 if (0 == types.Length) yield return new object[] { "Empty", typeof(UnresolvableDummySelection) };
             }
         }
+
+
+        #region Empty Types
+
+        public class DummySelection : SelectionBaseType
+        {
+        }
+
+        public class UnresolvableDummySelection : SelectionBaseType
+        {
+            private UnresolvableDummySelection()
+            {
+            }
+        }
+
+        #endregion
     }
 }
