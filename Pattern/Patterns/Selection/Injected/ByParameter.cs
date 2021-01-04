@@ -32,6 +32,7 @@ namespace Selection.Injected
             Assert.IsInstanceOfType(parameters[0], TypesForward[0]);
         }
 
+#if !UNITY_V4
         [TestMethod("Select by Parameter (Generic)"), TestProperty(SELECTION, BY_PARAMETER)]
         public virtual void Select_ByParameter_Generic()
         {
@@ -52,6 +53,7 @@ namespace Selection.Injected
             Assert.AreEqual(1, parameters.Length);
             Assert.IsInstanceOfType(parameters[0], TypesForward[0]);
         }
+#endif
 
         [TestMethod("Select by Parameter (Generic Parameter)"), TestProperty(SELECTION, BY_PARAMETER)]
         public virtual void Select_ByParameter_GenericParameter()

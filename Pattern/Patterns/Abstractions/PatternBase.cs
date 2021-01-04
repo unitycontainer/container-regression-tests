@@ -87,7 +87,15 @@ namespace Regression
             LoadInjectionProxies();
         }
 
-        public virtual void TestInitialize() => Container = new UnityContainer();
+        public virtual void TestInitialize()
+        {
+            Container = new UnityContainer();
+
+            // In v4 compatibility mode add 'Legacy' extension
+#if !UNITY_V4 && BEHAVIOR_V4
+            ((UnityContainer)Container).AddExtension(new Unity.Extension.Legacy());
+#endif
+        }
 
         #endregion
 
