@@ -144,13 +144,13 @@ namespace Resolution
             Assert.IsNotNull(array.FirstOrDefault(e => e.Value is OtherService));
         }
 
-        [TestMethod]
-#if BEHAVIOR_V4
+#if UNITY_V4
         [ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
 #else
         // Unity v5 and later does not throw on constraint violation when resolving
-        // collections. Violations are ignored and collection is returned without it.
+        // collections. Violations are ignored and collection is returned
 #endif
+        [TestMethod]
         public void HandlesConstraintViolation()
         {
             // Arrange

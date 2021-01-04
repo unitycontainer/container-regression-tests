@@ -180,13 +180,12 @@ namespace Resolution
         }
 
         [TestMethod]
-#if BEHAVIOR_V4
+#if UNITY_V4 // Unity v4 wraps all exceptions
         [ExpectedException(typeof(ResolutionFailedException))]
-        // Unity v4 wrapped all exceptions
 #else
         [ExpectedException(typeof(InvalidOperationException))]
 #endif
-        public void UserExceptionIsNotWrappadInResolutionFailed()
+        public void UserExceptionIsNotWrappadWhenResolutionFailed()
         {
             // Arrange
             Container.RegisterType<IService, Service>("1");

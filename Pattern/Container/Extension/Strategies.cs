@@ -66,11 +66,10 @@ namespace Container
             Assert.IsTrue(strategies.Contains(spy));
         }
 
+#if !UNITY_V4
         [TestMethod("Can Add Strategy Twice"), TestProperty(TESTING, nameof(BuilderStrategy))]
         [Obsolete]
-#if !BEHAVIOR_V4 && !BEHAVIOR_V4
         [ExpectedException(typeof(ArgumentException))]
-#endif
         public void CanAddStrategyTwice()
         {
             SpyStrategy spy = new SpyStrategy();
@@ -93,6 +92,7 @@ namespace Container
 
             Assert.AreNotEqual(before.Length, after.Length);
         }
+#endif
 
 #if !UNITY_V4 && !UNITY_V5
 
