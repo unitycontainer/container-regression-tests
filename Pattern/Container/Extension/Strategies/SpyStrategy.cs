@@ -26,6 +26,8 @@ namespace Regression.Container
 
         public object Existing => _existing;
 
+        public object Target => _existing;
+
         public bool BuildUpWasCalled => _called;
 
         #endregion
