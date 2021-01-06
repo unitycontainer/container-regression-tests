@@ -47,7 +47,7 @@ namespace Injection
 
         [TestCategory(CATEGORY_INJECT)]
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
-#if BEHAVIOR_V4 || BEHAVIOR_V5
+#if UNITY_V4 || UNITY_V5
         [ExpectedException(typeof(InvalidOperationException))]
 #else
         [ExpectedException(typeof(ResolutionFailedException))]
