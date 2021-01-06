@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <UnityTarget>LATEST</UnityTarget>
+  </PropertyGroup>
+
+  <Import Project="Regression.Build.props" />
+
+
+  <!-- Configuration Settings -->
+
+  <PropertyGroup>
+    <DefineConstants Condition="'$(Configuration)'=='v4'">$(DefineConstants);BEHAVIOR_V4</DefineConstants>
+    <DefineConstants Condition="'$(Configuration)'=='v5'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
+    <DefineConstants Condition="'$(Configuration)'!='v4' AND '$(Configuration)'!='v5'">$(DefineConstants);BEHAVIOR_V6</DefineConstants>
+
+    <DefineConstants>$(DefineConstants);BEHAVIOR_RESOLVED</DefineConstants>
+
+  </PropertyGroup>
+
+</Project>
