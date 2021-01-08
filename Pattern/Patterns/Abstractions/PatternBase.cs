@@ -21,7 +21,7 @@ namespace Regression
         private static string _type { get; set; }
         private static string _root { get; set; }
         private static string _prefix { get; set; }
-        
+
         protected static string FullyQualifiedTestClassName;
 
         #endregion
@@ -36,7 +36,7 @@ namespace Regression
         protected static string Dependency { get; private set; }
 
         protected static string Member { get; private set; }
-       
+
         protected virtual string DependencyName => string.Empty;
 
         #endregion
@@ -69,15 +69,15 @@ namespace Regression
         {
             FullyQualifiedTestClassName = name;
 
-            var type  = assembly is null 
+            var type = assembly is null
                 ? Type.GetType(FullyQualifiedTestClassName)
                 : Type.GetType($"{FullyQualifiedTestClassName}, {assembly.GetName().Name}");
 
-            var root  = type.Namespace.Split('.');
+            var root = type.Namespace.Split('.');
             var @base = type.BaseType.Namespace.Split('.');
 
-            Member     = root.Last();
-            Category   = @base.First();
+            Member = root.Last();
+            Category = @base.First();
             Dependency = @base.Last();
 
             _type = type.Namespace;
@@ -89,11 +89,22 @@ namespace Regression
 
         public virtual void TestInitialize()
         {
-            Container = new UnityContainer();
+            var container = new UnityContainer();
+            Container = container;
+
+#if  !UNITY_V4
+#if   BEHAVIOR_ACTIVATED
+            container.AddExtension(new ForceActivation());
+#elif BEHAVIOR_RESOLVED
+            container.AddExtension(new ForceResolution());
+#elif BEHAVIOR_COMPILED
+            container.AddExtension(new ForceCompillation());
+#endif
+#endif
 
             // In v4 compatibility mode add 'Legacy' extension
 #if !UNITY_V4 && BEHAVIOR_V4
-            ((UnityContainer)Container).AddExtension(new Unity.Extension.Legacy());
+            container.AddExtension(new Unity.Extension.Legacy());
 #endif
         }
 
@@ -107,7 +118,7 @@ namespace Regression
             return Type.GetType($"{Category}.{Dependency}.{Member}.{name}") ??
                    Type.GetType($"Regression.{Dependency}.{Member}.{name}");
         }
-        
+
         protected static Type GetTestType(string dependency, string name)
         {
             return Type.GetType($"{Category}.{dependency}.{Member}.{name}") ??
@@ -165,7 +176,7 @@ namespace Regression
                      .RegisterInstance(RegisteredUnresolvable)
                      .RegisterInstance(Name, NamedUnresolvable)
 #if !BEHAVIOR_V4 && !UNITY_V4 // Only Unity v5 and up allow `null` as a value
-                     .RegisterInstance(typeof(string),       Null, (object)null)
+                     .RegisterInstance(typeof(string), Null, (object)null)
                      .RegisterInstance(typeof(Unresolvable), Null, (object)null)
 #endif
                      .RegisterInstance(typeof(TestStruct), RegisteredStruct)

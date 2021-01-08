@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\Regression.Build.props" />
+  <Import Project="..\Regression.Environment.props" />
 
   <Choose>
     <When Condition="'$(UnityTarget)' == 'LEGACY'">
@@ -34,12 +34,8 @@
   <!-- Configuration Settings -->
 
   <PropertyGroup>
-    <DefineConstants Condition="'$(Configuration)'=='v4'">$(DefineConstants);BEHAVIOR_V4</DefineConstants>
-    <DefineConstants Condition="'$(Configuration)'=='v5'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
-    <DefineConstants Condition="'$(Configuration)'!='v4' AND '$(Configuration)'!='v5'">$(DefineConstants);BEHAVIOR_V6</DefineConstants>
-
     <DefineConstants>$(DefineConstants);BEHAVIOR_COMPILED</DefineConstants>
-
   </PropertyGroup>
 
+  <Import Project="..\Regression.Build.props" />
 </Project>
