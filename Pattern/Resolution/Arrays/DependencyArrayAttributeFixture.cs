@@ -10,7 +10,7 @@ namespace Resolution
 {
     public partial class Arrays
     {
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, BUILT_IN)]
         public void CanResolveArrayForConstructorParameter()
         {
             IService o1 = new Service();
@@ -27,7 +27,7 @@ namespace Resolution
             Assert.AreSame(o2, resolved.Loggers[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, BUILT_IN)]
         public void CanResolveArrayForProperty()
         {
             IService o1 = new Service();
@@ -44,7 +44,7 @@ namespace Resolution
             Assert.AreSame(o2, resolved.Loggers[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, BUILT_IN)]
         public void CanResolveArrayForConstructorParameterOnClosedGenericType()
         {
             IService o1 = new Service();
@@ -61,7 +61,7 @@ namespace Resolution
             Assert.AreSame(o2, resolved.Values[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, BUILT_IN)]
         [ExpectedException(typeof(ResolutionFailedException))]
         public void BindingDependencyArrayToArrayParameterWithRankOverOneThrows()
         {

@@ -12,7 +12,7 @@ namespace Resolution
 {
     public partial class Arrays
     {
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, REGISTERED)]
         public void CanConfigureContainerToCallConstructorWithArrayParameter()
         {
             // Arrange
@@ -32,7 +32,7 @@ namespace Resolution
             Assert.AreSame(o2, resolved.Loggers[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, REGISTERED)]
         public void CanConfigureContainerToCallConstructorWithArrayParameterWithNonGenericVersion()
         {
             // Arrange
@@ -52,7 +52,7 @@ namespace Resolution
             Assert.AreSame(o2, resolved.Loggers[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, REGISTERED)]
         public void CanConfigureContainerToInjectSpecificValuesIntoAnArray()
         {
             // Arrange
@@ -76,7 +76,7 @@ namespace Resolution
             Assert.AreSame(logger2, result.Loggers[2]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, REGISTERED)]
         public void CanConfigureContainerToInjectSpecificValuesIntoAnArrayWithNonGenericVersion()
         {
             // Arrange
@@ -101,7 +101,7 @@ namespace Resolution
             Assert.AreSame(logger2, result.Loggers[2]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, REGISTERED)]
         public void ContainerAutomaticallyResolvesAllWhenInjectingArrays()
         {
             // Arrange

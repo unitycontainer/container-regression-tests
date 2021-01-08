@@ -13,7 +13,7 @@ namespace Resolution
 {
     public partial class Arrays
     {
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, GENERIC)]
         public void ContainerAutomaticallyResolvesAllWhenInjectingGenericArrays()
         {
            // Arrange
@@ -31,7 +31,7 @@ namespace Resolution
             Assert.AreSame(expected[1], result.Prop[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, GENERIC)]
         public void CanCallConstructorTakingGenericParameterArray()
         {
             Container.RegisterType(typeof(ClassWithOneArrayGenericParameter<>),
@@ -53,7 +53,7 @@ namespace Resolution
             Assert.AreSame(a1, result.InjectedValue[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, GENERIC)]
         public void CanCallConstructorTakingGenericParameterArrayWithValues()
         {
             Container.RegisterType( typeof(ClassWithOneArrayGenericParameter<>),
@@ -79,7 +79,7 @@ namespace Resolution
             Assert.AreSame(a1, result.InjectedValue[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, GENERIC)]
         public void CanSetPropertyWithGenericParameterArrayType()
         {
             Container.RegisterType(typeof(ClassWithOneArrayGenericParameter<>),
@@ -104,7 +104,7 @@ namespace Resolution
             Assert.AreSame(a1, result.InjectedValue[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, GENERIC)]
         public void ResolvesMixedOpenClosedGenericsAsArray()
         {
             // Arrange
@@ -125,7 +125,7 @@ namespace Resolution
             Assert.IsNotNull(enumerable[2]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, GENERIC)]
         public void HandlesGenerics()
         {
             // Arrange
@@ -150,7 +150,7 @@ namespace Resolution
         // Unity v5 and later does not throw on constraint violation when resolving
         // collections. Violations are ignored and collection is returned
 #endif
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, GENERIC)]
         public void HandlesConstraintViolation()
         {
             // Arrange

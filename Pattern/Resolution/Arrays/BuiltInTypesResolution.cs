@@ -13,7 +13,7 @@ namespace Resolution
 {
     public partial class Arrays
     {
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, REGISTERED)]
         public void ArrayOfRegistered()
         {
             // Arrange
@@ -32,7 +32,7 @@ namespace Resolution
             Assert.AreEqual(3, array.Length);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, REGISTERED)]
         public void ArrayOfRegisteredPoco()
         {
             // Arrange
@@ -46,7 +46,7 @@ namespace Resolution
             Assert.AreEqual(1, array.Length);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, UNREGISTERED)]
         public void UnregisteredPoco()
         {
             // Act
@@ -58,7 +58,7 @@ namespace Resolution
         }
 
 #if !BEHAVIOR_V4 // Not yet supported
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, BUILT_IN)]
         public void Lazy()
         {
             // Arrange
@@ -81,7 +81,7 @@ namespace Resolution
             Assert.AreEqual(2, Service.Instances);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, BUILT_IN)]
         public void Func()
         {
             // Arrange
@@ -99,7 +99,7 @@ namespace Resolution
         }
 #endif
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, BUILT_IN)]
         public void FuncNamed()
         {
             // Arrange
@@ -117,7 +117,7 @@ namespace Resolution
         }
 
 #if !BEHAVIOR_V4
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, BUILT_IN)]
         public void LazyFunc()
         {
             // Arrange
@@ -146,7 +146,7 @@ namespace Resolution
             Assert.AreEqual(3, Service.Instances);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, BUILT_IN)]
         public void FuncLazy()
         {
             // Arrange
@@ -173,7 +173,7 @@ namespace Resolution
             Assert.AreEqual(2, Service.Instances);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, BUILT_IN)]
         public void FuncLazyInstance()
         {
             // Arrange
@@ -193,7 +193,7 @@ namespace Resolution
             Assert.AreEqual(1, Service.Instances);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, BUILT_IN)]
         public void ResolvesMixedOpenClosedFuncGenericsAsArray()
         {
             // Arrange
@@ -215,7 +215,7 @@ namespace Resolution
         }
 #endif
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, REGISTERED)]
         public void ClosedTrumpsOpenGeneric()
         {
             // Arrange

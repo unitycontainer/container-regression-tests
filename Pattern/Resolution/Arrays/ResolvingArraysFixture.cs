@@ -15,7 +15,7 @@ namespace Resolution
     {
         public const string Legacy = "legacy";
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, UNREGISTERED)]
         public void ContainerCanResolveListOfT()
         {
             // Arrange
@@ -28,7 +28,7 @@ namespace Resolution
             Assert.IsNotNull(result);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, UNREGISTERED)]
         public void ContainerReturnsEmptyArrayIfNoObjectsRegistered()
         {
             // Act
@@ -39,7 +39,7 @@ namespace Resolution
             Assert.AreEqual(0, result.Length);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, UNREGISTERED)]
         public void ResolveReturnsRegisteredObjects()
         {
             // Arrange
@@ -59,7 +59,7 @@ namespace Resolution
             Assert.AreSame(o2, result[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, UNREGISTERED)]
         public void ResolveAllReturnsRegisteredObjects()
         {
             // Arrange
@@ -80,7 +80,7 @@ namespace Resolution
             Assert.AreSame(o2, result[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, UNREGISTERED)]
         public void ResolveReturnsRegisteredObjectsForBaseClass()
         {
             // Arrange
@@ -100,7 +100,7 @@ namespace Resolution
             Assert.AreSame(o2, result[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, UNREGISTERED)]
         public void ResolveAllReturnsRegisteredObjectsForBaseClass()
         {
             // Arrange
@@ -121,7 +121,7 @@ namespace Resolution
             Assert.AreSame(o2, result[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, UNREGISTERED)]
         public void ResolverWithElementsReturnsEmptyArrayIfThereAreNoElements()
         {
             // Arrange
@@ -148,7 +148,7 @@ namespace Resolution
             Assert.AreEqual(0, legacy.Length);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, UNREGISTERED)]
         public void ResolverWithElementsReturnsLiteralElements()
         {
             // Arrange
@@ -184,7 +184,7 @@ namespace Resolution
             Assert.AreSame(o3, legacy[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, UNREGISTERED)]
         public void ResolverWithElementsReturnsResolvedElements()
         {
             // Arrange
@@ -223,7 +223,7 @@ namespace Resolution
             Assert.AreSame(o2, legacy[1]);
         }
 
-        [TestMethod]
+        [TestMethod, TestProperty(RESOLVING, UNREGISTERED)]
         public void ResolverWithElementsReturnsResolvedElementsForBaseClass()
         {
             // Arrange

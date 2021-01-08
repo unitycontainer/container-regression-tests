@@ -17,6 +17,7 @@ namespace Regression
 
         protected const string TDependency      = "TDependency";
 
+        protected const string TEST             = "Testing";
         protected const string OVERRIDE         = "Override";
         protected const string PARAMETER        = "Injecting";
         protected const string CATEGORY_INJECT  = "Injecting";
@@ -29,6 +30,8 @@ namespace Regression
         protected const string CHILD_CONTAINER  = "Child Container";
         protected const string REGISTERED       = "Registered";
         protected const string UNREGISTERED     = "Unregistered";
+        protected const string BUILT_IN         = "Built-In";
+        protected const string GENERIC          = "Generic";
 
         #endregion
 
