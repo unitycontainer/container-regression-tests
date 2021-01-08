@@ -4,55 +4,8 @@
 		<Configurations>Debug;Release;v4;v5</Configurations>
     <IsTestProject>true</IsTestProject>
 		<LangVersion>latest</LangVersion>
-	</PropertyGroup>
+  </PropertyGroup>
 
-
-  <PropertyGroup>
-		<!-- Well known locations for project files -->
-		<UnityContainer>..\..\Container\src\Unity.Container.csproj</UnityContainer>
-		<UnityLegacy>..\..\unity\source\Unity\Src\Unity.csproj</UnityLegacy>
-		<LangVersion>9.0</LangVersion>
-	</PropertyGroup>
-
-
-	<Choose>
-		<!-- Legacy Project -->
-		<When Condition="Exists('$(UnityLegacy)') AND !Exists('$(UnityContainer)')">
-			<PropertyGroup>
-				<UnityTarget>LEGACY</UnityTarget>
-			</PropertyGroup>
-		</When>
-
-		<!-- Master -->
-		<When Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln') AND Exists('..\..\Container\package.props')">
-			<PropertyGroup>
-				<UnityTarget>MASTER</UnityTarget>
-			</PropertyGroup>
-		</When>
-
-		<!-- Develop -->
-		<When Condition="Exists('$(UnityContainer)') AND Exists('..\..\Container\package.sln') AND !Exists('..\..\Container\package.props')">
-			<PropertyGroup>
-				<UnityTarget>DEVELOP</UnityTarget>
-			</PropertyGroup>
-		</When>
-
-		<!-- TNG -->
-		<When Condition="Exists('$(UnityContainer)') AND !Exists('..\..\Container\package.sln')">
-			<PropertyGroup>
-				<UnityTarget>LATEST</UnityTarget>
-			</PropertyGroup>
-		</When>
-
-		<!-- Standalone -->
-		<Otherwise>
-			<PropertyGroup>
-				<UnityTarget>STANDALONE</UnityTarget>
-			</PropertyGroup>
-		</Otherwise>
-	</Choose>
-  
-  
 
   <!-- Definitions -->
 
@@ -95,6 +48,12 @@
     <DefineConstants>UNITY_V4;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
+
+  <PropertyGroup>
+    <DefineConstants Condition="'$(Configuration)'=='v4'">$(DefineConstants);BEHAVIOR_V4</DefineConstants>
+    <DefineConstants Condition="'$(Configuration)'=='v5'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
+    <DefineConstants Condition="'$(Configuration)'!='v4' AND '$(Configuration)'!='v5'">$(DefineConstants);BEHAVIOR_V6</DefineConstants>
+  </PropertyGroup>
 
 
   <!-- v4 Exclusions -->

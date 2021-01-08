@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", "{B88AA8F4-E248-4B3A-AC0A-6E0AE536CC35}"
 	ProjectSection(SolutionItems) = preProject
 		Regression.Build.props = Regression.Build.props
+		Regression.Environment.props = Regression.Environment.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Container.Regression.Activated", "Pattern\Container.Regression.Activated.csproj", "{F1772C94-6588-43B6-B6D8-A3112E119536}"
