@@ -306,6 +306,8 @@ namespace Resolution
                 var service = scope.Resolve<IService>("3");
 
                 // Assert
+                Assert.IsNotNull(service);
+
                 Assert.AreEqual(3, enumerable.Length);
                 Assert.IsNotNull(enumerable[0]);
                 Assert.IsNotNull(enumerable[1]);
@@ -332,6 +334,8 @@ namespace Resolution
                 var service = scope.Resolve<IFoo<IService>>("3");
 
                 // Assert
+                Assert.IsNotNull(service);
+
                 Assert.AreEqual(3, enumerable.Length);
                 Assert.IsNotNull(enumerable[0]);
                 Assert.IsNotNull(enumerable[1]);
