@@ -30,7 +30,6 @@ namespace Constructors
         public override void Inject_Default(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
         public override void Inject_Named_Default(string test, Type type, object defaultValue, object defaultAttr, object registered, object named, object injected, object overridden, object @default) { }
 #endif
-
         #endregion
     }
 }

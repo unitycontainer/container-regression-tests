@@ -72,6 +72,27 @@ namespace Resolution
         }
 
         [TestMethod]
+        public void UnregisteredTwice()
+        {
+            // Arrange
+            Container.RegisterType<IService, Service>();
+            Container.RegisterType<IService, Service>("1");
+
+            // Act
+            var enumerable1 = Container.Resolve<IEnumerable<IService>>();
+            var enumerable2 = Container.Resolve<IEnumerable<IService>>();
+
+            // Verify
+            var array1 = enumerable1.ToArray();
+            Assert.IsNotNull(array1);
+            Assert.AreEqual(2, array1.Length);
+            
+            var array2 = enumerable2.ToArray();
+            Assert.IsNotNull(array2);
+            Assert.AreEqual(2, array2.Length);
+        }
+
+        [TestMethod]
         public void Lazy()
         {
             // Arrange

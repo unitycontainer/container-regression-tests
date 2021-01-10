@@ -101,7 +101,7 @@ namespace Injection
 #if !UNITY_V4
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
-        public virtual void Dependency_Injected_ByContract(string test, Type type, object defaultValue,
+        public void Dependency_Injected_ByContract(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
             => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
@@ -121,7 +121,7 @@ namespace Injection
 
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
-        public virtual void Dependency_Injected_ByContract_Ignored(string test, Type type, object defaultValue,
+        public void Dependency_Injected_ByContract_Ignored(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
             => Assert_FixtureBaseType(BaselineTestType.MakeGenericType(type),

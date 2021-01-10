@@ -87,7 +87,7 @@ namespace Regression.Container
         public override void PreBuildUp<TContext>(ref TContext context)
         {
             _called = true;
-            _existing = context.Target;
+            _existing = context.Existing;
 
 #if BEHAVIOR_V5
             var policy = (SpyPolicy)context.Get(null, typeof(SpyPolicy));
@@ -102,7 +102,7 @@ namespace Regression.Container
         public override void PostBuildUp<TContext>(ref TContext context)
         {
             // Spy on created object
-            _existing = context.Target;
+            _existing = context.Existing;
         }
 
         #endif

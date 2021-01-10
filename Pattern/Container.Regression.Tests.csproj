@@ -38,13 +38,7 @@
 		<DefineConstants Condition="'$(Configuration)'=='v4'">$(DefineConstants);BEHAVIOR_V4</DefineConstants>
 		<DefineConstants Condition="'$(Configuration)'=='v5'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
     <DefineConstants Condition="'$(Configuration)'!='v4' AND '$(Configuration)'!='v5'">$(DefineConstants);BEHAVIOR_V6</DefineConstants>
-
   </PropertyGroup>
-
-
-	<ItemGroup>
-	  <Compile Remove="Resolution\Hierarchy\**" />
-	</ItemGroup>
 
   <Import Project="..\Regression.Build.props" />
 </Project>

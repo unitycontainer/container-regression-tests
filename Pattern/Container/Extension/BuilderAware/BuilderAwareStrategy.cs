@@ -46,7 +46,7 @@ namespace Regression.Container
 #else
         public override void PreBuildUp<TContext>(ref TContext context)
         {
-            if (context.Target is IBuilderAware aware)
+            if (context.Existing is IBuilderAware aware)
                 aware.OnBuiltUp(context.Type, context.Name);
         }
 #endif
