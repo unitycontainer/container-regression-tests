@@ -7,7 +7,7 @@ using System.Reflection;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
-using Unity.Resolution;
+using Unity;
 #endif
 
 namespace Dependency

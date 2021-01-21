@@ -44,7 +44,7 @@ namespace Injection
                 BaselineTestType.MakeGenericType(type),
                 InjectionMember_Value(type), @default, registered);
 
-
+#if BEHAVIOR_V4 || BEHAVIOR_V5
         [TestCategory(CATEGORY_INJECT)]
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
 #if UNITY_V4 || UNITY_V5
@@ -66,6 +66,7 @@ namespace Injection
             // Act
             _ = Container.Resolve(target, null);
         }
+#endif
 
 
 #if !BEHAVIOR_V4 && !BEHAVIOR_V5
@@ -117,6 +118,7 @@ namespace Injection
 #endif
 
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
         [TestCategory(CATEGORY_INJECT)]
 #if !BEHAVIOR_V4 && !BEHAVIOR_V5
         [ExpectedException(typeof(ResolutionFailedException))]
@@ -131,6 +133,7 @@ namespace Injection
         }
 #else
             => Assert_Fail(NoPublicMember.MakeGenericType(type), InjectionMember_Value(injected));
+#endif
 #endif
     }
 }

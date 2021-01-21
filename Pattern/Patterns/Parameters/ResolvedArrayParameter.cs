@@ -126,27 +126,12 @@ namespace Parameters
 
         #region Failing
 
-        [PatternTestMethod("Ctor(null) with no arguments"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
-        [DynamicData(nameof(Parameters_Test_Data))]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ResolvedArrayParameter_Null(Type type, Type definition,
-                                                string member, string import,
-                                                Func<object, InjectionMember> func,
-                                                object registered, object named, object injected, object @default,
-                                                bool isNamed)
-        {
-            Assert_ResolvedArray_Injected(definition, type,
-                           func(new ResolvedArrayParameter(null)),
-                           Array.CreateInstance(type, 0));
-        }
-
-
         [PatternTestMethod("Ctor(generic, ...) throws"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
         [DynamicData(nameof(Parameters_Test_Data))]
 #if BEHAVIOR_V4
         [ExpectedException(typeof(ArgumentNullException))]
 #else
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof(ResolutionFailedException))]
 #endif
         public void ResolvedArrayParameter_Generic(Type type, Type definition,
                                                    string member, string import,

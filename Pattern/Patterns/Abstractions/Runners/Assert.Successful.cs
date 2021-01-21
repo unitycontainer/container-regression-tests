@@ -4,7 +4,7 @@ using System;
 using Microsoft.Practices.Unity;
 #else
 using Unity.Injection;
-using Unity.Resolution;
+using Unity;
 #endif
 
 namespace Regression

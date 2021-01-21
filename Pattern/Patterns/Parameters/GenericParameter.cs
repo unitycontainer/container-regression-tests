@@ -100,6 +100,7 @@ namespace Parameters
 
         #region Failing
 
+        [Ignore("Validation")]
         [PatternTestMethod("Ctor(T[]) on regular type")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(GenericParameter))]
 #if BEHAVIOR_V4
@@ -114,6 +115,7 @@ namespace Parameters
                 func(new GenericParameter(TDependency + "[]")), import, isNamed, registered, named);
 
 
+        [Ignore("Validation")]
         [PatternTestMethod("Ctor(WrongTypeName) throws on resolve")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(GenericParameter))]
 #if BEHAVIOR_V4
@@ -127,7 +129,7 @@ namespace Parameters
             => Assert_Generic_Injected(definition, type,
                 func(new GenericParameter(TDependency + "[]")), import, isNamed, registered, named);
 
-
+        [Ignore("Validation")]
         [PatternTestMethod("Ctor(T) on incompatible type")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(GenericParameter))]
         public void GenericParameter_Incompatible(Type type, Type definition, string member, string import,
