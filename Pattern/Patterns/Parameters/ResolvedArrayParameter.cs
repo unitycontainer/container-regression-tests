@@ -16,7 +16,7 @@ namespace Parameters
     {
         #region Success
 
-        [PatternTestMethod("Ctor(type) with no arguments"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
+        [TestMethod("Array with no arguments"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
         [DynamicData(nameof(Parameters_Test_Data))]
         public void ResolvedArrayParameter_Type(Type type, Type definition,
                                                 string member, string import,
@@ -28,7 +28,7 @@ namespace Parameters
                 Array.CreateInstance(type, 0));
 
 
-        [PatternTestMethod("Ctor(type, ...) with values"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
+        [TestMethod("Array with values"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
         [DynamicData(nameof(Parameters_Test_Data))]
         public void ResolvedArrayParameter_Value(Type type, Type definition,
                                                  string member, string import,
@@ -53,7 +53,7 @@ namespace Parameters
                 });
 
 
-        [PatternTestMethod("Ctor(type, ...) with resolvers"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
+        [TestMethod("Array with resolvers"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
         [DynamicData(nameof(Parameters_Test_Data))]
         public void ResolvedArrayParameter_Resolvers(Type type, Type definition,
                                                      string member, string import,
@@ -81,7 +81,7 @@ namespace Parameters
         }
 
 
-        [PatternTestMethod("Ctor(type, values) on object[] array"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
+        [TestMethod("Array{type, values} on object[] array"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
         [DynamicData(nameof(Array_Parameters_Data))]
         public void ResolvedArrayParameter_Object(Type type, Type definition,
                                                   string member, string import,
@@ -126,7 +126,7 @@ namespace Parameters
 
         #region Failing
 
-        [PatternTestMethod("Ctor(generic, ...) throws"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
+        [TestMethod("Array{generic, ...} throws"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
         [DynamicData(nameof(Parameters_Test_Data))]
 #if BEHAVIOR_V4
         [ExpectedException(typeof(ArgumentNullException))]
