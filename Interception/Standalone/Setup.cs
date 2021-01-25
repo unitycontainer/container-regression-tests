@@ -12,6 +12,7 @@ using Unity.Interception.PolicyInjection.Pipeline;
 #else
 using Unity;
 using Unity.Interception;
+using Unity.Interception.PolicyInjection.Pipeline;
 #endif
 
 namespace Standalone

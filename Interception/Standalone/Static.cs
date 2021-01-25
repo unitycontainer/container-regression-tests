@@ -10,6 +10,7 @@ using Unity.Interception.Interceptors.TypeInterceptors.VirtualMethodInterception
 #else
 using Unity;
 using Unity.Interception;
+using Unity.Interception.Interceptors.TypeInterceptors.VirtualMethodInterception;
 #endif
 
 namespace Standalone
