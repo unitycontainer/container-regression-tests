@@ -3,10 +3,15 @@ using System;
 using System.Collections.Generic;
 #if UNITY_V4
 using Microsoft.Practices.Unity.InterceptionExtension;
+#elif UNITY_V5
+using Unity.Interception.InterceptionBehaviors;
+using Unity.Interception.Interceptors;
+using Unity.Interception.Interceptors.InstanceInterceptors;
+using Unity.Interception.Interceptors.TypeInterceptors;
+using Unity.Interception.PolicyInjection.Pipeline;
 #else
 using Unity;
 using Unity.Interception;
-using Unity.Interception.PolicyInjection.Pipeline;
 #endif
 
 namespace Standalone
@@ -56,8 +61,9 @@ namespace Standalone
 
     public class RejectingInterceptor : IInstanceInterceptor, ITypeInterceptor
     {
+#if UNITY_V6
         public ISequenceSegment Next { get; set; }
-
+#endif
         public bool CanIntercept(Type t)
         {
             return false;

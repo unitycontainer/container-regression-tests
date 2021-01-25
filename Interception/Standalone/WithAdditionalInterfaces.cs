@@ -2,7 +2,12 @@
 using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity.InterceptionExtension;
+#elif UNITY_V5
+using Unity.Interception;
+using Unity.Interception.InterceptionBehaviors;
+using Unity.Interception.Interceptors.InstanceInterceptors.InterfaceInterception;
 #else
+using Unity;
 using Unity.Interception;
 #endif
 

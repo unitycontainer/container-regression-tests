@@ -3,9 +3,13 @@ using System;
 using System.Collections.Generic;
 #if UNITY_V4
 using Microsoft.Practices.Unity.InterceptionExtension;
-#else
+#elif UNITY_V5
 using Unity.Interception;
+using Unity.Interception.InterceptionBehaviors;
 using Unity.Interception.Interceptors.TypeInterceptors.VirtualMethodInterception;
+#else
+using Unity;
+using Unity.Interception;
 #endif
 
 namespace Standalone
