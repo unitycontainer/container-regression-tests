@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", 
 		Regression.Build.props = Regression.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Container.Regression.Tests", "Pattern\Container.Regression.Tests.csproj", "{B297ED79-ED00-408F-89ED-226BB679BF5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Container.Regression.Tests", "Container\Container.Regression.Tests.csproj", "{B297ED79-ED00-408F-89ED-226BB679BF5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,11 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", 
 		Regression.Environment.props = Regression.Environment.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Container.Regression.Activated", "Pattern\Container.Regression.Activated.csproj", "{F1772C94-6588-43B6-B6D8-A3112E119536}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Container.Regression.Activated", "Container\Container.Regression.Activated.csproj", "{F1772C94-6588-43B6-B6D8-A3112E119536}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Container.Regression.Compiled", "Pattern\Container.Regression.Compiled.csproj", "{3FD52E06-CBEC-4823-B368-33ACC85415E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Container.Regression.Compiled", "Container\Container.Regression.Compiled.csproj", "{3FD52E06-CBEC-4823-B368-33ACC85415E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Container.Regression.Resolved", "Pattern\Container.Regression.Resolved.csproj", "{B67BCDAB-5DA6-4110-8034-2DF8CE1FC343}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Container.Regression.Resolved", "Container\Container.Regression.Resolved.csproj", "{B67BCDAB-5DA6-4110-8034-2DF8CE1FC343}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

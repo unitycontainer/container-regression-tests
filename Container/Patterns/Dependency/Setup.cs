@@ -8,6 +8,7 @@ using System.Reflection;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
+using Unity.Resolution;
 #endif
 
 namespace Dependency
