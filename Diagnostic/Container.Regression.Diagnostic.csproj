@@ -38,7 +38,7 @@
 	<!-- Regression Tests -->
 
 	<ItemGroup>
-		<ProjectReference Include="..\Pattern\Container.Regression.Tests.csproj" />
+		<ProjectReference Include="..\Containera\Container.Regression.Tests.csproj" />
 	</ItemGroup>
 
 
