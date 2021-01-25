@@ -1,7 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+#if UNITY_V4
+using Microsoft.Practices.Unity.InterceptionExtension;
+#else
 using Unity.Interception;
-using Unity.Interception.TestSupport;
+#endif
 
 namespace Standalone
 {
