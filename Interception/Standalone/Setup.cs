@@ -1,25 +1,29 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+#if UNITY_V4
+using Microsoft.Practices.Unity.InterceptionExtension;
+#else
 using Unity;
 using Unity.Interception;
 using Unity.Interception.InterceptionBehaviors;
 using Unity.Interception.Interceptors;
 using Unity.Interception.Interceptors.TypeInterceptors.VirtualMethodInterception;
 using Unity.Interception.TestSupport;
+#endif
 
 namespace Standalone
 {
     [TestClass]
     public partial class StaticInterception
     {
-        #region Constants
+#region Constants
 
         const string PROPERTY = "Test";
         const string INSTANCE = "Instance";
         const string TYPE     = "Type";
 
-        #endregion
+#endregion
 
 
         [TestMethod]
@@ -227,7 +231,7 @@ namespace Standalone
             Assert.IsTrue(invoked);
         }
 
-        #region Test Data
+#region Test Data
 
         public class BaseClass : IInterface
         {
@@ -288,6 +292,6 @@ namespace Standalone
             public abstract int DoSomething();
         }
 
-        #endregion
+#endregion
     }
 }

@@ -33,7 +33,8 @@
     <Otherwise>
       <PropertyGroup>
         <DefineConstants>STANDALONE;$(DefineConstants)</DefineConstants>
-        <TargetFrameworks>net462;net472;net50</TargetFrameworks>
+        <!--<TargetFrameworks>net462;net472;net50</TargetFrameworks>-->
+        <TargetFrameworks>net462;net472</TargetFrameworks>
       </PropertyGroup>
     </Otherwise>
   </Choose>
