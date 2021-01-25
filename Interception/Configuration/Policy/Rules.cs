@@ -1,12 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 #if UNITY_V4
+using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
 #elif UNITY_V5
-using Unity.Interception.InterceptionBehaviors;
-using Unity.Interception.Interceptors;
-using Unity.Interception.Interceptors.InstanceInterceptors;
-using Unity.Interception.Interceptors.TypeInterceptors;
-using Unity.Interception.PolicyInjection.Pipeline;
+using Unity;
+using Unity.Interception;
+using Unity.Interception.PolicyInjection.Policies;
 #else
 using Unity;
 using Unity.Interception;
