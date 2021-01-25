@@ -2,6 +2,13 @@
 
   <Import Project="..\Regression.Environment.props" />
 
+  <!-- Well known locations for project files -->
+
+  <PropertyGroup>
+    <UnityInterception>..\..\Interception\src\Unity.Interception.csproj</UnityInterception>
+  </PropertyGroup>
+
+
   <Choose>
     <When Condition="'$(UnityTarget)' == 'LEGACY'">
       <PropertyGroup>
@@ -30,6 +37,45 @@
       </PropertyGroup>
     </Otherwise>
   </Choose>
+
+
+  <!-- Definitions -->
+
+  <!-- Unity v6 -->
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net5')) ">
+    <ProjectReference Condition="Exists('$(UnityInterception)') " Include="$(UnityInterception)" />
+    <PackageReference Condition="!Exists('$(UnityInterception)')" Include="Unity.Interception" Version="6.0.*-*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net48')) ">
+    <ProjectReference Condition="Exists('$(UnityInterception)') " Include="$(UnityInterception)" />
+    <PackageReference Condition="!Exists('$(UnityInterception)')" Include="Unity.Interception" Version="6.0.*-*" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net5')) ">
+    <DefineConstants>UNITY_V6;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <!-- Unity v5 -->
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net47')) ">
+    <ProjectReference Condition="Exists('$(UnityInterception)') " Include="$(UnityInterception)" />
+    <PackageReference Condition="!Exists('$(UnityInterception)')" Include="Unity.Interception" Version="5.11.*" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net47')) ">
+    <DefineConstants>UNITY_V5;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+
+  <!-- Unity v4 -->
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net46')) ">
+    <ProjectReference Condition="Exists('$(UnityInterception)') " Include="$(UnityInterception)" />
+    <PackageReference Condition="!Exists('$(UnityInterception)')" Include="Unity.Interception" Version="4.0.1" />
+  </ItemGroup>
+
 
 
   <!-- Configuration Settings -->
