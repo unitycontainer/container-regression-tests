@@ -58,6 +58,10 @@
     <DefineConstants>UNITY_V6;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net5')) ">
+    <Compile Remove="TestSupport\InvokeCountHandler.cs" />
+  </ItemGroup>
+
   <!-- Unity v5 -->
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net47')) ">
