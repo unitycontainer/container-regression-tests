@@ -31,6 +31,8 @@ namespace Configuration
         private const string RULES = "Rules";
         private const string MATCHING = "Matching";
         private const string HANDLERS = "Handlers";
+        private const string INJECTION = "Injection";
+
         private const string Name = "name";
         private const string PolicyName = "Policy1";
 
