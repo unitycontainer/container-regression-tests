@@ -81,6 +81,10 @@
     <PackageReference Condition="!Exists('$(UnityInterception)')" Include="Unity.Interception" Version="4.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interception\" />
+  </ItemGroup>
+
 
 
   <!-- Configuration Settings -->
