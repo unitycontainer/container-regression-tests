@@ -38,9 +38,4 @@
   </PropertyGroup>
 
   <Import Project="..\Regression.Build.props" />
-
-  <ItemGroup>
-    <PackageReference Update="MSTest.TestAdapter" Version="2.2.10" />
-    <PackageReference Update="MSTest.TestFramework" Version="2.2.10" />
-  </ItemGroup>
 </Project>
