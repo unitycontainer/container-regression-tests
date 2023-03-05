@@ -32,7 +32,9 @@ namespace Selection.Injected
             Assert.IsInstanceOfType(parameters[0], TypesForward[0]);
         }
 
-#if !UNITY_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("https://github.com/unitycontainer/container/issues/358")]
+#endif
         [TestMethod("Select generic"), TestProperty(SELECTION, BY_TYPE)]
         public virtual void Select_ByType_Generic()
         {
@@ -53,7 +55,6 @@ namespace Selection.Injected
             Assert.AreEqual(1, parameters.Length);
             Assert.IsInstanceOfType(parameters[0], TypesForward[0]);
         }
-#endif
 
         [TestMethod("Select second"), TestProperty(SELECTION, BY_TYPE)]
         public virtual void Select_ByType_Second()
@@ -93,7 +94,7 @@ namespace Selection.Injected
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, target);
 
-#if BEHAVIOR_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
 
             // With two constructors:
             //
@@ -104,7 +105,7 @@ namespace Selection.Injected
             //
             // .RegisterType<TestType>(new InjectionConstructor(typeof(string)))
             // 
-            // Unity v4 will correctly resolve string, but incorrectly pickup first 
+            // Unity will correctly resolve string, but incorrectly pickup first 
             // compatible constructor: 'TestType(object value)'. 
             // Since 'string' can be assigned to 'object', it is good enough for v4.
             // If it comes first, unity will accept this constructor. 

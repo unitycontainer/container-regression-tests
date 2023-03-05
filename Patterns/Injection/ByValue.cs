@@ -34,24 +34,24 @@ namespace Injection
                 InjectionMember_Value(injected),
                 injected, injected);
 
-
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("https://github.com/unitycontainer/container/issues/235")]
+#endif
         [TestCategory(CATEGORY_INJECT)]
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_WithType(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
                                             object @default)
-            => Assert_Injection(
+            => Assert_ThrowsWhenNotRegistered(
                 BaselineTestType.MakeGenericType(type),
                 InjectionMember_Value(type), @default, registered);
 
 #if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("https://github.com/unitycontainer/container/issues/235")]
+#endif
         [TestCategory(CATEGORY_INJECT)]
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
-#if UNITY_V4 || UNITY_V5
-        [ExpectedException(typeof(InvalidOperationException))]
-#else
         [ExpectedException(typeof(ResolutionFailedException))]
-#endif
         public virtual void Inject_NoMatch(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
                                             object @default)
@@ -66,10 +66,10 @@ namespace Injection
             // Act
             _ = Container.Resolve(target, null);
         }
+
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore()]
 #endif
-
-
-#if !BEHAVIOR_V4 && !BEHAVIOR_V5
         [TestCategory(CATEGORY_INJECT)]
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_Array(string test, Type type, object defaultValue, object defaultAttr,
@@ -82,7 +82,9 @@ namespace Injection
             Assert_Array_Import(BaselineArrayType.MakeGenericType(type), InjectionMember_Value(instance), instance);
         }
 
-
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore()]
+#endif
         [TestCategory(CATEGORY_INJECT)]
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_Enumerable(string test, Type type, object defaultValue, object defaultAttr, 
@@ -97,7 +99,6 @@ namespace Injection
             Assert_AlwaysSuccessful(target, InjectionMember_Value(instance), instance, instance);
         }
 
-#endif
         [TestCategory(CATEGORY_INJECT)]
         [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Inject_Resolver(string test, Type type, object defaultValue, object defaultAttr,

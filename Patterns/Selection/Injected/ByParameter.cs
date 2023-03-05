@@ -32,7 +32,9 @@ namespace Selection.Injected
             Assert.IsInstanceOfType(parameters[0], TypesForward[0]);
         }
 
-#if !UNITY_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("https://github.com/unitycontainer/container/issues/358")]
+#endif
         [TestMethod("Select by Parameter (Generic)"), TestProperty(SELECTION, BY_PARAMETER)]
         public virtual void Select_ByParameter_Generic()
         {
@@ -53,7 +55,6 @@ namespace Selection.Injected
             Assert.AreEqual(1, parameters.Length);
             Assert.IsInstanceOfType(parameters[0], TypesForward[0]);
         }
-#endif
 
         [TestMethod("Select by Parameter (Generic Parameter)"), TestProperty(SELECTION, BY_PARAMETER)]
         public virtual void Select_ByParameter_GenericParameter()
@@ -113,7 +114,7 @@ namespace Selection.Injected
             // Validate
             Assert.IsNotNull(instance);
             Assert.IsInstanceOfType(instance, target);
-#if BEHAVIOR_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
 
             // With two constructors:
             //

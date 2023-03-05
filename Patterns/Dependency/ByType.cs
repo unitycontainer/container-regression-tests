@@ -27,7 +27,7 @@ namespace Dependency
                                                 object registered, object named,
                                                 object injected, object overridden,
                                                 object @default)
-            => Assert_UnregisteredThrows_RegisteredSuccess(
+            => Assert_ThrowsWhenNotRegistered(
                 BaselineTestType.MakeGenericType(type), registered);
 
         [PatternTestMethod(XX_FROM_COMPUTER), TestCategory(CATEGORY_DEPENDENCY)]
@@ -37,7 +37,7 @@ namespace Dependency
                                        object registered, object named,
                                        object injected, object overridden,
                                        object @default)
-            => Assert_UnregisteredThrows_RegisteredSuccess(
+            => Assert_ThrowsWhenNotRegistered(
                 BaselineTestNamed.MakeGenericType(type), named);
 
         #endregion
@@ -52,7 +52,7 @@ namespace Dependency
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          object @default)
-            => Assert_UnregisteredThrows_RegisteredSuccess(
+            => Assert_ThrowsWhenNotRegistered(
                 CorrespondingTypeDefinition.MakeGenericType(type), registered);
 
 
@@ -63,7 +63,7 @@ namespace Dependency
                                                          object registered, object named,
                                                          object injected, object overridden,
                                                          object @default)
-            => Assert_UnregisteredThrows_RegisteredSuccess(
+            => Assert_ThrowsWhenNotRegistered(
                 CorrespondingTypeDefinition.MakeGenericType(type), registered);
 
         #endregion

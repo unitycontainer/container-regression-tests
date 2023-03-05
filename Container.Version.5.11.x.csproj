@@ -3,7 +3,7 @@
   <!-- Unity v5 -->
   
   <PropertyGroup>
-    <UnityContainer>..\..\Container\src\Unity.Container.csproj</UnityContainer>
+    <UnityContainer>..\Container\src\Unity.Container.csproj</UnityContainer>
     <DefineConstants>UNITY_V5;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
   
@@ -17,6 +17,7 @@
   <PropertyGroup>
     <DefineConstants Condition="'$(Configuration)'=='v5'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
     <DefineConstants Condition="'$(Configuration)'=='Release'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
+    <DefineConstants Condition="'$(Configuration)'=='Debug'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
   </PropertyGroup>
 
 

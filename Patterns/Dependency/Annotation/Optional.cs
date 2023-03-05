@@ -57,7 +57,7 @@ namespace Dependency.Optional
 
         #region Runners
 
-        protected override void Assert_UnregisteredThrows_RegisteredSuccess(Type type, ResolverOverride @override, object expected)
+        protected override void Assert_ThrowsWhenNotRegistered(Type type, ResolverOverride @override, object expected)
         {
             Container.RegisterType(null, type, null, null);
 

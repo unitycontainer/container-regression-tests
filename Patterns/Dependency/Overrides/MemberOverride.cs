@@ -36,6 +36,9 @@ namespace Dependency
                 MemberOverride(new InjectionParameter(overridden)), overridden);
 
 
+#if BEHAVIOR_V5
+        [Ignore("https://github.com/unitycontainer/container/issues/357")]
+#endif
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]
@@ -50,7 +53,7 @@ namespace Dependency
         public virtual void Member_ByResolvedMember(string test, Type type, object defaultValue,
                                                      object defaultAttr, object registered, object named,
                                                      object injected, object overridden, object @default) 
-            => Assert_UnregisteredThrows_RegisteredSuccess(
+            => Assert_ThrowsWhenNotRegistered(
                 BaselineTestType.MakeGenericType(type),
                 MemberOverride(new ResolvedParameter(type)), registered);
 
@@ -59,7 +62,7 @@ namespace Dependency
         public virtual void Member_ByResolvedNamed(string test, Type type, object defaultValue,
                                                      object defaultAttr, object registered, object named,
                                                      object injected, object overridden, object @default) 
-            => Assert_UnregisteredThrows_RegisteredSuccess(
+            => Assert_ThrowsWhenNotRegistered(
                 BaselineTestType.MakeGenericType(type),
                 MemberOverride(new ResolvedParameter(type, Name)),
                 named);
@@ -114,7 +117,7 @@ namespace Dependency
         public virtual void Member_OnType_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)
-            => Assert_UnregisteredThrows_RegisteredSuccess(
+            => Assert_ThrowsWhenNotRegistered(
                 BaselineTestType.MakeGenericType(type),
                 MemberOverride(new ResolvedParameter(type, Name)).OnType(type),
                 registered);

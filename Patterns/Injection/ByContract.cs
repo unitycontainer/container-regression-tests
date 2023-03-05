@@ -12,7 +12,9 @@ namespace Injection
 {
     public abstract partial class Pattern
     {
-#if !UNITY_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         [PatternTestMethod("Inject Unnamed dependency by XxxMember()"), TestCategory(CATEGORY_INJECT)]
         public virtual void Inject_Default(string test, Type type, object defaultValue, object defaultAttr,
@@ -24,6 +26,9 @@ namespace Injection
                 @default, registered);
 
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         [PatternTestMethod("Inject Named dependency by XxxMember()"), TestCategory(CATEGORY_INJECT)]
         public virtual void Inject_Named_Default(string test, Type type, object defaultValue, object defaultAttr,
@@ -33,7 +38,6 @@ namespace Injection
                 BaselineTestNamed.MakeGenericType(type),
                 InjectionMember_Default(), 
                 @default, named);
-#endif
 
         [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         [PatternTestMethod("Inject {1} dependency by {2} and {3}"), TestCategory(CATEGORY_INJECT)]

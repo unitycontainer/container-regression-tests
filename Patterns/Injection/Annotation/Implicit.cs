@@ -42,7 +42,7 @@ namespace Injection.Implicit
         public override void Inject_Named_Default(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default)
-            => Assert_UnregisteredThrows_RegisteredSuccess(
+            => Assert_ThrowsWhenNotRegistered(
                 BaselineTestNamed.MakeGenericType(type),
                 InjectionMember_Default(), registered);
 #endif

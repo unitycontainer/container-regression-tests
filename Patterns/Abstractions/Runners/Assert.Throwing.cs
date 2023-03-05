@@ -12,7 +12,7 @@ namespace Regression
 {
     public abstract partial class PatternBase
     {
-        protected void Assert_UnregisteredThrows_RegisteredSuccess(Type type, object expected)
+        protected void Assert_ThrowsWhenNotRegistered(Type type, object expected)
         {
             // Validate
             Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(type, null));
@@ -28,7 +28,7 @@ namespace Regression
             Assert.AreEqual(expected, instance.Value);
         }
 
-        protected void Assert_UnregisteredThrows_RegisteredSuccess(Type type, InjectionMember member, object expected)
+        protected void Assert_ThrowsWhenNotRegistered(Type type, InjectionMember member, object expected)
         {
             Container.RegisterType(null, type, null, null, member);
 
@@ -46,7 +46,26 @@ namespace Regression
             Assert.AreEqual(expected, instance.Value);
         }
 
-        protected virtual void Assert_UnregisteredThrows_RegisteredSuccess(Type type, ResolverOverride @override, object expected)
+        protected virtual void Assert_ThrowsWhenNotRegistered(Type type, InjectionMember member, object @default, object expected)
+        {
+            // Inject
+            Container.RegisterType(null, type, null, null, member);
+
+            // Act
+            Assert.ThrowsException<ResolutionFailedException>(() => Container.Resolve(type, null));
+
+            // Register missing types
+            RegisterTypes();
+
+            // Act
+            var instance = Container.Resolve(type, null) as PatternBaseType;
+
+            // Validate
+            Assert.IsNotNull(instance);
+            Assert.AreEqual(expected, instance.Value);
+        }
+
+        protected virtual void Assert_ThrowsWhenNotRegistered(Type type, ResolverOverride @override, object expected)
         {
             Container.RegisterType(null, type, null, null);
 

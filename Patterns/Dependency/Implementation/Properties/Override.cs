@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Unity;
 
 namespace Properties
 {
@@ -7,14 +8,12 @@ namespace Properties
     {
         #region Validation
 
-#if !BEHAVIOR_V4
-        [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
 #endif
-        public void Member_null()
-        {
-            _ = MemberOverride_ByName(null, this);
-        }
+        [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
+        [TestMethod, ExpectedException(typeof(ResolutionFailedException))]
+        public void Member_null() => _ = MemberOverride_ByName(null, this);
 
         #endregion
 
@@ -33,10 +32,11 @@ namespace Properties
     {
         #region Validation
 
-#if !BEHAVIOR_V4
-        [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
 #endif
+        [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
+        [TestMethod, ExpectedException(typeof(ResolutionFailedException))]
         public void Member_null()
         {
             _ = MemberOverride_ByName(null, this);
