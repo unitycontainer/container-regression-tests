@@ -118,9 +118,11 @@ namespace Injection
 #endif
 
 
-#if BEHAVIOR_V4 || BEHAVIOR_V5
         [TestCategory(CATEGORY_INJECT)]
-#if !BEHAVIOR_V4 && !BEHAVIOR_V5
+#if BEHAVIOR_V4
+#elif BEHAVIOR_V5
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
         [ExpectedException(typeof(ResolutionFailedException))]
 #endif
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
@@ -133,7 +135,6 @@ namespace Injection
         }
 #else
             => Assert_Fail(NoPublicMember.MakeGenericType(type), InjectionMember_Value(injected));
-#endif
 #endif
     }
 }

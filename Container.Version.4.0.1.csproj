@@ -23,6 +23,7 @@
 	<!-- v4 Exclusions -->
 	
   <ItemGroup>
+    <Compile Remove="**\*.!45.cs" />
     <Compile Remove="**\*.v5.cs" />
     <Compile Remove="**\*.v8.cs" />
 
@@ -39,6 +40,7 @@
     <Compile Remove="Patterns\Injection\Annotation\Overrides\Dependency.Import.cs" />
     <Compile Remove="Patterns\Injection\Annotation\Overrides\OptionalParameter.cs" />
     <Compile Remove="Patterns\Injection\Annotation\Overrides\ResolvedParameter.cs" />
+    <Compile Remove="Patterns\Injection\Override\Dependency.Injected.!v4.cs" />
     <Compile Remove="Patterns\Lifetime\LifetimeManager.cs" />
     <Compile Remove="Patterns\Lifetime\LifetimeManager\Disposable.cs" />
     <Compile Remove="Patterns\Selection\Implementation\Fields\Annotated.cs" />
