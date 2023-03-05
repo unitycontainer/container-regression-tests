@@ -37,7 +37,9 @@ namespace Injection
                 InjectionMember_Value(new InjectionParameter(injected)),
                 MemberOverride(new InjectionParameter(overridden)), overridden);
 
-
+#if BEHAVIOR_V5
+        [Ignore("https://github.com/unitycontainer/container/issues/357")]
+#endif
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         [ExpectedException(typeof(ResolutionFailedException))]

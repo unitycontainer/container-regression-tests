@@ -54,12 +54,13 @@
     <Compile Remove="Container\Extension\BuilderAware\IBuilderAware.cs" />
     <Compile Remove="Registration\Validation\Factory.cs" />
   </ItemGroup>
-	
+  
   <ItemGroup>
     <Using Remove="System.Net.Http" />
+    <None Remove=".git" />
     <None Remove=".gitignore" />
-	<None Remove="*.slnf" />
-	<None Remove="*.props" />
+	  <None Remove="*.slnf" />
+	  <None Remove="*.props" />
   </ItemGroup>
 
 </Project>
