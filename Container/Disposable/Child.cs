@@ -78,11 +78,11 @@ namespace Container
             Assert.AreEqual(1, service.Disposals);
         }
 
-        // Unity v4 did not have ContainerControlledTransientManager
-
-#if BEHAVIOR_V4 || BEHAVIOR_V5
+#if !UNITY_V4
+#if BEHAVIOR_V5
         [Ignore("Known Issue")]
 #endif
+        // Unity v4 did not have ContainerControlledTransientManager
         [PatternTestMethod(SubsequentResolutionsDisposed), TestProperty(DISPOSING, CHILD)]
         public void Child_SubsequentResolutionsDisposed()
         {
@@ -107,7 +107,8 @@ namespace Container
             Assert.AreEqual(0, after.Disposals);
         }
 
-#if BEHAVIOR_V4 || BEHAVIOR_V5
+
+#if BEHAVIOR_V5
         [Ignore("Known Issue")]
 #endif
         [PatternTestMethod(IgnoresExceptionDuringDisposal), TestProperty(DISPOSING, CHILD)]
@@ -124,6 +125,7 @@ namespace Container
             Assert.IsTrue(explosive.IsDisposed);
             Assert.AreEqual(1, explosive.Disposals);
         }
+#endif
 
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         [Ignore("Known Issue")]

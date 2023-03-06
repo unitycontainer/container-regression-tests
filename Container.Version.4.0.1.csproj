@@ -23,7 +23,7 @@
 	<!-- v4 Exclusions -->
 	
   <ItemGroup>
-    <Compile Remove="**\*.!45.cs" />
+    <Compile Remove="**\*.!v4.cs" />
     <Compile Remove="**\*.v5.cs" />
     <Compile Remove="**\*.v8.cs" />
 

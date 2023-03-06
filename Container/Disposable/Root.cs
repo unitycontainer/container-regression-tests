@@ -77,7 +77,8 @@ namespace Container
             Assert.AreEqual(1, service.Disposals);
         }
 
-#if BEHAVIOR_V4 || BEHAVIOR_V5
+#if !UNITY_V4
+#if BEHAVIOR_V5
         [Ignore("Known Issue")]
 #endif
         [PatternTestMethod(SubsequentResolutionsDisposed), TestProperty(DISPOSING, ROOT)]
@@ -104,7 +105,7 @@ namespace Container
             Assert.AreEqual(1, after.Disposals);
         }
 
-#if BEHAVIOR_V4 || BEHAVIOR_V5
+#if BEHAVIOR_V5
         [Ignore("Known Issue")]
 #endif
         [PatternTestMethod(IgnoresExceptionDuringDisposal), TestProperty(DISPOSING, ROOT)]
@@ -119,6 +120,7 @@ namespace Container
 
             Assert.IsTrue(explosive.IsDisposed);
         }
+#endif
 
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         [Ignore("Known Issue")]

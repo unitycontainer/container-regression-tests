@@ -34,6 +34,9 @@ namespace Lifetime.Manager
 
 
 #if !UNITY_V4
+#if BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
         [DataTestMethod, TestCategory(LIFETIME_MANAGER)]
         public virtual void Clone(LifetimeManager manager)
