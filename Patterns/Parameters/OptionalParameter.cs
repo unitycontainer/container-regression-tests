@@ -15,7 +15,9 @@ namespace Parameters
     {
         #region Success
 
-#if !UNITY_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Contract is ignored")]
+#endif
         [PatternTestMethod("OptionalParameter() preserves annotated contract")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalParameter))]
         public void OptionalParameter(Type type, Type definition, string member, string import,
@@ -23,7 +25,6 @@ namespace Parameters
                                       object injected, object @default, bool isNamed) 
             => Assert_Optionally_Injected(definition.MakeGenericType(type), 
                 func(new OptionalParameter()), @default, import, isNamed, registered, named);
-#endif
 
         [PatternTestMethod("OptionalParameter(type) forces contract: type, null")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalParameter))]
@@ -34,7 +35,9 @@ namespace Parameters
                 func(new OptionalParameter(type)), @default, import, isNamed, registered, registered);
 
 
-#if !UNITY_V4
+#if BEHAVIOR_V4
+        [Ignore("Contract is ignored")]
+#endif
         [PatternTestMethod("OptionalParameter(null) forces contract: AnnotatedType, null")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalParameter))]
         public void OptionalParameter_Null(Type type, Type definition, string member, string import,
@@ -44,6 +47,9 @@ namespace Parameters
                 func(new OptionalParameter((string)null)), @default, import, isNamed, registered, registered);
 
 
+#if BEHAVIOR_V4
+        [Ignore("Contract is ignored")]
+#endif
         [PatternTestMethod("OptionalParameter(Name) forces contract: AnnotatedType, Name")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalParameter))]
         public void OptionalParameter_Name(Type type, Type definition, string member, string import,
@@ -51,7 +57,6 @@ namespace Parameters
                                            object injected, object @default, bool isNamed)
             => Assert_Optionally_Injected(definition.MakeGenericType(type),
                 func(new OptionalParameter(Name)), @default, import, isNamed, named, named);
-#endif
 
         [PatternTestMethod("OptionalParameter(type, null) forces contract: type, null")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalParameter))]

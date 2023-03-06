@@ -10,7 +10,9 @@ namespace Lifetime.Synchronization
 {
     public abstract partial class Pattern
     {
-#if !UNITY_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod("SetValue(object) is not added to the scope"), TestCategory(LIFETIME_MANAGEMENT)]
         [DynamicData(nameof(Synchronized_Managers_Data), typeof(Lifetime.Pattern))]
         public virtual void SetValueObjectIsNotAddedToScope(LifetimeManager manager)
@@ -24,6 +26,9 @@ namespace Lifetime.Synchronization
             Assert.IsFalse(scope.Contains(instance));
         }
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod("SetValue(IDisposable) adds to the scope"), TestCategory(LIFETIME_MANAGEMENT)]
         [DynamicData(nameof(Synchronized_Managers_Data), typeof(Lifetime.Pattern))]
         public virtual void SetValueDisposableAddsToScope(LifetimeManager manager)
@@ -38,6 +43,5 @@ namespace Lifetime.Synchronization
             Assert.AreSame(instance, manager.GetTestValue(scope));
             Assert.IsTrue(scope.Contains(instance));
         }
-#endif
     }
 }

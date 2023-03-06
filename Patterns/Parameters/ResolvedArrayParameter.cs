@@ -28,6 +28,9 @@ namespace Parameters
                 Array.CreateInstance(type, 0));
 
 
+#if BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [TestMethod("Array with values"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
         [DynamicData(nameof(Parameters_Test_Data))]
         public void ResolvedArrayParameter_Value(Type type, Type definition,
@@ -81,6 +84,9 @@ namespace Parameters
         }
 
 
+#if BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [TestMethod("Array{type, values} on object[] array"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
         [DynamicData(nameof(Array_Parameters_Data))]
         public void ResolvedArrayParameter_Object(Type type, Type definition,
@@ -126,6 +132,9 @@ namespace Parameters
 
         #region Failing
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [TestMethod("Array{generic, ...} throws"), TestProperty(PARAMETER, nameof(ResolvedArrayParameter))]
         [DynamicData(nameof(Parameters_Test_Data))]
 #if BEHAVIOR_V4

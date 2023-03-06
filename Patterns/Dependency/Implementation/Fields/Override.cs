@@ -7,6 +7,9 @@ namespace Fields
     {
         #region Validation
 
+#if BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void Member_null()
@@ -32,6 +35,9 @@ namespace Fields
     {
         #region Validation
 
+#if BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void Member_null()

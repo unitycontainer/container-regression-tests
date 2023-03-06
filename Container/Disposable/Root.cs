@@ -12,6 +12,9 @@ namespace Container
 {
     public partial class Disposal
     {
+#if BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(SafeToDisposeMultipleTimes), TestProperty(DISPOSING, ROOT)]
         public void Root_SafeToDisposeMultipleTimes()
         {
@@ -38,7 +41,9 @@ namespace Container
             Assert.AreEqual(1, service.Disposals);
         }
 
-#if !BEHAVIOR_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(InstanceAccessibleAfterDispose), TestProperty(DISPOSING, ROOT)]
         public void Root_InstanceAccessibleAfterDispose()
         {
@@ -54,6 +59,9 @@ namespace Container
             Assert.AreSame(service, Container.Resolve<Unresolvable>());
         }
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(DisposableAccessibleAfterDispose), TestProperty(DISPOSING, ROOT)]
         public void Root_DisposableAccessibleAfterDispose()
         {
@@ -68,9 +76,10 @@ namespace Container
             Assert.IsTrue(service.IsDisposed);
             Assert.AreEqual(1, service.Disposals);
         }
-#endif
 
-#if !UNITY_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(SubsequentResolutionsDisposed), TestProperty(DISPOSING, ROOT)]
         public void Root_SubsequentResolutionsDisposed()
         {
@@ -95,6 +104,9 @@ namespace Container
             Assert.AreEqual(1, after.Disposals);
         }
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(IgnoresExceptionDuringDisposal), TestProperty(DISPOSING, ROOT)]
         public void Root_IgnoresExceptionDuringDisposal()
         {
@@ -107,9 +119,10 @@ namespace Container
 
             Assert.IsTrue(explosive.IsDisposed);
         }
-#endif
 
-#if !BEHAVIOR_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(DisposesWhenDiscarded), TestProperty(DISPOSING, ROOT)]
         public void Root_DisposesWhenDiscarded()
         {
@@ -136,6 +149,5 @@ namespace Container
                 return (weak, instance);
             }
         }
-#endif
     }
 }

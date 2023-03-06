@@ -100,36 +100,33 @@ namespace Parameters
 
         #region Failing
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
         [Ignore("Validation")]
+#endif
         [PatternTestMethod("GenericParameter(T[]) on regular type")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(GenericParameter))]
-#if BEHAVIOR_V4
-        [ExpectedException(typeof(InvalidOperationException))]
-#else
         [ExpectedException(typeof(ResolutionFailedException))]
-#endif
         public void GenericParameter_NoArray(Type type, Type definition, string member, string import,
                                              Func<object, InjectionMember> func, object registered, object named,
                                              object injected, object @default, bool isNamed)
             => Assert_Generic_Injected(definition, type,
                 func(new GenericParameter(TDependency + "[]")), import, isNamed, registered, named);
 
-
+#if BEHAVIOR_V4 || BEHAVIOR_V5
         [Ignore("Validation")]
+#endif
         [PatternTestMethod("GenericParameter(WrongTypeName) throws on resolve")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(GenericParameter))]
-#if BEHAVIOR_V4
-        [ExpectedException(typeof(InvalidOperationException))]
-#else
         [ExpectedException(typeof(ResolutionFailedException))]
-#endif
         public void GenericParameter_NoMatch(Type type, Type definition, string member, string import,
                                      Func<object, InjectionMember> func, object registered, object named,
                                      object injected, object @default, bool isNamed)
             => Assert_Generic_Injected(definition, type,
                 func(new GenericParameter(TDependency + "[]")), import, isNamed, registered, named);
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
         [Ignore("Validation")]
+#endif
         [PatternTestMethod("GenericParameter(T) on incompatible type")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(GenericParameter))]
         public void GenericParameter_Incompatible(Type type, Type definition, string member, string import,

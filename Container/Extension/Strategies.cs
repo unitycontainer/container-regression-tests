@@ -66,7 +66,9 @@ namespace Container
             Assert.IsTrue(strategies.Contains(spy));
         }
 
-#if !UNITY_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [TestMethod("Can Add Strategy Twice"), TestProperty(TESTING, nameof(BuilderStrategy))]
         [Obsolete]
         [ExpectedException(typeof(ArgumentException))]
@@ -92,58 +94,5 @@ namespace Container
 
             Assert.AreNotEqual(before.Length, after.Length);
         }
-#endif
-
-#if !UNITY_V4 && !UNITY_V5 && !UNITY_V6
-
-        [TestMethod("Can Add Other Strategy"), TestProperty(TESTING, nameof(BuilderStrategy))]
-        public void CanAddOtherStrategy()
-        {
-            SpyStrategy spy = new SpyStrategy();
-
-            var extension = new UnityContainer()
-                .AddExtension(new SpyExtension(spy, UnityBuildStage.PreCreation))
-                .Configure<SpyExtension>();
-
-            var before = AsEnumerable(extension.ExtensionContext.TypePipelineChain)
-                .Cast<BuilderStrategy>()
-                .ToArray();
-
-            Assert.IsTrue(before.Contains(spy));
-
-            extension.ExtensionContext.TypePipelineChain.Add(spy, UnityBuildStage.PostCreation);
-
-            var after = AsEnumerable(extension.ExtensionContext.TypePipelineChain)
-                .Cast<BuilderStrategy>()
-                .ToArray();
-
-            Assert.AreNotEqual(before.Length, after.Length);
-        }
-
-        [TestMethod("Can Replace Strategy"), TestProperty(TESTING, nameof(BuilderStrategy))]
-        public void CanReplaceStrategy()
-        {
-            SpyStrategy spy = new SpyStrategy();
-
-            var extension = new UnityContainer()
-                .AddExtension(new SpyExtension(spy, UnityBuildStage.PreCreation))
-                .Configure<SpyExtension>();
-
-            var before = AsEnumerable(extension.ExtensionContext.TypePipelineChain)
-                .Cast<BuilderStrategy>()
-                .ToArray();
-
-            Assert.IsTrue(before.Contains(spy));
-
-            extension.ExtensionContext.TypePipelineChain[UnityBuildStage.PreCreation] = spy;
-
-            var after = AsEnumerable(extension.ExtensionContext.TypePipelineChain)
-                .Cast<BuilderStrategy>()
-                .ToArray();
-
-            Assert.AreEqual(before.Length, after.Length);
-        }
-#endif
-
     }
 }

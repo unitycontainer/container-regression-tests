@@ -17,7 +17,6 @@
   <PropertyGroup>
     <DefineConstants Condition="'$(Configuration)'=='v5'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
     <DefineConstants Condition="'$(Configuration)'=='Release'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
-    <DefineConstants Condition="'$(Configuration)'=='Debug'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
   </PropertyGroup>
 
 

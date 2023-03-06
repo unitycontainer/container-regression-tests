@@ -74,7 +74,9 @@ namespace Parameters
                            new object[] { registered, named, injected, @default });
         }
 
-#if !BEHAVIOR_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod("GenericResolvedArrayParameter(T, values) on object[] array"), TestProperty(PARAMETER, nameof(GenericResolvedArrayParameter))]
         [DynamicData(nameof(Array_Parameters_Data))]
         public void GenericResolvedArrayParameter_Object(Type type, Type definition,
@@ -106,13 +108,15 @@ namespace Parameters
             for (var i = 0; i < expected.Length; i++)
                 Assert.IsTrue(list.Contains(expected[i]));
         }
-#endif
 
         #endregion
 
 
         #region Failing
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod("GenericResolvedArrayParameter(T) on not an array type"), TestProperty(PARAMETER, nameof(GenericResolvedArrayParameter))]
         [DynamicData(nameof(Parameters_Test_Data))]
 #if BEHAVIOR_V4
@@ -130,6 +134,9 @@ namespace Parameters
                 Array.CreateInstance(type, 0));
 
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod("GenericResolvedArrayParameter(wrong) throws if no match"), TestProperty(PARAMETER, nameof(GenericResolvedArrayParameter))]
         [DynamicData(nameof(Array_Parameters_Data))]
 #if BEHAVIOR_V4

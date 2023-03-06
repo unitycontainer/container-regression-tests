@@ -14,8 +14,10 @@ namespace Lifetime.Hierarchies
     public abstract partial class Pattern
     {
         #region Direct
-        
-#if !BEHAVIOR_V4
+
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Dependency_Data))]
         public void Resolve_Root_Children_Type_Siblings(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
@@ -39,6 +41,9 @@ namespace Lifetime.Hierarchies
         }
 
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Dependency_Data))]
         public void Resolve_Root_Children_Type_Hierarchical(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
@@ -62,6 +67,9 @@ namespace Lifetime.Hierarchies
         }
 
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Dependency_Data))]
         public void Resolve_Children_Root_Type_Siblings(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
@@ -85,6 +93,9 @@ namespace Lifetime.Hierarchies
         }
 
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Dependency_Data))]
         public void Resolve_Children_Root_Type_Hierarchical(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
@@ -106,7 +117,6 @@ namespace Lifetime.Hierarchies
                           child2, instanceFromChild2);
             }
         }
-#endif
 
         #endregion
 

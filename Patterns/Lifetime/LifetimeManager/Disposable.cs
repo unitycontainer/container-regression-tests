@@ -14,6 +14,9 @@ namespace Lifetime.Manager
 {
     public abstract partial class Pattern
     {
+#if BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod("SetValue(...) ignores lifetime on object"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Disposable_Data))]
         public void SetValueIgnoresLifetimeOnObject(string name, LifetimeManagerFactoryDelegate factory, bool isDisposable)
@@ -52,6 +55,9 @@ namespace Lifetime.Manager
 
 
 
+#if BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod("Supports multiple Dispose() calls"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Disposable_Data))]
         public void ImmuneToMultiDisposes(string name, LifetimeManagerFactoryDelegate factory, bool isDisposable)

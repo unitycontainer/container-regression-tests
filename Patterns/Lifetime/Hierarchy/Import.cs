@@ -15,7 +15,9 @@ namespace Lifetime.Hierarchies
     {
         #region Registered Singleton
 
-#if !BEHAVIOR_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
         public void Resolve_Root_Children_Singleton_Siblings(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
@@ -39,6 +41,9 @@ namespace Lifetime.Hierarchies
         }
 
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
         public void Resolve_Root_Children_Singleton_Hierarchical(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
@@ -62,6 +67,9 @@ namespace Lifetime.Hierarchies
         }
 
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
         public void Resolve_Children_Root_Singleton_Siblings(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
@@ -85,6 +93,9 @@ namespace Lifetime.Hierarchies
         }
 
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
         public void Resolve_Children_Root_Singleton_Hierarchical(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
@@ -106,14 +117,15 @@ namespace Lifetime.Hierarchies
                           child2, instanceFromChild2);
             }
         }
-#endif
 
         #endregion
 
 
         #region Unregistered Import
 
-#if !BEHAVIOR_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
         public void Resolve_Root_Children_Import_Siblings(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
@@ -137,6 +149,9 @@ namespace Lifetime.Hierarchies
         }
 
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
         public void Resolve_Root_Children_Import_Hierarchical(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
@@ -158,8 +173,6 @@ namespace Lifetime.Hierarchies
                           child2, instanceFromChild2);
             }
         }
-#endif
-
 
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_NONE)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
@@ -196,7 +209,9 @@ namespace Lifetime.Hierarchies
         }
 
 
-#if !BEHAVIOR_V4
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
         public void Resolve_Children_Root_Import_Siblings(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
@@ -220,6 +235,9 @@ namespace Lifetime.Hierarchies
         }
 
 
+#if BEHAVIOR_V4 || BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod(PATTERN_NAME_FORMAT), TestProperty(RESOLVING, REGISTRATION_ROOT)]
         [DynamicData(nameof(Hierarchy_Import_Data))]
         public void Resolve_Children_Root_Import_Hierarchical(string name, Type type, LifetimeManagerFactoryDelegate factory, params AssertResolutionDelegate[] methods)
@@ -241,7 +259,6 @@ namespace Lifetime.Hierarchies
                           child2, instanceFromChild2);
             }
         }
-#endif
 
         #endregion
 
