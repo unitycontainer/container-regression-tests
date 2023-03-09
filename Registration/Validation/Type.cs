@@ -20,27 +20,19 @@ namespace Registration
             get
             {
                 yield return new object[] { typeof(IService), typeof(Service),  null, null,                                     typeof(TransientLifetimeManager) };
-#if !BEHAVIOR_V4
-                yield return new object[] { typeof(Service),  typeof(IService), null, null,                                     typeof(TransientLifetimeManager) };
-#endif
                 yield return new object[] { typeof(object),   typeof(object),   null, null,                                     typeof(TransientLifetimeManager) };
                 yield return new object[] { null,             typeof(object),   null, null,                                     typeof(TransientLifetimeManager) };
-#if !BEHAVIOR_V4
-                yield return new object[] { typeof(object),   null,             null, null,                                     typeof(TransientLifetimeManager) };
-#endif
                 yield return new object[] { typeof(object),   typeof(object),   Name, null,                                     typeof(TransientLifetimeManager) };
                 yield return new object[] { null,             typeof(object),   Name, null,                                     typeof(TransientLifetimeManager) };
-#if !BEHAVIOR_V4
-                yield return new object[] { typeof(object),   null,             Name, null,                                     typeof(TransientLifetimeManager) };
-#endif
                 yield return new object[] { typeof(object),   typeof(object),   null, new ContainerControlledLifetimeManager(), typeof(ContainerControlledLifetimeManager) };
                 yield return new object[] { null,             typeof(object),   null, new ContainerControlledLifetimeManager(), typeof(ContainerControlledLifetimeManager) };
-#if !BEHAVIOR_V4
-                yield return new object[] { typeof(object),   null,             null, new ContainerControlledLifetimeManager(), typeof(ContainerControlledLifetimeManager) };
-#endif
                 yield return new object[] { typeof(object),   typeof(object),   Name, new ContainerControlledLifetimeManager(), typeof(ContainerControlledLifetimeManager) };
                 yield return new object[] { null,             typeof(object),   Name, new ContainerControlledLifetimeManager(), typeof(ContainerControlledLifetimeManager) };
-#if !BEHAVIOR_V4
+#if !BEHAVIOR_V4 // && !BEHAVIOR_V5
+                yield return new object[] { typeof(Service),  typeof(IService), null, null,                                     typeof(TransientLifetimeManager) };
+                yield return new object[] { typeof(object),   null,             null, null,                                     typeof(TransientLifetimeManager) };
+                yield return new object[] { typeof(object),   null,             Name, null,                                     typeof(TransientLifetimeManager) };
+                yield return new object[] { typeof(object),   null,             null, new ContainerControlledLifetimeManager(), typeof(ContainerControlledLifetimeManager) };
                 yield return new object[] { typeof(object),   null,             Name, new ContainerControlledLifetimeManager(), typeof(ContainerControlledLifetimeManager) };
 #endif
             }
@@ -50,7 +42,7 @@ namespace Registration
         {
             get
             {
-#if BEHAVIOR_V4
+#if BEHAVIOR_V4 // || BEHAVIOR_V5
                 yield return new object[] { typeof(ArgumentException), typeof(Service), typeof(IService), null, new TransientLifetimeManager(), null };
                 yield return new object[] { typeof(ArgumentException), typeof(object), null, null, new TransientLifetimeManager(),           null };
                 yield return new object[] { typeof(ArgumentException), typeof(object), null, Name, new TransientLifetimeManager(),           null };

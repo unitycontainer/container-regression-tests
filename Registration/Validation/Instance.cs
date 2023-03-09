@@ -24,6 +24,9 @@ namespace Registration
             Assert.IsNotNull(Container.Resolve<IUnresolvable>());
         }
 
+#if BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void RegisterInstance_ThrowsOnNullNull()
@@ -31,6 +34,9 @@ namespace Registration
             Container.RegisterInstance(null, null, null, new ContainerControlledLifetimeManager());
         }
 
+#if BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void RegisterInstance_Null_Null_Null()

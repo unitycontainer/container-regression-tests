@@ -21,12 +21,15 @@
   </PropertyGroup>
 
 	<!-- v4 Exclusions -->
-	
   <ItemGroup>
-    <Compile Remove="**\*.!v4.cs" />
-    <Compile Remove="**\*.v5.cs" />
-    <Compile Remove="**\*.v8.cs" />
+  	<Compile Remove="**\*.!v4.cs" />
+  	<Compile Remove="**\*.v5.cs" />
+  	<Compile Remove="**\*.v6.cs" />
+  	<Compile Remove="**\*.v7.cs" />
+  	<Compile Remove="**\*.v8.cs" />
+  </ItemGroup>
 
+  <ItemGroup>
     <Compile Remove="Pattern\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Pattern\Abstractions\Resolvers\ValidatintResolver.cs" />
     <Compile Remove="Pattern\Abstractions\FixtureBase.Fields.cs" />

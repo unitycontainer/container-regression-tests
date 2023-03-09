@@ -24,12 +24,17 @@
   
   <ItemGroup>
   	<Compile Remove="**\*.v4.cs" />
+  	<Compile Remove="**\*.!v5.cs" />
+  	<Compile Remove="**\*.v6.cs" />
+  	<Compile Remove="**\*.v7.cs" />
   	<Compile Remove="**\*.v8.cs" />
-  
-    <Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
-    <Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
-    <Compile Remove="Patterns\Dependency\DefaultAttribute.cs" />
-    <Compile Remove="Patterns\Lifetime\LifetimeManager.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Pattern\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+    <Compile Remove="Pattern\Abstractions\Resolvers\ValidatintResolver.cs" />
+    <Compile Remove="Pattern\Dependency\DefaultAttribute.cs" />
+    <Compile Remove="Pattern\Lifetime\LifetimeManager.cs" />
     <Compile Remove="Registration\Validation\Factory.cs" />
     <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
     <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />

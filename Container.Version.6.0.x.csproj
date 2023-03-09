@@ -3,7 +3,7 @@
   <!-- Unity v6 -->
   
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework> 
+    <TargetFrameworks>net6.0</TargetFrameworks> 
     <UnityContainer>..\Container\src\Unity.Container.csproj</UnityContainer>
     <DefineConstants>UNITY_V6;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
@@ -26,8 +26,13 @@
   
   <ItemGroup>
   	<Compile Remove="**\*.v4.cs" />
+  	<Compile Remove="**\*.v5.cs" />
+  	<Compile Remove="**\*.!v6.cs" />
+  	<Compile Remove="**\*.v7.cs" />
   	<Compile Remove="**\*.v8.cs" />
-  
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
     <Compile Remove="Patterns\Dependency\DefaultAttribute.cs" />
