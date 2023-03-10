@@ -50,7 +50,7 @@ namespace Registration
 
             // Validate
             Assert.IsNotNull(registrations);
-#if UNITY_V5 || UNITY_V6
+#if UNITY_V5 || UNITY_V6 || UNITY_V7
             Assert.IsInstanceOfType(registrations, typeof(IContainerRegistration[]));
 #else
             Assert.IsInstanceOfType(registrations, typeof(ContainerRegistration[]));

@@ -41,7 +41,7 @@ namespace Lifetime.Manager
         [DataTestMethod, TestCategory(LIFETIME_MANAGER)]
         public virtual void Clone(LifetimeManager manager)
         {
-#if UNITY_V5 || UNITY_V6
+#if UNITY_V5 || UNITY_V6 || UNITY_V7
             var clone = manager.CreateLifetimePolicy();
 #else
             var clone = manager.Clone();
@@ -52,7 +52,7 @@ namespace Lifetime.Manager
         }
 #endif
 
-#if !UNITY_V4 && !UNITY_V5 && !UNITY_V6
+#if !UNITY_V4 && !UNITY_V5 && !UNITY_V6 && !UNITY_V7
 
         [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
         [PatternTestMethod("TryGetValue returns NoValue"), TestCategory(LIFETIME_MANAGER)]
@@ -98,7 +98,7 @@ namespace Lifetime.Manager
             Assert.AreSame(value, other);
         }
 
-#if !UNITY_V4 && !UNITY_V5 && !UNITY_V6
+#if !UNITY_V4 && !UNITY_V5 && !UNITY_V6 && !UNITY_V7
         [PatternTestMethod("TryGetValue(...) does not block"), TestCategory(LIFETIME_MANAGER)]
         [DynamicData(nameof(Lifetime_Managers_Data), typeof(Lifetime.Pattern))]
         public void TryGetValueDoesNotBlock(LifetimeManager manager)

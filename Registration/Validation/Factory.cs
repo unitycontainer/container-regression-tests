@@ -22,18 +22,20 @@ namespace Registration
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void RegisterFactory_Null_Null_Factory()
-        {
-            // Act
-            Container.RegisterFactory(null, null, (c,t,n,o)=> null, null);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void RegisterFactory_Type_Null_Null()
         {
             // Act
             Container.RegisterFactory(typeof(object), null, null, null);
+        }
+
+#if !UNITY_V4 && !UNITY_V5 && !UNITY_V6 && !UNITY_V7
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void RegisterFactory_Null_Null_Factory()
+        {
+            // Act
+            Container.RegisterFactory(null, null, (c,t,n,o)=> null, null);
         }
 
         [TestMethod]
@@ -90,5 +92,7 @@ namespace Registration
             // Validate
             Assert.AreSame(value, instance);
         }
+#endif
+
     }
 }

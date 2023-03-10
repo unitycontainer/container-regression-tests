@@ -74,7 +74,7 @@ namespace Parameters
 
                 #region ResolvedParameter
 
-#if !UNITY_V4 && !UNITY_V5 && !UNITY_V6
+#if !UNITY_V4 && !UNITY_V5 && !UNITY_V6 && !UNITY_V7
                 yield return new object[]
                 {
                     "ResolvedParameter()",         // Name
@@ -137,7 +137,7 @@ namespace Parameters
 
                 #region OptionalParameter
 
-#if !UNITY_V4 && !UNITY_V5 && !UNITY_V6
+#if !UNITY_V4 && !UNITY_V5 && !UNITY_V6 && !UNITY_V7
                 yield return new object[]
                 {
                     "OptionalParameter()",         // Name
