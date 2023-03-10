@@ -7,12 +7,13 @@ on:
       - 'master'    
       - 'release/**'    
       - 'prototype/**'    
- 
-jobs: 
 
-  build-package-flow:
-    uses: unitycontainer/.github/.github/workflows/build-package-flow.yml@main
-    with:
-      solution-path: 'Container.Regression.Tests.sln'
-    secrets: inherit 
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        Configuration: [v4, v5, v6]
+    steps:
+      - uses: actions/checkout@v3
 
