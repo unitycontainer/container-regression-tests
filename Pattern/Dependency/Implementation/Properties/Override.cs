@@ -16,7 +16,7 @@ namespace Properties
         [Ignore("Known Issue")]
 #endif
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [TestMethod, ExpectedException(typeof(ResolutionFailedException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void Member_null() => _ = MemberOverride_ByName(null, this);
 
         #endregion
@@ -40,7 +40,7 @@ namespace Properties
         [Ignore("Known Issue")]
 #endif
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [TestMethod, ExpectedException(typeof(ResolutionFailedException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void Member_null()
         {
             _ = MemberOverride_ByName(null, this);
