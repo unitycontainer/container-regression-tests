@@ -12,6 +12,14 @@
 // Unity v6.x
 #endif
 
+#if UNITY_V7
+// Unity v7.x
+#endif
+
+#if UNITY_V8
+// Unity v8.x
+#endif
+
 
 // Behavior
 
@@ -27,8 +35,26 @@
 // v6.x
 #endif
 
+#if BEHAVIOR_V7
+// v7.x
+#endif
+
+#if BEHAVIOR_V8
+// v8.x
+#endif
+
 // .NET Framework
 
+
+#if NET8_0
+// Current Framework NET8.0
+#endif
+#if NET7_0
+// Current Framework NET7.0
+#endif
+#if NET6_0
+// Current Framework NET6.0
+#endif
 #if NET5_0
 // Current Framework NET5.0
 #endif
