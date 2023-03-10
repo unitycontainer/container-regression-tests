@@ -1,12 +1,4 @@
-﻿using System;
-using System.Threading;
-#if UNITY_V4
-using Microsoft.Practices.ObjectBuilder2;
-using Microsoft.Practices.Unity;
-#else
-using Unity;
-#endif
-
+﻿
 namespace Regression
 {
     public interface IConstrained<TEntity>

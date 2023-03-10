@@ -1,11 +1,8 @@
 ﻿#if UNITY_V4
 using Microsoft.Practices.Unity;
-#elif UNITY_V5 || UNITY_V6
-using Unity;
-using Unity.Extension;
 #else
-using Unity.Extension;
 using Unity;
+using Unity.Extension;
 #endif
 
 
