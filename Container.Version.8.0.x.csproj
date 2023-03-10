@@ -16,6 +16,10 @@
   <!-- Configuration Settings -->
 
   <PropertyGroup>
+    <DefineConstants Condition="'$(Configuration)'=='v4'">$(DefineConstants);BEHAVIOR_V4</DefineConstants>
+    <DefineConstants Condition="'$(Configuration)'=='v5'">$(DefineConstants);BEHAVIOR_V5</DefineConstants>
+	<DefineConstants Condition="'$(Configuration)'=='v6'">$(DefineConstants);BEHAVIOR_V6</DefineConstants>
+    <DefineConstants Condition="'$(Configuration)'=='v7'">$(DefineConstants);BEHAVIOR_V7</DefineConstants>
     <DefineConstants Condition="'$(Configuration)'=='v8'">$(DefineConstants);BEHAVIOR_V8</DefineConstants>
     <DefineConstants Condition="'$(Configuration)'=='Release'">$(DefineConstants);BEHAVIOR_V8</DefineConstants>
   </PropertyGroup>

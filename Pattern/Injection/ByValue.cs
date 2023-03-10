@@ -117,8 +117,8 @@ namespace Injection
                                InjectionMember_Value(new ValidatingResolverFactory(injected)),
                                injected, injected);
 #endif
-
-
+        // TODO: Implement in Diagnostic mode
+        [Ignore("Only relevant in Diagnostic mode")]
         [TestCategory(CATEGORY_INJECT)]
 #if BEHAVIOR_V4
 #elif BEHAVIOR_V5

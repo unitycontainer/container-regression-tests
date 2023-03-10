@@ -89,7 +89,7 @@ namespace Regression.Container
             _called = true;
             _existing = context.Existing;
 
-#if BEHAVIOR_V5
+#if UNITY_V5
             var policy = (SpyPolicy)context.Get(null, typeof(SpyPolicy));
 #else
             var policy = context.Policies.GetDefault<SpyPolicy>();
