@@ -1,0 +1,15 @@
+name:  Continuous Deployment
+
+on:
+  push:
+    branches:
+      - 'main'    
+      - 'master'    
+      - 'release/**'    
+      - 'prototype/**'    
+ 
+jobs: 
+
+  build-package-flow:
+    uses: unitycontainer/.github/.github/workflows/build-package-flow.yml@main
+    secrets: inherit 
