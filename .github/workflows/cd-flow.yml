@@ -13,5 +13,5 @@ jobs:
   build-package-flow:
     uses: unitycontainer/.github/.github/workflows/build-package-flow.yml@main
     with:
-      soulution-path: 'Container.Regression.Tests.sln'
+      solution-path: 'Container.Regression.Tests.sln'
     secrets: inherit 
