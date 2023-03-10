@@ -11,9 +11,13 @@ on:
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}      
     strategy:
       matrix:
         Configuration: [v4, v5, v6]
     steps:
       - uses: actions/checkout@v3
+
+
+
 
