@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Threading;
-using Unity;
 using Unity.Extension;
-using Unity.Resolution;
 
 namespace Regression
 {

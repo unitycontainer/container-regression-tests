@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Unity v6 -->
+  
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework> 
+    <UnityContainer>..\Container\src\Unity.Container.csproj</UnityContainer>
+    <DefineConstants>UNITY_V8;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Condition="Exists('$(UnityContainer)') " Include="$(UnityContainer)" />
+    <PackageReference Condition="!Exists('$(UnityContainer)')" Include="Unity.Container" Version="6.0.*-*" />
+  </ItemGroup>
+
+  <!-- Configuration Settings -->
+
+  <PropertyGroup>
+    <DefineConstants Condition="'$(Configuration)'=='v6'">$(DefineConstants);BEHAVIOR_V8</DefineConstants>
+    <DefineConstants Condition="'$(Configuration)'=='Release'">$(DefineConstants);BEHAVIOR_V8</DefineConstants>
+  </PropertyGroup>
+
+
+  <!-- v6 Exclusions -->
+  
+  <ItemGroup>
+  	<Compile Remove="**\*.v4.cs" />
+  	<Compile Remove="**\*.v5.cs" />
+  	<Compile Remove="**\*.v6.cs" />
+  	<Compile Remove="**\*.v7.cs" />
+  	<Compile Remove="**\*.!v8.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Pattern\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Using Remove="System.Net.Http" />
+    <None Remove=".git" />
+    <None Remove=".gitignore" />
+	  <None Remove="*.slnf" />
+	  <None Remove="*.props" />
+  </ItemGroup>
+
+</Project>
