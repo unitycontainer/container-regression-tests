@@ -42,9 +42,8 @@ namespace Injection
         public virtual void Inject_WithType(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
                                             object @default)
-            => Assert_ThrowsWhenNotRegistered(
-                BaselineTestType.MakeGenericType(type),
-                InjectionMember_Value(type), @default, registered);
+            => Assert_Injection(BaselineTestType.MakeGenericType(type),
+                                InjectionMember_Value(type), @default, registered);
 
 #if BEHAVIOR_V4 || BEHAVIOR_V5
         [Ignore("https://github.com/unitycontainer/container/issues/235")]
