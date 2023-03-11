@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Selection
 {
-    public abstract partial class Pattern : Regression.PatternBase
+    public abstract partial class Pattern : PatternBase
     {
         #region Fields
 

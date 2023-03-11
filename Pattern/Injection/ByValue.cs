@@ -117,24 +117,20 @@ namespace Injection
                                injected, injected);
 #endif
         // TODO: Implement in Diagnostic mode
-        [Ignore("Only relevant in Diagnostic mode")]
         [TestCategory(CATEGORY_INJECT)]
-#if BEHAVIOR_V4
-#elif BEHAVIOR_V5
+#if BEHAVIOR_V5
         [ExpectedException(typeof(InvalidOperationException))]
-#else
-        [ExpectedException(typeof(ResolutionFailedException))]
 #endif
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_NoPublicMember(string test, Type type, object defaultValue, object defaultAttr,
                                                    object registered, object named, object injected, object overridden,
                                                    object @default)
-#if BEHAVIOR_V4
-        {
-            // Unity v4 ignores injection members for nonpublic members
-        }
-#else
+#if BEHAVIOR_V5
             => Assert_Fail(NoPublicMember.MakeGenericType(type), InjectionMember_Value(injected));
+#else
+            => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
+                               InjectionMember_Value(new ValidatingResolverFactory(injected)),
+                               injected, injected);
 #endif
     }
 }
