@@ -115,7 +115,6 @@ namespace Injection
             => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                                InjectionMember_Value(new ValidatingResolverFactory(injected)),
                                injected, injected);
-#endif
         // TODO: Implement in Diagnostic mode
         [TestCategory(CATEGORY_INJECT)]
 #if BEHAVIOR_V5
@@ -131,6 +130,7 @@ namespace Injection
             => Assert_AlwaysSuccessful(BaselineTestType.MakeGenericType(type),
                                InjectionMember_Value(new ValidatingResolverFactory(injected)),
                                injected, injected);
+#endif
 #endif
     }
 }
