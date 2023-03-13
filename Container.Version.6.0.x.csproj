@@ -36,11 +36,11 @@
     <Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
     <Compile Remove="Patterns\Dependency\DefaultAttribute.cs" />
-    <Compile Remove="Patterns\Lifetime\LifetimeManager.cs" />
+    <!--<Compile Remove="Patterns\Lifetime\LifetimeManager.cs" />
     <Compile Remove="Registration\Validation\Factory.cs" />
     <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
     <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
-    <Compile Remove="Registration\Validation\Factory.cs" />
+    <Compile Remove="Registration\Validation\Factory.cs" />-->
   </ItemGroup>
   
   
