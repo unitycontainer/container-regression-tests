@@ -14,10 +14,10 @@ namespace Registration
         [TestMethod]
         public void IServiceProvider()
         {
-            var registration = Container.Registrations.ToList()[2];
-            
-            Assert.IsNotNull(registration);
-            Assert.AreEqual(registration.RegisteredType, typeof(IServiceProvider));
+            var _ = Container.Registrations
+                             .Select(r => r.RegisteredType)
+                             .Where(t => t == typeof(IServiceProvider))
+                             .First();
         }
 
         [TestMethod]
