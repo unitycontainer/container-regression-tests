@@ -11,7 +11,7 @@ using Unity.Lifetime;
 
 namespace Container
 {
-    public partial class Basics
+    public partial class Hierarchies
     {
         [PatternTestMethod("IUnityContainer Resolves Itself"), TestCategory(nameof(IUnityContainer))]
         public void IUnityContainer_Itself()

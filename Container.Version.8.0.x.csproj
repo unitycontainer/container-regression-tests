@@ -36,7 +36,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Compile Remove="Pattern\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+    <Compile Remove="Pattern\Abstractions\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
   </ItemGroup>
   
   <ItemGroup>
