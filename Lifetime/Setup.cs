@@ -21,6 +21,7 @@ namespace Lifetime
         protected const string LIFETIME_MANAGER = "Manager";
         protected const string SYNCHRONIZED_MANAGER = "Synchronization";
         protected const string LIFETIME_MANAGEMENT = "Scope";
+        protected const string INSTANCE_DEFAULT = "Instance Default";
 
         #endregion
 
