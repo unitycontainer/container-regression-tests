@@ -9,7 +9,7 @@ using Unity.Lifetime;
 namespace Lifetime
 {
     [TestClass]
-    public class Managers : Lifetime.Manager.Pattern
+    public class Containers : Lifetime.Manager.Pattern
     {
         #region Scaffolding
 
