@@ -22,6 +22,7 @@ namespace Regression
         protected const string PARAMETER = "Injecting";
         protected const string CATEGORY_INJECT = "Injecting";
         protected const string MEMBER_OVERRIDE = "MemberOverride";
+        protected const string PARAMETER_OVERRIDE = "ParameterOverride";
         protected const string VALIDATION = "Validation";
         protected const string IMPORTING = "Importing";
         protected const string HIERARCHY = "Hierarchy";
