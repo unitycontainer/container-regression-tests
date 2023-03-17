@@ -16,16 +16,13 @@ namespace Parameters
         #region Success
 
 #if !UNITY_V4
-#if BEHAVIOR_V5
-        [Ignore("Name is ignored")]
-#endif
         [PatternTestMethod("ResolvedParameter() preserves annotated contract"), TestProperty(PARAMETER, nameof(ResolvedParameter))]
         [DynamicData(nameof(Parameters_Test_Data))]
         public void ResolvedParameter(Type type, Type definition, string member, string import,
                                       Func<object, InjectionMember> func, object registered, object named,
                                       object injected, object @default, bool isNamed)
             => Assert_Parameter_Injected(definition.MakeGenericType(type),
-                func(new ResolvedParameter()), import, isNamed, registered, named);
+                func(new ResolvedParameter()), import, isNamed, registered, registered);
 
 
         [PatternTestMethod("ResolvedParameter(null) forces contract: AnnotatedType, null")]

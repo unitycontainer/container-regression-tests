@@ -37,7 +37,7 @@ namespace Injection
             => Assert_Injection(
                 BaselineTestNamed.MakeGenericType(type),
                 InjectionMember_Default(), 
-                @default, named);
+                @default, registered);
 
         [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         [PatternTestMethod("Inject {1} dependency by {2} and {3}"), TestCategory(CATEGORY_INJECT)]

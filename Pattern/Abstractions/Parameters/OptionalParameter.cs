@@ -16,16 +16,13 @@ namespace Parameters
         #region Success
 
 #if !UNITY_V4
-#if BEHAVIOR_V5
-        [Ignore("Contract is ignored")]
-#endif
         [PatternTestMethod("OptionalParameter() preserves annotated contract")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalParameter))]
         public void OptionalParameter(Type type, Type definition, string member, string import,
                                       Func<object, InjectionMember> func, object registered, object named,
                                       object injected, object @default, bool isNamed) 
             => Assert_Optionally_Injected(definition.MakeGenericType(type), 
-                func(new OptionalParameter()), @default, import, isNamed, registered, named);
+                func(new OptionalParameter()), @default, import, isNamed, registered, registered);
 
         [PatternTestMethod("OptionalParameter(null) forces contract: AnnotatedType, null")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(OptionalParameter))]

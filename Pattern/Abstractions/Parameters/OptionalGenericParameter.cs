@@ -21,13 +21,8 @@ namespace Parameters
         public void OptionalGenericParameter(Type type, Type definition, string member, string import,
                                      Func<object, InjectionMember> func, object registered, object named,
                                      object injected, object @default, bool isNamed)
-#if BEHAVIOR_V4 || BEHAVIOR_V5
             => Assert_Optional_Injected(definition, type,
                 func(new OptionalGenericParameter(TDependency)), @default, import, isNamed, registered, registered);
-#else
-            => Assert_Optional_Injected(definition, type,
-                func(new OptionalGenericParameter(TDependency)), @default, import, isNamed, registered, named);
-#endif
 
 
         [PatternTestMethod("OptionalGenericParameter(T, null) forces contract: T, null")]

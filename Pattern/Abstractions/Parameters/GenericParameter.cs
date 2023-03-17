@@ -28,13 +28,9 @@ namespace Parameters
         public void GenericParameter(Type type, Type definition, string member, string import,
                                      Func<object, InjectionMember> func, object registered, object named,
                                      object injected, object @default, bool isNamed)
-#if BEHAVIOR_V4 || BEHAVIOR_V5
             => Assert_Generic_Injected(definition, type,
                 func(new GenericParameter(TDependency)), import, isNamed, registered, registered);
-#else
-            => Assert_Generic_Injected(definition, type,
-                func(new GenericParameter(TDependency)), import, isNamed, registered, named);
-#endif
+
 
         [PatternTestMethod("GenericParameter(T, null) forces contract: T, null")]
         [DynamicData(nameof(Parameters_Test_Data)), TestProperty(PARAMETER, nameof(GenericParameter))]
@@ -182,7 +178,7 @@ namespace Parameters
 
             // Validate
             Assert.IsNotNull(instance);
-            Assert.AreEqual(expected, instance.Value);
+            Assert.AreEqual(registered, instance.Value);
         }
 
         #endregion
