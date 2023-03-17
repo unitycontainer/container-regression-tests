@@ -83,7 +83,7 @@ namespace Parameters
                     new string [] {
                         "Type=",
                         "Name=",
-                        Contract.AnyContractName
+                        "null"
                     }
                 };
 #endif
@@ -146,7 +146,7 @@ namespace Parameters
                     new string [] {
                         "Type=",
                         "Name=",
-                        Contract.AnyContractName
+                        "null"
                     }
                 };
 #endif
