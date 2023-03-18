@@ -10,7 +10,7 @@
   
   <ItemGroup>
     <ProjectReference Condition="Exists('$(UnityContainer)') " Include="$(UnityContainer)" />
-    <PackageReference Condition="!Exists('$(UnityContainer)')" Include="Unity.Container" Version="6.0.*-*" />
+    <PackageReference Condition="!Exists('$(UnityContainer)')" Include="Unity.Container" Version="6.0.0-beta.*" />
   </ItemGroup>
 
   <!-- Configuration Settings -->
