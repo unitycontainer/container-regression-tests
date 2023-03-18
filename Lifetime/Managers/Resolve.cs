@@ -15,14 +15,14 @@ namespace Lifetime
         public void PerResolve_CanBeConfigured()
         {
             Container.RegisterType<IPresenter, MockPresenter>()
-                     .RegisterType<IView, View>(TypeLifetime.PerResolve);
+                     .RegisterType<IView, View>(new PerResolveLifetimeManager());
         }
 
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(PerResolveLifetimeManager))]
         public void PerResolve_ViewIsReusedAcrossGraph()
         {
             Container.RegisterType<IPresenter, MockPresenter>()
-                     .RegisterType<IView, View>(TypeLifetime.PerResolve);
+                     .RegisterType<IView, View>(new PerResolveLifetimeManager());
 
             var view = Container.Resolve<IView>();
 
@@ -34,7 +34,7 @@ namespace Lifetime
         public void PerResolve_ViewsAreDifferentInDifferentResolveCalls()
         {
             Container.RegisterType<IPresenter, MockPresenter>()
-                     .RegisterType<IView, View>(TypeLifetime.PerResolve);
+                     .RegisterType<IView, View>(new PerResolveLifetimeManager());
 
             var view1 = Container.Resolve<IView>();
             var view2 = Container.Resolve<IView>();
@@ -46,7 +46,7 @@ namespace Lifetime
         public void PerResolve_FromMultipleThreads()
         {
             Container.RegisterType<IPresenter, MockPresenter>()
-                     .RegisterType<IView, View>(TypeLifetime.PerResolve);
+                     .RegisterType<IView, View>(new PerResolveLifetimeManager());
 
             object result1 = null;
             object result2 = null;
@@ -75,6 +75,7 @@ namespace Lifetime
             Assert.AreNotSame(result1, result2);
         }
 
+#if !UNITY_V4
 
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(PerResolveLifetimeManager))]
         public void PerResolve_LifetimeIsHonoredWhenUsingFactory()
@@ -84,6 +85,7 @@ namespace Lifetime
             var rootService = Container.Resolve<AService>();
             Assert.AreSame(rootService.SomeService, rootService.OtherService.SomeService);
         }
+#endif
 
     }
 }

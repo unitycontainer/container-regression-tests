@@ -6,8 +6,14 @@ namespace Dependency
 {
     public abstract partial class Pattern
     {
+        private const string v4 = "v4 does not support default value";
+
         // Defaults are not supported in Unity v4
         #region With Defaults
+
+#if BEHAVIOR_V4
+        [Ignore(v4)]
+#endif
         [PatternTestMethod("Dependency with default Value"), TestCategory(CATEGORY_DEPENDENCY)]
         [DynamicData(nameof(WithDefaultValue_Data))]
         public virtual void Import_WithDefault_Value(string test, Type type)
@@ -34,6 +40,9 @@ namespace Dependency
 #endif
         }
 
+#if BEHAVIOR_V4
+        [Ignore(v4)]
+#endif
         [PatternTestMethod("Dependency with DefaultValue attribute"), TestCategory(CATEGORY_DEPENDENCY)]
         [DynamicData(nameof(WithDefaultAttribute_Data))]
         /// <summary>
@@ -65,6 +74,9 @@ namespace Dependency
         }
 
 
+#if BEHAVIOR_V4
+        [Ignore(v4)]
+#endif
         [PatternTestMethod("Dependency with default Value and Attribute"), TestCategory(CATEGORY_DEPENDENCY)]
         [DynamicData(nameof(WithDefaultAndAttribute_Data))]
         /// <summary>

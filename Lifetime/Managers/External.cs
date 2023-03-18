@@ -31,7 +31,7 @@ namespace Lifetime
         public void External_SetLifetimeNoNameRegisterInstanceDiffNames()
         {
             var aInstance = new Service();
-            Container.RegisterType<Service>(TypeLifetime.PerContainer)
+            Container.RegisterType<Service>(new ContainerControlledLifetimeManager())
                 .RegisterInstance<Service>(aInstance)
                 .RegisterInstance<Service>("hello", aInstance)
                 .RegisterInstance<Service>("hi", aInstance, new ExternallyControlledLifetimeManager());
@@ -49,7 +49,7 @@ namespace Lifetime
         public void External_SetSingletonWithNameRegisterInstanceDiffNames()
         {
             var aInstance = new Service();
-            Container.RegisterType<Service>("set", TypeLifetime.PerContainer)
+            Container.RegisterType<Service>("set", new ContainerControlledLifetimeManager())
                 .RegisterInstance<Service>(aInstance)
                 .RegisterInstance<Service>("hello", aInstance)
                 .RegisterInstance<Service>("hi", aInstance, new ExternallyControlledLifetimeManager());
@@ -67,7 +67,7 @@ namespace Lifetime
         public void External_SetLifetimeWithNameRegisterInstanceDiffNames()
         {
             var aInstance = new Service();
-            Container.RegisterType<Service>("set", TypeLifetime.PerContainer)
+            Container.RegisterType<Service>("set", new ContainerControlledLifetimeManager())
                 .RegisterInstance<Service>(aInstance)
                 .RegisterInstance<Service>("hello", aInstance)
                 .RegisterInstance<Service>("hi", aInstance, new ExternallyControlledLifetimeManager());
@@ -92,7 +92,7 @@ namespace Lifetime
         {
             var aInstance = new Service();
             var bInstance = new OtherService();
-            Container.RegisterType<Service>(TypeLifetime.PerContainer)
+            Container.RegisterType<Service>(new ContainerControlledLifetimeManager())
                 .RegisterInstance<Service>(aInstance)
                 .RegisterInstance<Service>("hello", aInstance)
                 .RegisterInstance<OtherService>("hi", bInstance)

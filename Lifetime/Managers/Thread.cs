@@ -15,7 +15,7 @@ namespace Lifetime
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(PerThreadLifetimeManager))]
         public void PerThread_Type_SameThread()
         {
-            Container.RegisterType<IService, Service>(TypeLifetime.PerThread);
+            Container.RegisterType<IService, Service>(new PerThreadLifetimeManager());
 
             var a = Container.Resolve<IService>();
             var b = Container.Resolve<IService>();
@@ -26,7 +26,7 @@ namespace Lifetime
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(PerThreadLifetimeManager))]
         public void PerThread_Type_DifferentThreads()
         {
-            Container.RegisterType<IService, Service>(TypeLifetime.PerThread);
+            Container.RegisterType<IService, Service>(new PerThreadLifetimeManager());
 
             Thread t1 = new Thread(new ParameterizedThreadStart(ThreadProcedure));
             Thread t2 = new Thread(new ParameterizedThreadStart(ThreadProcedure));
@@ -44,6 +44,7 @@ namespace Lifetime
             Assert.AreNotSame(a, b);
         }
 
+#if !UNITY_V4
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(PerThreadLifetimeManager))]
         public void PerThread_Factory_SameThread()
         {
@@ -75,5 +76,6 @@ namespace Lifetime
 
             Assert.AreNotSame(a, b);
         }
+#endif
     }
 }

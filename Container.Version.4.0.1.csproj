@@ -3,6 +3,7 @@
   <!-- Unity v4 -->
 	
   <PropertyGroup> 
+    <TargetFrameworks>net6.0</TargetFrameworks> 
     <DefineConstants>UNITY_V4;$(DefineConstants)</DefineConstants>
     <UnityContainer>..\..\unity\source\Unity\Src\Unity.csproj</UnityContainer>
   </PropertyGroup>	
@@ -27,19 +28,24 @@
   	<Compile Remove="**\*.v6.cs" />
   	<Compile Remove="**\*.v7.cs" />
   	<Compile Remove="**\*.v8.cs" />
+  	<Compile Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
+  	<Compile Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
+  	<Compile Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
+  	<Compile Remove="Pattern\Implementation\Dependency\Fields\**" />
+  	<Compile Remove="Pattern\Implementation\Injection\Fields\**" />
+  	<Compile Remove="Pattern\Implementation\Selection\Fields\**" />
+  	<Compile Remove="Lifetime\Managers\Singleton.cs" />
+  	<Compile Remove="Lifetime\Managers\Transient.cs" />
+  	<Compile Remove="Pattern\Abstractions\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+    <Compile Remove="Pattern\Abstractions\Abstractions\Resolvers\ValidatintResolver.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Pattern\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
-    <Compile Remove="Pattern\Abstractions\Resolvers\ValidatintResolver.cs" />
-    <Compile Remove="Pattern\Abstractions\FixtureBase.Fields.cs" />
-    <Compile Remove="Pattern\Abstractions\Data\Fields\**" />
     <Compile Remove="Pattern\Dependency\DefaultValue.cs" />
     <Compile Remove="Pattern\Dependency\DefaultAttribute.cs" />
     <Compile Remove="Pattern\Dependency\Data\Fields\**" />
     <Compile Remove="Pattern\Dependency\Implementation\Fields\**" />
     <Compile Remove="Pattern\Injection\Implementation\Fields\**" />
-    <Compile Remove="Pattern\Injection\Data\Fields\**" />
     <Compile Remove="Pattern\Injection\Annotation\Overrides\Dependency.Import.cs" />
     <Compile Remove="Pattern\Injection\Annotation\Overrides\OptionalParameter.cs" />
     <Compile Remove="Pattern\Injection\Annotation\Overrides\ResolvedParameter.cs" />
@@ -49,6 +55,12 @@
     <Compile Remove="Pattern\Selection\Implementation\Fields\Annotated.cs" />
     <Compile Remove="Pattern\Selection\Implementation\Fields.cs" />
     <Compile Remove="Resolution\Enumerable\**" />
+    <EmbeddedResource Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
+    <EmbeddedResource Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
+    <EmbeddedResource Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
+    <EmbeddedResource Remove="Pattern\Implementation\Dependency\Fields\**" />
+    <EmbeddedResource Remove="Pattern\Implementation\Injection\Fields\**" />
+    <EmbeddedResource Remove="Pattern\Implementation\Selection\Fields\**" />
     <Compile Remove="Resolution\Generic\Constrained.cs" />
     <Compile Remove="Registration\Validation\Factory.cs" />
     <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
@@ -62,8 +74,14 @@
     <Using Remove="System.Net.Http" />
     <None Remove=".git" />
     <None Remove=".gitignore" />
-	  <None Remove="*.slnf" />
-	  <None Remove="*.props" />
+	<None Remove="*.slnf" />
+    <None Remove="*.props" />
+    <None Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
+    <None Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
+    <None Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
+    <None Remove="Pattern\Implementation\Dependency\Fields\**" />
+    <None Remove="Pattern\Implementation\Injection\Fields\**" />
+    <None Remove="Pattern\Implementation\Selection\Fields\**" />
   </ItemGroup>
 
 </Project>

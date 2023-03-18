@@ -12,6 +12,7 @@ namespace Lifetime
 {
     public partial class Managers
     {
+#if !UNITY_V4
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(ContainerControlledLifetimeManager))]
         public void PerContainer_Instance_Null()
         {
@@ -74,12 +75,13 @@ namespace Lifetime
 
             Assert.AreSame(test1, test2);
         }
+#endif
 
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(ContainerControlledLifetimeManager))]
         public void PerContainer_CheckSetSingletonDoneTwice()
         {
-            Container.RegisterType<Service>(TypeLifetime.PerContainer)
-                     .RegisterType<Service>("hello", TypeLifetime.PerContainer);
+            Container.RegisterType<Service>(new ContainerControlledLifetimeManager())
+                     .RegisterType<Service>("hello", new ContainerControlledLifetimeManager());
 
             var obj = Container.Resolve<Service>();
             var obj1 = Container.Resolve<Service>("hello");
@@ -90,7 +92,7 @@ namespace Lifetime
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(ContainerControlledLifetimeManager))]
         public void PerContainer_CheckSingletonWithDependencies()
         {
-            Container.RegisterType<ObjectWithOneDependency>(TypeLifetime.PerContainer);
+            Container.RegisterType<ObjectWithOneDependency>(new ContainerControlledLifetimeManager());
 
             var result1 = Container.Resolve<ObjectWithOneDependency>();
             var result2 = Container.Resolve<ObjectWithOneDependency>();
@@ -105,7 +107,7 @@ namespace Lifetime
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(ContainerControlledLifetimeManager))]
         public void PerContainer_CheckSingletonAsDependencies()
         {
-            Container.RegisterType<ObjectWithOneDependency>(TypeLifetime.PerContainer);
+            Container.RegisterType<ObjectWithOneDependency>(new ContainerControlledLifetimeManager());
 
             var result1 = Container.Resolve<ObjectWithTwoConstructorDependencies>();
             var result2 = Container.Resolve<ObjectWithTwoConstructorDependencies>();
@@ -122,7 +124,7 @@ namespace Lifetime
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(ContainerControlledLifetimeManager))]
         public void PerContainer_SetLifetimeTwiceWithLifetimeHandle()
         {
-            Container.RegisterType<Service>(TypeLifetime.PerContainer)
+            Container.RegisterType<Service>(new ContainerControlledLifetimeManager())
               .RegisterType<Service>("hello", new HierarchicalLifetimeManager());
             var obj = Container.Resolve<Service>();
             var obj1 = Container.Resolve<Service>("hello");
@@ -133,7 +135,7 @@ namespace Lifetime
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(ContainerControlledLifetimeManager))]
         public void PerContainer_SetLifetimeGetTwice()
         {
-            Container.RegisterType<Service>(TypeLifetime.PerContainer);
+            Container.RegisterType<Service>(new ContainerControlledLifetimeManager());
             var obj = Container.Resolve<Service>();
             var obj1 = Container.Resolve<Service>("hello");
 
@@ -147,8 +149,8 @@ namespace Lifetime
 
             Container.RegisterInstance(aInstance);
             Container.RegisterInstance("hello", aInstance);
-            Container.RegisterType<Service>(TypeLifetime.PerContainer);
-            Container.RegisterType<Service>("hello1", TypeLifetime.PerContainer);
+            Container.RegisterType<Service>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<Service>("hello1", new ContainerControlledLifetimeManager());
 
             var obj = Container.Resolve<Service>();
             var obj1 = Container.Resolve<Service>("hello1");
@@ -160,7 +162,7 @@ namespace Lifetime
         public void PerContainer_SetSingletonByNameRegisterInstanceOnit()
         {
             var aInstance = new Service();
-            Container.RegisterType<Service>("SetA", TypeLifetime.PerContainer)
+            Container.RegisterType<Service>("SetA", new ContainerControlledLifetimeManager())
                 .RegisterInstance<Service>(aInstance)
                 .RegisterInstance<Service>("hello", aInstance);
 
@@ -175,8 +177,8 @@ namespace Lifetime
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(ContainerControlledLifetimeManager))]
         public void PerContainer_TestSetLifetime()
         {
-            Container.RegisterType<Service>(TypeLifetime.PerContainer)
-               .RegisterType<Service>("hello", TypeLifetime.PerContainer);
+            Container.RegisterType<Service>(new ContainerControlledLifetimeManager())
+               .RegisterType<Service>("hello", new ContainerControlledLifetimeManager());
 
             var obj = Container.Resolve<Service>();
             var obj1 = Container.Resolve<Service>("hello");
@@ -184,13 +186,16 @@ namespace Lifetime
             Assert.AreNotSame(obj, obj1);
         }
 
+#if BEHAVIOR_V4
+        [Ignore("Known bug")]
+#endif
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(ContainerControlledLifetimeManager))]
         public void PerContainer_SetSingletonDefaultNameRegisterInstance()
         {
             var aInstance = new Service();
 
-            Container.RegisterType((Type)null, typeof(Service), null, TypeLifetime.PerContainer, null);
-            Container.RegisterType((Type)null, typeof(Service), "SetA", TypeLifetime.PerContainer, null);
+            Container.RegisterType((Type)null, typeof(Service), null, new ContainerControlledLifetimeManager(), null);
+            Container.RegisterType((Type)null, typeof(Service), "SetA", new ContainerControlledLifetimeManager(), null);
             Container.RegisterInstance(aInstance);
             Container.RegisterInstance("hello", aInstance);
             Container.RegisterInstance("hello", aInstance, new ExternallyControlledLifetimeManager());
@@ -209,8 +214,8 @@ namespace Lifetime
             //register type UnityTestClass
             var child = Container.CreateChildContainer();
 
-            Container.RegisterType<Service>(TypeLifetime.PerContainer);
-            child.RegisterType<Service>(TypeLifetime.PerContainer);
+            Container.RegisterType<Service>(new ContainerControlledLifetimeManager());
+            child.RegisterType<Service>(new ContainerControlledLifetimeManager());
 
             var mytestparent = Container.Resolve<Service>();
             var mytestchild = child.Resolve<Service>();
@@ -221,7 +226,7 @@ namespace Lifetime
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(ContainerControlledLifetimeManager))]
         public void PerContainer_UseContainerControlledLifetime()
         {
-            Container.RegisterType<Service>(TypeLifetime.PerContainer);
+            Container.RegisterType<Service>(new ContainerControlledLifetimeManager());
 
             var parentinstance = Container.Resolve<Service>();
             var hash = parentinstance.GetHashCode();
@@ -232,11 +237,12 @@ namespace Lifetime
             Assert.AreEqual(hash, parentinstance1.GetHashCode());
         }
 
+#if !UNITY_V4
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(ContainerControlledLifetimeManager))]
         public void PerContainer_TestStringEmpty()
         {
-            Container.RegisterType<Service>(null, TypeLifetime.PerContainer);
-            Container.RegisterType<Service>(string.Empty, TypeLifetime.PerContainer);
+            Container.RegisterType<Service>(null, new ContainerControlledLifetimeManager());
+            Container.RegisterType<Service>(string.Empty, new ContainerControlledLifetimeManager());
 
             Service a = Container.Resolve<Service>();
             Service c = Container.Resolve<Service>((string)null);
@@ -246,7 +252,6 @@ namespace Lifetime
             Assert.AreNotEqual(b, c);
             Assert.AreEqual(a, c);
         }
-
 
 
         [TestMethod, TestProperty(LIFETIME_MANAGER, nameof(ContainerControlledLifetimeManager))]
@@ -284,7 +289,7 @@ namespace Lifetime
         public void PerContainer_SameRegistrationFromMultipleThreadsGeneric()
         {
             Container.RegisterFactory<IService>((c, t, n) => new Service(), FactoryLifetime.PerContainer)
-                     .RegisterType(typeof(IFoo<>), typeof(Foo<>), TypeLifetime.PerContainer);
+                     .RegisterType(typeof(IFoo<>), typeof(Foo<>), new ContainerControlledLifetimeManager());
 
             object result1 = null;
             object result2 = null;
@@ -367,5 +372,6 @@ namespace Lifetime
             Assert.IsNull(result1);
             Assert.IsNotNull(result2);
         }
+#endif
     }
 }
