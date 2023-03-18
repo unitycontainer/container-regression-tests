@@ -3,9 +3,9 @@
   <!-- Unity v6 -->
   
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework> 
-    <UnityContainer>..\Container\src\Unity.Container.csproj</UnityContainer>
+    <TargetFrameworks>net6.0</TargetFrameworks> 
     <DefineConstants>UNITY_V6;$(DefineConstants)</DefineConstants>
+    <UnityContainer>..\Container\src\Unity.Container.csproj</UnityContainer>
   </PropertyGroup>
   
   <ItemGroup>
@@ -36,11 +36,6 @@
     <Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
     <Compile Remove="Patterns\Dependency\DefaultAttribute.cs" />
-    <!--<Compile Remove="Patterns\Lifetime\LifetimeManager.cs" />
-    <Compile Remove="Registration\Validation\Factory.cs" />
-    <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
-    <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />
-    <Compile Remove="Registration\Validation\Factory.cs" />-->
   </ItemGroup>
   
   
