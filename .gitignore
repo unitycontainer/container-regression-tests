@@ -142,3 +142,4 @@ project.lock.json
 testresults.xml
 testresults.xml
 /*.slnf
+/NuGet.Config
