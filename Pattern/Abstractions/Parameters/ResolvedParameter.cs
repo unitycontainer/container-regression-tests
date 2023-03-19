@@ -22,7 +22,7 @@ namespace Parameters
                                       Func<object, InjectionMember> func, object registered, object named,
                                       object injected, object @default, bool isNamed)
             => Assert_Parameter_Injected(definition.MakeGenericType(type),
-                func(new ResolvedParameter()), import, isNamed, registered, registered);
+                func(new ResolvedParameter()), import, isNamed, registered, named);
 
 
         [PatternTestMethod("ResolvedParameter(null) forces contract: AnnotatedType, null")]

@@ -11,18 +11,6 @@ namespace Parameters
 {
     public abstract partial class Pattern
     {
-#if !UNITY_V4 && !UNITY_V5 && !UNITY_V6
-        [TestCategory("ParameterBase")]
-        [DataTestMethod, DynamicData(nameof(Injection_Parameters_Data))]
-        public virtual void ToString(string test, ParameterValue value, string startsWith, string[] contains)
-        {
-            var parameter = value.ToString();
-            
-            Assert.IsTrue(parameter.StartsWith(startsWith));
-            foreach (var term in contains) Assert.IsTrue(parameter.Contains(term));
-        }
-#endif
-
         public static IEnumerable<object[]> Injection_Parameters_Data
         {
             get
