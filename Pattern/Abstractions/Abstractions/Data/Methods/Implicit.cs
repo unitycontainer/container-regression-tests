@@ -91,4 +91,13 @@ namespace Regression.Implicit.Methods
     }
 
     #endregion
+
+
+    #region Inherited
+
+    public class BaselineTestInherited<TDependency> : BaselineTestType<TDependency>
+    {
+    }
+
+    #endregion
 }

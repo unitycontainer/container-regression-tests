@@ -93,4 +93,13 @@ namespace Regression.Optional.Properties
     }
 
     #endregion
+
+
+    #region Inherited
+
+    public class BaselineTestInherited<TDependency> : BaselineTestType<TDependency>
+    {
+    }
+
+    #endregion
 }

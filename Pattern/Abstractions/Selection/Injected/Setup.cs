@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 #if UNITY_V4
 using Microsoft.Practices.Unity;
 #else
@@ -13,6 +12,7 @@ namespace Selection.Injected
         #region Constants
 
         const string SELECTION    = "Selection";
+        const string INHERITED    = "Inherited";
         const string BY_COUNT     = "By Count";
         const string BY_TYPE      = "By Type";
         const string BY_VALUE     = "By Value";

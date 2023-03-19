@@ -88,4 +88,13 @@ namespace Regression.Implicit.Properties
     }
 
     #endregion
+
+
+    #region Inherited
+
+    public class BaselineTestInherited<TDependency> : BaselineTestType<TDependency>
+    {
+    }
+
+    #endregion
 }
