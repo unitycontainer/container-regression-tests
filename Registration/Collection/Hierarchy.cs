@@ -59,11 +59,8 @@ namespace Registration
             var registrations = from r in child.Registrations
                                 where r.RegisteredType == typeof(Service)
                                 select r;
-#if BEHAVIOR_V4 || BEHAVIOR_V5
             Assert.AreEqual(1, registrations.Count());
-#else
-            Assert.AreEqual(2, registrations.Count());
-#endif
+
             var childRegistration = registrations.First();
             Assert.AreSame(typeof(Service), childRegistration.MappedToType);
         }
@@ -99,11 +96,8 @@ namespace Registration
             var registrations = from r in child.Registrations
                                 where r.RegisteredType == typeof(IService)
                                 select r;
-#if BEHAVIOR_V4 || BEHAVIOR_V5
             Assert.AreEqual(1, registrations.Count());
-#else
-            Assert.AreEqual(2, registrations.Count());
-#endif
+
             var childRegistration = registrations.First();
             Assert.AreSame(typeof(OtherService), childRegistration.MappedToType);
         }
