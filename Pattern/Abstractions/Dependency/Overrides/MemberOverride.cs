@@ -41,7 +41,6 @@ namespace Dependency
 #endif
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
         [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
-        [ExpectedException(typeof(ResolutionFailedException))]
         public virtual void Member_ByParameterRecursive(string test, Type type, object defaultValue,
                                                         object defaultAttr, object registered, object named,
                                                         object injected, object overridden, object @default)
