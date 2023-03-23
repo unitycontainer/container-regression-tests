@@ -3,6 +3,8 @@ using Regression;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Storage;
+using Unity.Builder;
+using Unity.Strategies;
 #if UNITY_V4
 using Microsoft.Practices.Unity.ObjectBuilder;
 using Microsoft.Practices.ObjectBuilder2;
@@ -45,7 +47,7 @@ namespace Container
             return chain as IEnumerable;
         }
 #else
-        IEnumerable AsEnumerable(IStagedStrategyChain chain)
+        IEnumerable AsEnumerable(IStagedStrategyChain<BuilderStrategy, UnityBuildStage> chain)
         {
             return chain;
         }

@@ -1,5 +1,4 @@
-﻿using Unity.Extension;
-
+﻿using Unity.Strategies;
 
 namespace Regression.Container
 {
