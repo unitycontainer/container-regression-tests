@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression.Container;
 using Regression;
-using Unity.Builder;
-using Unity.Strategies;
 #if UNITY_V4
 using Microsoft.Practices.Unity.ObjectBuilder;
 using Microsoft.Practices.ObjectBuilder2;
