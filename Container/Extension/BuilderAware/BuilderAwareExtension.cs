@@ -7,6 +7,7 @@ using Unity;
 using Unity.Builder;
 using Unity.Extension;
 #else
+using Unity.Builder;
 using Unity.Extension;
 #endif
 

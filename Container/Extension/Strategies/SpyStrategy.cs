@@ -5,6 +5,7 @@ using Unity.Builder;
 using Unity.Strategies;
 #else
 using Unity.Extension;
+using Unity.Strategies;
 #endif
 
 namespace Regression.Container

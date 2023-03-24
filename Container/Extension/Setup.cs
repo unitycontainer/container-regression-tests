@@ -1,14 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.Storage;
+using Unity.Builder;
+using Unity.Strategies;
 #if UNITY_V4
 using Microsoft.Practices.Unity.ObjectBuilder;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
-#else
+#elif UNITY_V5 || UNITY_V6
 using Unity.Storage;
 using Unity.Strategies;
 using Unity.Builder;
+using Unity;
+#else
 using Unity;
 #endif
 
@@ -41,7 +47,7 @@ namespace Container
             return chain as IEnumerable;
         }
 #else
-        IEnumerable AsEnumerable(IStagedStrategyChain chain)
+        IEnumerable AsEnumerable(IStagedStrategyChain<BuilderStrategy, UnityBuildStage> chain)
         {
             return chain;
         }

@@ -7,13 +7,10 @@ using System;
 using Microsoft.Practices.Unity.ObjectBuilder;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
-#elif UNITY_V5 || UNITY_V6
-using Unity.Strategies;
-using Unity.Builder;
-using Unity;
 #else
-using Unity.Extension;
 using Unity;
+using Unity.Builder;
+using Unity.Strategies;
 #endif
 
 namespace Container
@@ -59,9 +56,7 @@ namespace Container
                 .AddExtension(new SpyExtension(spy, UnityBuildStage.PreCreation))
                 .Configure<SpyExtension>();
 
-            var strategies = AsEnumerable(extension.ExtensionContext.Strategies)
-                .Cast<BuilderStrategy>()
-                .ToArray();
+            var strategies = extension.ExtensionContext.Strategies.Values.ToArray();
 
             Assert.IsTrue(strategies.Contains(spy));
         }
@@ -80,17 +75,13 @@ namespace Container
                 .AddExtension(new SpyExtension(spy, UnityBuildStage.PreCreation))
                 .Configure<SpyExtension>();
 
-            var before = AsEnumerable(extension.ExtensionContext.Strategies)
-                .Cast<BuilderStrategy>()
-                .ToArray();
+            var before = extension.ExtensionContext.Strategies.Values.ToArray();
 
             Assert.IsTrue(before.Contains(spy));
 
             extension.ExtensionContext.Strategies.Add(spy, UnityBuildStage.PreCreation);
             
-            var after = AsEnumerable(extension.ExtensionContext.Strategies)
-                .Cast<BuilderStrategy>()
-                .ToArray();
+            var after = extension.ExtensionContext.Strategies.Values.ToArray();
 
             Assert.AreNotEqual(before.Length, after.Length);
         }
