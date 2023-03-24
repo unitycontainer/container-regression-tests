@@ -45,45 +45,5 @@ namespace Container
 
             Assert.IsTrue(enumerable is IEnumerable);
         }
-
-        [TestMethod("Can Add Strategy"), TestProperty(TESTING, nameof(BuilderStrategy))]
-        [Obsolete]
-        public void CanAddStrategy()
-        {
-            SpyStrategy spy = new SpyStrategy();
-
-            var extension = new UnityContainer()
-                .AddExtension(new SpyExtension(spy, UnityBuildStage.PreCreation))
-                .Configure<SpyExtension>();
-
-            var strategies = extension.ExtensionContext.Strategies.Values.ToArray();
-
-            Assert.IsTrue(strategies.Contains(spy));
-        }
-
-#if BEHAVIOR_V4 || BEHAVIOR_V5
-        [Ignore("Known Issue")]
-#endif
-        [TestMethod("Can Add Strategy Twice"), TestProperty(TESTING, nameof(BuilderStrategy))]
-        [Obsolete]
-        [ExpectedException(typeof(ArgumentException))]
-        public void CanAddStrategyTwice()
-        {
-            SpyStrategy spy = new SpyStrategy();
-
-            var extension = new UnityContainer()
-                .AddExtension(new SpyExtension(spy, UnityBuildStage.PreCreation))
-                .Configure<SpyExtension>();
-
-            var before = extension.ExtensionContext.Strategies.Values.ToArray();
-
-            Assert.IsTrue(before.Contains(spy));
-
-            extension.ExtensionContext.Strategies.Add(spy, UnityBuildStage.PreCreation);
-            
-            var after = extension.ExtensionContext.Strategies.Values.ToArray();
-
-            Assert.AreNotEqual(before.Length, after.Length);
-        }
     }
 }

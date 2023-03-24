@@ -1,17 +1,12 @@
 ﻿using System;
-using Unity.Builder;
-using Unity.Strategies;
 #if UNITY_V4
 using Microsoft.Practices.Unity.ObjectBuilder;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
-#elif UNITY_V5 || UNITY_V6
+#else
 using Unity.Strategies;
 using Unity.Builder;
 using Unity.Extension;
-#else
-using Unity.Extension;
-using Unity;
 #endif
 
 #pragma warning disable CS0618 // Type or member is obsolete

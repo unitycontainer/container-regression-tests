@@ -74,6 +74,7 @@
     <Using Remove="System.Net.Http" />
     <None Remove=".git" />
     <None Remove=".gitignore" />
+    <None Remove="NuGet.Config" />
 	<None Remove="*.slnf" />
     <None Remove="*.props" />
     <None Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />

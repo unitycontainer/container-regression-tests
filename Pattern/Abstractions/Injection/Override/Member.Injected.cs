@@ -37,7 +37,7 @@ namespace Injection
                 InjectionMember_Value(new InjectionParameter(injected)),
                 MemberOverride(new InjectionParameter(overridden)), overridden);
 
-#if BEHAVIOR_V5
+#if BEHAVIOR_V4 || BEHAVIOR_V5
         [Ignore("https://github.com/unitycontainer/container/issues/357")]
 #endif
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]

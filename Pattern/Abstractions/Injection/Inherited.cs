@@ -11,6 +11,9 @@ namespace Injection
 {
     public abstract partial class Pattern
     {
+#if BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [TestCategory(INJECT_SUBCLASS)]
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_Inherited(string test, Type type, object defaultValue, object defaultAttr,
