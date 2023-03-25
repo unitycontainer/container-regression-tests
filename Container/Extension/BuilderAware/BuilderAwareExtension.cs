@@ -21,7 +21,7 @@ namespace Regression.Container
 #if UNITY_V4 || UNITY_V5 || UNITY_V6
             Context.Strategies.Add(new BuilderAwareStrategy(), UnityBuildStage.PostInitialization);
 #else
-            Context.TypePipelineChain.Add(UnityBuildStage.PostInitialization, new BuilderAwareStrategy());
+            Context.Strategies.Add(UnityBuildStage.PostInitialization, new BuilderAwareStrategy());
 #endif
         }
     }

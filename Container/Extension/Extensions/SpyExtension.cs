@@ -107,7 +107,7 @@ namespace Regression.Container
             // v4 & v5 syntax
             Context.Strategies.Add(_strategy, _stage);
 #else
-            Context.TypePipelineChain.Add(_stage, _strategy);
+            Context.Strategies.Add(_stage, _strategy);
 #endif
 
             // Add Spy Policy to storage
