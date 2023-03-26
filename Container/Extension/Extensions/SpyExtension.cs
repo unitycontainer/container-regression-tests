@@ -102,26 +102,12 @@ namespace Regression.Container
 
         protected override void Initialize()
         {
-#if BEHAVIOR_V4 || BEHAVIOR_V5
-            
-            // v4 & v5 syntax
-            Context.Strategies.Add(_strategy, _stage);
-#else
-            Context.Strategies.Add(_stage, _strategy);
-#endif
+            Context.Strategies.Add(_stage, _strategy.PreBuildUp);
 
             // Add Spy Policy to storage
             if (_policy is not null)
             {
-#if BEHAVIOR_V4
-                // v4 syntax
-                Context.Policies.SetDefault(_policyType, _policy);
-#elif BEHAVIOR_V5
-                // v5 syntax
-                Context.Policies.Set(null, _policyType, _policy);
-#else
                 Context.Policies.Set(_policyType, _policy);
-#endif
             }
         }
 

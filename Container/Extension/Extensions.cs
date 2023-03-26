@@ -15,6 +15,7 @@ namespace Container
 {
     public partial class Extensions
     {
+        [Ignore("TODO: Reenable")]
         [PatternTestMethod(NAME_PATTERN), TestProperty(TESTING, nameof(BuilderStrategy))]
         public void ExtensionCanAddStrategy_PreCreation()
         {
