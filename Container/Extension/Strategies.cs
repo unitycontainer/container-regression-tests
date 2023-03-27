@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression.Container;
-using Unity.Builder;
 #if UNITY_V4
 using Microsoft.Practices.Unity.ObjectBuilder;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #else
 using Unity;
+using Unity.Builder;
 using Unity.Strategies;
 #endif
 
@@ -20,7 +20,7 @@ namespace Container
             SpyStrategy spy = new SpyStrategy();
 
             var extension = new UnityContainer()
-                .AddExtension(new SpyExtension(spy, UnityBuildStage.PreCreation))
+                .AddExtension(new SpyExtension(spy, (int)UnityBuildStage.PreCreation))
                 .Configure<SpyExtension>();
 
             Assert.IsNotNull(extension);

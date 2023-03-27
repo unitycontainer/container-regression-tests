@@ -22,14 +22,14 @@ namespace Regression.Container
         private Type _policyType;
         private object _policy;
         private BuilderStrategy _strategy;
-        private UnityBuildStage _stage;
+        private int _stage;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="strategy"></param>
         /// <param name="stage"></param>
-        public SpyExtension(BuilderStrategy strategy, UnityBuildStage stage)
+        public SpyExtension(BuilderStrategy strategy, int stage)
         {
             _strategy = strategy;
             _stage = stage;
@@ -51,7 +51,7 @@ namespace Regression.Container
         /// </para>
         /// </param>
         /// <param name="policyType"><see cref="Type"/> of the policy</param>
-        public SpyExtension(BuilderStrategy strategy, UnityBuildStage stage, object policy, Type policyType)
+        public SpyExtension(BuilderStrategy strategy, int stage, object policy, Type policyType)
         {
             _strategy = strategy;
             _stage = stage;
@@ -102,7 +102,7 @@ namespace Regression.Container
 
         protected override void Initialize()
         {
-            Context.Strategies.Add(_stage, _strategy.PreBuildUp);
+            Context.ActivateStrategies.Add((UnityActivateStage)_stage, _strategy.PreBuildUp);
 
             // Add Spy Policy to storage
             if (_policy is not null)

@@ -20,7 +20,7 @@ namespace Container
         public void ExtensionCanAddStrategy_PreCreation()
         {
             SpyStrategy spy = new SpyStrategy();
-            SpyExtension extension = new SpyExtension(spy, UnityBuildStage.PreCreation);
+            SpyExtension extension = new SpyExtension(spy, (int)UnityBuildStage.PreCreation);
 
             IUnityContainer container = new UnityContainer()
                 .AddExtension(extension);
@@ -34,7 +34,7 @@ namespace Container
         public void ExtensionCanAddStrategy_PostInitialization()
         {
             SpyStrategy spy = new SpyStrategy();
-            SpyExtension extension = new SpyExtension(spy, UnityBuildStage.PostInitialization);
+            SpyExtension extension = new SpyExtension(spy, (int)UnityBuildStage.PostInitialization);
 
             IUnityContainer container = new UnityContainer()
                 .AddExtension(extension);
@@ -52,7 +52,7 @@ namespace Container
             SpyPolicy spyPolicy = new SpyPolicy();
 
             SpyExtension extension =
-                new SpyExtension(spy, UnityBuildStage.PreCreation, spyPolicy, typeof(SpyPolicy));
+                new SpyExtension(spy, (int)UnityBuildStage.PreCreation, spyPolicy, typeof(SpyPolicy));
 
             IUnityContainer container = new UnityContainer()
                 .AddExtension(extension);
