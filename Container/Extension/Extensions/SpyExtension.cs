@@ -102,7 +102,7 @@ namespace Regression.Container
 
         protected override void Initialize()
         {
-            Context.ActivateStrategies.Add((UnityActivateStage)_stage, _strategy.PreBuildUp);
+            Context.ActivateStrategies.Add((UnityActivationStage)_stage, _strategy.PreBuildUp);
 
             // Add Spy Policy to storage
             if (_policy is not null)
