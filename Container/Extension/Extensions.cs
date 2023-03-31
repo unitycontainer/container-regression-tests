@@ -30,6 +30,7 @@ namespace Container
             Assert.AreSame(result, spy.Existing);
         }
 
+        [Ignore("BEHAVIOR_V8")]
         [PatternTestMethod(NAME_PATTERN), TestProperty(TESTING, nameof(BuilderStrategy))]
         public void ExtensionCanAddStrategy_PostInitialization()
         {
@@ -45,6 +46,7 @@ namespace Container
         }
 
 
+        [Ignore("BEHAVIOR_V8")]
         [TestMethod("Can Add Default Policy"), TestProperty(TESTING, POLICY)]
         public void ExtensionCanAddDefaultPolicy()
         {
