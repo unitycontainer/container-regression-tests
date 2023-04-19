@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 #if UNITY_V4
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
@@ -14,7 +10,7 @@ using Unity.Lifetime;
 
 namespace Lifetime
 {
-    public class LifetimeContainer : List<IDisposable>
+    public class LifetimeContainer : List<IDisposable>, ILifetimeContainer
 #if UNITY_V5 || UNITY_V6
         , ILifetimeContainer
 #endif
@@ -43,6 +39,11 @@ namespace Lifetime
         {
             if (item is IDisposable disposable)
                 base.Remove(disposable);
+        }
+
+        void ILifetimeContainer.Remove(IDisposable item)
+        {
+            Remove(item);
         }
 
 #if UNITY_V5 || UNITY_V6

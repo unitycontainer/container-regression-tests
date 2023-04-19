@@ -165,7 +165,7 @@ namespace Lifetime
 #elif UNITY_V5 || UNITY_V6 || UNITY_V7
             return manager.GetValue((ILifetimeContainer)scope);
 #else
-            return manager.GetValue((ICollection<IDisposable>)scope);
+            return manager.GetValue((ILifetimeContainer)scope);
 #endif
 
         }
@@ -184,7 +184,7 @@ namespace Lifetime
 #elif UNITY_V5 || UNITY_V6 || UNITY_V7
             manager.SetValue(value, (ILifetimeContainer)scope);
 #else
-            manager.SetValue(value, (ICollection<IDisposable>)scope);
+            manager.SetValue(value, (ILifetimeContainer)scope);
 #endif
         }
 

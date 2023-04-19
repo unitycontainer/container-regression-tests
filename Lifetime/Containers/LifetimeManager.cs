@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Regression;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 #if UNITY_V4
 using Microsoft.Practices.ObjectBuilder2;
