@@ -83,6 +83,7 @@ namespace Container
         [Ignore("Known Issue")]
 #endif
         // Unity v4 did not have ContainerControlledTransientManager
+        [ExpectedException(typeof(ObjectDisposedException))]
         [PatternTestMethod(SubsequentResolutionsDisposed), TestProperty(DISPOSING, CHILD)]
         public void Child_SubsequentResolutionsDisposed()
         {
@@ -90,20 +91,20 @@ namespace Container
             var container = Container.CreateChildContainer()
                                      .RegisterType<Service>(new ContainerControlledTransientManager());
             // Act
-            var befor = container.Resolve<Service>();
+            var before = container.Resolve<Service>();
             Container.Dispose();
 
             var after = container.Resolve<Service>();
 
-            Assert.IsTrue(befor.IsDisposed);
+            Assert.IsTrue(before.IsDisposed);
             Assert.IsFalse(after.IsDisposed);
 
             Container.Dispose();
 
-            Assert.IsTrue(befor.IsDisposed);
+            Assert.IsTrue(before.IsDisposed);
             Assert.IsFalse(after.IsDisposed);
 
-            Assert.AreEqual(1, befor.Disposals);
+            Assert.AreEqual(1, before.Disposals);
             Assert.AreEqual(0, after.Disposals);
         }
 
