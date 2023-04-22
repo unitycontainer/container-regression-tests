@@ -16,7 +16,7 @@ namespace Container
     public partial class Extensions
     {
         [Ignore("TODO: Reenable")]
-        [PatternTestMethod(NAME_PATTERN), TestProperty(TESTING, nameof(BuilderStrategy))]
+        [PatternTestMethod(NAME_PATTERN), TestProperty(TESTING, "Builder Strategy")]
         public void ExtensionCanAddStrategy_PreCreation()
         {
             SpyStrategy spy = new SpyStrategy();
@@ -31,7 +31,7 @@ namespace Container
         }
 
         [Ignore("BEHAVIOR_V8")]
-        [PatternTestMethod(NAME_PATTERN), TestProperty(TESTING, nameof(BuilderStrategy))]
+        [PatternTestMethod(NAME_PATTERN), TestProperty(TESTING, "Builder Strategy")]
         public void ExtensionCanAddStrategy_PostInitialization()
         {
             SpyStrategy spy = new SpyStrategy();
