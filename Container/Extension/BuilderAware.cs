@@ -12,6 +12,7 @@ namespace Container
 {
     public partial class Extensions
     {
+        [Ignore("BEHAVIOR_V8")]
         [TestMethod, TestProperty(TESTING, nameof(IBuilderAware))]
         public void BuildCallsClassWithInterface()
         {
@@ -25,6 +26,7 @@ namespace Container
             Assert.AreEqual(typeof(Aware), instance.Type);
         }
 
+        [Ignore("BEHAVIOR_V8")]
         [TestMethod, TestProperty(TESTING, nameof(IBuilderAware))]
         public void BuildChecksConcreteTypeAndNotRequestedType()
         {

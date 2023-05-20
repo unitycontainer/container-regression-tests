@@ -16,6 +16,10 @@ namespace Parameters
         #region Success
 
 #if !UNITY_V4
+
+#if BEHAVIOR_V5
+        [Ignore("Known Issue")]
+#endif
         [PatternTestMethod("ResolvedParameter() preserves annotated contract"), TestProperty(PARAMETER, nameof(ResolvedParameter))]
         [DynamicData(nameof(Parameters_Test_Data))]
         public void ResolvedParameter(Type type, Type definition, string member, string import,

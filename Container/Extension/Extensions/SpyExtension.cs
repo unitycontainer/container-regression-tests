@@ -1,15 +1,12 @@
 ﻿using System;
+using Unity.Builder;
 #if UNITY_V4
 using Microsoft.Practices.Unity.ObjectBuilder;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
-#elif UNITY_V5 || UNITY_V6
-using Unity.Strategies;
-using Unity.Builder;
-using Unity.Extension;
 #else
+using Unity.Strategies;
 using Unity.Extension;
-using Unity;
 #endif
 
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -25,14 +22,14 @@ namespace Regression.Container
         private Type _policyType;
         private object _policy;
         private BuilderStrategy _strategy;
-        private UnityBuildStage _stage;
+        private int _stage;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="strategy"></param>
         /// <param name="stage"></param>
-        public SpyExtension(BuilderStrategy strategy, UnityBuildStage stage)
+        public SpyExtension(BuilderStrategy strategy, int stage)
         {
             _strategy = strategy;
             _stage = stage;
@@ -54,7 +51,7 @@ namespace Regression.Container
         /// </para>
         /// </param>
         /// <param name="policyType"><see cref="Type"/> of the policy</param>
-        public SpyExtension(BuilderStrategy strategy, UnityBuildStage stage, object policy, Type policyType)
+        public SpyExtension(BuilderStrategy strategy, int stage, object policy, Type policyType)
         {
             _strategy = strategy;
             _stage = stage;
@@ -105,26 +102,12 @@ namespace Regression.Container
 
         protected override void Initialize()
         {
-#if BEHAVIOR_V4 || BEHAVIOR_V5
-            
-            // v4 & v5 syntax
-            Context.Strategies.Add(_strategy, _stage);
-#else
-            Context.TypePipelineChain.Add(_stage, _strategy);
-#endif
+            Context.ActivateStrategies.Add((UnityActivationStage)_stage, _strategy.PreBuildUp);
 
             // Add Spy Policy to storage
             if (_policy is not null)
             {
-#if BEHAVIOR_V4
-                // v4 syntax
-                Context.Policies.SetDefault(_policyType, _policy);
-#elif BEHAVIOR_V5
-                // v5 syntax
-                Context.Policies.Set(null, _policyType, _policy);
-#else
                 Context.Policies.Set(_policyType, _policy);
-#endif
             }
         }
 

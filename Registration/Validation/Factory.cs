@@ -35,7 +35,7 @@ namespace Registration
         public void RegisterFactory_Null_Null_Factory()
         {
             // Act
-            Container.RegisterFactory(null, null, (c,t,n,o)=> null, null);
+            Container.RegisterFactory(null, null, (c,t,n)=> null, null);
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace Registration
         {
             // Arrange
             var value = new object();
-            Container.RegisterFactory(typeof(object), null, (c, t, n, o) => value, null);
+            Container.RegisterFactory(typeof(object), null, (c, t, n) => value, null);
 
             // Act
             var registration = Container.Registrations.First(r => typeof(object) == r.RegisteredType);
@@ -56,7 +56,7 @@ namespace Registration
         public void RegisterFactory_WithOverride_CanSetLifetime()
         {
             // Arrange
-            Container.RegisterFactory(typeof(object), null, (c, t, n, o) => null, new ContainerControlledLifetimeManager());
+            Container.RegisterFactory(typeof(object), null, (c, t, n) => null, new ContainerControlledLifetimeManager());
 
             // Act
             var registration = Container.Registrations.First(r => typeof(object) == r.RegisteredType);
@@ -70,7 +70,7 @@ namespace Registration
         {
             // Arrange
             var value = new object();
-            Container.RegisterFactory(typeof(object), null, (c, t, n, o) => value, null);
+            Container.RegisterFactory(typeof(object), null, (c, t, n) => value, null);
 
             // Act
             var instance = Container.Resolve<object>();
@@ -84,7 +84,7 @@ namespace Registration
         {
             // Arrange
             var value = new object();
-            Container.RegisterFactory(typeof(object), Name, (c, t, n, o) => value, null);
+            Container.RegisterFactory(typeof(object), Name, (c, t, n) => value, null);
 
             // Act
             var instance = Container.Resolve<object>(Name);

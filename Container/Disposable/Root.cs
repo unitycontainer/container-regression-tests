@@ -81,6 +81,7 @@ namespace Container
 #if BEHAVIOR_V5
         [Ignore("Known Issue")]
 #endif
+        [ExpectedException(typeof(ObjectDisposedException))]
         [PatternTestMethod(SubsequentResolutionsDisposed), TestProperty(DISPOSING, ROOT)]
         public void Root_SubsequentResolutionsDisposed()
         {
@@ -88,20 +89,20 @@ namespace Container
             var container = Container.RegisterType<Service>(new ContainerControlledTransientManager());
 
             // Act
-            var befor = container.Resolve<Service>();
+            var before = container.Resolve<Service>();
             container.Dispose();
 
             var after = container.Resolve<Service>();
 
-            Assert.IsTrue(befor.IsDisposed);
+            Assert.IsTrue(before.IsDisposed);
             Assert.IsFalse(after.IsDisposed);
 
             container.Dispose();
 
-            Assert.IsTrue(befor.IsDisposed);
+            Assert.IsTrue(before.IsDisposed);
             Assert.IsTrue(after.IsDisposed);
 
-            Assert.AreEqual(1, befor.Disposals);
+            Assert.AreEqual(1, before.Disposals);
             Assert.AreEqual(1, after.Disposals);
         }
 

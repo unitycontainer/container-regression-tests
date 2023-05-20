@@ -34,6 +34,7 @@
   <ItemGroup>
     <Compile Remove="Pattern\Abstractions\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Pattern\Abstractions\Abstractions\Resolvers\ValidatintResolver.cs" />
+    <Compile Remove="Pattern\Abstractions\Dependency\DefaultAttribute.cs" />
     <Compile Remove="Pattern\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Pattern\Abstractions\Resolvers\ValidatintResolver.cs" />
     <Compile Remove="Pattern\Dependency\DefaultAttribute.cs" />
@@ -49,6 +50,7 @@
     <Using Remove="System.Net.Http" />
     <None Remove=".git" />
     <None Remove=".gitignore" />
+    <None Remove="NuGet.Config" />
 	  <None Remove="*.slnf" />
 	  <None Remove="*.props" />
   </ItemGroup>

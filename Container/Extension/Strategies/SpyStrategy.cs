@@ -4,7 +4,7 @@ using Microsoft.Practices.ObjectBuilder2;
 using Unity.Builder;
 using Unity.Strategies;
 #else
-using Unity.Extension;
+using Unity.Policy;
 using Unity.Strategies;
 #endif
 

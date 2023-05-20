@@ -1,9 +1,9 @@
-﻿using Unity.Strategies;
+﻿using Unity.Builder;
 
 namespace Regression.Container
 {
     /// <summary>
-    /// Implementation of <see cref="BuilderStrategy"/> which will notify an object about
+    /// Implementation which will notify an object about
     /// the completion of a BuildUp operation.
     /// </summary>
     /// <remarks>
@@ -16,7 +16,7 @@ namespace Regression.Container
     /// but as demonstrated in this example could be easily added to the container.
     /// </para>
     /// </remarks>
-    public class BuilderAwareStrategy : BuilderStrategy
+    public class BuilderAwareStrategy
     {
         /// <summary>
         /// Called during the chain of responsibility for a build operation. The
@@ -24,7 +24,8 @@ namespace Regression.Container
         /// forward direction.
         /// </summary>
         /// <param name="context">Context of the build operation.</param>
-        public override void PreBuildUp<TContext>(ref TContext context)
+        public void PreBuildUp<TContext>(ref TContext context)
+            where TContext : IBuilderContext
         {
             if (context.Existing is IBuilderAware aware)
                 aware.OnBuiltUp(context.Type, context.Name);
