@@ -8,6 +8,7 @@ using Microsoft.Practices.Unity;
 #else
 using Unity;
 using Unity.Lifetime;
+using Unity.Storage;
 #endif
 
 namespace Lifetime
@@ -23,7 +24,7 @@ namespace Lifetime
         {
             // Arrange
             var scope = new LifetimeContainer();
-            object instance = new object();
+            var instance = new object();
 
             // Act
             var manager = (LifetimeManager)factory();

@@ -4,6 +4,7 @@ using Regression;
 using Microsoft.Practices.Unity;
 #else
 using Unity.Lifetime;
+using Unity.Storage;
 #endif
 
 namespace Lifetime
