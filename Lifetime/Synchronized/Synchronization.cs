@@ -8,6 +8,7 @@ using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 #else
 using Unity.Lifetime;
+using Unity.Storage;
 #endif
 
 namespace Lifetime

@@ -36,7 +36,10 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Compile Remove="Lifetime\Containers\Disposable.cs" />
+    <Compile Remove="Lifetime\Synchronized\ScopeLifetime.cs" />
     <Compile Remove="Pattern\Abstractions\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+    <Compile Remove="Lifetime\Data\LifetimeContainer.cs" />
   </ItemGroup>
   
   <ItemGroup>

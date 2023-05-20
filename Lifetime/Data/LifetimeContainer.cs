@@ -8,7 +8,7 @@ using Unity;
 using Unity.Lifetime;
 #endif
 
-namespace Lifetime
+namespace Unity.Storage
 {
     public class LifetimeContainer : List<IDisposable>, ILifetimeContainer
 #if UNITY_V5 || UNITY_V6
