@@ -33,6 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Container\Extension\BuilderAware\BuilderStrategy.cs" />
+    <Compile Remove="Lifetime\Data\LifetimeContainer.cs" />
     <Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
     <Compile Remove="Patterns\Dependency\DefaultAttribute.cs" />

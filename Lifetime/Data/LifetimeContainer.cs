@@ -10,7 +10,7 @@ using Unity.Lifetime;
 
 namespace Unity.Storage
 {
-    public class LifetimeContainer : List<IDisposable>, ILifetimeContainer
+    public class LifetimeContainer : List<IDisposable>
 #if UNITY_V5 || UNITY_V6
         , ILifetimeContainer
 #endif
@@ -40,15 +40,5 @@ namespace Unity.Storage
             if (item is IDisposable disposable)
                 base.Remove(disposable);
         }
-
-        void ILifetimeContainer.Remove(IDisposable item)
-        {
-            Remove(item);
-        }
-
-#if UNITY_V5 || UNITY_V6
-        IEnumerator IEnumerable.GetEnumerator()
-            => base.GetEnumerator();
-#endif
     }
 }

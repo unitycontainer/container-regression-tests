@@ -87,7 +87,7 @@ namespace Regression.Container
 
         protected override void Initialize()
         {
-            Context.Strategies.Add(this._strategy, this._stage);
+            Context.Strategies.Add(this._strategy, (UnityBuildStage)this._stage);
             
             if (_policy != null)
                 Context.Policies.Set(null, _policyType, _policy);
