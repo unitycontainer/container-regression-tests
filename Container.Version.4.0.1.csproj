@@ -3,7 +3,7 @@
   <!-- Unity v4 -->
 	
   <PropertyGroup> 
-    <TargetFrameworks>net6.0</TargetFrameworks> 
+    <TargetFrameworks>net7.0</TargetFrameworks> 
     <DefineConstants>UNITY_V4;$(DefineConstants)</DefineConstants>
     <UnityContainer>..\..\unity\source\Unity\Src\Unity.csproj</UnityContainer>
   </PropertyGroup>	
@@ -34,6 +34,7 @@
   	<Compile Remove="Pattern\Implementation\Dependency\Fields\**" />
   	<Compile Remove="Pattern\Implementation\Injection\Fields\**" />
   	<Compile Remove="Pattern\Implementation\Selection\Fields\**" />
+  	<Compile Remove="Container\Extension\BuilderAware\BuilderStrategy.cs" />
   	<Compile Remove="Lifetime\Managers\Singleton.cs" />
   	<Compile Remove="Lifetime\Managers\Transient.cs" />
   	<Compile Remove="Pattern\Abstractions\Abstractions\Resolvers\ValidatingResolverFactory.cs" />

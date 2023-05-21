@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.Builder;
 #if UNITY_V4
 using Microsoft.Practices.Unity.ObjectBuilder;
 using Microsoft.Practices.ObjectBuilder2;
@@ -7,6 +6,7 @@ using Microsoft.Practices.Unity;
 #else
 using Unity.Strategies;
 using Unity.Extension;
+using Unity.Builder;
 #endif
 
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -72,7 +72,7 @@ namespace Regression.Container
         /// </summary>
         protected override void Initialize()
         {
-            Context.Strategies.Add(_strategy, _stage);
+            Context.Strategies.Add(_strategy, (UnityBuildStage)_stage);
 
             if (_policy != null)
                 Context.Policies.SetDefault(_policyType, (IBuilderPolicy)_policy);

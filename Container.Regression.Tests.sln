@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Container.Version.5.11.x", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Container.Version.6.0.x", "Container.Version.6.0.x.csproj", "{8D317977-8D0F-48E6-A0B7-9B64753BE0F8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Container.Version.8.0.x", "Container.Version.8.0.x.csproj", "{D215C5DF-B488-4CEB-B8AB-9C26231437DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,20 @@ Global
 		{8D317977-8D0F-48E6-A0B7-9B64753BE0F8}.v7|Any CPU.Build.0 = v7|Any CPU
 		{8D317977-8D0F-48E6-A0B7-9B64753BE0F8}.v8|Any CPU.ActiveCfg = v8|Any CPU
 		{8D317977-8D0F-48E6-A0B7-9B64753BE0F8}.v8|Any CPU.Build.0 = v8|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.v4|Any CPU.ActiveCfg = v4|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.v4|Any CPU.Build.0 = v4|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.v5|Any CPU.ActiveCfg = v5|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.v5|Any CPU.Build.0 = v5|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.v6|Any CPU.ActiveCfg = v6|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.v6|Any CPU.Build.0 = v6|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.v7|Any CPU.ActiveCfg = v7|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.v7|Any CPU.Build.0 = v7|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.v8|Any CPU.ActiveCfg = v8|Any CPU
+		{D215C5DF-B488-4CEB-B8AB-9C26231437DF}.v8|Any CPU.Build.0 = v8|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

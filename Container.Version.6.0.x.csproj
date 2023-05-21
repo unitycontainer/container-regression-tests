@@ -3,7 +3,7 @@
   <!-- Unity v6 -->
   
   <PropertyGroup>
-    <TargetFrameworks>net6.0</TargetFrameworks> 
+    <TargetFrameworks>net7.0</TargetFrameworks> 
     <DefineConstants>UNITY_V6;$(DefineConstants)</DefineConstants>
     <UnityContainer>..\Container\src\Unity.Container.csproj</UnityContainer>
   </PropertyGroup>
