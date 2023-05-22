@@ -3,8 +3,11 @@
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <Configurations>Debug;Release;v4;v5;v6;v7;v8</Configurations>
+    <BaseOutputPath>bin\</BaseOutputPath>
+    <OutputPath>$(BaseOutputPath)\$(MSBuildProjectName)\$(OutputPath)</OutputPath>
   </PropertyGroup>
-  
+	
+	
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />

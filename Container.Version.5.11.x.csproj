@@ -3,7 +3,7 @@
   <!-- Unity v5 -->
   
   <PropertyGroup>
-    <TargetFrameworks>net7.0</TargetFrameworks> 
+    <TargetFramework Condition="$(TargetFramework) == ''">net462</TargetFramework> 
     <UnityContainer>..\Container\src\Unity.Container.csproj</UnityContainer>
     <DefineConstants>UNITY_V5;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
@@ -53,8 +53,8 @@
     <None Remove=".git" />
     <None Remove=".gitignore" />
     <None Remove="NuGet.Config" />
-	  <None Remove="*.slnf" />
-	  <None Remove="*.props" />
+	<None Remove="*.slnf" />
+    <None Remove="*.props" />
   </ItemGroup>
 
 </Project>

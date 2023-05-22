@@ -3,7 +3,7 @@
   <!-- Unity v6 -->
   
   <PropertyGroup>
-    <TargetFrameworks>net7.0</TargetFrameworks> 
+    <TargetFramework Condition="$(TargetFramework) == ''">net7.0</TargetFramework> 
     <UnityContainer>..\Container\src\Unity.Container.csproj</UnityContainer>
     <DefineConstants>UNITY_V8;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
@@ -46,8 +46,9 @@
     <Using Remove="System.Net.Http" />
     <None Remove=".git" />
     <None Remove=".gitignore" />
-	  <None Remove="*.slnf" />
-	  <None Remove="*.props" />
+    <None Remove="NuGet.Config" />
+	<None Remove="*.slnf" />
+    <None Remove="*.props" />
   </ItemGroup>
 
 </Project>

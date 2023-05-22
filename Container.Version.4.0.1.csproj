@@ -3,7 +3,7 @@
   <!-- Unity v4 -->
 	
   <PropertyGroup> 
-    <TargetFrameworks>net7.0</TargetFrameworks> 
+    <TargetFramework Condition="$(TargetFramework) == ''">net462</TargetFramework> 
     <DefineConstants>UNITY_V4;$(DefineConstants)</DefineConstants>
     <UnityContainer>..\..\unity\source\Unity\Src\Unity.csproj</UnityContainer>
   </PropertyGroup>	
@@ -28,6 +28,7 @@
   	<Compile Remove="**\*.v6.cs" />
   	<Compile Remove="**\*.v7.cs" />
   	<Compile Remove="**\*.v8.cs" />
+  	<Compile Remove="bin\**" />
   	<Compile Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
   	<Compile Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
   	<Compile Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
@@ -56,6 +57,7 @@
     <Compile Remove="Pattern\Selection\Implementation\Fields\Annotated.cs" />
     <Compile Remove="Pattern\Selection\Implementation\Fields.cs" />
     <Compile Remove="Resolution\Enumerable\**" />
+    <EmbeddedResource Remove="bin\**" />
     <EmbeddedResource Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
     <EmbeddedResource Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
     <EmbeddedResource Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
@@ -69,6 +71,12 @@
     <Compile Remove="Container\Extension\BuilderAware\BuilderAwareStrategy.cs" />
     <Compile Remove="Container\Extension\BuilderAware\IBuilderAware.cs" />
     <Compile Remove="Registration\Validation\Factory.cs" />
+    <None Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
+    <None Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
+    <None Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
+    <None Remove="Pattern\Implementation\Dependency\Fields\**" />
+    <None Remove="Pattern\Implementation\Injection\Fields\**" />
+    <None Remove="Pattern\Implementation\Selection\Fields\**" />
   </ItemGroup>
   
   <ItemGroup>
@@ -78,12 +86,6 @@
     <None Remove="NuGet.Config" />
 	<None Remove="*.slnf" />
     <None Remove="*.props" />
-    <None Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
-    <None Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
-    <None Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
-    <None Remove="Pattern\Implementation\Dependency\Fields\**" />
-    <None Remove="Pattern\Implementation\Injection\Fields\**" />
-    <None Remove="Pattern\Implementation\Selection\Fields\**" />
   </ItemGroup>
 
 </Project>
