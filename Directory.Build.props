@@ -4,6 +4,7 @@
     <LangVersion>latest</LangVersion>
     <Configurations>Debug;Release;v4;v5;v6;v7;v8</Configurations>
     <BaseOutputPath>bin\</BaseOutputPath>
+    <BaseIntermediateOutputPath>obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
     <OutputPath>$(BaseOutputPath)\$(MSBuildProjectName)\$(OutputPath)</OutputPath>
   </PropertyGroup>
 	

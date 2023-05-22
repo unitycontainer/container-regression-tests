@@ -45,12 +45,13 @@ namespace Injection
             => Assert_Injection(BaselineTestType.MakeGenericType(type),
                                 InjectionMember_Value(type), @default, registered);
 
-#if BEHAVIOR_V4 || BEHAVIOR_V5
-        [Ignore("https://github.com/unitycontainer/container/issues/235")]
-#endif
         [TestCategory(CATEGORY_INJECT)]
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
+#if UNITY_V4 || UNITY_V5
+        [ExpectedException(typeof(InvalidOperationException))]
+#else
         [ExpectedException(typeof(ResolutionFailedException))]
+#endif
         public virtual void Inject_NoMatch(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
                                             object @default)

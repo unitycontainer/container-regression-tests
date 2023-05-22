@@ -29,6 +29,8 @@
   	<Compile Remove="**\*.v6.cs" />
   	<Compile Remove="**\*.v7.cs" />
   	<Compile Remove="**\*.v8.cs" />
+  	<Compile Remove="obj\**" />
+  	<EmbeddedResource Remove="obj\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,6 +57,7 @@
     <None Remove="NuGet.Config" />
 	<None Remove="*.slnf" />
     <None Remove="*.props" />
+    <None Remove="obj\**" />
   </ItemGroup>
 
 </Project>

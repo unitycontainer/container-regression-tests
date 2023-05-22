@@ -29,6 +29,7 @@
   	<Compile Remove="**\*.v7.cs" />
   	<Compile Remove="**\*.v8.cs" />
   	<Compile Remove="bin\**" />
+  	<Compile Remove="obj\**" />
   	<Compile Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
   	<Compile Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
   	<Compile Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
@@ -58,6 +59,7 @@
     <Compile Remove="Pattern\Selection\Implementation\Fields.cs" />
     <Compile Remove="Resolution\Enumerable\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="obj\**" />
     <EmbeddedResource Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
     <EmbeddedResource Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
     <EmbeddedResource Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
@@ -71,6 +73,7 @@
     <Compile Remove="Container\Extension\BuilderAware\BuilderAwareStrategy.cs" />
     <Compile Remove="Container\Extension\BuilderAware\IBuilderAware.cs" />
     <Compile Remove="Registration\Validation\Factory.cs" />
+    <None Remove="obj\**" />
     <None Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
     <None Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
     <None Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
