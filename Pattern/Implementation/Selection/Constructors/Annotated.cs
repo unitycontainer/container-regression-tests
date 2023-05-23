@@ -9,7 +9,7 @@ using Unity;
 
 namespace Constructors
 {
-    [TestClass]
+    [TestClass()]
     public class Selecting_Annotated : Selection.Annotated.Pattern
     {
         #region Properties

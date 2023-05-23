@@ -15,7 +15,7 @@ namespace Injection
         #region Value
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
+        [PatternTestMethod("Override injection by value"), DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Member_Injected_ByValue(string test, Type type, object defaultValue,
                                            object defaultAttr, object registered, object named,
                                            object injected, object overridden, object @default)
