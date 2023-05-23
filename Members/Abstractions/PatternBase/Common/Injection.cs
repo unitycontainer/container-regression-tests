@@ -13,10 +13,10 @@ namespace Regression
     {
         #region Fields
 
-        protected static Func<object, InjectionMember>       InjectionMember_Value;
-        protected static Func<object[], InjectionMember>     InjectionMember_Args;
-        protected static Func<InjectionMember>               InjectionMember_Default;
-        protected static Func<Type, string, InjectionMember> InjectionMember_Contract;
+        protected static Func<object, InjectionMember>          InjectionMember_Value;
+        protected static Func<object[], InjectionMember>        InjectionMember_Args;
+        protected static Func<InjectionMember>                  InjectionMember_Default;
+        protected static Func<Type, string, InjectionMember>    InjectionMember_Contract;
 
         protected static Func<object, ResolverOverride>         MemberOverride;
         protected static Func<string, object, ResolverOverride> MemberOverride_ByName;

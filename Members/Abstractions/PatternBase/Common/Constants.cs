@@ -113,54 +113,6 @@ namespace Regression
         public static Delegate RegisteredDelegate = (Func<int>)(() => 0);
 
         #endregion
-
-
-        protected static TestDataSource[] Test_Data_Set = new TestDataSource[]
-        {
-            #region String
-
-            new TestDataSource<string>(
-                    null,                       // default
-                    DefaultString,              // DefaultValue
-                    DefaultValueString,         // DefaultAttributeValue
-                    RegisteredString,           // Registered
-                    NamedString,                // Named
-                    InjectedString,             // Injected
-                    OverriddenString            // Overridden
-                ),
-                
-            #endregion
-
-
-            #region Integer
-#if !BEHAVIOR_V4
-            new TestDataSource<int>(
-                    0,                          // default
-                    DefaultInt,                 // DefaultValue
-                    DefaultValueInt,            // DefaultAttributeValue
-                    RegisteredInt,              // Registered
-                    NamedInt,                   // Named
-                    InjectedInt,                // Injected
-                    OverriddenInt               // Overridden
-                ),
-#endif
-            #endregion
-
-
-            #region Unresolvable
-                
-            new TestDataSource<Unresolvable>(
-                    null,                       // default
-                    DefaultUnresolvable,        // DefaultValue
-                    DefaultValueUnresolvable,   // DefaultAttributeValue
-                    RegisteredUnresolvable,     // Registered
-                    NamedUnresolvable,          // Named
-                    InjectedUnresolvable,       // Injected
-                    OverriddenUnresolvable      // Overridden
-                ),
-            
-            #endregion
-        };
     }
 }
 
