@@ -29,7 +29,7 @@ namespace Injection
         #region Injection Members
 
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
+        [PatternTestMethod("Override with Injection Parameter"), DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Member_Injected_ByInjectionParameter(string test, Type type, object defaultValue,
                                                         object defaultAttr, object registered, object named,
                                                         object injected, object overridden, object @default)
@@ -41,7 +41,7 @@ namespace Injection
         [Ignore("https://github.com/unitycontainer/container/issues/357")]
 #endif
         [TestProperty(OVERRIDE, MEMBER_OVERRIDE)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
+        [PatternTestMethod("Override with Recursive Parameter"), DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Member_Injected_ByParameterRecursive(string test, Type type, object defaultValue,
                                                         object defaultAttr, object registered, object named,
                                                         object injected, object overridden, object @default)

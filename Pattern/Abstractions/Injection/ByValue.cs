@@ -15,7 +15,7 @@ namespace Injection
     public abstract partial class Pattern
     {
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
+        [PatternTestMethod("Inject dependency with {1}"), DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_Value(string test, Type type, object defaultValue, object defaultAttr,
                                            object registered, object named, object injected, object overridden,
                                            object @default) 
@@ -25,7 +25,7 @@ namespace Injection
                 injected, injected);
 
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
+        [PatternTestMethod("Inject with {1} dependency"), DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_Named(string test, Type type, object defaultValue, object defaultAttr,
                                          object registered, object named, object injected, object overridden,
                                          object @default)
@@ -38,15 +38,15 @@ namespace Injection
         [Ignore("https://github.com/unitycontainer/container/issues/235")]
 #endif
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
-        public virtual void Inject_WithType(string test, Type type, object defaultValue, object defaultAttr,
+        [PatternTestMethod("Inject with Type"), DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
+        public virtual void Inject_With_Type(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
                                             object @default)
             => Assert_Injection(BaselineTestType.MakeGenericType(type),
                                 InjectionMember_Value(type), @default, registered);
 
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
+        [PatternTestMethod("Inject with unresolvable dependency"), DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
 #if UNITY_V4 || UNITY_V5
         [ExpectedException(typeof(InvalidOperationException))]
 #else
@@ -71,7 +71,7 @@ namespace Injection
         [Ignore()]
 #endif
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
+        [PatternTestMethod("Inject with array"), DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_Array(string test, Type type, object defaultValue, object defaultAttr,
                                          object registered, object named, object injected, object overridden,
                                          object @default)
@@ -86,7 +86,7 @@ namespace Injection
         [Ignore()]
 #endif
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
+        [PatternTestMethod("Inject with Enumerable"), DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_Enumerable(string test, Type type, object defaultValue, object defaultAttr, 
                                               object registered, object named, object injected, object overridden, 
                                               object @default)
@@ -100,7 +100,7 @@ namespace Injection
         }
 
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
+        [PatternTestMethod("Inject with Resolver"), DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public virtual void Inject_Resolver(string test, Type type, object defaultValue, object defaultAttr,
                                             object registered, object named, object injected, object overridden,
                                             object @default)
@@ -109,7 +109,7 @@ namespace Injection
                                injected, injected);
 #if !UNITY_V4
         [TestCategory(CATEGORY_INJECT)]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
+        [PatternTestMethod("Inject with Type Factory"), DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_TypeFactory(string test, Type type, object defaultValue, object defaultAttr,
                                                object registered, object named, object injected, object overridden,
                                                object @default)
@@ -121,7 +121,7 @@ namespace Injection
 #if BEHAVIOR_V5
         [ExpectedException(typeof(InvalidOperationException))]
 #endif
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
+        [PatternTestMethod("Inject with invalid Type"), DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Inject_NoPublicMember(string test, Type type, object defaultValue, object defaultAttr,
                                                    object registered, object named, object injected, object overridden,
                                                    object @default)

@@ -15,8 +15,9 @@ namespace Injection
         #region Type
 
 
+        [PatternTestMethod("Override injection unmatchig Type")]
         [TestProperty(OVERRIDE, nameof(DependencyOverride))]
-        [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
+        [DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
         public virtual void Dependency_Injected_ByType_NoMatch(string test, Type type, object defaultValue,
                                                                   object defaultAttr, object registered, object named,
                                                                   object injected, object overridden, object @default)

@@ -11,11 +11,12 @@ namespace Injection.Implicit
 {
     public abstract partial class Pattern : Injection.Pattern
     {
-        //TODO: [Ignore("Validation")]
-        [TestCategory(CATEGORY_INJECT)]
+        const string ThrowsOnParameterConst = "Throws on {2} {3}";
+
+        [PatternTestMethod(ThrowsOnParameterConst), TestCategory(CATEGORY_INJECT)]
         [ExpectedException(typeof(ResolutionFailedException))]
-        [DataTestMethod, DynamicData(nameof(Unity_Recognized_Types_Data), typeof(PatternBase))]
-        public virtual void Throws_OnRefParameter(string test, Type type)
+        [DynamicData(nameof(Unity_Recognized_Types_Data), typeof(PatternBase))]
+        public virtual void Throws_On_Ref_Parameter(string test, Type type)
         {
             // Arrange
             var target = GetType("BaselineTestType_Ref`1").MakeGenericType(type);
@@ -24,11 +25,13 @@ namespace Injection.Implicit
             _ = Container.Resolve(target, null);
         }
 
-        //TODO: [Ignore("Validation")]
-        [TestCategory(CATEGORY_INJECT)]
+
+
+
+        [PatternTestMethod(ThrowsOnParameterConst), TestCategory(CATEGORY_INJECT)]
         [ExpectedException(typeof(ResolutionFailedException))]
-        [DataTestMethod, DynamicData(nameof(Unity_Recognized_Types_Data), typeof(PatternBase))]
-        public virtual void Throws_OnOutParameter(string test, Type type)
+        [DynamicData(nameof(Unity_Recognized_Types_Data), typeof(PatternBase))]
+        public virtual void Throws_On_Out_Parameter(string test, Type type)
         {
             // Arrange
             var target = GetType("BaselineTestType_Out`1").MakeGenericType(type);
@@ -36,6 +39,9 @@ namespace Injection.Implicit
             // Act
             _ = Container.Resolve(target, null);
         }
+
+
+
 
 #if !UNITY_V4
         [DataTestMethod, DynamicData(nameof(Test_Type_Data), typeof(PatternBase))]
