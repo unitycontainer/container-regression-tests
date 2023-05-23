@@ -36,13 +36,13 @@
   <ItemGroup>
     <Compile Remove="Container\Extension\BuilderAware\BuilderStrategy.cs" />
     <Compile Remove="Lifetime\Data\LifetimeContainer.cs" />
-    <Compile Remove="Pattern\Abstractions\Common\Resolvers\ValidatingResolverFactory.cs" />
-    <Compile Remove="Pattern\Abstractions\Common\Resolvers\ValidatintResolver.cs" />
-    <Compile Remove="Pattern\Abstractions\Dependency\DefaultAttribute.cs" />
-    <Compile Remove="Pattern\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
-    <Compile Remove="Pattern\Abstractions\Resolvers\ValidatintResolver.cs" />
-    <Compile Remove="Pattern\Dependency\DefaultAttribute.cs" />
-    <Compile Remove="Pattern\Lifetime\LifetimeManager.cs" />
+    <Compile Remove="Members\Abstractions\Common\Resolvers\ValidatingResolverFactory.cs" />
+    <Compile Remove="Members\Abstractions\Common\Resolvers\ValidatintResolver.cs" />
+    <Compile Remove="Members\Abstractions\Dependency\DefaultAttribute.cs" />
+    <Compile Remove="Members\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+    <Compile Remove="Members\Abstractions\Resolvers\ValidatintResolver.cs" />
+    <Compile Remove="Members\Dependency\DefaultAttribute.cs" />
+    <Compile Remove="Members\Lifetime\LifetimeManager.cs" />
     <Compile Remove="Registration\Validation\Factory.cs" />
     <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
     <Compile Remove="Registration\BuiltIn\IUnityContainerAsync.cs" />

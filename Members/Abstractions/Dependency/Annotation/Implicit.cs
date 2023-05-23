@@ -19,10 +19,11 @@ namespace Dependency.Implicit
 
         [DataTestMethod, DynamicData(nameof(Type_Compatibility_Data), typeof(PatternBase))]
         public override void Member_OnType(string test, Type type, object defaultValue,
-                                                                  object defaultAttr, object registered, object named,
-                                                                  object injected, object overridden, object @default)
+                                           object defaultAttr, object registered, object named,
+                                           object injected, object overridden, object @default)
+
             => Assert_Consumer(type, MemberOverride(overridden).OnType(BaselineTestType.MakeGenericType(type)),
-                overridden, registered);
+                               overridden, registered);
 
         #endregion
     }

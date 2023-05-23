@@ -44,7 +44,6 @@ namespace Regression
             }
         }
 
-
         public static IEnumerable<Type> Unity_Recognized_Types
         {
             get

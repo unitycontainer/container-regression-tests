@@ -3,14 +3,14 @@
   <!-- Unity v6 -->
   
   <PropertyGroup>
-    <TargetFrameworks>net7.0</TargetFrameworks> 
+    <TargetFramework Condition="$(TargetFramework) == ''">net7.0</TargetFramework> 
     <DefineConstants>UNITY_V6;$(DefineConstants)</DefineConstants>
     <UnityContainer>..\Container\src\Unity.Container.csproj</UnityContainer>
   </PropertyGroup>
   
   <ItemGroup>
     <ProjectReference Condition="Exists('$(UnityContainer)') " Include="$(UnityContainer)" />
-    <PackageReference Condition="!Exists('$(UnityContainer)')" Include="Unity.Container" Version="6.0.0-beta.*" />
+    <PackageReference Condition="!Exists('$(UnityContainer)')" Include="Unity.Container" Version="6.0.0-beta.42" />
   </ItemGroup>
 
   <!-- Configuration Settings -->
@@ -35,9 +35,9 @@
   <ItemGroup>
     <Compile Remove="Container\Extension\BuilderAware\BuilderStrategy.cs" />
     <Compile Remove="Lifetime\Data\LifetimeContainer.cs" />
-    <Compile Remove="Patterns\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
-    <Compile Remove="Patterns\Abstractions\Resolvers\ValidatintResolver.cs" />
-    <Compile Remove="Patterns\Dependency\DefaultAttribute.cs" />
+    <Compile Remove="Memberss\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
+    <Compile Remove="Memberss\Abstractions\Resolvers\ValidatintResolver.cs" />
+    <Compile Remove="Memberss\Dependency\DefaultAttribute.cs" />
   </ItemGroup>
   
   
@@ -45,8 +45,12 @@
     <Using Remove="System.Net.Http" />
     <None Remove=".git" />
     <None Remove=".gitignore" />
-	  <None Remove="*.slnf" />
-	  <None Remove="*.props" />
+    <None Remove="NuGet.Config" />
+	<None Remove="*.slnf" />
+	<None Remove="*.props" />
+	<None Remove="obj\**" />
+  	<Compile Remove="obj\**" />
+  	<EmbeddedResource Remove="obj\**" />
   </ItemGroup>
 
 </Project>
