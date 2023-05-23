@@ -53,9 +53,5 @@
     <None Remove="*.props" />
     <None Remove="obj\**" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Members\Pattern\" />
-  </ItemGroup>
 
 </Project>

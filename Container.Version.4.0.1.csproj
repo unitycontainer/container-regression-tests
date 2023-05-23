@@ -32,14 +32,6 @@
 
   <ItemGroup>
   	<Compile Remove="Members\Abstractions\Data\Fields\**" />
-  	<Compile Remove="Members\Abstractions\Dependency\Data\Fields\**" />
-  	<Compile Remove="Members\Abstractions\Injection\Data\Fields\**" />
-  	<Compile Remove="Members\Implementation\Dependency\Fields\**" />
-  	<Compile Remove="Members\Implementation\Injection\Fields\**" />
-  	<Compile Remove="Members\Implementation\Selection\Fields\**" />
-  	<Compile Remove="Container\Extension\BuilderAware\BuilderStrategy.cs" />
-  	<Compile Remove="Lifetime\Managers\Singleton.cs" />
-  	<Compile Remove="Lifetime\Managers\Transient.cs" />
   	<Compile Remove="Members\Abstractions\Common\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Members\Abstractions\Common\Resolvers\ValidatintResolver.cs" />
     <Compile Remove="Members\Dependency\DefaultValue.cs" />
@@ -51,18 +43,19 @@
     <Compile Remove="Members\Injection\Annotation\Overrides\OptionalParameter.cs" />
     <Compile Remove="Members\Injection\Annotation\Overrides\ResolvedParameter.cs" />
     <Compile Remove="Members\Injection\Override\Dependency.Injected.!v4.cs" />
+  	<Compile Remove="Members\Tests\Dependency\Fields\**" />
+  	<Compile Remove="Members\Tests\Injection\Fields\**" />
+  	<Compile Remove="Members\Tests\Selection\Fields\**" />
     <Compile Remove="Members\Lifetime\LifetimeManager.cs" />
     <Compile Remove="Members\Lifetime\LifetimeManager\Disposable.cs" />
     <Compile Remove="Members\Selection\Implementation\Fields\Annotated.cs" />
     <Compile Remove="Members\Selection\Implementation\Fields.cs" />
+  	<Compile Remove="Members\Pattern\Dependency\Data\Fields\**" />
+  	<Compile Remove="Members\Pattern\Injection\Data\Fields\**" />
+  	<Compile Remove="Container\Extension\BuilderAware\BuilderStrategy.cs" />
+  	<Compile Remove="Lifetime\Managers\Singleton.cs" />
+  	<Compile Remove="Lifetime\Managers\Transient.cs" />
     <Compile Remove="Resolution\Enumerable\**" />
-    <EmbeddedResource Remove="Members\Abstractions\Data\Fields\**" />
-    <EmbeddedResource Remove="Members\Data\Fields\**" />
-    <EmbeddedResource Remove="Members\Abstractions\Dependency\Data\Fields\**" />
-    <EmbeddedResource Remove="Members\Abstractions\Injection\Data\Fields\**" />
-    <EmbeddedResource Remove="Members\Implementation\Dependency\Fields\**" />
-    <EmbeddedResource Remove="Members\Implementation\Injection\Fields\**" />
-    <EmbeddedResource Remove="Members\Implementation\Selection\Fields\**" />
     <Compile Remove="Resolution\Generic\Constrained.cs" />
     <Compile Remove="Registration\Validation\Factory.cs" />
     <Compile Remove="Registration\BuiltIn\IServiceProvider.cs" />
@@ -70,13 +63,6 @@
     <Compile Remove="Container\Extension\BuilderAware\BuilderAwareStrategy.cs" />
     <Compile Remove="Container\Extension\BuilderAware\IBuilderAware.cs" />
     <Compile Remove="Registration\Validation\Factory.cs" />
-    <None Remove="Members\Abstractions\Data\Fields\**" />
-    <None Remove="Members\Data\Fields\**" />
-    <None Remove="Members\Abstractions\Dependency\Data\Fields\**" />
-    <None Remove="Members\Abstractions\Injection\Data\Fields\**" />
-    <None Remove="Members\Implementation\Dependency\Fields\**" />
-    <None Remove="Members\Implementation\Injection\Fields\**" />
-    <None Remove="Members\Implementation\Selection\Fields\**" />
   </ItemGroup>
   
   <ItemGroup>
