@@ -33,25 +33,27 @@
   	<Compile Remove="**\*.v6.cs" />
   	<Compile Remove="**\*.v7.cs" />
   	<Compile Remove="**\*.!v8.cs" />
-  	<Compile Remove="obj\**" />
-  	<EmbeddedResource Remove="obj\**" />
   </ItemGroup>
   
   <ItemGroup>
     <Compile Remove="Lifetime\Containers\Disposable.cs" />
     <Compile Remove="Lifetime\Synchronized\ScopeLifetime.cs" />
-    <Compile Remove="Members\Abstractions\Types\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Lifetime\Data\LifetimeContainer.cs" />
+    <Compile Remove="Members\Abstractions\Types\Resolvers\ValidatingResolverFactory.cs" />
   </ItemGroup>
   
   <ItemGroup>
     <Using Remove="System.Net.Http" />
+  	<Compile Remove="obj\**" />
+  	<Compile Remove="bin\**" />
+    <None Remove="obj\**" />
+    <None Remove="bin\**" />
     <None Remove=".git" />
     <None Remove=".gitignore" />
     <None Remove="NuGet.Config" />
+    <None Remove="README.md" />
 	<None Remove="*.slnf" />
     <None Remove="*.props" />
-    <None Remove="obj\**" />
   </ItemGroup>
 
 </Project>

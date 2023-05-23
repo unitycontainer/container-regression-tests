@@ -71,16 +71,16 @@
   
   <ItemGroup>
     <Using Remove="System.Net.Http" />
+  	<Compile Remove="obj\**" />
+  	<Compile Remove="bin\**" />
+    <None Remove="obj\**" />
+    <None Remove="bin\**" />
     <None Remove=".git" />
     <None Remove=".gitignore" />
     <None Remove="NuGet.Config" />
 	<None Remove="*.slnf" />
     <None Remove="*.props" />
-  	<Compile Remove="bin\**" />
-  	<Compile Remove="obj\**" />
-    <None Remove="obj\**" />
-    <EmbeddedResource Remove="bin\**" />
-    <EmbeddedResource Remove="obj\**" />
+    <None Remove="README.md" />
   </ItemGroup>
 
 </Project>

@@ -43,14 +43,16 @@
   
   <ItemGroup>
     <Using Remove="System.Net.Http" />
+  	<Compile Remove="obj\**" />
+  	<Compile Remove="bin\**" />
+    <None Remove="obj\**" />
+    <None Remove="bin\**" />
     <None Remove=".git" />
     <None Remove=".gitignore" />
     <None Remove="NuGet.Config" />
+    <None Remove="README.md" />
 	<None Remove="*.slnf" />
-	<None Remove="*.props" />
-	<None Remove="obj\**" />
-  	<Compile Remove="obj\**" />
-  	<EmbeddedResource Remove="obj\**" />
+    <None Remove="*.props" />
   </ItemGroup>
 
 </Project>
