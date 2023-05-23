@@ -28,9 +28,10 @@
   	<Compile Remove="**\*.v6.cs" />
   	<Compile Remove="**\*.v7.cs" />
   	<Compile Remove="**\*.v8.cs" />
-  	<Compile Remove="bin\**" />
-  	<Compile Remove="obj\**" />
-  	<Compile Remove="Members\Abstractions\Common\Data\Fields\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+  	<Compile Remove="Members\Abstractions\Data\Fields\**" />
   	<Compile Remove="Members\Abstractions\Dependency\Data\Fields\**" />
   	<Compile Remove="Members\Abstractions\Injection\Data\Fields\**" />
   	<Compile Remove="Members\Implementation\Dependency\Fields\**" />
@@ -41,9 +42,6 @@
   	<Compile Remove="Lifetime\Managers\Transient.cs" />
   	<Compile Remove="Members\Abstractions\Common\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Members\Abstractions\Common\Resolvers\ValidatintResolver.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Members\Dependency\DefaultValue.cs" />
     <Compile Remove="Members\Dependency\DefaultAttribute.cs" />
     <Compile Remove="Members\Dependency\Data\Fields\**" />
@@ -58,9 +56,8 @@
     <Compile Remove="Members\Selection\Implementation\Fields\Annotated.cs" />
     <Compile Remove="Members\Selection\Implementation\Fields.cs" />
     <Compile Remove="Resolution\Enumerable\**" />
-    <EmbeddedResource Remove="bin\**" />
-    <EmbeddedResource Remove="obj\**" />
-    <EmbeddedResource Remove="Members\Abstractions\Common\Data\Fields\**" />
+    <EmbeddedResource Remove="Members\Abstractions\Data\Fields\**" />
+    <EmbeddedResource Remove="Members\Data\Fields\**" />
     <EmbeddedResource Remove="Members\Abstractions\Dependency\Data\Fields\**" />
     <EmbeddedResource Remove="Members\Abstractions\Injection\Data\Fields\**" />
     <EmbeddedResource Remove="Members\Implementation\Dependency\Fields\**" />
@@ -73,8 +70,8 @@
     <Compile Remove="Container\Extension\BuilderAware\BuilderAwareStrategy.cs" />
     <Compile Remove="Container\Extension\BuilderAware\IBuilderAware.cs" />
     <Compile Remove="Registration\Validation\Factory.cs" />
-    <None Remove="obj\**" />
-    <None Remove="Members\Abstractions\Common\Data\Fields\**" />
+    <None Remove="Members\Abstractions\Data\Fields\**" />
+    <None Remove="Members\Data\Fields\**" />
     <None Remove="Members\Abstractions\Dependency\Data\Fields\**" />
     <None Remove="Members\Abstractions\Injection\Data\Fields\**" />
     <None Remove="Members\Implementation\Dependency\Fields\**" />
@@ -89,6 +86,11 @@
     <None Remove="NuGet.Config" />
 	<None Remove="*.slnf" />
     <None Remove="*.props" />
+  	<Compile Remove="bin\**" />
+  	<Compile Remove="obj\**" />
+    <None Remove="obj\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="obj\**" />
   </ItemGroup>
 
 </Project>
