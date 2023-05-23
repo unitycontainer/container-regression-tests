@@ -36,6 +36,8 @@
     <Compile Remove="Members\Abstractions\Common\Resolvers\ValidatintResolver.cs" />
     <Compile Remove="Members\Abstractions\PatternBase\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Members\Abstractions\PatternBase\Resolvers\ValidatintResolver.cs" />
+    <Compile Remove="Members\Abstractions\Types\Resolvers\ValidatingResolverFactory.cs" />
+    <Compile Remove="Members\Abstractions\Types\Resolvers\ValidatintResolver.cs" />
     <Compile Remove="Members\Dependency\DefaultValue.cs" />
     <Compile Remove="Members\Dependency\DefaultAttribute.cs" />
     <Compile Remove="Members\Dependency\Data\Fields\**" />

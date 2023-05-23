@@ -43,6 +43,8 @@
     <Compile Remove="Members\Abstractions\PatternBase\Resolvers\ValidatintResolver.cs" />
     <Compile Remove="Members\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Members\Abstractions\Resolvers\ValidatintResolver.cs" />
+    <Compile Remove="Members\Abstractions\Types\Resolvers\ValidatingResolverFactory.cs" />
+    <Compile Remove="Members\Abstractions\Types\Resolvers\ValidatintResolver.cs" />
     <Compile Remove="Members\Dependency\DefaultAttribute.cs" />
     <Compile Remove="Members\Lifetime\LifetimeManager.cs" />
     <Compile Remove="Registration\Validation\Factory.cs" />
