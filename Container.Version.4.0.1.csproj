@@ -30,7 +30,7 @@
   	<Compile Remove="**\*.v8.cs" />
   	<Compile Remove="bin\**" />
   	<Compile Remove="obj\**" />
-  	<Compile Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
+  	<Compile Remove="Pattern\Abstractions\Common\Data\Fields\**" />
   	<Compile Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
   	<Compile Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
   	<Compile Remove="Pattern\Implementation\Dependency\Fields\**" />
@@ -39,8 +39,8 @@
   	<Compile Remove="Container\Extension\BuilderAware\BuilderStrategy.cs" />
   	<Compile Remove="Lifetime\Managers\Singleton.cs" />
   	<Compile Remove="Lifetime\Managers\Transient.cs" />
-  	<Compile Remove="Pattern\Abstractions\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
-    <Compile Remove="Pattern\Abstractions\Abstractions\Resolvers\ValidatintResolver.cs" />
+  	<Compile Remove="Pattern\Abstractions\Common\Resolvers\ValidatingResolverFactory.cs" />
+    <Compile Remove="Pattern\Abstractions\Common\Resolvers\ValidatintResolver.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,7 +60,7 @@
     <Compile Remove="Resolution\Enumerable\**" />
     <EmbeddedResource Remove="bin\**" />
     <EmbeddedResource Remove="obj\**" />
-    <EmbeddedResource Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
+    <EmbeddedResource Remove="Pattern\Abstractions\Common\Data\Fields\**" />
     <EmbeddedResource Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
     <EmbeddedResource Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
     <EmbeddedResource Remove="Pattern\Implementation\Dependency\Fields\**" />
@@ -74,7 +74,7 @@
     <Compile Remove="Container\Extension\BuilderAware\IBuilderAware.cs" />
     <Compile Remove="Registration\Validation\Factory.cs" />
     <None Remove="obj\**" />
-    <None Remove="Pattern\Abstractions\Abstractions\Data\Fields\**" />
+    <None Remove="Pattern\Abstractions\Common\Data\Fields\**" />
     <None Remove="Pattern\Abstractions\Dependency\Data\Fields\**" />
     <None Remove="Pattern\Abstractions\Injection\Data\Fields\**" />
     <None Remove="Pattern\Implementation\Dependency\Fields\**" />

@@ -36,8 +36,8 @@
   <ItemGroup>
     <Compile Remove="Container\Extension\BuilderAware\BuilderStrategy.cs" />
     <Compile Remove="Lifetime\Data\LifetimeContainer.cs" />
-    <Compile Remove="Pattern\Abstractions\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
-    <Compile Remove="Pattern\Abstractions\Abstractions\Resolvers\ValidatintResolver.cs" />
+    <Compile Remove="Pattern\Abstractions\Common\Resolvers\ValidatingResolverFactory.cs" />
+    <Compile Remove="Pattern\Abstractions\Common\Resolvers\ValidatintResolver.cs" />
     <Compile Remove="Pattern\Abstractions\Dependency\DefaultAttribute.cs" />
     <Compile Remove="Pattern\Abstractions\Resolvers\ValidatingResolverFactory.cs" />
     <Compile Remove="Pattern\Abstractions\Resolvers\ValidatintResolver.cs" />
