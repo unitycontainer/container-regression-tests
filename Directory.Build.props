@@ -3,9 +3,9 @@
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <Configurations>Debug;Release;v4;v5;v6;v7;v8</Configurations>
-    <BaseOutputPath>bin\$(MSBuildProjectName)\</BaseOutputPath>
-    <BaseIntermediateOutputPath>obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
-    <OutputPath>$(BaseOutputPath)\$(OutputPath)</OutputPath>
+    <BaseOutputPath Condition="$(BaseOutputPath) == ''">bin\$(MSBuildProjectName)\</BaseOutputPath>
+    <BaseIntermediateOutputPath Condition="$(BaseIntermediateOutputPath) == ''">obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+    <OutputPath Condition="$(OutputPath) == ''">$(BaseOutputPath)\$(OutputPath)</OutputPath>
   </PropertyGroup>
 	
 	
