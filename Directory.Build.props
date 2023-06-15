@@ -3,16 +3,16 @@
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <Configurations>Debug;Release;v4;v5;v6;v7;v8</Configurations>
-    <BaseOutputPath>bin\</BaseOutputPath>
+    <BaseOutputPath>bin\$(MSBuildProjectName)\</BaseOutputPath>
     <BaseIntermediateOutputPath>obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
-    <OutputPath>$(BaseOutputPath)\$(MSBuildProjectName)\$(OutputPath)</OutputPath>
+    <OutputPath>$(BaseOutputPath)\$(OutputPath)</OutputPath>
   </PropertyGroup>
 	
 	
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
+    <PackageReference Include="MSTest.TestAdapter"     Version="3.*" />
+    <PackageReference Include="MSTest.TestFramework"   Version="3.*" />
   </ItemGroup>
 	
 </Project>
